@@ -9,7 +9,27 @@
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="Aboutme Nov 17th, 2013 This is About Me page Mou Overview Mou, the missing Markdown editor for web developers. Syntax Strong and Emphasize strong or &hellip;">
+  <meta name="description" content="Aboutme Nov 17th, 2013 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+#! /bin/sh
+gender='male'
+name='Hujiawei'
+category='coder'
+birthday='1991/01/12'
+location &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -43,21 +63,29 @@
 </hgroup>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <nav role="navigation"><!--
+<ul class="subscription" data-subscription="rss">
+
+  <li><a href="https://github.com/hujiaweibujidao" rel="subscribe-rss" title="subscribe via RSS">View me on GitHub</a></li>
   <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
+   
+</ul> -->
+
+  <!--
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
     <input type="hidden" name="q" value="site:hujiaweibujidao.github.io" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
-</form>
+</form> 
   
+  -->
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/aboutme/">AboutMe</a></li>
+  <li><a href="/math/">Math</a></li>
+  <li><a href="/datamining/">DataMining</a></li>
   <li><a href="/blog/archives">Archives</a></li>
 </ul>
 
@@ -84,321 +112,84 @@
 <time datetime="2013-11-17T18:24:00+08:00" pubdate data-updated="true">Nov 17<span>th</span>, 2013</time></p>
   </header>
   
-  <h2>This is About Me page</h2>
-
-<h1>Mou</h1>
-
-<h2>Overview</h2>
-
-<p><strong>Mou</strong>, the missing Markdown editor for <em>web developers</em>.</p>
-
-<h3>Syntax</h3>
-
-<h4>Strong and Emphasize</h4>
-
-<p><strong>strong</strong> or <strong>strong</strong> ( Cmd + B )</p>
-
-<p><em>emphasize</em> or <em>emphasize</em> ( Cmd + I )</p>
-
-<p><strong>Sometimes I want a lot of text to be bold.
-Like, seriously, a <em>LOT</em> of text</strong></p>
-
-<h4>Blockquotes</h4>
-
-<blockquote><p>Right angle brackets &gt; are used for block quotes.</p></blockquote>
-
-<h4>Links and Email</h4>
-
-<p>An email <a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#x6f;&#x3a;&#101;&#120;&#x61;&#109;&#112;&#108;&#101;&#64;&#101;&#120;&#97;&#x6d;&#112;&#108;&#101;&#x2e;&#99;&#111;&#109;">&#x65;&#x78;&#x61;&#x6d;&#112;&#x6c;&#101;&#64;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;</a> link.</p>
-
-<p>Simple inline link <a href="http://chenluois.com">http://chenluois.com</a>, another inline link <a href="http://smallerapp.com">Smaller</a>, one more inline link with title <a href="http://resizesafari.com" title="a Safari extension">Resize</a>.</p>
-
-<p>A <a href="http://mouapp.com" title="Markdown editor on Mac OS X">reference style</a> link. Input id, then anywhere in the doc, define the link with corresponding id:</p>
-
-<p>Titles ( or called tool tips ) in the links are optional.</p>
-
-<h4>Images</h4>
-
-<h4>Inline code and Block code</h4>
-
-<p>Inline code are surround by <code>backtick</code> key. To create a block code:</p>
-
-<pre><code>Indent each line by at least 1 tab, or 4 spaces.
-var Mou = exactlyTheAppIwant; 
-</code></pre>
-
-<h4>Ordered Lists</h4>
-
-<p>Ordered lists are created using &ldquo;1.&rdquo; + Space:</p>
-
-<ol>
-<li>Ordered list item</li>
-<li>Ordered list item</li>
-<li>Ordered list item</li>
-</ol>
-
-
-<h4>Unordered Lists</h4>
-
-<p>Unordered list are created using &ldquo;*&rdquo; + Space:</p>
-
-<ul>
-<li>Unordered list item</li>
-<li>Unordered list item</li>
-<li>Unordered list item</li>
-</ul>
-
-
-<p>Or using &ldquo;&ndash;&rdquo; + Space:</p>
-
-<ul>
-<li>Unordered list item</li>
-<li>Unordered list item</li>
-<li>Unordered list item</li>
-</ul>
-
-
-<h4>Hard Linebreak</h4>
-
-<p>End a line with two or more spaces will create a hard linebreak, called <code>&lt;br /&gt;</code> in HTML. ( Control + Return )<br/>
-Above line ended with 2 spaces.</p>
-
-<h4>Horizontal Rules</h4>
-
-<p>Three or more asterisks or dashes:</p>
-
-<hr />
-
-<hr />
-
-<hr />
-
-<h4>Headers</h4>
-
-<p>Setext-style:</p>
-
-<h1>This is H1</h1>
-
-<h2>This is H2</h2>
-
-<p>atx-style:</p>
-
-<h1>This is H1</h1>
-
-<h2>This is H2</h2>
-
-<h3>This is H3</h3>
-
-<h4>This is H4</h4>
-
-<h5>This is H5</h5>
-
-<h6>This is H6</h6>
-
-<h3>Extra Syntax</h3>
-
-<h4>Footnotes</h4>
-
-<p>Footnotes work mostly like reference-style links. A footnote is made of two things: a marker in the text that will become a superscript number; a footnote definition that will be placed in a list of footnotes at the end of the document. A footnote looks like this:</p>
-
-<p>That&rsquo;s some text with a footnote.<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
-
-<h4>Strikethrough</h4>
-
-<p>Wrap with 2 tilde characters:</p>
-
-<p><del>Strikethrough</del></p>
-
-<h4>Fenced Code Blocks</h4>
-
-<p>Start with a line containing 3 or more backticks, and ends with the first line with the same number of backticks:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+  <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Fenced code blocks are like Stardard Markdown’s regular code
-</span><span class='line'>blocks, except that they’re not indented and instead rely on
-</span><span class='line'>a start and end fence lines to delimit the code block.</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/sh
+</span><span class='line'>gender='male'
+</span><span class='line'>name='Hujiawei'
+</span><span class='line'>category='coder'
+</span><span class='line'>birthday='1991/01/12'
+</span><span class='line'>location='Beijing, P.R.China'
+</span><span class='line'>university='Tsinghua University'
+</span><span class='line'>technologies='Java/Shell/Android/iOS'
+</span><span class='line'>emailaddress='hujiawei090807@gmail.com'
+</span><span class='line'>favorites='coding, travelling and music'
+</span><span class='line'>echo "Hello,all. My name is $name, a $gender $category."
+</span><span class='line'>echo "I was born in $birthday, and now studys in $university, $location."
+</span><span class='line'>echo "My favorites are $favorites, and I am also fond of $technologies."
+</span><span class='line'>echo "My email address is $emailaddress. Email me if you are interested in $name."
+</span><span class='line'>echo "Hope you enjoy my bolg site here! Have fun! :-) "</span></code></pre></td></tr></table></div></figure>
 
 
-<h4>Tables</h4>
+<h4>请不要因为上面的那段代码就把浏览器关了哈，亲！</h4>
 
-<p>A simple table looks like this:</p>
+<p>大家好，我叫Hujiawei，清华计算机系2013届研究生。自从本科接触计算机以来，便疯狂地爱上了计算机，本人热爱编程，喜欢Java/C/Linux/Android/iOS/Python/RaspberryPi等等，在湖南永景股份有限公司/三星中国研究院实习过，开发过大型(商业)网站(<a href="http://www.cnblogs.com/yinger/category/305399.html">ASP.NET</a>和J2EE SSH架构)，也开发过(商用)桌面软件（<a href="http://www.cnblogs.com/yinger/category/339483.html">RCP</a>和<a href="http://www.cnblogs.com/yinger/category/372015.html">JavaFx</a>），同样也做过Android应用（<a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/project_weiweibo">微微博TinyWeibo</a>，爱学习iStudy和Gaze移植等）和小游戏（8Puzzle等），iOS无实际开发经验。我对移动互联网和数据挖掘比较感兴趣，如果你有相同兴趣欢迎联系我，交个朋友。</p>
 
-<table>
-<thead>
-<tr>
-<th>First Header </th>
-<th> Second Header </th>
-<th> Third Header</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Content Cell </td>
-<td> Content Cell  </td>
-<td> Content Cell</td>
-</tr>
-<tr>
-<td>Content Cell </td>
-<td> Content Cell  </td>
-<td> Content Cell</td>
-</tr>
-</tbody>
-</table>
+<p>我的邮箱地址：<a href="&#109;&#x61;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#104;&#117;&#x6a;&#x69;&#x61;&#119;&#101;&#105;&#x30;&#x39;&#48;&#56;&#x30;&#55;&#x40;&#103;&#109;&#97;&#105;&#x6c;&#46;&#x63;&#x6f;&#x6d;">&#x68;&#117;&#106;&#x69;&#x61;&#x77;&#101;&#x69;&#x30;&#57;&#48;&#56;&#48;&#x37;&#64;&#x67;&#109;&#97;&#x69;&#x6c;&#46;&#x63;&#111;&#109;</a></p>
 
+<p>我的GitHub主页： <a href="https://github.com/hujiaweibujidao">https://github.com/hujiaweibujidao</a></p>
 
-<p>If you wish, you can add a leading and tailing pipe to each line of the table:</p>
+<p>中南大学计科0902班毕业纪念网址：<a href="http://csucs0902.duapp.com">http://csucs0902.duapp.com</a></p>
 
-<table>
-<thead>
-<tr>
-<th></th>
-<th> First Header </th>
-<th> Second Header </th>
-<th> Third Header </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td> Content Cell </td>
-<td> Content Cell  </td>
-<td> Content Cell |</td>
-</tr>
-<tr>
-<td></td>
-<td> Content Cell </td>
-<td> Content Cell  </td>
-<td> Content Cell |</td>
-</tr>
-</tbody>
-</table>
+<p>PS：以后都会呆在北京，如果有不错的实习机会请和我联系，最好是和移动开发或者数据挖掘有关，谢谢！</p>
 
+<h4>原博客地址：</h4>
 
-<p>Specify alignement for each column by adding colons to separator lines:</p>
+<p><a href="http://hujiaweiyinger.diandian.com">点点博客</a>  [本科大四研究生入学前的技术总结]  <a href="http://www.cnblogs.com/yinger">博客园</a>  [本科大二大三的技术总结]  <a href="http://hujiawei.tumblr.com">Tumblr</a>  [英文博客]</p>
 
-<table>
-<thead>
-<tr>
-<th align="left">First Header </th>
-<th align="center"> Second Header </th>
-<th align="right"> Third Header</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Left         </td>
-<td align="center"> Center        </td>
-<td align="right"> Right</td>
-</tr>
-<tr>
-<td align="left">Left         </td>
-<td align="center"> Center        </td>
-<td align="right"> Right</td>
-</tr>
-</tbody>
-</table>
+<h4>推荐系列</h4>
 
-
-<h3>Shortcuts</h3>
-
-<h4>View</h4>
-
-<ul>
-<li>Toggle live preview: Shift + Cmd + I</li>
-<li>Toggle Words Counter: Shift + Cmd + W</li>
-<li>Toggle Transparent: Shift + Cmd + T</li>
-<li>Toggle Floating: Shift + Cmd + F</li>
-<li>Left/Right = 1/1: Cmd + 0</li>
-<li>Left/Right = 3/1: Cmd + +</li>
-<li>Left/Right = 1/3: Cmd + &ndash;</li>
-<li>Toggle Writing orientation: Cmd + L</li>
-<li>Toggle fullscreen: Control + Cmd + F</li>
-</ul>
-
-
-<h4>Actions</h4>
-
-<ul>
-<li>Copy HTML: Option + Cmd + C</li>
-<li>Strong: Select text, Cmd + B</li>
-<li>Emphasize: Select text, Cmd + I</li>
-<li>Inline Code: Select text, Cmd + K</li>
-<li>Strikethrough: Select text, Cmd + U</li>
-<li>Link: Select text, Control + Shift + L</li>
-<li>Image: Select text, Control + Shift + I</li>
-<li>Select Word: Control + Option + W</li>
-<li>Select Line: Shift + Cmd + L</li>
-<li>Select All: Cmd + A</li>
-<li>Deselect All: Cmd + D</li>
-<li>Convert to Uppercase: Select text, Control + U</li>
-<li>Convert to Lowercase: Select text, Control + Shift + U</li>
-<li>Convert to Titlecase: Select text, Control + Option + U</li>
-<li>Convert to List: Select lines, Control + L</li>
-<li>Convert to Blockquote: Select lines, Control + Q</li>
-<li>Convert to H1: Cmd + 1</li>
-<li>Convert to H2: Cmd + 2</li>
-<li>Convert to H3: Cmd + 3</li>
-<li>Convert to H4: Cmd + 4</li>
-<li>Convert to H5: Cmd + 5</li>
-<li>Convert to H6: Cmd + 6</li>
-<li>Convert Spaces to Tabs: Control + [</li>
-<li>Convert Tabs to Spaces: Control + ]</li>
-<li>Insert Current Date: Control + Shift + 1</li>
-<li>Insert Current Time: Control + Shift + 2</li>
-<li>Insert entity &lt;: Control + Shift + ,</li>
-<li>Insert entity >: Control + Shift + .</li>
-<li>Insert entity &amp;: Control + Shift + 7</li>
-<li>Insert entity Space: Control + Shift + Space</li>
-<li>Insert Scriptogr.am Header: Control + Shift + G</li>
-<li>Shift Line Left: Select lines, Cmd + [</li>
-<li>Shift Line Right: Select lines, Cmd + ]</li>
-<li>New Line: Cmd + Return</li>
-<li>Comment: Cmd + /</li>
-<li>Hard Linebreak: Control + Return</li>
-</ul>
-
-
-<h4>Edit</h4>
-
-<ul>
-<li>Auto complete current word: Esc</li>
-<li>Find: Cmd + F</li>
-<li>Close find bar: Esc</li>
-</ul>
-
-
-<h4>Post</h4>
-
-<ul>
-<li>Post on Scriptogr.am: Control + Shift + S</li>
-<li>Post on Tumblr: Control + Shift + T</li>
-</ul>
-
-
-<h4>Export</h4>
-
-<ul>
-<li>Export HTML: Option + Cmd + E</li>
-<li>Export PDF:  Option + Cmd + P</li>
-</ul>
-
-
-<h3>And more?</h3>
-
-<p>Don&rsquo;t forget to check Preferences, lots of useful options are there.</p>
-
-<p>Follow <a href="http://twitter.com/chenluois">@chenluois</a> on Twitter for the latest news.</p>
-
-<p>For feedback, use the menu <code>Help</code> &ndash; <code>Send Feedback</code></p>
-<div class="footnotes">
-<hr/>
 <ol>
-<li id="fn:1">
-<p>And that&rsquo;s the footnote.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li><p><a href="http://hujiaweiyinger.diandian.com/post/2013-06-04/ios6_list" target="_blank">iOS 6 Programming Cookbook读书笔记</a></p></li>
+<li><p><a href="http://www.cnblogs.com/yinger/category/317241.html" target="_blank">框架学习之Spring</a></p></li>
+<li><p><a href="http://www.cnblogs.com/yinger/category/315885.html" target="_blank">框架学习之Hibernate</a></p></li>
+<li><p><a href="http://www.cnblogs.com/yinger/category/311933.html" target="_blank">框架学习之Struts2</a></p></li>
+<li><p><a href="http://www.cnblogs.com/yinger/category/312985.html" target="_blank">JavaWeb学习</a></p></li>
+<li><p><a href="http://www.cnblogs.com/yinger/category/372015.html" target="_blank">JavaFx系列博文</a></p></li>
+<li><p><a href="http://www.cnblogs.com/yinger/category/339483.html" target="_blank">RCP版本病人信息管理系统开发</a></p></li>
+<li><p><a href="http://www.cnblogs.com/yinger/category/305399.html" target="_blank">ASP.NET版本新闻发布系统开发总结</a></p></li>
 </ol>
-</div>
+
+
+<h4>推荐博文</h4>
+
+<ol>
+<li><p><a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/project_weiweibo" target="_blank">微微博项目展示</a></p></li>
+<li><p><a href="http://hujiaweiyinger.diandian.com/post/2013-05-24/project_wechat4j" target="_blank">Wechat4j项目</a></p></li>
+<li><p><a href="http://hujiaweiyinger.diandian.com/post/2013-07-16/edx_build_edx_platform" target="_blank">Edx平台在MacOSX上的搭建</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hujiaweiyinger.diandian.com/post/2013-07-27/install_edx-platform_on_ubuntu12.04" target="_blank">在Ubuntu12.04LTS上的搭建</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hujiawei.tumblr.com/post/56574509577/the-instructions-to-install-edx-platform-on-ubuntu12-04" target="_blank">Tumblr上的英文版本</a></p></li>
+<li><p><a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/project_rcp_mail_client" target="_blank">RCP版本的邮件客户端</a></p></li>
+<li><p><a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/build_ucore_lab_evironment" target="_blank">ucore lab0 开发环境搭建</a></p></li>
+<li><p><a href="http://hujiaweiyinger.diandian.com/post/2013-05-31/axis2_first_try" target="_blank">Axis2初探</a></p></li>
+<li><p><a href="http://hujiaweiyinger.diandian.com/post/2013-05-19/flexpager_search" target="_blank">FlexPager探秘</a></p></li>
+<li><p><a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/mupdf_first_try" target="_blank">MuPDF初探</a></p></li>
+<li><p><a href="http://hujiaweiyinger.diandian.com/post/2013-05-19/apktool_apk" target="_blank">使用apktools反编译apk得到资源文件</a></p></li>
+<li><p><a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/project_rcp_digital_image_process" target="_blank">RCP版本的数字图像处理软件</a></p></li>
+<li><p><a href="http://hujiaweiyinger.diandian.com/post/2013-09-09/memcached" target="_blank">memcached安装与使用</a></p></li>
+<li><p><a href="http://hujiaweiyinger.diandian.com/post/2013-09-03/raspberrypi_start" target="_blank">Raspberry Pi扬帆起航</a></p></li>
+</ol>
 
 
   
@@ -437,7 +228,28 @@ Above line ended with 2 spaces.</p>
 <aside class="sidebar">
   
     <section>
-  <h1>Recent Posts</h1>
+  <h1>关于博主</h1><br/>
+  <a href="/aboutme/"><img src="/images/me.png" width="250px" height="210px" alt="protrait"/></a><br/>
+  <p>Hi, I'm Hujiawei, from P.R.China. Now I'm a postgraduate student studying in <a href="http://www.tsinghua.edu.cn/publish/th/index.html">Tsinghua University</a>.
+  Wanna know me? <a href="/aboutme/">See here.</a> <br/>	
+  </p>
+  <a href="http://weibo.com/hujiaweiyinger"><img src="/images/sinaweibo.png"/></a> &nbsp;
+  <a href="https://github.com/hujiaweibujidao"><img src="/images/github.png"/></a>&nbsp;
+  <a href="http://hujiawei.tumblr.com"><img src="/images/tumblr.png"/></a> &nbsp;
+  <a href="https://twitter.com/hujiaweiyinger"><img src="/images/twitter.png"/></a>
+  
+  <br/>
+  
+</section>
+<section>
+ <h1>分类目录</h1>
+ <ul id="categories">
+	 <li class='category'><a href='/blog/categories/hello/'>hello (1)</a></li>
+
+ </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
   <ul id="recent_posts">
     
       <li class="post">
@@ -446,11 +258,20 @@ Above line ended with 2 spaces.</p>
     
   </ul>
 </section>
-
-
-
-
-
+<section>
+<h1>好友博客</h1>
+<ul>
+        <li>
+        <a href="http://doufunao.github.io/">豆腐脑的幻想乡</a>
+        </li>
+        <li>
+        <a href="http://c4fun.cn/">Code 4 Fun</a>
+        </li>
+        <li>
+        <a href="http://www.tanglei.name/">tanglei的blog</a>
+        </li>
+</ul>
+</section>
   
 </aside>
 
@@ -458,8 +279,8 @@ Above line ended with 2 spaces.</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - hujiawei -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  Copyright &copy; 2013 - hujiawei - <a href="http://happybirthday2yinger.duapp.com/">Happy birthday to MY QUEEN</a> -
+  <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
 </footer>

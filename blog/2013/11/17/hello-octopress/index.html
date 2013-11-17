@@ -44,21 +44,29 @@
 </hgroup>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <nav role="navigation"><!--
+<ul class="subscription" data-subscription="rss">
+
+  <li><a href="https://github.com/hujiaweibujidao" rel="subscribe-rss" title="subscribe via RSS">View me on GitHub</a></li>
   <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
+   
+</ul> -->
+
+  <!--
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
     <input type="hidden" name="q" value="site:hujiaweibujidao.github.io" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
-</form>
+</form> 
   
+  -->
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/aboutme/">AboutMe</a></li>
+  <li><a href="/math/">Math</a></li>
+  <li><a href="/datamining/">DataMining</a></li>
   <li><a href="/blog/archives">Archives</a></li>
 </ul>
 
@@ -88,6 +96,13 @@
 
 <time datetime="2013-11-17T17:03:00+08:00" pubdate data-updated="true">Nov 17<span>th</span>, 2013</time>
         
+        
+        <!--增加一个到达评论的链接-->
+        <!--
+        
+          | <a href="#comments">Comments</a>
+         
+        -->
       </p>
     
   </header>
@@ -142,12 +157,55 @@
   </footer>
 </article>
 
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN   data-title=""-->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hujiaweibujidao"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
 </div>
 
 <aside class="sidebar">
   
     <section>
-  <h1>Recent Posts</h1>
+  <h1>关于博主</h1><br/>
+  <a href="/aboutme/"><img src="/images/me.png" width="250px" height="210px" alt="protrait"/></a><br/>
+  <p>Hi, I'm Hujiawei, from P.R.China. Now I'm a postgraduate student studying in <a href="http://www.tsinghua.edu.cn/publish/th/index.html">Tsinghua University</a>.
+  Wanna know me? <a href="/aboutme/">See here.</a> <br/>	
+  </p>
+  <a href="http://weibo.com/hujiaweiyinger"><img src="/images/sinaweibo.png"/></a> &nbsp;
+  <a href="https://github.com/hujiaweibujidao"><img src="/images/github.png"/></a>&nbsp;
+  <a href="http://hujiawei.tumblr.com"><img src="/images/tumblr.png"/></a> &nbsp;
+  <a href="https://twitter.com/hujiaweiyinger"><img src="/images/twitter.png"/></a>
+  
+  <br/>
+  
+</section>
+<section>
+ <h1>分类目录</h1>
+ <ul id="categories">
+	 <li class='category'><a href='/blog/categories/hello/'>hello (1)</a></li>
+
+ </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
   <ul id="recent_posts">
     
       <li class="post">
@@ -156,11 +214,20 @@
     
   </ul>
 </section>
-
-
-
-
-
+<section>
+<h1>好友博客</h1>
+<ul>
+        <li>
+        <a href="http://doufunao.github.io/">豆腐脑的幻想乡</a>
+        </li>
+        <li>
+        <a href="http://c4fun.cn/">Code 4 Fun</a>
+        </li>
+        <li>
+        <a href="http://www.tanglei.name/">tanglei的blog</a>
+        </li>
+</ul>
+</section>
   
 </aside>
 
@@ -168,8 +235,8 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - hujiawei -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  Copyright &copy; 2013 - hujiawei - <a href="http://happybirthday2yinger.duapp.com/">Happy birthday to MY QUEEN</a> -
+  <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
 </footer>
