@@ -9,8 +9,7 @@
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="Hello world!
-">
+  <meta name="description" content="Hello world! Hello Octopress! 曾经因为很多问题的答案都在博客园上，于是我在那里驻扎了，但是，它的广告让我不能忍！ 后来因为点点博客的小清新我瞬间就爱上了它，于是我搬家了，但是，它的冷清让我想要离开！ 再后来Wordpress进入了我的眼帘，苦于没有host， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,7 +107,183 @@
   </header>
 
 
-<div class="entry-content"><p>Hello world!</p>
+<div class="entry-content"><p>Hello world! Hello Octopress!</p>
+
+<p>曾经因为很多问题的答案都在<a href="http://www.cnblogs.com"><strong>博客园</strong></a>上，于是我在那里驻扎了，但是，它的广告让我不能忍！</p>
+
+<p>后来因为<a href="http://www.diandian.com"><strong>点点博客</strong></a>的小清新我瞬间就爱上了它，于是我搬家了，但是，它的冷清让我想要离开！</p>
+
+<p>再后来<a href="http://wordpress.com"><strong>Wordpress</strong></a>进入了我的眼帘，苦于没有host，只好在BAE上安营，但是，它的龟速简直烦我发指！</p>
+
+<p>最后我终于走进了我一直忽视了的<a href="http://octopress.org/"><strong>Octopress</strong></a>，那一瞬间，我才发现，这才是我想要的！这才是我想要的博客！我可以自由的定义页面中的任何内容！</p>
+
+<blockquote><p>A blogging framework for hackers.         &mdash; Parker Moore</p></blockquote>
+
+<p>今天从早上开始一直到晚上终于把Octopress搭建和配置好了，好开心啊有木有！</p>
+
+<p>下面介绍安装过程：[不是很轻松，但是也不会很难哟！]</p>
+
+<p>安装步骤如下：</p>
+
+<p>*<a href="http://octopress.org/docs/setup/rbenv/">安装rbenv和ruby</a></p>
+
+<p>请确保ruby版本是1.9.3以上！我试过，如果版本低的话会出错，但是如果版本很高的话也有可能出错(我试过1.9.3-p2xx)，建议就安装1.9.3-p0，也可以使用<a href="http://octopress.org/docs/setup/rvm/">rvm</a>来管理ruby版本，我两个都试过了，推荐使用rbenv。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew update
+</span><span class='line'>brew install rbenv
+</span><span class='line'>brew install ruby-build
+</span><span class='line'>rbenv install 1.9.3-p0
+</span><span class='line'>rbenv rehash
+</span><span class='line'>rbenv global 1.9.3-p0  #建议增加这句修改系统全局的ruby版本
+</span><span class='line'>ruby --version  #查看系统ruby版本</span></code></pre></td></tr></table></div></figure>
+
+
+<p>*<a href="http://octopress.org/docs/setup/">安装Octopress</a></p>
+
+<p>这部分耗时会长一些，其中的octopress目录名称可以随便修改，例如myblog等，<code>gem list</code>命令可以查看已经安装好了的依赖包，<code>rake install</code>就类似<code>make install</code>进行安装(Octopress的主题)，一定要确保这里执行的命令都是正确执行了的，否则后面可能出错。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress
+</span><span class='line'>cd octopress
+</span><span class='line'>gem install bundler
+</span><span class='line'>rbenv rehash    # If you use rbenv, rehash to be able to run the bundle command
+</span><span class='line'>bundle install
+</span><span class='line'>rake install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>*<a href="http://octopress.org/docs/deploying/github/">发布到Github上</a></p>
+
+<p>以前个人博客是在位于<code>http://username.github.com</code>这个域名下，现在改成了<code>http://username.github.io</code>，所以大家可以看到两种不同域名下的博客。另外，<a href="https://help.github.com/categories/20/articles">Github Pages</a>分为两类，一类是个人或者组织的博客，另一类是项目的介绍博客，这里只介绍如果搭建不介绍后者，但是两者基本上相同。</p>
+
+<p>首先新建repository，名称为<code>username.github.io</code>，其中<code>username</code>是你的github用户名，拷贝repository的SSH地址，类似<code>git@github.com:username/username.github.io.git</code>。然后执行下面代码&#8220;，它主要是进行以下操作(不难理解，我就不翻译了，原文看着舒坦，嘿嘿)：</p>
+
+<ul>
+<li>Ask for and store your Github Pages repository url.</li>
+<li>Rename the remote pointing to imathis/octopress from &lsquo;origin&rsquo; to &lsquo;octopress&rsquo;</li>
+<li>Add your Github Pages repository as the default origin remote.</li>
+<li>Switch the active branch from master to source.</li>
+<li>Configure your blog&rsquo;s url according to your repository.</li>
+<li>Setup a master branch in the _deploy directory for deployment.</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake setup_github_pages #按照提示输入你的repository的SSH地址
+</span><span class='line'>rake generate #生成静态网页，记住，每次有修改之后都需要执行一次或者多次才能查看新的预览！
+</span><span class='line'>rake deploy  #发布网页，这里会提交代码到github
+</span><span class='line'>rake preview #本地预览，默认端口是4000，可以修改
+</span><span class='line'>git add .
+</span><span class='line'>git commit -m 'your message'
+</span><span class='line'>git push origin source  #一定记着要提交source下的内容</span></code></pre></td></tr></table></div></figure>
+
+
+<p>需要注意的是，如果你是Github新手的话，可能遇到<code>Permission denied (publickey)</code>，这说明你还没有添加key给当前用户，解决方案请参考<a href="https://help.github.com/articles/error-permission-denied-publickey">Error:Permission denied (publickey)</a>和<a href="https://help.github.com/articles/generating-ssh-keys">Github help:Generating SSH Keys</a>来为当前用户创建publickey，</p>
+
+<p>通过命令<code>ssh -T billy.anyteen@github.com</code>可以查看Github是否识别当前用户，如果不能识别会返回<code>Permission denied (publickey)</code>，否则便是<code>Hi username! You've successfully authenticated, but GitHub does not # provide shell access.</code></p>
+
+<p>另外，极力推荐一个<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">Git的简明教程</a>，作者廖雪峰是一位资深的Java开发者，著有书籍《Spring 2.0核心技术与最佳实践》。</p>
+
+<p>*大功告成！</p>
+
+<p>① 大致介绍下Octopress的目录结构(摘自<a href="http://www.dongwm.com/archives/qian-yi-octpressyi-ji-zi-ding-yi/">小明明s à domicile</a>)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>├─ config.rb  #指定额外的compass插件
+</span><span class='line'>├─ config.ru  
+</span><span class='line'>├─ Rakefile   #rake的配置文件,类似于makefile,这个我修改了一些内容
+</span><span class='line'>├─ Gemfile    #bundle要下载需要的gem依赖关系的指定文件
+</span><span class='line'>├─ Gemfile.lock  #这些gem依赖的对应关系,比如A的x本依赖于B的y版本,我也修改了
+</span><span class='line'>├─ _config.yml  #站点的配置文件
+</span><span class='line'>├─ public/  #在静态编译完成后的目录,网站只需要这个目录下的文件树
+</span><span class='line'>├─ _deploy/  #deploy时候生成的缓存文件夹,和public目录一样
+</span><span class='line'>├─ sass/  #css文件的源文件,过程中会compass成css
+</span><span class='line'>├─ plugins/  #放置自带以及第三方插件的目录,ruby程序
+</span><span class='line'>│  └── xxx.rb
+</span><span class='line'>└─ source/  #这个是站点的源文件目录,public目录就是根据这个目录下数据生成的
+</span><span class='line'>   └─ _includes/
+</span><span class='line'>      └─ custom/  #自定义的模板目录,被相应上级html include
+</span><span class='line'>         └─ asides/  #边栏模板自定义模板目录
+</span><span class='line'>      └─ asides/  #边栏模板目录
+</span><span class='line'>      └─ post/  #文章页面相应模板目录
+</span><span class='line'>   └─ _layouts/  #默认网站html相关文件,最底层
+</span><span class='line'>   └─ _posts/  #新增以及从其它程序迁移过来的数据都存在这里
+</span><span class='line'>   └─ stylesheets/ #css文件目录
+</span><span class='line'>   └─ javascripts/  #js文件目录</span></code></pre></td></tr></table></div></figure>
+
+
+<p>② 一些配置内容</p>
+
+<p><a href="http://octopress.org/docs/configuring/">关于如何配置Octopress</a></p>
+
+<p><a href="http://octopress.org/docs/blogging/">关于如何创建新的page或者post以及本地预览</a></p>
+
+<p><a href="http://octopress.org/docs/theme/">关于如何修改主题和默认的样式</a></p>
+
+<p><a href="http://opthemes.com/">Octopress支持的第三方主题下载和预览网站</a></p>
+
+<p><a href="http://812lcl.github.io/blog/2013/10/26/octopressce-bian-lan-ji-ping-lun-xi-tong-ding-zhi/">关于侧边栏和主题的定制，添加新浪微博，多说评论，分类标签云等等</a></p>
+
+<p>[注意，使用多说的话，shortname不是你的个人资料中的名称，而是新建的站点给定的！另外，对于<a href="http://havee.me/internet/2013-02/add-duoshuo-commemt-system-into-octopress.html">这里</a>提到的升级问题，可以干脆直接删除data-title]</p>
+
+<p>最有用的资料总能在这里找到：<a href="http://octopress.org/docs/">Octopress的官方文档</a></p>
+
+<p>③ 关于<a href="http://jekyllrb.com/docs/home/">Jekyll</a></p>
+
+<p>Octopress是基于Jekyll的，所以对Jekyll有一定的了解是很有必要的，Jekyll主页中记录了Jekyll的方方面面，最好是了解下Directory Structure，Configuration，Writing Posts，Creating Pages等等内容，这对后面的Octopress的使用会有很大帮助的。</p>
+
+<p>④ 关于本地编写博客</p>
+
+<p>对于前台开发，我心中向来只有一个工具<a href="www.aptana.com">Aptana</a>！所以，我把整个octopress目录作为aptana中的一个项目进行管理，至少有两个好处：</p>
+
+<ul>
+<li>aptana的git插件可以让我很清楚的看到我又改动了哪些文件中的哪些内容</li>
+<li>aptana的语法高亮功能让我可以在众多的前台代码中游刃有余，对于简单的html可以直接在aptana中预览</li>
+</ul>
+
+
+<p>对于Markdown编辑器，我觉得Mou可能不是最好的，但是，它是很精巧的！我简直爱不释手，希望之后能够在我的博客中实现数学公式的编辑，这样会很方便，哈哈</p>
+
+<p>哦了，今天就到这里啦！哈哈哈</p>
+
+<p>晚安，Octopress！</p>
 </div>
 
 
@@ -225,6 +400,18 @@
         </li>
         <li>
         <a href="http://www.tanglei.name/">tanglei的blog</a>
+        </li>
+        <li>
+        <a href="http://www.liaoxuefeng.com/">廖雪峰的官方网站</a>
+        </li>
+        <li>
+        <a href="http://easypi.github.io/">easypi's blog</a>
+        </li>
+        <li>
+        <a href="http://812lcl.github.io/">812lcl的博客</a>
+        </li>
+        <li>
+        <a href="#">这里会是你吗?</a>
         </li>
 </ul>
 </section>
