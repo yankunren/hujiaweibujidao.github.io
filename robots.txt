@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://hujiaweibujidao.github.io/sitemap.xml 
