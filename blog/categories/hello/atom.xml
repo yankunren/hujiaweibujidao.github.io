@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Hujiawei Bujidao]]></title>
-  <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: hello | Hujiawei Bujidao]]></title>
+  <link href="http://hujiaweibujidao.github.io/blog/categories/hello/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
   <updated>2013-11-17T19:03:48+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
