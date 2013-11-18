@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2013-11-18T15:54:07+08:00</updated>
+  <updated>2013-11-18T20:48:13+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -14,13 +14,426 @@
 
   
   <entry>
+    <title type="html"><![CDATA[android ndk and opencv development 2]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/"/>
+    <updated>2013-11-18T15:59:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2</id>
+    <content type="html"><![CDATA[<h3>Android NDK 和 OpenCV 整合开发总结(2)</h3>
+
+<p>这节主要介绍的内容是<a href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>的核心内容和开发总结(包括很多常见问题的解决方案)。</p>
+
+<h4>1.不得不说的JNI和javah命令</h4>
+
+<p>NDK开发的核心之一便是JNI，<a href="http://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/jniTOC.html">Oracle官方的JNI相关文档</a>，重要的是里面的第3-4部分(数据类型和函数)，本文不会介绍这些，如果想快速入手可以查看<a href="http://my.oschina.net/zhiweiofli/blog?catalog=225458">这位作者的几篇关于JNI的文章</a>，讲得深入浅出，另外推荐一篇<a href="http://www.ibm.com/developerworks/cn/java/j-lo-jni/index.html">IBM DeveloperWorks上的文章:JNI 对象在函数调用中的生命周期</a>，讲得有点深奥哟。</p>
+
+<ul>
+<li><p><a href="http://docs.oracle.com/javase/6/docs/technotes/tools/windows/javah.html">javah命令：详细命令参数</a>：<code>javah produces C header files and C source files from a Java class. These files provide the connective glue that allow your Java and C code to interact.</code></p></li>
+<li><p>在Eclipse中配置<strong>万能的javah工具</strong>的方法</p></li>
+</ul>
+
+
+<p>(1)在<code>External Tools Configurations</code>中新建<code>Program</code></p>
+
+<p>(2)<code>Location</code>设置为<code>/usr/bin/javah</code></p>
+
+<p>(3)<code>Working Directory</code>设置为<code>${project_loc}/bin/classes</code></p>
+
+<p>(4)<code>Arguments</code>设置为<code>-jni -verbose -d "${project_loc}${system_property:file.separator}jni" ${java_type_name}</code></p>
+
+<p>(5)OK，以后只要选中要进行&#8221;反编译&#8221;的Java Class，然后运行这个External Tool就可以了！注意，因为我的<code>Arguments</code>设置为导出的头文件是放在项目的jni目录中，如果不是Android NDK开发的话，请自行修改输出路径，还有<code>Working Directory</code>设置为<code>${project_loc}/bin</code>，不要包含后面的<code>/classes</code>。如果还有问题的话，推荐看下<a href="http://blog.csdn.net/mirkerson/article/details/8901270">这位作者的JNI相关配置</a></p>
+
+<h4>2.那些年的Android NDK Dev Guide</h4>
+
+<p>在ndk的根目录下有一个html文件<code>document.html</code>，这个就是Android NDK Dev Guide，用浏览器打开可以看到里面介绍了NDK开发中的很多配置问题，不同版本的NDK差别还是蛮大的，而且NDK开发中问题会很多，不向SDK那么简单，所以，一旦出现了问题，运气好能够Google解决，RP弱的时候只能啃这些Guide来找答案了。这几篇文章的简单介绍可以查看<a href="http://developer.android.com/tools/sdk/ndk/index.html#Docs">Android Developer上的解释</a>。对于这部分的内容，可以阅读下<a href="http://blog.csdn.net/smfwuxiao/article/category/1328624">这位作者的几篇NDK Dev Guide的翻译版本</a>，虽然略有过时，但是看后肯定会很受用的，下面我简单介绍下几个内容：</p>
+
+<ul>
+<li>[1]Android NDK Overview</li>
+</ul>
+
+
+<p>这篇文章介绍了NDK的目标和NDK开发的简易实践过程，后面的那些文章基本上都是围绕这个核心内容展开的，非常建议阅读。需要注意的是，NDK只支持Android 1.5版本以上的机型。</p>
+
+<ul>
+<li>[2]Android.mk文件</li>
+</ul>
+
+
+<p>Android.mk文件是用来描述源代码是如何进行编译的，ndk-build命令实际上对GNU Make命令的一个封装，所以，Android.mk文件的写法就类似Makefile的写法[关于Make的详细内容可以看这本书，<a href="http://pan.baidu.com/s/1zi2CR">GNU Make的中文手册</a>，虽然是今年读的，但是我记得的东西也不多了…]
+Android.mk文件可以生成一个动态链接库或者一个静态链接库，但是只有动态链接库是会复制到应用的安装包中的，静态库一般是用来生成其他的动态链接库的。你可以在一个Android.mk文件定义一个或者多个module，不同的module可以使用相同的source file进行编译得到。你不需要列出头文件，也不需要显示指明要生成的目标文件之间的依赖关系(这些内容在GNU Make中是很重要的，虽然GNU Make中的隐式规则也可以做到)。下面以hello-jni项目中的Android.mk文件为例讲解其中重要的几点。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>LOCAL_PATH := $(call my-dir)
+</span><span class='line'>include $(CLEAR_VARS)
+</span><span class='line'>LOCAL_MODULE    := hello-jni
+</span><span class='line'>LOCAL_SRC_FILES := hello-jni.c
+</span><span class='line'>include $(BUILD_SHARED_LIBRARY)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>①<code>LOCAL_PATH := $(call my-dir)</code>：Android.mk文件的第一行必须要指明<code>LOCAL_PATH</code>，<code>my-dir</code>是编译系统提供的一个宏函数，这个宏函数会返回当前Android.mk文件所在的目录</p>
+
+<p>②<code>include $(CLEAR_VARS)</code>：<code>CLEAR_VARS</code>是编译系统提供的一个变量，这个变量指向一个特殊的Makefile文件，它会清除所有除了<code>LOCAL_PATH</code>之外的其他的<code>LOCAL_XXX</code>变量。</p>
+
+<p>③<code>LOCAL_MODULE := hello-jni</code>：必须要指定<code>LOCAL_MODULE</code>，它是指这个Android.mk要生成的目标，这个名称是一个<strong>不包含空格的唯一的字符串</strong>，编译系统会自动根据名称进行一定的修改，例如<code>foo.so</code>和<code>libfoo.so</code>得到的都是<code>libfoo.so</code>！</p>
+
+<p>④<code>LOCAL_SRC_FILES := hello-jni.c</code>：指定C/C++源文件列表，不要包含头文件。如果需要自定义C++源文件的后缀，可以配置<code>LOCAL_CPP_EXTENSION</code>参数。注意写法，我给个例子，一定要记住每行后面加上一个反斜线符，并且反斜线符后面不能再有任何内容，否则编译会报错！</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>LOCAL_SRC_FILES := hello-jni.c \
+</span><span class='line'>foo.c  \
+</span><span class='line'>boo.cpp</span></code></pre></td></tr></table></div></figure>
+
+
+<p>⑤<code>include $(BUILD_SHARED_LIBRARY)</code>：<code>BUILD_SHARED_LIBRARY</code>是编译系统提供的一个Makefile文件，它会根据你前面提供的参数来生成动态链接库，同理，如果是<code>BUILD_STATIC_LIBRARY</code>的话，便是生成静态链接库。</p>
+
+<p><strong>最佳实践</strong>：一般来说，<code>LOCAL_</code>作为前缀的一般定义LOCAL Module的变量，<code>PRIVATE_</code>或者<code>NDK_</code>或者<code>APP_</code>一般定义内部使用的变量，<code>lower-case</code>小写字母的名称一般也是定义内部使用的变量或者函数。如果你要在Android.mk文件定义自己的变量，建议使用<code>MY_</code>作为前缀！</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>MY_SOURCES := foo.c
+</span><span class='line'>ifneq ($(MY_CONFIG_BAR),)
+</span><span class='line'>   MY_SOURCES += bar.c
+</span><span class='line'>endif
+</span><span class='line'>LOCAL_SRC_FILES += $(MY_SOURCES)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Android.mk这篇文章中后面详细介绍了很多编译系统内置的变量和函数，以及该文件内可以设置的变量，此处就不再赘述了。</p>
+
+<ul>
+<li>[3]Application.mk文件</li>
+</ul>
+
+
+<p>Application.mk文件描述的是你的应用需要使用哪些native modules，这个文件不是必须的，小项目可以不用编写这个文件。这个文件可以放在两个不同的位置，最常用的是放在jni目录下，和Android.mk文件放在一块，也可以放在<code>$NDK/apps/&lt;myapp&gt;/</code>目录下(不推荐使用后者，如果使用的是后者，那么必须要显示指定<code>APP_PROJECT_PATH</code>)</p>
+
+<p>①<code>APP_MODULES</code>：这个参数在NDK r4之前是一定要指定的，之后便是可选的，默认情况下，NDK将编译Android.mk文件中定义的所有的modules。</p>
+
+<p>②<code>APP_CFLAGS</code>：这个参数用来指定编译C/C++文件选项参数，例如<code>-frtti -fexceptions</code>等等，而<code>APP_CPPFLAGS</code>是专门用来指定C++源文件的选项参数。</p>
+
+<p>③<code>APP_ABI</code>：这个参数很重要，默认情况下，NDK build将生成对应<code>armeabi</code>CPU架构的库文件，你可以指定其他的CPU架构，或者同时指定多个(自从NDK r7之后，设置为<code>all</code>可以生成所有CPU架构的库文件)！关于不同CPU架构的介绍在<code>CPU Arch ABIs</code>中介绍了，我不是很懂，此文不细讲。如果想要查看某个android设备是什么CPU架构，可以上网查，或者通过执行<code>adb shell getprop ro.product.cpu.abi</code>得到，下面这段摘自<a href="http://docs.opencv.org/doc/tutorials/introduction/android_binary_package/O4A_SDK.html">OpenCV for Android SDK</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>armeabi, armv7a-neon, arm7a-neon-android8, mips and x86 stand forplatform targets:
+</span><span class='line'>   * armeabi is for ARM v5 and ARM v6 architectures with Android API 8+,
+</span><span class='line'>   * armv7a-neon is for NEON-optimized ARM v7 with Android API 9+,
+</span><span class='line'>   * arm7a-neon-android8 is for NEON-optimized ARM v7 with Android API 8,
+</span><span class='line'>   * mips is for MIPS architecture with Android API 9+,
+</span><span class='line'>   * x86 is for Intel x86 CPUs with Android API 9+.
+</span><span class='line'>If using hardware device for testing/debugging, run the following command to learnits CPU architecture:
+</span><span class='line'>*** adb shell getprop ro.product.cpu.abi ***
+</span><span class='line'>If you’re using an AVD emulator, go Window &gt; AVD Manager to see thelist of availible devices. Click Edit in the context menu of theselected device. In the window, which then pop-ups, find the CPU field.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>④<code>APP_STL</code>：指定STL，默认情况下ndk编译系统使用最精简的C++运行时库<code>/system/lib/libstdc++.so</code>，但是你可以指定其他的。详细的内容可以查看<code>$NDK/docs/CPLUSPLUS-SUPPORT.html</code>文件，这个文件可能并没有列出在document.html中！</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>system          -&gt; Use the default minimal system C++ runtime library.
+</span><span class='line'>gabi++_static   -&gt; Use the GAbi++ runtime as a static library.
+</span><span class='line'>gabi++_shared   -&gt; Use the GAbi++ runtime as a shared library.
+</span><span class='line'>stlport_static  -&gt; Use the STLport runtime as a static library.
+</span><span class='line'>stlport_shared  -&gt; Use the STLport runtime as a shared library.
+</span><span class='line'>gnustl_static   -&gt; Use the GNU STL as a static library.
+</span><span class='line'>gnustl_shared   -&gt; Use the GNU STL as a shared library.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我们可以从下面的表格中看出它们对C++语言特性的支持程度：<br/>
+从中我们可以看出gnustl很不错，所以一般会配置为gnustl_static。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>             C++       C++   Standard
+</span><span class='line'>          Exceptions  RTTI    Library
+</span><span class='line'>system        no       no        no
+</span><span class='line'>gabi++       yes      yes        no
+</span><span class='line'>stlport      yes      yes       yes
+</span><span class='line'>gnustl       yes      yes       yes</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+另外需要注意的是，如果你指定的是<code>xxx_shared</code>，想要在运行时加载它，并且其他的库是基于<code>xxx_shared</code>的话，一定记得要先加载<code>xxx_shared</code>，然后再去加载其他的库。</p>
+
+<p>⑤<code>APP_PLATFORM</code>：指定目标android系统版本，注意，指定的是<code>API level</code>，一般情况下，这里可能会与<code>AndroidManifest.xml</code>文件中定义的<code>minSdkVersion</code>冲突而报错，处理办法是类似上一节中提到的修改<code>APP_PLATFORM</code>保证两个不冲突就行了。</p>
+
+<ul>
+<li>[4]Stable-APIS</li>
+</ul>
+
+
+<p>build system会自动加载C库，Math库以及C++支持库，所以你不需要通过<code>LOCAL_LDLIBS</code>指定加载他们。Android系统下载有多个<code>API level</code>，每个<code>API level</code>都对应了一个Android的发布系统，对应关系如下所示。其中<code>android-6</code>，<code>android-7</code>和<code>android-5</code>是一样的NDK，也就是说他们提供的是相同的native ABIs。对应<code>API level</code>的头文件都放在了<code>$NDK/platforms/android-&lt;level&gt;/arch-arm/usr/include</code>目录下，这正是上一节中导入的项目中在<code>C/C++ General</code>下的<code>Paths and Symbols</code>中的<code>GNU C</code>和<code>GNU C++</code>配置。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Note that the build system automatically links the C library, the Math
+</span><span class='line'>library and the C++ support library to your native code, there is no
+</span><span class='line'>need to list them in a LOCAL_LDLIBS line.
+</span><span class='line'>There are several "API Levels" defined. Each API level corresponds to
+</span><span class='line'>a given Android system platform release. The following levels are
+</span><span class='line'>currently supported:
+</span><span class='line'>    android-3      -&gt; Official Android 1.5 system images
+</span><span class='line'>    android-4      -&gt; Official Android 1.6 system images
+</span><span class='line'>    android-5      -&gt; Official Android 2.0 system images
+</span><span class='line'>    android-6      -&gt; Official Android 2.0.1 system images
+</span><span class='line'>    android-7      -&gt; Official Android 2.1 system images
+</span><span class='line'>    android-8      -&gt; Official Android 2.2 system images
+</span><span class='line'>    android-9      -&gt; Official Android 2.3 system images
+</span><span class='line'>    android-14     -&gt; Official Android 4.0 system images
+</span><span class='line'>Note that android-6 and android-7 are the same as android-5 for the NDK,
+</span><span class='line'>i.e. they provide exactly the same native ABIs!
+</span><span class='line'>IMPORTANT:
+</span><span class='line'>    The headers corresponding to a given API level are now located
+</span><span class='line'>    under $NDK/platforms/android-&lt;level&gt;/arch-arm/usr/include</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 介绍几个比较重要的库：<br/>
+(1)C库(libc)：不需要指定 –lpthread –lrt，也就是说它会自动链接<br/>
+(2)C++库(lstdc++)：不需要指定 –lstdc++<br/>
+(3)Math库(libm)：不需要指定 –lm<br/>
+(4)Android log(liblog)：<strong>需要</strong>指定 –llog <br/>
+(5)动态链接器库(libdl)：不需要指定 –ldl<br/>
+(6)Jnigraphics库(libjnigraphics)：这个C语言库提供了对Java中Bitmap的操作，<strong>需要</strong>指定 –ljnigraphics，这个库是<code>android-8</code>新增加的内容，典型的使用方式是：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Briefly, typical usage should look like:
+</span><span class='line'>    1/ Use AndroidBitmap_getInfo() to retrieve information about a
+</span><span class='line'>       given bitmap handle from JNI (e.g. its width/height/pixel format)
+</span><span class='line'>    2/ Use AndroidBitmap_lockPixels() to lock the pixel buffer and
+</span><span class='line'>       retrieve a pointer to it. This ensures the pixels will not move
+</span><span class='line'>       until AndroidBitmap_unlockPixels() is called.
+</span><span class='line'>    3/ Modify the pixel buffer, according to its pixel format, width,
+</span><span class='line'>       stride, etc.., in native code.
+</span><span class='line'>    4/ Call AndroidBitmap_unlockPixels() to unlock the buffer.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(7)The Android native application APIs：<code>android-9</code>新增加的内容，这些API使得你可以完全使用native code编写android app，但是一般情况下还是需要通过jni的，相关API如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>The following headers correspond to these new native APIs (see comments
+</span><span class='line'>inside them for more details):
+</span><span class='line'>
+</span><span class='line'>  &lt;android/native_activity.h&gt;
+</span><span class='line'>
+</span><span class='line'>        Activity lifecycle management (and general entry point)
+</span><span class='line'>
+</span><span class='line'>  &lt;android/looper.h&gt;
+</span><span class='line'>  &lt;android/input.h&gt;
+</span><span class='line'>  &lt;android/keycodes.h&gt;
+</span><span class='line'>  &lt;android/sensor.h&gt;
+</span><span class='line'>
+</span><span class='line'>        To Listen to input events and sensors directly from native code.
+</span><span class='line'>
+</span><span class='line'>  &lt;android/rect.h&gt;
+</span><span class='line'>  &lt;android/window.h&gt;
+</span><span class='line'>  &lt;android/native_window.h&gt;
+</span><span class='line'>  &lt;android/native_window_jni.h&gt;
+</span><span class='line'>
+</span><span class='line'>        Window management, including the ability to lock/unlock the pixel
+</span><span class='line'>        buffer to draw directly into it.
+</span><span class='line'>
+</span><span class='line'>  &lt;android/configuration.h&gt;
+</span><span class='line'>  &lt;android/asset_manager.h&gt;
+</span><span class='line'>  &lt;android/storage_manager.h&gt;
+</span><span class='line'>  &lt;android/obb.h&gt;
+</span><span class='line'>        Direct (read-only) access to assets embedded in your .apk. or
+</span><span class='line'>        the Opaque Binary Blob (OBB) files, a new feature of Android X.X
+</span><span class='line'>        that allows one to distribute large amount of application data
+</span><span class='line'>        outside of the .apk (useful for game assets, for example).
+</span><span class='line'>
+</span><span class='line'>All the corresponding functions are provided by the "libandroid.so" library
+</span><span class='line'>version that comes with API level 9. To use it, use the following:
+</span><span class='line'>
+</span><span class='line'>    LOCAL_LDLIBS += -landroid</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>[5]NDK Build</li>
+</ul>
+
+
+<p>使用<code>ndk-build</code>命令(ndk r4之后引入的)实际上是GNU Make的封装，它等价于<code>make -f $NDK/build/core/build-local.mk [参数]</code>命令。系统必须要安装GNU Make 3.81以上版本，否则编译将报错！如果你安装了GNU Make 3.81，但是默认的make命令没有启动，那么可以在执行<code>ndk-build</code>之前定义GNUMAKE这个变量，例如<code>GNUMAKE=/usr/local/bin/gmake ndk-build</code>。<br/>
+注意，在Windows下进行NDK开发的话，一般使用的是Cygwin自带的Make工具，但是默认是使用NDK的awk工具，所以可能会报一个错误<code>Android NDK: Host 'awk' tool is outdated. Please define HOST_AWK to point to Gawk or Nawk !</code>，解决方案就是删除NDK自带的awk工具<a href="http://blog.csdn.net/achellies/article/details/7531440">参考网址</a>，这也就是第一节中使用<code>ndk-build -v</code>命令得到的GNU Make信息输出不同了，嘿嘿，我这伏笔埋的够深吧！其实，也可以使用下面的方式直接覆盖系统的环境变量</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>NDK_HOST_AWK=&lt;path-to-awk&gt;
+</span><span class='line'>NDK_HOST_ECHO=&lt;path-to-echo&gt;
+</span><span class='line'>NDK_HOST_CMP=&lt;path-to-cmp&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+在Windows先开发还有一个需要注意的是，如果是使用Cygwin对native code进行编译，那么需要在使用<code>ndk-build</code>之前调用<code>NDK_USE_CYGPATH=1</code>！</p>
+
+<p>下面是ndk-build命令的可用参数，比较常用的是 <code>ndk-build NDK_DEBUG=1</code> 或者 <code>ndk-build V=1</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  ndk-build                  --&gt; rebuild required machine code.
+</span><span class='line'>  ndk-build clean            --&gt; clean all generated binaries.
+</span><span class='line'>  ndk-build NDK_DEBUG=1      --&gt; generate debuggable native code.
+</span><span class='line'>  ndk-build V=1              --&gt; launch build, displaying build commands.
+</span><span class='line'>  ndk-build -B               --&gt; force a complete rebuild.
+</span><span class='line'>  ndk-build -B V=1           --&gt; force a complete rebuild and display build
+</span><span class='line'>                                 commands.
+</span><span class='line'>  ndk-build NDK_LOG=1        --&gt; display internal NDK log messages
+</span><span class='line'>                                 (used for debugging the NDK itself).
+</span><span class='line'>  ndk-build NDK_DEBUG=1      --&gt; force a debuggable build (see below)
+</span><span class='line'>  ndk-build NDK_DEBUG=0      --&gt; force a release build (see below)
+</span><span class='line'>  ndk-build NDK_HOST_32BIT=1 --&gt; Always use toolchain in 32-bit (see below)
+</span><span class='line'>  ndk-build NDK_APPLICATION_MK=&lt;file&gt;
+</span><span class='line'>    --&gt; rebuild, using a specific Application.mk pointed to by
+</span><span class='line'>        the NDK_APPLICATION_MK command-line variable.
+</span><span class='line'>  ndk-build -C &lt;project&gt;     --&gt; build the native code for the project
+</span><span class='line'>                                 path located at &lt;project&gt;. Useful if you
+</span><span class='line'>                                 don't want to 'cd' to it in your terminal.</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>[6]NDK GDB，Import Module，Prebuilts，Standalone Toolchains以及和CPU相关的三个内容因为我没有涉及过，自己也不是很了解，所以此处暂时搁置了，以后如果用到以后补充。</p></li>
+<li><p>[7]<a href="http://blog.csdn.net/smfwuxiao/article/details/6612373">Tips and Tricks 建议和技巧</a></p></li>
+</ul>
+
+
+<h4>那些曾经的头疼的问题</h4>
+
+<ul>
+<li>[1]使用Android SDK Manager下载SDK时失败或者很慢</li>
+</ul>
+
+
+<p>在Windows下修改hosts文件：<code>C:\Windows\System32\drivers\etc</code> <br/>
+增加如下一行配置：<code>74.125.237.1 dl-ssl.google.com</code></p>
+
+<ul>
+<li>[2]<code>Fatal signal 11 (SIGSEGV) at 0x00000004 (code=1), thread 23487 (mple)</code></li>
+</ul>
+
+
+<p>错误原因是因为访问了非法访问的内存地址，具体的原因可能是访问了null对象或者数组，很有可能是Java层传给Native层的对象是null，导致Native层访问了非法访问的地址。<a href="http://stackoverflow.com/questions/14495242/android-fatal-signal-11-sigsegv-at-0x00000040-code-1-error?rq=1">参考网址1</a>   <a href="http://stackoverflow.com/questions/10787676/fatal-signal-11-sigsegv-at-0x00000000-code-1">参考网址2</a></p>
+
+<ul>
+<li>[3]使用ADB命令向AVD中复制文件或文件夹时报错</li>
+</ul>
+
+
+<p>默认情况下avd对应的目录是只读的，去掉只读就好了。<a href="http://www.crifan.com/ddms_import_file_error_transfer_error_read_only_file_system/">参考网址</a></p>
+
+<ul>
+<li>[4]To be continued</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[android ndk and opencv developement]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-developement/"/>
     <updated>2013-11-18T14:41:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-developement</id>
     <content type="html"><![CDATA[<h3>Android NDK 和 OpenCV 整合开发总结(1)</h3>
 
-<p>在Samsung呆了段时间，还是学了不少东西的，主要做的任务是<a href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>开发，也涉及到了<a href="http://opencv.org/">OpenCV</a>的内容，正好最近在开发XFace都用得上，所以，写篇文章总结下这些内容，主要包括三大部分，分为下面三节来介绍，本节主要介绍第一部分</p>
+<p>请无视我把<code>development</code>写成了<code>developement</code>哈，亲！
+在Samsung呆了段时间，还是学了不少东西的，主要做的任务是<a href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>开发，也涉及到了<a href="http://opencv.org/">OpenCV</a>的内容，正好最近在开发XFace都用得上，所以，写篇文章总结下这些内容，主要包括三大部分，分为下面三节来介绍，本节主要介绍第一部分</p>
 
 <ul>
 <li>Android NDK 和 OpenCV整合开发的环境搭建以及人脸检测项目的运行测试</li>
@@ -29,7 +442,7 @@
 </ul>
 
 
-<p>[本文假设你是安装配置好了Java和Android SDK开发环境的，如果没有的话，开发工具建议使用<a href="http://developer.android.com/sdk/installing/bundle.html">ADT</a>，它更加方便，包含了Android SDK 和 安装了ADT Plugin的Eclipse]</p>
+<p>[本文假设你是安装配置好了Java和Android SDK开发环境的，如果没有的话，开发工具建议使用<a href="http://developer.android.com/sdk/installing/bundle.html">ADT</a>，它更加方便，包含了Android SDK 和 安装了ADT Plugin的Eclipse，何乐而不为呢?]</p>
 
 <h4>1. 下载Android NDK，解压即可</h4>
 
@@ -156,7 +569,7 @@
 <p>[Windows平台则不要删除末尾的<code>.cmd</code>，Linux和Mac平台则需要删掉<code>.cmd</code>]</p>
 
 <ul>
-<li>修改<code>C/C++ General</code>，将<code>GNU C</code>和<code>GNU C++</code>中配置的最后一个路径修改成 <code>${OPENCVROOT}/sdk/native/jni/include</code></li>
+<li>修改<code>C/C++ General</code>，将<code>Paths and Symbols</code>中的<code>GNU C</code>和<code>GNU C++</code>配置的最后一个路径修改成 <code>${OPENCVROOT}/sdk/native/jni/include</code> (这个路径保存的是opencv的native code头文件)</li>
 </ul>
 
 
@@ -177,18 +590,18 @@
 
 <p>项目来源：<a href="http://romanhosek.cz/android-eye-detection-and-tracking-with-opencv/">http://romanhosek.cz/android-eye-detection-and-tracking-with-opencv/</a></p>
 
-<p>该作者根据原有的人脸检测做了一个人眼检测，博文最后附有<a href="http://romanhosek.cz/?wpdmact=process&amp;did=MS5ob3RsaW5r">下载地址</a>，我的<a href="https://github.com/yinger090807/XFace">Github</a>上已经有了一份备份，配置方式和Face Detection一样</p>
+<p>该作者根据原有的人脸检测做了一个人眼检测，博文最后附有<a href="http://romanhosek.cz/?wpdmact=process&amp;did=MS5ob3RsaW5r">下载地址</a>，我的<a href="https://github.com/yinger090807/XFace">Github</a>上已经有了一份备份，配置方式和Face Detection一样，至于人脸检测和人眼检测的算法我以后会有相关文章进行介绍，暂且期待下吧，嘿嘿</p>
 
 <p>[如果配置完了之后提示一个<code>app_platform</code>的警告的话，可以在<code>Application.mk</code>文件中添加 <code>APP_PLATFORM := android-8</code>]</p>
 
 <p>仔细理解上面的配置和操作，如果还有啥问题或者不清楚的可以查看<a href="http://docs.opencv.org/doc/tutorials/introduction/android_binary_package/O4A_SDK.html">OpenCV官方这篇入门文档:Manual OpenCV4Android SDK setup</a></p>
 
-<p>两个项目运行结果：[帮主，对不住啦…… 泪奔中]</p>
+<p>两个项目运行结果：[帮主，对不住啦，谁叫您长得这么帅呢！我的脸识别不了，只能用您老的Face啦！]</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201311/face_detection.png" alt="face detection" />
 <img src="http://hujiaweibujidao.github.io/images/201311/eye_detection.png" alt="eye detection" /></p>
 
-<p>OK！本节结束！觉得好，请看下节！</p>
+<p>OK！本节结束！如果觉得好，请看下节！</p>
 ]]></content>
   </entry>
   
@@ -199,7 +612,7 @@
     <id>http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy</id>
     <content type="html"><![CDATA[<p>刚刚来到Octopress的世界，我的新鲜感依旧还在，呵呵，上午写了几个<code>shell</code>脚本让你在Octopress上写博客更加轻松些，至少让我轻松了很多，哈哈哈。</p>
 
-<p>在本地写好文章内容之后，对于每次修改我们总是需要在终端切换到octopress的目录下，然后执行<code>rake generate</code>才可以在本地预览，另外，最头疼的是新建文章<code>new_post["postname"]</code>这些个命令了，那个下划线可能会记成短破折线，时间长了你可能就不记得这个命令了，当然，如果你是ruby开发者那就肯定不会这样啦，我这年龄大了，记忆力不行咯，很难记住那么多的命令啦，还有就是我希望只要打开Terminal就可以调用这些命令，而不用每次切换目录，而且每次我新建了一个文章之后，Mou能够直接启动并打开这个新建的文章让我编辑，想想，这个世界是不是美好多了？哈哈哈</p>
+<p>类似新建文章<code>new_post["postname"]</code>这些个命令了，那个下划线可能会记成短破折线，时间长了你可能就不记得这个命令了，当然，如果你是ruby开发者那就肯定不会这样啦，我这年龄大了，记忆力不行咯，很难记住那么多的命令啦，还有就是我希望只要打开Terminal就可以调用这些命令，而不用每次切换目录，而且每次我新建了一个文章之后，Mou能够直接启动并打开这个新建的文章让我编辑，想想，这个世界是不是美好多了？哈哈哈</p>
 
 <p>操作步骤：</p>
 
