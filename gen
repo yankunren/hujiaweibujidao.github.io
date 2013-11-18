@@ -4,3 +4,4 @@ path=$OCTOPRESS_HOME
 cd "$path"
 #pwd
 rake generate
+echo "generate ok"

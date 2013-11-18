@@ -5,3 +5,4 @@ cd "$path"
 #pwd
 rake generate
 rake deploy
+echo "generate and deploy ok"

@@ -2,7 +2,7 @@
 
 if [ $# -ne 1 ]
 then
-    echo "Usage - $0  message"
+    echo "Usage - gmit  message"
     exit 1
 fi
 
@@ -12,3 +12,4 @@ cd "$path"
 git add .
 git commit -m "$1"
 git push origin source
+echo "git commit and push ok"
