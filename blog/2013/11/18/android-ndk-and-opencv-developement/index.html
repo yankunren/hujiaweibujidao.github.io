@@ -1,0 +1,450 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>android ndk and opencv developement - Hujiawei Bujidao</title>
+  <meta name="author" content="hujiawei">
+
+  
+  <meta name="description" content="Android NDK 和 OpenCV 整合开发总结(1) 在Samsung呆了段时间，还是学了不少东西的，主要做的任务是Android NDK开发，也涉及到了OpenCV的内容，正好最近在开发XFace都用得上，所以，写篇文章总结下这些内容，主要包括三大部分，分为下面三节来介绍， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-developement">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Hujiawei Bujidao</a></h1>
+  
+    <h2>Love coding, travelling and MY QUEEN.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><!--
+<ul class="subscription" data-subscription="rss">
+
+  <li><a href="https://github.com/hujiaweibujidao" rel="subscribe-rss" title="subscribe via RSS">View me on GitHub</a></li>
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+   
+</ul> -->
+
+  <!--
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hujiaweibujidao.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form> 
+  
+  -->
+<ul class="main-navigation">
+  <li><a href="/blog/archives/">Blog</a></li>
+  <li><a href="/aboutme/">AboutMe</a></li>
+  <li><a href="/math/">Math</a></li>
+  <li><a href="/datamining/">DataMining</a></li>
+  <li><a href="/mobiledev/">MobileDev</a></li>
+  <!-- <li><a href="/datamining/">Projects</a></li> -->
+  <!--
+  <li><a href="/blog/archives">Archives</a></li>
+  -->
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Android Ndk and Opencv Developement</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-18T14:41:00+08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>Android NDK 和 OpenCV 整合开发总结(1)</h3>
+
+<p>在Samsung呆了段时间，还是学了不少东西的，主要做的任务是<a href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>开发，也涉及到了<a href="http://opencv.org/">OpenCV</a>的内容，正好最近在开发XFace都用得上，所以，写篇文章总结下这些内容，主要包括三大部分，分为下面三节来介绍，本节主要介绍第一部分</p>
+
+<ul>
+<li>Android NDK 和 OpenCV整合开发的环境搭建以及人脸检测项目的运行测试</li>
+<li>Android NDK 的核心内容和开发总结</li>
+<li>OpenCV在Android NDK开发中的应用</li>
+</ul>
+
+
+<p>[本文假设你是安装配置好了Java和Android SDK开发环境的，如果没有的话，开发工具建议使用<a href="http://developer.android.com/sdk/installing/bundle.html">ADT</a>，它更加方便，包含了Android SDK 和 安装了ADT Plugin的Eclipse]</p>
+
+<h4>1. 下载Android NDK，解压即可</h4>
+
+<p>下载地址： <a href="https://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a></p>
+
+<p><a href="http://download.csdn.net/download/xiao87651234/3991166">如果不能下载(公司内部可能就不让访问或者访问很慢)，可以查看这位作者的备用下载地址</a></p>
+
+<h4>2. 下载OpenCV[2.6版本]，然后进行安装 (这是OpenCV的完整内容)</h4>
+
+<p>下载地址：<a href="http://opencv.org/">OpenCV首页</a></p>
+
+<p><a href="http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation">Linux平台的安装教程</a>       <a href="http://tilomitra.com/opencv-on-mac-osx/">Mac平台的安装教程</a></p>
+
+<p>(1) 首先安装需要安装的工具和依赖包[详见前面的Linux安装教程]，Mac平台基本上只要安装CMake即可</p>
+
+<p>(2) 使用CMake编译opencv源码，然后通过make安装opencv</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd &lt;path-to-opencv-source&gt;
+</span><span class='line'>mkdir release
+</span><span class='line'>cd release
+</span><span class='line'>cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. 
+</span><span class='line'>make
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>3. 下载opencv_android_sdk 2.4.4版本，导入目录sdk/java作为Library Project (这个是OpenCV for Android)</h4>
+
+<p>下载地址：<a href="http://sourceforge.net/projects/opencvlibrary/files/opencv-android/">opencv-android on sourceforge</a></p>
+
+<p>[2.4.2相对比较旧了，有些新特性不支持，比如人脸识别(但是有人脸检测)，不推荐下载这个；2.4.6相对比较新，但是可能导入的Library Project一直报错，所以如果不能解决就考虑使用2.4.4，只要Library Project导入进来没问题就行]</p>
+
+<p><a href="http://docs.opencv.org/doc/tutorials/introduction/android_binary_package/O4A_SDK.html#general-info">关于opencv for android的目录结构的详细解释</a></p>
+
+<h4>4. 环境配置NDK和OpenCV环境</h4>
+
+<ul>
+<li>安装Android SDK(略过)和NDK，配置到系统PATH中</li>
+</ul>
+
+
+<p>[推荐配置，方便以后在终端执行adb和ndk-build等命令]</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export ANDROID_SDK_ROOT=/Users/hujiawei/Android/android_sdk
+</span><span class='line'>export PATH=${PATH}:${ANDROID_SDK_ROOT}/platform-tools:${ANDROID_SDK_ROOT}/tools
+</span><span class='line'>export ANDROID_NDK_ROOT=/Users/hujiawei/Android/android_ndk
+</span><span class='line'>export PATH=${PATH}:${ANDROID_NDK_ROOT}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>使用<code>ndk-build -v</code>测试配置</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GNU Make 3.81
+</span><span class='line'>Copyright (C) 2006  Free Software Foundation, Inc.
+</span><span class='line'>This is free software; see the source for copying conditions.
+</span><span class='line'>There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+</span><span class='line'>PARTICULAR PURPOSE.
+</span><span class='line'>This program built for i386-apple-darwin10.8.0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果是在Windows下，并且安装了Cygwin的话，输出就略有不同，它使用的不是系统内置的GNU Make</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ndk-build -v
+</span><span class='line'>GNU Make 3.82.90
+</span><span class='line'>Built for i686-pc-cygwin
+</span><span class='line'>Copyright (C) 2010  Free Software Foundation, Inc.
+</span><span class='line'>License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+</span><span class='line'>This is free software: you are free to change and redistribute it.
+</span><span class='line'>There is NO WARRANTY, to the extent permitted by law.</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>在Eclipse(Android Development Tool)的设置中，在 C/C++ &ndash;> Build &ndash;> Environment 中添加下面两个配置</li>
+</ul>
+
+
+<p>[添加这两项配置是为了后面进行各项关于路径配置的方便]</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>NDKROOT = /Users/hujiawei/Android/android_ndk
+</span><span class='line'>OPENCVROOT = /Users/hujiawei/Android/opencv_sdk</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>5. 运行OpenCV for Android中的Sample项目FaceDetection</h4>
+
+<ul>
+<li><p>导入OpenCV for Android中的<code>Library Project</code> &ndash; <code>OpenCV Library - 2.4.4</code></p></li>
+<li><p>修改<code>Library Project</code>，改为前面导入到workspace中的<code>Library Project</code></p></li>
+</ul>
+
+
+<p>[原有的配置默认该项目和<code>Library Project</code>是在同一个目录下，所以如果你以前接触过的话，会发现很多文章都是告诉你要把<code>Library Project</code>拷贝到和当前项目同一个目录下，其实是完全没有必要的！]</p>
+
+<ul>
+<li>修改<code>C/C++ Build</code>，将<code>Build Command</code>改成： <code>${NDKROOT}/ndk-build</code></li>
+</ul>
+
+
+<p>[Windows平台则不要删除末尾的<code>.cmd</code>，Linux和Mac平台则需要删掉<code>.cmd</code>]</p>
+
+<ul>
+<li>修改<code>C/C++ General</code>，将<code>GNU C</code>和<code>GNU C++</code>中配置的最后一个路径修改成 <code>${OPENCVROOT}/sdk/native/jni/include</code></li>
+</ul>
+
+
+<p>[建议将这个配置导出到文件中，方便以后做类似项目时可以快速进行配置]</p>
+
+<ul>
+<li>修改jni目录下的<code>Android.mk</code>，将<code>include OpenCV.mk</code>这行改成：<code>include${OPENCVROOT}/sdk/native/jni/OpenCV.mk</code></li>
+</ul>
+
+
+<p>[原有的配置是默认OpenCV的sdk文件夹和包含项目根目录的文件夹是同一个目录下]</p>
+
+<ul>
+<li><p>经过上面的配置之后，FaceDetection项目便没有问题了，打开jni目录下的cpp和h文件也不会报错了，当然，手机必须安装OpenCV Manager才能成功运行FaceDetection</p></li>
+<li><p>运行眼镜检测的示例程序</p></li>
+</ul>
+
+
+<p>项目来源：<a href="http://romanhosek.cz/android-eye-detection-and-tracking-with-opencv/">http://romanhosek.cz/android-eye-detection-and-tracking-with-opencv/</a></p>
+
+<p>该作者根据原有的人脸检测做了一个人眼检测，博文最后附有<a href="http://romanhosek.cz/?wpdmact=process&amp;did=MS5ob3RsaW5r">下载地址</a>，我的<a href="https://github.com/yinger090807/XFace">Github</a>上已经有了一份备份，配置方式和Face Detection一样</p>
+
+<p>[如果配置完了之后提示一个<code>app_platform</code>的警告的话，可以在<code>Application.mk</code>文件中添加 <code>APP_PLATFORM := android-8</code>]</p>
+
+<p>仔细理解上面的配置和操作，如果还有啥问题或者不清楚的可以查看<a href="http://docs.opencv.org/doc/tutorials/introduction/android_binary_package/O4A_SDK.html">OpenCV官方这篇入门文档:Manual OpenCV4Android SDK setup</a></p>
+
+<p>两个项目运行结果：[帮主，对不住啦…… 泪奔中]</p>
+
+<p><img src="/images/201311/face_detection.png" alt="face detection" />
+<img src="/images/201311/eye_detection.png" alt="eye detection" /></p>
+
+<p>OK！本节结束！觉得好，请看下节！</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hujiawei</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-18T14:41:00+08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/mobiledev/'>mobiledev</a>, <a class='category' href='/blog/categories/opencv/'>opencv</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/11/18/make-your-octopress-easy/" title="Previous Post: make your octopress easy">&laquo; make your octopress easy</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN   data-title=""-->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hujiaweibujidao"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>关于博主</h1><br/>
+  <a href="/aboutme/"><img src="/images/me-small.png" width="250px" height="210px" alt="protrait"/></a><br/>
+  <p>Hi, I'm Hujiawei, from P.R.China. Now I'm a postgraduate student studying in <a href="http://www.tsinghua.edu.cn/publish/th/index.html">Tsinghua University</a>.
+  Wanna know me? <a href="/aboutme/">See here.</a> <br/>	
+  </p>
+  <a href="http://weibo.com/hujiaweiyinger"><img src="/images/sinaweibo.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://github.com/hujiaweibujidao"><img src="/images/github.png" width="40px" height="40px"/></a>&nbsp;
+  <a href="http://hujiawei.tumblr.com"><img src="/images/tumblr.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://twitter.com/hujiaweiyinger"><img src="/images/twitter.png" width="40px" height="40px"/></a>
+  
+  <br/>
+  
+</section>
+<section>
+ <h1>分类目录</h1>
+ <ul id="categories">
+	 <li class='category'><a href='/blog/categories/android/'>android (1)</a></li>
+<li class='category'><a href='/blog/categories/mobiledev/'>mobiledev (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/opencv/'>opencv (1)</a></li>
+
+ </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/18/android-ndk-and-opencv-developement/">Android Ndk and Opencv Developement</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/18/make-your-octopress-easy/">Make Your Octopress Easy</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/17/hello-octopress/">Hello Octopress</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+<h1>好友博客</h1>
+<ul>
+        <li>
+        <a href="http://doufunao.github.io/">豆腐脑的幻想乡</a>
+        </li>
+        <li>
+        <a href="http://c4fun.cn/">Code 4 Fun</a>
+        </li>
+        <li>
+        <a href="http://www.tanglei.name/">tanglei的blog</a>
+        </li>
+        <li>
+        <a href="http://www.liaoxuefeng.com/">廖雪峰的官方网站</a>
+        </li>
+        <li>
+        <a href="http://easypi.github.io/">easypi's blog</a>
+        </li>
+        <li>
+        <a href="http://812lcl.github.io/">812lcl的博客</a>
+        </li>
+        <li>
+        <a href="http://wufawei.com/">Ted's Homepage</a>
+        </li>
+        <li>
+        <a href="#">这里会是你吗?</a>
+        </li>
+</ul>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - hujiawei - <a href="http://happybirthday2yinger.duapp.com/">Happy birthday to MY QUEEN</a> -
+  <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
