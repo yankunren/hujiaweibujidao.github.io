@@ -1,0 +1,17 @@
+#! /bin/bash
+
+path=$OCTOPRESS_HOME
+cd "$path"
+#pwd
+filepath=`rake new_post["$1"]`
+#echo "$filepath"
+#Creating new post: source/_posts/2013-11-18-test5.markdown
+OLD_IFS="$IFS"
+IFS=" "
+arr=($filepath)
+filepath=${arr[3]}
+IFS="$OLD_IFS"
+postpath="$path/$filepath"
+#echo "$postpath"
+#open Mou with the file
+open -a Mou $postpath

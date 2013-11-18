@@ -1,8 +1,14 @@
 #! /bin/bash
 
-path='/Users/hujiawei/git/octopress'
+if [ $# -ne 1 ]
+then
+    echo "Usage - $0  message"
+    exit 1
+fi
+
+path=$OCTOPRESS_HOME
 cd "$path"
-pwd
+#pwd
 git add .
 git commit -m "$1"
 git push origin source

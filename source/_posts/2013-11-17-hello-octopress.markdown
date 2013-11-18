@@ -124,11 +124,13 @@ git push origin source  #一定记着要提交source下的内容
 
 最有用的资料总能在这里找到：[Octopress的官方文档](http://octopress.org/docs/)
 
-③ 关于[Jekyll](http://jekyllrb.com/docs/home/)
+③ 关于终端命令：大多数时候
+
+④ 关于[Jekyll](http://jekyllrb.com/docs/home/)
 
 Octopress是基于Jekyll的，所以对Jekyll有一定的了解是很有必要的，Jekyll主页中记录了Jekyll的方方面面，最好是了解下Directory Structure，Configuration，Writing Posts，Creating Pages等等内容，这对后面的Octopress的使用会有很大帮助的。
 
-④ 关于本地编写博客
+⑤ 关于本地编写博客
 
 对于前台开发，我心中向来只有一个工具[Aptana](www.aptana.com)！所以，我把整个octopress目录作为aptana中的一个项目进行管理，至少有两个好处：
 
