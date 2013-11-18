@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2013-11-18T11:13:22+08:00</updated>
+  <updated>2013-11-18T13:00:07+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,87 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[test8]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/test8/"/>
+    <updated>2013-11-18T12:35:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/test8</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[test7]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/test7/"/>
+    <updated>2013-11-18T12:34:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/test7</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[test6]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/test6/"/>
+    <updated>2013-11-18T12:33:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/test6</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[test5]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/test5/"/>
+    <updated>2013-11-18T12:28:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/test5</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[test4]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/test4/"/>
+    <updated>2013-11-18T12:26:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/test4</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[test3]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/test3/"/>
+    <updated>2013-11-18T12:25:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/test3</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[test2]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/test2/"/>
+    <updated>2013-11-18T12:22:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/test2</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[test]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/test/"/>
+    <updated>2013-11-18T12:21:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/test</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[pagerank]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/pagerank/"/>
+    <updated>2013-11-18T11:19:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/pagerank</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hello Octopress]]></title>
@@ -176,11 +257,13 @@
 
 <p>最有用的资料总能在这里找到：<a href="http://octopress.org/docs/">Octopress的官方文档</a></p>
 
-<p>③ 关于<a href="http://jekyllrb.com/docs/home/">Jekyll</a></p>
+<p>③ 关于终端命令：大多数时候</p>
+
+<p>④ 关于<a href="http://jekyllrb.com/docs/home/">Jekyll</a></p>
 
 <p>Octopress是基于Jekyll的，所以对Jekyll有一定的了解是很有必要的，Jekyll主页中记录了Jekyll的方方面面，最好是了解下Directory Structure，Configuration，Writing Posts，Creating Pages等等内容，这对后面的Octopress的使用会有很大帮助的。</p>
 
-<p>④ 关于本地编写博客</p>
+<p>⑤ 关于本地编写博客</p>
 
 <p>对于前台开发，我心中向来只有一个工具<a href="www.aptana.com">Aptana</a>！所以，我把整个octopress目录作为aptana中的一个项目进行管理，至少有两个好处：</p>
 

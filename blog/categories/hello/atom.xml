@@ -4,7 +4,7 @@
   <title><![CDATA[Category: hello | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/hello/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2013-11-18T11:13:22+08:00</updated>
+  <updated>2013-11-18T13:00:07+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -142,11 +142,13 @@ git push origin source  #一定记着要提交source下的内容
 
 <p>最有用的资料总能在这里找到：<a href="http://octopress.org/docs/">Octopress的官方文档</a></p>
 
-<p>③ 关于<a href="http://jekyllrb.com/docs/home/">Jekyll</a></p>
+<p>③ 关于终端命令：大多数时候</p>
+
+<p>④ 关于<a href="http://jekyllrb.com/docs/home/">Jekyll</a></p>
 
 <p>Octopress是基于Jekyll的，所以对Jekyll有一定的了解是很有必要的，Jekyll主页中记录了Jekyll的方方面面，最好是了解下Directory Structure，Configuration，Writing Posts，Creating Pages等等内容，这对后面的Octopress的使用会有很大帮助的。</p>
 
-<p>④ 关于本地编写博客</p>
+<p>⑤ 关于本地编写博客</p>
 
 <p>对于前台开发，我心中向来只有一个工具<a href="www.aptana.com">Aptana</a>！所以，我把整个octopress目录作为aptana中的一个项目进行管理，至少有两个好处：</p>
 
