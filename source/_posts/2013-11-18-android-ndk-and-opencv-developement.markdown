@@ -128,8 +128,8 @@ OPENCVROOT = /Users/hujiawei/Android/opencv_sdk
 仔细理解上面的配置和操作，如果还有啥问题或者不清楚的可以查看[OpenCV官方这篇入门文档:Manual OpenCV4Android SDK setup](http://docs.opencv.org/doc/tutorials/introduction/android_binary_package/O4A_SDK.html)
 
 两个项目运行结果：[帮主，对不住啦，谁叫您长得这么帅呢！我的脸识别不了，只能用您老的Face啦！]   
-{% img left http://hujiaweibujidao.github.io/images/201311/face_detection.png 350 500 face detection %}
-{% img right http://hujiaweibujidao.github.io/images/201311/eye_detection.png 350 500 eye detection %}
+{% img left /images/201311/face_detection.png 350 500 face detection %}
+{% img right /images/201311/eye_detection.png 350 500 eye detection %}
 
 OK！本节结束！如果觉得好，请看下节！
 
