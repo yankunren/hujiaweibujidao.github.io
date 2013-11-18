@@ -1,0 +1,6 @@
+#! /bin/bash
+
+path='/Users/hujiawei/git/octopress'
+cd "$path"
+pwd
+rake generate
