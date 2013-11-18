@@ -4,7 +4,7 @@
   <title><![CDATA[Category: opencv | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/opencv/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2013-11-18T21:10:26+08:00</updated>
+  <updated>2013-11-18T21:23:44+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -495,10 +495,9 @@ OPENCVROOT = /Users/hujiawei/Android/opencv_sdk
 
 <p>仔细理解上面的配置和操作，如果还有啥问题或者不清楚的可以查看<a href="http://docs.opencv.org/doc/tutorials/introduction/android_binary_package/O4A_SDK.html">OpenCV官方这篇入门文档:Manual OpenCV4Android SDK setup</a></p>
 
-<p>两个项目运行结果：[帮主，对不住啦，谁叫您长得这么帅呢！我的脸识别不了，只能用您老的Face啦！]</p>
-
-<p><img src="/images/201311/face_detection.png" alt="face detection" />
-<img src="/images/201311/eye_detection.png" alt="eye detection" /></p>
+<p>两个项目运行结果：[帮主，对不住啦，谁叫您长得这么帅呢！我的脸识别不了，只能用您老的Face啦！] <br/>
+<img class="left <a" src="href="http://hujiaweibujidao.github.io/images/201311/face_detection.png">http://hujiaweibujidao.github.io/images/201311/face_detection.png</a>" width="350" height="500" title="face detection" >
+<img class="right <a" src="href="http://hujiaweibujidao.github.io/images/201311/eye_detection.png">http://hujiaweibujidao.github.io/images/201311/eye_detection.png</a>" width="350" height="500" title="eye detection" ></p>
 
 <p>OK！本节结束！如果觉得好，请看下节！</p>
 ]]></content>
