@@ -4,7 +4,7 @@
   <title><![CDATA[Category: opencv | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/opencv/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2013-11-18T21:33:42+08:00</updated>
+  <updated>2013-11-19T01:09:57+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -14,13 +14,270 @@
 
   
   <entry>
+    <title type="html"><![CDATA[android ndk and opencv development 3]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3/"/>
+    <updated>2013-11-18T21:35:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3</id>
+    <content type="html"><![CDATA[<h3>Android NDK 和 OpenCV 整合开发总结(3)</h3>
+
+<p>终于写到第三节啦，虽然很累，但是还是要坚持，坚持写完这3篇文章。</p>
+
+<p>这一节的主要内容是OpenCV在Android NDK开发中的应用，包括下面几个方面的内容：</p>
+
+<ul>
+<li>如何实现Static Initialization从而不需要安装OpenCV Manager运行含opencv library的app</li>
+<li>对十份论文和报告中的关于OpenCV和Android NDK开发的总结</li>
+<li>如何使用Android中的摄像头，常见的问题?</li>
+<li>OpenCV和Android NDK开发的一般途径</li>
+</ul>
+
+
+<h4>1.实现Static Initialization</h4>
+
+<p>实现Static Initialization就是指将OpenCV Library添加到app package中，不需要安装OpenCV Manager这个app就能运行，<a href="http://docs.opencv.org/trunk/doc/tutorials/introduction/android_binary_package/dev_with_OCV_on_Android.html">官方文档有介绍</a>，但是不详细，尤其是最后那句代码到底要放在什么地方大家都不清楚，其实并不需要向官方文档中介绍的那样配置，我想在这里介绍下如何修改FaceDetection项目的源码来做到这点。(最好是找一个包含jni代码的项目进行修改)</p>
+
+<ul>
+<li>[1]打开jni下的Android.mk文件，修改OpenCV的那一部分，将<code>off</code>设置为<code>on</code>，并设置<code>OPENCV_LIB_TYPE</code>为<code>SHARED</code>，结果如下：</li>
+</ul>
+
+
+<p><code>
+OPENCV_CAMERA_MODULES:=on
+OPENCV_INSTALL_MODULES:=on
+OPENCV_LIB_TYPE:=SHARED
+include ${OPENCVROOT}/sdk/native/jni/OpenCV.mk
+</code></p>
+
+<ul>
+<li>[2]打开FdActivity.java文件，在其中添加一个静态初始化块代码，它是用来加载<code>opencv_java</code>库的，由于FaceDetection中还用了另一个库detection_based_tracker，所以要在<code>else</code>子句中加载进来：</li>
+</ul>
+
+
+<p>```
+static {</p>
+
+<pre><code>Log.i(TAG, "opencv library load!");
+if (!OpenCVLoader.initDebug()) {
+    Log.i(TAG, "OpenCV load not successfully");
+} else {
+    System.loadLibrary("detection_based_tracker");// load other libraries
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<ul>
+<li>[3]删除FdActivity.java的OnResume()方法的最后那句，不让它去访问OpenCV Manager。</li>
+</ul>
+
+
+<p>```
+@Override
+public void onResume() {</p>
+
+<pre><code>super.onResume();
+</code></pre>
+
+<p>//OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_3, this, mLoaderCallback);//
+}
+```</p>
+
+<ul>
+<li>[4]修改FdActivity.java的OnCreate()方法，从上面的<code>private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this)</code>代码块中拷贝<code>try-catch</code>块放到OnCreate的setContentView()之后，然后拷贝<code>mOpenCvCameraView.enableView();</code>放到<code>mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.fd_activity_surface_view);</code>之后，修改后的OnCreate()方法如下：</li>
+</ul>
+
+
+<p>```
+public void onCreate(Bundle savedInstanceState) {</p>
+
+<pre><code>Log.i(TAG, "called onCreate");
+super.onCreate(savedInstanceState);
+getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+setContentView(R.layout.face_detect_surface_view);
+
+//
+try {
+    // load cascade file from application resources
+    InputStream is = getResources().openRawResource(R.raw.lbpcascade_frontalface);
+    File cascadeDir = getDir("cascade", Context.MODE_PRIVATE);
+    mCascadeFile = new File(cascadeDir, "lbpcascade_frontalface.xml");
+    FileOutputStream os = new FileOutputStream(mCascadeFile);
+
+    byte[] buffer = new byte[4096];
+    int bytesRead;
+    while ((bytesRead = is.read(buffer)) != -1) {
+        os.write(buffer, 0, bytesRead);
+    }
+    is.close();
+    os.close();
+
+    mJavaDetector = new CascadeClassifier(mCascadeFile.getAbsolutePath());
+    if (mJavaDetector.empty()) {
+        Log.e(TAG, "Failed to load cascade classifier");
+        mJavaDetector = null;
+    } else
+        Log.i(TAG, "Loaded cascade classifier from " + mCascadeFile.getAbsolutePath());
+
+    mNativeDetector = new DetectionBasedTracker(mCascadeFile.getAbsolutePath(), 0);// hujiawei
+
+    cascadeDir.delete();
+
+} catch (IOException e) {
+    e.printStackTrace();
+    Log.e(TAG, "Failed to load cascade. Exception thrown: " + e);
+}
+
+//
+
+mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.fd_activity_surface_view);
+mOpenCvCameraView.enableView();//
+mOpenCvCameraView.setCvCameraViewListener(this);
+</code></pre>
+
+<p>}
+```</p>
+
+<ul>
+<li>[5]OK，卸载安装好的OpenCV Manager，然后重新调试运行FaceDetection试试，它已经可以自行运行了！</li>
+</ul>
+
+
+<h4>2.对十份论文和报告中的关于OpenCV和Android NDK开发的总结</h4>
+
+<p>这10篇文献大部分[<a href="http://pan.baidu.com/s/19WOVq">下载地址</a>]都还是停留如何在android开发中使用opencv library，没有牵涉到具体的实现领域。具体总结如下：</p>
+
+<ul>
+<li>_利用OpenCV实现在Android系统下的人脸检测</li>
+</ul>
+
+
+<p>本文主要介绍了如何在底层通过opencv来对人脸部分进行检测，得到的人脸位置数据通过JNI传递给Java层，详细介绍了其中的JNI代码和共享库的构建过程，对图片是通过图片的路径来进行传递的，因为这里的检测只是对单张静态的图片进行检测。[这竟然是博士生的论文，它比我实习要做的简单多了！]</p>
+
+<ul>
+<li>_Tutorial-2-OpenCV-for-Android-Setup-Macintosh-API11</li>
+</ul>
+
+
+<p>本文主要是介绍了OpenCV和Android NDK开发环境的搭建，以及基于示例程序Face-Detection的演示。使用的方式是将OpenCV Library Project作为库，然后调用OpenCV Android API。</p>
+
+<ul>
+<li>_Android application for Face Recognition</li>
+</ul>
+
+
+<p>这是一份详细的项目介绍，实现了几种基于Android平台的人脸检测和识别，包括Google API和OpenCV的，但是OpenCV的由于需要Library Project，而且算法过于复杂，作者便自行开发了人脸检测库，有6大特性，其中包括了眼镜和嘴巴的检测。</p>
+
+<ul>
+<li>_ECCV-2012-OpenCV4Android</li>
+</ul>
+
+
+<p>这份报告写得精简但是内容丰富，有几个重要点：<br/>
+(1) 使用opencv的android应用开发方式，对应不同的开发人群：Java developer / Native developer <br/>
+(2) OpenCV4Android目前的局限性，以及开发过程中对于提高性能和开发效率需要注意的事项</p>
+
+<ul>
+<li>_Introduction to OpenCV for Android devices</li>
+</ul>
+
+
+<p>本文设计的内容都很基础，涉及到opencv和android开发的环境搭建，亮点是最后的Using C++ OpenCV code，这里是在android ndk中使用opencv本地代码的重要配置项。</p>
+
+<ul>
+<li>_opencv-facedetection</li>
+</ul>
+
+
+<p>这份报告讲述了很多opencv的相关知识，另外还详细讲述了一个人脸检测的算法</p>
+
+<ul>
+<li>_OpenCV on Android Platforms</li>
+</ul>
+
+
+<p>这份报告内容也比较多，但是都很基础。</p>
+
+<ul>
+<li>_BDTI_ARMTechCon_2012_OpenCV_Android</li>
+</ul>
+
+
+<p>这份报告讲的是opencv在嵌入式设备中的应用，其中介绍了opencv在android上的开发，需要注意的是opencv2.4开始提供了native android camera support！</p>
+
+<ul>
+<li>_OpenCV Based Real-Time Video Processing  Using Android Smartphone</li>
+</ul>
+
+
+<p>这篇论文介绍了利用opencv对实时的视频进行处理和纯android library进行处理的比较，发现利用opencv处理的结果更加准确，效率更快，而且更加省电。比较时使用的都是基本图像处理操作，例如灰度化，高斯模糊，Sobel边缘检测等等。[这篇论文貌似发在国际期刊上，我表示呵呵一下……到处都是水啊]</p>
+
+<ul>
+<li>_Realtime Computer Vision  with OpenCV</li>
+</ul>
+
+
+<p>这篇文章比较有意思，大致看了下，介绍了opencv在移动终端的应用。</p>
+
+<h4>3.Android的摄像头</h4>
+
+<ul>
+<li><p>关于如何使用android的摄像头：android设备一般有两个摄像头，前置摄像头和后置摄像头，在进行和摄像头相关的应用开发的时候很容易遇到各种问题，推荐以下几篇文章：<br/>
+<a href="https://developer.android.com/guide/topics/media/camera.html">Android Developer中有对应的文档:Camera</a><br/>
+<a href="http://blog.csdn.net/yinyuan1987/article/details/6969225">这位作者的总结：Android相机</a><br/>
+<a href="http://stackoverflow.com/questions/2779002/how-to-open-front-camera-on-android-platform">StackOverflow上关于如何调用前置摄像头</a><br/>
+<a href="http://blog.csdn.net/yangzl2008/article/details/9262505">如何在Android中后台开启摄像头默默拍照</a><br/>
+<a href="http://blog.csdn.net/ocean20/article/details/8772196">关于Camera的三种Callback</a></p></li>
+<li><p>关于保存预览图片：Android中的<code>BitmapFactory.decodeByteArray</code>只支持一定的格式，Camara默认的previewformat格式为<code>NV21</code>(对于大多数的Android设备，即使修改CameraParameters的设置也还是不行)，所以在获得bitmap时，需要进行转换，通过YuvImage类来转换成JPEG格式，然后再保存到文件中。<br/>
+<a href="http://www.cnblogs.com/liuan/archive/2012/01/10/2318300.html">Google Group上的讨论</a></p></li>
+<li><p>关于如何在预览界面上添加一个矩形框，类似二维码扫描那样，原理很简单，一个使用SurfaceView，另一个使用ImageVIew(或者SurfaceView也行)，推荐文章：<br/>
+<a href="http://blog.csdn.net/yanzi1225627/article/details/8580034">Android摄像头中预览界面添加矩形框</a></p></li>
+<li><p>关于如何进行和OpenCV有关的摄像头开发：有了OpenCV的library之后，关于摄像头的开发可谓是简单了很多，可以参见OpenCV for Android中的三个Tutorial(CameraPreview, MixingProcessing, CameraControl)，源码都在opencv-android sdk的samples目录下，这里简单介绍下： <br/>
+OpenCV Library中提供了两种摄像头，一种是Java摄像头-<code>org.opencv.android.JavaCameraView</code>，另一种是Native摄像头-<code>org.opencv.android.NativeCameraView</code> (可以运行CameraPreview这个项目来体验下两者的不同，其实差不多)。两者都继承自<code>CameraBridgeViewBase</code>这个抽象类，但是JavaCamera使用的就是Android SDK中的Camera，而NativeCamera使用的是OpenCV中的VideoCapture。</p></li>
+<li><p>关于OpenCV的Camera在Layout文件中的配置：<code>opencv:show_fps</code>在layout中如果设置为<code>true</code>的话显示界面中会出现当前摄像头帧率的信息以及图片的大小，<code>opencv:camera_id</code>的配置有三种<code>front</code>,<code>back</code>,<code>any</code>分别对应前置摄像头，后者摄像头和默认的摄像头(其实也就是后置摄像头)。</p></li>
+<li><p>关于<code>CvCameraViewListener2</code>接口：它可以方便的处理和摄像头的交互，该接口只有三个函数，分别在Camera打开(onCameraViewStarted)，关闭(onCameraViewStopped)和预览的图片帧到了的时候(onCameraFrame)调用。其中OnCameraFrame这个方法很重要，如果要对图片进行处理的话一般都是在这里面处理的，这个函数的输入参数是<code>CvCameraViewFrame</code>，需要注意的是，不要在这个方法的外面使用这个变量，因为这个对象没有它自己的状态，在回调方法的外面它是行为是不可预测的！它提供了两个有用的方法rgba()和gray()分别得到图像帧的RGBA格式和灰度图，OnCameraFrame的返回值是<strong>RGBA格式</strong>的图像，这个很重要！<a href="http://docs.opencv.org/trunk/doc/tutorials/introduction/android_binary_package/dev_with_OCV_on_Android.html">来自OpenCV文档:Android Development with Android</a></p></li>
+</ul>
+
+
+<p><code>Note Do not save or use CvCameraViewFrame object out of onCameraFrame callback. This object does not have its own state and its behavior out of callback is unpredictable!</code></p>
+
+<ul>
+<li>关于如何传递摄像头预览的图像数据给Native代码：这个很重要！我曾经试过很多的方式，大致思路有：</li>
+</ul>
+
+
+<p>①传递图片路径：这是最差的方式，我使用过，速度很慢</p>
+
+<p>②传递预览图像的字节数组到Native，然后将字节数组处理成RGB或者RGBA的格式[具体哪种格式要看你的图像处理函数能否处理RGBA，如果可以的话推荐转换成RGBA，因为返回的也是RGBA格式的。网上有很多的文章讨论如何转换：一种方式是使用一个自定义的函数进行编码转换，另一个种方式是使用OpenCV中的Mat和cvtColor函数进行转换]，接着调用图像处理函数，处理完成之后，将处理的结果保存在一个整形数组中(实际上就是RGB或者RGBA格式的图像数据)，最后调用Bitmap的方法将其转换成bitmap返回。这种方法速度也比较慢</p>
+
+<p>③使用OpenCV的摄像头：JavaCamera或者NativeCamera都行，好处是它进行了很多的封装，可以直接将预览图像的Mat结构传递给Native层，这种传递是使用Mat的内存地址(long型)，Native层只要根据这个地址将其封装成Mat就可以进行处理了，另外，它的回调函数的返回值也是Mat，非常方便！这种方式速度较快。[详细过程可以查看opencv-android sdk的samples项目中的Tutorial2-MixedProcessing]</p>
+
+<h4>3.OpenCV和Android NDK开发的一般途径</h4>
+
+<p>在进行这类开发的时候，需要考虑如何在android中使用opencv，并且如果需要调用摄像头的话，要考虑以下内容：<br/>
+首先，是否是在原有的C/C++代码上进行移植，如果是的话，那么尽量考虑使用ndk进行开发，否则使用opencv for android编写Java代码进行开发，效率不会比native代码低多少； <br/>
+其次，如果是需要opencv library，是否能够容忍运行应用还需要安装OpenCV Manager，如果不能的话，则在开发时要考虑将opencv binaries添加到应用中进行static initialization； <br/>
+接着，是否需要调用摄像头，如果需要的话，是使用原生Android的Camera还是使用OpenCV的Camera，如果是OpenCV Camera的话，是使用Java调用摄像头还是Native调用摄像头；<br/>
+最后，图片如何进行传递，如果是单张静态图片进行处理的话，只需要路径就行了，但是如果是在视频状态下对图片进行处理的话，那么就只能传递图像数据了，这里涉及到了android中如何获取预览的图像数据以及如何将其传递到底层，又如何进行转换(一般是YUV转成RGB)使得opencv可以进行处理，处理完了之后，又如何将处理得到的图片传递给Java层。</p>
+
+<p>推荐一本书籍《Mastering OpenCV with Practical Computer Vision Projects》，电子书可以在<a href="http://www.ppurl.com/2012/12/mastering-opencv-with-practical-computer-vision-projects.html">皮皮书屋</a>下载，<a href="https://github.com/MasteringOpenCV">原书源码在Github上</a>。该书第一章介绍如何开发一个使用OpenCV的Android项目-<code>Cartoonifer and Skin Changer for Android</code>，这个项目涉及到了OpenCV在Android中的方方面面，采用的是第二种图像数据传递方式，其中他提出了很多可以优化的地方，包括：尽量使用Mat而不要使用IplImage，尽量保证你的图像处理函数能够处理RGBA格式的图像，如果可以先压缩图像大小再对图像进行处理，使用noise filter降低图像中的噪声。总之，极力推荐此书，我以后的文章中还会提到这本书，嘿嘿。</p>
+
+<p>OK！终于完结了！多谢关注！</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[android ndk and opencv development 2]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/"/>
     <updated>2013-11-18T15:59:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2</id>
     <content type="html"><![CDATA[<h3>Android NDK 和 OpenCV 整合开发总结(2)</h3>
 
-<p>这节主要介绍的内容是<a href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>的核心内容和开发总结(包括很多常见问题的解决方案)。</p>
+<p>这节主要介绍的内容是<a href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>的核心内容和开发总结(包括很多常见问题的解决方案)，本节分为三部分：<br/>
+* JNI技术和javah命令
+* Android NDK Dev Guide
+* NDK开发中常见的问题</p>
 
 <h4>1.不得不说的JNI和javah命令</h4>
 
@@ -58,7 +315,7 @@
 </ul>
 
 
-<p>Android.mk文件是用来描述源代码是如何进行编译的，ndk-build命令实际上对GNU Make命令的一个封装，所以，Android.mk文件的写法就类似Makefile的写法[关于Make的详细内容可以看这本书，<a href="http://pan.baidu.com/s/1zi2CR">GNU Make的中文手册</a>，虽然是今年读的，但是我记得的东西也不多了…]
+<p>Android.mk文件是用来描述源代码是如何进行编译的，ndk-build命令实际上对GNU Make命令的一个封装，所以，Android.mk文件的写法就类似Makefile的写法[关于Make的详细内容可以看这本书，<a href="http://pan.baidu.com/s/1swSO7">GNU Make的中文手册</a>，虽然是今年读的，但是我记得的东西也不多了…]
 Android.mk文件可以生成一个动态链接库或者一个静态链接库，但是只有动态链接库是会复制到应用的安装包中的，静态库一般是用来生成其他的动态链接库的。你可以在一个Android.mk文件定义一个或者多个module，不同的module可以使用相同的source file进行编译得到。你不需要列出头文件，也不需要显示指明要生成的目标文件之间的依赖关系(这些内容在GNU Make中是很重要的，虽然GNU Make中的隐式规则也可以做到)。下面以hello-jni项目中的Android.mk文件为例讲解其中重要的几点。</p>
 
 <p><code>
@@ -134,7 +391,7 @@ gnustl_static   -&gt; Use the GNU STL as a static library.
 gnustl_shared   -&gt; Use the GNU STL as a shared library.
 </code>
 我们可以从下面的表格中看出它们对C++语言特性的支持程度：<br/>
-从中我们可以看出gnustl很不错，所以一般会配置为gnustl_static。<br/>
+从中我们可以看出gnustl很不错，所以一般会配置为gnustl_static。如果选用的是gnustl的话，一般还需要在<code>C/C++ General</code>下的<code>Paths and Symbols</code>中的<code>GNU C</code>和<code>GNU C++</code>配置里添加<code>${NDKROOT}/sources/cxx-stl/gnu-libstdc++/4.6/include</code> 和 <code>${NDKROOT}/sources/cxx-stl/gnu-libstdc++/4.6/libs/armeabi-v7a/include</code> 这两项。
 ```</p>
 
 <pre><code>             C++       C++   Standard
@@ -270,6 +527,7 @@ NDK_HOST_CMP=&lt;path-to-cmp&gt;
 </code></pre>
 
 <p><code>``  
+如果还是不行的话，参见[StackOverflow上的解答](http://stackoverflow.com/questions/8384213/android-ndk-revision-7-host-awk-tool-is-outdated-error)  
 在Windows先开发还有一个需要注意的是，如果是使用Cygwin对native code进行编译，那么需要在使用</code>ndk-build<code>之前调用</code>NDK_USE_CYGPATH=1`！</p>
 
 <p>下面是ndk-build命令的可用参数，比较常用的是 <code>ndk-build NDK_DEBUG=1</code> 或者 <code>ndk-build V=1</code></p>
@@ -338,7 +596,44 @@ NDK_HOST_CMP=&lt;path-to-cmp&gt;
 <p>默认情况下avd对应的目录是只读的，去掉只读就好了。<a href="http://www.crifan.com/ddms_import_file_error_transfer_error_read_only_file_system/">参考网址</a></p>
 
 <ul>
-<li>[4]To be continued</li>
+<li>[4]对android项目执行<code>add Native Support</code>报错</li>
+</ul>
+
+
+<p>使用<code>add Native Support</code>时一定要记住项目不能有jni目录！如果有的话，那就只能先删除(或者备份重要内容)，然后再执行<code>add Native Support</code></p>
+
+<ul>
+<li>[5]将String传递到Native层解析出现了乱码！</li>
+</ul>
+
+
+<p>使用自定义的将jstring转换成char*的函数，内容如下：</p>
+
+<p>```
+static char<em> jstringToString(JNIEnv</em> env, jstring jstr) {</p>
+
+<pre><code>char* rtn = NULL;
+jclass clsstring = env-&gt;FindClass("java/lang/String");
+jstring strencode = env-&gt;NewStringUTF("utf-8"); //"gbk");//
+jmethodID mid = env-&gt;GetMethodID(clsstring, "getBytes",
+        "(Ljava/lang/String;)[B");
+jbyteArray barr = (jbyteArray) env-&gt;CallObjectMethod(jstr, mid, strencode);
+jsize alen = env-&gt;GetArrayLength(barr);
+jbyte* ba = env-&gt;GetByteArrayElements(barr, JNI_FALSE);
+if (alen &gt; 0) {
+    rtn = (char*) malloc(alen + 1);
+    memcpy(rtn, ba, alen);
+    rtn[alen] = '\0';
+}
+env-&gt;ReleaseByteArrayElements(barr, ba, 0);
+return rtn;
+</code></pre>
+
+<p>}
+```</p>
+
+<ul>
+<li>[6]To be continued</li>
 </ul>
 
 ]]></content>
@@ -352,7 +647,8 @@ NDK_HOST_CMP=&lt;path-to-cmp&gt;
     <content type="html"><![CDATA[<h3>Android NDK 和 OpenCV 整合开发总结(1)</h3>
 
 <p>请无视我把<code>development</code>写成了<code>developement</code>哈，亲！
-在Samsung呆了段时间，还是学了不少东西的，主要做的任务是<a href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>开发，也涉及到了<a href="http://opencv.org/">OpenCV</a>的内容，正好最近在开发XFace都用得上，所以，写篇文章总结下这些内容，主要包括三大部分，分为下面三节来介绍，本节主要介绍第一部分</p>
+在Samsung呆了段时间，还是学了不少东西的，主要做的任务是<a href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>开发，也涉及到了<a href="http://opencv.org/">OpenCV</a>的内容，正好最近在开发XFace都用得上，所以，写篇文章总结下这些内容，这些内容均为原创，摘录的部分我都会引用提示，尊重版权嘛，嘿嘿，我保证这里有不少内容是搜索不到的独家秘笈哟！<br/>
+该系列主要包括三大部分，分为下面三节来介绍，本节主要介绍第一部分</p>
 
 <ul>
 <li>Android NDK 和 OpenCV整合开发的环境搭建以及人脸检测项目的运行测试</li>

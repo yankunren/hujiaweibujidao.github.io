@@ -9,7 +9,10 @@
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="Android NDK 和 OpenCV 整合开发总结(2) 这节主要介绍的内容是Android NDK的核心内容和开发总结(包括很多常见问题的解决方案)。 1.不得不说的JNI和javah命令 NDK开发的核心之一便是JNI，Oracle官方的JNI相关文档，重要的是里面的第3-4部分( &hellip;">
+  <meta name="description" content="Android NDK 和 OpenCV 整合开发总结(2) 这节主要介绍的内容是Android NDK的核心内容和开发总结(包括很多常见问题的解决方案)，本节分为三部分：
+* JNI技术和javah命令
+* Android NDK Dev Guide
+* NDK开发中常见的问题 1. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -105,7 +108,10 @@
 
 <div class="entry-content"><h3>Android NDK 和 OpenCV 整合开发总结(2)</h3>
 
-<p>这节主要介绍的内容是<a href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>的核心内容和开发总结(包括很多常见问题的解决方案)。</p>
+<p>这节主要介绍的内容是<a href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>的核心内容和开发总结(包括很多常见问题的解决方案)，本节分为三部分：<br/>
+* JNI技术和javah命令
+* Android NDK Dev Guide
+* NDK开发中常见的问题</p>
 
 <h4>1.不得不说的JNI和javah命令</h4>
 
@@ -143,7 +149,7 @@
 </ul>
 
 
-<p>Android.mk文件是用来描述源代码是如何进行编译的，ndk-build命令实际上对GNU Make命令的一个封装，所以，Android.mk文件的写法就类似Makefile的写法[关于Make的详细内容可以看这本书，<a href="http://pan.baidu.com/s/1zi2CR">GNU Make的中文手册</a>，虽然是今年读的，但是我记得的东西也不多了…]
+<p>Android.mk文件是用来描述源代码是如何进行编译的，ndk-build命令实际上对GNU Make命令的一个封装，所以，Android.mk文件的写法就类似Makefile的写法[关于Make的详细内容可以看这本书，<a href="http://pan.baidu.com/s/1swSO7">GNU Make的中文手册</a>，虽然是今年读的，但是我记得的东西也不多了…]
 Android.mk文件可以生成一个动态链接库或者一个静态链接库，但是只有动态链接库是会复制到应用的安装包中的，静态库一般是用来生成其他的动态链接库的。你可以在一个Android.mk文件定义一个或者多个module，不同的module可以使用相同的source file进行编译得到。你不需要列出头文件，也不需要显示指明要生成的目标文件之间的依赖关系(这些内容在GNU Make中是很重要的，虽然GNU Make中的隐式规则也可以做到)。下面以hello-jni项目中的Android.mk文件为例讲解其中重要的几点。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -244,7 +250,7 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 
 
 <p>我们可以从下面的表格中看出它们对C++语言特性的支持程度：<br/>
-从中我们可以看出gnustl很不错，所以一般会配置为gnustl_static。</p>
+从中我们可以看出gnustl很不错，所以一般会配置为gnustl_static。如果选用的是gnustl的话，一般还需要在<code>C/C++ General</code>下的<code>Paths and Symbols</code>中的<code>GNU C</code>和<code>GNU C++</code>配置里添加<code>${NDKROOT}/sources/cxx-stl/gnu-libstdc++/4.6/include</code> 和 <code>${NDKROOT}/sources/cxx-stl/gnu-libstdc++/4.6/libs/armeabi-v7a/include</code> 这两项。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -431,6 +437,7 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 
 
 <p>
+如果还是不行的话，参见<a href="http://stackoverflow.com/questions/8384213/android-ndk-revision-7-host-awk-tool-is-outdated-error">StackOverflow上的解答</a><br/>
 在Windows先开发还有一个需要注意的是，如果是使用Cygwin对native code进行编译，那么需要在使用<code>ndk-build</code>之前调用<code>NDK_USE_CYGPATH=1</code>！</p>
 
 <p>下面是ndk-build命令的可用参数，比较常用的是 <code>ndk-build NDK_DEBUG=1</code> 或者 <code>ndk-build V=1</code></p>
@@ -504,7 +511,57 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 <p>默认情况下avd对应的目录是只读的，去掉只读就好了。<a href="http://www.crifan.com/ddms_import_file_error_transfer_error_read_only_file_system/">参考网址</a></p>
 
 <ul>
-<li>[4]To be continued</li>
+<li>[4]对android项目执行<code>add Native Support</code>报错</li>
+</ul>
+
+
+<p>使用<code>add Native Support</code>时一定要记住项目不能有jni目录！如果有的话，那就只能先删除(或者备份重要内容)，然后再执行<code>add Native Support</code></p>
+
+<ul>
+<li>[5]将String传递到Native层解析出现了乱码！</li>
+</ul>
+
+
+<p>使用自定义的将jstring转换成char*的函数，内容如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>static char* jstringToString(JNIEnv* env, jstring jstr) {
+</span><span class='line'>    char* rtn = NULL;
+</span><span class='line'>    jclass clsstring = env-&gt;FindClass("java/lang/String");
+</span><span class='line'>    jstring strencode = env-&gt;NewStringUTF("utf-8"); //"gbk");//
+</span><span class='line'>    jmethodID mid = env-&gt;GetMethodID(clsstring, "getBytes",
+</span><span class='line'>            "(Ljava/lang/String;)[B");
+</span><span class='line'>    jbyteArray barr = (jbyteArray) env-&gt;CallObjectMethod(jstr, mid, strencode);
+</span><span class='line'>    jsize alen = env-&gt;GetArrayLength(barr);
+</span><span class='line'>    jbyte* ba = env-&gt;GetByteArrayElements(barr, JNI_FALSE);
+</span><span class='line'>    if (alen &gt; 0) {
+</span><span class='line'>        rtn = (char*) malloc(alen + 1);
+</span><span class='line'>        memcpy(rtn, ba, alen);
+</span><span class='line'>        rtn[alen] = '\0';
+</span><span class='line'>    }
+</span><span class='line'>    env-&gt;ReleaseByteArrayElements(barr, ba, 0);
+</span><span class='line'>    return rtn;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>[6]To be continued</li>
 </ul>
 
 </div>
@@ -553,6 +610,8 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
         <a class="basic-alignment left" href="/blog/2013/11/18/android-ndk-and-opencv-developement/" title="Previous Post: android ndk and opencv developement">&laquo; android ndk and opencv developement</a>
       
       
+        <a class="basic-alignment right" href="/blog/2013/11/18/android-ndk-and-opencv-development-3/" title="Next Post: android ndk and opencv development 3">android ndk and opencv development 3 &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -600,16 +659,20 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 <section>
  <h1>分类目录</h1>
  <ul id="categories">
-	 <li class='category'><a href='/blog/categories/android/'>android (2)</a></li>
-<li class='category'><a href='/blog/categories/mobiledev/'>mobiledev (2)</a></li>
+	 <li class='category'><a href='/blog/categories/android/'>android (3)</a></li>
+<li class='category'><a href='/blog/categories/mobiledev/'>mobiledev (3)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
-<li class='category'><a href='/blog/categories/opencv/'>opencv (2)</a></li>
+<li class='category'><a href='/blog/categories/opencv/'>opencv (3)</a></li>
 
  </ul>
 </section>
 <section>
   <h1>近期文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/18/android-ndk-and-opencv-development-3/">Android Ndk and Opencv Development 3</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/11/18/android-ndk-and-opencv-development-2/">Android Ndk and Opencv Development 2</a>
