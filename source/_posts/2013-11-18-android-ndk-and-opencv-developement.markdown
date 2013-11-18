@@ -8,13 +8,14 @@ categories: mobiledev android opencv
 
 ### Android NDK 和 OpenCV 整合开发总结(1)
 
+请无视我把`development`写成了`developement`哈，亲！
 在Samsung呆了段时间，还是学了不少东西的，主要做的任务是[Android NDK](http://developer.android.com/tools/sdk/ndk/index.html)开发，也涉及到了[OpenCV](http://opencv.org/)的内容，正好最近在开发XFace都用得上，所以，写篇文章总结下这些内容，主要包括三大部分，分为下面三节来介绍，本节主要介绍第一部分
 
 * Android NDK 和 OpenCV整合开发的环境搭建以及人脸检测项目的运行测试
 * Android NDK 的核心内容和开发总结
 * OpenCV在Android NDK开发中的应用
 
-[本文假设你是安装配置好了Java和Android SDK开发环境的，如果没有的话，开发工具建议使用[ADT](http://developer.android.com/sdk/installing/bundle.html)，它更加方便，包含了Android SDK 和 安装了ADT Plugin的Eclipse]
+[本文假设你是安装配置好了Java和Android SDK开发环境的，如果没有的话，开发工具建议使用[ADT](http://developer.android.com/sdk/installing/bundle.html)，它更加方便，包含了Android SDK 和 安装了ADT Plugin的Eclipse，何乐而不为呢?]
 
 #### 1. 下载Android NDK，解压即可
 
@@ -106,7 +107,7 @@ OPENCVROOT = /Users/hujiawei/Android/opencv_sdk
 
 [Windows平台则不要删除末尾的`.cmd`，Linux和Mac平台则需要删掉`.cmd`]
 
-- 修改`C/C++ General`，将`GNU C`和`GNU C++`中配置的最后一个路径修改成 `${OPENCVROOT}/sdk/native/jni/include`
+- 修改`C/C++ General`，将`Paths and Symbols`中的`GNU C`和`GNU C++`配置的最后一个路径修改成 `${OPENCVROOT}/sdk/native/jni/include` (这个路径保存的是opencv的native code头文件)
 
 [建议将这个配置导出到文件中，方便以后做类似项目时可以快速进行配置]
 
@@ -120,16 +121,16 @@ OPENCVROOT = /Users/hujiawei/Android/opencv_sdk
 
 项目来源：<http://romanhosek.cz/android-eye-detection-and-tracking-with-opencv/>
 
-该作者根据原有的人脸检测做了一个人眼检测，博文最后附有[下载地址](http://romanhosek.cz/?wpdmact=process&did=MS5ob3RsaW5r)，我的[Github](https://github.com/yinger090807/XFace)上已经有了一份备份，配置方式和Face Detection一样
+该作者根据原有的人脸检测做了一个人眼检测，博文最后附有[下载地址](http://romanhosek.cz/?wpdmact=process&did=MS5ob3RsaW5r)，我的[Github](https://github.com/yinger090807/XFace)上已经有了一份备份，配置方式和Face Detection一样，至于人脸检测和人眼检测的算法我以后会有相关文章进行介绍，暂且期待下吧，嘿嘿
 
 [如果配置完了之后提示一个`app_platform`的警告的话，可以在`Application.mk`文件中添加 `APP_PLATFORM := android-8`]
 
 仔细理解上面的配置和操作，如果还有啥问题或者不清楚的可以查看[OpenCV官方这篇入门文档:Manual OpenCV4Android SDK setup](http://docs.opencv.org/doc/tutorials/introduction/android_binary_package/O4A_SDK.html)
 
-两个项目运行结果：[帮主，对不住啦…… 泪奔中]
+两个项目运行结果：[帮主，对不住啦，谁叫您长得这么帅呢！我的脸识别不了，只能用您老的Face啦！]
 
 ![face detection]({{ root_url }}/images/201311/face_detection.png)
 ![eye detection]({{ root_url }}/images/201311/eye_detection.png)
 
-OK！本节结束！觉得好，请看下节！
+OK！本节结束！如果觉得好，请看下节！
 
