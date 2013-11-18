@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2013-11-18T13:00:07+08:00</updated>
+  <updated>2013-11-18T13:58:03+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -14,83 +14,253 @@
 
   
   <entry>
-    <title type="html"><![CDATA[test8]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/test8/"/>
-    <updated>2013-11-18T12:35:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/test8</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[test7]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/test7/"/>
-    <updated>2013-11-18T12:34:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/test7</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[test6]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/test6/"/>
-    <updated>2013-11-18T12:33:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/test6</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[test5]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/test5/"/>
-    <updated>2013-11-18T12:28:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/test5</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[test4]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/test4/"/>
-    <updated>2013-11-18T12:26:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/test4</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[test3]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/test3/"/>
-    <updated>2013-11-18T12:25:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/test3</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[test2]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/test2/"/>
-    <updated>2013-11-18T12:22:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/test2</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[test]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/test/"/>
-    <updated>2013-11-18T12:21:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/test</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[pagerank]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/pagerank/"/>
-    <updated>2013-11-18T11:19:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/pagerank</id>
-    <content type="html"><![CDATA[
+    <title type="html"><![CDATA[make your octopress easy]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/"/>
+    <updated>2013-11-18T13:11:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy</id>
+    <content type="html"><![CDATA[<p>刚刚来到Octopress的世界，我的新鲜感依旧还在，呵呵，上午写了几个<code>shell</code>脚本让你在Octopress上写博客更加轻松些，至少让我轻松了很多，哈哈哈。</p>
+
+<p>在本地写好文章内容之后，对于每次修改我们总是需要在终端切换到octopress的目录下，然后执行<code>rake generate</code>才可以在本地预览，另外，最头疼的是新建文章<code>new_post["postname"]</code>这些个命令了，那个下划线可能会记成短破折线，时间长了你可能就不记得这个命令了，当然，如果你是ruby开发者那就肯定不会这样啦，我这年龄大了，记忆力不行咯，很难记住那么多的命令啦，还有就是我希望只要打开Terminal就可以调用这些命令，而不用每次切换目录，而且每次我新建了一个文章之后，Mou能够直接启动并打开这个新建的文章让我编辑，想想，这个世界是不是美好多了？哈哈哈</p>
+
+<p>操作步骤：</p>
+
+<h4>[1]新建环境变量<code>OCTOPRESS_HOME</code>，它是你的octopress的根目录，并添加到<code>PATH</code>中</h4>
+
+<p>[下面是我在Mac上的操作，其他系统自行修改]</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo nano ~/.bash_profile  #打开并修改.bash_profile文件，下面两行是在该文件中的修改
+</span><span class='line'>export OCTOPRESS_HOME=/Users/hujiawei/git/octopress  #添加OCTOPRESS_HOME变量
+</span><span class='line'>export PATH=${PATH}:${OCTOPRESS_HOME}  #添加到path中
+</span><span class='line'>source ~/.bash_profile  
+</span><span class='line'>echo $OCTOPRESS_HOME  #验证是否变量存在
+</span><span class='line'>echo $PATH  #验证path是否设置成功</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>[2]编写几个<code>shell</code>脚本，放在<code>OCTOPRESS_HOME</code>目录下，作用分别如下：</h4>
+
+<ul>
+<li>gen：等价于<code>rake generate</code>操作</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
+</span><span class='line'>path=$OCTOPRESS_HOME
+</span><span class='line'>cd "$path"
+</span><span class='line'>#pwd
+</span><span class='line'>rake generate
+</span><span class='line'>echo "generate ok"</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>dep：等价于<code>rake deploy</code>操作</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
+</span><span class='line'>path=$OCTOPRESS_HOME
+</span><span class='line'>cd "$path"
+</span><span class='line'>#pwd
+</span><span class='line'>rake generate
+</span><span class='line'>rake deploy
+</span><span class='line'>echo "generate and deploy ok"</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>pre：等价于<code>rake preview</code>操作</li>
+</ul>
+
+
+<p>[注意，这里我是在子线程中启动预览的，所以你按下了Ctrl+C会也不会把预览给终止了，是不是瞬间又感觉这个世界又美好了很多啊，哈哈]</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
+</span><span class='line'>path=$OCTOPRESS_HOME
+</span><span class='line'>cd "$path"
+</span><span class='line'>#pwd
+</span><span class='line'>#rake watch
+</span><span class='line'>rake preview &
+</span><span class='line'>#echo "watch and preview ok"</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>gmit：等价于<code>git add/commit/push</code>几个操作的组合</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
+</span><span class='line'>if [ $# -ne 1 ]
+</span><span class='line'>then
+</span><span class='line'>    echo "Usage - gmit  message"
+</span><span class='line'>    exit 1
+</span><span class='line'>fi
+</span><span class='line'>path=$OCTOPRESS_HOME
+</span><span class='line'>cd "$path"
+</span><span class='line'>#pwd
+</span><span class='line'>git add .
+</span><span class='line'>git commit -m "$1"
+</span><span class='line'>git push origin source
+</span><span class='line'>echo "git commit and push ok"</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>newpost：等价于<code>new_post[""] + open Mou</code>操作组合</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
+</span><span class='line'>if [ $# -ne 1 ]
+</span><span class='line'>then
+</span><span class='line'>    echo "Usage -newpost  postname"
+</span><span class='line'>    exit 1
+</span><span class='line'>fi
+</span><span class='line'>path=$OCTOPRESS_HOME
+</span><span class='line'>cd "$path"
+</span><span class='line'>#pwd
+</span><span class='line'>filepath=`rake new_post["$1"]`
+</span><span class='line'>#echo "$filepath"
+</span><span class='line'>#Creating new post: source/_posts/2013-11-18-test5.markdown
+</span><span class='line'>OLD_IFS="$IFS"
+</span><span class='line'>IFS=" "
+</span><span class='line'>arr=($filepath)
+</span><span class='line'>filepath=${arr[3]}
+</span><span class='line'>IFS="$OLD_IFS"
+</span><span class='line'>postpath="$path/$filepath"
+</span><span class='line'>#echo "$postpath"
+</span><span class='line'>#open Mou with the file
+</span><span class='line'>open -a Mou $postpath</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>newpage：等价于<code>new_page[""] + open Mou</code>操作组合</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
+</span><span class='line'>if [ $# -ne 1 ]
+</span><span class='line'>then
+</span><span class='line'>    echo "Usage - newpage  pagename"
+</span><span class='line'>    exit 1
+</span><span class='line'>fi
+</span><span class='line'>path=$OCTOPRESS_HOME
+</span><span class='line'>cd "$path"
+</span><span class='line'>echo "$path"
+</span><span class='line'>filepath=`rake new_page["$1"]`
+</span><span class='line'>echo "$filepath"
+</span><span class='line'>#Creating new page: source/projects/index.markdown
+</span><span class='line'>OLD_IFS="$IFS"
+</span><span class='line'>IFS=" "
+</span><span class='line'>arr=($filepath)
+</span><span class='line'>filepath=${arr[3]}
+</span><span class='line'>IFS="$OLD_IFS"
+</span><span class='line'>postpath="$path/$filepath"
+</span><span class='line'>echo "$postpath"
+</span><span class='line'>#open Mou with the file
+</span><span class='line'>open -a Mou $postpath</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>[3]使用<code>chmod 777 xxx</code>修改脚本的权限，测试执行下</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd $OCTOPRESS_HOME
+</span><span class='line'>chmod 777 gen  #其他文件类似
+</span><span class='line'>chmod 777 pre
+</span><span class='line'>chmod 777 dep
+</span><span class='line'>chmod 777 gmit
+</span><span class='line'>chmod 777 newpost
+</span><span class='line'>chmod 777 newpage
+</span><span class='line'>gen
+</span><span class='line'>newpost "test new post" #当这条命令完成生成了Markdown文件之后，你会发现Mou闪电般的将文件打开了，等着你输入呢！</span></code></pre></td></tr></table></div></figure>
+
+
+<p>OK！Enjoy the world of Octopress！</p>
 ]]></content>
   </entry>
   
@@ -257,13 +427,11 @@
 
 <p>最有用的资料总能在这里找到：<a href="http://octopress.org/docs/">Octopress的官方文档</a></p>
 
-<p>③ 关于终端命令：大多数时候</p>
-
-<p>④ 关于<a href="http://jekyllrb.com/docs/home/">Jekyll</a></p>
+<p>③ 关于<a href="http://jekyllrb.com/docs/home/">Jekyll</a></p>
 
 <p>Octopress是基于Jekyll的，所以对Jekyll有一定的了解是很有必要的，Jekyll主页中记录了Jekyll的方方面面，最好是了解下Directory Structure，Configuration，Writing Posts，Creating Pages等等内容，这对后面的Octopress的使用会有很大帮助的。</p>
 
-<p>⑤ 关于本地编写博客</p>
+<p>④ 关于本地编写博客</p>
 
 <p>对于前台开发，我心中向来只有一个工具<a href="www.aptana.com">Aptana</a>！所以，我把整个octopress目录作为aptana中的一个项目进行管理，至少有两个好处：</p>
 

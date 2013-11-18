@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: hello | Hujiawei Bujidao]]></title>
-  <link href="http://hujiaweibujidao.github.io/blog/categories/hello/atom.xml" rel="self"/>
+  <title><![CDATA[Category: octopress | Hujiawei Bujidao]]></title>
+  <link href="http://hujiaweibujidao.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2013-11-18T13:00:07+08:00</updated>
+  <updated>2013-11-18T13:58:03+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,219 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[make your octopress easy]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/"/>
+    <updated>2013-11-18T13:11:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy</id>
+    <content type="html"><![CDATA[<p>刚刚来到Octopress的世界，我的新鲜感依旧还在，呵呵，上午写了几个<code>shell</code>脚本让你在Octopress上写博客更加轻松些，至少让我轻松了很多，哈哈哈。</p>
+
+<p>在本地写好文章内容之后，对于每次修改我们总是需要在终端切换到octopress的目录下，然后执行<code>rake generate</code>才可以在本地预览，另外，最头疼的是新建文章<code>new_post["postname"]</code>这些个命令了，那个下划线可能会记成短破折线，时间长了你可能就不记得这个命令了，当然，如果你是ruby开发者那就肯定不会这样啦，我这年龄大了，记忆力不行咯，很难记住那么多的命令啦，还有就是我希望只要打开Terminal就可以调用这些命令，而不用每次切换目录，而且每次我新建了一个文章之后，Mou能够直接启动并打开这个新建的文章让我编辑，想想，这个世界是不是美好多了？哈哈哈</p>
+
+<p>操作步骤：</p>
+
+<h4>[1]新建环境变量<code>OCTOPRESS_HOME</code>，它是你的octopress的根目录，并添加到<code>PATH</code>中</h4>
+
+<p>[下面是我在Mac上的操作，其他系统自行修改]</p>
+
+<p><code>
+sudo nano ~/.bash_profile  #打开并修改.bash_profile文件，下面两行是在该文件中的修改
+export OCTOPRESS_HOME=/Users/hujiawei/git/octopress  #添加OCTOPRESS_HOME变量
+export PATH=${PATH}:${OCTOPRESS_HOME}  #添加到path中
+source ~/.bash_profile  
+echo $OCTOPRESS_HOME  #验证是否变量存在
+echo $PATH  #验证path是否设置成功
+</code></p>
+
+<h4>[2]编写几个<code>shell</code>脚本，放在<code>OCTOPRESS_HOME</code>目录下，作用分别如下：</h4>
+
+<ul>
+<li>gen：等价于<code>rake generate</code>操作</li>
+</ul>
+
+
+<p>```</p>
+
+<h1>! /bin/bash</h1>
+
+<p>path=$OCTOPRESS_HOME
+cd &ldquo;$path&rdquo;</p>
+
+<h1>pwd</h1>
+
+<p>rake generate
+echo &ldquo;generate ok&rdquo;
+```</p>
+
+<ul>
+<li>dep：等价于<code>rake deploy</code>操作</li>
+</ul>
+
+
+<p>```</p>
+
+<h1>! /bin/bash</h1>
+
+<p>path=$OCTOPRESS_HOME
+cd &ldquo;$path&rdquo;</p>
+
+<h1>pwd</h1>
+
+<p>rake generate
+rake deploy
+echo &ldquo;generate and deploy ok&rdquo;
+```</p>
+
+<ul>
+<li>pre：等价于<code>rake preview</code>操作</li>
+</ul>
+
+
+<p>[注意，这里我是在子线程中启动预览的，所以你按下了Ctrl+C会也不会把预览给终止了，是不是瞬间又感觉这个世界又美好了很多啊，哈哈]</p>
+
+<p>```</p>
+
+<h1>! /bin/bash</h1>
+
+<p>path=$OCTOPRESS_HOME
+cd &ldquo;$path&rdquo;</p>
+
+<h1>pwd</h1>
+
+<h1>rake watch</h1>
+
+<p>rake preview &amp;</p>
+
+<h1>echo &ldquo;watch and preview ok&rdquo;</h1>
+
+<p>```</p>
+
+<ul>
+<li>gmit：等价于<code>git add/commit/push</code>几个操作的组合</li>
+</ul>
+
+
+<p>```</p>
+
+<h1>! /bin/bash</h1>
+
+<p>if [ $# -ne 1 ]
+then</p>
+
+<pre><code>echo "Usage - gmit  message"
+exit 1
+</code></pre>
+
+<p>fi
+path=$OCTOPRESS_HOME
+cd &ldquo;$path&rdquo;</p>
+
+<h1>pwd</h1>
+
+<p>git add .
+git commit -m &ldquo;$1&rdquo;
+git push origin source
+echo &ldquo;git commit and push ok&rdquo;
+```</p>
+
+<ul>
+<li>newpost：等价于<code>new_post[""] + open Mou</code>操作组合</li>
+</ul>
+
+
+<p>```</p>
+
+<h1>! /bin/bash</h1>
+
+<p>if [ $# -ne 1 ]
+then</p>
+
+<pre><code>echo "Usage -newpost  postname"
+exit 1
+</code></pre>
+
+<p>fi
+path=$OCTOPRESS_HOME
+cd &ldquo;$path&rdquo;</p>
+
+<h1>pwd</h1>
+
+<p>filepath=<code>rake new_post["$1"]</code></p>
+
+<h1>echo &ldquo;$filepath&rdquo;</h1>
+
+<h1>Creating new post: source/_posts/2013-11-18-test5.markdown</h1>
+
+<p>OLD_IFS=&ldquo;$IFS&rdquo;
+IFS=&ldquo; &rdquo;
+arr=($filepath)
+filepath=${arr[3]}
+IFS=&ldquo;$OLD_IFS&rdquo;
+postpath=&ldquo;$path/$filepath&rdquo;</p>
+
+<h1>echo &ldquo;$postpath&rdquo;</h1>
+
+<h1>open Mou with the file</h1>
+
+<p>open -a Mou $postpath
+```</p>
+
+<ul>
+<li>newpage：等价于<code>new_page[""] + open Mou</code>操作组合</li>
+</ul>
+
+
+<p>```</p>
+
+<h1>! /bin/bash</h1>
+
+<p>if [ $# -ne 1 ]
+then</p>
+
+<pre><code>echo "Usage - newpage  pagename"
+exit 1
+</code></pre>
+
+<p>fi
+path=$OCTOPRESS_HOME
+cd &ldquo;$path&rdquo;
+echo &ldquo;$path&rdquo;
+filepath=<code>rake new_page["$1"]</code>
+echo &ldquo;$filepath&rdquo;</p>
+
+<h1>Creating new page: source/projects/index.markdown</h1>
+
+<p>OLD_IFS=&ldquo;$IFS&rdquo;
+IFS=&ldquo; &rdquo;
+arr=($filepath)
+filepath=${arr[3]}
+IFS=&ldquo;$OLD_IFS&rdquo;
+postpath=&ldquo;$path/$filepath&rdquo;
+echo &ldquo;$postpath&rdquo;</p>
+
+<h1>open Mou with the file</h1>
+
+<p>open -a Mou $postpath
+```</p>
+
+<h4>[3]使用<code>chmod 777 xxx</code>修改脚本的权限，测试执行下</h4>
+
+<p><code>
+cd $OCTOPRESS_HOME
+chmod 777 gen  #其他文件类似
+chmod 777 pre
+chmod 777 dep
+chmod 777 gmit
+chmod 777 newpost
+chmod 777 newpage
+gen
+newpost "test new post" #当这条命令完成生成了Markdown文件之后，你会发现Mou闪电般的将文件打开了，等着你输入呢！
+</code></p>
+
+<p>OK！Enjoy the world of Octopress！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hello Octopress]]></title>
@@ -142,13 +355,11 @@ git push origin source  #一定记着要提交source下的内容
 
 <p>最有用的资料总能在这里找到：<a href="http://octopress.org/docs/">Octopress的官方文档</a></p>
 
-<p>③ 关于终端命令：大多数时候</p>
-
-<p>④ 关于<a href="http://jekyllrb.com/docs/home/">Jekyll</a></p>
+<p>③ 关于<a href="http://jekyllrb.com/docs/home/">Jekyll</a></p>
 
 <p>Octopress是基于Jekyll的，所以对Jekyll有一定的了解是很有必要的，Jekyll主页中记录了Jekyll的方方面面，最好是了解下Directory Structure，Configuration，Writing Posts，Creating Pages等等内容，这对后面的Octopress的使用会有很大帮助的。</p>
 
-<p>⑤ 关于本地编写博客</p>
+<p>④ 关于本地编写博客</p>
 
 <p>对于前台开发，我心中向来只有一个工具<a href="www.aptana.com">Aptana</a>！所以，我把整个octopress目录作为aptana中的一个项目进行管理，至少有两个好处：</p>
 
