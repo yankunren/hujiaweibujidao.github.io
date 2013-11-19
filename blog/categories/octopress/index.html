@@ -35,15 +35,18 @@
 </head>
 
 <body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Hujiawei Bujidao</a></h1>
-  
-    <h2>Love coding, travelling and MY QUEEN.</h2>
-  
+	<header role="banner">
+		<hgroup>
+	<h1><a href="/"><img src="/images/dolphin-small.png"  />Hujiawei Bujidao</a></h1>
+	
+	<h2>Love coding, travelling, family and MY QUEEN.</h2>
+	
 </hgroup>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+
+	</header>
+	<nav role="navigation">
+		<ul class="subscription" data-subscription="rss">
 
   <!-- <li><a href="https://github.com/hujiaweibujidao" rel="subscribe-rss" title="subscribe via RSS">View me on GitHub</a></li> -->
   <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
@@ -72,18 +75,19 @@
   -->
 </ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article role="article">
-  
-  <header>
-    <h1 class="entry-title">Category: Octopress</h1>
-    
-  </header>
-  
-  <div id="blog-archives" class="category">
+
+	</nav>
+	<div id="main">
+		<div id="content">
+			<div>
+	<article role="article">
+		
+		<header>
+			<h1 class="entry-title">Category: Octopress</h1>
+			
+		</header>
+		
+		<div id="blog-archives" class="category">
 
 
 
@@ -118,14 +122,26 @@
 
 </div>
 
+		
+		<footer>
+			
+			
+			<div class="sharing">
   
-</article>
+  
+  
+</div>
 
+			
+		</footer>
+		
+	</article>
+	
 </div>
 
 <aside class="sidebar">
-  
-    <section>
+	
+	<section>
   <h1>关于博主</h1><br/>
   <a href="/aboutme/"><img src="/images/me-small.png" width="250px" height="210px" alt="protrait"/></a><br/>
   <p>Hi, I'm Hujiawei, from P.R.China. Now I'm a postgraduate student studying in <a href="http://www.tsinghua.edu.cn/publish/th/index.html">Tsinghua University</a>.
@@ -204,23 +220,96 @@
         </li>
 </ul>
 </section>
-  
+	
 </aside>
 
 
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
+
+
+
+		</div>
+	</div>
+	
+	<footer role="contentinfo">
+		<p>
 	Copyright &copy; 2013 - hujiawei - <a href="http://happybirthday2yinger.duapp.com/">Happy birthday to MY QUEEN</a> - <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
-	<!-- CNZZ --> &nbsp;&nbsp;
+	<!-- CNZZ -->
+	&nbsp;&nbsp;
 	<script type="text/javascript">
 		var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
 		document.write(unescape("%3Cspan id='cnzz_stat_icon_1000165127'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000165127%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
 	</script>
 </p>
+<style>
+	.returnTop {
+		position: fixed;
+		_position: absolute;
+		right: 10px;
+		bottom: 200px;
+		_bottom: auto;
+		display: none;
+		width: 40px;
+		height: 40px;
+		border: 1px solid #61b72e;
+		border-radius: 4px;
+		background: #fff;
+		box-shadow: 0 0 5px #F5F5F5;
+		text-indent: -9999px;
+		cursor: pointer;
+	}
+	.returnTop .s {
+		position: absolute;
+		top: -2px;
+		_top: -20px;
+		left: 10px;
+		width: 0;
+		height: 0;
+		border-width: 10px;
+		border-color: transparent transparent #61b72e;
+		border-style: dashed dashed solid;
+	}
+	.returnTop .b {
+		position: absolute;
+		top: 18px;
+		left: 16px;
+		height: 12px;
+		width: 8px;
+		background: #61b72e;
+	}
+</style>
+<div class="returnTop" title="嗖的就上去了！">
+	<span class="s"></span>
+	<span class="b"></span>
+	返回顶部
+</div>
+<script type="text/javascript">
+$(function(){
+$(window).bind("scroll", function(){
 
-</footer>
-  
+var scrollTopNum = $(document).scrollTop(),
+winHeight = $(window).height(),
+returnTop = $("div.returnTop");
+
+(scrollTopNum > 0) ? returnTop.fadeIn("fast") : returnTop.fadeOut("fast");
+
+if (!-[1,]&&!window.XMLHttpRequest) {
+returnTop.css("top", scrollTopNum + winHeight - 200);
+}
+
+});
+
+$("div.returnTop").click(function() {
+$("html, body").animate({ scrollTop: 0 }, 100);
+});
+
+});
+</script>
+
+
+
+	</footer>
+	
+	
 
 
 
