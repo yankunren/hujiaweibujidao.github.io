@@ -9,9 +9,9 @@ categories: mobiledev android opencv
 ### Android NDK 和 OpenCV 整合开发总结(2)
 
 这节主要介绍的内容是[Android NDK](http://developer.android.com/tools/sdk/ndk/index.html)的核心内容和开发总结(包括很多常见问题的解决方案)，本节分为三部分：  
-* JNI技术和javah命令
-* Android NDK Dev Guide
-* NDK开发中常见的问题
+* JNI技术和javah命令   
+* Android NDK Dev Guide   
+* NDK开发中常见的问题  
 
 #### 1.不得不说的JNI和javah命令
 
