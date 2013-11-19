@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2013-11-19T11:22:20+08:00</updated>
+  <updated>2013-11-19T16:57:06+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -328,8 +328,8 @@ OpenCV Library中提供了两种摄像头，一种是Java摄像头-<code>org.ope
     <content type="html"><![CDATA[<h3>Android NDK 和 OpenCV 整合开发总结(2)</h3>
 
 <p>这节主要介绍的内容是<a href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>的核心内容和开发总结(包括很多常见问题的解决方案)，本节分为三部分：<br/>
-* JNI技术和javah命令
-* Android NDK Dev Guide
+* JNI技术和javah命令 <br/>
+* Android NDK Dev Guide <br/>
 * NDK开发中常见的问题</p>
 
 <h4>1.不得不说的JNI和javah命令</h4>
