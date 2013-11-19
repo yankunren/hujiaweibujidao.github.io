@@ -16,7 +16,7 @@ categories: mobiledev android opencv
 * [Android NDK 的核心内容和开发总结](http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/)
 * [OpenCV 在 Android NDK 开发中的应用](http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3/)
 
-[本文假设你是安装配置好了Java和Android SDK开发环境的，如果没有的话，开发工具建议使用[ADT](http://developer.android.com/sdk/installing/bundle.html)，它更加方便，包含了Android SDK 和 安装了 ADT Plugin 的 Eclipse，何乐而不为呢?]
+[本文假设你是安装配置好了Java和Android SDK开发环境的，如果没有的话，可以看[我以前在点点博客写的这篇文章](http://hujiaweiyinger.diandian.com/post/2013-10-30/setup_android_ndk_environment_and_solve_some_problems)，开发工具建议使用[ADT](http://developer.android.com/sdk/installing/bundle.html)，它更加方便，包含了Android SDK 和 安装了 ADT Plugin 的 Eclipse，何乐而不为呢?]
 
 #### 1. 下载Android NDK，解压即可
 
