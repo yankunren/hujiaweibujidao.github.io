@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2013-11-19T11:00:20+08:00</updated>
+  <updated>2013-11-19T11:22:20+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -313,6 +313,10 @@ OpenCV Library中提供了两种摄像头，一种是Java摄像头-<code>org.ope
 <p>推荐一本书籍《Mastering OpenCV with Practical Computer Vision Projects》，电子书可以在<a href="http://www.ppurl.com/2012/12/mastering-opencv-with-practical-computer-vision-projects.html">皮皮书屋</a>下载，<a href="https://github.com/MasteringOpenCV">原书源码在Github上</a>。该书第一章介绍如何开发一个使用OpenCV的Android项目-<code>Cartoonifer and Skin Changer for Android</code>，这个项目涉及到了OpenCV在Android中的方方面面，采用的是第二种图像数据传递方式，其中他提出了很多可以优化的地方，包括：尽量使用Mat而不要使用IplImage，尽量保证你的图像处理函数能够处理RGBA格式的图像，如果可以先压缩图像大小再对图像进行处理，使用noise filter降低图像中的噪声。总之，极力推荐此书，我以后的文章中还会提到这本书，嘿嘿。</p>
 
 <p>OK！终于完结了！多谢关注！</p>
+
+<p class='post-footer'>
+                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3/'>http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+
 ]]></content>
   </entry>
   
@@ -779,6 +783,10 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 <li>[6]To be continued</li>
 </ul>
 
+
+<p class='post-footer'>
+                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/'>http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+
 ]]></content>
   </entry>
   
@@ -959,6 +967,10 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 <img class="right" src="http://hujiaweibujidao.github.io/images/201311/eye_detection.png" width="350" height="500" title="eye detection" ></p>
 
 <p>OK！本节结束！如果觉得好，请看下节！</p>
+
+<p class='post-footer'>
+                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-developement/'>http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-developement/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+
 ]]></content>
   </entry>
   
@@ -1210,6 +1222,10 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 
 
 <p>OK！Enjoy the world of Octopress！</p>
+
+<p class='post-footer'>
+                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/'>http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+
 ]]></content>
   </entry>
   
@@ -1395,6 +1411,10 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 <p>哦了，今天就到这里啦！哈哈哈</p>
 
 <p>晚安，Octopress！</p>
+
+<p class='post-footer'>
+                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2013/11/17/hello-octopress/'>http://hujiaweibujidao.github.io/blog/2013/11/17/hello-octopress/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+
 ]]></content>
   </entry>
   
