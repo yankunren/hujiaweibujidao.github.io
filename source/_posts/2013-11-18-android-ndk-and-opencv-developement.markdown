@@ -9,7 +9,8 @@ categories: mobiledev android opencv
 ### Android NDK 和 OpenCV 整合开发总结(1)
 
 请无视我把`development`写成了`developement`哈，亲！
-在Samsung呆了段时间，还是学了不少东西的，主要做的任务是[Android NDK](http://developer.android.com/tools/sdk/ndk/index.html)开发，也涉及到了[OpenCV](http://opencv.org/)的内容，正好最近在开发XFace都用得上，所以，写篇文章总结下这些内容，主要包括三大部分，分为下面三节来介绍，本节主要介绍第一部分
+在Samsung呆了段时间，还是学了不少东西的，主要做的任务是[Android NDK](http://developer.android.com/tools/sdk/ndk/index.html)开发，也涉及到了[OpenCV](http://opencv.org/)的内容，正好最近在开发XFace都用得上，所以，写篇文章总结下这些内容，这些内容均为原创，摘录的部分我都会引用提示，尊重版权嘛，嘿嘿，我保证这里有不少内容是搜索不到的独家秘笈哟！  
+该系列主要包括三大部分，分为下面三节来介绍，本节主要介绍第一部分
 
 * Android NDK 和 OpenCV整合开发的环境搭建以及人脸检测项目的运行测试
 * Android NDK 的核心内容和开发总结

@@ -1,0 +1,2 @@
+1.修改default layout，在footer中加上判断，给index.html设置footer:false！它的子layout-page和post设置为true
+2.返回顶部使用的是http://www.feelcss.com/simple-return-to-the-top-of-the-effect-by-jquery.html

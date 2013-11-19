@@ -8,7 +8,10 @@ categories: mobiledev android opencv
 
 ### Android NDK 和 OpenCV 整合开发总结(2)
 
-这节主要介绍的内容是[Android NDK](http://developer.android.com/tools/sdk/ndk/index.html)的核心内容和开发总结(包括很多常见问题的解决方案)。
+这节主要介绍的内容是[Android NDK](http://developer.android.com/tools/sdk/ndk/index.html)的核心内容和开发总结(包括很多常见问题的解决方案)，本节分为三部分：  
+* JNI技术和javah命令
+* Android NDK Dev Guide
+* NDK开发中常见的问题
 
 #### 1.不得不说的JNI和javah命令
 
@@ -39,7 +42,7 @@ NDK开发的核心之一便是JNI，[Oracle官方的JNI相关文档](http://docs
 
 - [2]Android.mk文件
 
-Android.mk文件是用来描述源代码是如何进行编译的，ndk-build命令实际上对GNU Make命令的一个封装，所以，Android.mk文件的写法就类似Makefile的写法[关于Make的详细内容可以看这本书，[GNU Make的中文手册](http://pan.baidu.com/s/1zi2CR)，虽然是今年读的，但是我记得的东西也不多了…]
+Android.mk文件是用来描述源代码是如何进行编译的，ndk-build命令实际上对GNU Make命令的一个封装，所以，Android.mk文件的写法就类似Makefile的写法[关于Make的详细内容可以看这本书，[GNU Make的中文手册](http://pan.baidu.com/s/1swSO7)，虽然是今年读的，但是我记得的东西也不多了…]
 Android.mk文件可以生成一个动态链接库或者一个静态链接库，但是只有动态链接库是会复制到应用的安装包中的，静态库一般是用来生成其他的动态链接库的。你可以在一个Android.mk文件定义一个或者多个module，不同的module可以使用相同的source file进行编译得到。你不需要列出头文件，也不需要显示指明要生成的目标文件之间的依赖关系(这些内容在GNU Make中是很重要的，虽然GNU Make中的隐式规则也可以做到)。下面以hello-jni项目中的Android.mk文件为例讲解其中重要的几点。
 
 ```
@@ -112,7 +115,7 @@ gnustl_static   -> Use the GNU STL as a static library.
 gnustl_shared   -> Use the GNU STL as a shared library.
 ```
 我们可以从下面的表格中看出它们对C++语言特性的支持程度：  
-从中我们可以看出gnustl很不错，所以一般会配置为gnustl_static。  
+从中我们可以看出gnustl很不错，所以一般会配置为gnustl_static。如果选用的是gnustl的话，一般还需要在`C/C++ General`下的`Paths and Symbols`中的`GNU C`和`GNU C++`配置里添加`${NDKROOT}/sources/cxx-stl/gnu-libstdc++/4.6/include` 和 `${NDKROOT}/sources/cxx-stl/gnu-libstdc++/4.6/libs/armeabi-v7a/include` 这两项。
 ```
                  C++       C++   Standard
               Exceptions  RTTI    Library
@@ -221,6 +224,7 @@ version that comes with API level 9. To use it, use the following:
     NDK_HOST_ECHO=<path-to-echo>
     NDK_HOST_CMP=<path-to-cmp>
 ```  
+如果还是不行的话，参见[StackOverflow上的解答](http://stackoverflow.com/questions/8384213/android-ndk-revision-7-host-awk-tool-is-outdated-error)  
 在Windows先开发还有一个需要注意的是，如果是使用Cygwin对native code进行编译，那么需要在使用`ndk-build`之前调用`NDK_USE_CYGPATH=1`！  
 
 下面是ndk-build命令的可用参数，比较常用的是 `ndk-build NDK_DEBUG=1` 或者 `ndk-build V=1`
@@ -265,5 +269,33 @@ version that comes with API level 9. To use it, use the following:
 
 默认情况下avd对应的目录是只读的，去掉只读就好了。[参考网址](http://www.crifan.com/ddms_import_file_error_transfer_error_read_only_file_system/)
 
-- [4]To be continued
+- [4]对android项目执行`add Native Support`报错
+
+使用`add Native Support`时一定要记住项目不能有jni目录！如果有的话，那就只能先删除(或者备份重要内容)，然后再执行`add Native Support`
+
+- [5]将String传递到Native层解析出现了乱码！
+
+使用自定义的将jstring转换成char*的函数，内容如下：
+
+```
+static char* jstringToString(JNIEnv* env, jstring jstr) {
+    char* rtn = NULL;
+    jclass clsstring = env->FindClass("java/lang/String");
+    jstring strencode = env->NewStringUTF("utf-8"); //"gbk");//
+    jmethodID mid = env->GetMethodID(clsstring, "getBytes",
+            "(Ljava/lang/String;)[B");
+    jbyteArray barr = (jbyteArray) env->CallObjectMethod(jstr, mid, strencode);
+    jsize alen = env->GetArrayLength(barr);
+    jbyte* ba = env->GetByteArrayElements(barr, JNI_FALSE);
+    if (alen > 0) {
+        rtn = (char*) malloc(alen + 1);
+        memcpy(rtn, ba, alen);
+        rtn[alen] = '\0';
+    }
+    env->ReleaseByteArrayElements(barr, ba, 0);
+    return rtn;
+}
+```
+
+- [6]To be continued
 
