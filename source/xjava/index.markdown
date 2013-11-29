@@ -21,7 +21,10 @@ XJava是一个为Java初学者提供Java入门教程的项目，它的所有内�
 
 {%img right /images/dolphin.png %}
 
-* [第一章 Java概述]()
+* [第一章 Java概述](/files/xjava-chapter1.pdf)
+
+后面章节暂无
+
 * [第二章 Java语言基础知识]()
 * [第三章 面向对象编程（上）]()
 * [第四章 面向对象编程（下）]()
