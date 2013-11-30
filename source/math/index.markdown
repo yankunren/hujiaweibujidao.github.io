@@ -7,11 +7,9 @@ sharing: true
 footer: true
 ---
 
-一本关于数值算法与应用的总结小书正在编写中
+一本关于数值算法与应用的总结小书正在编写中…
 
-Please Writing...
-
-目前新鲜出炉的部分：
+目前新鲜出炉的部分：[点击章节标题可以直接查看并下载 \(^o^)/~]   
 
 * [第一章 线性方程组求解](/files/nm-chapter1.pdf)
 
@@ -28,3 +26,10 @@ Please Writing...
 * [第四章 曲线拟合和多项式插值](/files/nm-chapter4.pdf)
 
 内容包括：曲线拟合，拉格朗日插值多项式，牛顿插值多项式，分段线性插值，保形分段三次插值，三次样条插值
+
+
+{% img  /images/201311/nm-cover.png 600 600  %}
+{% img  /images/201311/nm-chapter.png 600 600  %}
+{% img  /images/201311/nm-math.png 600 600  %}
+{% img  /images/201311/nm-code.png 600 600  %}
+    
