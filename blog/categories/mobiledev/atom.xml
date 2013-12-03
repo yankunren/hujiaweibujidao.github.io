@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mobiledev | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mobiledev/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2013-11-30T18:55:56+08:00</updated>
+  <updated>2013-12-03T22:25:54+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -787,7 +787,7 @@ OPENCVROOT = /Users/hujiawei/Android/opencv_sdk
 
 <ul>
 <li><p>经过上面的配置之后，FaceDetection项目便没有问题了，打开jni目录下的cpp和h文件也不会报错了，当然，手机必须安装OpenCV Manager才能成功运行FaceDetection</p></li>
-<li><p>运行眼镜检测的示例程序</p></li>
+<li><p>运行人眼检测的示例程序</p></li>
 </ul>
 
 
