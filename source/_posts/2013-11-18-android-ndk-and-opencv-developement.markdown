@@ -113,7 +113,7 @@ OPENCVROOT = /Users/hujiawei/Android/opencv_sdk
 
 - 经过上面的配置之后，FaceDetection项目便没有问题了，打开jni目录下的cpp和h文件也不会报错了，当然，手机必须安装OpenCV Manager才能成功运行FaceDetection
 
-- 运行眼镜检测的示例程序
+- 运行人眼检测的示例程序
 
 项目来源：<http://romanhosek.cz/android-eye-detection-and-tracking-with-opencv/>  
 该作者根据原有的人脸检测做了一个人眼检测，博文最后附有[下载地址](http://romanhosek.cz/?wpdmact=process&did=MS5ob3RsaW5r)，我的[Github](https://github.com/yinger090807/XFace)上已经有了一份备份，配置方式和Face Detection一样，至于人脸检测和人眼检测的算法我以后会有相关文章进行介绍，暂且期待下吧，嘿嘿  
