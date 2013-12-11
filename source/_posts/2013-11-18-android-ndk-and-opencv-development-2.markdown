@@ -44,7 +44,7 @@ NDK开发的核心之一便是JNI，在[Oracle官方的JNI相关文档](http://d
 
 - **[2]Android.mk文件**
 
-Android.mk文件是用来描述源代码是如何进行编译的，**ndk-build命令实际上对GNU Make命令的一个封装**，所以，Android.mk文件的写法就类似Makefile的写法[关于Make的详细内容可以看这本书，[GNU Make的中文手册](http://pan.baidu.com/s/1swSO7)，虽然是今年读的，但是我记得的也不多了，老了…]   
+Android.mk文件是用来描述源代码是如何进行编译的，**ndk-build命令实际上对GNU Make命令的一个封装**，所以，Android.mk文件的写法就类似Makefile的写法[关于Make的详细内容可以看这本书，[GNU Make的中文手册]，虽然是今年读的，但是我记得的也不多了，老了老了…]   
 Android.mk文件可以生成一个动态链接库或者一个静态链接库，但是只有动态链接库是会复制到应用的安装包中的，静态库一般是用来生成其他的动态链接库的。你可以在一个Android.mk文件定义一个或者多个module，不同的module可以使用相同的source file进行编译得到。你不需要列出头文件，也不需要显示指明要生成的目标文件之间的依赖关系(这些内容在GNU Make中是很重要的，虽然GNU Make中的隐式规则也可以做到)。下面以hello-jni项目中的Android.mk文件为例讲解其中重要的几点。
 
 ```
