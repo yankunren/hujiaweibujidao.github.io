@@ -28,7 +28,7 @@ Google官方Android开发者网站，发布关于Android的最新信息，有最
 
 4.其他资源
 
-[StackOverflow](http://stackoverflow.com/) 嘿嘿，没有它解决不了的问题，我觉得！
+[StackOverflow](http://stackoverflow.com/) 嘿嘿，没有它解决不了的问题！
 
 [Android 开源资料库](http://blog.daimajia.com/?page_id=60)  开源资料不少，大部分都在Github上
 
@@ -69,9 +69,9 @@ Google官方Android开发者网站，发布关于Android的最新信息，有最
 
 如果是进行Android NDK开发的话，推荐两本书籍：
 
-[《Pro Android C++ with the NDK》](http://book.douban.com/subject/20285069/) [《Mastering OpenCV with Practical Computer Vision Projects》](http://book.douban.com/subject/20469441/)
+[《Pro Android C++ with the NDK》](http://book.douban.com/subject/20285069/) [《Mastering OpenCV with Practical Computer Vision Projects》](http://book.douban.com/subject/20469441/) 
 
-#### Android学习总结：先专注于某本入门书籍，细读它，理解大部分内容，如果原书有源码，建议实际运行看下结果，如果原书有项目实践，建议跟着作者的步骤一步步完成。另外，读书建议先粗略读，然后细读，这样前面不懂的小知识马上就解决了，不用花时间纠缠于某个小问题，提高效率。读完了入门级书之后建议自己找个项目做做，可以是小游戏，也可以是小应用，然后开始看提高篇或者深入篇的书籍。    
+#### Android学习总结：先专注于某本入门书籍，细读它，理解大部分内容，如果原书有源码，建议实际运行看下结果，如果原书有项目实践，建议跟着作者的步骤一步步完成。另外，读书建议先粗略读，然后细读，这样前面不懂的小知识马上就解决了，不用花时间纠缠于某个小问题，要提高读书效率。读完了入门级书之后建议自己找个项目做做，可以是小游戏，也可以是小应用，然后开始看提高篇或者深入篇的书籍。    
      
 ****
 
@@ -106,7 +106,7 @@ iOS开发不仅开发的成本很高，入门的门槛也比较高，如果喜�
 
 [《iOS 6 Programming Cookbook》](http://book.douban.com/subject/19953782/)
 
-这本书介绍的是iOS6编程，虽然现在最新的是iOS7了，但是变化不大，大多数iOS开发书籍是介绍iOS4或者iOS5开发，但是不同版本差异还是比较大，这点不像Android，所以推荐看iOS6及以上版本的iOS编程的书籍
+这本书介绍的是iOS6编程，虽然现在最新的是iOS7了，但是变化不大，大多数iOS开发书籍是介绍iOS4或者iOS5开发，但是不同版本差异还是比较大，所以推荐看iOS6及以上版本的iOS编程的书籍
 
 [《iOS开发指南：从零基础到App Store上架》](http://book.douban.com/subject/24846574/)
 
@@ -116,7 +116,7 @@ iOS开发不仅开发的成本很高，入门的门槛也比较高，如果喜�
 
 李刚老师估计闲不下来，嘿嘿，这是他的新书，貌似要出版了，自然要赞！
 
-其他书籍： [没怎么读过]
+其他书籍： [我没怎么读过]
 
 [豆瓣书籍：iOS开发](http://book.douban.com/subject_search?search_text=iOS&cat=1001)
 
@@ -127,10 +127,23 @@ iOS开发不仅开发的成本很高，入门的门槛也比较高，如果喜�
 
 ### Windows Phone部分
 
-需要熟悉微软的.NET平台，语言主要是C#，目前Windows Phone资料不算多，图书馆里也就基本书籍，很容易找到那些常见的资源，我没有研究过，在此就不详细提了
+需要熟悉微软的.NET平台，语言主要是C#，目前Windows Phone资料不算多，图书馆里也就几本书籍，很容易找到那些常见的资源，我没有研究过，在此就不详细提了
 
 [Microsoft Windows Phone Developer 开发者网站](http://developer.windowsphone.com/zh-cn)
 
 [豆瓣书籍：Windows Phone开发](http://book.douban.com/subject_search?search_text=Windows+Phone&cat=1001)
 
 OK！差不多就这些了，有什么问题请[通过邮件联系我](mailto:hujiawei090807@gmail.com)，谢谢！
+
+
+[附上两周的Android入门课件和演示应用魔力8号球的源码]
+
+[Android入门课程(上)](/files/android01.pdf)
+
+[Android入门课程(下)](/files/android02.pdf)
+
+[魔力8号球源码](/files/magic8.zip)
+
+
+
+
