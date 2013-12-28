@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ios | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2013-12-22T19:05:20+08:00</updated>
+  <updated>2013-12-28T21:48:32+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -40,7 +40,7 @@
 
 <p>4.其他资源</p>
 
-<p><a href="http://stackoverflow.com/">StackOverflow</a> 嘿嘿，没有它解决不了的问题，我觉得！</p>
+<p><a href="http://stackoverflow.com/">StackOverflow</a> 嘿嘿，没有它解决不了的问题！</p>
 
 <p><a href="http://blog.daimajia.com/?page_id=60">Android 开源资料库</a>  开源资料不少，大部分都在Github上</p>
 
@@ -82,7 +82,7 @@
 
 <p><a href="http://book.douban.com/subject/20285069/">《Pro Android C++ with the NDK》</a> <a href="http://book.douban.com/subject/20469441/">《Mastering OpenCV with Practical Computer Vision Projects》</a></p>
 
-<h4>Android学习总结：先专注于某本入门书籍，细读它，理解大部分内容，如果原书有源码，建议实际运行看下结果，如果原书有项目实践，建议跟着作者的步骤一步步完成。另外，读书建议先粗略读，然后细读，这样前面不懂的小知识马上就解决了，不用花时间纠缠于某个小问题，提高效率。读完了入门级书之后建议自己找个项目做做，可以是小游戏，也可以是小应用，然后开始看提高篇或者深入篇的书籍。</h4>
+<h4>Android学习总结：先专注于某本入门书籍，细读它，理解大部分内容，如果原书有源码，建议实际运行看下结果，如果原书有项目实践，建议跟着作者的步骤一步步完成。另外，读书建议先粗略读，然后细读，这样前面不懂的小知识马上就解决了，不用花时间纠缠于某个小问题，要提高读书效率。读完了入门级书之后建议自己找个项目做做，可以是小游戏，也可以是小应用，然后开始看提高篇或者深入篇的书籍。</h4>
 
 <hr />
 
@@ -116,7 +116,7 @@
 
 <p><a href="http://book.douban.com/subject/19953782/">《iOS 6 Programming Cookbook》</a></p>
 
-<p>这本书介绍的是iOS6编程，虽然现在最新的是iOS7了，但是变化不大，大多数iOS开发书籍是介绍iOS4或者iOS5开发，但是不同版本差异还是比较大，这点不像Android，所以推荐看iOS6及以上版本的iOS编程的书籍</p>
+<p>这本书介绍的是iOS6编程，虽然现在最新的是iOS7了，但是变化不大，大多数iOS开发书籍是介绍iOS4或者iOS5开发，但是不同版本差异还是比较大，所以推荐看iOS6及以上版本的iOS编程的书籍</p>
 
 <p><a href="http://book.douban.com/subject/24846574/">《iOS开发指南：从零基础到App Store上架》</a></p>
 
@@ -126,7 +126,7 @@
 
 <p>李刚老师估计闲不下来，嘿嘿，这是他的新书，貌似要出版了，自然要赞！</p>
 
-<p>其他书籍： [没怎么读过]</p>
+<p>其他书籍： [我没怎么读过]</p>
 
 <p><a href="http://book.douban.com/subject_search?search_text=iOS&amp;cat=1001">豆瓣书籍：iOS开发</a></p>
 
@@ -136,13 +136,21 @@
 
 <h3>Windows Phone部分</h3>
 
-<p>需要熟悉微软的.NET平台，语言主要是C#，目前Windows Phone资料不算多，图书馆里也就基本书籍，很容易找到那些常见的资源，我没有研究过，在此就不详细提了</p>
+<p>需要熟悉微软的.NET平台，语言主要是C#，目前Windows Phone资料不算多，图书馆里也就几本书籍，很容易找到那些常见的资源，我没有研究过，在此就不详细提了</p>
 
 <p><a href="http://developer.windowsphone.com/zh-cn">Microsoft Windows Phone Developer 开发者网站</a></p>
 
 <p><a href="http://book.douban.com/subject_search?search_text=Windows+Phone&amp;cat=1001">豆瓣书籍：Windows Phone开发</a></p>
 
 <p>OK！差不多就这些了，有什么问题请<a href="mailto:hujiawei090807@gmail.com">通过邮件联系我</a>，谢谢！</p>
+
+<p>[附上两周的Android入门课件和演示应用魔力8号球的源码]</p>
+
+<p><a href="/files/android01.pdf">Android入门课程(上)</a></p>
+
+<p><a href="/files/android02.pdf">Android入门课程(下)</a></p>
+
+<p><a href="/files/magic8.zip">魔力8号球源码</a></p>
 ]]></content>
   </entry>
   
