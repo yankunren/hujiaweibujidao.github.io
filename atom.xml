@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-02-21T10:29:08+08:00</updated>
+  <updated>2014-02-21T10:30:47+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -44,8 +44,6 @@
 
 <p>④重启虚拟机，打开终端输入<code>java -version</code>进行测试</p>
 
-<p><img src="javaversion.png" alt="javaversion" /></p>
-
 <p><img src="http://hujiaweibujidao.github.io/images/201402/javaversion.png"></p>
 
 <p>2.配置Android SDK环境</p>
@@ -72,8 +70,6 @@
 
 <p>⑤重启虚拟机，打开终端输入<code>adb version</code>进行测试</p>
 
-<p><img src="adbversion.png" alt="adbversion" /></p>
-
 <p><img src="http://hujiaweibujidao.github.io/images/201402/adbversion.png"></p>
 
 <p>3.配置Android NDK环境</p>
@@ -91,8 +87,6 @@
 
 
 <p>④重启虚拟机，打开终端输入<code>ndk-build -v</code>进行测试</p>
-
-<p><img src="ndkversion.png" alt="ndkversion" /></p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201402/ndkversion.png"></p>
 
@@ -129,8 +123,6 @@
 <p>第一种方式是使用Git方式获取源代码然后运行</p>
 
 <p>1.运行Eclipse，在<code>window-&gt;view</code>中找到并打开<code>Git Repositories</code>视图，然后选择<code>clone a git repository</code>，在弹出的窗口中输入下面的内容 (注：下面内容是我在GitHub上的一个项目，可以选择fork一份项目或者我添加teamworker)</p>
-
-<p><img src="gitclone.png" alt="gitclone" /></p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201402/gitclone.png"></p>
 
