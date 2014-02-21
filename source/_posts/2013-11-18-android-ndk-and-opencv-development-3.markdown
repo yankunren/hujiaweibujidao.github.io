@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Android ndk and OpenCV development 3"
+title: "android ndk and opencv development 3"
 date: 2013-11-18 21:35
 comments: true
 categories: android opencv mobiledev
