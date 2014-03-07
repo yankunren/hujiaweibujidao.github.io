@@ -17,7 +17,7 @@ location='Beijing, P.R.China'
 university='Tsinghua University'
 technologies='Java/Shell/Android/iOS'
 emailaddress='hujiawei090807@gmail.com'
-favorites='coding, travelling and music'
+favorites='coding, travelling, music and Conan'
 echo "Hello,all. My name is $name, a $gender $category."
 echo "I was born in $birthday, and now studys in $university, $location."
 echo "My favorites are $favorites, and I am also fond of $technologies."

@@ -4,6 +4,7 @@ title: "android ndk and opencv development 4"
 date: 2014-02-21 10:15
 comments: true
 categories: mobiledev android opencv
+published: false
 ---
 #### Android NDK与OpenCV的整合开发环境搭建
 
