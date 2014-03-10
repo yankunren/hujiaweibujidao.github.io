@@ -9,4 +9,4 @@ footer: true
 
 Writing...
 
-目前已经完成的算法包括：Apriori算法、朴素贝叶斯分类器、人工神经网络
+目前已经完成的算法包括：Apriori、朴素贝叶斯分类器、人工神经网络、K-Means，SVM

@@ -40,7 +40,7 @@ PS：以后都会呆在北京，如果有不错的实习机会请和我联系，
 
 ####原博客地址：
 
-[点点博客](http://hujiaweiyinger.diandian.com)  [本科大四研究生入学前的技术总结]  [博客园](http://www.cnblogs.com/yinger)  [本科大二大三的技术总结]  [Tumblr](http://hujiawei.tumblr.com)  [英文博客]
+[点点博客](http://hujiaweiyinger.diandian.com)  [大四及研究生入学前的技术总结]  [博客园](http://www.cnblogs.com/yinger)  [大二大三的技术总结]  [Tumblr](http://hujiawei.tumblr.com)  [英文博客]
 
 
 ####  推荐系列
