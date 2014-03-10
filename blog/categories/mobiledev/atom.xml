@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mobiledev | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mobiledev/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-03-10T12:40:17+08:00</updated>
+  <updated>2014-03-10T12:43:26+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -47,7 +47,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 <p>如下图所示，后面环境配置中添加内容也是如此</p>
 
-<p><img src="/images/201402/imagesetcprofile.png"></p>
+<p><img src="/images/201402/etcprofile.png"></p>
 
 <p>④重启虚拟机，打开终端输入<code>java -version</code>进行测试（重启虚拟机也可以等待下面的Android SDK和Android NDK环境都配置好了之后再重启也行）</p>
 
@@ -116,9 +116,10 @@ export PATH=${PATH}:${ANDROID_NDK_ROOT}
 
 <p>③打开<code>window-&gt;preferences</code>，找到左侧的<code>C/C++ Build-&gt;Environment</code>添加下面两个环境变量：</p>
 
-<p>```
+<p><code>
 NDKROOT=/home/xface/android/adt-bundle/ndk
-OPENCVROOT=/home/xface/android/opencv_sdk</p>
+OPENCVROOT=/home/xface/android/opencv_sdk
+</code></p>
 
 <p><img src="/images/201402/environment.png"></p>
 
