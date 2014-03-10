@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-03-10T13:26:38+08:00</updated>
+  <updated>2014-03-10T19:30:32+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -1882,7 +1882,7 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 
 <p>后来因为<a href="http://www.diandian.com"><strong>点点博客</strong></a>的小清新我瞬间就爱上了它，于是我搬家了，但是，它的冷清让我想要离开！</p>
 
-<p>再后来<a href="http://wordpress.com"><strong>Wordpress</strong></a>进入了我的眼帘，苦于没有host，只好在BAE上安营，但是，它的龟速简直烦我发指！</p>
+<p>再后来<a href="http://wordpress.com"><strong>Wordpress</strong></a>进入了我的眼帘，苦于没有host，只好在BAE上安营，但是，它的龟速简直让我发指！</p>
 
 <p>最后我终于走进了我一直忽视了的<a href="http://octopress.org/"><strong>Octopress</strong></a>，那一瞬间，我才发现，这才是我想要的！这才是我想要的博客！我可以自由的定义页面中的任何内容！</p>
 
@@ -1968,7 +1968,7 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 
 <p>通过命令<code>ssh -T billy.anyteen@github.com</code>可以查看Github是否识别当前用户，如果不能识别会返回<code>Permission denied (publickey)</code>，否则便是<code>Hi username! You've successfully authenticated, but GitHub does not # provide shell access.</code></p>
 
-<p>另外，极力推荐一个<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">Git的简明教程</a>，作者廖雪峰是一位资深的Java开发者，著有书籍《Spring 2.0核心技术与最佳实践》。</p>
+<p>另外，极力推荐一个<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">Git的简明教程</a>，作者廖雪峰是一位资深的开发者，著有畅销书籍《Spring 2.0核心技术与最佳实践》等，最近又推出了Python简明教程，非常实用！</p>
 
 <p>*大功告成！</p>
 
