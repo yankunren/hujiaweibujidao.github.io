@@ -11,7 +11,7 @@ Hello world! Hello Octopress!
 
 后来因为[**点点博客**](http://www.diandian.com)的小清新我瞬间就爱上了它，于是我搬家了，但是，它的冷清让我想要离开！
 
-再后来[**Wordpress**](http://wordpress.com)进入了我的眼帘，苦于没有host，只好在BAE上安营，但是，它的龟速简直烦我发指！
+再后来[**Wordpress**](http://wordpress.com)进入了我的眼帘，苦于没有host，只好在BAE上安营，但是，它的龟速简直让我发指！
 
 最后我终于走进了我一直忽视了的[**Octopress**](http://octopress.org/)，那一瞬间，我才发现，这才是我想要的！这才是我想要的博客！我可以自由的定义页面中的任何内容！
 
@@ -78,7 +78,7 @@ git push origin source  #一定记着要提交source下的内容
 
 通过命令`ssh -T billy.anyteen@github.com`可以查看Github是否识别当前用户，如果不能识别会返回`Permission denied (publickey)`，否则便是`Hi username! You've successfully authenticated, but GitHub does not # provide shell access.`
 
-另外，极力推荐一个[Git的简明教程](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)，作者廖雪峰是一位资深的Java开发者，著有书籍《Spring 2.0核心技术与最佳实践》。
+另外，极力推荐一个[Git的简明教程](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)，作者廖雪峰是一位资深的开发者，著有畅销书籍《Spring 2.0核心技术与最佳实践》等，最近又推出了Python简明教程，非常实用！
 
 *大功告成！
 
