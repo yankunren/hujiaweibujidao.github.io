@@ -1,0 +1,485 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>develop with OpenCV on Mac OS X - Hujiawei Bujidao</title>
+  <meta name="author" content="hujiawei">
+
+  
+  <meta name="description" content="今天大部分时间都是在琢磨如何在Mac OS X上进行OpenCV项目的开发，最终选择的开发工具是Xcode(版本是4.6.1)，使用的OpenCV版本是2.4.6。 1.安装CMake 安装CMake可以使用MacPorts，也可以使用Homebrew， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+	<header role="banner">
+		<hgroup style="text-align: center">
+	<h1><a href="/"><img src="/images/conan-paper-small.png"  />Hujiawei Bujidao<img src="/images/conan-hat-small.png"  /></a></h1>
+	
+	<h2>I will always be your savior! A secret makes a man man!</h2>
+	
+</hgroup>
+
+
+	</header>
+	<nav role="navigation">
+		<ul class="subscription" data-subscription="rss">
+
+  <!-- <li><a href="https://github.com/hujiaweibujidao" rel="subscribe-rss" title="subscribe via RSS">View me on GitHub</a></li> -->
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+   
+</ul>
+
+  <!--
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hujiaweibujidao.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form> 
+  
+  -->
+<ul class="main-navigation">
+  <li><a href="/blog/archives/">Blog</a></li>
+  <li><a href="/aboutme/">AboutMe</a></li>
+  <li><a href="/math/">Math</a></li>
+  <li><a href="/datamining/">DataMining</a></li>
+  <li><a href="/blog/categories/mobiledev/">MobileDev</a></li>
+  <!--
+  <li><a href="/xjava/">XJava</a></li>
+  -->
+  <!-- <li><a href="/datamining/">Projects</a></li> -->
+  <!--
+  <li><a href="/blog/archives">Archives</a></li>
+  -->
+</ul>
+
+
+	</nav>
+	<div id="main">
+		<div id="content">
+			<div>
+	<article class="hentry" role="article">
+		
+  <header>
+    
+      <h1 class="entry-title">Develop With OpenCV on Mac OS X</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-13T19:23:00+08:00" pubdate data-updated="true">Mar 13<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>今天大部分时间都是在琢磨如何在Mac OS X上进行OpenCV项目的开发，最终选择的开发工具是Xcode(版本是4.6.1)，使用的OpenCV版本是2.4.6。</p>
+
+<h4>1.安装CMake</h4>
+
+<p>安装CMake可以使用MacPorts，也可以使用Homebrew，如果以前安装过两者中的任何一个就用那个进行安装吧，我用的是Homebrew，命令如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo port install cmake //macports
+</span><span class='line'>sudo brew install cmake //homebrew</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>2.编译OpenCV</h4>
+
+<p>OpenCV下载地址：<a href="http://sourceforge.net/projects/opencvlibrary/">http://sourceforge.net/projects/opencvlibrary/</a></p>
+
+<p>目前最新版本是2.4.8，我使用的是2.4.6，下载后解压，执行下面代码：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd &lt;path-to-opencv-source&gt;
+</span><span class='line'>mkdir release
+</span><span class='line'>cd release
+</span><span class='line'>cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. 
+</span><span class='line'>make
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>[完成之后在<code>/usr/local/bin</code>目录下便有了<code>opencv</code>和<code>opencv2</code>两个目录，在<code>/usr/local/lib</code>目录下有很多的<code>opencv</code>相关的动态库，例如<code>libopencv_core.dylib</code>等等]</p>
+
+<p>其他参考内容：<a href="http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation">Building OpenCV from Source Using CMake, Using the Command Line</a></p>
+
+<h4>3.使用Xcode进行OpenCV项目开发</h4>
+
+<p>1.Open Xcode, choose <code>New  -&gt; New Project -&gt; Command Line Tool</code></p>
+
+<p>2.Name it and select <code>C++</code> for type</p>
+
+<p>3.Click on your project from the left menu. Click the build settings tab from the top. Filter all. Scroll to <code>Search Paths</code>. Under <code>header search paths</code>, for debug and release, set the path to <code>/usr/local/include</code></p>
+
+<p>4.Click on your project from the left menu. <code>File-&gt;New-&gt;New Group</code>, Name the group <code>OpenCV Frameworks</code>.</p>
+
+<p>5.Select the folder (group) you just labeled, <code>OpenCV Frameworks</code> in the left menu. Go to <code>File -&gt; add Files</code>, Type <code>/</code>, which will allow you to manually go to a folder. Go to &ndash;> <code>/usr/local/lib</code></p>
+
+<p>6.Select both of these files, <code>libopencv_core.dylib</code>, <code>libopencv_highgui.dylib</code>, and click <code>Add</code>. (you may need to add other library files from this folder to run other code.)</p>
+
+<p>7.You must include this line of code in the beginning of your main.cpp file:
+<code>#include &lt;opencv2/opencv.hpp&gt;</code></p>
+
+<p>可以修改main.cpp，代码如下，运行结果就是显示一张指定的图片。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;opencv2/opencv.hpp&gt;
+</span><span class='line'>using namespace cv;
+</span><span class='line'>int main(int argc, char** argv) {
+</span><span class='line'>  Mat image;
+</span><span class='line'>  image = imread("/Users/hujiawei/Pictures/others/other_naicha/naicha.jpg", 1);
+</span><span class='line'>    namedWindow("Display Image", WINDOW_AUTOSIZE);
+</span><span class='line'>  imshow("Display Image", image);
+</span><span class='line'>  waitKey(0);
+</span><span class='line'>  return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其他参考内容：<a href="https://sites.google.com/site/learningopencv1/installing-opencv">Installing OpenCV</a></p>
+
+<h4>4.其他问题</h4>
+
+<p>如果使用Eclipse开发的，首先要安装CDT插件，其次需要在opencv项目属性的<code>C/C++ General -&gt; Paths and Symbols</code>中添加其他的路径，包括OpenCV所需的头文件，类似<code>&lt;opencv_sdk&gt;/sdk/native/jni/include</code>，此外，关于编译器GCC，我本机只是安装了Command Line Tools，但是该工具在系统升级到Maverick(10.9)时会出现一个链接问题，10.8及以下版本应该是没有问题。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>There are two implementations of the standard C++ library available on OS X: libstdc++ and libc++. They are not binary compatible and libMLi3 requires libstdc++.
+</span><span class='line'>On 10.8 and earlier libstdc++ is chosen by default, on 10.9 libc++ is chosen by default. To ensure compatibility with libMLi3, we need to choose libstdc++ manually.
+</span><span class='line'>To do this, add -stdlib=libstdc++ to the linking command.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个问题将导致很多问题，比如这个问题<code>ld: symbol(s) not found for architecture x86_64</code>，在Xcode中对于这个问题我的解决办法就是在项目的<code>Build Setting</code>中，将<code>C++ standard library</code>切换成<code>libstdc++</code>，以及<code>OS X deployment target</code>改成<code>10.8</code>，之后便通过编译，成功运行。</p>
+
+<p>更多相关内容参考：</p>
+
+<p><a href="http://stackoverflow.com/questions/19637164/c-linking-error-after-upgrading-to-mac-os-x-10-9-xcode-5-0-1">C++ linking error after upgrading to Mac OS X 10.9 / Xcode 5.0.1</a></p>
+
+<p><a href="http://mathematica.stackexchange.com/questions/34692/mathlink-linking-error-after-os-x-10-9-mavericks-upgrade">MathLink linking error after OS X 10.9 (Mavericks) upgrade</a></p>
+
+<p class='post-footer'>
+                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/'>http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+
+</div>
+
+
+		<footer>
+			<p class="meta">
+				
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hujiawei</span></span>
+
+				
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-13T19:23:00+08:00" pubdate data-updated="true">Mar 13<span>th</span>, 2014</time>
+				
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/opencv/'>opencv</a>
+  
+</span>
+
+
+			</p>
+			
+			<div class="sharing">
+  
+  
+  
+</div>
+
+			
+			<p class="meta">
+				
+				<a class="basic-alignment left" href="/blog/2014/02/21/android-ndk-and-opencv-development-4/" title="Previous Post: android ndk and opencv development 4">&laquo; android ndk and opencv development 4</a>
+				
+				
+			</p>
+		</footer>
+	</article>
+	
+
+	
+	<section>
+		<h1>Comments</h1>
+		<div id="comments" aria-live="polite">
+			<!-- Duoshuo Comment BEGIN   data-title=""-->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hujiaweibujidao"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+
+		</div>
+	</section>
+	
+
+</div>
+
+<aside class="sidebar">
+	
+	<section>
+  <h1>关于博主</h1><br/>
+  <a href="/aboutme/"><img src="/images/me-small.png" width="250px" height="210px" alt="protrait"/></a><br/>
+  <p>Hi, I'm Hujiawei, from P.R.China. Now I'm a postgraduate student studying in <a href="http://www.tsinghua.edu.cn/publish/th/index.html">Tsinghua University</a>.
+  Wanna know me? <a href="/aboutme/">See here.</a> <br/>	
+  </p>
+  <a href="http://weibo.com/hujiaweiyinger"><img src="/images/sinaweibo.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://github.com/hujiaweibujidao"><img src="/images/github.png" width="40px" height="40px"/></a>&nbsp;
+  <a href="http://hujiawei.tumblr.com"><img src="/images/tumblr.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://twitter.com/hujiaweiyinger"><img src="/images/twitter.png" width="40px" height="40px"/></a>
+  
+  <br/>
+  
+</section>
+<section>
+ <h1>分类目录</h1>
+ <ul id="categories">
+	 <li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
+<li class='category'><a href='/blog/categories/ios/'>ios (1)</a></li>
+<li class='category'><a href='/blog/categories/mobiledev/'>mobiledev (5)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/opencv/'>opencv (5)</a></li>
+
+ </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/03/13/develop-with-opencv-on-mac-os-x/">Develop With OpenCV on Mac OS X</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/21/android-ndk-and-opencv-development-4/">Android Ndk and Opencv Development 4</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/12/14/yi-dong-kai-fa-zi-liao-hui-ji/">移动开发资料汇集</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/18/android-ndk-and-opencv-development-3/">Android Ndk and Opencv Development 3</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/18/android-ndk-and-opencv-development-2/">Android Ndk and Opencv Development 2</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+	<h1>好友博客</h1>
+	<ul>
+		<li>
+			<a href="http://doufunao.github.io/">豆腐脑的幻想乡</a>
+		</li>
+		<li>
+			<a href="http://c4fun.cn/">Code 4 Fun</a>
+		</li>
+		<li>
+			<a href="http://www.tanglei.name/">tanglei的blog</a>
+		</li>
+		<li>
+			<a href="http://ontheroad.sinaapp.com/">Find My Way</a>
+		</li>
+		
+		<li>
+			<a href="http://www.liaoxuefeng.com/">廖雪峰的官方网站</a>
+		</li>
+		<li>
+			<a href="http://easypi.github.io/">easypi's blog</a>
+		</li>
+		<li>
+			<a href="http://812lcl.github.io/">812lcl的博客</a>
+		</li>
+		<li>
+			<a href="http://wufawei.com/">Ted's Homepage</a>
+		</li>
+		<li>
+			<a href="http://www.renfei.org/blog/">Renfei Song</a>
+		</li>
+		
+		<li>
+			<a href="#">这里会是你吗?</a>
+		</li>
+	</ul>
+</section>
+	
+</aside>
+
+
+
+		</div>
+	</div>
+	
+	<footer role="contentinfo">
+		<p>
+	Copyright &copy; 2014 - hujiawei - <a href="http://happybirthday2yinger.duapp.com/">Happy birthday to MY QUEEN</a> - <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
+	<!-- CNZZ -->
+	&nbsp;&nbsp;
+	<script type="text/javascript">
+		var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+		document.write(unescape("%3Cspan id='cnzz_stat_icon_1000165127'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000165127%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<!-- license -->
+	<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="http://i.creativecommons.org/l/by-nd/3.0/88x31.png" /></a>
+	<br />
+	本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh">知识共享署名-禁止演绎 3.0 未本地化版本许可协议</a>进行许可。
+</p>
+<style>
+	.returnTop {
+		position: fixed;
+		_position: absolute;
+		right: 10px;
+		bottom: 200px;
+		_bottom: auto;
+		display: none;
+		width: 40px;
+		height: 40px;
+		border: 1px solid #61b72e;
+		border-radius: 4px;
+		background: #fff;
+		box-shadow: 0 0 5px #F5F5F5;
+		text-indent: -9999px;
+		cursor: pointer;
+	}
+	.returnTop .s {
+		position: absolute;
+		top: -2px;
+		_top: -20px;
+		left: 10px;
+		width: 0;
+		height: 0;
+		border-width: 10px;
+		border-color: transparent transparent #61b72e;
+		border-style: dashed dashed solid;
+	}
+	.returnTop .b {
+		position: absolute;
+		top: 18px;
+		left: 16px;
+		height: 12px;
+		width: 8px;
+		background: #61b72e;
+	}
+</style>
+<div class="returnTop" title="嗖的就上去了！">
+	<span class="s"></span>
+	<span class="b"></span>
+	返回顶部
+</div>
+<script type="text/javascript">
+$(function(){
+$(window).bind("scroll", function(){
+
+var scrollTopNum = $(document).scrollTop(),
+winHeight = $(window).height(),
+returnTop = $("div.returnTop");
+
+(scrollTopNum > 0) ? returnTop.fadeIn("fast") : returnTop.fadeOut("fast");
+
+if (!-[1,]&&!window.XMLHttpRequest) {
+returnTop.css("top", scrollTopNum + winHeight - 200);
+}
+
+});
+
+$("div.returnTop").click(function() {
+$("html, body").animate({ scrollTop: 0 }, 100);
+});
+
+});
+</script>
+
+
+
+	</footer>
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
