@@ -4,7 +4,7 @@
   <title><![CDATA[Category: android | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-03-13T21:44:14+08:00</updated>
+  <updated>2014-03-21T11:42:15+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -1098,7 +1098,7 @@ NDK_HOST_CMP=&lt;path-to-cmp&gt;
 <p>```</p>
 
 <ul>
-<li><p><strong>[6]NDK GDB，Import Module，Prebuilts，Standalone Toolchains以及和CPU相关的三个内容</strong>因为我没有涉及过，自己也不是很了解，所以此处暂时搁置了，以后如果用到以后补充。</p></li>
+<li><p><strong>[6]NDK GDB，Import Module，Prebuilts，Standalone Toolchains以及和CPU相关的三个内容</strong>因为我没有涉及过，自己也不是很了解，所以此处暂时搁置了，以后如果用到以后补充。关于NDK调试环境的搭建可以参见<a href="http://qiang106.iteye.com/blog/1830416">这位作者的实践博文</a></p></li>
 <li><p><strong>[7]<a href="http://blog.csdn.net/smfwuxiao/article/details/6612373">Tips and Tricks 建议和技巧</a></strong></p></li>
 </ul>
 
