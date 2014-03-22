@@ -255,7 +255,7 @@ version that comes with API level 9. To use it, use the following:
                                  don't want to 'cd' to it in your terminal.
 ```
 
-- **[6]NDK GDB，Import Module，Prebuilts，Standalone Toolchains以及和CPU相关的三个内容**因为我没有涉及过，自己也不是很了解，所以此处暂时搁置了，以后如果用到以后补充。
+- **[6]NDK GDB，Import Module，Prebuilts，Standalone Toolchains以及和CPU相关的三个内容**因为我没有涉及过，自己也不是很了解，所以此处暂时搁置了，以后如果用到以后补充。关于NDK调试环境的搭建可以参见[这位作者的实践博文](http://qiang106.iteye.com/blog/1830416)
 
 - **[7][Tips and Tricks 建议和技巧](http://blog.csdn.net/smfwuxiao/article/details/6612373)**  
  

@@ -43,7 +43,7 @@ sudo make install
 
 2.Name it and select `C++` for type
 
-3.Click on your project from the left menu. Click the build settings tab from the top. Filter all. Scroll to `Search Paths`. Under `header search paths`, for debug and release, set the path to `/usr/local/include`
+3.Click on your project from the left menu. Click the `build settings` tab from the top. Filter all. Scroll to `Search Paths`. Under `header search paths`, for debug and release, set the path to `/usr/local/include`. Under `library search paths`, set the path to `$(PROJECT_DIR)`. Finally, check if `C++ standard library` is `libstdc++` or not, if not, change it to this!
 
 4.Click on your project from the left menu. `File->New->New Group`, Name the group `OpenCV Frameworks`. 
 
@@ -82,7 +82,7 @@ On 10.8 and earlier libstdc++ is chosen by default, on 10.9 libc++ is chosen by 
 To do this, add -stdlib=libstdc++ to the linking command.
 ```
 
-这个问题将导致很多问题，比如这个问题`ld: symbol(s) not found for architecture x86_64`，在Xcode中对于这个问题我的解决办法就是在项目的`Build Setting`中，将`C++ standard library`切换成`libstdc++`，以及`OS X deployment target`改成`10.8`，之后便通过编译，成功运行。
+这个问题将导致很多问题，比如这个问题`ld: symbol(s) not found for architecture x86_64`，在Xcode中对于这个问题我的解决办法就是在项目的`Build Setting`中，将`C++ standard library`切换成`libstdc++`[可以尝试将`OS X deployment target`改成`10.8`]，之后便通过编译，成功运行。
 
 更多相关内容参考：
 
