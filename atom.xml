@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-03-22T12:04:56+08:00</updated>
+  <updated>2014-03-22T12:09:36+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -201,7 +201,7 @@
 
 <p>2.Name it and select <code>C++</code> for type</p>
 
-<p>3.Click on your project from the left menu. Click the build settings tab from the top. Filter all. Scroll to <code>Search Paths</code>. Under <code>header search paths</code>, for debug and release, set the path to <code>/usr/local/include</code></p>
+<p>3.Click on your project from the left menu. Click the <code>build settings</code> tab from the top. Filter all. Scroll to <code>Search Paths</code>. Under <code>header search paths</code>, for debug and release, set the path to <code>/usr/local/include</code></p>
 
 <p>4.Click on your project from the left menu. <code>File-&gt;New-&gt;New Group</code>, Name the group <code>OpenCV Frameworks</code>.</p>
 
@@ -250,7 +250,7 @@
 </span><span class='line'>To do this, add -stdlib=libstdc++ to the linking command.</span></code></pre></td></tr></table></div></figure>
 
 
-<p>这个问题将导致很多问题，比如这个问题<code>ld: symbol(s) not found for architecture x86_64</code>，在Xcode中对于这个问题我的解决办法就是在项目的<code>Build Setting</code>中，将<code>C++ standard library</code>切换成<code>libstdc++</code>，以及<code>OS X deployment target</code>改成<code>10.8</code>，之后便通过编译，成功运行。</p>
+<p>这个问题将导致很多问题，比如这个问题<code>ld: symbol(s) not found for architecture x86_64</code>，在Xcode中对于这个问题我的解决办法就是在项目的<code>Build Setting</code>中，将<code>C++ standard library</code>切换成<code>libstdc++</code>[可以尝试将<code>OS X deployment target</code>改成<code>10.8</code>]，之后便通过编译，成功运行。</p>
 
 <p>更多相关内容参考：</p>
 
