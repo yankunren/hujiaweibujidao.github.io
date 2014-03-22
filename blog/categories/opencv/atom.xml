@@ -4,7 +4,7 @@
   <title><![CDATA[Category: opencv | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/opencv/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-03-22T12:09:36+08:00</updated>
+  <updated>2014-03-22T12:19:30+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -53,7 +53,7 @@ sudo make install
 
 <p>2.Name it and select <code>C++</code> for type</p>
 
-<p>3.Click on your project from the left menu. Click the <code>build settings</code> tab from the top. Filter all. Scroll to <code>Search Paths</code>. Under <code>header search paths</code>, for debug and release, set the path to <code>/usr/local/include</code></p>
+<p>3.Click on your project from the left menu. Click the <code>build settings</code> tab from the top. Filter all. Scroll to <code>Search Paths</code>. Under <code>header search paths</code>, for debug and release, set the path to <code>/usr/local/include</code>. Under <code>library search paths</code>, set the path to <code>$(PROJECT_DIR)</code>. Finally, check if <code>C++ standard library</code> is <code>libstdc++</code> or not, if not, change it to this!</p>
 
 <p>4.Click on your project from the left menu. <code>File-&gt;New-&gt;New Group</code>, Name the group <code>OpenCV Frameworks</code>.</p>
 
