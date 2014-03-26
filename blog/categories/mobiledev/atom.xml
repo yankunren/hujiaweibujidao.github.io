@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mobiledev | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mobiledev/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-03-22T12:19:30+08:00</updated>
+  <updated>2014-03-26T17:19:31+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -1204,7 +1204,7 @@ return rtn;
 <a href="http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation">Linux平台的安装教程</a>  <a href="http://tilomitra.com/opencv-on-mac-osx/">Mac平台的安装教程</a></p>
 
 <p>(1) 首先安装需要安装的工具和依赖包[详见前面的Linux安装教程]，Mac平台基本上只要安装CMake即可 <br/>
-(2) 使用CMake编译opencv源码，然后通过make安装opencv[完成之后在<code>/usr/local/bin</code>目录下便有了<code>opencv</code>和<code>opencv2</code>两个目录，在<code>/usr/local/lib</code>目录下有很多的<code>opencv</code>相关的动态库，例如<code>libopencv_core.dylib</code>等等]</p>
+(2) 使用CMake编译opencv源码，然后通过make安装opencv[完成之后在<code>/usr/local/include</code>目录下便有了<code>opencv</code>和<code>opencv2</code>两个目录，在<code>/usr/local/lib</code>目录下有很多的<code>opencv</code>相关的动态库，例如<code>libopencv_core.dylib</code>等等]</p>
 
 <p><code>
 cd &lt;path-to-opencv-source&gt;

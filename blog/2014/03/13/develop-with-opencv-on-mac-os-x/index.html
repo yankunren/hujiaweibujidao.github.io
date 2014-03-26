@@ -142,7 +142,7 @@
 </span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
 
 
-<p>[完成之后在<code>/usr/local/bin</code>目录下便有了<code>opencv</code>和<code>opencv2</code>两个目录，在<code>/usr/local/lib</code>目录下有很多的<code>opencv</code>相关的动态库，例如<code>libopencv_core.dylib</code>等等]</p>
+<p>[完成之后在<code>/usr/local/include</code>目录下便有了<code>opencv</code>和<code>opencv2</code>两个目录，在<code>/usr/local/lib</code>目录下有很多的<code>opencv</code>相关的动态库，例如<code>libopencv_core.dylib</code>等等]</p>
 
 <p>其他参考内容：<a href="http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation">Building OpenCV from Source Using CMake, Using the Command Line</a></p>
 
@@ -201,7 +201,7 @@
 </span><span class='line'>To do this, add -stdlib=libstdc++ to the linking command.</span></code></pre></td></tr></table></div></figure>
 
 
-<p>这个问题将导致很多问题，比如这个问题<code>ld: symbol(s) not found for architecture x86_64</code>，在Xcode中对于这个问题我的解决办法就是在项目的<code>Build Setting</code>中，将<code>C++ standard library</code>切换成<code>libstdc++</code>[可以尝试将<code>OS X deployment target</code>改成<code>10.8</code>]，之后便通过编译，成功运行。</p>
+<p>如果遇到问题<code>ld: symbol(s) not found for architecture x86_64</code>，检查代码中是否需要包含还没有添加的库文件。</p>
 
 <p>更多相关内容参考：</p>
 
