@@ -31,7 +31,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..
 make
 sudo make install
 ```
-[完成之后在`/usr/local/bin`目录下便有了`opencv`和`opencv2`两个目录，在`/usr/local/lib`目录下有很多的`opencv`相关的动态库，例如`libopencv_core.dylib`等等]
+[完成之后在`/usr/local/include`目录下便有了`opencv`和`opencv2`两个目录，在`/usr/local/lib`目录下有很多的`opencv`相关的动态库，例如`libopencv_core.dylib`等等]
 
 其他参考内容：[Building OpenCV from Source Using CMake, Using the Command Line](http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation)
 
@@ -82,7 +82,7 @@ On 10.8 and earlier libstdc++ is chosen by default, on 10.9 libc++ is chosen by 
 To do this, add -stdlib=libstdc++ to the linking command.
 ```
 
-这个问题将导致很多问题，比如这个问题`ld: symbol(s) not found for architecture x86_64`，在Xcode中对于这个问题我的解决办法就是在项目的`Build Setting`中，将`C++ standard library`切换成`libstdc++`[可以尝试将`OS X deployment target`改成`10.8`]，之后便通过编译，成功运行。
+如果遇到问题`ld: symbol(s) not found for architecture x86_64`，检查代码中是否需要包含还没有添加的库文件。
 
 更多相关内容参考：
 
