@@ -4,7 +4,7 @@
   <title><![CDATA[Category: opencv | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/opencv/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-03-27T09:39:25+08:00</updated>
+  <updated>2014-03-27T10:17:43+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -474,7 +474,7 @@ new Thread(new Runnable() {</p>
 
 <p>③<a href="http://hujiaweiyinger.diandian.com/post/2013-10-30/setup_android_ndk_environment_and_solve_some_problems">关于在windows平台搭建android开发环境的教程</a></p>
 
-<p>不推荐使用Windows进行开发，因为不仅要安装Cygwin，还要进行很多其他的配置</p>
+<p>不推荐使用Windows进行开发，因为不仅要安装Cygwin，还要进行很多其他的配置，如果实在是不得已，可以尝试参考<a href="http://blog.csdn.net/pwh0996/article/details/8957764">这位博主的环境搭建过程</a></p>
 
 <p>④<a href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-developement/">关于android ndk和opencv整合开发以及实例项目运行的教程</a></p>
 
