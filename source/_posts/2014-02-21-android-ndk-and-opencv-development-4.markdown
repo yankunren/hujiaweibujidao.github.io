@@ -357,7 +357,7 @@ XFace应用程序的使用过程中会产生一些文件夹和文件，全部存
 
 ③[关于在windows平台搭建android开发环境的教程](http://hujiaweiyinger.diandian.com/post/2013-10-30/setup_android_ndk_environment_and_solve_some_problems) 
 
-不推荐使用Windows进行开发，因为不仅要安装Cygwin，还要进行很多其他的配置
+不推荐使用Windows进行开发，因为不仅要安装Cygwin，还要进行很多其他的配置，如果实在是不得已，可以尝试参考[这位博主的环境搭建过程](http://blog.csdn.net/pwh0996/article/details/8957764)
 
 ④[关于android ndk和opencv整合开发以及实例项目运行的教程](http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-developement/)
 
