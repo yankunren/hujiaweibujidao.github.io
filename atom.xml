@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-03-26T17:19:31+08:00</updated>
+  <updated>2014-03-27T09:39:25+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -796,7 +796,7 @@
 
 
 <ul>
-<li>[2]打开FdActivity.java文件，在其中添加一个静态初始化块代码，它是用来加载<code>OpenCV_java</code>库的，由于FaceDetection中还用了另一个库detection_based_tracker，所以要在<code>else</code>子句中加载进来：</li>
+<li>[2]打开FdActivity.java文件，在其中添加一个静态初始化块代码，它是用来加载<code>OpenCV_java</code>库的，由于FaceDetection中还用了另一个库detection_based_tracker(用于人脸跟踪)，所以要在<code>else</code>子句中加载进来：</li>
 </ul>
 
 
@@ -946,7 +946,7 @@
 </ul>
 
 
-<p>本文主要介绍了如何在底层通过OpenCV来对人脸部分进行检测，得到的人脸位置数据通过JNI传递给Java层，详细介绍了其中的JNI代码和共享库的构建过程，对图片是通过图片的路径来进行传递的，因为这里的检测只是对单张静态的图片进行检测。[这竟然是博士生的论文，它比我实习要做的简单多了！]</p>
+<p>本文主要介绍了如何在底层通过OpenCV来对人脸部分进行检测，得到的人脸位置数据通过JNI传递给Java层，详细介绍了其中的JNI代码和共享库的构建过程，对图片是通过图片的路径来进行传递的，因为这里的检测只是对单张静态的图片进行检测。</p>
 
 <ul>
 <li>_Tutorial-2-OpenCV-for-Android-Setup-Macintosh-API11</li>
@@ -1004,7 +1004,7 @@
 </ul>
 
 
-<p>这篇论文介绍了利用OpenCV对实时的视频进行处理和纯Android library进行处理的比较，发现利用OpenCV处理的结果更加准确，效率更快，而且更加省电。比较时使用的都是基本图像处理操作，例如灰度化，高斯模糊，Sobel边缘检测等等。[这篇论文貌似发在国际期刊上，我表示呵呵一下……到处都是水啊]</p>
+<p>这篇论文介绍了利用OpenCV对实时的视频进行处理和纯Android library进行处理的比较，发现利用OpenCV处理的结果更加准确，效率更快，而且更加省电。比较时使用的都是基本图像处理操作，例如灰度化，高斯模糊，Sobel边缘检测等等。</p>
 
 <ul>
 <li>_Realtime Computer Vision  with OpenCV</li>
