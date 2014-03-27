@@ -394,6 +394,147 @@ OpenCV Library中提供了两种摄像头，一种是Java摄像头-<code>org.Ope
 
 <p>③使用OpenCV的摄像头：JavaCamera或者NativeCamera都行，好处是它进行了很多的封装，可以直接将预览图像的Mat结构传递给Native层，这种传递是使用Mat的内存地址(long型)，Native层只要根据这个地址将其封装成Mat就可以进行处理了，另外，它的回调函数的返回值也是Mat，非常方便！这种方式速度较快。详细过程可以查看OpenCV-Android sdk的samples项目中的Tutorial2-MixedProcessing。</p>
 
+<ul>
+<li>关于摄像头预览界面倒置的问题：很多时候(一般是将应用设置为<code>portrait</code>模式之后)在调用了OpenCV的Camera之后，出现预览内容倒置了90度的现象，原因是OpenCV的Camera默认情况下是以<code>landscape</code>模式运行的，一个可行但是不是很好的解决方案是修改OpenCV库中的<code>org.opencv.camera.CameraBridgeViewBase</code>类中的<code>deliverandDraw</code>方法，<a href="http://stackoverflow.com/questions/19190921/always-open-in-landscape-mode-orientation-for-front-camera-in-opencv-javacv">问题参考链接</a></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>protected void deliverAndDrawFrame(CvCameraViewFrame frame) {
+</span><span class='line'>        Mat modified;
+</span><span class='line'>
+</span><span class='line'>        if (mListener != null) {
+</span><span class='line'>            modified = mListener.onCameraFrame(frame);
+</span><span class='line'>        } else {
+</span><span class='line'>            modified = frame.rgba();
+</span><span class='line'>        }
+</span><span class='line'>
+</span><span class='line'>        boolean bmpValid = true;
+</span><span class='line'>        if (modified != null) {
+</span><span class='line'>            try {
+</span><span class='line'>                Utils.matToBitmap(modified, mCacheBitmap);
+</span><span class='line'>            } catch(Exception e) {
+</span><span class='line'>                Log.e(TAG, "Mat type: " + modified);
+</span><span class='line'>                Log.e(TAG, "Bitmap type: " + mCacheBitmap.getWidth() + "*" + mCacheBitmap.getHeight());
+</span><span class='line'>                Log.e(TAG, "Utils.matToBitmap() throws an exception: " + e.getMessage());
+</span><span class='line'>                bmpValid = false;
+</span><span class='line'>            }
+</span><span class='line'>        }
+</span><span class='line'>
+</span><span class='line'>        if (bmpValid && mCacheBitmap != null) {
+</span><span class='line'>            Canvas canvas = getHolder().lockCanvas();
+</span><span class='line'>            if (canvas != null) {
+</span><span class='line'>//                canvas.drawColor(0, android.graphics.PorterDuff.Mode.CLEAR);
+</span><span class='line'>//                Log.d(TAG, "mStretch value: " + mScale);
+</span><span class='line'>//
+</span><span class='line'>//                if (mScale != 0) {
+</span><span class='line'>//                    canvas.drawBitmap(mCacheBitmap, new Rect(0,0,mCacheBitmap.getWidth(), mCacheBitmap.getHeight()),
+</span><span class='line'>//                         new Rect((int)((canvas.getWidth() - mScale*mCacheBitmap.getWidth()) / 2),
+</span><span class='line'>//                         (int)((canvas.getHeight() - mScale*mCacheBitmap.getHeight()) / 2),
+</span><span class='line'>//                         (int)((canvas.getWidth() - mScale*mCacheBitmap.getWidth()) / 2 + mScale*mCacheBitmap.getWidth()),
+</span><span class='line'>//                         (int)((canvas.getHeight() - mScale*mCacheBitmap.getHeight()) / 2 + mScale*mCacheBitmap.getHeight())), null);
+</span><span class='line'>//                } else {
+</span><span class='line'>//                     canvas.drawBitmap(mCacheBitmap, new Rect(0,0,mCacheBitmap.getWidth(), mCacheBitmap.getHeight()),
+</span><span class='line'>//                         new Rect((canvas.getWidth() - mCacheBitmap.getWidth()) / 2,
+</span><span class='line'>//                         (canvas.getHeight() - mCacheBitmap.getHeight()) / 2,
+</span><span class='line'>//                         (canvas.getWidth() - mCacheBitmap.getWidth()) / 2 + mCacheBitmap.getWidth(),
+</span><span class='line'>//                         (canvas.getHeight() - mCacheBitmap.getHeight()) / 2 + mCacheBitmap.getHeight()), null);
+</span><span class='line'>//                }
+</span><span class='line'>
+</span><span class='line'>                //ABC : Fixed for image rotation
+</span><span class='line'>                //TODO Why portrait is not opening in fulls creen
+</span><span class='line'>                Matrix matrix = new Matrix();
+</span><span class='line'>                int height_Canvas = canvas.getHeight();
+</span><span class='line'>                int width_Canvas = canvas.getWidth();
+</span><span class='line'>
+</span><span class='line'>                int width = mCacheBitmap.getWidth();
+</span><span class='line'>                int height = mCacheBitmap.getHeight();
+</span><span class='line'>
+</span><span class='line'>                float f1 = (width_Canvas - width) / 2;
+</span><span class='line'>                float f2 = (height_Canvas - height) / 2;
+</span><span class='line'>                matrix.preTranslate(f1, f2);
+</span><span class='line'>                if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+</span><span class='line'>                matrix.postRotate(270f,(width_Canvas) / 2,(height_Canvas) / 2);
+</span><span class='line'>                canvas.drawBitmap(mCacheBitmap, matrix, new Paint());
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>                if (mFpsMeter != null) {
+</span><span class='line'>                    mFpsMeter.measure();
+</span><span class='line'>                    mFpsMeter.draw(canvas, 20, 30);
+</span><span class='line'>                }
+</span><span class='line'>                getHolder().unlockCanvasAndPost(canvas);
+</span><span class='line'>            }
+</span><span class='line'>        }
+</span><span class='line'>    }</span></code></pre></td></tr></table></div></figure>
+
+
 <h4>3.OpenCV 和 OpenCV NDK 整合开发的一般途径</h4>
 
 <p>在进行这类开发的时候，需要考虑如何在Android中使用OpenCV，并且如果需要调用摄像头的话，要考虑以下内容：<br/>

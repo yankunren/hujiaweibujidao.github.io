@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mobiledev | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mobiledev/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-03-27T10:17:43+08:00</updated>
+  <updated>2014-03-28T00:03:04+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -773,6 +773,86 @@ OpenCV Library中提供了两种摄像头，一种是Java摄像头-<code>org.Ope
 <p>②传递预览图像的字节数组到Native层，然后将字节数组处理成RGB或者RGBA的格式[具体哪种格式要看你的图像处理函数能否处理RGBA格式的，如果可以的话推荐转换成RGBA格式，因为返回的也是RGBA格式的。网上有很多的文章讨论如何转换：一种方式是使用一个自定义的函数进行编码转换(可以搜索到这个函数)，另一个种方式是使用OpenCV中的Mat和cvtColor函数进行转换，接着调用图像处理函数，处理完成之后，将处理的结果保存在一个整形数组中(实际上就是RGB或者RGBA格式的图像数据)，最后调用Bitmap的方法将其转换成bitmap返回。这种方法速度也比较慢，但是比第一种方案要快了不少，具体实现过程可以看下面的推荐书籍。</p>
 
 <p>③使用OpenCV的摄像头：JavaCamera或者NativeCamera都行，好处是它进行了很多的封装，可以直接将预览图像的Mat结构传递给Native层，这种传递是使用Mat的内存地址(long型)，Native层只要根据这个地址将其封装成Mat就可以进行处理了，另外，它的回调函数的返回值也是Mat，非常方便！这种方式速度较快。详细过程可以查看OpenCV-Android sdk的samples项目中的Tutorial2-MixedProcessing。</p>
+
+<ul>
+<li>关于摄像头预览界面倒置的问题：很多时候(一般是将应用设置为<code>portrait</code>模式之后)在调用了OpenCV的Camera之后，出现预览内容倒置了90度的现象，原因是OpenCV的Camera默认情况下是以<code>landscape</code>模式运行的，一个可行但是不是很好的解决方案是修改OpenCV库中的<code>org.opencv.camera.CameraBridgeViewBase</code>类中的<code>deliverandDraw</code>方法，<a href="http://stackoverflow.com/questions/19190921/always-open-in-landscape-mode-orientation-for-front-camera-in-opencv-javacv">问题参考链接</a></li>
+</ul>
+
+
+<p>```
+protected void deliverAndDrawFrame(CvCameraViewFrame frame) {</p>
+
+<pre><code>    Mat modified;
+
+    if (mListener != null) {
+        modified = mListener.onCameraFrame(frame);
+    } else {
+        modified = frame.rgba();
+    }
+
+    boolean bmpValid = true;
+    if (modified != null) {
+        try {
+            Utils.matToBitmap(modified, mCacheBitmap);
+        } catch(Exception e) {
+            Log.e(TAG, "Mat type: " + modified);
+            Log.e(TAG, "Bitmap type: " + mCacheBitmap.getWidth() + "*" + mCacheBitmap.getHeight());
+            Log.e(TAG, "Utils.matToBitmap() throws an exception: " + e.getMessage());
+            bmpValid = false;
+        }
+    }
+
+    if (bmpValid &amp;&amp; mCacheBitmap != null) {
+        Canvas canvas = getHolder().lockCanvas();
+        if (canvas != null) {
+</code></pre>
+
+<p>//                canvas.drawColor(0, android.graphics.PorterDuff.Mode.CLEAR);
+//                Log.d(TAG, &ldquo;mStretch value: &rdquo; + mScale);
+//
+//                if (mScale != 0) {
+//                    canvas.drawBitmap(mCacheBitmap, new Rect(0,0,mCacheBitmap.getWidth(), mCacheBitmap.getHeight()),
+//                         new Rect((int)((canvas.getWidth() &ndash; mScale<em>mCacheBitmap.getWidth()) / 2),
+//                         (int)((canvas.getHeight() &ndash; mScale</em>mCacheBitmap.getHeight()) / 2),
+//                         (int)((canvas.getWidth() &ndash; mScale<em>mCacheBitmap.getWidth()) / 2 + mScale</em>mCacheBitmap.getWidth()),
+//                         (int)((canvas.getHeight() &ndash; mScale<em>mCacheBitmap.getHeight()) / 2 + mScale</em>mCacheBitmap.getHeight())), null);
+//                } else {
+//                     canvas.drawBitmap(mCacheBitmap, new Rect(0,0,mCacheBitmap.getWidth(), mCacheBitmap.getHeight()),
+//                         new Rect((canvas.getWidth() &ndash; mCacheBitmap.getWidth()) / 2,
+//                         (canvas.getHeight() &ndash; mCacheBitmap.getHeight()) / 2,
+//                         (canvas.getWidth() &ndash; mCacheBitmap.getWidth()) / 2 + mCacheBitmap.getWidth(),
+//                         (canvas.getHeight() &ndash; mCacheBitmap.getHeight()) / 2 + mCacheBitmap.getHeight()), null);
+//                }</p>
+
+<pre><code>            //ABC : Fixed for image rotation
+            //TODO Why portrait is not opening in fulls creen
+            Matrix matrix = new Matrix();
+            int height_Canvas = canvas.getHeight();
+            int width_Canvas = canvas.getWidth();
+
+            int width = mCacheBitmap.getWidth();
+            int height = mCacheBitmap.getHeight();
+
+            float f1 = (width_Canvas - width) / 2;
+            float f2 = (height_Canvas - height) / 2;
+            matrix.preTranslate(f1, f2);
+            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+            matrix.postRotate(270f,(width_Canvas) / 2,(height_Canvas) / 2);
+            canvas.drawBitmap(mCacheBitmap, matrix, new Paint());
+
+
+
+            if (mFpsMeter != null) {
+                mFpsMeter.measure();
+                mFpsMeter.draw(canvas, 20, 30);
+            }
+            getHolder().unlockCanvasAndPost(canvas);
+        }
+    }
+}
+</code></pre>
+
+<p>```</p>
 
 <h4>3.OpenCV 和 OpenCV NDK 整合开发的一般途径</h4>
 
