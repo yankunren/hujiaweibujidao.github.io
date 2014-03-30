@@ -4,7 +4,7 @@
   <title><![CDATA[Category: android | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-03-30T16:38:17+08:00</updated>
+  <updated>2014-03-30T17:07:50+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -531,6 +531,147 @@ new Thread(new Runnable() {</p>
 <p>⑥<a href="http://bytefish.de/blog/opencv_facerecognizer_documentation/">关于OpenCV中的人脸识别算法 &ndash; OpenCV FaceRecognizer documentation</a></p>
 
 <p>该博客作者是OpenCV2.4之后内置的人脸识别模块的原作者，他在他的博客中详细介绍了FaceRecognizer的API以及他使用的人脸识别算法，算法讲解部分可以参考<a href="http://bytefish.de/blog/face_recognition_with_opencv2/">Face Recognition with Python/GNU Octave/Matlab</a>。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[移动开发资料汇集]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2013/12/14/yi-dong-kai-fa-zi-liao-hui-ji/"/>
+    <updated>2013-12-14T22:59:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2013/12/14/yi-dong-kai-fa-zi-liao-hui-ji</id>
+    <content type="html"><![CDATA[<h2>移动开发资料汇集</h2>
+
+<hr />
+
+<h3>Android部分</h3>
+
+<h5>(1)网站类</h5>
+
+<p>1.Android开发者：<a href="http://developer.android.com/index.html">http://developer.android.com/index.html</a></p>
+
+<p>Google官方Android开发者网站，发布关于Android的最新信息，有最权威的<a href="http://developer.android.com/training/index.html">开发教程</a>和<a href="http://developer.android.com/guide/components/index.html">API手册</a>以及<a href="http://developer.android.com/design/index.html">应用设计教程</a>，还提供最新最强大的<a href="http://developer.android.com/tools/index.html">开发工具以及SDK</a>下载！</p>
+
+<p>2.开源中国 Android开发专区：<a href="http://www.oschina.net/android">http://www.oschina.net/android</a></p>
+
+<p>这里有关于Android开发的各种知识，小到环境搭建，大到细节实现，很多开发者在这里分享了自己的开发经验，所以如果在某个方面遇到了问题，没准可以在这里找到答案。</p>
+
+<p>3.eoe移动开发者社区：<a href="http://android.eoe.cn/">http://android.eoe.cn/</a></p>
+
+<p>国内最好的android开发社区，这里有类似开源中国中的<a href="http://www.eoe.cn/wiki/android.html">各类开发教程</a>，还有<a href="http://www.eoeandroid.com/portal.php?mod=topic&amp;topicid=7">eoe Android特刊</a>，不过后者已经很久没有更新了，社区比较好的是如果遇到什么实在解决不了的问题不妨试试在论坛中发帖询问下高手。</p>
+
+<p>4.其他资源</p>
+
+<p><a href="http://stackoverflow.com/">StackOverflow</a> 嘿嘿，没有它解决不了的问题！</p>
+
+<p><a href="http://blog.daimajia.com/?page_id=60">Android 开源资料库</a>  开源资料不少，大部分都在Github上</p>
+
+<h5>(2)书籍类</h5>
+
+<p>1.<a href="http://book.douban.com/subject/6515839/">《疯狂Android讲义》</a></p>
+
+<p>作者李刚，国内的Java领域大牛之一，著有多本疯狂系列的书籍，包括<a href="http://book.douban.com/subject/3246499/">《疯狂Java讲义》</a>、<a href="http://book.douban.com/subject/3333726/">《轻量级Java EE企业应用实战(第3版):Struts 2＋Spring 3＋Hibernate整合开发》</a>等等。
+《疯狂Android讲义》这本书很厚，基本上覆盖了Android开发的所有内容，作者凭借丰富的教学经验对Android开发进行讲解，对于初学者可能遇到的各种问题和各种疑惑都意义进行了分析，内容足够深入，另外，此书还有几个实例项目进行实践，可以说，学习Android开发有这一本书足够了！如果感觉Java基础不足了，推荐看他的另一本Java巨著<a href="http://book.douban.com/subject/6515839/">《疯狂Java讲义》</a>，同样，学习Java只要看这本书就足够了！当然，最好还是看下<a href="http://book.douban.com/subject/2130190/">《Java编程思想》</a></p>
+
+<p>2.其他书籍</p>
+
+<p>[入门篇]人民邮电出版社：
+<a href="http://book.douban.com/subject/3770255/">《Google Android开发入门与实战》</a>
+<a href="http://book.douban.com/subject/3788013/">《Google Android SDK开发范例大全》</a></p>
+
+<p>两本都是入门级别的书籍，而且两本时间有点早了，如果有新版本建议看新版本</p>
+
+<p>[提高篇]电子工业出版社：
+<a href="http://book.douban.com/subject/4251755/">《Android系统原理及开发要点详解》</a>
+<a href="http://book.douban.com/subject/5907455/">《Android系统级深入开发》</a></p>
+
+<p>两本书是同样两位作者写的，写的时间比较早了，内容不是很新鲜，但是还是很有参考价值，因为内容涉及到系统原理，所以并不简单，适合想了解系统原理，但是又不想精读系统原理</p>
+
+<p>[深入篇]机械工业出版社：<a href="http://book.douban.com/subject/6802440/">《深入理解Android(卷一)》</a><a href="http://book.douban.com/subject/11542973/">《深入理解Android(卷二)》</a></p>
+
+<p>作者邓凡平，深入理解Android姊妹篇，经典中的经典，对于深入理解Android很有帮助，两本书以源码分析的方式介绍Android了各个子系统，灰常深入，适合想精通系统原理 [这两本书我还没看]</p>
+
+<p>如果真的想要深入Android系统原理的话不妨看下<a href="http://blog.csdn.net/luoshengyang/article/details/8923485">老罗是怎么做到的</a>，嘿嘿</p>
+
+<p>其他的好书：<a href="http://book.douban.com/subject/20556210/">《Android软件安全与逆向分析》</a>
+<a href="http://book.douban.com/subject/6047744/">《Android技术内幕》</a> 等等</p>
+
+<p><a href="http://www.amazon.cn/s/ref=nb_sb_noss?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&amp;url=search-alias%3Dstripbooks&amp;field-keywords=%E5%9B%BE%E7%81%B5%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%9B%E4%B9%A6%E2%80%A2%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97+android&amp;rh=n%3A658390051%2Ck%3A%E5%9B%BE%E7%81%B5%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%9B%E4%B9%A6%E2%80%A2%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97+android">图灵程序设计丛书•移动开发系列 Android</a></p>
+
+<p>图灵系列的书籍都是灰常的经典，一本本都是好书，但是一个人时间精力有限，难以都看完，再加上这些书籍中的很多内容是重叠了的，所以要根据自己实际的开发需求来读相应的书籍</p>
+
+<p>如果是进行Android NDK开发的话，推荐两本书籍：</p>
+
+<p><a href="http://book.douban.com/subject/20285069/">《Pro Android C++ with the NDK》</a> <a href="http://book.douban.com/subject/20469441/">《Mastering OpenCV with Practical Computer Vision Projects》</a></p>
+
+<h4>Android学习总结：先专注于某本入门书籍，细读它，理解大部分内容，如果原书有源码，建议实际运行看下结果，如果原书有项目实践，建议跟着作者的步骤一步步完成。另外，读书建议先粗略读，然后细读，这样前面不懂的小知识马上就解决了，不用花时间纠缠于某个小问题，要提高读书效率。读完了入门级书之后建议自己找个项目做做，可以是小游戏，也可以是小应用，然后开始看提高篇或者深入篇的书籍。</h4>
+
+<hr />
+
+<h3>iOS部分</h3>
+
+<h5>(1)网站类</h5>
+
+<p>1.Apple iOS Dev Center：<a href="https://developer.apple.com/devcenter/ios/index.actions">https://developer.apple.com/devcenter/ios/index.action</a></p>
+
+<p>苹果官方iOS开发网址，最新的资讯、教程、开发工具</p>
+
+<p>2.开源中国 iOS专区：<a href="http://www.oschina.net/ios/home">http://www.oschina.net/ios/home</a></p>
+
+<p>丰富的开发教程和开发资源，遇到什么问题可以在这里找找教程</p>
+
+<p>3.Cocoa China：<a href="http://www.cocoachina.com/">http://www.cocoachina.com/</a></p>
+
+<p>中国最大的iOS开发网站，这里真的是什么都有哟，亲！</p>
+
+<p>4.其他资源</p>
+
+<p><a href="http://code4app.com/">找代码？看这里->Code4App</a></p>
+
+<p><a href="http://ui4app.com/">找资源？看这里->UI4App</a></p>
+
+<h5>(2)书籍类</h5>
+
+<p><a href="http://book.douban.com/subject/4813265/">《Head First iPhone and iPad Development》</a></p>
+
+<p>iOS开发不仅开发的成本很高，入门的门槛也比较高，如果喜欢Head First系列书籍的话不妨先看下这本</p>
+
+<p><a href="http://book.douban.com/subject/19953782/">《iOS 6 Programming Cookbook》</a></p>
+
+<p>这本书介绍的是iOS6编程，虽然现在最新的是iOS7了，但是变化不大，大多数iOS开发书籍是介绍iOS4或者iOS5开发，但是不同版本差异还是比较大，所以推荐看iOS6及以上版本的iOS编程的书籍</p>
+
+<p><a href="http://book.douban.com/subject/24846574/">《iOS开发指南：从零基础到App Store上架》</a></p>
+
+<p>今年出的新书，内容非常详细，作者是关东升，国内知名的iOS开发专家，可以搜到他的新浪微博，他专注于iOS开发，录制过一些iOS开发视频  [这本书我没读过，还没看到过]</p>
+
+<p><a href="http://book.douban.com/subject/25767591/">《疯狂iOS 讲义（上） Objective-C 2.0与iPhone/iPad应用开发基础》</a></p>
+
+<p>李刚老师估计闲不下来，嘿嘿，这是他的新书，貌似要出版了，自然要赞！</p>
+
+<p>其他书籍： [我没怎么读过]</p>
+
+<p><a href="http://book.douban.com/subject_search?search_text=iOS&amp;cat=1001">豆瓣书籍：iOS开发</a></p>
+
+<h4>iOS学习总结：对于iOS开发我还没有完整入门，只是看了英文原汁原味的《iOS 6 Programming Cookbook》，这本书还是很不错的，分不同的开发内容进行讲解，但对于入门还是不够的，我自己读的时候写了些<a href="http://hujiaweiyinger.diandian.com/post/2013-06-04/ios6_list">读书笔记</a>，不嫌难看不妨参考下，嘿嘿。建议先搞懂Objective-C，然后再开始学习iOS开发，不要直接就学习iOS开发，没打好地基是建不了摩天大厦的！另外，开发成本略高，需要苹果机，装黑苹果麻烦，速度还慢，量力而行 O(∩_∩)O</h4>
+
+<hr />
+
+<h3>Windows Phone部分</h3>
+
+<p>需要熟悉微软的.NET平台，语言主要是C#，目前Windows Phone资料不算多，图书馆里也就几本书籍，很容易找到那些常见的资源，我没有研究过，在此就不详细提了</p>
+
+<p><a href="http://developer.windowsphone.com/zh-cn">Microsoft Windows Phone Developer 开发者网站</a></p>
+
+<p><a href="http://book.douban.com/subject_search?search_text=Windows+Phone&amp;cat=1001">豆瓣书籍：Windows Phone开发</a></p>
+
+<p>OK！差不多就这些了，有什么问题请<a href="mailto:hujiawei090807@gmail.com">通过邮件联系我</a>，谢谢！</p>
+
+<p>[附上两周的Android入门课件和演示应用魔力8号球的源码]</p>
+
+<p><a href="/files/android01.pdf">Android入门课程(上)</a></p>
+
+<p><a href="/files/android02.pdf">Android入门课程(下)</a></p>
+
+<p><a href="/files/magic8.zip">魔力8号球源码</a></p>
 ]]></content>
   </entry>
   
@@ -1250,158 +1391,6 @@ return rtn;
 
 
 <p>哦了，还不痛快? 请看下节<a href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3/">OpenCV 在 Android NDK 开发中的应用</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[android ndk and opencv developement]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-developement/"/>
-    <updated>2013-11-18T14:41:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-developement</id>
-    <content type="html"><![CDATA[<h3>Android NDK 和 OpenCV 整合开发总结(1)</h3>
-
-<p>请无视我把<code>development</code>写成了<code>developement</code>哈，亲！<br/>
-在Samsung呆了段时间，还是学了不少东西的，主要做的任务是做<a href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>开发，也涉及到了<a href="http://opencv.org/">OpenCV</a>的内容，正好自己最近在开发XFace，这些知识都用得上，所以，想写几篇文章总结下这些知识。该系列内容均为原创，摘录的部分我都会引用提示，尊重版权嘛，嘿嘿，我保证这里有不少内容是搜索不到的独家秘笈哟！很多都是我的开发经验，嘿嘿<br/>
-该系列主要包括三大部分，分为下面三节来介绍，本节主要介绍第一部分</p>
-
-<ul>
-<li>Android NDK 和 OpenCV 整合开发的环境搭建以及人脸检测项目的运行测试</li>
-<li><a href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/">Android NDK 的核心内容和开发总结</a></li>
-<li><a href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3/">OpenCV 在 Android NDK 开发中的应用</a></li>
-</ul>
-
-
-<p>[本文假设你是安装配置好了Java和Android SDK开发环境的，如果没有的话，可以看<a href="http://hujiaweiyinger.diandian.com/post/2013-10-30/setup_android_ndk_environment_and_solve_some_problems">我以前在点点博客写的这篇文章</a>，开发工具建议使用<a href="http://developer.android.com/sdk/installing/bundle.html">ADT</a>，它更加方便，包含了Android SDK 和 安装了 ADT Plugin 的 Eclipse，何乐而不为呢?]</p>
-
-<h4>1. 下载Android NDK，解压即可</h4>
-
-<p>下载地址： <a href="https://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a> <br/>
-<a href="http://download.csdn.net/download/xiao87651234/3991166">如果不能下载(公司内部可能就不让访问或者访问很慢)，可以查看这位作者的备用下载地址</a></p>
-
-<h4>2. 下载安装OpenCV[2.6版本] (可选步骤)</h4>
-
-<p>下载地址：<a href="http://opencv.org/">OpenCV首页</a>
-<a href="http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation">Linux平台的安装教程</a>  <a href="http://tilomitra.com/opencv-on-mac-osx/">Mac平台的安装教程</a></p>
-
-<p>(1) 首先安装需要安装的工具和依赖包[详见前面的Linux安装教程]，Mac平台基本上只要安装CMake即可 <br/>
-(2) 使用CMake编译opencv源码，然后通过make安装opencv[完成之后在<code>/usr/local/include</code>目录下便有了<code>opencv</code>和<code>opencv2</code>两个目录，在<code>/usr/local/lib</code>目录下有很多的<code>opencv</code>相关的动态库，例如<code>libopencv_core.dylib</code>等等]</p>
-
-<p><code>
-cd &lt;path-to-opencv-source&gt;
-mkdir release
-cd release
-cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..
-make
-sudo make install
-</code></p>
-
-<h4>3. 下载opencv_android_sdk 2.4.4版本，导入目录sdk/java作为Library Project (这个是OpenCV for Android)</h4>
-
-<p>下载地址：<a href="http://sourceforge.net/projects/opencvlibrary/files/opencv-android/">opencv-android on sourceforge</a></p>
-
-<p>[2.4.2相对比较旧了，有些新特性不支持，比如人脸识别(但是有人脸检测)，不推荐下载这个；2.4.6相对比较新，但是可能导入的Library Project一直报错，所以如果不能解决就考虑使用2.4.4，只要Library Project导入进来没问题就行]</p>
-
-<p><a href="http://docs.opencv.org/doc/tutorials/introduction/android_binary_package/O4A_SDK.html#general-info">关于opencv for android的目录结构的详细解释</a></p>
-
-<h4>4. 环境配置NDK和OpenCV环境</h4>
-
-<ul>
-<li>安装Android SDK(略过)和NDK，配置到系统PATH中</li>
-</ul>
-
-
-<p>[推荐配置，方便以后在终端执行adb和ndk-build等命令]</p>
-
-<p><code>
-export ANDROID_SDK_ROOT=/Users/hujiawei/Android/android_sdk
-export PATH=${PATH}:${ANDROID_SDK_ROOT}/platform-tools:${ANDROID_SDK_ROOT}/tools
-export ANDROID_NDK_ROOT=/Users/hujiawei/Android/android_ndk
-export PATH=${PATH}:${ANDROID_NDK_ROOT}
-</code></p>
-
-<ul>
-<li>使用<code>ndk-build -v</code>测试配置</li>
-</ul>
-
-
-<p><code>
-GNU Make 3.81
-Copyright (C) 2006  Free Software Foundation, Inc.
-This is free software; see the source for copying conditions.
-There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE.
-This program built for i386-apple-darwin10.8.0
-</code></p>
-
-<p>如果是在Windows下，并且安装了Cygwin的话，输出就略有不同，它使用的不是系统内置的GNU Make</p>
-
-<p><code>
-$ ndk-build -v
-GNU Make 3.82.90
-Built for i686-pc-cygwin
-Copyright (C) 2010  Free Software Foundation, Inc.
-License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
-This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.
-</code></p>
-
-<ul>
-<li>在Eclipse(Android Development Tool)的设置中，在 C/C++ &ndash;> Build &ndash;> Environment 中添加下面两个配置 [添加这两项配置是为了后面进行各项关于路径配置的方便]</li>
-</ul>
-
-
-<p><code>
-NDKROOT = /Users/hujiawei/Android/android_ndk
-OPENCVROOT = /Users/hujiawei/Android/opencv_sdk
-</code></p>
-
-<h4>5. 运行OpenCV for Android中的Sample项目FaceDetection</h4>
-
-<ul>
-<li><p>导入OpenCV for Android中的<code>Library Project</code> &ndash; <code>OpenCV Library - 2.4.4</code></p></li>
-<li><p>修改<code>Library Project</code>，改为前面导入到workspace中的<code>Library Project</code></p></li>
-</ul>
-
-
-<p>[原有的配置默认该项目和<code>Library Project</code>是在同一个目录下，所以如果你以前接触过的话，会发现很多文章都是告诉你要把<code>Library Project</code>拷贝到和当前项目同一个目录下，其实是完全没有必要的！]</p>
-
-<ul>
-<li>修改<code>C/C++ Build</code>，将<code>Build Command</code>改成： <code>${NDKROOT}/ndk-build</code></li>
-</ul>
-
-
-<p>[Windows平台则不要删除末尾的<code>.cmd</code>，Linux和Mac平台则需要删掉<code>.cmd</code>]</p>
-
-<ul>
-<li>修改<code>C/C++ General</code>，将<code>Paths and Symbols</code>中的<code>GNU C</code>和<code>GNU C++</code>配置的最后一个路径修改成 <code>${OPENCVROOT}/sdk/native/jni/include</code> (这个路径保存的是opencv的native code头文件)</li>
-</ul>
-
-
-<p>[建议将这个配置导出到文件中，方便以后做类似项目时可以快速进行配置]</p>
-
-<ul>
-<li>修改jni目录下的<code>Android.mk</code>，将<code>include OpenCV.mk</code>这行改成：<code>include${OPENCVROOT}/sdk/native/jni/OpenCV.mk</code></li>
-</ul>
-
-
-<p>[原有的配置是默认OpenCV的sdk文件夹和包含项目根目录的文件夹是同一个目录下]</p>
-
-<ul>
-<li><p>经过上面的配置之后，FaceDetection项目便没有问题了，打开jni目录下的cpp和h文件也不会报错了，当然，手机必须安装OpenCV Manager才能成功运行FaceDetection</p></li>
-<li><p>运行人眼检测的示例程序</p></li>
-</ul>
-
-
-<p>项目来源：<a href="http://romanhosek.cz/android-eye-detection-and-tracking-with-opencv/">http://romanhosek.cz/android-eye-detection-and-tracking-with-opencv/</a><br/>
-该作者根据原有的人脸检测做了一个人眼检测，博文最后附有<a href="http://romanhosek.cz/?wpdmact=process&amp;did=MS5ob3RsaW5r">下载地址</a>，我的<a href="https://github.com/yinger090807/XFace">Github</a>上已经有了一份备份，配置方式和Face Detection一样，至于人脸检测和人眼检测的算法我以后会有相关文章进行介绍，暂且期待下吧，嘿嘿<br/>
-[如果配置完了之后提示一个<code>app_platform</code>的警告的话，可以在<code>Application.mk</code>文件中添加 <code>APP_PLATFORM := android-8</code>]<br/>
-仔细理解上面的配置和操作，如果还有啥问题或者不清楚的可以查看<a href="http://docs.opencv.org/doc/tutorials/introduction/android_binary_package/O4A_SDK.html">OpenCV官方这篇入门文档:Manual OpenCV4Android SDK setup</a></p>
-
-<p>两个项目运行结果：[帮主，对不住啦，谁叫您长得这么帅呢！我的脸识别不了，只能用您老的啦！] <br/>
-<img class="left" src="/images/201311/face_detection.png" width="350" height="500" title="face detection" >
-<img class="right" src="/images/201311/eye_detection.png" width="350" height="500" title="eye detection" ></p>
-
-<p>OK！本节结束！如果觉得好，请看下节<a href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/">Android NDK 的核心内容和开发总结</a>！</p>
 ]]></content>
   </entry>
   
