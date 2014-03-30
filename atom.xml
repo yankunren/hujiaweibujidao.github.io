@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-03-30T11:39:01+08:00</updated>
+  <updated>2014-03-30T16:34:02+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,210 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Matlab Image Segmentation]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/03/30/matlab-image-segmentation/"/>
+    <updated>2014-03-30T16:13:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/03/30/matlab-image-segmentation</id>
+    <content type="html"><![CDATA[<ol>
+<li>基于迭代的自动阈值图像分割方法</li>
+</ol>
+
+
+<p>参考文献: <a href="http://hujiaweibujidao.github.io/files/image_segmentation.pdf">基于迭代(自动阈值)算法的医学图像增强方法</a></p>
+
+<p>该文献实现了全局和局部的图像分割代码，使用的都是迭代算法，对比下面的结果可以看出，在灰度差异特别大的情况下，局部阈值分割要比全局阈值分割表现更好。</p>
+
+<p>1.1 全局阈值分割程序</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>original_image=imread('test1.png');
+</span><span class='line'>gray_image=rgb2gray(original_image);
+</span><span class='line'>gray_image=double(gray_image);
+</span><span class='line'>t=mean(gray_image(:));
+</span><span class='line'>is_done=false;
+</span><span class='line'>count=0;%迭代次数
+</span><span class='line'>block=gray_image(1:end,1:end);%不分块
+</span><span class='line'>while ~is_done
+</span><span class='line'>    r1=find(gray_image&lt;=t);
+</span><span class='line'>    r2=find(gray_image&gt;t);
+</span><span class='line'>    temp1=mean(block(r1));
+</span><span class='line'>    if isnan(temp1);
+</span><span class='line'>        temp1=0;
+</span><span class='line'>    end
+</span><span class='line'>    temp2=mean(block(r2));
+</span><span class='line'>    if isnan(temp2)
+</span><span class='line'>        temp2=0;
+</span><span class='line'>    end
+</span><span class='line'>    t_new=(temp1+temp2)/2;
+</span><span class='line'>    is_done=abs(t_new-t)&lt;1;%差异阈值是1
+</span><span class='line'>    t=t_new;
+</span><span class='line'>    count=count+1;
+</span><span class='line'>    if count&gt;=1000
+</span><span class='line'>        Error='Error:Cannot find the ideal threshold.'
+</span><span class='line'>        return
+</span><span class='line'>    end
+</span><span class='line'>end
+</span><span class='line'>[m,n]=size(gray_image);
+</span><span class='line'>result=zeros(m,n)+255;
+</span><span class='line'>result(r1)=0;
+</span><span class='line'>% resule(r2)=255;
+</span><span class='line'>result=uint8(result);
+</span><span class='line'>figure
+</span><span class='line'>imshow(result);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>1.2 局部阈值分割程序</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>original_image=imread('test1.png');
+</span><span class='line'>gray_image=rgb2gray(original_image);
+</span><span class='line'>gray_image=double(gray_image);
+</span><span class='line'>[m,n]=size(gray_image);
+</span><span class='line'>result=zeros(m,n);
+</span><span class='line'>block_size=70;%分块大小
+</span><span class='line'>for i=1:block_size:m
+</span><span class='line'>    for j=1:block_size:n
+</span><span class='line'>        if ((i+block_size)&gt;m)&&((j+block_size)&gt;n)
+</span><span class='line'>            block=gray_image(i:end,j:end);
+</span><span class='line'>        elseif ((i+block_size)&gt;m)&&((j+block_size)&lt;=n)
+</span><span class='line'>            block=gray_image(i:end,j:j+block_size-1);
+</span><span class='line'>        elseif ((i+block_size)&lt;=m)&&((j+block_size)&gt;n)
+</span><span class='line'>            block=gray_image(i:i+block_size-1,j:end);
+</span><span class='line'>        else
+</span><span class='line'>            block=gray_image(i:i+block_size-1,j:j+block_size-1);
+</span><span class='line'>        end
+</span><span class='line'>        t=mean(block(:)); t_org=t; is_done=false; count=0;
+</span><span class='line'>        while ~is_done
+</span><span class='line'>            r1=find(block&lt;=t); r2=find(block&gt;t); temp1=mean(block(r1));
+</span><span class='line'>            if isnan(temp1);
+</span><span class='line'>                temp1=0;
+</span><span class='line'>            end
+</span><span class='line'>            temp2=mean(block(r2));
+</span><span class='line'>            if isnan(temp2)
+</span><span class='line'>                temp2=0;
+</span><span class='line'>            end
+</span><span class='line'>            t_new=(temp1+temp2)/2; is_done=abs(t_new-t)&lt;1; t=t_new;
+</span><span class='line'>            count=count+1;
+</span><span class='line'>            if count&gt;=1000
+</span><span class='line'>                Error='Error:Cannot find the ideal threshold.'
+</span><span class='line'>                return
+</span><span class='line'>            end
+</span><span class='line'>        end
+</span><span class='line'>        block(r1)=0;
+</span><span class='line'>        block(r2)=255;
+</span><span class='line'>        if ((i+block_size)&gt;m)&&((j+block_size)&gt;n)
+</span><span class='line'>            result(i:end,j:end)=block;
+</span><span class='line'>        elseif ((i+block_size)&gt;m)&&((j+block_size)&lt;=n)
+</span><span class='line'>            result(i:end,j:j+block_size-1)=block;
+</span><span class='line'>        elseif ((i+block_size)&lt;=m)&&((j+block_size)&gt;n)
+</span><span class='line'>            result(i:i+block_size-1,j:end)=block;
+</span><span class='line'>        else
+</span><span class='line'>            result(i:i+block_size-1,j:j+block_size-1)=block;
+</span><span class='line'>        end
+</span><span class='line'>    end
+</span><span class='line'>end
+</span><span class='line'>resule=uint8(result);
+</span><span class='line'>figure
+</span><span class='line'>imshow(result);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>对比结果：
+<img class="left" src="http://hujiaweibujidao.github.io/images/201403/whole.png"> <img class="right" src="http://hujiaweibujidao.github.io/images/201403/partial.png"></p>
+
+<ol>
+<li></li>
+</ol>
+
+
+<p class='post-footer'>
+                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2014/03/30/matlab-image-segmentation/'>http://hujiaweibujidao.github.io/blog/2014/03/30/matlab-image-segmentation/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[移动开发资料汇集]]></title>
