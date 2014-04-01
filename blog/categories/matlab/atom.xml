@@ -4,7 +4,7 @@
   <title><![CDATA[Category: matlab | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/matlab/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-03-30T17:07:50+08:00</updated>
+  <updated>2014-04-01T09:13:52+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -22,7 +22,7 @@
 
 <p>参考文献: <a href="/files/image_segmentation.pdf">基于迭代(自动阈值)算法的医学图像增强方法</a></p>
 
-<p>该文献实现了全局和局部的图像分割代码，使用的都是迭代算法，对比下面的结果可以看出，在灰度差异特别大的情况下，局部阈值分割要比全局阈值分割表现更好。[我对源码略有修改]</p>
+<p>该文献实现了全局和局部的图像分割代码，使用的都是迭代算法，对比下面的结果可以看出，在灰度差异特别大的图像中，局部阈值分割要比全局阈值分割表现更好。[注:我对源码略有修改]</p>
 
 <p>1.1 全局阈值分割程序</p>
 
@@ -126,9 +126,40 @@ imshow(result);
 
 <p>对比结果：</p>
 
-<p><img class="left" src="/images/201403/whole.png"> <img class="right" src="/images/201403/partial.png"></p>
+<p><img src="/images/201403/whole.png" width="320" height="210"> <img src="/images/201403/partial.png" width="320" height="210"></p>
 
-<p>2.OSTU算法</p>
+<p>2.基于OSTU算法的自动阈值图像分割</p>
+
+<p>[这块我还没有细究&hellip;] Matlab内置的<code>graythresh</code>使用的便是OSTU算法，使得白色像素和黑色像素的类间方差最大。</p>
+
+<p>因为上面测试图像的亮度存在明显的水平差异，所以我写了一个将图像沿水平方向分成几部分分别进行OSTU算法，效果明显又比上面两种方式要好些。</p>
+
+<p>```
+function [ result ] = partialostu( image,part,isrgb )
+%PARTIALOSTU partial image ostu
+if isrgb</p>
+
+<pre><code>image=rgb2gray(image);
+</code></pre>
+
+<p>end
+cols=size(image,2);
+result=zeros(size(image));
+for i=1:part</p>
+
+<pre><code>fstart=floor((i-1)*cols/part)+1;
+fend=floor(i*cols/part);
+f=image(:,fstart:fend);
+t=graythresh(f);
+f=im2bw(f,t);
+result(:,fstart:fend)=f;
+</code></pre>
+
+<p>end
+end
+```</p>
+
+<p><img src="/images/201403/postu.png"></p>
 ]]></content>
   </entry>
   
