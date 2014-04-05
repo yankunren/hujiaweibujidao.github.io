@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "android ndk and opencv developement"
+title: "android ndk and opencv development"
 date: 2013-11-18 14:41
 comments: true
 categories: mobiledev android opencv
@@ -8,7 +8,6 @@ categories: mobiledev android opencv
 
 ### Android NDK 和 OpenCV 整合开发总结(1)
 
-请无视我把`development`写成了`developement`哈，亲！  
 在Samsung呆了段时间，还是学了不少东西的，主要做的任务是做[Android NDK](http://developer.android.com/tools/sdk/ndk/index.html)开发，也涉及到了[OpenCV](http://opencv.org/)的内容，正好自己最近在开发XFace，这些知识都用得上，所以，想写几篇文章总结下这些知识。该系列内容均为原创，摘录的部分我都会引用提示，尊重版权嘛，嘿嘿，我保证这里有不少内容是搜索不到的独家秘笈哟！很多都是我的开发经验，嘿嘿  
 该系列主要包括三大部分，分为下面三节来介绍，本节主要介绍第一部分
 
