@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-08T16:09:13+08:00</updated>
+  <updated>2014-04-08T20:03:55+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -283,6 +283,46 @@
 </span><span class='line'>cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/opencv .. 
 </span><span class='line'>make
 </span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但是，还有一个问题，无论在Xcode还是Eclipse中创建OpenCV项目都一样会报一个错，如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dyld: Library not loaded: lib/libopencv_core.2.4.dylib
+</span><span class='line'>  Referenced from: /Users/hujiawei/Library/Developer/Xcode/DerivedData/PRWorks-gmeabxnfaunwiqbrvvjpxjlfkymu/Build/Products/Debug/PRWorks
+</span><span class='line'>  Reason: image not found</span></code></pre></td></tr></table></div></figure>
+
+
+<p>即使你的路径都没错也还是不能加载到，不知道何原因，但是如果你直接将编译之后的所有dylib复制到<code>/usr/local/lib</code>中即可，不能是该目录下的某个文件夹！复制了之后，自然<code>brew doctor</code>会对此进行警告，无视吧。</p>
+
+<p>一个常用来测试OpenCV环境的项目代码如下，需要opencv_core和opencv_highgui两个库</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;opencv2/opencv.hpp&gt;
+</span><span class='line'>using namespace cv;
+</span><span class='line'>int main(int argc, char** argv) {
+</span><span class='line'>  Mat image;
+</span><span class='line'>  image = imread(
+</span><span class='line'>          "/Users/hujiawei/Pictures/webimages/clone-your-octopress-001.png",
+</span><span class='line'>          1);
+</span><span class='line'>  namedWindow("Display Image", WINDOW_AUTOSIZE);
+</span><span class='line'>  imshow("Display Image", image);
+</span><span class='line'>  waitKey(0);
+</span><span class='line'>  return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
 <p>7.最后执行<code>brew linkapps</code>会将brew安装的python中的app链接到Applications中</p>
