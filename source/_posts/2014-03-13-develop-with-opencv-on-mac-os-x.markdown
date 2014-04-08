@@ -33,6 +33,8 @@ sudo make install
 ```
 [完成之后在`/usr/local/include`目录下便有了`opencv`和`opencv2`两个目录，在`/usr/local/lib`目录下有很多的`opencv`相关的动态库，例如`libopencv_core.dylib`等等]
 
+[注，如果不需要了，想要卸载 OpenCV的话，可以回到`release`目录，执行`sudo make uninstall`，然后手动删除一些`/usr/local`下与OpenCV有关的目录]
+
 其他参考内容：[Building OpenCV from Source Using CMake, Using the Command Line](http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation)
 
 
