@@ -1,0 +1,663 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Setting up environments on new Mac - Hujiawei Bujidao</title>
+  <meta name="author" content="hujiawei">
+
+  
+  <meta name="description" content="1.安装Java 7u51 ［直接在官网下载dmg点击安装即可] JAVA_HOME=/Library/Java/JavaVirtualMachines/1.7.0_51.jdk/Contents/Home 为了保证Eclipse和Matlab等需要JRE 6的应用程序能够运行，还需要 ［1.7. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/08/setting-up-environments-on-new-mac">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+	<header role="banner">
+		<hgroup style="text-align: center">
+	<h1><a href="/"><img src="/images/conan-paper-small.png"  />Hujiawei Bujidao<img src="/images/conan-hat-small.png"  /></a></h1>
+	
+	<h2>I will always be your savior! A secret makes a man man!</h2>
+	
+</hgroup>
+
+
+	</header>
+	<nav role="navigation">
+		<ul class="subscription" data-subscription="rss">
+
+  <!-- <li><a href="https://github.com/hujiaweibujidao" rel="subscribe-rss" title="subscribe via RSS">View me on GitHub</a></li> -->
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+   
+</ul>
+
+  <!--
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hujiaweibujidao.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form> 
+  
+  -->
+<ul class="main-navigation">
+  <li><a href="/blog/archives/">Blog</a></li>
+  <li><a href="/aboutme/">AboutMe</a></li>
+  <li><a href="/math/">Math</a></li>
+  <!--
+  <li><a href="/datamining/">DataMining</a></li>
+  -->
+  <li><a href="/blog/categories/mobiledev/">MobileDev</a></li>
+  <!--
+  <li><a href="/xjava/">XJava</a></li>
+  -->
+  <!-- <li><a href="/datamining/">Projects</a></li> -->
+  <!--
+  <li><a href="/blog/archives">Archives</a></li>
+  -->
+</ul>
+
+
+	</nav>
+	<div id="main">
+		<div id="content">
+			<div>
+	<article class="hentry" role="article">
+		
+  <header>
+    
+      <h1 class="entry-title">Setting Up Environments on New Mac</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-08T11:13:00+08:00" pubdate data-updated="true">Apr 8<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>1.安装Java 7u51 ［直接在<a href="http://www.java.com/zh_CN/download/manual.jsp">官网</a>下载dmg点击安装即可]</p>
+
+<p><code>JAVA_HOME=/Library/Java/JavaVirtualMachines/1.7.0_51.jdk/Contents/Home</code></p>
+
+<p>为了保证Eclipse和Matlab等需要JRE 6的应用程序能够运行，还需要 ［<code>1.7.0.jdk</code>部分可能需要修改］</p>
+
+<p>[个人猜测，因为Mac OS X早期系统和Mavericks中将JDK存放的位置不同，很多程序按照以前的位置去查找，所以找不到，不能正常启动]</p>
+
+<p><code>sudo mkdir /System/Library/Java/JavaVirtualMachines</code></p>
+
+<p><code>sudo ln -s /Library/Java/JavaVirtualMachines/1.7.0.jdk /System/Library/Java/JavaVirtualMachines/1.6.0.jdk</code></p>
+
+<p>实际上上面的操作还是会导致系统存在两个JRE（6和7），不过已经算是很好的解决方案了</p>
+
+<p>网址：<a href="http://apple.stackexchange.com/questions/58203/mountain-lion-with-java-7-only">http://apple.stackexchange.com/questions/58203/mountain-lion-with-java-7-only</a></p>
+
+<p>2.安装HomeBrew</p>
+
+<p>网址：<a href="https://raw.github.com/Homebrew/homebrew/go/install">https://raw.github.com/Homebrew/homebrew/go/install</a></p>
+
+<p>执行<code>ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"</code>，如果还没有安装Xcode，则需要安装CLT(Command Line Tools) <code>"xcode-select --install"</code></p>
+
+<p>Homebrew会将安装的软件包存放在<code>/usr/local/</code>目录下，例如<code>/usr/local/bin</code>存放一些可执行文件，<code>/usr/local/lib</code>存放一些公共库，通过homebrew安装的软件包存放在<code>/usr/local/Cellar</code>目录下。
+通过<code>brew doctor</code>命令可以检查系统中软件包可能存在的一些问题。添加<code>export PATH=/usr/local/bin:$PATH</code>到<code>~/.bash_profile</code>文件中，这样默认先使用Homebrew安装的应用程序，而不是使用系统。[注：Homebrew不会破坏系统的一些软件或者环境变量]</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hujiawei-MacBook-Pro:~ hujiawei$ ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+</span><span class='line'>==&gt; This script will install:
+</span><span class='line'>/usr/local/bin/brew
+</span><span class='line'>/usr/local/Library/...
+</span><span class='line'>/usr/local/share/man/man1/brew.1
+</span><span class='line'>...
+</span><span class='line'>==&gt; Installation successful!
+</span><span class='line'>You should run `brew doctor' *before* you install anything.
+</span><span class='line'>Now type: brew help</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3.安装git</p>
+
+<p>网址：<a href="https://help.github.com/articles/generating-ssh-keys">https://help.github.com/articles/generating-ssh-keys</a></p>
+
+<p><code>brew install git</code>，然后按照网址提示添加<code>ssh－key</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hujiawei-MacBook-Pro:.ssh hujiawei$ ssh-add ~/.ssh/id_rsa
+</span><span class='line'>Identity added: /Users/hujiawei/.ssh/id_rsa (/Users/hujiawei/.ssh/id_rsa)
+</span><span class='line'>hujiawei-MacBook-Pro:.ssh hujiawei$ pbcopy &lt; ~/.ssh/id_rsa.pub
+</span><span class='line'>hujiawei-MacBook-Pro:.ssh hujiawei$ pbcopy &lt; ~/.ssh/id_rsa.pub
+</span><span class='line'>hujiawei-MacBook-Pro:.ssh hujiawei$ ssh -T git@github.com
+</span><span class='line'>Warning: Permanently added the RSA host key for IP address '192.30.252.128' to the list of known hosts.
+</span><span class='line'>Hi hujiaweibujidao! You've successfully authenticated, but GitHub does not provide shell access.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>4.配置python环境</p>
+
+<p>网址：<a href="http://penandpants.com/2012/02/24/install-python/">http://penandpants.com/2012/02/24/install-python/</a></p>
+
+<p>使用Homebrew安装了python之后，python路径修改为 <code>/usr/local/bin/python</code> [原来在 <code>/usr/bin/python</code>]，<code>pip install &lt;package&gt;</code>命令会将软件包安装到<code>/usr/local/lib/python2.7/site-packages</code>中。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hujiawei-MacBook-Pro:~ hujiawei$ brew install python
+</span><span class='line'>Warning: A newer Command Line Tools release is available
+</span><span class='line'>Update them from Software Update in the App Store.
+</span><span class='line'>==&gt; Installing dependencies for python: readline, sqlite, gdbm
+</span><span class='line'>==&gt; Installing python dependency: readline
+</span><span class='line'>==&gt; Downloading https://downloads.sf.net/project/machomebrew/Bottles/readline-6.
+</span><span class='line'>==&gt; Pouring readline-6.2.4.mavericks.bottle.2.tar.gz
+</span><span class='line'>==&gt; Caveats
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果把<code>/usr/local/share/python</code>（参考网站提示用来存放Python脚本）也添加到<code>$PATH</code>中的话，<code>brew doctor</code>会给出一个警告，暂时不添加。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Warning: /usr/local/share/python is not needed in PATH.
+</span><span class='line'>Formerly homebrew put Python scripts you installed via `pip` or `pip3`
+</span><span class='line'>(or `easy_install`) into that directory above but now it can be removed
+</span><span class='line'>from your PATH variable.
+</span><span class='line'>Python scripts will now install into /usr/local/bin.
+</span><span class='line'>You can delete anything, except 'Extras', from the /usr/local/share/python
+</span><span class='line'>(and /usr/local/share/python3) dir and install affected Python packages
+</span><span class='line'>anew with `pip install --upgrade`.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装好了python之后，按照网址上的内容继续安装pip，然后安装<code>virtualenv, virtualenvwrapper, numpy, gfortran, scipy, matplotlib</code>等模块。[注，一般软件包使用brew安装和管理，对于python的模块使用pip安装和管理]</p>
+
+<p>5.配置Ruby环境 ［为了正常使用原有的Octopress］</p>
+
+<p>网址：<a href="http://hujiaweibujidao.github.io/blog/2013/11/17/hello-octopress/">http://hujiaweibujidao.github.io/blog/2013/11/17/hello-octopress/</a></p>
+
+<p>网址：<a href="http://blog.zerosharp.com/clone-your-octopress-to-blog-from-two-places/">http://blog.zerosharp.com/clone-your-octopress-to-blog-from-two-places/</a></p>
+
+<p>网址：<a href="http://octopress.org/docs/setup/">http://octopress.org/docs/setup/</a> <a href="http://octopress.org/docs/deploying/github/">http://octopress.org/docs/deploying/github/</a></p>
+
+<p>执行<code>rbenv install 1.9.3-p0</code> 时需要<code>apple-gcc42</code>，执行 <code>brew tap homebrew/dupes ; brew install apple-gcc42</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hujiawei-MacBook-Pro:eclipse_cp hujiawei$ brew install rbenv
+</span><span class='line'>Warning: A newer Command Line Tools release is available
+</span><span class='line'>Update them from Software Update in the App Store.
+</span><span class='line'>==&gt; Downloading https://github.com/sstephenson/rbenv/archive/v0.4.0.tar.gz
+</span><span class='line'>==&gt; Caveats
+</span><span class='line'>To use Homebrew's directories rather than ~/.rbenv add to your profile:
+</span><span class='line'>  export RBENV_ROOT=/usr/local/var/rbenv
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rbenv是一个管理ruby环境的工具，gem相当于管理ruby模块的工具。(<code>gem list</code>查看已安装的模块)</p>
+
+<p>如果想要使用以前的Octopress的话，执行下面的命令，之后就可以像以前一样使用Octopress了</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew update
+</span><span class='line'>brew install rbenv
+</span><span class='line'>brew install ruby-build
+</span><span class='line'>rbenv install 1.9.3-p0
+</span><span class='line'>rbenv rehash
+</span><span class='line'>rbenv global 1.9.3-p0  #建议增加这句修改系统全局的ruby版本
+</span><span class='line'>ruby --version  #查看系统ruby版本
+</span><span class='line'>cd &lt;path-to-octopress&gt;
+</span><span class='line'>gem install bundler
+</span><span class='line'>rbenv rehash    # If you use rbenv, rehash to be able to run the bundle command
+</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>6.配置OpenCV环境</p>
+
+<p>网址：<a href="http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/">http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/</a></p>
+
+<p><strong>注意！如果是进行OpenCV源码编译的话，因为会产生很多的文件保存到<code>/usr/local</code>下的各个子目录中，这会导致<code>brew doctor</code>报出很多错误，例如<code>/usr/local/lib</code>下很多OpenCV的库Homebrew不能识别，甚至涉及到了权限问题，所以建议不要再前面进行OpenCV环境的配置！</strong></p>
+
+<p>正常情况下的OpenCV配置：安装CMake，编译OpenCV源码，花的时间比较长</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo brew install cmake //homebrew
+</span><span class='line'>cd &lt;path-to-opencv-source&gt;
+</span><span class='line'>mkdir release
+</span><span class='line'>cd release
+</span><span class='line'>cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..
+</span><span class='line'>make
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果导致前面出现Python环境配置出现问题，可以尝试卸载OpenCV，还要手动删除一些<code>/usr/local</code>下的OpenCV目录。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hujiawei-MacBook-Pro:hujiawei hujiawei$ cd Android/opencv-2.4.6.1/
+</span><span class='line'>hujiawei-MacBook-Pro:opencv-2.4.6.1 hujiawei$ cd release
+</span><span class='line'>hujiawei-MacBook-Pro:release hujiawei$ sudo make uninstall
+</span><span class='line'>Password:
+</span><span class='line'>Scanning dependencies of target uninstall
+</span><span class='line'>-- Uninstalling "/usr/local/include/opencv2/opencv_modules.hpp"
+</span><span class='line'>-- Uninstalling "/usr/local/lib/pkgconfig/opencv.pc"
+</span><span class='line'>-- Uninstalling "/usr/local/share/OpenCV/OpenCVConfig.cmake"
+</span><span class='line'>-- Uninstalling "/usr/local/share/OpenCV/OpenCVConfig-version.cmake"
+</span><span class='line'>-- Uninstalling "/usr/local/include/opencv/cv.h"
+</span><span class='line'>-- Uninstalling "/usr/local/include/opencv/cv.hpp"
+</span><span class='line'>...
+</span><span class='line'>-- Uninstalling "/usr/local/share/OpenCV/haarcascades/haarcascade_smile.xml"
+</span><span class='line'>-- Uninstalling "/usr/local/share/OpenCV/haarcascades/haarcascade_upperbody.xml"
+</span><span class='line'>-- Uninstalling "/usr/local/share/OpenCV/lbpcascades/lbpcascade_frontalface.xml"
+</span><span class='line'>-- Uninstalling "/usr/local/share/OpenCV/lbpcascades/lbpcascade_profileface.xml"
+</span><span class='line'>-- Uninstalling "/usr/local/share/OpenCV/lbpcascades/lbpcascade_silverware.xml"
+</span><span class='line'>-- Uninstalling "/usr/local/bin/opencv_haartraining"
+</span><span class='line'>-- Uninstalling "/usr/local/bin/opencv_createsamples"
+</span><span class='line'>-- Uninstalling "/usr/local/bin/opencv_performance"
+</span><span class='line'>-- Uninstalling "/usr/local/bin/opencv_traincascade"
+</span><span class='line'>Built target uninstall</span></code></pre></td></tr></table></div></figure>
+
+
+<p>7.最后使用<code>brew doctor</code>检查，修复问题。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hujiawei-MacBook-Pro:~ hujiawei$ brew doctor
+</span><span class='line'>Warning: You have unlinked kegs in your Cellar
+</span><span class='line'>Leaving kegs unlinked can lead to build-trouble and cause brews that depend on
+</span><span class='line'>those kegs to fail to run properly once built. Run `brew link` on these:
+</span><span class='line'>    cloog
+</span><span class='line'>    isl
+</span><span class='line'>Warning: A newer Command Line Tools release is available
+</span><span class='line'>Update them from Software Update in the App Store.
+</span><span class='line'>^C
+</span><span class='line'>hujiawei-MacBook-Pro:~ hujiawei$ brew link cloog
+</span><span class='line'>Linking /usr/local/Cellar/cloog/0.18.1... 8 symlinks created
+</span><span class='line'>hujiawei-MacBook-Pro:~ hujiawei$ brew link isl
+</span><span class='line'>Linking /usr/local/Cellar/isl/0.12.1... 6 symlinks created</span></code></pre></td></tr></table></div></figure>
+
+
+<p class='post-footer'>
+                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2014/04/08/setting-up-environments-on-new-mac/'>http://hujiaweibujidao.github.io/blog/2014/04/08/setting-up-environments-on-new-mac/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+
+</div>
+
+
+		<footer>
+			<p class="meta">
+				
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hujiawei</span></span>
+
+				
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-08T11:13:00+08:00" pubdate data-updated="true">Apr 8<span>th</span>, 2014</time>
+				
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/mac/'>mac</a>
+  
+</span>
+
+
+			</p>
+			
+			<div class="sharing">
+  
+  
+  
+</div>
+
+			
+			<p class="meta">
+				
+				<a class="basic-alignment left" href="/blog/2014/03/30/matlab-image-segmentation/" title="Previous Post: Matlab Image Segmentation">&laquo; Matlab Image Segmentation</a>
+				
+				
+			</p>
+		</footer>
+	</article>
+	
+
+	
+	<section>
+		<h1>Comments</h1>
+		<div id="comments" aria-live="polite">
+			<!-- Duoshuo Comment BEGIN   data-title=""-->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hujiaweibujidao"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+
+		</div>
+	</section>
+	
+
+</div>
+
+<aside class="sidebar">
+	
+	<section>
+  <h1>关于博主</h1><br/>
+  <a href="/aboutme/"><img src="/images/me-small.png" width="250px" height="210px" alt="protrait"/></a><br/>
+  <p>Hi, I'm Hujiawei, from P.R.China. Now I'm a postgraduate student studying in <a href="http://www.tsinghua.edu.cn/publish/th/index.html">Tsinghua University</a>.
+  Wanna know me? <a href="/aboutme/">See here.</a> <br/>	
+  </p>
+  <a href="http://weibo.com/hujiaweiyinger"><img src="/images/sinaweibo.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://github.com/hujiaweibujidao"><img src="/images/github.png" width="40px" height="40px"/></a>&nbsp;
+  <a href="http://hujiawei.tumblr.com"><img src="/images/tumblr.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://twitter.com/hujiaweiyinger"><img src="/images/twitter.png" width="40px" height="40px"/></a>
+  
+  <br/>
+  
+</section>
+<section>
+ <h1>分类目录</h1>
+ <ul id="categories">
+	 <li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
+<li class='category'><a href='/blog/categories/ios/'>ios (1)</a></li>
+<li class='category'><a href='/blog/categories/mac/'>mac (1)</a></li>
+<li class='category'><a href='/blog/categories/matlab/'>matlab (1)</a></li>
+<li class='category'><a href='/blog/categories/mobiledev/'>mobiledev (5)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/opencv/'>opencv (5)</a></li>
+
+ </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/04/08/setting-up-environments-on-new-mac/">Setting Up Environments on New Mac</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/30/matlab-image-segmentation/">Matlab Image Segmentation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/13/mobile-development-materials/">移动开发资料汇集</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/13/develop-with-opencv-on-mac-os-x/">Develop With Opencv on Mac</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/21/android-ndk-and-opencv-development-4/">Android Ndk and Opencv Development 4</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+	<h1>好友博客</h1>
+	<ul>
+		<li>
+			<a href="http://doufunao.github.io/">豆腐脑的幻想乡</a>
+		</li>
+		<li>
+			<a href="http://c4fun.cn/">Code 4 Fun</a>
+		</li>
+		<li>
+			<a href="http://www.tanglei.name/">tanglei的blog</a>
+		</li>
+		<li>
+			<a href="http://ontheroad.sinaapp.com/">Find My Way</a>
+		</li>
+		
+		<li>
+			<a href="http://www.liaoxuefeng.com/">廖雪峰的官方网站</a>
+		</li>
+		<li>
+			<a href="http://easypi.github.io/">easypi's blog</a>
+		</li>
+		<li>
+			<a href="http://812lcl.github.io/">812lcl的博客</a>
+		</li>
+		<li>
+			<a href="http://wufawei.com/">Ted's Homepage</a>
+		</li>
+		<li>
+			<a href="http://www.renfei.org/blog/">Renfei Song</a>
+		</li>
+		
+		<li>
+			<a href="#">这里会是你吗?</a>
+		</li>
+	</ul>
+</section>
+	
+</aside>
+
+
+
+		</div>
+	</div>
+	
+	<footer role="contentinfo">
+		<p>
+	Copyright &copy; 2014 - hujiawei - <a href="http://happybirthday2yinger.duapp.com/">Happy birthday to MY QUEEN</a> - <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
+	<!-- CNZZ -->
+	&nbsp;&nbsp;
+	<script type="text/javascript">
+		var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+		document.write(unescape("%3Cspan id='cnzz_stat_icon_1000165127'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000165127%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<!-- license -->
+	<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="http://i.creativecommons.org/l/by-nd/3.0/88x31.png" /></a>
+	<br />
+	本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh">知识共享署名-禁止演绎 3.0 未本地化版本许可协议</a>进行许可。
+</p>
+<style>
+	.returnTop {
+		position: fixed;
+		_position: absolute;
+		right: 10px;
+		bottom: 200px;
+		_bottom: auto;
+		display: none;
+		width: 40px;
+		height: 40px;
+		border: 1px solid #61b72e;
+		border-radius: 4px;
+		background: #fff;
+		box-shadow: 0 0 5px #F5F5F5;
+		text-indent: -9999px;
+		cursor: pointer;
+	}
+	.returnTop .s {
+		position: absolute;
+		top: -2px;
+		_top: -20px;
+		left: 10px;
+		width: 0;
+		height: 0;
+		border-width: 10px;
+		border-color: transparent transparent #61b72e;
+		border-style: dashed dashed solid;
+	}
+	.returnTop .b {
+		position: absolute;
+		top: 18px;
+		left: 16px;
+		height: 12px;
+		width: 8px;
+		background: #61b72e;
+	}
+</style>
+<div class="returnTop" title="嗖的就上去了！">
+	<span class="s"></span>
+	<span class="b"></span>
+	返回顶部
+</div>
+<script type="text/javascript">
+$(function(){
+$(window).bind("scroll", function(){
+
+var scrollTopNum = $(document).scrollTop(),
+winHeight = $(window).height(),
+returnTop = $("div.returnTop");
+
+(scrollTopNum > 0) ? returnTop.fadeIn("fast") : returnTop.fadeOut("fast");
+
+if (!-[1,]&&!window.XMLHttpRequest) {
+returnTop.css("top", scrollTopNum + winHeight - 200);
+}
+
+});
+
+$("div.returnTop").click(function() {
+$("html, body").animate({ scrollTop: 0 }, 100);
+});
+
+});
+</script>
+
+
+
+	</footer>
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

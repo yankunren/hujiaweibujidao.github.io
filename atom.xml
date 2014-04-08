@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-08T11:03:33+08:00</updated>
+  <updated>2014-04-08T11:15:50+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -14,26 +14,285 @@
 
   
   <entry>
-    <title type="html"><![CDATA[principal component analysis]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/05/principal-component-analysis/"/>
-    <updated>2014-04-05T22:53:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/05/principal-component-analysis</id>
-    <content type="html"><![CDATA[<p>PCA</p>
+    <title type="html"><![CDATA[Setting up environments on new Mac]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/04/08/setting-up-environments-on-new-mac/"/>
+    <updated>2014-04-08T11:13:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/04/08/setting-up-environments-on-new-mac</id>
+    <content type="html"><![CDATA[<p>1.安装Java 7u51 ［直接在<a href="http://www.java.com/zh_CN/download/manual.jsp">官网</a>下载dmg点击安装即可]</p>
 
-<ol>
-<li></li>
-</ol>
+<p><code>JAVA_HOME=/Library/Java/JavaVirtualMachines/1.7.0_51.jdk/Contents/Home</code></p>
+
+<p>为了保证Eclipse和Matlab等需要JRE 6的应用程序能够运行，还需要 ［<code>1.7.0.jdk</code>部分可能需要修改］</p>
+
+<p>[个人猜测，因为Mac OS X早期系统和Mavericks中将JDK存放的位置不同，很多程序按照以前的位置去查找，所以找不到，不能正常启动]</p>
+
+<p><code>sudo mkdir /System/Library/Java/JavaVirtualMachines</code></p>
+
+<p><code>sudo ln -s /Library/Java/JavaVirtualMachines/1.7.0.jdk /System/Library/Java/JavaVirtualMachines/1.6.0.jdk</code></p>
+
+<p>实际上上面的操作还是会导致系统存在两个JRE（6和7），不过已经算是很好的解决方案了</p>
+
+<p>网址：<a href="http://apple.stackexchange.com/questions/58203/mountain-lion-with-java-7-only">http://apple.stackexchange.com/questions/58203/mountain-lion-with-java-7-only</a></p>
+
+<p>2.安装HomeBrew</p>
+
+<p>网址：<a href="https://raw.github.com/Homebrew/homebrew/go/install">https://raw.github.com/Homebrew/homebrew/go/install</a></p>
+
+<p>执行<code>ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"</code>，如果还没有安装Xcode，则需要安装CLT(Command Line Tools) <code>"xcode-select --install"</code></p>
+
+<p>Homebrew会将安装的软件包存放在<code>/usr/local/</code>目录下，例如<code>/usr/local/bin</code>存放一些可执行文件，<code>/usr/local/lib</code>存放一些公共库，通过homebrew安装的软件包存放在<code>/usr/local/Cellar</code>目录下。
+通过<code>brew doctor</code>命令可以检查系统中软件包可能存在的一些问题。添加<code>export PATH=/usr/local/bin:$PATH</code>到<code>~/.bash_profile</code>文件中，这样默认先使用Homebrew安装的应用程序，而不是使用系统。[注：Homebrew不会破坏系统的一些软件或者环境变量]</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hujiawei-MacBook-Pro:~ hujiawei$ ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+</span><span class='line'>==&gt; This script will install:
+</span><span class='line'>/usr/local/bin/brew
+</span><span class='line'>/usr/local/Library/...
+</span><span class='line'>/usr/local/share/man/man1/brew.1
+</span><span class='line'>...
+</span><span class='line'>==&gt; Installation successful!
+</span><span class='line'>You should run `brew doctor' *before* you install anything.
+</span><span class='line'>Now type: brew help</span></code></pre></td></tr></table></div></figure>
 
 
-<p>参考资料:</p>
+<p>3.安装git</p>
 
-<p>1.<a href="http://www.doc.ic.ac.uk/~dfg/ProbabilisticInference/IDAPILecture15.pdf">Lecture 15: Principal Component Analysis</a>
-介绍了PCA基本原理，也介绍了PCA在人脸识别中的应用
-2.<a href="http://bytefish.de/blog/pca_lda_with_gnu_octave/">Bytefish&rsquo;s Blog about Principal Component and Linear Discriminant Analysis</a>
-Bytefish的博客中介绍了PCA和LDA，以及如何将它们应用到人脸识别中。他是OpenCV内置人脸识别算法的作者，他的博客中有算法的详细讲解。</p>
+<p>网址：<a href="https://help.github.com/articles/generating-ssh-keys">https://help.github.com/articles/generating-ssh-keys</a></p>
+
+<p><code>brew install git</code>，然后按照网址提示添加<code>ssh－key</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hujiawei-MacBook-Pro:.ssh hujiawei$ ssh-add ~/.ssh/id_rsa
+</span><span class='line'>Identity added: /Users/hujiawei/.ssh/id_rsa (/Users/hujiawei/.ssh/id_rsa)
+</span><span class='line'>hujiawei-MacBook-Pro:.ssh hujiawei$ pbcopy &lt; ~/.ssh/id_rsa.pub
+</span><span class='line'>hujiawei-MacBook-Pro:.ssh hujiawei$ pbcopy &lt; ~/.ssh/id_rsa.pub
+</span><span class='line'>hujiawei-MacBook-Pro:.ssh hujiawei$ ssh -T git@github.com
+</span><span class='line'>Warning: Permanently added the RSA host key for IP address '192.30.252.128' to the list of known hosts.
+</span><span class='line'>Hi hujiaweibujidao! You've successfully authenticated, but GitHub does not provide shell access.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>4.配置python环境</p>
+
+<p>网址：<a href="http://penandpants.com/2012/02/24/install-python/">http://penandpants.com/2012/02/24/install-python/</a></p>
+
+<p>使用Homebrew安装了python之后，python路径修改为 <code>/usr/local/bin/python</code> [原来在 <code>/usr/bin/python</code>]，<code>pip install &lt;package&gt;</code>命令会将软件包安装到<code>/usr/local/lib/python2.7/site-packages</code>中。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hujiawei-MacBook-Pro:~ hujiawei$ brew install python
+</span><span class='line'>Warning: A newer Command Line Tools release is available
+</span><span class='line'>Update them from Software Update in the App Store.
+</span><span class='line'>==&gt; Installing dependencies for python: readline, sqlite, gdbm
+</span><span class='line'>==&gt; Installing python dependency: readline
+</span><span class='line'>==&gt; Downloading https://downloads.sf.net/project/machomebrew/Bottles/readline-6.
+</span><span class='line'>==&gt; Pouring readline-6.2.4.mavericks.bottle.2.tar.gz
+</span><span class='line'>==&gt; Caveats
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果把<code>/usr/local/share/python</code>（参考网站提示用来存放Python脚本）也添加到<code>$PATH</code>中的话，<code>brew doctor</code>会给出一个警告，暂时不添加。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Warning: /usr/local/share/python is not needed in PATH.
+</span><span class='line'>Formerly homebrew put Python scripts you installed via `pip` or `pip3`
+</span><span class='line'>(or `easy_install`) into that directory above but now it can be removed
+</span><span class='line'>from your PATH variable.
+</span><span class='line'>Python scripts will now install into /usr/local/bin.
+</span><span class='line'>You can delete anything, except 'Extras', from the /usr/local/share/python
+</span><span class='line'>(and /usr/local/share/python3) dir and install affected Python packages
+</span><span class='line'>anew with `pip install --upgrade`.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装好了python之后，按照网址上的内容继续安装pip，然后安装<code>virtualenv, virtualenvwrapper, numpy, gfortran, scipy, matplotlib</code>等模块。[注，一般软件包使用brew安装和管理，对于python的模块使用pip安装和管理]</p>
+
+<p>5.配置Ruby环境 ［为了正常使用原有的Octopress］</p>
+
+<p>网址：<a href="http://hujiaweibujidao.github.io/blog/2013/11/17/hello-octopress/">http://hujiaweibujidao.github.io/blog/2013/11/17/hello-octopress/</a></p>
+
+<p>网址：<a href="http://blog.zerosharp.com/clone-your-octopress-to-blog-from-two-places/">http://blog.zerosharp.com/clone-your-octopress-to-blog-from-two-places/</a></p>
+
+<p>网址：<a href="http://octopress.org/docs/setup/">http://octopress.org/docs/setup/</a> <a href="http://octopress.org/docs/deploying/github/">http://octopress.org/docs/deploying/github/</a></p>
+
+<p>执行<code>rbenv install 1.9.3-p0</code> 时需要<code>apple-gcc42</code>，执行 <code>brew tap homebrew/dupes ; brew install apple-gcc42</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hujiawei-MacBook-Pro:eclipse_cp hujiawei$ brew install rbenv
+</span><span class='line'>Warning: A newer Command Line Tools release is available
+</span><span class='line'>Update them from Software Update in the App Store.
+</span><span class='line'>==&gt; Downloading https://github.com/sstephenson/rbenv/archive/v0.4.0.tar.gz
+</span><span class='line'>==&gt; Caveats
+</span><span class='line'>To use Homebrew's directories rather than ~/.rbenv add to your profile:
+</span><span class='line'>  export RBENV_ROOT=/usr/local/var/rbenv
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rbenv是一个管理ruby环境的工具，gem相当于管理ruby模块的工具。(<code>gem list</code>查看已安装的模块)</p>
+
+<p>如果想要使用以前的Octopress的话，执行下面的命令，之后就可以像以前一样使用Octopress了</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew update
+</span><span class='line'>brew install rbenv
+</span><span class='line'>brew install ruby-build
+</span><span class='line'>rbenv install 1.9.3-p0
+</span><span class='line'>rbenv rehash
+</span><span class='line'>rbenv global 1.9.3-p0  #建议增加这句修改系统全局的ruby版本
+</span><span class='line'>ruby --version  #查看系统ruby版本
+</span><span class='line'>cd &lt;path-to-octopress&gt;
+</span><span class='line'>gem install bundler
+</span><span class='line'>rbenv rehash    # If you use rbenv, rehash to be able to run the bundle command
+</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>6.配置OpenCV环境</p>
+
+<p>网址：<a href="http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/">http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/</a></p>
+
+<p><strong>注意！如果是进行OpenCV源码编译的话，因为会产生很多的文件保存到<code>/usr/local</code>下的各个子目录中，这会导致<code>brew doctor</code>报出很多错误，例如<code>/usr/local/lib</code>下很多OpenCV的库Homebrew不能识别，甚至涉及到了权限问题，所以建议不要再前面进行OpenCV环境的配置！</strong></p>
+
+<p>正常情况下的OpenCV配置：安装CMake，编译OpenCV源码，花的时间比较长</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo brew install cmake //homebrew
+</span><span class='line'>cd &lt;path-to-opencv-source&gt;
+</span><span class='line'>mkdir release
+</span><span class='line'>cd release
+</span><span class='line'>cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..
+</span><span class='line'>make
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果导致前面出现Python环境配置出现问题，可以尝试卸载OpenCV，还要手动删除一些<code>/usr/local</code>下的OpenCV目录。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hujiawei-MacBook-Pro:hujiawei hujiawei$ cd Android/opencv-2.4.6.1/
+</span><span class='line'>hujiawei-MacBook-Pro:opencv-2.4.6.1 hujiawei$ cd release
+</span><span class='line'>hujiawei-MacBook-Pro:release hujiawei$ sudo make uninstall
+</span><span class='line'>Password:
+</span><span class='line'>Scanning dependencies of target uninstall
+</span><span class='line'>-- Uninstalling "/usr/local/include/opencv2/opencv_modules.hpp"
+</span><span class='line'>-- Uninstalling "/usr/local/lib/pkgconfig/opencv.pc"
+</span><span class='line'>-- Uninstalling "/usr/local/share/OpenCV/OpenCVConfig.cmake"
+</span><span class='line'>-- Uninstalling "/usr/local/share/OpenCV/OpenCVConfig-version.cmake"
+</span><span class='line'>-- Uninstalling "/usr/local/include/opencv/cv.h"
+</span><span class='line'>-- Uninstalling "/usr/local/include/opencv/cv.hpp"
+</span><span class='line'>...
+</span><span class='line'>-- Uninstalling "/usr/local/share/OpenCV/haarcascades/haarcascade_smile.xml"
+</span><span class='line'>-- Uninstalling "/usr/local/share/OpenCV/haarcascades/haarcascade_upperbody.xml"
+</span><span class='line'>-- Uninstalling "/usr/local/share/OpenCV/lbpcascades/lbpcascade_frontalface.xml"
+</span><span class='line'>-- Uninstalling "/usr/local/share/OpenCV/lbpcascades/lbpcascade_profileface.xml"
+</span><span class='line'>-- Uninstalling "/usr/local/share/OpenCV/lbpcascades/lbpcascade_silverware.xml"
+</span><span class='line'>-- Uninstalling "/usr/local/bin/opencv_haartraining"
+</span><span class='line'>-- Uninstalling "/usr/local/bin/opencv_createsamples"
+</span><span class='line'>-- Uninstalling "/usr/local/bin/opencv_performance"
+</span><span class='line'>-- Uninstalling "/usr/local/bin/opencv_traincascade"
+</span><span class='line'>Built target uninstall</span></code></pre></td></tr></table></div></figure>
+
+
+<p>7.最后使用<code>brew doctor</code>检查，修复问题。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hujiawei-MacBook-Pro:~ hujiawei$ brew doctor
+</span><span class='line'>Warning: You have unlinked kegs in your Cellar
+</span><span class='line'>Leaving kegs unlinked can lead to build-trouble and cause brews that depend on
+</span><span class='line'>those kegs to fail to run properly once built. Run `brew link` on these:
+</span><span class='line'>    cloog
+</span><span class='line'>    isl
+</span><span class='line'>Warning: A newer Command Line Tools release is available
+</span><span class='line'>Update them from Software Update in the App Store.
+</span><span class='line'>^C
+</span><span class='line'>hujiawei-MacBook-Pro:~ hujiawei$ brew link cloog
+</span><span class='line'>Linking /usr/local/Cellar/cloog/0.18.1... 8 symlinks created
+</span><span class='line'>hujiawei-MacBook-Pro:~ hujiawei$ brew link isl
+</span><span class='line'>Linking /usr/local/Cellar/isl/0.12.1... 6 symlinks created</span></code></pre></td></tr></table></div></figure>
+
 
 <p class='post-footer'>
-                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2014/04/05/principal-component-analysis/'>http://hujiaweibujidao.github.io/blog/2014/04/05/principal-component-analysis/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2014/04/08/setting-up-environments-on-new-mac/'>http://hujiaweibujidao.github.io/blog/2014/04/08/setting-up-environments-on-new-mac/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 
 ]]></content>
   </entry>
