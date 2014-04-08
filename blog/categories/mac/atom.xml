@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-08T11:15:50+08:00</updated>
+  <updated>2014-04-08T12:31:06+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -186,6 +186,14 @@ Scanning dependencies of target uninstall
 -- Uninstalling "/usr/local/bin/opencv_performance"
 -- Uninstalling "/usr/local/bin/opencv_traincascade"
 Built target uninstall
+</code>
+执行<code>brew linkapps</code>会将brew安装的python中的app链接到Applications中</p>
+
+<p><code>
+hujiawei-MacBook-Pro:~ hujiawei$ brew linkapps
+Linking /usr/local/Cellar/python/2.7.6/IDLE.app
+Linking /usr/local/Cellar/python/2.7.6/Python Launcher.app
+Finished linking. Find the links under /Applications.
 </code></p>
 
 <p>7.最后使用<code>brew doctor</code>检查，修复问题。</p>
