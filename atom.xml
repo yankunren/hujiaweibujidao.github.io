@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-08T12:31:06+08:00</updated>
+  <updated>2014-04-08T16:09:13+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -38,10 +38,12 @@
 
 <p>网址：<a href="https://raw.github.com/Homebrew/homebrew/go/install">https://raw.github.com/Homebrew/homebrew/go/install</a></p>
 
+<p>网址：<a href="http://linfan.info/blog/2012/02/25/homebrew-installation-and-usage/">http://linfan.info/blog/2012/02/25/homebrew-installation-and-usage/</a> [Homebrew使用教程]</p>
+
 <p>执行<code>ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"</code>，如果还没有安装Xcode，则需要安装CLT(Command Line Tools) <code>"xcode-select --install"</code></p>
 
 <p>Homebrew会将安装的软件包存放在<code>/usr/local/</code>目录下，例如<code>/usr/local/bin</code>存放一些可执行文件，<code>/usr/local/lib</code>存放一些公共库，通过homebrew安装的软件包存放在<code>/usr/local/Cellar</code>目录下。
-通过<code>brew doctor</code>命令可以检查系统中软件包可能存在的一些问题。添加<code>export PATH=/usr/local/bin:$PATH</code>到<code>~/.bash_profile</code>文件中，这样默认先使用Homebrew安装的应用程序，而不是使用系统。[注：Homebrew不会破坏系统的一些软件或者环境变量]</p>
+通过<code>brew doctor</code>命令可以检查系统中软件包可能存在的一些问题。添加<code>export PATH=/usr/local/bin:$PATH</code>到<code>~/.bash_profile</code>文件中，这样默认先使用Homebrew安装的应用程序，而不是使用系统。[注：Homebrew不会破坏系统的一些软件或者环境变量，另外，Homebrew下载的安装包存放在<code>/Library/Caches/Homebrew</code>目录中，创建的Formula存放在<code>/usr/local/Library/Formula</code>目录中]</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -89,7 +91,7 @@
 
 <p>网址：<a href="http://penandpants.com/2012/02/24/install-python/">http://penandpants.com/2012/02/24/install-python/</a></p>
 
-<p>使用Homebrew安装了python之后，python路径修改为 <code>/usr/local/bin/python</code> [原来在 <code>/usr/bin/python</code>]，<code>pip install &lt;package&gt;</code>命令会将软件包安装到<code>/usr/local/lib/python2.7/site-packages</code>中。</p>
+<p>使用Homebrew安装了python之后，python路径修改为 <code>/usr/local/bin/python</code> [原来在 <code>/usr/bin/python</code>]，<code>pip install &lt;package&gt;</code>命令会将模块安装到<code>/usr/local/lib/python2.7/site-packages</code>中。<code>pip list</code>命令查看已经安装的Python模块。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -261,7 +263,29 @@
 </span><span class='line'>Built target uninstall</span></code></pre></td></tr></table></div></figure>
 
 
-<p>执行<code>brew linkapps</code>会将brew安装的python中的app链接到Applications中</p>
+<p>如果可以的话，使用Homebrew安装OpenCV</p>
+
+<p>参考网址：<a href="http://www.jeffreythompson.org/blog/2013/08/22/update-installing-opencv-on-mac-mountain-lion/">http://www.jeffreythompson.org/blog/2013/08/22/update-installing-opencv-on-mac-mountain-lion/</a>  支持Mavericks</p>
+
+<p>其他关于搭建OpenCV环境的文章 <a href="http://blog.sciencenet.cn/blog-702148-657754.html">http://blog.sciencenet.cn/blog-702148-657754.html</a></p>
+
+<p>我的系统在执行<code>brew install jasper</code>时不知何原因不能继续，一直停留在<code>make install</code>状态，所以<code>brew install opencv</code>不能成功，即使我修改japser或者opencv的Formula文件也无济于事，最终尝试还是进行OpenCV源码编译，但是不安装到<code>/usr/local/</code>目录中，方法是修改下面的<code>CMAKE_INSTALL_PREFIX</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd &lt;path-to-opencv-source&gt;
+</span><span class='line'>mkdir release
+</span><span class='line'>cd release
+</span><span class='line'>cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/opencv .. 
+</span><span class='line'>make
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>7.最后执行<code>brew linkapps</code>会将brew安装的python中的app链接到Applications中</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -273,7 +297,7 @@
 </span><span class='line'>Finished linking. Find the links under /Applications.</span></code></pre></td></tr></table></div></figure>
 
 
-<p>7.最后使用<code>brew doctor</code>检查，修复问题。</p>
+<p>使用<code>brew doctor</code>检查，修复问题。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -728,7 +752,9 @@
 
 <p>[完成之后在<code>/usr/local/include</code>目录下便有了<code>opencv</code>和<code>opencv2</code>两个目录，在<code>/usr/local/lib</code>目录下有很多的<code>opencv</code>相关的动态库，例如<code>libopencv_core.dylib</code>等等]</p>
 
-<p>[注，如果不需要了，想要卸载 OpenCV的话，可以回到<code>release</code>目录，执行<code>sudo make uninstall</code>，然后手动删除一些<code>/usr/local</code>下与OpenCV有关的目录]</p>
+<p>[注1:如果不需要了，想要卸载 OpenCV的话，可以回到<code>release</code>目录，执行<code>sudo make uninstall</code>，然后手动删除一些<code>/usr/local</code>下与OpenCV有关的目录]</p>
+
+<p>[注2:如果不想把OpenCV安装在默认的<code>/usr/local/</code>目录下的话，例如为了防止Homebrew中对opencv部分的报错，而使用Homebrew安装opencv都报错的情况，可以考虑将opencv安装到其他的位置，修改<code>CMAKE_INSTALL_PREFIX=/usr/local</code>即可]</p>
 
 <p>其他参考内容：<a href="http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation">Building OpenCV from Source Using CMake, Using the Command Line</a></p>
 
