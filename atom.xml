@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-08T20:03:55+08:00</updated>
+  <updated>2014-04-08T20:11:19+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -754,7 +754,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[develop with opencv on mac]]></title>
+    <title type="html"><![CDATA[Develop with OpenCV on Mac]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/"/>
     <updated>2014-03-13T19:23:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x</id>
@@ -843,7 +843,20 @@
 
 <h4>4.其他问题</h4>
 
-<p>如果使用Eclipse开发的，首先要安装CDT插件，其次需要在opencv项目属性的<code>C/C++ General -&gt; Paths and Symbols</code>中添加其他的路径，包括OpenCV所需的头文件，类似<code>&lt;opencv_sdk&gt;/sdk/native/jni/include</code>，此外，关于编译器GCC，我本机只是安装了Command Line Tools，但是该工具在系统升级到Maverick(10.9)时会出现一个链接问题，10.8及以下版本应该是没有问题。</p>
+<p>如果使用Eclipse开发的话按照下面的步骤进行：</p>
+
+<blockquote><ol>
+<li>按照正常的步骤，使用eclipse建立一个Mac C++工程，包含一个cpp文件</li>
+<li>右击工程名, 选择“Properties”，在属性配置页中选择，点击C/C++ Build, 在下拉选项中选择 Settings. 在右边的选项卡中选择 Tool Settings。</li>
+<li>在GCC C++ Compiler选项列表中选择Includes，在Include paths(-l)中添加安装好的opencv的头文件存放目录：/usr/local/include/ [存放opencv头文件的目录]</li>
+<li>在MacOS X C++Linker选项列表中选择Library，在Library search path (-L)中添加安装好的opencv Lib文件存放目录：/usr/local/lib/ [经过我的测试只能是这个目录！其他目录甚至是它的子目录都不行！如果在其他路径中，复制过来也行！]</li>
+<li>在MacOS X C++Linker选项列表中选择Library, 在Libraries(-l) 中依次点击“＋”号，添加需要使用的Lib文件(通常情况下，使用前三个)：
+opencv_core opencv_imgproc opencv_highgui opencv_ml opencv_video opencv_features2d opencv_calib3d opencv_objdetect opencv_contrib opencv_legacy opencv_flann</li>
+<li>重新build项目，运行即可。</li>
+</ol>
+</blockquote>
+
+<p>下面是关于问题<code>ld: symbol(s) not found for architecture x86_64</code>的解释：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -853,9 +866,11 @@
 </span><span class='line'>To do this, add -stdlib=libstdc++ to the linking command.</span></code></pre></td></tr></table></div></figure>
 
 
-<p>如果遇到问题<code>ld: symbol(s) not found for architecture x86_64</code>，检查代码中是否需要包含还没有添加的库文件。</p>
+<p>如果遇到问题<code>ld: symbol(s) not found for architecture x86_64</code>，先检查代码中是否需要包含还没有添加的库文件，再检查是否是其他问题。</p>
 
 <p>更多相关内容参考：</p>
+
+<p><a href="http://blog.sciencenet.cn/blog-702148-657754.html">http://blog.sciencenet.cn/blog-702148-657754.html</a></p>
 
 <p><a href="http://stackoverflow.com/questions/19637164/c-linking-error-after-upgrading-to-mac-os-x-10-9-xcode-5-0-1">C++ linking error after upgrading to Mac OS X 10.9 / Xcode 5.0.1</a></p>
 
