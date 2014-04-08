@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-06T08:56:22+08:00</updated>
+  <updated>2014-04-08T10:57:21+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -262,6 +262,8 @@ rbenv rehash
 rbenv global 1.9.3-p0  #建议增加这句修改系统全局的ruby版本
 ruby --version  #查看系统ruby版本
 </code></p>
+
+<p>[注：如果install 1.9.3-p0时报错，提示llvm不行，需要安装gcc时按照提示的命令执行即可：<code>brew tap homebrew/dupes ; brew install apple-gcc42</code>]</p>
 
 <p>*<a href="http://octopress.org/docs/setup/">安装Octopress</a></p>
 
