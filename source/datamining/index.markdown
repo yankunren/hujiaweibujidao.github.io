@@ -9,4 +9,32 @@ footer: true
 
 Writing...
 
-目前已经完成的算法包括：Apriori、朴素贝叶斯分类器、人工神经网络、K-Means，SVM
+1. PCA, KPCA
+
+2. LDA
+
+3. ICA
+
+4. ANN
+
+5. SVM
+
+6. K-Means
+
+7. Naive Bayes
+
+8. Linear Regression, LWLR, Ridge Regression...
+
+9. Logistic Regression
+
+10. KNN, Gradient decent
+
+11. Recommend system, Apriori, FP Growth
+
+12. Haar, SIFT, LBPH, HOSVD...
+
+13. Template match...
+
+Matlab/Python version
+
+

@@ -38,6 +38,8 @@ rbenv global 1.9.3-p0  #建议增加这句修改系统全局的ruby版本
 ruby --version  #查看系统ruby版本
 ```
 
+[注：如果install 1.9.3-p0时报错，提示llvm不行，需要安装gcc时按照提示的命令执行即可：`brew tap homebrew/dupes ; brew install apple-gcc42`]
+
 *[安装Octopress](http://octopress.org/docs/setup/)
 
 这部分耗时会长一些，其中的octopress目录名称可以随便修改，例如myblog等，`gem list`命令可以查看已经安装好了的依赖包，`rake install`就类似`make install`进行安装(Octopress的主题)，一定要确保这里执行的命令都是正确执行了的，否则后面可能出错。
