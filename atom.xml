@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-08T10:57:21+08:00</updated>
+  <updated>2014-04-08T11:03:33+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[principal component analysis]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/04/05/principal-component-analysis/"/>
+    <updated>2014-04-05T22:53:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/04/05/principal-component-analysis</id>
+    <content type="html"><![CDATA[<p>PCA</p>
+
+<ol>
+<li></li>
+</ol>
+
+
+<p>参考资料:</p>
+
+<p>1.<a href="http://www.doc.ic.ac.uk/~dfg/ProbabilisticInference/IDAPILecture15.pdf">Lecture 15: Principal Component Analysis</a>
+介绍了PCA基本原理，也介绍了PCA在人脸识别中的应用
+2.<a href="http://bytefish.de/blog/pca_lda_with_gnu_octave/">Bytefish&rsquo;s Blog about Principal Component and Linear Discriminant Analysis</a>
+Bytefish的博客中介绍了PCA和LDA，以及如何将它们应用到人脸识别中。他是OpenCV内置人脸识别算法的作者，他的博客中有算法的详细讲解。</p>
+
+<p class='post-footer'>
+                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2014/04/05/principal-component-analysis/'>http://hujiaweibujidao.github.io/blog/2014/04/05/principal-component-analysis/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Matlab Image Segmentation]]></title>
@@ -431,6 +456,8 @@
 
 
 <p>[完成之后在<code>/usr/local/include</code>目录下便有了<code>opencv</code>和<code>opencv2</code>两个目录，在<code>/usr/local/lib</code>目录下有很多的<code>opencv</code>相关的动态库，例如<code>libopencv_core.dylib</code>等等]</p>
+
+<p>[注，如果不需要了，想要卸载 OpenCV的话，可以回到<code>release</code>目录，执行<code>sudo make uninstall</code>，然后手动删除一些<code>/usr/local</code>下与OpenCV有关的目录]</p>
 
 <p>其他参考内容：<a href="http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation">Building OpenCV from Source Using CMake, Using the Command Line</a></p>
 

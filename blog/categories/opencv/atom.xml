@@ -4,7 +4,7 @@
   <title><![CDATA[Category: opencv | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/opencv/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-08T10:57:21+08:00</updated>
+  <updated>2014-04-08T11:03:33+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -44,6 +44,8 @@ make
 sudo make install
 </code>
 [完成之后在<code>/usr/local/include</code>目录下便有了<code>opencv</code>和<code>opencv2</code>两个目录，在<code>/usr/local/lib</code>目录下有很多的<code>opencv</code>相关的动态库，例如<code>libopencv_core.dylib</code>等等]</p>
+
+<p>[注，如果不需要了，想要卸载 OpenCV的话，可以回到<code>release</code>目录，执行<code>sudo make uninstall</code>，然后手动删除一些<code>/usr/local</code>下与OpenCV有关的目录]</p>
 
 <p>其他参考内容：<a href="http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation">Building OpenCV from Source Using CMake, Using the Command Line</a></p>
 
