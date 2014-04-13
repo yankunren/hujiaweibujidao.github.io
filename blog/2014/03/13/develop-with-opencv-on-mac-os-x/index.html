@@ -195,6 +195,28 @@
 
 <p>其他参考内容：<a href="https://sites.google.com/site/learningopencv1/installing-opencv">Installing OpenCV</a></p>
 
+<h5>阅读开源项目</h5>
+
+<p>阅读开源项目<a href="https://github.com/MasteringOpenCV/code">Mastering OpenCV with Practical Computer Vision Projects</a>中的代码，以第8章Face Recognition using Eigenfaces or Fisherfaces为例</p>
+
+<p>编写一个shell，内容如下(修改自<code>README.txt</code>)，其中的<code>OpenCV_DIR</code>为OpenCV源码编译后得到的文件夹(如上面的release目录)，执行这个shell便可以得到Xcode项目，当然打开这个项目之后还要修改相应的配置。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export OpenCV_DIR="/Volumes/hujiawei/Users/hujiawei/Android/opencv-2.4.6.1/build"
+</span><span class='line'>mkdir build
+</span><span class='line'>cd build
+</span><span class='line'>cp $OpenCV_DIR/../data/lbpcascades/lbpcascade_frontalface.xml .
+</span><span class='line'>cp $OpenCV_DIR/../data/haarcascades/haarcascade_eye.xml .
+</span><span class='line'>cp $OpenCV_DIR/../data/haarcascades/haarcascade_eye_tree_eyeglasses.xml .
+</span><span class='line'>cmake -G Xcode -D OpenCV_DIR=$OpenCV_DIR ..</span></code></pre></td></tr></table></div></figure>
+
+
 <h4>4.其他问题</h4>
 
 <p>如果使用Eclipse开发的话按照下面的步骤进行：</p>
@@ -330,7 +352,8 @@ opencv_core opencv_imgproc opencv_highgui opencv_ml opencv_video opencv_features
 <section>
  <h1>分类目录</h1>
  <ul id="categories">
-	 <li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
+	 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (1)</a></li>
+<li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
 <li class='category'><a href='/blog/categories/ios/'>ios (1)</a></li>
 <li class='category'><a href='/blog/categories/mac/'>mac (1)</a></li>
 <li class='category'><a href='/blog/categories/matlab/'>matlab (1)</a></li>
@@ -343,6 +366,10 @@ opencv_core opencv_imgproc opencv_highgui opencv_ml opencv_video opencv_features
 <section>
   <h1>近期文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/04/13/vertext-cover-problem/">Vertext Cover Problem</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/04/08/setting-up-environments-on-new-mac/">Setting Up Environments on New Mac</a>
@@ -358,10 +385,6 @@ opencv_core opencv_imgproc opencv_highgui opencv_ml opencv_video opencv_features
     
       <li class="post">
         <a href="/blog/2014/03/13/develop-with-opencv-on-mac-os-x/">Develop With OpenCV on Mac</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/21/android-ndk-and-opencv-development-4/">Android Ndk and Opencv Development 4</a>
       </li>
     
   </ul>
