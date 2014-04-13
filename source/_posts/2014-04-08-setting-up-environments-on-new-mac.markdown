@@ -25,10 +25,12 @@ categories: mac
 
 网址：[https://raw.github.com/Homebrew/homebrew/go/install](https://raw.github.com/Homebrew/homebrew/go/install)
 
+网址：[http://linfan.info/blog/2012/02/25/homebrew-installation-and-usage/](http://linfan.info/blog/2012/02/25/homebrew-installation-and-usage/) [Homebrew使用教程]
+
 执行`ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"`，如果还没有安装Xcode，则需要安装CLT(Command Line Tools) `"xcode-select --install"`
 
 Homebrew会将安装的软件包存放在`/usr/local/`目录下，例如`/usr/local/bin`存放一些可执行文件，`/usr/local/lib`存放一些公共库，通过homebrew安装的软件包存放在`/usr/local/Cellar`目录下。
-通过`brew doctor`命令可以检查系统中软件包可能存在的一些问题。添加`export PATH=/usr/local/bin:$PATH`到`~/.bash_profile`文件中，这样默认先使用Homebrew安装的应用程序，而不是使用系统。[注：Homebrew不会破坏系统的一些软件或者环境变量]
+通过`brew doctor`命令可以检查系统中软件包可能存在的一些问题。添加`export PATH=/usr/local/bin:$PATH`到`~/.bash_profile`文件中，这样默认先使用Homebrew安装的应用程序，而不是使用系统。[注：Homebrew不会破坏系统的一些软件或者环境变量，另外，Homebrew下载的安装包存放在`/Library/Caches/Homebrew`目录中，创建的Formula存放在`/usr/local/Library/Formula`目录中]
 
 ```
 hujiawei-MacBook-Pro:~ hujiawei$ ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
@@ -62,7 +64,7 @@ Hi hujiaweibujidao! You've successfully authenticated, but GitHub does not provi
 
 网址：[http://penandpants.com/2012/02/24/install-python/](http://penandpants.com/2012/02/24/install-python/)
 
-使用Homebrew安装了python之后，python路径修改为 `/usr/local/bin/python` [原来在 `/usr/bin/python`]，`pip install <package>`命令会将软件包安装到`/usr/local/lib/python2.7/site-packages`中。
+使用Homebrew安装了python之后，python路径修改为 `/usr/local/bin/python` [原来在 `/usr/bin/python`]，`pip install <package>`命令会将模块安装到`/usr/local/lib/python2.7/site-packages`中。`pip list`命令查看已经安装的Python模块。
 
 ```
 hujiawei-MacBook-Pro:~ hujiawei$ brew install python
@@ -174,7 +176,50 @@ Scanning dependencies of target uninstall
 -- Uninstalling "/usr/local/bin/opencv_traincascade"
 Built target uninstall
 ```
-执行`brew linkapps`会将brew安装的python中的app链接到Applications中
+如果可以的话，使用Homebrew安装OpenCV
+
+参考网址：[http://www.jeffreythompson.org/blog/2013/08/22/update-installing-opencv-on-mac-mountain-lion/](http://www.jeffreythompson.org/blog/2013/08/22/update-installing-opencv-on-mac-mountain-lion/)  支持Mavericks
+
+其他关于搭建OpenCV环境的文章 [http://blog.sciencenet.cn/blog-702148-657754.html](http://blog.sciencenet.cn/blog-702148-657754.html)
+
+我的系统在执行`brew install jasper`时不知何原因不能继续，一直停留在`make install`状态，所以`brew install opencv`不能成功，即使我修改japser或者opencv的Formula文件也无济于事，最终尝试还是进行OpenCV源码编译，但是不安装到`/usr/local/`目录中，方法是修改下面的`CMAKE_INSTALL_PREFIX`
+
+```
+cd <path-to-opencv-source>
+mkdir release
+cd release
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/opencv .. 
+make
+sudo make install
+```
+但是，还有一个问题，无论在Xcode还是Eclipse中创建OpenCV项目都一样会报一个错，如下：
+
+```
+dyld: Library not loaded: lib/libopencv_core.2.4.dylib
+  Referenced from: /Users/hujiawei/Library/Developer/Xcode/DerivedData/PRWorks-gmeabxnfaunwiqbrvvjpxjlfkymu/Build/Products/Debug/PRWorks
+  Reason: image not found
+```
+
+即使你的路径都没错也还是不能加载到，不知道何原因，但是如果你直接将编译之后的所有dylib复制到`/usr/local/lib`中即可，不能是该目录下的某个文件夹！复制了之后，自然`brew doctor`会对此进行警告，无视吧。
+
+一个常用来测试OpenCV环境的项目代码如下，需要opencv_core和opencv_highgui两个库
+
+```
+#include <opencv2/opencv.hpp>
+using namespace cv;
+int main(int argc, char** argv) {
+	Mat image;
+	image = imread(
+			"/Users/hujiawei/Pictures/webimages/clone-your-octopress-001.png",
+			1);
+	namedWindow("Display Image", WINDOW_AUTOSIZE);
+	imshow("Display Image", image);
+	waitKey(0);
+	return 0;
+}
+```
+
+7.最后执行`brew linkapps`会将brew安装的python中的app链接到Applications中
 
 ```
 hujiawei-MacBook-Pro:~ hujiawei$ brew linkapps
@@ -183,7 +228,7 @@ Linking /usr/local/Cellar/python/2.7.6/Python Launcher.app
 Finished linking. Find the links under /Applications.
 ```
 
-7.最后使用`brew doctor`检查，修复问题。
+使用`brew doctor`检查，修复问题。
 
 ```
 hujiawei-MacBook-Pro:~ hujiawei$ brew doctor

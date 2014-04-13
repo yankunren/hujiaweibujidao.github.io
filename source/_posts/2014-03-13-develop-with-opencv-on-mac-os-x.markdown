@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "develop with opencv on mac"
+title: "Develop with OpenCV on Mac"
 date: 2014-03-13 19:23
 comments: true
 categories: opencv
@@ -33,7 +33,9 @@ sudo make install
 ```
 [完成之后在`/usr/local/include`目录下便有了`opencv`和`opencv2`两个目录，在`/usr/local/lib`目录下有很多的`opencv`相关的动态库，例如`libopencv_core.dylib`等等]
 
-[注，如果不需要了，想要卸载 OpenCV的话，可以回到`release`目录，执行`sudo make uninstall`，然后手动删除一些`/usr/local`下与OpenCV有关的目录]
+[注1:如果不需要了，想要卸载 OpenCV的话，可以回到`release`目录，执行`sudo make uninstall`，然后手动删除一些`/usr/local`下与OpenCV有关的目录]
+
+[注2:如果不想把OpenCV安装在默认的`/usr/local/`目录下的话，例如为了防止Homebrew中对opencv部分的报错，而使用Homebrew安装opencv都报错的情况，可以考虑将opencv安装到其他的位置，修改`CMAKE_INSTALL_PREFIX=/usr/local`即可]
 
 其他参考内容：[Building OpenCV from Source Using CMake, Using the Command Line](http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation)
 
@@ -73,10 +75,37 @@ int main(int argc, char** argv) {
 
 其他参考内容：[Installing OpenCV](https://sites.google.com/site/learningopencv1/installing-opencv)
 
+##### 阅读开源项目
+
+阅读开源项目[Mastering OpenCV with Practical Computer Vision Projects](https://github.com/MasteringOpenCV/code)中的代码，以第8章Face Recognition using Eigenfaces or Fisherfaces为例
+
+编写一个shell，内容如下(修改自`README.txt`)，其中的`OpenCV_DIR`为OpenCV源码编译后得到的文件夹(如上面的release目录)，执行这个shell便可以得到Xcode项目，当然打开这个项目之后还要修改相应的配置。
+
+```
+export OpenCV_DIR="/Volumes/hujiawei/Users/hujiawei/Android/opencv-2.4.6.1/build"
+mkdir build
+cd build
+cp $OpenCV_DIR/../data/lbpcascades/lbpcascade_frontalface.xml .
+cp $OpenCV_DIR/../data/haarcascades/haarcascade_eye.xml .
+cp $OpenCV_DIR/../data/haarcascades/haarcascade_eye_tree_eyeglasses.xml .
+cmake -G Xcode -D OpenCV_DIR=$OpenCV_DIR ..
+```
+
 
 #### 4.其他问题
 
-如果使用Eclipse开发的，首先要安装CDT插件，其次需要在opencv项目属性的`C/C++ General -> Paths and Symbols`中添加其他的路径，包括OpenCV所需的头文件，类似`<opencv_sdk>/sdk/native/jni/include`，此外，关于编译器GCC，我本机只是安装了Command Line Tools，但是该工具在系统升级到Maverick(10.9)时会出现一个链接问题，10.8及以下版本应该是没有问题。
+如果使用Eclipse开发的话按照下面的步骤进行：
+
+>1. 按照正常的步骤，使用eclipse建立一个Mac C++工程，包含一个cpp文件
+2. 右击工程名, 选择“Properties”，在属性配置页中选择，点击C/C++ Build, 在下拉选项中选择 Settings. 在右边的选项卡中选择 Tool Settings。
+3. 在GCC C++ Compiler选项列表中选择Includes，在Include paths(-l)中添加安装好的opencv的头文件存放目录：/usr/local/include/ [存放opencv头文件的目录]
+4. 在MacOS X C++Linker选项列表中选择Library，在Library search path (-L)中添加安装好的opencv Lib文件存放目录：/usr/local/lib/ [经过我的测试只能是这个目录！其他目录甚至是它的子目录都不行！如果在其他路径中，复制过来也行！]
+5. 在MacOS X C++Linker选项列表中选择Library, 在Libraries(-l) 中依次点击“＋”号，添加需要使用的Lib文件(通常情况下，使用前三个)：
+opencv_core opencv_imgproc opencv_highgui opencv_ml opencv_video opencv_features2d opencv_calib3d opencv_objdetect opencv_contrib opencv_legacy opencv_flann
+6. 重新build项目，运行即可。
+>
+
+下面是关于问题`ld: symbol(s) not found for architecture x86_64`的解释：
 
 ```
 There are two implementations of the standard C++ library available on OS X: libstdc++ and libc++. They are not binary compatible and libMLi3 requires libstdc++.
@@ -84,9 +113,11 @@ On 10.8 and earlier libstdc++ is chosen by default, on 10.9 libc++ is chosen by 
 To do this, add -stdlib=libstdc++ to the linking command.
 ```
 
-如果遇到问题`ld: symbol(s) not found for architecture x86_64`，检查代码中是否需要包含还没有添加的库文件。
+如果遇到问题`ld: symbol(s) not found for architecture x86_64`，先检查代码中是否需要包含还没有添加的库文件，再检查是否是其他问题。
 
 更多相关内容参考：
+
+[http://blog.sciencenet.cn/blog-702148-657754.html](http://blog.sciencenet.cn/blog-702148-657754.html)
 
 [C++ linking error after upgrading to Mac OS X 10.9 / Xcode 5.0.1](http://stackoverflow.com/questions/19637164/c-linking-error-after-upgrading-to-mac-os-x-10-9-xcode-5-0-1)
 
