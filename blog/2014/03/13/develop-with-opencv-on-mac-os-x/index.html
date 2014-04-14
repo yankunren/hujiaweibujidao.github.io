@@ -9,7 +9,7 @@
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="今天大部分时间都是在琢磨如何在Mac OS X上进行OpenCV项目的开发，最终选择的开发工具是Xcode(版本是4.6.1)，使用的OpenCV版本是2.4.6。 1.安装CMake 安装CMake可以使用MacPorts，也可以使用Homebrew， &hellip;">
+  <meta name="description" content="今天大部分时间都是在琢磨如何在Mac OS X上进行OpenCV项目的开发，尝试的开发工具有Xcode(版本是4.6.1)和Eclipse，使用的OpenCV版本是2.4.6。 如果只是需要OpenCV的相关头文件以及动态库，请直接执行brew install opencv（ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -112,11 +112,13 @@
   </header>
 
 
-<div class="entry-content"><p>今天大部分时间都是在琢磨如何在Mac OS X上进行OpenCV项目的开发，最终选择的开发工具是Xcode(版本是4.6.1)，使用的OpenCV版本是2.4.6。</p>
+<div class="entry-content"><p>今天大部分时间都是在琢磨如何在Mac OS X上进行OpenCV项目的开发，尝试的开发工具有Xcode(版本是4.6.1)和Eclipse，使用的OpenCV版本是2.4.6。</p>
+
+<p>如果只是需要OpenCV的相关头文件以及动态库，请直接执行<code>brew install opencv</code>（如果安装了Homebrew的话），如果不行，请看下面的OpenCV源码编译安装过程。</p>
 
 <h4>1.安装CMake</h4>
 
-<p>安装CMake可以使用MacPorts，也可以使用Homebrew，如果以前安装过两者中的任何一个就用那个进行安装吧，我用的是Homebrew，命令如下：</p>
+<p>安装CMake可以使用MacPorts，也可以使用Homebrew，如果以前安装过两者中的任何一个就用那个进行安装吧，我用的是Homebrew，推荐使用Homebrew，真正的“佳酿”，命令如下：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -144,13 +146,17 @@
 </span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
 
 
-<p>[完成之后在<code>/usr/local/include</code>目录下便有了<code>opencv</code>和<code>opencv2</code>两个目录，在<code>/usr/local/lib</code>目录下有很多的<code>opencv</code>相关的动态库，例如<code>libopencv_core.dylib</code>等等]</p>
+<p>[完成之后在<code>/usr/local/include</code>目录下便有了<code>opencv</code>和<code>opencv2</code>两个目录，在<code>/usr/local/lib</code>目录下有很多的<code>opencv</code>相关的动态库，例如<code>libopencv_core.dylib</code>等等，还有几个其他的文件，它们都存放在<code>/usr/local</code>目录下]</p>
 
-<p>[注1:如果不需要了，想要卸载 OpenCV的话，可以回到<code>release</code>目录，执行<code>sudo make uninstall</code>，然后手动删除一些<code>/usr/local</code>下与OpenCV有关的目录]</p>
+<p>[注1:如果不需要了，想要卸载 OpenCV的话，可以回到<code>release</code>目录，执行<code>sudo make uninstall</code>，然后手动删除一些<code>/usr/local</code>下与OpenCV有关的目录和文件]</p>
 
-<p>[注2:如果不想把OpenCV安装在默认的<code>/usr/local/</code>目录下的话，例如为了防止Homebrew中对opencv部分的报错，而使用Homebrew安装opencv都报错的情况，可以考虑将opencv安装到其他的位置，修改<code>CMAKE_INSTALL_PREFIX=/usr/local</code>即可]</p>
+<p>[注2:如果不想把OpenCV安装在默认的<code>/usr/local/</code>目录下的话，例如为了防止Homebrew中对opencv部分的报错，而又无法使用Homebrew正常安装opencv的情况下，可以考虑将opencv安装到其他的位置，修改<code>CMAKE_INSTALL_PREFIX=/usr/local</code>即可，但是在Eclipse中的项目中可能会出现问题，详情看后面]</p>
 
-<p>其他参考内容：<a href="http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation">Building OpenCV from Source Using CMake, Using the Command Line</a></p>
+<p>其他参考内容：</p>
+
+<p><a href="http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation">Building OpenCV from Source Using CMake, Using the Command Line</a></p>
+
+<p><a href="https://sites.google.com/site/learningopencv1/installing-opencv">Installing OpenCV</a></p>
 
 <h4>3.使用Xcode进行OpenCV项目开发</h4>
 
@@ -193,9 +199,42 @@
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<p>其他参考内容：<a href="https://sites.google.com/site/learningopencv1/installing-opencv">Installing OpenCV</a></p>
+<p>其他参考内容：</p>
 
-<h5>阅读开源项目</h5>
+<p><a href="http://stackoverflow.com/questions/19637164/c-linking-error-after-upgrading-to-mac-os-x-10-9-xcode-5-0-1">C++ linking error after upgrading to Mac OS X 10.9 / Xcode 5.0.1</a></p>
+
+<p><a href="http://mathematica.stackexchange.com/questions/34692/mathlink-linking-error-after-os-x-10-9-mavericks-upgrade">MathLink linking error after OS X 10.9 (Mavericks) upgrade</a></p>
+
+<h4>4.使用Eclipse进行OpenCV项目开发</h4>
+
+<p>如果使用Eclipse开发的话按照下面的步骤进行：</p>
+
+<blockquote><ol>
+<li>按照正常的步骤，使用eclipse建立一个Mac C++工程，包含一个cpp文件</li>
+<li>右击工程名, 选择“Properties”，在属性配置页中选择，点击C/C++ Build, 在下拉选项中选择 Settings. 在右边的选项卡中选择 Tool Settings。</li>
+<li>在GCC C++ Compiler选项列表中选择Includes，在Include paths(-l)中添加安装好的opencv的头文件存放目录：/usr/local/include/ [存放opencv头文件的目录]</li>
+<li>在MacOS X C++Linker选项列表中选择Library，在Library search path (-L)中添加安装好的opencv Lib文件存放目录：/usr/local/lib/ [<strong><em>经过我的测试只能是这个目录！其他目录甚至是它的子目录都不行！如果在其他路径中，复制过来也行！</em></strong>]</li>
+<li>在MacOS X C++Linker选项列表中选择Library, 在Libraries(-l) 中依次点击“＋”号，添加需要使用的Lib文件(通常情况下，使用前三个，注意不要包括前缀<code>lib</code>，可以添加版本号)：
+opencv_core opencv_imgproc opencv_highgui opencv_ml opencv_video opencv_features2d opencv_calib3d opencv_objdetect opencv_contrib opencv_legacy opencv_flann</li>
+<li>重新build项目，运行即可。</li>
+</ol>
+</blockquote>
+
+<p>如果遇到问题<code>ld: symbol(s) not found for architecture x86_64</code>，先检查代码中是否需要包含还没有添加的库文件，再检查是否是其他问题。如果是Mac平台，下面还有一个关于问题<code>ld: symbol(s) not found for architecture x86_64</code>的解释可供参考：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>There are two implementations of the standard C++ library available on OS X: libstdc++ and libc++. They are not binary compatible and libMLi3 requires libstdc++.
+</span><span class='line'>On 10.8 and earlier libstdc++ is chosen by default, on 10.9 libc++ is chosen by default. To ensure compatibility with libMLi3, we need to choose libstdc++ manually.
+</span><span class='line'>To do this, add -stdlib=libstdc++ to the linking command.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>更多相关内容参考：</p>
+
+<p><a href="http://blog.sciencenet.cn/blog-702148-657754.html">http://blog.sciencenet.cn/blog-702148-657754.html</a></p>
+
+<h5>5.阅读开源项目</h5>
 
 <p>阅读开源项目<a href="https://github.com/MasteringOpenCV/code">Mastering OpenCV with Practical Computer Vision Projects</a>中的代码，以第8章Face Recognition using Eigenfaces or Fisherfaces为例</p>
 
@@ -216,41 +255,6 @@
 </span><span class='line'>cp $OpenCV_DIR/../data/haarcascades/haarcascade_eye_tree_eyeglasses.xml .
 </span><span class='line'>cmake -G Xcode -D OpenCV_DIR=$OpenCV_DIR ..</span></code></pre></td></tr></table></div></figure>
 
-
-<h4>4.其他问题</h4>
-
-<p>如果使用Eclipse开发的话按照下面的步骤进行：</p>
-
-<blockquote><ol>
-<li>按照正常的步骤，使用eclipse建立一个Mac C++工程，包含一个cpp文件</li>
-<li>右击工程名, 选择“Properties”，在属性配置页中选择，点击C/C++ Build, 在下拉选项中选择 Settings. 在右边的选项卡中选择 Tool Settings。</li>
-<li>在GCC C++ Compiler选项列表中选择Includes，在Include paths(-l)中添加安装好的opencv的头文件存放目录：/usr/local/include/ [存放opencv头文件的目录]</li>
-<li>在MacOS X C++Linker选项列表中选择Library，在Library search path (-L)中添加安装好的opencv Lib文件存放目录：/usr/local/lib/ [经过我的测试只能是这个目录！其他目录甚至是它的子目录都不行！如果在其他路径中，复制过来也行！]</li>
-<li>在MacOS X C++Linker选项列表中选择Library, 在Libraries(-l) 中依次点击“＋”号，添加需要使用的Lib文件(通常情况下，使用前三个)：
-opencv_core opencv_imgproc opencv_highgui opencv_ml opencv_video opencv_features2d opencv_calib3d opencv_objdetect opencv_contrib opencv_legacy opencv_flann</li>
-<li>重新build项目，运行即可。</li>
-</ol>
-</blockquote>
-
-<p>下面是关于问题<code>ld: symbol(s) not found for architecture x86_64</code>的解释：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>There are two implementations of the standard C++ library available on OS X: libstdc++ and libc++. They are not binary compatible and libMLi3 requires libstdc++.
-</span><span class='line'>On 10.8 and earlier libstdc++ is chosen by default, on 10.9 libc++ is chosen by default. To ensure compatibility with libMLi3, we need to choose libstdc++ manually.
-</span><span class='line'>To do this, add -stdlib=libstdc++ to the linking command.</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果遇到问题<code>ld: symbol(s) not found for architecture x86_64</code>，先检查代码中是否需要包含还没有添加的库文件，再检查是否是其他问题。</p>
-
-<p>更多相关内容参考：</p>
-
-<p><a href="http://blog.sciencenet.cn/blog-702148-657754.html">http://blog.sciencenet.cn/blog-702148-657754.html</a></p>
-
-<p><a href="http://stackoverflow.com/questions/19637164/c-linking-error-after-upgrading-to-mac-os-x-10-9-xcode-5-0-1">C++ linking error after upgrading to Mac OS X 10.9 / Xcode 5.0.1</a></p>
-
-<p><a href="http://mathematica.stackexchange.com/questions/34692/mathlink-linking-error-after-os-x-10-9-mavericks-upgrade">MathLink linking error after OS X 10.9 (Mavericks) upgrade</a></p>
 
 <p class='post-footer'>
                         Original link:<a href='http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/'>http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
@@ -352,15 +356,12 @@ opencv_core opencv_imgproc opencv_highgui opencv_ml opencv_video opencv_features
 <section>
  <h1>分类目录</h1>
  <ul id="categories">
-	 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (1)</a></li>
-<li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
+	 <li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
 <li class='category'><a href='/blog/categories/ios/'>ios (1)</a></li>
 <li class='category'><a href='/blog/categories/mac/'>mac (1)</a></li>
 <li class='category'><a href='/blog/categories/matlab/'>matlab (1)</a></li>
-<li class='category'><a href='/blog/categories/ml/'>ml (1)</a></li>
 <li class='category'><a href='/blog/categories/mobiledev/'>mobiledev (5)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
-<li class='category'><a href='/blog/categories/oj/'>oj (1)</a></li>
 <li class='category'><a href='/blog/categories/opencv/'>opencv (5)</a></li>
 
  </ul>
@@ -370,23 +371,23 @@ opencv_core opencv_imgproc opencv_highgui opencv_ml opencv_video opencv_features
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/04/13/vertext-cover-problem/">Vertext Cover Problem</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/09/leetcode-oj-part1/">LeetCode OJ Part1</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2014/04/08/setting-up-environments-on-new-mac/">Setting Up Environments on New Mac</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/04/05/principal-component-analysis/">Principal Component Analysis</a>
+        <a href="/blog/2014/03/30/matlab-image-segmentation/">Matlab Image Segmentation</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/03/30/matlab-image-segmentation/">Matlab Image Segmentation</a>
+        <a href="/blog/2014/03/13/mobile-development-materials/">Material on Mobile Development</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/13/develop-with-opencv-on-mac-os-x/">Develop With OpenCV on Mac</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/21/android-ndk-and-opencv-development-4/">Android Ndk and Opencv Development 4</a>
       </li>
     
   </ul>
