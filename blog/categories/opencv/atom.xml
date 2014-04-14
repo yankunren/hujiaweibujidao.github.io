@@ -4,7 +4,7 @@
   <title><![CDATA[Category: opencv | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/opencv/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-14T19:17:32+08:00</updated>
+  <updated>2014-04-14T19:48:00+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -104,19 +104,19 @@ return 0;
 
 <p>如果使用Eclipse开发的话按照下面的步骤进行：</p>
 
-<p>1.按照正常的步骤，使用eclipse建立一个Mac C++工程，包含一个cpp文件</p>
+<p>1.按照正常的步骤，使用Eclipse建立一个<code>Mac C++</code>工程，包含一个cpp文件</p>
 
-<p>2.右击工程名, 选择“Properties”，在属性配置页中选择，点击C/C++ Build, 在下拉选项中选择 Settings. 在右边的选项卡中选择 Tool Settings。</p>
+<p>2.右击工程名, 选择<code>Properties</code>，在属性配置页中选择，点击<code>C/C++ Build</code>, 在下拉选项中选择 <code>Settings</code>. 在右边的选项卡中选择 <code>Tool Settings</code>。</p>
 
-<p>3.在GCC C++ Compiler选项列表中选择Includes，在Include paths(-l)中添加安装好的opencv的头文件存放目录：/usr/local/include/ [存放opencv头文件的目录]</p>
+<p>3.在<code>GCC C++ Compiler</code>选项列表中选择<code>Includes</code>，在<code>Include paths(-l)</code>中添加安装好的opencv的头文件存放目录：<code>/usr/local/include/</code> [存放opencv头文件的目录，自行看情况而定]</p>
 
-<p>4.在MacOS X C++Linker选项列表中选择Library，在Library search path (-L)中添加安装好的opencv Lib文件存放目录：/usr/local/lib/ [<strong><em>经过我的测试只能是这个目录！其他目录甚至是它的子目录都不行！如果在其他路径中，复制过来也行！</em></strong>]</p>
+<p>4.在<code>MacOS X C++Linker</code>选项列表中选择<code>Library</code>，在<code>Library search path (-L)</code>中添加安装好的opencv dylib文件存放目录：<code>/usr/local/lib/</code> [<strong><em>经过我的测试只能是这个目录！其他目录甚至是它的子目录都不行！如果在其他路径中，复制过来也行！</em></strong>]</p>
 
-<p>5.在MacOS X C++Linker选项列表中选择Library, 在Libraries(-l) 中依次点击“＋”号，添加需要使用的Lib文件(通常情况下，使用前三个，注意不要包括前缀<code>lib</code>，可以添加版本号)：</p>
+<p>5.在<code>MacOS X C++Linker</code>选项列表中选择<code>Library</code>, 在<code>Libraries(-l)</code> 中依次点击<code>＋</code>号，添加需要使用的lib文件(通常情况下，使用前三个，注意不要包括前缀<code>lib</code>，可以添加版本号)：</p>
 
 <p>opencv_core opencv_imgproc opencv_highgui opencv_ml opencv_video opencv_features2d opencv_calib3d opencv_objdetect opencv_contrib opencv_legacy opencv_flann</p>
 
-<p>6.重新build项目，运行即可。</p>
+<p>6.重新build项目即可。</p>
 
 <p>如果遇到问题<code>ld: symbol(s) not found for architecture x86_64</code>，先检查代码中是否需要包含还没有添加的库文件，再检查是否是其他问题。如果是Mac平台，下面还有一个关于问题<code>ld: symbol(s) not found for architecture x86_64</code>的解释可供参考：</p>
 
