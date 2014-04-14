@@ -1,9 +1,10 @@
 ---
 layout: post
-title: "vertext cover problem"
+title: "Vertext Cover Problem"
 date: 2014-04-13 23:57
 comments: true
 categories: algorithm
+published: false
 ---
 
 #### 1.问题描述

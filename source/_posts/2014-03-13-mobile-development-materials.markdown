@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "移动开发资料汇集"
+title: "Material on Mobile Development"
 date: 2014-03-13 20:28
 comments: true
 categories: mobiledev android ios

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Setting up environments on new Mac"
+title: "Setting Up Environments on New Mac"
 date: 2014-04-08 11:13
 comments: true
 categories: mac
