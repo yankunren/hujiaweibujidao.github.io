@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-14T00:12:15+08:00</updated>
+  <updated>2014-04-14T08:59:00+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[vertext cover problem]]></title>
+    <title type="html"><![CDATA[Vertext Cover Problem]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem/"/>
     <updated>2014-04-13T23:57:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem</id>
@@ -114,7 +114,120 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Setting up environments on new Mac]]></title>
+    <title type="html"><![CDATA[LeetCode OJ Part1]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/04/09/leetcode-oj-part1/"/>
+    <updated>2014-04-09T18:18:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/04/09/leetcode-oj-part1</id>
+    <content type="html"><![CDATA[<p>为了找以后工作嘛，挑战下LeetCode OJ，顺序可能与OJ上的顺序不同哟，慢慢增加&hellip;</p>
+
+<p>注，我附上的代码都包含了测试代码，提交的代码中不需要测试部分，我保留是因为某些题中有些测试样例比较特殊，为了提醒自己不要再犯同样的错！</p>
+
+<p>1.Reverse Words in a String</p>
+
+<p>字符串题，字符串分割再反转</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Solution:
+</span><span class='line'>    # @param s, a string
+</span><span class='line'>    # @return a string
+</span><span class='line'>    def reverseWords(self, s):
+</span><span class='line'>        l = s.strip().split()
+</span><span class='line'>        l.reverse()
+</span><span class='line'>        return ' '.join(l)
+</span><span class='line'>if __name__ == '__main__':
+</span><span class='line'>    teststrs = ('helo world', ' hel hj ')
+</span><span class='line'>    so = Solution()
+</span><span class='line'>    for test in teststrs:
+</span><span class='line'>        print so.reverseWords(test)    </span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.Evaluate Reverse Polish Notation</p>
+
+<p>栈的利用，逆波兰表达式求值</p>
+
+<p>注：在Java中<code>6/(-132)=0</code>但是在Python中<code>6/(-132)=-1</code>，OJ认为0是正解，所以Python中进行除法运算时使用<code>int(float(m)/float(n))</code>。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Solution:
+</span><span class='line'>    # @param tokens, a list of string
+</span><span class='line'>    # @return an integer
+</span><span class='line'>    def evalRPN(self, tokens):
+</span><span class='line'>        stack = []
+</span><span class='line'>        result = 0
+</span><span class='line'>        for token in tokens:
+</span><span class='line'>            if (token in '+-*/'):
+</span><span class='line'>                result = self.calculate(token, int(stack.pop()), int(stack.pop()))
+</span><span class='line'>                stack.append(result)
+</span><span class='line'>            else:
+</span><span class='line'>                stack.append(int(token))
+</span><span class='line'>        return stack.pop()
+</span><span class='line'>    def calculate(self, token, n, m):
+</span><span class='line'>        if token.__eq__('+'):
+</span><span class='line'>            return n + m
+</span><span class='line'>        elif token.__eq__('-'):
+</span><span class='line'>            return m - n
+</span><span class='line'>        elif token.__eq__('*'):
+</span><span class='line'>            return n * m
+</span><span class='line'>        elif token.__eq__('/'):
+</span><span class='line'>            return int(float(m) / float(n))
+</span><span class='line'>if __name__ == '__main__':
+</span><span class='line'>    tests = [["18"],["10","6","9","3","+","-11","*","/","*","17","+","5","+"]];
+</span><span class='line'>    so = Solution()
+</span><span class='line'>    for test in tests:
+</span><span class='line'>        print so.evalRPN(test)  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>3.Max Points on a Line</p>
+
+<p>在平面上的点集合中找到在同一条线上最多的点集合的个数</p>
+
+<p>注：相同的点重复计算点个数</p>
+
+<p class='post-footer'>
+                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2014/04/09/leetcode-oj-part1/'>http://hujiaweibujidao.github.io/blog/2014/04/09/leetcode-oj-part1/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Setting Up Environments on New Mac]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/08/setting-up-environments-on-new-mac/"/>
     <updated>2014-04-08T11:13:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/08/setting-up-environments-on-new-mac</id>
@@ -469,6 +582,31 @@
 
 <p class='post-footer'>
                         Original link:<a href='http://hujiaweibujidao.github.io/blog/2014/04/08/setting-up-environments-on-new-mac/'>http://hujiaweibujidao.github.io/blog/2014/04/08/setting-up-environments-on-new-mac/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[principal component analysis]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/04/05/principal-component-analysis/"/>
+    <updated>2014-04-05T22:53:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/04/05/principal-component-analysis</id>
+    <content type="html"><![CDATA[<p>PCA</p>
+
+<ol>
+<li></li>
+</ol>
+
+
+<p>参考资料:</p>
+
+<p>1.<a href="http://www.doc.ic.ac.uk/~dfg/ProbabilisticInference/IDAPILecture15.pdf">Lecture 15: Principal Component Analysis</a>
+介绍了PCA基本原理，也介绍了PCA在人脸识别中的应用
+2.<a href="http://bytefish.de/blog/pca_lda_with_gnu_octave/">Bytefish&rsquo;s Blog about Principal Component and Linear Discriminant Analysis</a>
+Bytefish的博客中介绍了PCA和LDA，以及如何将它们应用到人脸识别中。他是OpenCV内置人脸识别算法的作者，他的博客中有算法的详细讲解。</p>
+
+<p class='post-footer'>
+                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2014/04/05/principal-component-analysis/'>http://hujiaweibujidao.github.io/blog/2014/04/05/principal-component-analysis/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 
 ]]></content>
   </entry>
