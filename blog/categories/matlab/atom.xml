@@ -4,7 +4,7 @@
   <title><![CDATA[Category: matlab | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/matlab/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-14T19:10:22+08:00</updated>
+  <updated>2014-04-14T19:12:28+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -130,7 +130,9 @@ imshow(result);
 
 <p>2.基于OSTU算法的自动阈值图像分割</p>
 
-<p>[这块我还没有细究&hellip;] Matlab内置的<code>graythresh</code>使用的便是OSTU算法，使得白色像素和黑色像素的类间方差最大。</p>
+<p>[这块我还没有细究&hellip;To be continued&hellip;&hellip;]</p>
+
+<p>Matlab内置的<code>graythresh</code>使用的便是OSTU算法，使得白色像素和黑色像素的类间方差最大。</p>
 
 <p>因为上面测试图像的亮度存在明显的水平差异，所以我写了一个将图像沿水平方向分成几部分分别进行OSTU算法，效果明显又比上面两种方式要好些。</p>
 
