@@ -1,0 +1,484 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Vertext Cover Problem - Hujiawei Bujidao</title>
+  <meta name="author" content="hujiawei">
+
+  
+  <meta name="description" content="1.问题描述 给定一个N个点M条边的无向图G（点的编号从1至N），问是否存在一个不超过K个点的集合S，使得G中的每条边都至少有一个点在集合S中。 例如，如下图所示的无向图G（报告中算法分析过程中一直使用下面的图G） (1)如果选择包含点1,2,6这3个点的集合S不能满足条件，因为边(3,7) &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<!-- add Mathjax support-->
+<!--
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+-->
+  
+
+</head>
+
+<body   >
+	<header role="banner">
+		<hgroup style="text-align: center">
+	<h1><a href="/"><img src="/images/conan-paper-small.png"  />Hujiawei Bujidao<img src="/images/conan-hat-small.png"  /></a></h1>
+	
+	<h2>I will always be your savior! A secret makes a man man!</h2>
+	
+	
+</hgroup>
+
+
+	</header>
+	<nav role="navigation">
+		<ul class="subscription" data-subscription="rss">
+
+  <!-- <li><a href="https://github.com/hujiaweibujidao" rel="subscribe-rss" title="subscribe via RSS">View me on GitHub</a></li> -->
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+   
+</ul>
+
+  <!--
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hujiaweibujidao.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form> 
+  
+  -->
+<ul class="main-navigation">
+  <li><a href="/blog/archives/">Blog</a></li>
+  <li><a href="/aboutme/">AboutMe</a></li>
+  <li><a href="/math/">Math</a></li>
+  <!--
+  <li><a href="/datamining/">DataMining</a></li>
+  -->
+  <li><a href="/blog/categories/mobiledev/">MobileDev</a></li>
+  <!--
+  <li><a href="/xjava/">XJava</a></li>
+  -->
+  <!-- <li><a href="/datamining/">Projects</a></li> -->
+  <!--
+  <li><a href="/blog/archives">Archives</a></li>
+  -->
+</ul>
+
+
+	</nav>
+	<div id="main">
+		<div id="content">
+			<div>
+	<article class="hentry" role="article">
+		
+  <header>
+    
+      <h1 class="entry-title">Vertext Cover Problem</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-13T23:57:00+08:00" pubdate data-updated="true">Apr 13<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h4>1.问题描述</h4>
+
+<p>给定一个N个点M条边的无向图G（点的编号从1至N），问是否存在一个不超过K个点的集合S，使得G中的每条边都至少有一个点在集合S中。</p>
+
+<p>例如，如下图所示的无向图G（报告中算法分析过程中一直使用下面的图G）</p>
+
+<p>(1)如果选择包含点1,2,6这3个点的集合S不能满足条件，因为边(3,7)两个端点都不在S中。</p>
+
+<p><img src="/images/201404/exp1-3.png" alt="image" /></p>
+
+<p>(2)如果选择包含点1,2,6,7这4个点的集合S虽然满足条件，但是它使用了4个点，其实可以使用更少的点，如下面(3)所示</p>
+
+<p><img src="/images/201404/exp1-2.png" alt="image" /></p>
+
+<p>(3)如果选择包含点1,3,5这3个点的集合S便满足条件，使得G中的每条边都至少有一个点在集合S中。</p>
+
+<p><img src="/images/201404/exp1-1.png" alt="image" /></p>
+
+<h4>2.解题思路</h4>
+
+<p>我的解题思路基于分支定界和贪心两个策略，用一个优先队列维护当前可行的节点，每个节点维护着该节点情况下还可以选择的顶点数目k、需要覆盖的剩余边数e、顶点的状态state、顶点的边数edge等信息，这些节点的排序遵循下面的贪心策略，节点的扩展遵循下面的分支定界策略。总体思路是：</p>
+
+<p>①将原图数据构造成一个解空间树的节点，利用定界策略判断是否有解，如果无解直接退出，如果有可能有解则插入到优先队列中；</p>
+
+<p>②若优先队列不为空，那么便从优先队列中取出第一个可行的节点，进入步骤③，如果优先队列为空则退出；</p>
+
+<p>③判断当前节点是否满足解的条件，如果满足便输出解退出，如果不满足便进入步骤④；</p>
+
+<p>④检查当前节点是否可以扩展，不能扩展的话便进入②继续循环，如果能扩展的话则扩展，然后验证扩展到左右节点是否有解，将有解的扩展节点插入到优先队列中，然后进入②继续循环。</p>
+
+<p>下面分别介绍下分支定界和贪心这两个策略：</p>
+
+<h5>(1)分支定界策略</h5>
+
+<p>首先，界的选择。在一个确定的无向图G中，每个顶点的边即确定了，那么对于该无向图中k个顶点能够覆盖的最多的边数e也就可以确定了！只要对顶点按照边的数目降序排列，然后选择前k个顶点，将它们的边数相加即能得到一个边数上界！因为这k个顶点相互之间可能有边存在也可能没有，所以这是个上界，而且有可能达到。以图G为例，各个顶点的边数统计，并采用降序排列的结果如下：</p>
+
+<!--顶点 | 2 | 3 | 1| 5 | 6| 4| 7 
+--| --| --|--|--|--|--|--
+边数 | 3 | 3 | 2| 2| 2| 1| 1-->
+
+
+<!--
+顶点 | 边数
+----| ---- 
+2 | 3 
+3 | 3
+1 | 2 
+5 | 2
+6 | 2
+4 | 1
+7 | 1-->
+
+
+<p><img src="/images/201404/exp1-f3.png" alt="image" /></p>
+
+<p>假设取k=3个点，那么有Up(e)=(3+3+2)=8 > 7 条边（7为图G的总边数），也就是说，如果从图G中取3个点，要覆盖8条边是有可能的。但是，如果取k=2个点，那么有Up(e)=(3+3)=6 &lt; 7 条边，说明从图G中取2个点，是不可能覆盖G中的全部7条边的！基于这个上界，可以在分支树中扩展出来的节点进行验证，已知它还可以选择的顶点数目以及还需要覆盖的边的条数，加上顶点的状态（下面会分析说明）即可判断当前节点是否存在解！如果不存在即可进行剪枝了。</p>
+
+<p>其次，顶点的状态。该策略中顶点有三种状态，分别为已经选择了的状态S1，不选择的状态S2，可以选择的状态S3。其中，不选择的状态S2对应解空间树中的右节点，不选择该节点，然后设置该节点为不选择状态S2。这点很重要，因为有了这个状态，可以使得上界的判断更为精确，因为只能从剩余顶点集中选择那些状态S3的顶点，状态S1和S2都不行，那么上界便会更小，也就更加精确，从而利于剪枝！</p>
+
+<h5>(2)贪心策略</h5>
+
+<p>贪心的策略是指可行的结点都是按照还需要覆盖的剩余边数的降序排列，即，每次选择的节点都是可行节点中还需要覆盖的边数最小的那个节点，因为它最接近结果了。</p>
+
+<h5>(3)例子分析</h5>
+
+<p>以图G为例，此时e=7（要覆盖的边数），取k=3，图G用邻接矩阵保存为全局数据，计算每个顶点的边数，然后降序排列。</p>
+
+<p>步骤①判断是否可能有解，Up(e)=3+3+2=8>7，可能有解，那么将图G构造成一个解空间树的节点，它包含了还能选择的点数k=3，还需要覆盖的边数e=7，每个顶点的边数以及按边数大小的降序排列（上表），每个顶点的状态（初始时都是可选择的状态S3）。然后，将该节点插入到优先队列中，该优先队列是用最小堆实现的，按照前面的贪心策略对队列中的节点进行降序排列。</p>
+
+<p>步骤②取出了优先队列中的根节点，很显然，还需要覆盖的边数为7，不为0，所以还不满足条件。接下来要检查是否能够进行扩展，从顶点集合中选择状态为可以选择的顶点中边数最多的点，该点存在为顶点2，接着进行扩展，扩展左节点时将还能选择的点数k-1=2，然后计算选择了该点之后删除了几条未覆盖的边，得到还需要覆盖的边数e=4，然后更新所有其他顶点的边数，并重新排序，最后将顶点2的状态设置为已经选择了；扩展右节点时，只要将顶点2的状态设置为不能选择，还能选择的点数k(=3)，还需要覆盖的边数e(=7)保持不变。扩展完了之后，同样判断左右节点是否可能有解，如果有解，将该节点插入到优先队列中。这里左右节点都有解，那么将左右节点都插入到优先队列中，因为左节点还需要覆盖的边数e=4小于右节点的e=7，所以根据贪心策略，左节点在右节点的前面。上面两个步骤的图示如下，其中标明了顶点状态颜色。</p>
+
+<p><img src="/images/201404/exp1-f1.png" alt="image" /></p>
+
+<p>算法然后继续进入步骤②，此时取出的是节点是刚才插入的左节点，很显然，还需要覆盖的边数为4，不为0，所以还不满足条件。接下来要检查是否能够进行扩展，从顶点集合中选择状态为可以选择的顶点中边数最多的点，该点存在为顶点3，接着进行扩展，扩展左节点时将还能选择的点数k-1=1，然后计算选择了该点之后删除了几条未覆盖的边，得到还需要覆盖的边数e=2，然后更新所有其他顶点的边数，并重新排序，最后将顶点3的状态设置为已经选择了；扩展右节点时，只要将顶点3的状态设置为不能选择，还能选择的点数k(=3)，还需要覆盖的边数e(=7)保持不变。扩展完了之后，同样判断左右节点是否可能有解，如果有解，将该节点插入到优先队列中。这里左右节点都不可能有解，那么直接进入步骤②继续循环。上面这一步的图示如下：</p>
+
+<p><img src="/images/201404/exp1-f2.png" alt="image" /></p>
+
+<p>算法按照上面的方式不断进行，最后满足条件的分支的过程是：</p>
+
+<p>①不选择顶点2；②选择顶点3；③选择顶点1；④选择顶点5。</p>
+
+<p>最后得到的满足条件的解是选择顶点1,3,5。</p>
+
+<h4>(4)复杂度分析</h4>
+
+<p>该算法优先队列使用的是最小堆实现的(O(nlgn))，对顶点按照边排序使用的是快速排序算法(O(nlgn))，解空间树的深度最多为顶点数目n，每层都要进行分支定界，所以每层的时间复杂度为O(nlgn)，所以算法总的时间复杂度为O(n<sup>2</sup> lgn)。但是，为了实现分支定界，每个节点保存的信息量较多，空间复杂度较大。(有木有分析错了，我不太会分析复杂度)</p>
+
+<p>OJ系统的结果为：时间 156ms  空间 1.0MB</p>
+
+<p class='post-footer'>
+                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem/'>http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+
+</div>
+
+
+		<footer>
+			<p class="meta">
+				
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hujiawei</span></span>
+
+				
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-13T23:57:00+08:00" pubdate data-updated="true">Apr 13<span>th</span>, 2014</time>
+				
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
+  
+</span>
+
+
+			</p>
+			
+			<div class="sharing">
+  
+  
+  
+</div>
+
+			
+			<p class="meta">
+				
+				<a class="basic-alignment left" href="/blog/2014/04/08/setting-up-environments-on-new-mac/" title="Previous Post: Setting Up Environments on New Mac">&laquo; Setting Up Environments on New Mac</a>
+				
+				
+				<a class="basic-alignment right" href="/blog/2014/04/15/flying-on-mac/" title="Next Post: Flying on Mac">Flying on Mac &raquo;</a>
+				
+			</p>
+		</footer>
+	</article>
+	
+
+	
+	<section>
+		<h1>Comments</h1>
+		<div id="comments" aria-live="polite">
+			<!-- Duoshuo Comment BEGIN   data-title=""-->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hujiaweibujidao"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+
+		</div>
+	</section>
+	
+
+</div>
+
+<aside class="sidebar">
+	
+	<section>
+  <h1>关于博主</h1><br/>
+  <a href="/aboutme/"><img src="/images/me-small.png" width="250px" height="210px" alt="protrait"/></a><br/>
+  <p>Hi, I'm Hujiawei, from P.R.China. Now I'm a postgraduate student studying in <a href="http://www.tsinghua.edu.cn/publish/th/index.html">Tsinghua University</a>.
+  Wanna know me? <a href="/aboutme/">See here.</a> <br/>	
+  </p>
+  <a href="http://weibo.com/hujiaweiyinger"><img src="/images/sinaweibo.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://github.com/hujiaweibujidao"><img src="/images/github.png" width="40px" height="40px"/></a>&nbsp;
+  <a href="http://hujiawei.tumblr.com"><img src="/images/tumblr.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://twitter.com/hujiaweiyinger"><img src="/images/twitter.png" width="40px" height="40px"/></a>
+  
+  <br/>
+  
+</section>
+<section>
+ <h1>分类目录</h1>
+ <ul id="categories">
+	 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (1)</a></li>
+<li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
+<li class='category'><a href='/blog/categories/ios/'>ios (1)</a></li>
+<li class='category'><a href='/blog/categories/mac/'>mac (2)</a></li>
+<li class='category'><a href='/blog/categories/matlab/'>matlab (1)</a></li>
+<li class='category'><a href='/blog/categories/mobiledev/'>mobiledev (5)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/opencv/'>opencv (5)</a></li>
+
+ </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/04/15/flying-on-mac/">Flying on Mac</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/13/vertext-cover-problem/">Vertext Cover Problem</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/08/setting-up-environments-on-new-mac/">Setting Up Environments on New Mac</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/30/matlab-image-segmentation/">Matlab Image Segmentation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/13/mobile-development-materials/">Material on Mobile Development</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+	<h1>好友博客</h1>
+	<ul>
+		<li>
+			<a href="http://doufunao.github.io/">豆腐脑的幻想乡</a>
+		</li>
+		<li>
+			<a href="http://c4fun.cn/">Code 4 Fun</a>
+		</li>
+		<li>
+			<a href="http://www.tanglei.name/">TangLei blog</a>
+		</li>
+		<li>
+			<a href="http://ontheroad.sinaapp.com/">Tian Jun-Find My Way</a>
+		</li>
+		
+		<li>
+			<a href="http://www.liaoxuefeng.com/">廖雪峰的官方网站</a>
+		</li>
+		<li>
+			<a href="http://wufawei.com/">Ted's Homepage</a>
+		</li>
+		<li>
+			<a href="http://www.renfei.org/blog/">Renfei Song</a>
+		</li>
+		<li>
+			<a href="http://bluedavy.me">BlueDavy之技术blog</a>
+		</li>
+		
+		<li>
+			<a href="#">这里会是你吗?</a>
+		</li>
+	</ul>
+</section>
+	
+</aside>
+
+
+
+		</div>
+	</div>
+	
+	<footer role="contentinfo">
+		<p>
+	Copyright &copy; 2014 - hujiawei - <a href="http://happybirthday2yinger.duapp.com/">Happy birthday to MY QUEEN</a> - <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
+	<!-- CNZZ -->
+	&nbsp;&nbsp;
+	<script type="text/javascript">
+		var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+		document.write(unescape("%3Cspan id='cnzz_stat_icon_1000165127'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000165127%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<!-- license -->
+	<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="http://i.creativecommons.org/l/by-nd/3.0/88x31.png" /></a>
+	<br />
+	本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh">知识共享署名-禁止演绎 3.0 未本地化版本许可协议</a>进行许可。
+</p>
+<style>
+	.returnTop {
+		position: fixed;
+		_position: absolute;
+		right: 10px;
+		bottom: 200px;
+		_bottom: auto;
+		display: none;
+		width: 40px;
+		height: 40px;
+		border: 1px solid #61b72e;
+		border-radius: 4px;
+		background: #fff;
+		box-shadow: 0 0 5px #F5F5F5;
+		text-indent: -9999px;
+		cursor: pointer;
+	}
+	.returnTop .s {
+		position: absolute;
+		top: -2px;
+		_top: -20px;
+		left: 10px;
+		width: 0;
+		height: 0;
+		border-width: 10px;
+		border-color: transparent transparent #61b72e;
+		border-style: dashed dashed solid;
+	}
+	.returnTop .b {
+		position: absolute;
+		top: 18px;
+		left: 16px;
+		height: 12px;
+		width: 8px;
+		background: #61b72e;
+	}
+</style>
+<div class="returnTop" title="嗖的就上去了！">
+	<span class="s"></span>
+	<span class="b"></span>
+	返回顶部
+</div>
+<script type="text/javascript">
+$(function(){
+$(window).bind("scroll", function(){
+
+var scrollTopNum = $(document).scrollTop(),
+winHeight = $(window).height(),
+returnTop = $("div.returnTop");
+
+(scrollTopNum > 0) ? returnTop.fadeIn("fast") : returnTop.fadeOut("fast");
+
+if (!-[1,]&&!window.XMLHttpRequest) {
+returnTop.css("top", scrollTopNum + winHeight - 200);
+}
+
+});
+
+$("div.returnTop").click(function() {
+$("html, body").animate({ scrollTop: 0 }, 100);
+});
+
+});
+</script>
+
+
+
+	</footer>
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
