@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-23T23:32:29+08:00</updated>
+  <updated>2014-04-23T23:34:34+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -28,7 +28,32 @@
 
 <p>不知为何，最近加上了这句Math公式还是没有显示出来，貌似Mou并没有去加载这个js的样子，于是我尝试在浏览器中直接访问，将这个js中的所有内容复制进来，这样Mou有显示正常了，数学公式都没有问题！ :&ndash;) 如果你不能访问，放心，我已经将这个js的源码放在<a href="https://gist.github.com/hujiaweibujidao/11146289">这个Gist中</a>。</p>
 
-<p>如果还是不行的话，那么建议使用<a href="https://stackedit.io/">stackedit</a>，感谢@beader的建议！还有一个问题是stackedit是在线编辑的，图片要保存到Google Driver中(或者有个特定的网址)，另外，它和Mou中内置的MathJax的渲染解析工具略有不同，例如对于行内Math的插入上，这时候</p>
+<p>如果还是不行的话，那么建议使用<a href="https://stackedit.io/">stackedit</a>，感谢@beader的建议！还有一个问题是stackedit是在线编辑的，图片要保存到Google Driver中(或者有个特定的网址)，另外，它和Mou中内置的MathJax的渲染解析工具略有不同，例如对于行内Math的插入上，这时候推荐按照<a href="http://blog-jfttt.herokuapp.com/blog/2013/12/26/add-latex/">这位博主的方式修改</a>，添加下面的代码：</p>
+
+<p>```</p>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+
+<p>```</p>
 ]]></content>
   </entry>
   

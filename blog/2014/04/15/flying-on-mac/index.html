@@ -127,7 +127,41 @@
 
 <p>不知为何，最近加上了这句Math公式还是没有显示出来，貌似Mou并没有去加载这个js的样子，于是我尝试在浏览器中直接访问，将这个js中的所有内容复制进来，这样Mou有显示正常了，数学公式都没有问题！ :&ndash;) 如果你不能访问，放心，我已经将这个js的源码放在<a href="https://gist.github.com/hujiaweibujidao/11146289">这个Gist中</a>。</p>
 
-<p>如果还是不行的话，那么建议使用<a href="https://stackedit.io/">stackedit</a>，感谢@beader的建议！还有一个问题是stackedit是在线编辑的，图片要保存到Google Driver中(或者有个特定的网址)，另外，它和Mou中内置的MathJax的渲染解析工具略有不同，例如对于行内Math的插入上，这时候</p>
+<p>如果还是不行的话，那么建议使用<a href="https://stackedit.io/">stackedit</a>，感谢@beader的建议！还有一个问题是stackedit是在线编辑的，图片要保存到Google Driver中(或者有个特定的网址)，另外，它和Mou中内置的MathJax的渲染解析工具略有不同，例如对于行内Math的插入上，这时候推荐按照<a href="http://blog-jfttt.herokuapp.com/blog/2013/12/26/add-latex/">这位博主的方式修改</a>，添加下面的代码：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!-- mathjax config similar to math.stackexchange --&gt;
+</span><span class='line'>&lt;script type="text/x-mathjax-config"&gt;
+</span><span class='line'>MathJax.Hub.Config({
+</span><span class='line'>  jax: ["input/TeX", "output/HTML-CSS"],
+</span><span class='line'>  tex2jax: {
+</span><span class='line'>    inlineMath: [ ['$', '$'] ],
+</span><span class='line'>    displayMath: [ ['$$', '$$']],
+</span><span class='line'>    processEscapes: true,
+</span><span class='line'>    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+</span><span class='line'>  },
+</span><span class='line'>  messageStyle: "none",
+</span><span class='line'>  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+</span><span class='line'>});
+</span><span class='line'>&lt;/script&gt;
+</span><span class='line'>&lt;script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"&gt;&lt;/script&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
 
 <p class='post-footer'>
                         Original link:<a href='http://hujiaweibujidao.github.io/blog/2014/04/15/flying-on-mac/'>http://hujiaweibujidao.github.io/blog/2014/04/15/flying-on-mac/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
