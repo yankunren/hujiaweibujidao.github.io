@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-23T23:48:28+08:00</updated>
+  <updated>2014-04-23T23:54:27+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -72,10 +72,8 @@
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!-- import js for mathjax --&gt;
-</span><span class='line'>&lt;script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"&gt;
-</span><span class='line'>&lt;/script&gt;</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>&lt;script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"&gt;&lt;/script&gt;</span></code></pre></td></tr></table></div></figure>
 
 
 <p>该链接指向的是Mathjax的js，用来渲染Math公式，Mou支持Mathjax。为了减轻Octopress加载的负担，可以只在需要使用Mathjax的博文中添加一行js即可，不需要将它放在自定义的<code>head.html</code>文件中。</p>

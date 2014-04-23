@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-23T23:48:28+08:00</updated>
+  <updated>2014-04-23T23:54:27+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -27,8 +27,7 @@
 <!-- import js for mathjax -->
 
 
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default">
-</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
 
 <p>```</p>
