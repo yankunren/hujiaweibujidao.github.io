@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-23T22:11:12+08:00</updated>
+  <updated>2014-04-23T22:13:58+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Numerical Methods using Matlab]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/"/>
+    <updated>2014-04-23T22:13:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab</id>
+    <content type="html"><![CDATA[<p>一本关于数值算法与应用的总结小书</p>
+
+<p>目前写了四个章节：[点击章节标题可以直接查看并下载 (^o^)/~]</p>
+
+<ul>
+<li><a href="http://hujiaweibujidao.github.io/files/nm-chapter1.pdf">第一章 线性方程组求解</a></li>
+</ul>
+
+
+<p>内容包括：高斯消去法，LU分解，Cholesky分解，矩阵的逆矩阵求解</p>
+
+<ul>
+<li><a href="http://hujiaweibujidao.github.io/files/nm-chapter2.pdf">第二章 非线性方程求解</a></li>
+</ul>
+
+
+<p>内容包括：二分法，牛顿法，割线法，IQI法，Zeroin算法</p>
+
+<ul>
+<li><a href="http://hujiaweibujidao.github.io/files/nm-chapter3.pdf">第三章 矩阵特征值和奇异值求解</a></li>
+</ul>
+
+
+<p>内容包括：基本幂法，逆幂法和移位幂法，QR分解，Householder变换，实用QR分解技术，奇异值分解SVD</p>
+
+<ul>
+<li><a href="http://hujiaweibujidao.github.io/files/nm-chapter4.pdf">第四章 曲线拟合和多项式插值</a></li>
+</ul>
+
+
+<p>内容包括：曲线拟合，拉格朗日插值多项式，牛顿插值多项式，分段线性插值，保形分段三次插值，三次样条插值</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201311/nm-cover.png" width="600" height="600" title="" >
+<img src="http://hujiaweibujidao.github.io/images/201311/nm-chapter.png" width="600" height="600" title="" >
+<img src="http://hujiaweibujidao.github.io/images/201311/nm-math.png" width="600" height="600" title="" >
+<img src="http://hujiaweibujidao.github.io/images/201311/nm-code.png" width="600" height="600" title="" ></p>
+
+<p class='post-footer'>
+                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/'>http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Flying on Mac]]></title>
