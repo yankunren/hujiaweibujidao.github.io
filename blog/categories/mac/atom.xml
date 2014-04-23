@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-23T23:24:25+08:00</updated>
+  <updated>2014-04-23T23:32:29+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -24,9 +24,11 @@
 
 <blockquote><p><a href="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default">http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default</a></p></blockquote>
 
-<p>该链接指向的是Mathjax的js，用来渲染Math公式，Mou支持Mathjax。为了减轻Octopress加载的负担，可以只在需要使用Mathjax的博文中添加上面的代码，不需要将它放在自定义的<code>head.html</code>文件中。</p>
+<p>该链接指向的是Mathjax的js，用来渲染Math公式，Mou支持Mathjax。为了减轻Octopress加载的负担，可以只在需要使用Mathjax的博文中添加一行js即可，不需要将它放在自定义的<code>head.html</code>文件中。</p>
 
 <p>不知为何，最近加上了这句Math公式还是没有显示出来，貌似Mou并没有去加载这个js的样子，于是我尝试在浏览器中直接访问，将这个js中的所有内容复制进来，这样Mou有显示正常了，数学公式都没有问题！ :&ndash;) 如果你不能访问，放心，我已经将这个js的源码放在<a href="https://gist.github.com/hujiaweibujidao/11146289">这个Gist中</a>。</p>
+
+<p>如果还是不行的话，那么建议使用<a href="https://stackedit.io/">stackedit</a>，感谢@beader的建议！还有一个问题是stackedit是在线编辑的，图片要保存到Google Driver中(或者有个特定的网址)，另外，它和Mou中内置的MathJax的渲染解析工具略有不同，例如对于行内Math的插入上，这时候</p>
 ]]></content>
   </entry>
   
