@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-23T23:54:27+08:00</updated>
+  <updated>2014-04-23T23:59:57+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -63,6 +63,13 @@ MathJax.Hub.Config({
 
 <p>```</p>
 
+<p>测试：The <em>Gamma function</em> satisfying $\Gamma(n) = (n-1)!\quad\forall
+n\in\mathbb N$ is via the Euler integral</p>
+
+<p>$$
+\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
+$$</p>
+
 <!-- mathjax config similar to math.stackexchange -->
 
 
@@ -83,13 +90,6 @@ MathJax.Hub.Config({
 
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 
-
-<p>The <em>Gamma function</em> satisfying $\Gamma(n) = (n-1)!\quad\forall
-n\in\mathbb N$ is via the Euler integral</p>
-
-<p>$$
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-$$</p>
 ]]></content>
   </entry>
   
