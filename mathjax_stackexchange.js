@@ -1,4 +1,4 @@
-<!-- Mathjax StackExchange -->
+<!-- !!!!not using!!!!Mathjax StackExchange -->
 <!-- mathjax config similar to math.stackexchange -->
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
