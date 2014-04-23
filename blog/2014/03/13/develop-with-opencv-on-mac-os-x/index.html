@@ -121,33 +121,36 @@
 
 <p>如果只是需要OpenCV的相关头文件以及动态库，请直接执行<code>brew install opencv</code>（如果安装了Homebrew的话），如果不行，请看下面的OpenCV源码编译安装过程。</p>
 
-<h4 id="cmake">1.安装CMake</h4>
+<h4>1.安装CMake</h4>
 
 <p>安装CMake可以使用MacPorts，也可以使用Homebrew，如果以前安装过两者中的任何一个就用那个进行安装吧，我用的是Homebrew，推荐使用Homebrew，真正的“佳酿”，命令如下：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">sudo port install cmake //macports
-</span><span class="line">sudo brew install cmake //homebrew</span></code></pre></td></tr></table></div></figure></notextile></div>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo port install cmake //macports
+</span><span class='line'>sudo brew install cmake //homebrew</span></code></pre></td></tr></table></div></figure>
 
-<h4 id="opencv">2.编译OpenCV</h4>
+
+<h4>2.编译OpenCV</h4>
 
 <p>OpenCV下载地址：<a href="http://sourceforge.net/projects/opencvlibrary/">http://sourceforge.net/projects/opencvlibrary/</a></p>
 
 <p>目前最新版本是2.4.8，我使用的是2.4.6，下载后解压，执行下面代码：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">cd &lt;path-to-opencv-source&gt;
-</span><span class="line">mkdir release
-</span><span class="line">cd release
-</span><span class="line">cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. 
-</span><span class="line">make
-</span><span class="line">sudo make install</span></code></pre></td></tr></table></div></figure></notextile></div>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd &lt;path-to-opencv-source&gt;
+</span><span class='line'>mkdir release
+</span><span class='line'>cd release
+</span><span class='line'>cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. 
+</span><span class='line'>make
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
+
+
 <p>[完成之后在<code>/usr/local/include</code>目录下便有了<code>opencv</code>和<code>opencv2</code>两个目录，在<code>/usr/local/lib</code>目录下有很多的<code>opencv</code>相关的动态库，例如<code>libopencv_core.dylib</code>等等，还有几个其他的文件，它们都存放在<code>/usr/local</code>目录下]</p>
 
 <p>[注1:如果不需要了，想要卸载 OpenCV的话，可以回到<code>release</code>目录，执行<code>sudo make uninstall</code>，然后手动删除一些<code>/usr/local</code>下与OpenCV有关的目录和文件]</p>
@@ -160,7 +163,7 @@
 
 <p><a href="https://sites.google.com/site/learningopencv1/installing-opencv">Installing OpenCV</a></p>
 
-<h4 id="xcodeopencv">3.使用Xcode进行OpenCV项目开发</h4>
+<h4>3.使用Xcode进行OpenCV项目开发</h4>
 
 <p>1.Open Xcode, choose <code>New  -&gt; New Project -&gt; Command Line Tool</code></p>
 
@@ -168,9 +171,9 @@
 
 <p>3.Click on your project from the left menu. Click the <code>build settings</code> tab from the top. Filter all. Scroll to <code>Search Paths</code>. Under <code>header search paths</code>, for debug and release, set the path to <code>/usr/local/include</code>. Under <code>library search paths</code>, set the path to <code>$(PROJECT_DIR)</code>. Finally, check if <code>C++ standard library</code> is <code>libstdc++</code> or not, if not, change it to this!</p>
 
-<p>4.Click on your project from the left menu. <code>File-&gt;New-&gt;New Group</code>, Name the group <code>OpenCV Frameworks</code>. </p>
+<p>4.Click on your project from the left menu. <code>File-&gt;New-&gt;New Group</code>, Name the group <code>OpenCV Frameworks</code>.</p>
 
-<p>5.Select the folder (group) you just labeled, <code>OpenCV Frameworks</code> in the left menu. Go to <code>File -&gt; add Files</code>, Type <code>/</code>, which will allow you to manually go to a folder. Go to -&gt; <code>/usr/local/lib</code></p>
+<p>5.Select the folder (group) you just labeled, <code>OpenCV Frameworks</code> in the left menu. Go to <code>File -&gt; add Files</code>, Type <code>/</code>, which will allow you to manually go to a folder. Go to &ndash;> <code>/usr/local/lib</code></p>
 
 <p>6.Select both of these files, <code>libopencv_core.dylib</code>, <code>libopencv_highgui.dylib</code>, and click <code>Add</code>. (you may need to add other library files from this folder to run other code.)</p>
 
@@ -179,86 +182,91 @@
 
 <p>可以修改main.cpp，代码如下，运行结果就是显示一张指定的图片。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">#include &lt;opencv2/opencv.hpp&gt;
-</span><span class="line">using namespace cv;
-</span><span class="line">int main(int argc, char** argv) {
-</span><span class="line">	Mat image;
-</span><span class="line">	image = imread("/Users/hujiawei/Pictures/others/other_naicha/naicha.jpg", 1);
-</span><span class="line">    namedWindow("Display Image", WINDOW_AUTOSIZE);
-</span><span class="line">	imshow("Display Image", image);
-</span><span class="line">	waitKey(0);
-</span><span class="line">	return 0;
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;opencv2/opencv.hpp&gt;
+</span><span class='line'>using namespace cv;
+</span><span class='line'>int main(int argc, char** argv) {
+</span><span class='line'>  Mat image;
+</span><span class='line'>  image = imread("/Users/hujiawei/Pictures/others/other_naicha/naicha.jpg", 1);
+</span><span class='line'>    namedWindow("Display Image", WINDOW_AUTOSIZE);
+</span><span class='line'>  imshow("Display Image", image);
+</span><span class='line'>  waitKey(0);
+</span><span class='line'>  return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
-<p>其他参考内容：   </p>
+
+<p>其他参考内容：</p>
 
 <p><a href="http://stackoverflow.com/questions/19637164/c-linking-error-after-upgrading-to-mac-os-x-10-9-xcode-5-0-1">C++ linking error after upgrading to Mac OS X 10.9 / Xcode 5.0.1</a></p>
 
 <p><a href="http://mathematica.stackexchange.com/questions/34692/mathlink-linking-error-after-os-x-10-9-mavericks-upgrade">MathLink linking error after OS X 10.9 (Mavericks) upgrade</a></p>
 
-<h4 id="eclipseopencv">4.使用Eclipse进行OpenCV项目开发</h4>
+<h4>4.使用Eclipse进行OpenCV项目开发</h4>
 
 <p>如果使用Eclipse开发的话按照下面的步骤进行：</p>
 
-<p>1.按照正常的步骤，使用Eclipse建立一个<code>Mac C++</code>工程，包含一个cpp文件   </p>
+<p>1.按照正常的步骤，使用Eclipse建立一个<code>Mac C++</code>工程，包含一个cpp文件</p>
 
-<p>2.右击工程名, 选择<code>Properties</code>，在属性配置页中选择，点击<code>C/C++ Build</code>, 在下拉选项中选择 <code>Settings</code>. 在右边的选项卡中选择 <code>Tool Settings</code>。   </p>
+<p>2.右击工程名, 选择<code>Properties</code>，在属性配置页中选择，点击<code>C/C++ Build</code>, 在下拉选项中选择 <code>Settings</code>. 在右边的选项卡中选择 <code>Tool Settings</code>。</p>
 
-<p>3.在<code>GCC C++ Compiler</code>选项列表中选择<code>Includes</code>，在<code>Include paths(-l)</code>中添加安装好的opencv的头文件存放目录：<code>/usr/local/include/</code> [存放opencv头文件的目录，自行看情况而定]    </p>
+<p>3.在<code>GCC C++ Compiler</code>选项列表中选择<code>Includes</code>，在<code>Include paths(-l)</code>中添加安装好的opencv的头文件存放目录：<code>/usr/local/include/</code> [存放opencv头文件的目录，自行看情况而定]</p>
 
-<p>4.在<code>MacOS X C++Linker</code>选项列表中选择<code>Library</code>，在<code>Library search path (-L)</code>中添加安装好的opencv dylib文件存放目录：<code>/usr/local/lib/</code> [<strong><em>经过我的测试只能是这个目录！其他目录甚至是它的子目录都不行！如果在其他路径中，复制过来也行！</em></strong>]    </p>
+<p>4.在<code>MacOS X C++Linker</code>选项列表中选择<code>Library</code>，在<code>Library search path (-L)</code>中添加安装好的opencv dylib文件存放目录：<code>/usr/local/lib/</code> [<strong><em>经过我的测试只能是这个目录！其他目录甚至是它的子目录都不行！如果在其他路径中，复制过来也行！</em></strong>]</p>
 
-<p>5.在<code>MacOS X C++Linker</code>选项列表中选择<code>Library</code>, 在<code>Libraries(-l)</code> 中依次点击<code>＋</code>号，添加需要使用的lib文件(通常情况下，使用前三个，注意不要包括前缀<code>lib</code>，可以添加版本号)：    </p>
+<p>5.在<code>MacOS X C++Linker</code>选项列表中选择<code>Library</code>, 在<code>Libraries(-l)</code> 中依次点击<code>＋</code>号，添加需要使用的lib文件(通常情况下，使用前三个，注意不要包括前缀<code>lib</code>，可以添加版本号)：</p>
 
-<p>opencv_core opencv_imgproc opencv_highgui opencv_ml opencv_video opencv_features2d opencv_calib3d opencv_objdetect opencv_contrib opencv_legacy opencv_flann   </p>
+<p>opencv_core opencv_imgproc opencv_highgui opencv_ml opencv_video opencv_features2d opencv_calib3d opencv_objdetect opencv_contrib opencv_legacy opencv_flann</p>
 
 <p>6.重新build项目即可。</p>
 
 <p>如果遇到问题<code>ld: symbol(s) not found for architecture x86_64</code>，先检查代码中是否需要包含还没有添加的库文件，再检查是否是其他问题。如果是Mac平台，下面还有一个关于问题<code>ld: symbol(s) not found for architecture x86_64</code>的解释可供参考：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">There are two implementations of the standard C++ library available on OS X: libstdc++ and libc++. They are not binary compatible and libMLi3 requires libstdc++.
-</span><span class="line">On 10.8 and earlier libstdc++ is chosen by default, on 10.9 libc++ is chosen by default. To ensure compatibility with libMLi3, we need to choose libstdc++ manually.
-</span><span class="line">To do this, add -stdlib=libstdc++ to the linking command.</span></code></pre></td></tr></table></div></figure></notextile></div>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>There are two implementations of the standard C++ library available on OS X: libstdc++ and libc++. They are not binary compatible and libMLi3 requires libstdc++.
+</span><span class='line'>On 10.8 and earlier libstdc++ is chosen by default, on 10.9 libc++ is chosen by default. To ensure compatibility with libMLi3, we need to choose libstdc++ manually.
+</span><span class='line'>To do this, add -stdlib=libstdc++ to the linking command.</span></code></pre></td></tr></table></div></figure>
+
 
 <p>更多相关内容参考：</p>
 
 <p><a href="http://blog.sciencenet.cn/blog-702148-657754.html">http://blog.sciencenet.cn/blog-702148-657754.html</a></p>
 
-<h5 id="section">5.阅读开源项目</h5>
+<h5>5.阅读开源项目</h5>
 
 <p>阅读开源项目<a href="https://github.com/MasteringOpenCV/code">Mastering OpenCV with Practical Computer Vision Projects</a>中的代码，以第8章Face Recognition using Eigenfaces or Fisherfaces为例</p>
 
 <p>编写一个shell，内容如下(修改自<code>README.txt</code>)，其中的<code>OpenCV_DIR</code>为OpenCV源码编译后得到的文件夹(如上面的release目录)，执行这个shell便可以得到Xcode项目，当然打开这个项目之后还要修改相应的配置。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">export OpenCV_DIR="/Volumes/hujiawei/Users/hujiawei/Android/opencv-2.4.6.1/build"
-</span><span class="line">mkdir build
-</span><span class="line">cd build
-</span><span class="line">cp $OpenCV_DIR/../data/lbpcascades/lbpcascade_frontalface.xml .
-</span><span class="line">cp $OpenCV_DIR/../data/haarcascades/haarcascade_eye.xml .
-</span><span class="line">cp $OpenCV_DIR/../data/haarcascades/haarcascade_eye_tree_eyeglasses.xml .
-</span><span class="line">cmake -G Xcode -D OpenCV_DIR=$OpenCV_DIR ..</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/">http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export OpenCV_DIR="/Volumes/hujiawei/Users/hujiawei/Android/opencv-2.4.6.1/build"
+</span><span class='line'>mkdir build
+</span><span class='line'>cd build
+</span><span class='line'>cp $OpenCV_DIR/../data/lbpcascades/lbpcascade_frontalface.xml .
+</span><span class='line'>cp $OpenCV_DIR/../data/haarcascades/haarcascade_eye.xml .
+</span><span class='line'>cp $OpenCV_DIR/../data/haarcascades/haarcascade_eye_tree_eyeglasses.xml .
+</span><span class='line'>cmake -G Xcode -D OpenCV_DIR=$OpenCV_DIR ..</span></code></pre></td></tr></table></div></figure>
+
+
+<p class='post-footer'>
+                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/'>http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+
 </div>
 
 
