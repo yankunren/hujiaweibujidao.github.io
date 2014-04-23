@@ -123,247 +123,232 @@
 
 <p>操作步骤：</p>
 
-<h4>[1]新建环境变量<code>OCTOPRESS_HOME</code>，它是你的octopress的根目录，并添加到<code>PATH</code>中</h4>
+<h4 id="octopresshomeoctopresspath">[1]新建环境变量<code>OCTOPRESS_HOME</code>，它是你的octopress的根目录，并添加到<code>PATH</code>中</h4>
 
 <p>[下面是我在Mac上的操作，其他系统自行修改]</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo nano ~/.bash_profile  #打开并修改.bash_profile文件，下面两行是在该文件中的修改
-</span><span class='line'>export OCTOPRESS_HOME=/Users/hujiawei/git/octopress  #添加OCTOPRESS_HOME变量
-</span><span class='line'>export PATH=${PATH}:${OCTOPRESS_HOME}  #添加到path中
-</span><span class='line'>source ~/.bash_profile  
-</span><span class='line'>echo $OCTOPRESS_HOME  #验证是否变量存在
-</span><span class='line'>echo $PATH  #验证path是否设置成功</span></code></pre></td></tr></table></div></figure>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo nano ~/.bash_profile  #打开并修改.bash_profile文件，下面两行是在该文件中的修改
+</span><span class="line">export OCTOPRESS_HOME=/Users/hujiawei/git/octopress  #添加OCTOPRESS_HOME变量
+</span><span class="line">export PATH=${PATH}:${OCTOPRESS_HOME}  #添加到path中
+</span><span class="line">source ~/.bash_profile  
+</span><span class="line">echo $OCTOPRESS_HOME  #验证是否变量存在
+</span><span class="line">echo $PATH  #验证path是否设置成功</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-
-<h4>[2]编写几个<code>shell</code>脚本，放在<code>OCTOPRESS_HOME</code>目录下，作用分别如下：</h4>
-
-<ul>
-<li>gen：等价于<code>rake generate</code>操作</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
-</span><span class='line'>path=$OCTOPRESS_HOME
-</span><span class='line'>cd "$path"
-</span><span class='line'>#pwd
-</span><span class='line'>rake generate
-</span><span class='line'>echo "generate ok"</span></code></pre></td></tr></table></div></figure>
-
+<h4 id="shelloctopresshome">[2]编写几个<code>shell</code>脚本，放在<code>OCTOPRESS_HOME</code>目录下，作用分别如下：</h4>
 
 <ul>
-<li>dep：等价于<code>rake deploy</code>操作</li>
+  <li>gen：等价于<code>rake generate</code>操作</li>
 </ul>
 
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
-</span><span class='line'>path=$OCTOPRESS_HOME
-</span><span class='line'>cd "$path"
-</span><span class='line'>#pwd
-</span><span class='line'>rake generate
-</span><span class='line'>rake deploy
-</span><span class='line'>echo "generate and deploy ok"</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">#! /bin/bash
+</span><span class="line">path=$OCTOPRESS_HOME
+</span><span class="line">cd "$path"
+</span><span class="line">#pwd
+</span><span class="line">rake generate
+</span><span class="line">echo "generate ok"</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
-<li>pre：等价于<code>rake preview</code>操作</li>
+  <li>dep：等价于<code>rake deploy</code>操作</li>
 </ul>
 
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">#! /bin/bash
+</span><span class="line">path=$OCTOPRESS_HOME
+</span><span class="line">cd "$path"
+</span><span class="line">#pwd
+</span><span class="line">rake generate
+</span><span class="line">rake deploy
+</span><span class="line">echo "generate and deploy ok"</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>pre：等价于<code>rake preview</code>操作 </li>
+</ul>
 
 <p>[注意，这里我是在子线程中启动预览的，所以你按下了Ctrl+C会也不会把预览给终止了，是不是瞬间又感觉这个世界又美好了很多啊，哈哈]</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
-</span><span class='line'>path=$OCTOPRESS_HOME
-</span><span class='line'>cd "$path"
-</span><span class='line'>#pwd
-</span><span class='line'>#rake watch
-</span><span class='line'>rake preview &
-</span><span class='line'>#echo "watch and preview ok"</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>gmit：等价于<code>git add/commit/push</code>几个操作的组合</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
-</span><span class='line'>if [ $# -ne 1 ]
-</span><span class='line'>then
-</span><span class='line'>    echo "Usage - gmit  message"
-</span><span class='line'>    exit 1
-</span><span class='line'>fi
-</span><span class='line'>path=$OCTOPRESS_HOME
-</span><span class='line'>cd "$path"
-</span><span class='line'>#pwd
-</span><span class='line'>git add .
-</span><span class='line'>git commit -m "$1"
-</span><span class='line'>git push origin source
-</span><span class='line'>echo "git commit and push ok"</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">#! /bin/bash
+</span><span class="line">path=$OCTOPRESS_HOME
+</span><span class="line">cd "$path"
+</span><span class="line">#pwd
+</span><span class="line">#rake watch
+</span><span class="line">rake preview &amp;
+</span><span class="line">#echo "watch and preview ok"</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
-<li>newpost：等价于<code>new_post[""] + open Mou</code>操作组合</li>
+  <li>gmit：等价于<code>git add/commit/push</code>几个操作的组合</li>
 </ul>
 
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
-</span><span class='line'>if [ $# -ne 1 ]
-</span><span class='line'>then
-</span><span class='line'>    echo "Usage -newpost  postname"
-</span><span class='line'>    exit 1
-</span><span class='line'>fi
-</span><span class='line'>path=$OCTOPRESS_HOME
-</span><span class='line'>cd "$path"
-</span><span class='line'>#pwd
-</span><span class='line'>filepath=`rake new_post["$1"]`
-</span><span class='line'>#echo "$filepath"
-</span><span class='line'>#Creating new post: source/_posts/2013-11-18-test5.markdown
-</span><span class='line'>OLD_IFS="$IFS"
-</span><span class='line'>IFS=" "
-</span><span class='line'>arr=($filepath)
-</span><span class='line'>filepath=${arr[3]}
-</span><span class='line'>IFS="$OLD_IFS"
-</span><span class='line'>postpath="$path/$filepath"
-</span><span class='line'>#echo "$postpath"
-</span><span class='line'>#open Mou with the file
-</span><span class='line'>open -a Mou $postpath</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">#! /bin/bash
+</span><span class="line">if [ $# -ne 1 ]
+</span><span class="line">then
+</span><span class="line">    echo "Usage - gmit  message"
+</span><span class="line">    exit 1
+</span><span class="line">fi
+</span><span class="line">path=$OCTOPRESS_HOME
+</span><span class="line">cd "$path"
+</span><span class="line">#pwd
+</span><span class="line">git add .
+</span><span class="line">git commit -m "$1"
+</span><span class="line">git push origin source
+</span><span class="line">echo "git commit and push ok"</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
-<li>newpage：等价于<code>new_page[""] + open Mou</code>操作组合</li>
+  <li>newpost：等价于<code>new_post[""] + open Mou</code>操作组合</li>
 </ul>
 
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">#! /bin/bash
+</span><span class="line">if [ $# -ne 1 ]
+</span><span class="line">then
+</span><span class="line">    echo "Usage -newpost  postname"
+</span><span class="line">    exit 1
+</span><span class="line">fi
+</span><span class="line">path=$OCTOPRESS_HOME
+</span><span class="line">cd "$path"
+</span><span class="line">#pwd
+</span><span class="line">filepath=`rake new_post["$1"]`
+</span><span class="line">#echo "$filepath"
+</span><span class="line">#Creating new post: source/_posts/2013-11-18-test5.markdown
+</span><span class="line">OLD_IFS="$IFS"
+</span><span class="line">IFS=" "
+</span><span class="line">arr=($filepath)
+</span><span class="line">filepath=${arr[3]}
+</span><span class="line">IFS="$OLD_IFS"
+</span><span class="line">postpath="$path/$filepath"
+</span><span class="line">#echo "$postpath"
+</span><span class="line">#open Mou with the file
+</span><span class="line">open -a Mou $postpath</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
-</span><span class='line'>if [ $# -ne 1 ]
-</span><span class='line'>then
-</span><span class='line'>    echo "Usage - newpage  pagename"
-</span><span class='line'>    exit 1
-</span><span class='line'>fi
-</span><span class='line'>path=$OCTOPRESS_HOME
-</span><span class='line'>cd "$path"
-</span><span class='line'>echo "$path"
-</span><span class='line'>filepath=`rake new_page["$1"]`
-</span><span class='line'>echo "$filepath"
-</span><span class='line'>#Creating new page: source/projects/index.markdown
-</span><span class='line'>OLD_IFS="$IFS"
-</span><span class='line'>IFS=" "
-</span><span class='line'>arr=($filepath)
-</span><span class='line'>filepath=${arr[3]}
-</span><span class='line'>IFS="$OLD_IFS"
-</span><span class='line'>postpath="$path/$filepath"
-</span><span class='line'>echo "$postpath"
-</span><span class='line'>#open Mou with the file
-</span><span class='line'>open -a Mou $postpath</span></code></pre></td></tr></table></div></figure>
+<ul>
+  <li>newpage：等价于<code>new_page[""] + open Mou</code>操作组合</li>
+</ul>
 
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">#! /bin/bash
+</span><span class="line">if [ $# -ne 1 ]
+</span><span class="line">then
+</span><span class="line">    echo "Usage - newpage  pagename"
+</span><span class="line">    exit 1
+</span><span class="line">fi
+</span><span class="line">path=$OCTOPRESS_HOME
+</span><span class="line">cd "$path"
+</span><span class="line">echo "$path"
+</span><span class="line">filepath=`rake new_page["$1"]`
+</span><span class="line">echo "$filepath"
+</span><span class="line">#Creating new page: source/projects/index.markdown
+</span><span class="line">OLD_IFS="$IFS"
+</span><span class="line">IFS=" "
+</span><span class="line">arr=($filepath)
+</span><span class="line">filepath=${arr[3]}
+</span><span class="line">IFS="$OLD_IFS"
+</span><span class="line">postpath="$path/$filepath"
+</span><span class="line">echo "$postpath"
+</span><span class="line">#open Mou with the file
+</span><span class="line">open -a Mou $postpath</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h4>[3]使用<code>chmod 777 xxx</code>修改脚本的权限，测试执行下</h4>
+<h4 id="chmod-777-xxx">[3]使用<code>chmod 777 xxx</code>修改脚本的权限，测试执行下</h4>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd $OCTOPRESS_HOME
-</span><span class='line'>chmod 777 gen  #其他文件类似
-</span><span class='line'>chmod 777 pre
-</span><span class='line'>chmod 777 dep
-</span><span class='line'>chmod 777 gmit
-</span><span class='line'>chmod 777 newpost
-</span><span class='line'>chmod 777 newpage
-</span><span class='line'>gen
-</span><span class='line'>newpost "test new post" #当这条命令完成生成了Markdown文件之后，你会发现Mou闪电般的将文件打开了，等着你输入呢！</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">cd $OCTOPRESS_HOME
+</span><span class="line">chmod 777 gen  #其他文件类似
+</span><span class="line">chmod 777 pre
+</span><span class="line">chmod 777 dep
+</span><span class="line">chmod 777 gmit
+</span><span class="line">chmod 777 newpost
+</span><span class="line">chmod 777 newpage
+</span><span class="line">gen
+</span><span class="line">newpost "test new post" #当这条命令完成生成了Markdown文件之后，你会发现Mou闪电般的将文件打开了，等着你输入呢！</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>OK！Enjoy the world of Octopress！</p>
 
-<p class='post-footer'>
-                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/'>http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
-
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/">http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 </div>
 
 
