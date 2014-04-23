@@ -9,9 +9,7 @@
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="Math Nov 17th, 2013 The Gamma function satisfying $\Gamma(n) = (n-1)!\quad\forall
-n\in\mathbb N$ is via the Euler integral $$
-\Gamma(z) = \int_0^\ &hellip;">
+  <meta name="description" content="Math Nov 17th, 2013 MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], processEscapes: true } }); MathJax.Hub.Config({ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -115,7 +113,46 @@ n\in\mathbb N$ is via the Euler integral $$
 			
 		</header>
 		
-		<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+		<!-- mathjax config similar to math.stackexchange -->
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+
+
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 
 <p>The <em>Gamma function</em> satisfying $\Gamma(n) = (n-1)!\quad\forall
@@ -124,32 +161,6 @@ n\in\mathbb N$ is via the Euler integral</p>
 <p>$$
 \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
 $$</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@requires_authorization
-</span><span class='line'>def somefunc(param1='', param2=0):
-</span><span class='line'>    r'''A docstring'''
-</span><span class='line'>    if param1 &gt; param2: # interesting
-</span><span class='line'>        print 'Gre\'ater'
-</span><span class='line'>    return (param2 - param1 + 1 + 0b10l) or None
-</span><span class='line'>
-</span><span class='line'>class SomeClass:
-</span><span class='line'>    pass
-</span><span class='line'>
-</span><span class='line'>&gt;&gt;&gt; message = '''interpreter
-</span><span class='line'>... prompt'''</span></code></pre></td></tr></table></div></figure>
-
 
 <h3>第一部分 高等数学总结</h3>
 
