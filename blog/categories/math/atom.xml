@@ -4,7 +4,7 @@
   <title><![CDATA[Category: math | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-23T23:03:28+08:00</updated>
+  <updated>2014-04-23T23:16:12+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -50,10 +50,10 @@
 
 <p>内容包括：曲线拟合，拉格朗日插值多项式，牛顿插值多项式，分段线性插值，保形分段三次插值，三次样条插值</p>
 
-<p><img src="/images/201311/nm-cover.png" width="600" height="600" title="" >
-<img src="/images/201311/nm-chapter.png" width="600" height="600" title="" >
-<img src="/images/201311/nm-math.png" width="600" height="600" title="" >
-<img src="/images/201311/nm-code.png" width="600" height="600" title="" ></p>
+<p>{% img  /images/201311/nm-cover.png 600 600  %}
+{% img  /images/201311/nm-chapter.png 600 600  %}
+{% img  /images/201311/nm-math.png 600 600  %}
+{% img  /images/201311/nm-code.png 600 600  %}</p>
 ]]></content>
   </entry>
   
