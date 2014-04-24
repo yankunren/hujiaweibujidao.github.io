@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-24T11:46:20+08:00</updated>
+  <updated>2014-04-24T12:09:41+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -18,7 +18,10 @@
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/24/calculus-summary/"/>
     <updated>2014-04-24T08:40:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/24/calculus-summary</id>
-    <content type="html"><![CDATA[<h2><center>微积分总结</center></h2>
+    <content type="html"><![CDATA[<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+
+
+<h2><center>微积分总结</center></h2>
 
 <p>[TOC]</p>
 
@@ -136,7 +139,9 @@
 
 <p>微分的几何意义，这其实是数学中常用的非线性函数的局部线性化，这里是利用曲线的切线段来近似代替曲线段。</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/weifen_meaning.png&lt;p" alt="image" /></p>
+<p><img src="http://hujiaweibujidao.github.io/images/math/weifen_meaning.png" alt="image" /></p>
+
+<p>  <p class='post-footer'></p>
 
 <pre><code>                    Original link:&lt;a href='http://hujiaweibujidao.github.io/blog/2014/04/24/calculus-summary/'&gt;http://hujiaweibujidao.github.io/blog/2014/04/24/calculus-summary/&lt;/a&gt;&lt;br/&gt;Written by &lt;a href='http://hujiaweibujidao.github.io'&gt;hujiawei&lt;/a&gt;&amp;nbsp;Posted at &lt;a href='http://hujiaweibujidao.github.io'&gt;http://hujiaweibujidao.github.io&lt;/a&gt;&lt;br/&gt;Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.&lt;br /&gt;Thanks a lot. Hope you enjoy here! ^_^&lt;/p&gt;
 </code></pre>

@@ -1,58 +1,81 @@
 
-<!DOCTYPE HTML>
-<html lang="zh-cn">
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <title>Hujiawei Bujidao</title>
-
   <meta name="author" content="hujiawei">
+
   
-  <meta name="description" content="Develop With OpenCV on Mac Mar 13th, 2014 今天大部分时间都是在琢磨如何在Mac OS X上进行OpenCV项目的开发，尝试的开发工具有Xcode(版本是4.6.1)和Eclipse，使用的OpenCV版本是2.4.6。 &hellip;">
-  
+  <meta name="description" content="今天大部分时间都是在琢磨如何在Mac OS X上进行OpenCV项目的开发，尝试的开发工具有Xcode(版本是4.6.1)和Eclipse，使用的OpenCV版本是2.4.6。 如果只是需要OpenCV的相关头文件以及动态库，请直接执行brew install opencv（ &hellip;">
   
 
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
   <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/page/2">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
-</head>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
   
-<body class="default">
-  <div id="wrapper">
-    <div id="header">
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
   <h1><a href="/">Hujiawei Bujidao</a></h1>
   
-    <p>I will always be your savior! A secret makes a man man!</p>
+    <h2>I will always be your savior! A secret makes a man man!</h2>
   
-</div>
-<ul id="social-links">
-  
-    <li><a class="feed" href="/atom.xml" title="RSS">RSS</a></li>
-  
-  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
-<div class="clear"></div>
-<ul id="nav">
   
-    <li> <a href="/" class="current">blog</a> </li>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hujiaweibujidao.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
   
-
-  
-    <li><a href="/blog/archives">archives</a></li>
-  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
 </ul>
 
-    <div id="main"> 
-
-  
-  <div class="post"> <div class="post-header">
-  
-    <h1 class="post-title">
-      <a href="/blog/2014/03/13/develop-with-opencv-on-mac-os-x/">Develop With OpenCV on Mac</a>
-    </h1>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
   
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/13/develop-with-opencv-on-mac-os-x/">Develop With OpenCV on Mac</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -65,9 +88,13 @@
 
 
 <time datetime="2014-03-13T19:23:00+08:00" pubdate data-updated="true">Mar 13<span>th</span>, 2014</time>
-</div>
+        
+      </p>
+    
+  </header>
 
-<div class="post-content"><p>今天大部分时间都是在琢磨如何在Mac OS X上进行OpenCV项目的开发，尝试的开发工具有Xcode(版本是4.6.1)和Eclipse，使用的OpenCV版本是2.4.6。</p>
+
+  <div class="entry-content"><p>今天大部分时间都是在琢磨如何在Mac OS X上进行OpenCV项目的开发，尝试的开发工具有Xcode(版本是4.6.1)和Eclipse，使用的OpenCV版本是2.4.6。</p>
 
 <p>如果只是需要OpenCV的相关头文件以及动态库，请直接执行<code>brew install opencv</code>（如果安装了Homebrew的话），如果不行，请看下面的OpenCV源码编译安装过程。</p>
 
@@ -218,16 +245,22 @@
                         Original link:<a href='http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/'>http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 
 </div>
- </div>
+  
+  
 
-  
-  <div class="post"> <div class="post-header">
-  
-    <h1 class="post-title">
-      <a href="/blog/2014/02/21/android-ndk-and-opencv-development-4/">Android Ndk and Opencv Development 4</a>
-    </h1>
+
+    </article>
   
   
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/21/android-ndk-and-opencv-development-4/">Android Ndk and Opencv Development 4</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -240,9 +273,13 @@
 
 
 <time datetime="2014-02-21T10:15:00+08:00" pubdate data-updated="true">Feb 21<span>st</span>, 2014</time>
-</div>
+        
+      </p>
+    
+  </header>
 
-<div class="post-content"><h4>Android NDK与OpenCV的整合开发环境搭建</h4>
+
+  <div class="entry-content"><h4>Android NDK与OpenCV的整合开发环境搭建</h4>
 
 <p>以XFace项目为例，虚拟机的操作系统为64位的Ubuntu 12.04，用户名和密码都是xface</p>
 
@@ -728,16 +765,22 @@
                         Original link:<a href='http://hujiaweibujidao.github.io/blog/2014/02/21/android-ndk-and-opencv-development-4/'>http://hujiaweibujidao.github.io/blog/2014/02/21/android-ndk-and-opencv-development-4/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 
 </div>
- </div>
+  
+  
 
-  
-  <div class="post"> <div class="post-header">
-  
-    <h1 class="post-title">
-      <a href="/blog/2013/11/18/android-ndk-and-opencv-development-3/">Android Ndk and Opencv Development 3</a>
-    </h1>
+
+    </article>
   
   
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/18/android-ndk-and-opencv-development-3/">Android Ndk and Opencv Development 3</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -750,9 +793,13 @@
 
 
 <time datetime="2013-11-18T21:35:00+08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2013</time>
-</div>
+        
+      </p>
+    
+  </header>
 
-<div class="post-content"><h3>Android NDK 和 OpenCV 整合开发总结(3)</h3>
+
+  <div class="entry-content"><h3>Android NDK 和 OpenCV 整合开发总结(3)</h3>
 
 <p>终于写到第三节啦，虽然很累，但是还是要坚持，坚持写完这3篇文章。</p>
 
@@ -1199,16 +1246,22 @@ OpenCV Library中提供了两种摄像头，一种是Java摄像头-<code>org.Ope
                         Original link:<a href='http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3/'>http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 
 </div>
- </div>
+  
+  
 
-  
-  <div class="post"> <div class="post-header">
-  
-    <h1 class="post-title">
-      <a href="/blog/2013/11/18/android-ndk-and-opencv-development-2/">Android Ndk and Opencv Development 2</a>
-    </h1>
+
+    </article>
   
   
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/18/android-ndk-and-opencv-development-2/">Android Ndk and Opencv Development 2</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -1221,9 +1274,13 @@ OpenCV Library中提供了两种摄像头，一种是Java摄像头-<code>org.Ope
 
 
 <time datetime="2013-11-18T15:59:00+08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2013</time>
-</div>
+        
+      </p>
+    
+  </header>
 
-<div class="post-content"><h3>Android NDK 和 OpenCV 整合开发总结(2)</h3>
+
+  <div class="entry-content"><h3>Android NDK 和 OpenCV 整合开发总结(2)</h3>
 
 <p>这节主要介绍的内容是<a href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>开发的核心内容和开发总结(包括很多常见问题的解决方案)，本节主要分为三部分：<br/>
 * JNI技术和javah命令 <br/>
@@ -1692,16 +1749,22 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
                         Original link:<a href='http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/'>http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 
 </div>
- </div>
+  
+  
 
-  
-  <div class="post"> <div class="post-header">
-  
-    <h1 class="post-title">
-      <a href="/blog/2013/11/18/android-ndk-and-opencv-developement/">Android Ndk and Opencv Development</a>
-    </h1>
+
+    </article>
   
   
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/18/android-ndk-and-opencv-developement/">Android Ndk and Opencv Development</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -1714,9 +1777,13 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 
 
 <time datetime="2013-11-18T14:41:00+08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2013</time>
-</div>
+        
+      </p>
+    
+  </header>
 
-<div class="post-content"><h3>Android NDK 和 OpenCV 整合开发总结(1)</h3>
+
+  <div class="entry-content"><h3>Android NDK 和 OpenCV 整合开发总结(1)</h3>
 
 <p>在Samsung呆了段时间，还是学了不少东西的，主要做的任务是做<a href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>开发，也涉及到了<a href="http://opencv.org/">OpenCV</a>的内容，正好自己最近在开发XFace，这些知识都用得上，所以，想写几篇文章总结下这些知识。该系列内容均为原创，摘录的部分我都会引用提示，尊重版权嘛，嘿嘿，我保证这里有不少内容是搜索不到的独家秘笈哟！很多都是我的开发经验，嘿嘿<br/>
 该系列主要包括三大部分，分为下面三节来介绍，本节主要介绍第一部分</p>
@@ -1884,16 +1951,22 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
                         Original link:<a href='http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-developement/'>http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-developement/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 
 </div>
- </div>
+  
+  
 
-  
-  <div class="post"> <div class="post-header">
-  
-    <h1 class="post-title">
-      <a href="/blog/2013/11/18/make-your-octopress-easy/">Make Your Octopress Easy</a>
-    </h1>
+
+    </article>
   
   
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/18/make-your-octopress-easy/">Make Your Octopress Easy</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -1906,9 +1979,13 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 
 
 <time datetime="2013-11-18T13:11:00+08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2013</time>
-</div>
+        
+      </p>
+    
+  </header>
 
-<div class="post-content"><p>刚刚来到Octopress的世界，我的新鲜感依旧还在，呵呵，上午写了几个<code>shell</code>脚本让你在Octopress上写博客更加轻松些，至少让我轻松了很多，哈哈哈。</p>
+
+  <div class="entry-content"><p>刚刚来到Octopress的世界，我的新鲜感依旧还在，呵呵，上午写了几个<code>shell</code>脚本让你在Octopress上写博客更加轻松些，至少让我轻松了很多，哈哈哈。</p>
 
 <p>我特别头疼于类似新建文章<code>new_post["postname"]</code>这些个命令，那个下划线可能会记成短破折线，时间长了我可能就不记得这个命令了，当然，如果你是ruby开发者那就肯定不会这样啦，我这年龄大了，记忆力不行了，很难记住那么多的命令啦，还有就是我希望只要打开Terminal就可以调用这些命令，而不用每次切换目录，而且每次我新建了一个文章之后，Mou能够直接启动并打开这个新建的文章让我编辑，想想，这个世界是不是美好多了？哈哈哈</p>
 
@@ -2156,16 +2233,22 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
                         Original link:<a href='http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/'>http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 
 </div>
- </div>
+  
+  
 
-  
-  <div class="post"> <div class="post-header">
-  
-    <h1 class="post-title">
-      <a href="/blog/2013/11/17/hello-octopress/">Hello Octopress</a>
-    </h1>
+
+    </article>
   
   
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/17/hello-octopress/">Hello Octopress</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -2178,9 +2261,13 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 
 
 <time datetime="2013-11-17T17:03:00+08:00" pubdate data-updated="true">Nov 17<span>th</span>, 2013</time>
-</div>
+        
+      </p>
+    
+  </header>
 
-<div class="post-content"><p>Hello world! Hello Octopress!</p>
+
+  <div class="entry-content"><p>Hello world! Hello Octopress!</p>
 
 <p>曾经因为很多问题的答案都在<a href="http://www.cnblogs.com"><strong>博客园</strong></a>上，于是我在那里驻扎了，但是，它的广告让我不能忍！</p>
 
@@ -2364,75 +2451,45 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
                         Original link:<a href='http://hujiaweibujidao.github.io/blog/2013/11/17/hello-octopress/'>http://hujiaweibujidao.github.io/blog/2013/11/17/hello-octopress/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 
 </div>
- </div>
+  
+  
 
 
-<div id="pagination">
+    </article>
   
-  
-    <a class="next" href="/">Next&raquo;</a>
-  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
 </div>
- </div>
-    <div id="footer">
-  <div class="panels">
-    <div class="license">
-      <h2>License</h2>
-      <p>如非特别声明，本 Blog 的文章由 hujiawei 创作，采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">知识共享署名-非商业性使用-相同方式共享 3.0 Unported 许可协议</a>进行许可。</p>
-    </div>
+<aside class="sidebar">
+  
+    
+  
+</aside>
 
-    <div class="posts">
-      <h2>Recent Posts</h2>
-      <ul>
-        
-          <li>
-            <a href="/blog/2014/04/24/calculus-summary/">Calculus Summary</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2014/04/23/numerical-methods-using-matlab/">Numerical Methods using Matlab</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2014/04/22/probability-and-statistics-summary/">probability and statistics summary</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2014/04/15/flying-on-mac/">Flying on Mac</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2014/04/13/vertext-cover-problem/">Vertext Cover Problem</a>
-          </li>
-        
-      </ul>
-    </div>
-
-    <div class="douban">
-      <h2>Reading</h2>
-      
-        <p>Please set your Douban ID in _config.yml</p>
-      
     </div>
   </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - hujiawei -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
 
-  <p class="powered">
-    Powered by <a href="http://octopress.org">Octopress</a> and <a href="https://github.com/iwinux/compbits">Compbits</a>
-  </p>
-</div>
-
-  </div> <!-- #wrapper end -->
-
-  
-
+</footer>
   
 
 
-  
 
-  
 
-  
+
+
+
+
+
+
 
 </body>
 </html>

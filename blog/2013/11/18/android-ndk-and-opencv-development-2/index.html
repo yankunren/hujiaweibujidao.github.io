@@ -1,54 +1,79 @@
 
-<!DOCTYPE HTML>
-<html lang="zh-cn">
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
-  <meta charset="UTF-8">
-  <title>Hujiawei Bujidao</title>
-
+  <meta charset="utf-8">
+  <title>android ndk and opencv development 2 - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
+
   
-  <meta name="description" content="Android Ndk and Opencv Development 2 Nov 18th, 2013 Android NDK 和 OpenCV 整合开发总结(2) 这节主要介绍的内容是Android NDK开发的核心内容和开发总结(包括很多常见问题的解决方案)，本节主要分为三部分：
-* &hellip;">
-  
+  <meta name="description" content="Android NDK 和 OpenCV 整合开发总结(2) 这节主要介绍的内容是Android NDK开发的核心内容和开发总结(包括很多常见问题的解决方案)，本节主要分为三部分：
+* JNI技术和javah命令 * Android NDK Dev Guide * NDK开发中常见的问题 1. &hellip;">
   
 
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
   <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
-</head>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
   
-<body class="default">
-  <div id="wrapper">
-    <div id="header">
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
   <h1><a href="/">Hujiawei Bujidao</a></h1>
   
-    <p>I will always be your savior! A secret makes a man man!</p>
+    <h2>I will always be your savior! A secret makes a man man!</h2>
   
-</div>
-<ul id="social-links">
-  
-    <li><a class="feed" href="/atom.xml" title="RSS">RSS</a></li>
-  
-  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
-<div class="clear"></div>
-<ul id="nav">
   
-    <li> <a href="/">blog</a> </li>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hujiaweibujidao.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
   
-
-  
-    <li><a href="/blog/archives">archives</a></li>
-  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
 </ul>
 
-    <div id="main"> <div class="post-header">
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
   
-    <h1 class="post-title">Android Ndk and Opencv Development 2</h1>
-  
-  
+  <header>
+    
+      <h1 class="entry-title">Android Ndk and Opencv Development 2</h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -61,9 +86,13 @@
 
 
 <time datetime="2013-11-18T15:59:00+08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2013</time>
-</div>
+        
+      </p>
+    
+  </header>
 
-<div class="post-content"><h3>Android NDK 和 OpenCV 整合开发总结(2)</h3>
+
+<div class="entry-content"><h3>Android NDK 和 OpenCV 整合开发总结(2)</h3>
 
 <p>这节主要介绍的内容是<a href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>开发的核心内容和开发总结(包括很多常见问题的解决方案)，本节主要分为三部分：<br/>
 * JNI技术和javah命令 <br/>
@@ -534,18 +563,36 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 </div>
 
 
-<div class="post-single">
-  <div class="post-meta">
-    
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hujiawei</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-18T15:59:00+08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2013</time>
+      
 
 <span class="categories">
-  Categories:
   
     <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/mobiledev/'>mobiledev</a>, <a class='category' href='/blog/categories/opencv/'>opencv</a>
   
 </span>
 
 
+    </p>
     
       <div class="sharing">
   
@@ -554,71 +601,133 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 </div>
 
     
-  </div>
-  <div class="clear"></div>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/11/18/android-ndk-and-opencv-developement/" title="Previous Post: android ndk and opencv development">&laquo; android ndk and opencv development</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/11/18/android-ndk-and-opencv-development-3/" title="Next Post: android ndk and opencv development 3">android ndk and opencv development 3 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
 
-  
 </div>
- </div>
-    <div id="footer">
-  <div class="panels">
-    <div class="license">
-      <h2>License</h2>
-      <p>如非特别声明，本 Blog 的文章由 hujiawei 创作，采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">知识共享署名-非商业性使用-相同方式共享 3.0 Unported 许可协议</a>进行许可。</p>
-    </div>
 
-    <div class="posts">
-      <h2>Recent Posts</h2>
-      <ul>
-        
-          <li>
-            <a href="/blog/2014/04/24/calculus-summary/">Calculus Summary</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2014/04/23/numerical-methods-using-matlab/">Numerical Methods using Matlab</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2014/04/22/probability-and-statistics-summary/">probability and statistics summary</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2014/04/15/flying-on-mac/">Flying on Mac</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2014/04/13/vertext-cover-problem/">Vertext Cover Problem</a>
-          </li>
-        
-      </ul>
-    </div>
-
-    <div class="douban">
-      <h2>Reading</h2>
-      
-        <p>Please set your Douban ID in _config.yml</p>
-      
-    </div>
-  </div>
-
-  <p class="powered">
-    Powered by <a href="http://octopress.org">Octopress</a> and <a href="https://github.com/iwinux/compbits">Compbits</a>
+<aside class="sidebar">
+  
+    <section>
+	<h1>关于博主</h1><br/>
+  <a href="/aboutme/"><img src="/images/me-small.png" width="250px" height="210px" alt="protrait"/></a><br/>
+  <p>Hi, I'm Hujiawei, from P.R.China. Now I'm a postgraduate student studying in <a href="http://www.tsinghua.edu.cn/publish/th/index.html">Tsinghua University</a>.
+  Wanna know me? <a href="/aboutme/">See here.</a> <br/>	
   </p>
-</div>
+  <a href="http://weibo.com/hujiaweiyinger"><img src="/images/sinaweibo.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://github.com/hujiaweibujidao"><img src="/images/github.png" width="40px" height="40px"/></a>&nbsp;
+  <a href="http://hujiawei.tumblr.com"><img src="/images/tumblr.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://twitter.com/hujiaweiyinger"><img src="/images/twitter.png" width="40px" height="40px"/></a>
+  
+  <br/>
+</section>
+<section>
+ <h1>分类目录</h1>
+ <ul id="categories">
+	 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (2)</a></li>
+<li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
+<li class='category'><a href='/blog/categories/ios/'>ios (1)</a></li>
+<li class='category'><a href='/blog/categories/mac/'>mac (2)</a></li>
+<li class='category'><a href='/blog/categories/math/'>math (3)</a></li>
+<li class='category'><a href='/blog/categories/matlab/'>matlab (1)</a></li>
+<li class='category'><a href='/blog/categories/ml/'>ml (1)</a></li>
+<li class='category'><a href='/blog/categories/mobiledev/'>mobiledev (5)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/opencv/'>opencv (5)</a></li>
 
-  </div> <!-- #wrapper end -->
+ </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="近期文章">
+    
+      <li class="post">
+        <a href="/blog/2014/04/24/calculus-summary/">Calculus Summary</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/23/numerical-methods-using-matlab/">Numerical Methods Using Matlab</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/22/probability-and-statistics-summary/">Probability and Statistics Summary</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/15/flying-on-mac/">Flying on Mac</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/13/vertext-cover-problem/">Vertext Cover Problem</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+	<h1>好友博客</h1>
+	<ul>
+		<li>
+			<a href="http://doufunao.github.io/">豆腐脑的幻想乡</a>
+		</li>
+		<li>
+			<a href="http://c4fun.cn/">Code 4 Fun</a>
+		</li>
+		<li>
+			<a href="http://www.tanglei.name/">TangLei blog</a>
+		</li>
+		<li>
+			<a href="http://ontheroad.sinaapp.com/">Tian Jun-Find My Way</a>
+		</li>
+		
+		<li>
+			<a href="http://www.liaoxuefeng.com/">廖雪峰的官方网站</a>
+		</li>
+		<li>
+			<a href="http://wufawei.com/">Ted's Homepage</a>
+		</li>
+		<li>
+			<a href="http://www.renfei.org/blog/">Renfei Song</a>
+		</li>
+		<li>
+			<a href="http://bluedavy.me">BlueDavy之技术blog</a>
+		</li>
+		
+		<li>
+			<a href="#">这里会是你吗?</a>
+		</li>
+	</ul>
+</section>
+  
+</aside>
 
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - hujiawei -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
   
 
-  
 
 
-  
 
-  
 
-  
+
+
+
+
+
 
 </body>
 </html>
