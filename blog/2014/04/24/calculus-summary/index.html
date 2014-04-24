@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Vertext Cover Problem - Hujiawei Bujidao</title>
+  <title>Calculus Summary - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="1.问题描述 给定一个N个点M条边的无向图G（点的编号从1至N），问是否存在一个不超过K个点的集合S，使得G中的每条边都至少有一个点在集合S中。 例如，如下图所示的无向图G（报告中算法分析过程中一直使用下面的图G） (1)如果选择包含点1,2,6这3个点的集合S不能满足条件，因为边(3,7) &hellip;">
+  <meta name="description" content="微积分总结 [TOC] 第零部分 碎碎念 到了研究生阶段才意识到本科的数学原来作用这么大，不论是在数据挖掘，还是机器学习，亦或是模式识别，数学都是基础中的基础。于是乎，我在逸夫图书馆泡了几天看了些微积分、线代和数理统计的书籍，写下三份总结，记录下重要的知识，以备后忘。本人才疏学浅， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem">
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/24/calculus-summary">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
@@ -94,7 +94,7 @@
 		
   <header>
     
-      <h1 class="entry-title">Vertext Cover Problem</h1>
+      <h1 class="entry-title">Calculus Summary</h1>
     
     
       <p class="meta">
@@ -110,105 +110,135 @@
   
 
 
-<time datetime="2014-04-13T23:57:00+08:00" pubdate data-updated="true">Apr 13<span>th</span>, 2014</time>
+<time datetime="2014-04-24T08:40:00+08:00" pubdate data-updated="true">Apr 24<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h4>1.问题描述</h4>
+<div class="entry-content"><h2><center>微积分总结</center></h2>
 
-<p>给定一个N个点M条边的无向图G（点的编号从1至N），问是否存在一个不超过K个点的集合S，使得G中的每条边都至少有一个点在集合S中。</p>
+<p>[TOC]</p>
 
-<p>例如，如下图所示的无向图G（报告中算法分析过程中一直使用下面的图G）</p>
+<h3><center>第零部分 碎碎念</center></h3>
 
-<p>(1)如果选择包含点1,2,6这3个点的集合S不能满足条件，因为边(3,7)两个端点都不在S中。</p>
+<p>到了研究生阶段才意识到本科的数学原来作用这么大，不论是在数据挖掘，还是机器学习，亦或是模式识别，数学都是基础中的基础。于是乎，我在逸夫图书馆泡了几天看了些微积分、线代和数理统计的书籍，写下三份总结，记录下重要的知识，以备后忘。本人才疏学浅，若有错误之处还请指出，让我“增长”，若有不足也请指出，使我“完备”，谢谢！:&ndash;)</p>
 
-<p><img src="/images/201404/exp1-3.png" alt="image" /></p>
+<p><strong>[注：这些总结不会详细地讲解所有概念，只是挑选一些我个人感觉比较有用的知识点进行总结，很多时候可能只是列举知识点，并无解释，忘记了的可以自行Wiki或者翻书，另外，为了节省写作时间，我剪切粘贴了很多图片&hellip;嗯，就是这样&hellip;]</strong></p>
 
-<p>(2)如果选择包含点1,2,6,7这4个点的集合S虽然满足条件，但是它使用了4个点，其实可以使用更少的点，如下面(3)所示</p>
+<p>参考书籍：</p>
 
-<p><img src="/images/201404/exp1-2.png" alt="image" /></p>
+<p>1.<a href="http://book.douban.com/subject/2112359/">同济大学 高等数学 高等教育出版社</a></p>
 
-<p>(3)如果选择包含点1,3,5这3个点的集合S便满足条件，使得G中的每条边都至少有一个点在集合S中。</p>
+<p>2.<a href="http://product.dangdang.com/23311529.html">高等数学 中国环境出版社</a></p>
 
-<p><img src="/images/201404/exp1-1.png" alt="image" /></p>
+<h3><center>第一部分 函数与极限 </center></h3>
 
-<h4>2.解题思路</h4>
+<h4>第一节 函数</h4>
 
-<p>我的解题思路基于分支定界和贪心两个策略，用一个优先队列维护当前可行的节点，每个节点维护着该节点情况下还可以选择的顶点数目k、需要覆盖的剩余边数e、顶点的状态state、顶点的边数edge等信息，这些节点的排序遵循下面的贪心策略，节点的扩展遵循下面的分支定界策略。总体思路是：</p>
+<p>集合、区间与邻域，函数的概念与性质，反函数与复合函数，初等函数</p>
 
-<p>①将原图数据构造成一个解空间树的节点，利用定界策略判断是否有解，如果无解直接退出，如果有可能有解则插入到优先队列中；</p>
+<p>关于<a href="http://zh.wikipedia.org/wiki/%E5%88%9D%E7%AD%89%E5%87%BD%E6%95%B0">初等函数 on wiki</a>，初等函数在其定义域内都是连续的。</p>
 
-<p>②若优先队列不为空，那么便从优先队列中取出第一个可行的节点，进入步骤③，如果优先队列为空则退出；</p>
+<p><img src="http://hujiaweibujidao.github.io/images/math/elementalfuns.png" title="elementalfuns.png" alt="image" /></p>
 
-<p>③判断当前节点是否满足解的条件，如果满足便输出解退出，如果不满足便进入步骤④；</p>
+<p>关于指数函数：
+对于相等间隔的自变量x的取值，指数函数对应值的比例为常数。由指数运算法则可知，对任意的x，只要给定$x<em>{0}>0$，则$a^{x+x</em>{0}}/a^{x}=a^{x_{0}}$恒成立。此性质可以作为判断两个变量之间的关系是否为指数函数关系的主要依据。此外，这个性质导出了数理统计中的指数分布。</p>
 
-<p>④检查当前节点是否可以扩展，不能扩展的话便进入②继续循环，如果能扩展的话则扩展，然后验证扩展到左右节点是否有解，将有解的扩展节点插入到优先队列中，然后进入②继续循环。</p>
+<h4>第二节 函数的极限</h4>
 
-<p>下面分别介绍下分支定界和贪心这两个策略：</p>
+<p>数列极限及性质，函数极限及性质，无穷小与无穷大，极限运算法则，极限存在准则和两个重要极限，无穷小的比较</p>
 
-<h5>(1)分支定界策略</h5>
+<p>关于收敛数列(极限存在)有两个性质：唯一性和有界性</p>
 
-<p>首先，界的选择。在一个确定的无向图G中，每个顶点的边即确定了，那么对于该无向图中k个顶点能够覆盖的最多的边数e也就可以确定了！只要对顶点按照边的数目降序排列，然后选择前k个顶点，将它们的边数相加即能得到一个边数上界！因为这k个顶点相互之间可能有边存在也可能没有，所以这是个上界，而且有可能达到。以图G为例，各个顶点的边数统计，并采用降序排列的结果如下：</p>
+<p>关于函数极限，注意，$x \to x{0}$的极限是否存在与函数在$x_{0}$是否有定义无关。<a href="http://hujiaweibujidao.github.io/images/math/fun_limit.png" title="fun_limit.png">函数极限的定义</a></p>
 
-<!--顶点 | 2 | 3 | 1| 5 | 6| 4| 7 
---| --| --|--|--|--|--|--
-边数 | 3 | 3 | 2| 2| 2| 1| 1-->
-
-
-<!--
-顶点 | 边数
-----| ---- 
-2 | 3 
-3 | 3
-1 | 2 
-5 | 2
-6 | 2
-4 | 1
-7 | 1-->
+<!--![image](http://hujiaweibujidao.github.io/images/math/elementalfuns.png)-->
 
 
-<p><img src="/images/201404/exp1-f3.png" alt="image" /></p>
+<p>函数极限的几何意义是，当x在领域$(x<em>{0}&ndash;\delta,x</em>{0}+\delta)$内时，函数值y落在下图中$(A-\varepsilon,A+\varepsilon)$内。</p>
 
-<p>假设取k=3个点，那么有Up(e)=(3+3+2)=8 > 7 条边（7为图G的总边数），也就是说，如果从图G中取3个点，要覆盖8条边是有可能的。但是，如果取k=2个点，那么有Up(e)=(3+3)=6 &lt; 7 条边，说明从图G中取2个点，是不可能覆盖G中的全部7条边的！基于这个上界，可以在分支树中扩展出来的节点进行验证，已知它还可以选择的顶点数目以及还需要覆盖的边的条数，加上顶点的状态（下面会分析说明）即可判断当前节点是否存在解！如果不存在即可进行剪枝了。</p>
+<p><img src="http://hujiaweibujidao.github.io/images/math/funlimit_meaning.png" title="funlimit_meaning.png" alt="function limit meaning" /></p>
 
-<p>其次，顶点的状态。该策略中顶点有三种状态，分别为已经选择了的状态S1，不选择的状态S2，可以选择的状态S3。其中，不选择的状态S2对应解空间树中的右节点，不选择该节点，然后设置该节点为不选择状态S2。这点很重要，因为有了这个状态，可以使得上界的判断更为精确，因为只能从剩余顶点集中选择那些状态S3的顶点，状态S1和S2都不行，那么上界便会更小，也就更加精确，从而利于剪枝！</p>
+<p>关于无穷小和无穷大：无穷小并不是指负无穷，而是函数在$x \to x{0}$时的极限为0，无穷小与有解变量的乘积还是无穷小，但是这个性质放在无穷大上面就不成立！例如，$\lim<em>{x \to +\infty} \frac{sinx}{x} = 0$是无穷小，但是$\lim</em>{x \to +\infty} xcosx$不是无穷小，它不符合无穷小的定义，<a href="http://www.guokr.com/post/469944/">关于这个问题的讨论</a>。</p>
 
-<h5>(2)贪心策略</h5>
+<p>两个重要的极限：$\lim<em>{x \to 0} \frac{sinx}{x} = 1$ 和 $\lim</em>{x \to +\infty} (1+\frac{1}{x})^{x} = e$</p>
 
-<p>贪心的策略是指可行的结点都是按照还需要覆盖的剩余边数的降序排列，即，每次选择的节点都是可行节点中还需要覆盖的边数最小的那个节点，因为它最接近结果了。</p>
+<p>关于极限$\lim_{x \to 0} \frac{sinx}{x} = 1$可用下图来解释，圆的边长是1，$BC=sinx, AD=tanx, \hat{AB}=x$，在$x \to 0$时，三者近似相等。</p>
 
-<h5>(3)例子分析</h5>
+<p><img src="http://hujiaweibujidao.github.io/images/math/sinxoverx.png" title="sinxoverx.png" alt="sinx over x" /></p>
 
-<p>以图G为例，此时e=7（要覆盖的边数），取k=3，图G用邻接矩阵保存为全局数据，计算每个顶点的边数，然后降序排列。</p>
+<p>关于极限$\lim<em>{x \to \infty} (1+\frac{1}{x})^{x} = e$，注意，不论是$\lim</em>{x \to +\infty}$还是$\lim_{x \to &ndash;\infty}$都成立，它道出了自然对数$e$到底是什么！当然还有其他的方式表示出$e$，比如级数的方式，我认为$e$是数学界最美丽的符号！$e \approx 2.71828$</p>
 
-<p>步骤①判断是否可能有解，Up(e)=3+3+2=8>7，可能有解，那么将图G构造成一个解空间树的节点，它包含了还能选择的点数k=3，还需要覆盖的边数e=7，每个顶点的边数以及按边数大小的降序排列（上表），每个顶点的状态（初始时都是可选择的状态S3）。然后，将该节点插入到优先队列中，该优先队列是用最小堆实现的，按照前面的贪心策略对队列中的节点进行降序排列。</p>
+<h4>第三节 函数的连续性与间断点</h4>
 
-<p>步骤②取出了优先队列中的根节点，很显然，还需要覆盖的边数为7，不为0，所以还不满足条件。接下来要检查是否能够进行扩展，从顶点集合中选择状态为可以选择的顶点中边数最多的点，该点存在为顶点2，接着进行扩展，扩展左节点时将还能选择的点数k-1=2，然后计算选择了该点之后删除了几条未覆盖的边，得到还需要覆盖的边数e=4，然后更新所有其他顶点的边数，并重新排序，最后将顶点2的状态设置为已经选择了；扩展右节点时，只要将顶点2的状态设置为不能选择，还能选择的点数k(=3)，还需要覆盖的边数e(=7)保持不变。扩展完了之后，同样判断左右节点是否可能有解，如果有解，将该节点插入到优先队列中。这里左右节点都有解，那么将左右节点都插入到优先队列中，因为左节点还需要覆盖的边数e=4小于右节点的e=7，所以根据贪心策略，左节点在右节点的前面。上面两个步骤的图示如下，其中标明了顶点状态颜色。</p>
+<p>函数的连续性，函数的间断点</p>
 
-<p><img src="/images/201404/exp1-f1.png" alt="image" /></p>
+<p>函数的间断点分为两类：第一类是函数在$x=x_{0}$处间断，但是左右极限都存在，如果左右极限相等的话该间断点称为可去间断点，如果不相等称为跳跃间断点；其他情况下的间断点都属于第二类间断点。</p>
 
-<p>算法然后继续进入步骤②，此时取出的是节点是刚才插入的左节点，很显然，还需要覆盖的边数为4，不为0，所以还不满足条件。接下来要检查是否能够进行扩展，从顶点集合中选择状态为可以选择的顶点中边数最多的点，该点存在为顶点3，接着进行扩展，扩展左节点时将还能选择的点数k-1=1，然后计算选择了该点之后删除了几条未覆盖的边，得到还需要覆盖的边数e=2，然后更新所有其他顶点的边数，并重新排序，最后将顶点3的状态设置为已经选择了；扩展右节点时，只要将顶点3的状态设置为不能选择，还能选择的点数k(=3)，还需要覆盖的边数e(=7)保持不变。扩展完了之后，同样判断左右节点是否可能有解，如果有解，将该节点插入到优先队列中。这里左右节点都不可能有解，那么直接进入步骤②继续循环。上面这一步的图示如下：</p>
+<h4>第四节 初等函数的连续性</h4>
 
-<p><img src="/images/201404/exp1-f2.png" alt="image" /></p>
+<p>连续函数四则运算的连续性，反函数与复合函数的连续性，初等函数的连续性</p>
 
-<p>算法按照上面的方式不断进行，最后满足条件的分支的过程是：</p>
+<h4>第五节 闭区间上连续函数的性质</h4>
 
-<p>①不选择顶点2；②选择顶点3；③选择顶点1；④选择顶点5。</p>
+<p>最大值和最小值定理，介值定理与零点定理</p>
 
-<p>最后得到的满足条件的解是选择顶点1,3,5。</p>
+<p>最大值和最小值定理就是说在闭区间上的连续函数f(x)一定是有上下界的；</p>
 
-<h4>(4)复杂度分析</h4>
+<p>介值定理就是说在闭区间上的连续函数f(x)，如果左右端点的取值不同，例如$f(a)=A,f(b)=B$，那么区间中肯定有一点的函数值能够取到$[A,B]$之间的任何一个值！</p>
 
-<p>该算法优先队列使用的是最小堆实现的(O(nlgn))，对顶点按照边排序使用的是快速排序算法(O(nlgn))，解空间树的深度最多为顶点数目n，每层都要进行分支定界，所以每层的时间复杂度为O(nlgn)，所以算法总的时间复杂度为O(n<sup>2</sup> lgn)。但是，为了实现分支定界，每个节点保存的信息量较多，空间复杂度较大。(有木有分析错了，我不太会分析复杂度)</p>
+<p>零点定理就是说在闭区间上的连续函数f(x)，如果左右端点的取值异号，例如$f(a)=A>0,f(b)=B&lt;0$，那么区间中肯定有一点的函数值为0！</p>
 
-<p>OJ系统的结果为：时间 156ms  空间 1.0MB</p>
+<h3><center>第二部分 导数与微分</center></h3>
 
-<p class='post-footer'>
-                        Original link:<a href='http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem/'>http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem/</a><br/>Written by <a href='http://hujiaweibujidao.github.io'>hujiawei</a>&nbsp;Posted at <a href='http://hujiaweibujidao.github.io'>http://hujiaweibujidao.github.io</a><br/>Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+<h4>第一节 导数概念</h4>
 
+<p>引例，导数的定义，导数的几何意义，可导与连续的关系</p>
+
+<p>导数的几何意义就是曲线在某点的切线的斜率，反应了变化的快慢，理解这个很重要，以及后面的偏导数的理解，它们最后都应用对一些算法的理解中，例如梯度下降算法，其实就是利用这个几何意义，让要优化的函数尽快地逼近局部最优解。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/deviration_meaning.png" title="deviration_meaning.png" alt="deviration_meaning.png" /></p>
+
+<h4>第二节 函数的求导法则</h4>
+
+<p>函数的和、差、积、商的求导法则，反函数的求导法则，复合函数的求导法则，基本求导法则与导数公式</p>
+
+<p>关于反函数的求导法则：$\frac{dy}{dx}=\frac{1}{\frac{dx}{dy}}$</p>
+
+<p>关于复合函数的求导法则：$\frac{dy}{dx}=\frac{dy}{du} \cdot \frac{du}{dx}$</p>
+
+<p>关于基本初等函数求导法则</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/deviration.png" alt="image" /></p>
+
+<h4>第三节 高阶导数</h4>
+
+<p>二阶及二阶以上的导数称为高阶导数</p>
+
+<h4>第四节 隐函数及其参数方程所确定的函数的导数</h4>
+
+<p>隐函数的导数，由参数方程所确定的函数的导数</p>
+
+<p>如果方程$F(x,y)=0$确定了$y$是$x$的函数，那么这样的函数就叫做隐函数。一般它的求导分为两种方法：(1)如果能够解出$y=f(x)$关系式的话，就先解出然后求导；(2)如果不能解出，那么就利用复合函数求导方式进行求导。</p>
+
+<h4>第五节 函数的微分</h4>
+
+<p>微分的定义，微分的几何意义，基本微分公式与微分法则，微分形式的不变性，微分的应用</p>
+
+<p>先看看微分是怎么引入的？</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/weifen.png" alt="image" /></p>
+
+<p>就是说，在实际应用中，常常需要知道当自变量x有细微变化的时候，函数y的变化量$\vartriangle y$是多少？为了方便计算，需要将增量表达式线性化处理，从而计算出$\vartriangle y$的近似值。如上面所示，我们只需要用$A \vartriangle x$来近似代替$\vartriangle y$。</p>
+
+<p>微分的几何意义，这其实是数学中常用的非线性函数的局部线性化，这里是利用曲线的切线段来近似代替曲线段。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/weifen_meaning.png&lt;p" alt="image" /></p>
+
+<pre><code>                    Original link:&lt;a href='http://hujiaweibujidao.github.io/blog/2014/04/24/calculus-summary/'&gt;http://hujiaweibujidao.github.io/blog/2014/04/24/calculus-summary/&lt;/a&gt;&lt;br/&gt;Written by &lt;a href='http://hujiaweibujidao.github.io'&gt;hujiawei&lt;/a&gt;&amp;nbsp;Posted at &lt;a href='http://hujiaweibujidao.github.io'&gt;http://hujiaweibujidao.github.io&lt;/a&gt;&lt;br/&gt;Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.&lt;br /&gt;Thanks a lot. Hope you enjoy here! ^_^&lt;/p&gt;
+</code></pre>
 </div>
 
 
@@ -231,12 +261,12 @@
   
 
 
-<time datetime="2014-04-13T23:57:00+08:00" pubdate data-updated="true">Apr 13<span>th</span>, 2014</time>
+<time datetime="2014-04-24T08:40:00+08:00" pubdate data-updated="true">Apr 24<span>th</span>, 2014</time>
 				
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
+    <a class='category' href='/blog/categories/math/'>math</a>
   
 </span>
 
@@ -252,10 +282,8 @@
 			
 			<p class="meta">
 				
-				<a class="basic-alignment left" href="/blog/2014/04/09/leetcode-oj-part1/" title="Previous Post: LeetCode OJ Part1">&laquo; LeetCode OJ Part1</a>
+				<a class="basic-alignment left" href="/blog/2014/04/23/numerical-methods-using-matlab/" title="Previous Post: Numerical Methods using Matlab">&laquo; Numerical Methods using Matlab</a>
 				
-				
-				<a class="basic-alignment right" href="/blog/2014/04/15/flying-on-mac/" title="Next Post: Flying on Mac">Flying on Mac &raquo;</a>
 				
 			</p>
 		</footer>
