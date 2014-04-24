@@ -37,7 +37,7 @@
 <body   >
 
 	<header role="banner">
-		<hgroup>
+		
 <hgroup style="text-align: center">
 	<h1><a href="/"><img src="/images/conan-paper-small.png"  />Hujiawei Bujidao<img src="/images/conan-hat-small.png"  /></a></h1>
 	
@@ -84,11 +84,14 @@
 	<div id="main">
 		<div id="content">
 			<div>
-<article role="article">
-  
-  <header>
-    <h1 class="entry-title">Math</h1>
-    <p class="meta">
+
+	<article role="article">
+		
+		<header>
+			<h1 class="entry-title">Math</h1>
+			
+			<p class="meta">
+				
 
 
 
@@ -100,10 +103,12 @@
   
 
 
-<time datetime="2013-11-17T19:39:00+08:00" pubdate data-updated="true">Nov 17<span>th</span>, 2013</time></p>
-  </header>
-  
-  <p>最美的&#8221;数学心桥&#8221;： $e^{ix}=cosx+isinx$.</p>
+<time datetime="2013-11-17T19:39:00+08:00" pubdate data-updated="true">Nov 17<span>th</span>, 2013</time>
+			</p>
+			
+		</header>
+		
+		<p>最美的&#8221;数学心桥&#8221;： $e^{ix}=cosx+isinx$.</p>
 
 <p>最美的&#8221;数学符号&#8221;： $e=\lim_{x \to +\infty} (1+\frac{1}{x})^{x}$.</p>
 
@@ -119,11 +124,12 @@
 
 <p>一本关于数值算法与应用的总结小书，使用Matlab语言，详情猛戳<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">HERE</a>.</p>
 
-  
-    <footer>
-      <p class="meta">
-        
-        
+		
+		<footer>
+			
+			<p class="meta">
+				
+				
 
 
 
@@ -136,25 +142,27 @@
 
 
 <time datetime="2013-11-17T19:39:00+08:00" pubdate data-updated="true">Nov 17<span>th</span>, 2013</time>
-        
-      </p>
-      
-        <div class="sharing">
+				
+			</p>
+			
+			<div class="sharing">
   
   
   
 </div>
 
-      
-    </footer>
-  
-</article>
+			
+		</footer>
+		
+	</article>
+	
 
 </div>
 
 <aside class="sidebar">
   
-    <section>
+  
+	<section>
 	<h1>关于博主</h1><br/>
   <a href="/aboutme/"><img src="/images/me-small.png" width="250px" height="210px" alt="protrait"/></a><br/>
   <p>Hi, I'm Hujiawei, from P.R.China. Now I'm a postgraduate student studying in <a href="http://www.tsinghua.edu.cn/publish/th/index.html">Tsinghua University</a>.
@@ -243,8 +251,9 @@
 		</li>
 	</ul>
 </section>
-  
-</aside>
+	
+	
+  </aside>
 
 
 		</div>
@@ -253,6 +262,23 @@
 	<footer role="contentinfo">
 		<p>
   	Copyright &copy; 2014 - hujiawei - <a href="http://happybirthday2yinger.duapp.com/">Happy birthday to MY QUEEN</a> - <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
+  	
+  	<!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+  	
 	<!-- CNZZ -->
 	&nbsp;&nbsp;
 	<script type="text/javascript">
