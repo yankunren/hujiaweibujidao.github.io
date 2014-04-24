@@ -1,105 +1,53 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE HTML>
+<html lang="zh-cn">
 <head>
-  <meta charset="utf-8">
-  <title>Matlab Image Segmentation - Hujiawei Bujidao</title>
+  <meta charset="UTF-8">
+  <title>Hujiawei Bujidao</title>
+
   <meta name="author" content="hujiawei">
-
   
-  <meta name="description" content="1.基于迭代的自动阈值图像分割方法 参考文献: 基于迭代(自动阈值)算法的医学图像增强方法 该文献实现了全局和局部的图像分割代码，使用的都是迭代算法，对比下面的结果可以看出，在灰度差异特别大的图像中，局部阈值分割要比全局阈值分割表现更好。[注:我对源码略有修改] 1.1 全局阈值分割程序 1
-2 &hellip;">
+  <meta name="description" content="Matlab Image Segmentation Mar 30th, 2014 1.基于迭代的自动阈值图像分割方法 参考文献: 基于迭代(自动阈值)算法的医学图像增强方法 该文献实现了全局和局部的图像分割代码，使用的都是迭代算法，对比下面的结果可以看出，在灰度差异特别大的图像中， &hellip;">
+  
   
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
   <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/03/30/matlab-image-segmentation">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-<!-- add Mathjax support-->
-<!--
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
--->
-  
-
 </head>
+  
+<body class="default">
+  <div id="wrapper">
+    <div id="header">
+  <h1><a href="/">Hujiawei Bujidao</a></h1>
+  
+    <p>I will always be your savior! A secret makes a man man!</p>
+  
+</div>
+<ul id="social-links">
+  
+    <li><a class="feed" href="/atom.xml" title="RSS">RSS</a></li>
+  
+  
+  
+</ul>
+<div class="clear"></div>
+<ul id="nav">
+  
+    <li> <a href="/">blog</a> </li>
+  
 
-<body   >
-	<header role="banner">
-		<hgroup style="text-align: center">
-	<h1><a href="/"><img src="/images/conan-paper-small.png"  />Hujiawei Bujidao<img src="/images/conan-hat-small.png"  /></a></h1>
-	
-	<h2>I will always be your savior! A secret makes a man man!</h2>
-	
-	
-</hgroup>
-
-
-	</header>
-	<nav role="navigation">
-		<ul class="subscription" data-subscription="rss">
-
-  <!-- <li><a href="https://github.com/hujiaweibujidao" rel="subscribe-rss" title="subscribe via RSS">View me on GitHub</a></li> -->
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-   
+  
+    <li><a href="/blog/archives">archives</a></li>
+  
 </ul>
 
-  <!--
+    <div id="main"> <div class="post-header">
   
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:hujiaweibujidao.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form> 
+    <h1 class="post-title">Matlab Image Segmentation</h1>
   
-  -->
-<ul class="main-navigation">
-  <li><a href="/blog/archives/">Blog</a></li>
-  <li><a href="/aboutme/">AboutMe</a></li>
-  <li><a href="/math/">Math</a></li>
-  <!--
-  <li><a href="/datamining/">DataMining</a></li>
-  -->
-  <li><a href="/blog/categories/mobiledev/">MobileDev</a></li>
-  <!--
-  <li><a href="/xjava/">XJava</a></li>
-  -->
-  <!-- <li><a href="/datamining/">Projects</a></li> -->
-  <!--
-  <li><a href="/blog/archives">Archives</a></li>
-  -->
-</ul>
-
-
-	</nav>
-	<div id="main">
-		<div id="content">
-			<div>
-	<article class="hentry" role="article">
-		
-  <header>
-    
-      <h1 class="entry-title">Matlab Image Segmentation</h1>
-    
-    
-      <p class="meta">
-        
+  
 
 
 
@@ -112,13 +60,9 @@
 
 
 <time datetime="2014-03-30T16:13:00+08:00" pubdate data-updated="true">Mar 30<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
+</div>
 
-
-<div class="entry-content"><p>1.基于迭代的自动阈值图像分割方法</p>
+<div class="post-content"><p>1.基于迭代的自动阈值图像分割方法</p>
 
 <p>参考文献: <a href="/files/image_segmentation.pdf">基于迭代(自动阈值)算法的医学图像增强方法</a></p>
 
@@ -354,293 +298,91 @@
 </div>
 
 
-		<footer>
-			<p class="meta">
-				
-  
-
-<span class="byline author vcard">Posted by <span class="fn">hujiawei</span></span>
-
-				
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-30T16:13:00+08:00" pubdate data-updated="true">Mar 30<span>th</span>, 2014</time>
-				
+<div class="post-single">
+  <div class="post-meta">
+    
 
 <span class="categories">
+  Categories:
   
     <a class='category' href='/blog/categories/matlab/'>matlab</a>
   
 </span>
 
 
-			</p>
-			
-			<div class="sharing">
+    
+      <div class="sharing">
   
   
   
 </div>
 
-			
-			<p class="meta">
-				
-				<a class="basic-alignment left" href="/blog/2014/03/13/mobile-development-materials/" title="Previous Post: Material on Mobile Development">&laquo; Material on Mobile Development</a>
-				
-				
-				<a class="basic-alignment right" href="/blog/2014/04/05/principal-component-analysis/" title="Next Post: Principal Component Analysis">Principal Component Analysis &raquo;</a>
-				
-			</p>
-		</footer>
-	</article>
-	
+    
+  </div>
+  <div class="clear"></div>
 
-	
-	<section>
-		<h1>Comments</h1>
-		<div id="comments" aria-live="polite">
-			<!-- Duoshuo Comment BEGIN   data-title=""-->
-<div class="ds-thread"></div>
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"hujiaweibujidao"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = 'http://static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script>
-<!-- Duoshuo Comment END -->
-
-		</div>
-	</section>
-	
-
+  
 </div>
+ </div>
+    <div id="footer">
+  <div class="panels">
+    <div class="license">
+      <h2>License</h2>
+      <p>如非特别声明，本 Blog 的文章由 hujiawei 创作，采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">知识共享署名-非商业性使用-相同方式共享 3.0 Unported 许可协议</a>进行许可。</p>
+    </div>
 
-<aside class="sidebar">
-	
-	<section>
-  <h1>关于博主</h1><br/>
-  <a href="/aboutme/"><img src="/images/me-small.png" width="250px" height="210px" alt="protrait"/></a><br/>
-  <p>Hi, I'm Hujiawei, from P.R.China. Now I'm a postgraduate student studying in <a href="http://www.tsinghua.edu.cn/publish/th/index.html">Tsinghua University</a>.
-  Wanna know me? <a href="/aboutme/">See here.</a> <br/>	
+    <div class="posts">
+      <h2>Recent Posts</h2>
+      <ul>
+        
+          <li>
+            <a href="/blog/2014/04/24/calculus-summary/">Calculus Summary</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2014/04/23/numerical-methods-using-matlab/">Numerical Methods using Matlab</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2014/04/22/probability-and-statistics-summary/">probability and statistics summary</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2014/04/15/flying-on-mac/">Flying on Mac</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2014/04/13/vertext-cover-problem/">Vertext Cover Problem</a>
+          </li>
+        
+      </ul>
+    </div>
+
+    <div class="douban">
+      <h2>Reading</h2>
+      
+        <p>Please set your Douban ID in _config.yml</p>
+      
+    </div>
+  </div>
+
+  <p class="powered">
+    Powered by <a href="http://octopress.org">Octopress</a> and <a href="https://github.com/iwinux/compbits">Compbits</a>
   </p>
-  <a href="http://weibo.com/hujiaweiyinger"><img src="/images/sinaweibo.png" width="40px" height="40px"/></a> &nbsp;
-  <a href="https://github.com/hujiaweibujidao"><img src="/images/github.png" width="40px" height="40px"/></a>&nbsp;
-  <a href="http://hujiawei.tumblr.com"><img src="/images/tumblr.png" width="40px" height="40px"/></a> &nbsp;
-  <a href="https://twitter.com/hujiaweiyinger"><img src="/images/twitter.png" width="40px" height="40px"/></a>
-  
-  <br/>
-  
-</section>
-<section>
- <h1>分类目录</h1>
- <ul id="categories">
-	 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (2)</a></li>
-<li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
-<li class='category'><a href='/blog/categories/ios/'>ios (1)</a></li>
-<li class='category'><a href='/blog/categories/mac/'>mac (2)</a></li>
-<li class='category'><a href='/blog/categories/math/'>math (3)</a></li>
-<li class='category'><a href='/blog/categories/matlab/'>matlab (1)</a></li>
-<li class='category'><a href='/blog/categories/ml/'>ml (1)</a></li>
-<li class='category'><a href='/blog/categories/mobiledev/'>mobiledev (5)</a></li>
-<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
-<li class='category'><a href='/blog/categories/opencv/'>opencv (5)</a></li>
-
- </ul>
-</section>
-<section>
-  <h1>近期文章</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2014/04/24/calculus-summary/">Calculus Summary</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/23/numerical-methods-using-matlab/">Numerical Methods Using Matlab</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/22/probability-and-statistics-summary/">Probability and Statistics Summary</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/15/flying-on-mac/">Flying on Mac</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/13/vertext-cover-problem/">Vertext Cover Problem</a>
-      </li>
-    
-  </ul>
-</section>
-<section>
-	<h1>好友博客</h1>
-	<ul>
-		<li>
-			<a href="http://doufunao.github.io/">豆腐脑的幻想乡</a>
-		</li>
-		<li>
-			<a href="http://c4fun.cn/">Code 4 Fun</a>
-		</li>
-		<li>
-			<a href="http://www.tanglei.name/">TangLei blog</a>
-		</li>
-		<li>
-			<a href="http://ontheroad.sinaapp.com/">Tian Jun-Find My Way</a>
-		</li>
-		
-		<li>
-			<a href="http://www.liaoxuefeng.com/">廖雪峰的官方网站</a>
-		</li>
-		<li>
-			<a href="http://wufawei.com/">Ted's Homepage</a>
-		</li>
-		<li>
-			<a href="http://www.renfei.org/blog/">Renfei Song</a>
-		</li>
-		<li>
-			<a href="http://bluedavy.me">BlueDavy之技术blog</a>
-		</li>
-		
-		<li>
-			<a href="#">这里会是你吗?</a>
-		</li>
-	</ul>
-</section>
-	
-</aside>
-
-
-
-		</div>
-	</div>
-	
-	<footer role="contentinfo">
-		<p>
-	Copyright &copy; 2014 - hujiawei - <a href="http://happybirthday2yinger.duapp.com/">Happy birthday to MY QUEEN</a> - <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
-
-<!-- Mathjax StackExchange -->
-<!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  jax: ["input/TeX", "output/HTML-CSS"],
-  tex2jax: {
-    inlineMath: [ ['$', '$'] ],
-    displayMath: [ ['$$', '$$']],
-    processEscapes: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-  },
-  messageStyle: "none",
-  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-});
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
-	
-	<!-- CNZZ -->
-	&nbsp;&nbsp;
-	<script type="text/javascript">
-		var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-		document.write(unescape("%3Cspan id='cnzz_stat_icon_1000165127'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000165127%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-	<!-- license -->
-	<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="http://i.creativecommons.org/l/by-nd/3.0/88x31.png" /></a>
-	<br />
-	本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh">知识共享署名-禁止演绎 3.0 未本地化版本许可协议</a>进行许可。
-</p>
-<style>
-	.returnTop {
-		position: fixed;
-		_position: absolute;
-		right: 10px;
-		bottom: 200px;
-		_bottom: auto;
-		display: none;
-		width: 40px;
-		height: 40px;
-		border: 1px solid #61b72e;
-		border-radius: 4px;
-		background: #fff;
-		box-shadow: 0 0 5px #F5F5F5;
-		text-indent: -9999px;
-		cursor: pointer;
-	}
-	.returnTop .s {
-		position: absolute;
-		top: -2px;
-		_top: -20px;
-		left: 10px;
-		width: 0;
-		height: 0;
-		border-width: 10px;
-		border-color: transparent transparent #61b72e;
-		border-style: dashed dashed solid;
-	}
-	.returnTop .b {
-		position: absolute;
-		top: 18px;
-		left: 16px;
-		height: 12px;
-		width: 8px;
-		background: #61b72e;
-	}
-</style>
-<div class="returnTop" title="嗖的就上去了！">
-	<span class="s"></span>
-	<span class="b"></span>
-	返回顶部
 </div>
-<script type="text/javascript">
-$(function(){
-$(window).bind("scroll", function(){
 
-var scrollTopNum = $(document).scrollTop(),
-winHeight = $(window).height(),
-returnTop = $("div.returnTop");
+  </div> <!-- #wrapper end -->
 
-(scrollTopNum > 0) ? returnTop.fadeIn("fast") : returnTop.fadeOut("fast");
+  
 
-if (!-[1,]&&!window.XMLHttpRequest) {
-returnTop.css("top", scrollTopNum + winHeight - 200);
-}
-
-});
-
-$("div.returnTop").click(function() {
-$("html, body").animate({ scrollTop: 0 }, 100);
-});
-
-});
-</script>
+  
 
 
+  
 
-	</footer>
-	
-	
+  
 
-
-
-
-
-
-
-
-
-
+  
 
 </body>
 </html>

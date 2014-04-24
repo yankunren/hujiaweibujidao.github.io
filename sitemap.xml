@@ -2,87 +2,73 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://hujiaweibujidao.github.io/blog/2013/11/17/hello-octopress/</loc>
-        <lastmod>2014-04-07T19:04:41+08:00</lastmod>
+        <lastmod>2014-04-24T11:44:57+08:00</lastmod>
     </url>
     <url>
         <loc>http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/</loc>
-        <lastmod>2013-11-19T17:01:44+08:00</lastmod>
+        <lastmod>2014-04-24T11:44:57+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-developement/
         </loc>
-        <lastmod>2014-04-06T09:27:08+08:00</lastmod>
+        <lastmod>2014-04-24T11:44:57+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/
         </loc>
-        <lastmod>2014-03-18T14:25:57+08:00</lastmod>
+        <lastmod>2014-04-24T11:44:57+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3/
         </loc>
-        <lastmod>2014-03-28T00:02:46+08:00</lastmod>
+        <lastmod>2014-04-24T11:44:57+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://hujiaweibujidao.github.io/blog/2014/02/21/android-ndk-and-opencv-development-4/
         </loc>
-        <lastmod>2014-03-27T10:17:35+08:00</lastmod>
+        <lastmod>2014-04-24T11:44:57+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/
         </loc>
-        <lastmod>2014-04-14T19:47:46+08:00</lastmod>
+        <lastmod>2014-04-24T11:44:57+08:00</lastmod>
     </url>
     <url>
         <loc>http://hujiaweibujidao.github.io/blog/2014/03/13/mobile-development-materials/</loc>
-        <lastmod>2014-04-14T09:00:20+08:00</lastmod>
+        <lastmod>2014-04-24T11:44:57+08:00</lastmod>
     </url>
     <url>
         <loc>http://hujiaweibujidao.github.io/blog/2014/03/30/matlab-image-segmentation/</loc>
-        <lastmod>2014-04-14T19:12:01+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hujiaweibujidao.github.io/blog/2014/04/05/principal-component-analysis/</loc>
-        <lastmod>2014-04-16T17:34:39+08:00</lastmod>
+        <lastmod>2014-04-24T11:44:57+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://hujiaweibujidao.github.io/blog/2014/04/08/setting-up-environments-on-new-mac/
         </loc>
-        <lastmod>2014-04-14T08:52:20+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hujiaweibujidao.github.io/blog/2014/04/09/leetcode-oj-part1/</loc>
-        <lastmod>2014-04-14T19:11:06+08:00</lastmod>
+        <lastmod>2014-04-24T11:44:57+08:00</lastmod>
     </url>
     <url>
         <loc>http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem/</loc>
-        <lastmod>2014-04-21T23:41:09+08:00</lastmod>
+        <lastmod>2014-04-24T11:44:57+08:00</lastmod>
     </url>
     <url>
         <loc>http://hujiaweibujidao.github.io/blog/2014/04/15/flying-on-mac/</loc>
-        <lastmod>2014-04-24T00:05:26+08:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://hujiaweibujidao.github.io/blog/2014/04/22/probability-and-statistics-summary/
-        </loc>
-        <lastmod>2014-04-24T00:07:22+08:00</lastmod>
+        <lastmod>2014-04-24T11:44:57+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/
         </loc>
-        <lastmod>2014-04-23T22:13:34+08:00</lastmod>
+        <lastmod>2014-04-24T11:44:57+08:00</lastmod>
     </url>
     <url>
         <loc>http://hujiaweibujidao.github.io/blog/2014/04/24/calculus-summary/</loc>
-        <lastmod>2014-04-24T11:21:57+08:00</lastmod>
+        <lastmod>2014-04-24T11:44:57+08:00</lastmod>
     </url>
     <url>
         <loc>http://hujiaweibujidao.github.io/404.html</loc>
@@ -94,15 +80,19 @@
     </url>
     <url>
         <loc>http://hujiaweibujidao.github.io/blog/archives/</loc>
-        <lastmod>2014-04-24T11:21:57+08:00</lastmod>
+        <lastmod>2014-04-24T11:44:57+08:00</lastmod>
     </url>
     <url>
         <loc>http://hujiaweibujidao.github.io/datamining/</loc>
         <lastmod>2014-04-06T10:29:31+08:00</lastmod>
     </url>
     <url>
+        <loc>http://hujiaweibujidao.github.io/feed/index.xml</loc>
+        <lastmod>2014-04-24T11:44:57+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://hujiaweibujidao.github.io/</loc>
-        <lastmod>2014-04-24T11:21:57+08:00</lastmod>
+        <lastmod>2014-04-24T11:44:57+08:00</lastmod>
     </url>
     <url>
         <loc>http://hujiaweibujidao.github.io/index_stevejobs.html</loc>
