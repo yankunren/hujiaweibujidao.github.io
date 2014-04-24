@@ -7,9 +7,12 @@ categories: ml
 published: false
 ---
 
-PCA
+Materials on PCA
 
-To be continued......
+
+
+
+
 
 
 参考资料:

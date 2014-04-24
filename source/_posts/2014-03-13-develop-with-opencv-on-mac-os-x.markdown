@@ -88,14 +88,19 @@ int main(int argc, char** argv) {
 
 如果使用Eclipse开发的话按照下面的步骤进行：
 
-1.按照正常的步骤，使用eclipse建立一个Mac C++工程，包含一个cpp文件
-2.右击工程名, 选择“Properties”，在属性配置页中选择，点击C/C++ Build, 在下拉选项中选择 Settings. 在右边的选项卡中选择 Tool Settings。
-3.在GCC C++ Compiler选项列表中选择Includes，在Include paths(-l)中添加安装好的opencv的头文件存放目录：/usr/local/include/ [存放opencv头文件的目录]
-4.在MacOS X C++Linker选项列表中选择Library，在Library search path (-L)中添加安装好的opencv Lib文件存放目录：/usr/local/lib/ [***经过我的测试只能是这个目录！其他目录甚至是它的子目录都不行！如果在其他路径中，复制过来也行！***]
-5.在MacOS X C++Linker选项列表中选择Library, 在Libraries(-l) 中依次点击“＋”号，添加需要使用的Lib文件(通常情况下，使用前三个，注意不要包括前缀`lib`，可以添加版本号)：
-opencv_core opencv_imgproc opencv_highgui opencv_ml opencv_video opencv_features2d opencv_calib3d opencv_objdetect opencv_contrib opencv_legacy opencv_flann
-6.重新build项目，运行即可。
+1.按照正常的步骤，使用Eclipse建立一个`Mac C++`工程，包含一个cpp文件   
 
+2.右击工程名, 选择`Properties`，在属性配置页中选择，点击`C/C++ Build`, 在下拉选项中选择 `Settings`. 在右边的选项卡中选择 `Tool Settings`。   
+
+3.在`GCC C++ Compiler`选项列表中选择`Includes`，在`Include paths(-l)`中添加安装好的opencv的头文件存放目录：`/usr/local/include/` [存放opencv头文件的目录，自行看情况而定]    
+
+4.在`MacOS X C++Linker`选项列表中选择`Library`，在`Library search path (-L)`中添加安装好的opencv dylib文件存放目录：`/usr/local/lib/` [***经过我的测试只能是这个目录！其他目录甚至是它的子目录都不行！如果在其他路径中，复制过来也行！***]    
+
+5.在`MacOS X C++Linker`选项列表中选择`Library`, 在`Libraries(-l)` 中依次点击`＋`号，添加需要使用的lib文件(通常情况下，使用前三个，注意不要包括前缀`lib`，可以添加版本号)：    
+
+opencv_core opencv_imgproc opencv_highgui opencv_ml opencv_video opencv_features2d opencv_calib3d opencv_objdetect opencv_contrib opencv_legacy opencv_flann   
+
+6.重新build项目即可。
 
 如果遇到问题`ld: symbol(s) not found for architecture x86_64`，先检查代码中是否需要包含还没有添加的库文件，再检查是否是其他问题。如果是Mac平台，下面还有一个关于问题`ld: symbol(s) not found for architecture x86_64`的解释可供参考：
 

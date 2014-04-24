@@ -1,15 +1,14 @@
 ---
-layout: page
-title: "math"
-date: 2013-11-17 19:39
+layout: post
+title: "Numerical Methods using Matlab"
+date: 2014-04-23 22:13
 comments: true
-sharing: true
-footer: true
+categories: math
 ---
 
 一本关于数值算法与应用的总结小书
 
-目前新鲜出炉的部分：[点击章节标题可以直接查看并下载 \(^o^)/~]   
+目前写了四个章节：[点击章节标题可以直接查看并下载 \(^o^)/~]   
 
 * [第一章 线性方程组求解](/files/nm-chapter1.pdf)
 
@@ -32,4 +31,3 @@ footer: true
 {% img  /images/201311/nm-chapter.png 600 600  %}
 {% img  /images/201311/nm-math.png 600 600  %}
 {% img  /images/201311/nm-code.png 600 600  %}
-    

@@ -7,4 +7,4 @@ sharing: false
 footer: false
 ---
 ### OOOPS! I am so sorry for that! 
-{% img /images/dolphin.png dolphin %}
+{% img /images/conan-mainperson.png conan %}

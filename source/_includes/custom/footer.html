@@ -1,5 +1,22 @@
 <p>
-	Copyright &copy; {{ site.time | date: "%Y" }} - {{ site.author }} - <a href="http://happybirthday2yinger.duapp.com/">Happy birthday to MY QUEEN</a> - <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
+  	Copyright &copy; {{ site.time | date: "%Y" }} - {{ site.author }} - <a href="http://happybirthday2yinger.duapp.com/">Happy birthday to MY QUEEN</a> - <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
+  	
+  	<!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+  	
 	<!-- CNZZ -->
 	&nbsp;&nbsp;
 	<script type="text/javascript">
@@ -10,7 +27,9 @@
 	<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="http://i.creativecommons.org/l/by-nd/3.0/88x31.png" /></a>
 	<br />
 	本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh">知识共享署名-禁止演绎 3.0 未本地化版本许可协议</a>进行许可。
+
 </p>
+
 <style>
 	.returnTop {
 		position: fixed;
@@ -75,4 +94,3 @@ $("html, body").animate({ scrollTop: 0 }, 100);
 
 });
 </script>
-
