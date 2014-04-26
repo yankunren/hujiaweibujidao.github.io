@@ -6,7 +6,6 @@ comments: true
 categories: math
 published: false
 ---
-<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
 
 ## <center>微积分总结</center>
 
@@ -128,4 +127,4 @@ published: false
   [7]: http://hujiaweibujidao.github.io/images/math/deviration.png
   [8]: http://hujiaweibujidao.github.io/images/math/weifen.png
   [9]: http://hujiaweibujidao.github.io/images/math/weifen_meaning.png
-  
+

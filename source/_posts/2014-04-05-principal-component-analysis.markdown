@@ -11,10 +11,6 @@ Materials on PCA
 
 
 
-
-
-
-
 参考资料:
 
 1.[Lecture 15: Principal Component Analysis](http://www.doc.ic.ac.uk/~dfg/ProbabilisticInference/IDAPILecture15.pdf)    
