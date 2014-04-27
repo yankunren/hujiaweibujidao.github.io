@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Calculus Summary Chapter 10 - Hujiawei Bujidao</title>
+  <title>linearalgebra_summary - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="第十部分 微分方程 第一节 微分方程的基本概念
-引例，微分方程的基本概念 在许多问题中，我们不总是能够得到函数关系式，而是得到函数和它的导数之间的关系式，这样的关系式就是微分方程。微分方程中出现的未知函数的最高阶导数的阶数叫做微分方程的阶。 只要是能够满足微分方程的函数都是它的解， &hellip;">
+  <meta name="description" content="线性代数那些事 Things of Linear Algebra
+逸夫图书馆, 2014/4/27 [TOC] 0.碎碎念 到了研究生阶段才意识到本科的数学原来作用这么大，不论是在数据挖掘，还是机器学习，亦或是模式识别，数学都是基础中的基础。于是乎，我在逸夫图书馆泡了几天看了些微积分、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/28/calculus-summary-chapter-10">
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/28/linearalgebra-summary">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
@@ -90,7 +90,7 @@
 		
   <header>
     
-      <h1 class="entry-title">Calculus Summary Chapter 10</h1>
+      <h1 class="entry-title">Linearalgebra_summary</h1>
     
     
       <p class="meta">
@@ -106,81 +106,56 @@
   
 
 
-<time datetime="2014-04-28T14:29:00+08:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
+<time datetime="2014-04-28T14:03:00+08:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3 id="center-center"><center>第十部分 微分方程</center></h3>
+<div class="entry-content"><p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
+<strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
 
-<h4 id="section">第一节 微分方程的基本概念</h4>
-<p>引例，微分方程的基本概念</p>
+<p>[TOC]</p>
 
-<p>在许多问题中，我们不总是能够得到函数关系式，而是得到函数和它的导数之间的关系式，这样的关系式就是微分方程。微分方程中出现的未知函数的最高阶导数的阶数叫做微分方程的阶。</p>
+<h4 id="center0center"><center>0.碎碎念</center></h4>
 
-<p>只要是能够满足微分方程的函数都是它的解，如果解中包含了任意常数，并且任意常数的个数与阶数相同，那么这个解又叫做微分方程的通解。</p>
+<p>到了研究生阶段才意识到本科的数学原来作用这么大，不论是在数据挖掘，还是机器学习，亦或是模式识别，数学都是基础中的基础。于是乎，我在逸夫图书馆泡了几天看了些微积分、线代和数理统计的书籍，写下三份总结，记录下重要的知识，以备后忘。本人才疏学浅，若有错误之处还请指出，让我“增长”，若有不足也请指出，使我“完备”，谢谢！:-)</p>
 
-<p>通常我们会有一些初始条件。确定了通解中的任意常数的话，那么就得到了微分方程的特解。</p>
+<p><strong>[注：这些总结不会详细地讲解所有概念，只是挑选一些我个人感觉比较有用的知识点进行总结，很多时候可能只是列举知识点，并无解释，忘记了的可以自行Wiki或者翻书，另外，为了节省写作时间，对于一些定理我并没有给出详细的表达，忽略了些前提条件，请不要较真，我希望的是给自己一个感性的理解就行，具体理性的分析需要的时候再查，还有就是我还剪切粘贴了很多图片，再有就是，本文采用的是’非线性方式’进行总结的…首篇意识流作品…嗯，就是这样…强迫症者慎入…]</strong></p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>求微分方程<script type="math/tex">y'=f(x,y)</script>满足初始条件$$y</td>
-      <td><em>{x=x</em>{0}}=y_{0}$$的特解的问题，叫做一阶微分方程的初值问题。</td>
-    </tr>
-  </tbody>
-</table>
+<p>PS：本总结根据下面提到的武汉大学黄正华老师写的线性代数复习总结的顺序来的，因为黄老师的总结已经写得很好了，我只会提到一些我在其他地方看到或者听到的比较有用的心得分享。</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/chuzhi.png" alt="image" /></p>
+<p>参考书籍：</p>
 
-<h4 id="section-1">第二节 一阶微分方程</h4>
-<p>可分离变量方程，齐次方程，一阶线性微分方程，伯努利方程</p>
+<p>1.[线性代数 Using Matlab]</p>
 
-<p>可分离变量方程：利用一阶微分方程的形式，巧妙地分离变量，一边是y的函数，另一边是x的函数，然后左右两边积分即可得到一个关于x和y的隐函数，这个隐函数即为微分方程的解。</p>
+<p>2.[]</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/fenlibianliang1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/fenlibianliang2.png" alt="image" /></p>
+<p>它山之石：</p>
 
-<p>齐次方程：将原微分方程进行调整，左边为一阶导数，右边为关于<script type="math/tex">\frac{y}{x}</script>的函数，然后可以利用可分离变量得到微分方程的解。有些非齐次的微分方程可以化为齐次方程。</p>
+<p>1.<a href="http://aff.whu.edu.cn/huangzh/">武汉大学 黄正华老师</a>写的线性代数复习总结<a href="http://hujiaweibujidao.github.io/files/linear_algebra_huangzhenghua.pdf">book</a></p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/qici1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/qici2.png" alt="image" /></p>
+<h4 id="center1center"><center>1.行列式</center></h4>
 
-<p>一阶线性微分方程：对于未知函数和导数都是一次的微分方程。</p>
+<p><strong>什么是行列式？</strong><a href="http://zh.wikipedia.org/wiki/%E8%A1%8C%E5%88%97%E5%BC%8F">on Wiki</a></p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/xianxing1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/xianxing2.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/xianxing3.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/xianxing4.png" alt="image" /></p>
+<p>这个问题一点都不简单！行列式到底是什么？<strong>wiki的解释：行列式其实是一个函数，一个将方阵转换成一个标量的函数！行列式可以看做是有向面积或体积的概念在一般的欧几里得空间中的推广。或者说，在 n 维欧几里得空间中，行列式描述的是一个线性变换对“体积”所造成的影响。</strong></p>
 
-<p>伯努利方程：含二阶导数</p>
+<p>首先要注意的是如果是指矩阵，那么只有方阵才有行列式！对方阵求行列式得到一个值，这个值就是指这个$n \times n$方阵(矩阵都可以看做是一个线性变换)，也就是这个线性变换，对n维空间中的“体积”所造成的影响。在二维空间中，这个“体积”实际上是平行四边形的面积，在三维空间中，“体积”就是指平行六面体的体积。</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/bonuli1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/bonuli2.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/bonuli3.png" alt="image" /></p>
+<p>先看下行列式在二维和三维空间的几何意义</p>
 
-<h4 id="section-2">第三节 可降阶的高阶微分方程</h4>
-<p>y(n)=f(x)型的微分方程，yn=f(x，y’)型的微分方程，yn=f(Y，y’)型的微分方程</p>
-
-<p>略过。</p>
-
-<h4 id="section-3">第四节 二阶常系数微分方程</h4>
-<p>通解的结构，二阶常系数齐次线性微分方程，二阶常系数非齐次线性微分方程</p>
-
-<p>略过。</p>
-
-<h4 id="section-4">第五节 微分方程的应用实例</h4>
-<p>物体冷却过程的数学模型，动力学问题，人口模型</p>
-
-<p>略过。</p>
-
-<center>Congratuation! Thank you!</center>
-<center>恭喜你，看完啦！</center>
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi2.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi3.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi4.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi5.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi6.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi7.png" alt="image" /></p>
 
 <p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/28/calculus-summary-chapter-10/">http://hujiaweibujidao.github.io/blog/2014/04/28/calculus-summary-chapter-10/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/28/linearalgebra-summary/">http://hujiaweibujidao.github.io/blog/2014/04/28/linearalgebra-summary/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 </div>
 
 
@@ -203,7 +178,7 @@
   
 
 
-<time datetime="2014-04-28T14:29:00+08:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
+<time datetime="2014-04-28T14:03:00+08:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
 				
 
 <span class="categories">
@@ -224,8 +199,10 @@
 			
 			<p class="meta">
 				
-				<a class="basic-alignment left" href="/blog/2014/04/28/linearalgebra-summary/" title="Previous Post: linearalgebra_summary">&laquo; linearalgebra_summary</a>
+				<a class="basic-alignment left" href="/blog/2014/04/28/calculus-summary-all/" title="Previous Post: Calculus Summary All Chapters">&laquo; Calculus Summary All Chapters</a>
 				
+				
+				<a class="basic-alignment right" href="/blog/2014/04/28/calculus-summary-chapter-10/" title="Next Post: Calculus Summary Chapter 10">Calculus Summary Chapter 10 &raquo;</a>
 				
 			</p>
 		</footer>
