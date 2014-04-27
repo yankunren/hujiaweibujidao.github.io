@@ -4,7 +4,7 @@
   <title><![CDATA[Category: math | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-27T14:20:34+08:00</updated>
+  <updated>2014-04-27T14:32:57+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,71 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Calculus Summary Chapter 1]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-1/"/>
+    <updated>2014-04-27T14:29:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-1</id>
+    <content type="html"><![CDATA[<h3 id="center--center"><center>第一部分 函数与极限 </center></h3>
+
+<h4 id="section">第一节 函数</h4>
+<p>集合、区间与邻域，函数的概念与性质，反函数与复合函数，初等函数</p>
+
+<p>关于初等函数 <a href="http://zh.wikipedia.org/wiki/%E5%88%9D%E7%AD%89%E5%87%BD%E6%95%B0">wiki</a>，初等函数在其定义域内都是连续的。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/elementalfuns.png" alt="image" /></p>
+
+<p>关于指数函数：
+对于相等间隔的自变量x的取值，指数函数对应值的比例为常数。由指数运算法则可知，对任意的x，只要给定$x_{0}&gt;0$，则<script type="math/tex">a^{x+x_{0}}/a^{x}=a^{x_{0}}</script>恒成立。此性质可以作为判断两个变量之间的关系是否为指数函数关系的主要依据。此外，这个性质导出了数理统计中的指数分布，在数理统计中我们会看到。</p>
+
+<h4 id="section-1">第二节 函数的极限</h4>
+<p>数列极限及性质，函数极限及性质，无穷小与无穷大，极限运算法则，极限存在准则和两个重要极限，无穷小的比较</p>
+
+<p>关于收敛数列(极限存在)有两个性质：唯一性和有界性</p>
+
+<p>关于函数极限，注意，<script type="math/tex">x \to x_{0}</script>的极限是否存在与函数在<script type="math/tex">x_{0}</script>是否有定义无关。<a href="http://hujiaweibujidao.github.io/images/math/fun_limit.png">函数极限的定义</a></p>
+
+<p>函数极限的几何意义是，当x在领域<script type="math/tex">(x_{0}-\delta,x_{0}+\delta)</script>内时，函数值y落在下图中<script type="math/tex">(A-\varepsilon,A+\varepsilon)</script>内。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/funlimit_meaning.png" alt="image" /></p>
+
+<p>关于无穷小和无穷大：无穷小并不是指负无穷，而是函数在<script type="math/tex">x \to x_{0}</script>时的极限为0，无穷小与有解变量的乘积还是无穷小，但是这个性质放在无穷大上面就不成立了！例如，<script type="math/tex">\lim_{x \to +\infty} \frac{sinx}{x} = 0</script>是无穷小，但是<script type="math/tex">\lim_{x \to +\infty} xcosx</script>不是无穷小，它不符合无穷小的定义，<a href="http://www.guokr.com/post/469944/">关于这个问题的讨论</a>，上面仅代表我的理解，不知对否，若有错误请指出。</p>
+
+<p>两个重要的极限：<script type="math/tex">\lim_{x \to 0} \frac{sinx}{x} = 1</script> 和 <script type="math/tex">\lim_{x \to +\infty} (1+\frac{1}{x})^{x} = e</script></p>
+
+<p>关于极限<script type="math/tex">\lim_{x \to 0} \frac{sinx}{x} = 1</script>可用下图来解释，圆的边长是1，<script type="math/tex">BC=sinx, AD=tanx, \hat{AB}=x</script>，在角度很小很小，即<script type="math/tex">x \to 0</script>时，三者近似相等。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/sinxoverx.png" alt="image" /></p>
+
+<p>关于极限<script type="math/tex">\lim_{x \to \infty} (1+\frac{1}{x})^{x} = e</script> (注意，不论是<script type="math/tex">\lim_{x \to +\infty}</script>还是<script type="math/tex">\lim_{x \to -\infty}</script>都成立)它道出了自然对数<script type="math/tex">e</script>到底是什么！当然还有其他的方式表示出<script type="math/tex">e</script>，比如按照级数展开的方式，我认为<script type="math/tex">e</script>是数学界最美丽的符号！<script type="math/tex">e \approx 2.71828</script></p>
+
+<p>这两个重要极限一般用于求复杂的函数的极限值。</p>
+
+<h4 id="section-2">第三节 函数的连续性与间断点</h4>
+<p>函数的连续性，函数的间断点</p>
+
+<p>函数的间断点分为两类：
+第一类是函数在<script type="math/tex">x=x_{0}</script>处间断，但是左右极限都存在，如果左右极限相等的话该间断点称为可去间断点，如果不相等称为跳跃间断点；
+其他情况下的间断点都属于第二类间断点。</p>
+
+<h4 id="section-3">第四节 初等函数的连续性</h4>
+<p>连续函数四则运算的连续性，反函数与复合函数的连续性，初等函数的连续性</p>
+
+<p>只要记住初等函数在它们的定义域内是连续就行了。</p>
+
+<h4 id="section-4">第五节 闭区间上连续函数的性质</h4>
+<p>最大值和最小值定理，介值定理与零点定理</p>
+
+<p>最大值和最小值定理就是说在闭区间上的连续函数f(x)一定是有上下界的；</p>
+
+<p>介值定理就是说在闭区间上的连续函数f(x)，如果左右端点的取值不同，例如<script type="math/tex">f(a)=A,f(b)=B</script>，那么区间中肯定有一点的函数值能够取到<script type="math/tex">[A,B]</script>之间的任何一个值；</p>
+
+<p>零点定理就是说在闭区间上的连续函数f(x)，如果左右端点的取值异号，例如<script type="math/tex">% &lt;![CDATA[
+f(a)=A>0,f(b)=B<0 %]]&gt;</script>，那么区间中肯定有一点的函数值为0！</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linearalgebra_summary]]></title>
