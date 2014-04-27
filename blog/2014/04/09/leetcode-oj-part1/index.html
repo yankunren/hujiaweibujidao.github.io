@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Calculus Summary Chapter 10 - Hujiawei Bujidao</title>
+  <title>LeetCode OJ Part1 - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="第十部分 微分方程 第一节 微分方程的基本概念
-引例，微分方程的基本概念 在许多问题中，我们不总是能够得到函数关系式，而是得到函数和它的导数之间的关系式，这样的关系式就是微分方程。微分方程中出现的未知函数的最高阶导数的阶数叫做微分方程的阶。 只要是能够满足微分方程的函数都是它的解， &hellip;">
+  <meta name="description" content="为了找以后工作嘛，挑战下LeetCode OJ，顺序可能与OJ上的顺序不同哟，慢慢增加… 注，我附上的代码都包含了测试代码，提交的代码中不需要测试部分，我保留是因为某些题中有些测试样例比较特殊，为了提醒自己不要再犯同样的错！ 1.Reverse Words in a String 字符串题， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/28/calculus-summary-chapter-10">
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/09/leetcode-oj-part1">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
@@ -90,7 +89,7 @@
 		
   <header>
     
-      <h1 class="entry-title">Calculus Summary Chapter 10</h1>
+      <h1 class="entry-title">LeetCode OJ Part1</h1>
     
     
       <p class="meta">
@@ -106,81 +105,117 @@
   
 
 
-<time datetime="2014-04-28T14:29:00+08:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
+<time datetime="2014-04-09T18:18:00+08:00" pubdate data-updated="true">Apr 9<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3 id="center-center"><center>第十部分 微分方程</center></h3>
+<div class="entry-content"><p>为了找以后工作嘛，挑战下LeetCode OJ，顺序可能与OJ上的顺序不同哟，慢慢增加…</p>
 
-<h4 id="section">第一节 微分方程的基本概念</h4>
-<p>引例，微分方程的基本概念</p>
+<p>注，我附上的代码都包含了测试代码，提交的代码中不需要测试部分，我保留是因为某些题中有些测试样例比较特殊，为了提醒自己不要再犯同样的错！</p>
 
-<p>在许多问题中，我们不总是能够得到函数关系式，而是得到函数和它的导数之间的关系式，这样的关系式就是微分方程。微分方程中出现的未知函数的最高阶导数的阶数叫做微分方程的阶。</p>
+<p>1.Reverse Words in a String</p>
 
-<p>只要是能够满足微分方程的函数都是它的解，如果解中包含了任意常数，并且任意常数的个数与阶数相同，那么这个解又叫做微分方程的通解。</p>
+<p>字符串题，字符串分割再反转</p>
 
-<p>通常我们会有一些初始条件。确定了通解中的任意常数的话，那么就得到了微分方程的特解。</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">class Solution:
+</span><span class="line">    # @param s, a string
+</span><span class="line">    # @return a string
+</span><span class="line">    def reverseWords(self, s):
+</span><span class="line">        l = s.strip().split()
+</span><span class="line">        l.reverse()
+</span><span class="line">        return ' '.join(l)
+</span><span class="line">if __name__ == '__main__':
+</span><span class="line">    teststrs = ('helo world', ' hel hj ')
+</span><span class="line">    so = Solution()
+</span><span class="line">    for test in teststrs:
+</span><span class="line">        print so.reverseWords(test)    </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<table>
-  <tbody>
-    <tr>
-      <td>求微分方程<script type="math/tex">y'=f(x,y)</script>满足初始条件$$y</td>
-      <td><em>{x=x</em>{0}}=y_{0}$$的特解的问题，叫做一阶微分方程的初值问题。</td>
-    </tr>
-  </tbody>
-</table>
+<p>2.Evaluate Reverse Polish Notation</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/chuzhi.png" alt="image" /></p>
+<p>栈的利用，逆波兰表达式求值</p>
 
-<h4 id="section-1">第二节 一阶微分方程</h4>
-<p>可分离变量方程，齐次方程，一阶线性微分方程，伯努利方程</p>
+<p>注：在Java中<code>6/(-132)=0</code>但是在Python中<code>6/(-132)=-1</code>，OJ认为0是正解，所以Python中进行除法运算时使用<code>int(float(m)/float(n))</code>。</p>
 
-<p>可分离变量方程：利用一阶微分方程的形式，巧妙地分离变量，一边是y的函数，另一边是x的函数，然后左右两边积分即可得到一个关于x和y的隐函数，这个隐函数即为微分方程的解。</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">class Solution:
+</span><span class="line">    # @param tokens, a list of string
+</span><span class="line">    # @return an integer
+</span><span class="line">    def evalRPN(self, tokens):
+</span><span class="line">        stack = []
+</span><span class="line">        result = 0
+</span><span class="line">        for token in tokens:
+</span><span class="line">            if (token in '+-*/'):
+</span><span class="line">                result = self.calculate(token, int(stack.pop()), int(stack.pop()))
+</span><span class="line">                stack.append(result)
+</span><span class="line">            else:
+</span><span class="line">                stack.append(int(token))
+</span><span class="line">        return stack.pop()
+</span><span class="line">    def calculate(self, token, n, m):
+</span><span class="line">        if token.__eq__('+'):
+</span><span class="line">            return n + m
+</span><span class="line">        elif token.__eq__('-'):
+</span><span class="line">            return m - n
+</span><span class="line">        elif token.__eq__('*'):
+</span><span class="line">            return n * m
+</span><span class="line">        elif token.__eq__('/'):
+</span><span class="line">            return int(float(m) / float(n))
+</span><span class="line">if __name__ == '__main__':
+</span><span class="line">    tests = [["18"],["10","6","9","3","+","-11","*","/","*","17","+","5","+"]];
+</span><span class="line">    so = Solution()
+</span><span class="line">    for test in tests:
+</span><span class="line">        print so.evalRPN(test)  </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/fenlibianliang1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/fenlibianliang2.png" alt="image" /></p>
+<p>3.Max Points on a Line</p>
 
-<p>齐次方程：将原微分方程进行调整，左边为一阶导数，右边为关于<script type="math/tex">\frac{y}{x}</script>的函数，然后可以利用可分离变量得到微分方程的解。有些非齐次的微分方程可以化为齐次方程。</p>
+<p>在平面上的点集合中找到在同一条线上最多的点集合的个数</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/qici1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/qici2.png" alt="image" /></p>
+<p>注：相同的点重复计算点个数</p>
 
-<p>一阶线性微分方程：对于未知函数和导数都是一次的微分方程。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/xianxing1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/xianxing2.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/xianxing3.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/xianxing4.png" alt="image" /></p>
-
-<p>伯努利方程：含二阶导数</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/bonuli1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/bonuli2.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/bonuli3.png" alt="image" /></p>
-
-<h4 id="section-2">第三节 可降阶的高阶微分方程</h4>
-<p>y(n)=f(x)型的微分方程，yn=f(x，y’)型的微分方程，yn=f(Y，y’)型的微分方程</p>
-
-<p>略过。</p>
-
-<h4 id="section-3">第四节 二阶常系数微分方程</h4>
-<p>通解的结构，二阶常系数齐次线性微分方程，二阶常系数非齐次线性微分方程</p>
-
-<p>略过。</p>
-
-<h4 id="section-4">第五节 微分方程的应用实例</h4>
-<p>物体冷却过程的数学模型，动力学问题，人口模型</p>
-
-<p>略过。</p>
-
-<center>Congratuation! Thank you!</center>
-<center>恭喜你，看完啦！</center>
+<p>To be continued……</p>
 
 <p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/28/calculus-summary-chapter-10/">http://hujiaweibujidao.github.io/blog/2014/04/28/calculus-summary-chapter-10/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/09/leetcode-oj-part1/">http://hujiaweibujidao.github.io/blog/2014/04/09/leetcode-oj-part1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 </div>
 
 
@@ -203,12 +238,12 @@
   
 
 
-<time datetime="2014-04-28T14:29:00+08:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
+<time datetime="2014-04-09T18:18:00+08:00" pubdate data-updated="true">Apr 9<span>th</span>, 2014</time>
 				
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/math/'>math</a>
+    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
   
 </span>
 
@@ -224,8 +259,10 @@
 			
 			<p class="meta">
 				
-				<a class="basic-alignment left" href="/blog/2014/04/28/linearalgebra-summary/" title="Previous Post: linearalgebra_summary">&laquo; linearalgebra_summary</a>
+				<a class="basic-alignment left" href="/blog/2014/04/08/setting-up-environments-on-new-mac/" title="Previous Post: Setting Up Environments on New Mac">&laquo; Setting Up Environments on New Mac</a>
 				
+				
+				<a class="basic-alignment right" href="/blog/2014/04/13/vertext-cover-problem/" title="Next Post: Vertext Cover Problem">Vertext Cover Problem &raquo;</a>
 				
 			</p>
 		</footer>
