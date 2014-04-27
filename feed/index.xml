@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-27T11:45:26+08:00</updated>
+  <updated>2014-04-27T11:48:05+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -361,21 +361,7 @@ f(a)=A>0,f(b)=B<0 %]]&gt;</script>，那么区间中肯定有一点的函数值�
 <p><img src="http://hujiaweibujidao.github.io/images/math/touying1.png" alt="image" />
 <img src="http://hujiaweibujidao.github.io/images/math/touying2.png" alt="image" /></p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>向量的数量积的概念，即$$a b=</td>
-      <td>a</td>
-      <td> </td>
-      <td>b</td>
-      <td>\cos\theta<script type="math/tex">，在物理中就是指力F做的功W。数量积又叫内积，是很重要的概念，在线代中同样有矩阵内积的概念，在数据挖掘中有一种很常用的度量相似度的方式，即余弦相似度，一般用于文本类似的数据求相似度。向量的向量积是</script>a b=</td>
-      <td>a</td>
-      <td> </td>
-      <td>b</td>
-      <td>\sin\theta$$。</td>
-    </tr>
-  </tbody>
-</table>
+<p>向量的数量积的概念，即<script type="math/tex">ab=\|a\|\|b\|\cos \theta</script>，在物理中就是指力F做的功W。数量积又叫内积，是很重要的概念，在线代中同样有矩阵内积的概念，在数据挖掘中有一种很常用的度量相似度的方式，即余弦相似度，一般用于文本类似的数据求相似度。向量的向量积是<script type="math/tex">ab=\|a\|\|b\|\sin\theta</script>。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/shuliangji1.png" alt="image" />
 <img src="http://hujiaweibujidao.github.io/images/math/shuliangji2.png" alt="image" /></p>
