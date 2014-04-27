@@ -1,0 +1,470 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Calculus Summary Chapter 6 - Hujiawei Bujidao</title>
+  <meta name="author" content="hujiawei">
+
+  
+  <meta name="description" content="第六部分 无穷级数 第一节 常数项级数的概念与基本性质
+常数项级数的概念，常数项级数的基本性质 无穷级数的思想来源于近似计算圆面积这个问题，考虑用内接正方形来近似计算。 数列{}的元素之和得到的表达式就叫做(常数项)(无穷)级数，其前n项之和又可以组成一个新的数列{}，即，一般项称为部分和。 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-6">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+
+	<header role="banner">
+		
+<hgroup style="text-align: center">
+	<h1><a href="/"><img src="/images/conan-paper-small.png"  />Hujiawei Bujidao<img src="/images/conan-hat-small.png"  /></a></h1>
+	
+	<h2>I will always be your savior! A secret makes a man man!</h2>
+	
+</hgroup>
+
+
+	</header>
+	<nav role="navigation">
+		<ul class="subscription" data-subscription="rss">
+  <!--<li><a href="https://github.com/hujiaweibujidao" rel="subscribe-rss" title="subscribe via RSS">View me on GitHub</a></li>-->
+  <!--
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+  --> 
+</ul>
+<!--
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hujiaweibujidao.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form> 
+  
+-->
+<ul class="main-navigation">
+  <li><a href="/blog/archives/">Blog</a></li>
+  <li><a href="/aboutme/">AboutMe</a></li>
+  <li><a href="/math/">Math</a></li>
+  <!--
+  <li><a href="/datamining/">DataMining</a></li>
+  -->
+  <li><a href="/blog/categories/mobiledev/">MobileDev</a></li>
+  <!--
+  <li><a href="/xjava/">XJava</a></li>
+  -->
+  <!-- <li><a href="/datamining/">Projects</a></li> -->
+</ul>
+
+
+	</nav>
+	<div id="main">
+		<div id="content">
+			<div>
+
+<article class="hentry" role="article">
+		
+  <header>
+    
+      <h1 class="entry-title">Calculus Summary Chapter 6</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-27T14:29:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3 id="center-center"><center>第六部分 无穷级数</center></h3>
+
+<h4 id="section">第一节 常数项级数的概念与基本性质</h4>
+<p>常数项级数的概念，常数项级数的基本性质</p>
+
+<p>无穷级数的思想来源于近似计算圆面积这个问题，考虑用内接正方形来近似计算。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/infty_round.png" alt="image" /></p>
+
+<p>数列{<script type="math/tex">u_{n}</script>}的元素之和得到的表达式<script type="math/tex">u_{1}+u_{2}+\cdots+u_{n}+\cdots</script>就叫做(常数项)(无穷)级数，其前n项之和又可以组成一个新的数列{<script type="math/tex">s_{n}</script>}，即<script type="math/tex">s_{n}=\Sigma_{i=1}^{n}u_{i}</script>，一般项<script type="math/tex">s_{n}</script>称为部分和。</p>
+
+<p>如果部分和数列{<script type="math/tex">s_{n}</script>}有极限，那么这个无穷级数<script type="math/tex">u_{n}=\Sigma_{i=1}^{n}u_{i}</script>就是收敛的，极限s就叫做这个无穷级数的和。</p>
+
+<p>级数收敛的必要条件是它的一般项<script type="math/tex">u_{n}</script>趋近于0，但不是充分条件！比如，调和级数<script type="math/tex">1+\frac{1}{2}+\frac{1}{3}+\frac{1}{4}+\cdots+\frac{1}{n}+\cdots</script>的一般项<script type="math/tex">u_{n}=\frac{1}{n}</script>也是趋近于0的，但是调和级数是发散的，采用反证法即可证明得到，证明如下，<script type="math/tex">s_{2n}-s{n}>\frac{1}{2}</script>并不趋近于0，所以不收敛。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/tiaohe_series.png" alt="image" /></p>
+
+<h4 id="section-1">第二节 常数项级数敛散性的判别方法</h4>
+<p>正项级数及其敛散性的判别方法，交错级数及其敛散性的判别方法，绝对收敛与条件收敛</p>
+
+<p>正项级数<script type="math/tex">u_{n}=\Sigma_{i=1}^{n}u_{i}</script>收敛的充分必要条件是它的部分和数列{<script type="math/tex">s_{n}</script>}有界。</p>
+
+<p>比值审敛法，对于正项级数<script type="math/tex">u_{n}=\Sigma_{i=1}^{n}u_{i}</script>，若<script type="math/tex">\lim_{n\to \infty}\frac{u_{n+1}}{u_{n}}=\beta</script>，当<script type="math/tex">\beta>1</script>时级数发散，当<script type="math/tex">% <![CDATA[
+\beta<1 %]]></script>时级数收敛，当<script type="math/tex">\beta=1</script>时级数可能发散可能收敛。</p>
+
+<p>还有其他的一些判断级数收敛的方法，略过。</p>
+
+<h4 id="section-2">第三节 幂级数</h4>
+<p>函数项级数的基本概念，幂级数及其敛散性，幂级数的运算，函数展开成幂级数，幂级数在近似计算中的应用</p>
+
+<p>函数项级数就是定义在某个区间上的函数族之和，表达式类似<script type="math/tex">u_{1}(x)+u_{2}(x)+u_{3}(x)+\cdots+u_{n}(x)+\cdots</script>，对于某个确定的值<script type="math/tex">x=x_{0}</script>，函数项级数<script type="math/tex">u_{1}(x_{0})+u_{2}(x_{0})+u_{3}(x_{0})+\cdots+u_{n}(x_{0})+\cdots</script>就变成常数项级数，如果该常数项级数收敛的话，那么点<script type="math/tex">x_{0}</script>就是函数项级数在定义区间上的一个收敛点，所有收敛点就组成了收敛域。</p>
+
+<p>幂级数就是最常用的一类函数项级数，它的形式如下：</p>
+
+<script type="math/tex; mode=display">\Sigma_{n=0}^{\infty}a_{n}x^{n}=a_{0}x^{0}+a_{1}x^{1}+\cdots+a_{n}x^{n}+\cdots</script>
+
+<p>一种判断幂级数收敛的办法是阿贝尔定理，如果级数<script type="math/tex">\Sigma_{n=0}^{\infty}a_{n}x^{n}</script>当<script type="math/tex">x=x_{0}(x_{0} \ne 0)</script>时收敛，那么对于开区间<script type="math/tex">(-\|x_{0}\|,\|x_{0}\|)</script>内的任何x都有幂级数收敛，反之，如果当<script type="math/tex">x=x_{0}(x_{0} \ne 0)</script>时发散，那么对于闭区间<script type="math/tex">[-\|x_{0}\|,\|x_{0}\|]</script>外的任何x都有幂级数发散。其实就是对于幂级数的收敛半径R内部任意x都收敛，外部都发散！</p>
+
+<p>许多应用中，我们都希望知道如何将一个给定的函数f(x)展开成幂级数的形式，这样相当于对函数进行近似了，可以大大简化计算量，于是便有了泰勒级数！</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/tylor_serials.png" alt="image" /></p>
+
+<p>特别地，当<script type="math/tex">x_{0}=0</script>时泰勒级数又叫麦克劳林级数，展开式称为麦克劳林展开式</p>
+
+<script type="math/tex; mode=display">f(x)=\Sigma_{n=0}^{n}\frac{1}{n!}f^{n}(0)x^{n}</script>
+
+<p>将函数展开成幂级数的步骤：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/miseries1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/miseries2.png" alt="image" /></p>
+
+<p>例如，对于函数<script type="math/tex">e^{x}</script>幂级数展开</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/ex.png" alt="image" /></p>
+
+<p>常用的幂级数：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/common_series.png" alt="image" /></p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-6/">http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-6/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+</div>
+
+
+		<footer>
+			<p class="meta">
+				
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hujiawei</span></span>
+
+				
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-27T14:29:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+				
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/math/'>math</a>
+  
+</span>
+
+
+			</p>
+			
+			<div class="sharing">
+  
+  
+  
+</div>
+
+			
+			<p class="meta">
+				
+				<a class="basic-alignment left" href="/blog/2014/04/27/calculus-summary-chapter-5/" title="Previous Post: Calculus Summary Chapter 5">&laquo; Calculus Summary Chapter 5</a>
+				
+				
+				<a class="basic-alignment right" href="/blog/2014/04/27/calculus-summary-chapter-7/" title="Next Post: Calculus Summary Chapter 7">Calculus Summary Chapter 7 &raquo;</a>
+				
+			</p>
+		</footer>
+	</article>
+	
+
+	
+	<section>
+		<h1>Comments</h1>
+		<div id="comments" aria-live="polite">
+			<!-- Duoshuo Comment BEGIN   data-title=""-->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hujiaweibujidao"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+
+		</div>
+	</section>
+	
+</div>
+
+<aside class="sidebar">
+  
+	<section>
+	<h1>关于博主</h1><br/>
+  <a href="/aboutme/"><img src="/images/me-small.png" width="250px" height="210px" alt="protrait"/></a><br/>
+  <p>Hi, I'm Hujiawei, from P.R.China. Now I'm a postgraduate student studying in <a href="http://www.tsinghua.edu.cn/publish/th/index.html">Tsinghua University</a>.
+  Wanna know me? <a href="/aboutme/">See here.</a> <br/>	
+  </p>
+  <a href="http://weibo.com/hujiaweiyinger"><img src="/images/sinaweibo.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://github.com/hujiaweibujidao"><img src="/images/github.png" width="40px" height="40px"/></a>&nbsp;
+  <a href="http://hujiawei.tumblr.com"><img src="/images/tumblr.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://twitter.com/hujiaweiyinger"><img src="/images/twitter.png" width="40px" height="40px"/></a>
+  
+  <br/>
+</section>
+<section>
+ <h1>分类目录</h1>
+ <ul id="categories">
+	 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (2)</a></li>
+<li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
+<li class='category'><a href='/blog/categories/ios/'>ios (1)</a></li>
+<li class='category'><a href='/blog/categories/mac/'>mac (2)</a></li>
+<li class='category'><a href='/blog/categories/math/'>math (15)</a></li>
+<li class='category'><a href='/blog/categories/matlab/'>matlab (1)</a></li>
+<li class='category'><a href='/blog/categories/ml/'>ml (1)</a></li>
+<li class='category'><a href='/blog/categories/mobiledev/'>mobiledev (5)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/opencv/'>opencv (5)</a></li>
+
+ </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/04/27/calculus-summary-chapter-9/">Calculus Summary Chapter 9</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/27/calculus-summary-chapter-8/">Calculus Summary Chapter 8</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/27/calculus-summary-chapter-7/">Calculus Summary Chapter 7</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/27/calculus-summary-chapter-6/">Calculus Summary Chapter 6</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/27/calculus-summary-chapter-5/">Calculus Summary Chapter 5</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+	<h1>好友博客</h1>
+	<ul>
+		<li>
+			<a href="http://doufunao.github.io/">豆腐脑的幻想乡</a>
+		</li>
+		<li>
+			<a href="http://c4fun.cn/">Code 4 Fun</a>
+		</li>
+		<li>
+			<a href="http://www.tanglei.name/">TangLei blog</a>
+		</li>
+		<li>
+			<a href="http://ontheroad.sinaapp.com/">Tian Jun-Find My Way</a>
+		</li>
+		
+		<li>
+			<a href="http://www.liaoxuefeng.com/">廖雪峰的官方网站</a>
+		</li>
+		<li>
+			<a href="http://wufawei.com/">Ted's Homepage</a>
+		</li>
+		<li>
+			<a href="http://www.renfei.org/blog/">Renfei Song</a>
+		</li>
+		<li>
+			<a href="http://bluedavy.me">BlueDavy之技术blog</a>
+		</li>
+		
+		<li>
+			<a href="#">这里会是你吗?</a>
+		</li>
+	</ul>
+</section>
+	
+</aside>
+
+
+		</div>
+	</div>
+	
+	<footer role="contentinfo">
+		<p>
+  	Copyright &copy; 2014 - hujiawei - <a href="http://happybirthday2yinger.duapp.com/">Happy birthday to MY QUEEN</a> - <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
+  	
+<!-- mathjax config similar to math.stackexchange 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+-->
+
+<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+  	
+	<!-- CNZZ -->
+	&nbsp;&nbsp;
+	<script type="text/javascript">
+		var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+		document.write(unescape("%3Cspan id='cnzz_stat_icon_1000165127'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000165127%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<!-- license -->
+	<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="http://i.creativecommons.org/l/by-nd/3.0/88x31.png" /></a>
+	<br />
+	本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh">知识共享署名-禁止演绎 3.0 未本地化版本许可协议</a>进行许可。
+
+</p>
+
+<style>
+	.returnTop {
+		position: fixed;
+		_position: absolute;
+		right: 10px;
+		bottom: 200px;
+		_bottom: auto;
+		display: none;
+		width: 40px;
+		height: 40px;
+		border: 1px solid #61b72e;
+		border-radius: 4px;
+		background: #fff;
+		box-shadow: 0 0 5px #F5F5F5;
+		text-indent: -9999px;
+		cursor: pointer;
+	}
+	.returnTop .s {
+		position: absolute;
+		top: -2px;
+		_top: -20px;
+		left: 10px;
+		width: 0;
+		height: 0;
+		border-width: 10px;
+		border-color: transparent transparent #61b72e;
+		border-style: dashed dashed solid;
+	}
+	.returnTop .b {
+		position: absolute;
+		top: 18px;
+		left: 16px;
+		height: 12px;
+		width: 8px;
+		background: #61b72e;
+	}
+</style>
+<div class="returnTop" title="嗖的就上去了！">
+	<span class="s"></span>
+	<span class="b"></span>
+	返回顶部
+</div>
+<script type="text/javascript">
+$(function(){
+$(window).bind("scroll", function(){
+
+var scrollTopNum = $(document).scrollTop(),
+winHeight = $(window).height(),
+returnTop = $("div.returnTop");
+
+(scrollTopNum > 0) ? returnTop.fadeIn("fast") : returnTop.fadeOut("fast");
+
+if (!-[1,]&&!window.XMLHttpRequest) {
+returnTop.css("top", scrollTopNum + winHeight - 200);
+}
+
+});
+
+$("div.returnTop").click(function() {
+$("html, body").animate({ scrollTop: 0 }, 100);
+});
+
+});
+</script>
+
+	</footer>
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

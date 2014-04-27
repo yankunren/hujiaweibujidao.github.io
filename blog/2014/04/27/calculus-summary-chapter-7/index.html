@@ -1,0 +1,488 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Calculus Summary Chapter 7 - Hujiawei Bujidao</title>
+  <meta name="author" content="hujiawei">
+
+  
+  <meta name="description" content="第七部分 向量代数与空间解析几何
+本部分是多元微分学的基础，而且涉及到了很多的空间知识，图形比较多，所以这部分的图片比较多，如若不清晰请Wiki或者翻书查看。 第一节 空间直角坐标系
+空间点的直角坐标，空间两点的距离 第二节 向量代数
+向量的概念，向量的线性运算，向量的坐标，向量的模、方向角、投影 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-7">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+
+	<header role="banner">
+		
+<hgroup style="text-align: center">
+	<h1><a href="/"><img src="/images/conan-paper-small.png"  />Hujiawei Bujidao<img src="/images/conan-hat-small.png"  /></a></h1>
+	
+	<h2>I will always be your savior! A secret makes a man man!</h2>
+	
+</hgroup>
+
+
+	</header>
+	<nav role="navigation">
+		<ul class="subscription" data-subscription="rss">
+  <!--<li><a href="https://github.com/hujiaweibujidao" rel="subscribe-rss" title="subscribe via RSS">View me on GitHub</a></li>-->
+  <!--
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+  --> 
+</ul>
+<!--
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hujiaweibujidao.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form> 
+  
+-->
+<ul class="main-navigation">
+  <li><a href="/blog/archives/">Blog</a></li>
+  <li><a href="/aboutme/">AboutMe</a></li>
+  <li><a href="/math/">Math</a></li>
+  <!--
+  <li><a href="/datamining/">DataMining</a></li>
+  -->
+  <li><a href="/blog/categories/mobiledev/">MobileDev</a></li>
+  <!--
+  <li><a href="/xjava/">XJava</a></li>
+  -->
+  <!-- <li><a href="/datamining/">Projects</a></li> -->
+</ul>
+
+
+	</nav>
+	<div id="main">
+		<div id="content">
+			<div>
+
+<article class="hentry" role="article">
+		
+  <header>
+    
+      <h1 class="entry-title">Calculus Summary Chapter 7</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-27T14:29:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3 id="center-center"><center>第七部分 向量代数与空间解析几何</center></h3>
+<p>本部分是多元微分学的基础，而且涉及到了很多的空间知识，图形比较多，所以这部分的图片比较多，如若不清晰请Wiki或者翻书查看。</p>
+
+<h4 id="section">第一节 空间直角坐标系</h4>
+<p>空间点的直角坐标，空间两点的距离</p>
+
+<h4 id="section-1">第二节 向量代数</h4>
+<p>向量的概念，向量的线性运算，向量的坐标，向量的模、方向角、投影，向量的数量积与向量积</p>
+
+<p>方向角和方向余弦的概念：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/fangxiangjiao1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/fangxiangjiao2.png" alt="image" /></p>
+
+<p>投影的概念，投影是一个数值，当投影是指是一个向量<script type="math/tex">\overrightarrow{r}</script>在另一个向量<script type="math/tex">\overrightarrow{u}</script>上的投影时，投影就是投影到目标向量上得到的向量的模与目标向量的单位向量的模的比值。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/touying1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/touying2.png" alt="image" /></p>
+
+<p>向量的数量积的概念，即<script type="math/tex">ab=\|a\|\|b\|\cos \theta</script>，在物理中就是指力F做的功W。数量积又叫内积，是很重要的概念，在线代中同样有矩阵内积的概念，在数据挖掘中有一种很常用的度量相似度的方式，即余弦相似度，一般用于文本类似的数据求相似度。向量的向量积是<script type="math/tex">ab=\|a\|\|b\|\sin\theta</script>。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/shuliangji1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/shuliangji2.png" alt="image" /></p>
+
+<h4 id="section-2">第三节 平面及其方程</h4>
+<p>平面的点法式方程，平面的一般方程，两平面的夹角</p>
+
+<p>已知一个平面内的一点和这个平面的法向量便可以确定一个平面了；其实，任何一个三元一次方程<script type="math/tex">Ax+By+Cz+D=0</script>都可以确定一个平面，其法向量就是(A,B,C)。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/space1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/space2.png" alt="image" /></p>
+
+<p>两个平面的夹角可用两个平面的法向量之间的夹角来得到。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/spaceangle.png" alt="image" />
+       　
+####第四节 空间直线及其方程
+空间直线的一般方程，空间直线的对称式方程与参数方程，两直线的夹角，直线与平面的夹角</p>
+
+<p>两个平面的交线就可以确定一条空间直线；已知直线上一点和直线的方向向量也可以确定一条直线。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/line1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/line2.png" alt="image" /></p>
+
+<p>两条直线之间的夹角可用两条直线的方向向量之间的夹角来得到</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/lineangle.png" alt="image" /></p>
+
+<p>直线与平面之间的夹角可用直线的方向向量和平面的法向量之间的夹角来得到。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/linespaceangle.png" alt="image" /></p>
+
+<h4 id="section-3">第五节 曲面及其方程</h4>
+<p>曲面方程的概念，旋转曲面，柱面，二次曲面</p>
+
+<p>曲面方程</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/qumian.png" alt="image" /></p>
+
+<p>旋转曲面：平面内一条曲线绕着平面上的一条直线旋转一周得到的曲面叫做旋转曲面。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/xuanzhuanqumian.png" alt="image" /></p>
+
+<p>柱面：一条直线绕着一条定曲线平行移动得到的轨迹称为柱面。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/zhumian.png" alt="image" /></p>
+
+<p>二次曲面<a href="http://zh.wikipedia.org/wiki/%E4%BA%8C%E6%AC%A1%E6%9B%B2%E9%9D%A2">on wiki</a>，与平面解析几何中定义二次曲线类似，三元二次方程<script type="math/tex">F(x,y,z)=0</script>所表示的曲面称为二次曲面，而平面是一次曲面。Wikipedia上显示了各种二次曲面的方程和二次曲面的图形。</p>
+
+<h4 id="section-4">第六节 空间曲线及其方程</h4>
+<p>空间曲线的一般方程，空间曲线的参数方程，空间曲线在坐标面上的投影</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/spaceline1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/spaceline2.png" alt="image" /></p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-7/">http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-7/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+</div>
+
+
+		<footer>
+			<p class="meta">
+				
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hujiawei</span></span>
+
+				
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-27T14:29:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+				
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/math/'>math</a>
+  
+</span>
+
+
+			</p>
+			
+			<div class="sharing">
+  
+  
+  
+</div>
+
+			
+			<p class="meta">
+				
+				<a class="basic-alignment left" href="/blog/2014/04/27/calculus-summary-chapter-6/" title="Previous Post: Calculus Summary Chapter 6">&laquo; Calculus Summary Chapter 6</a>
+				
+				
+				<a class="basic-alignment right" href="/blog/2014/04/27/calculus-summary-chapter-8/" title="Next Post: Calculus Summary Chapter 8">Calculus Summary Chapter 8 &raquo;</a>
+				
+			</p>
+		</footer>
+	</article>
+	
+
+	
+	<section>
+		<h1>Comments</h1>
+		<div id="comments" aria-live="polite">
+			<!-- Duoshuo Comment BEGIN   data-title=""-->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hujiaweibujidao"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+
+		</div>
+	</section>
+	
+</div>
+
+<aside class="sidebar">
+  
+	<section>
+	<h1>关于博主</h1><br/>
+  <a href="/aboutme/"><img src="/images/me-small.png" width="250px" height="210px" alt="protrait"/></a><br/>
+  <p>Hi, I'm Hujiawei, from P.R.China. Now I'm a postgraduate student studying in <a href="http://www.tsinghua.edu.cn/publish/th/index.html">Tsinghua University</a>.
+  Wanna know me? <a href="/aboutme/">See here.</a> <br/>	
+  </p>
+  <a href="http://weibo.com/hujiaweiyinger"><img src="/images/sinaweibo.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://github.com/hujiaweibujidao"><img src="/images/github.png" width="40px" height="40px"/></a>&nbsp;
+  <a href="http://hujiawei.tumblr.com"><img src="/images/tumblr.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://twitter.com/hujiaweiyinger"><img src="/images/twitter.png" width="40px" height="40px"/></a>
+  
+  <br/>
+</section>
+<section>
+ <h1>分类目录</h1>
+ <ul id="categories">
+	 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (2)</a></li>
+<li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
+<li class='category'><a href='/blog/categories/ios/'>ios (1)</a></li>
+<li class='category'><a href='/blog/categories/mac/'>mac (2)</a></li>
+<li class='category'><a href='/blog/categories/math/'>math (15)</a></li>
+<li class='category'><a href='/blog/categories/matlab/'>matlab (1)</a></li>
+<li class='category'><a href='/blog/categories/ml/'>ml (1)</a></li>
+<li class='category'><a href='/blog/categories/mobiledev/'>mobiledev (5)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/opencv/'>opencv (5)</a></li>
+
+ </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/04/27/calculus-summary-chapter-9/">Calculus Summary Chapter 9</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/27/calculus-summary-chapter-8/">Calculus Summary Chapter 8</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/27/calculus-summary-chapter-7/">Calculus Summary Chapter 7</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/27/calculus-summary-chapter-6/">Calculus Summary Chapter 6</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/27/calculus-summary-chapter-5/">Calculus Summary Chapter 5</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+	<h1>好友博客</h1>
+	<ul>
+		<li>
+			<a href="http://doufunao.github.io/">豆腐脑的幻想乡</a>
+		</li>
+		<li>
+			<a href="http://c4fun.cn/">Code 4 Fun</a>
+		</li>
+		<li>
+			<a href="http://www.tanglei.name/">TangLei blog</a>
+		</li>
+		<li>
+			<a href="http://ontheroad.sinaapp.com/">Tian Jun-Find My Way</a>
+		</li>
+		
+		<li>
+			<a href="http://www.liaoxuefeng.com/">廖雪峰的官方网站</a>
+		</li>
+		<li>
+			<a href="http://wufawei.com/">Ted's Homepage</a>
+		</li>
+		<li>
+			<a href="http://www.renfei.org/blog/">Renfei Song</a>
+		</li>
+		<li>
+			<a href="http://bluedavy.me">BlueDavy之技术blog</a>
+		</li>
+		
+		<li>
+			<a href="#">这里会是你吗?</a>
+		</li>
+	</ul>
+</section>
+	
+</aside>
+
+
+		</div>
+	</div>
+	
+	<footer role="contentinfo">
+		<p>
+  	Copyright &copy; 2014 - hujiawei - <a href="http://happybirthday2yinger.duapp.com/">Happy birthday to MY QUEEN</a> - <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
+  	
+<!-- mathjax config similar to math.stackexchange 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+-->
+
+<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+  	
+	<!-- CNZZ -->
+	&nbsp;&nbsp;
+	<script type="text/javascript">
+		var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+		document.write(unescape("%3Cspan id='cnzz_stat_icon_1000165127'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000165127%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<!-- license -->
+	<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="http://i.creativecommons.org/l/by-nd/3.0/88x31.png" /></a>
+	<br />
+	本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh">知识共享署名-禁止演绎 3.0 未本地化版本许可协议</a>进行许可。
+
+</p>
+
+<style>
+	.returnTop {
+		position: fixed;
+		_position: absolute;
+		right: 10px;
+		bottom: 200px;
+		_bottom: auto;
+		display: none;
+		width: 40px;
+		height: 40px;
+		border: 1px solid #61b72e;
+		border-radius: 4px;
+		background: #fff;
+		box-shadow: 0 0 5px #F5F5F5;
+		text-indent: -9999px;
+		cursor: pointer;
+	}
+	.returnTop .s {
+		position: absolute;
+		top: -2px;
+		_top: -20px;
+		left: 10px;
+		width: 0;
+		height: 0;
+		border-width: 10px;
+		border-color: transparent transparent #61b72e;
+		border-style: dashed dashed solid;
+	}
+	.returnTop .b {
+		position: absolute;
+		top: 18px;
+		left: 16px;
+		height: 12px;
+		width: 8px;
+		background: #61b72e;
+	}
+</style>
+<div class="returnTop" title="嗖的就上去了！">
+	<span class="s"></span>
+	<span class="b"></span>
+	返回顶部
+</div>
+<script type="text/javascript">
+$(function(){
+$(window).bind("scroll", function(){
+
+var scrollTopNum = $(document).scrollTop(),
+winHeight = $(window).height(),
+returnTop = $("div.returnTop");
+
+(scrollTopNum > 0) ? returnTop.fadeIn("fast") : returnTop.fadeOut("fast");
+
+if (!-[1,]&&!window.XMLHttpRequest) {
+returnTop.css("top", scrollTopNum + winHeight - 200);
+}
+
+});
+
+$("div.returnTop").click(function() {
+$("html, body").animate({ scrollTop: 0 }, 100);
+});
+
+});
+</script>
+
+	</footer>
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
