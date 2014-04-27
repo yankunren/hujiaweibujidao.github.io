@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>xjava - Hujiawei Bujidao</title>
+  <title>linearalgebra_summary - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="Xjava Nov 18th, 2013 欢迎来到XJava的世界！ 1.什么是XJava XJava是一个为Java初学者提供Java入门教程的项目，它的所有内容都是公开的，你可以自由的查看，包括教程中的源码。我的导师和我计划将于明年写完这本书，本博客将不定期地更新教程中的内容， &hellip;">
+  <meta name="description" content="线性代数那些事 Things of Linear Algebra
+逸夫图书馆, 2014/4/27 [TOC] 0.碎碎念 到了研究生阶段才意识到本科的数学原来作用这么大，不论是在数据挖掘，还是机器学习，亦或是模式识别，数学都是基础中的基础。于是乎，我在逸夫图书馆泡了几天看了些微积分、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hujiaweibujidao.github.io/xjava">
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/27/linearalgebra-summary">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
@@ -85,13 +86,15 @@
 		<div id="content">
 			<div>
 
-	<article role="article">
+<article class="hentry" role="article">
 		
-		<header>
-			<h1 class="entry-title">Xjava</h1>
-			
-			<p class="meta">
-				
+  <header>
+    
+      <h1 class="entry-title">Linearalgebra_summary</h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -103,54 +106,66 @@
   
 
 
-<time datetime="2013-11-18T12:50:00+08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2013</time>
-			</p>
-			
-		</header>
-		
-		<h3 id="xjava">欢迎来到XJava的世界！</h3>
-
-<h4 id="xjava-1">1.什么是XJava</h4>
-
-<p>XJava是一个为Java初学者提供Java入门教程的项目，它的所有内容都是公开的，你可以自由的查看，包括<a href="https://github.com/hujiaweibujidao/XJava">教程中的源码</a>。我的导师和我计划将于明年写完这本书，本博客将不定期地更新教程中的内容，欢迎自行浏览查看。</p>
-
-<p>无论作者使用多少技巧去查找错误，有些错误还是悄悄地隐藏了起来，并且对新读者或多或少都会造成一定的困扰。如果你发现了任何你认为是错误的地方，请通过电子邮件(<a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#104;&#117;&#106;&#105;&#097;&#119;&#101;&#105;&#048;&#057;&#048;&#056;&#048;&#055;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;">&#104;&#117;&#106;&#105;&#097;&#119;&#101;&#105;&#048;&#057;&#048;&#056;&#048;&#055;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;</a>)联系我，对于您的帮助我不胜感激。</p>
-
-<h4 id="xjava-">2.XJava课程结构 (暂时目录结构，可能在编写过程中修改)</h4>
-
-<p><img class="right" src="/images/dolphin.png" /></p>
-
-<ul>
-  <li><a href="/files/xjava-chapter1.pdf">第一章 Java概述</a></li>
-</ul>
-
-<p>后面章节暂无</p>
-
-<ul>
-  <li><a href="">第二章 Java语言基础知识</a></li>
-  <li><a href="">第三章 面向对象编程（上）</a></li>
-  <li><a href="">第四章 面向对象编程（下）</a></li>
-  <li><a href="">第五章 异常处理</a></li>
-  <li><a href="">第六章 IO处理</a></li>
-  <li><a href="">第七章 Java集合</a></li>
-  <li><a href="">第八章 多线程编程</a></li>
-  <li><a href="">第九章 SWT界面开发</a></li>
-  <li><a href="">第十章 网络编程</a></li>
-  <li><a href="">第十一章 JDBC编程</a></li>
-  <li><a href="">第十二章 Servlet程序设计</a></li>
-  <li><a href="">第十三章 JSP程序设计</a></li>
-</ul>
-
-<h4 id="section">3.版权声明</h4>
-
-<p>本书虽然还没有出版(预计明年出版)，但是使用者只能用于学习使用，不得用于任何其他商业目的，侵权必究！</p>
+<time datetime="2014-04-27T14:03:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
 
 
-		
+<div class="entry-content"><p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
+<strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
+
+<p>[TOC]</p>
+
+<h4 id="center0center"><center>0.碎碎念</center></h4>
+
+<p>到了研究生阶段才意识到本科的数学原来作用这么大，不论是在数据挖掘，还是机器学习，亦或是模式识别，数学都是基础中的基础。于是乎，我在逸夫图书馆泡了几天看了些微积分、线代和数理统计的书籍，写下三份总结，记录下重要的知识，以备后忘。本人才疏学浅，若有错误之处还请指出，让我“增长”，若有不足也请指出，使我“完备”，谢谢！:-)</p>
+
+<p><strong>[注：这些总结不会详细地讲解所有概念，只是挑选一些我个人感觉比较有用的知识点进行总结，很多时候可能只是列举知识点，并无解释，忘记了的可以自行Wiki或者翻书，另外，为了节省写作时间，对于一些定理我并没有给出详细的表达，忽略了些前提条件，请不要较真，我希望的是给自己一个感性的理解就行，具体理性的分析需要的时候再查，还有就是我还剪切粘贴了很多图片，再有就是，本文采用的是’非线性方式’进行总结的…首篇意识流作品…嗯，就是这样…强迫症者慎入…]</strong></p>
+
+<p>PS：本总结根据下面提到的武汉大学黄正华老师写的线性代数复习总结的顺序来的，因为黄老师的总结已经写得很好了，我只会提到一些我在其他地方看到或者听到的比较有用的心得分享。</p>
+
+<p>参考书籍：</p>
+
+<p>1.[线性代数 Using Matlab]</p>
+
+<p>2.[]</p>
+
+<p>它山之石：</p>
+
+<p>1.<a href="http://aff.whu.edu.cn/huangzh/">武汉大学 黄正华老师</a>写的线性代数复习总结<a href="http://hujiaweibujidao.github.io/files/linear_algebra_huangzhenghua.pdf">book</a></p>
+
+<h4 id="center1center"><center>1.行列式</center></h4>
+
+<p><strong>什么是行列式？</strong><a href="http://zh.wikipedia.org/wiki/%E8%A1%8C%E5%88%97%E5%BC%8F">on Wiki</a></p>
+
+<p>这个问题一点都不简单！行列式到底是什么？<strong>wiki的解释：行列式其实是一个函数，一个将方阵转换成一个标量的函数！行列式可以看做是有向面积或体积的概念在一般的欧几里得空间中的推广。或者说，在 n 维欧几里得空间中，行列式描述的是一个线性变换对“体积”所造成的影响。</strong></p>
+
+<p>首先要注意的是如果是指矩阵，那么只有方阵才有行列式！对方阵求行列式得到一个值，这个值就是指这个$n \times n$方阵(矩阵都可以看做是一个线性变换)，也就是这个线性变换，对n维空间中的“体积”所造成的影响。在二维空间中，这个“体积”实际上是平行四边形的面积，在三维空间中，“体积”就是指平行六面体的体积。</p>
+
+<p>先看下行列式在二维和三维空间的几何意义</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi2.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi3.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi4.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi5.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi6.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi7.png" alt="image" /></p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/linearalgebra-summary/">http://hujiaweibujidao.github.io/blog/2014/04/27/linearalgebra-summary/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+</div>
+
+
 		<footer>
-			
 			<p class="meta">
 				
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hujiawei</span></span>
+
 				
 
 
@@ -163,8 +178,16 @@
   
 
 
-<time datetime="2013-11-18T12:50:00+08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2013</time>
+<time datetime="2014-04-27T14:03:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
 				
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/math/'>math</a>
+  
+</span>
+
+
 			</p>
 			
 			<div class="sharing">
@@ -174,15 +197,41 @@
 </div>
 
 			
+			<p class="meta">
+				
+				<a class="basic-alignment left" href="/blog/2014/04/24/calculus-summary/" title="Previous Post: Calculus Summary">&laquo; Calculus Summary</a>
+				
+				
+			</p>
 		</footer>
-		
 	</article>
 	
 
+	
+	<section>
+		<h1>Comments</h1>
+		<div id="comments" aria-live="polite">
+			<!-- Duoshuo Comment BEGIN   data-title=""-->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hujiaweibujidao"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+
+		</div>
+	</section>
+	
 </div>
 
 <aside class="sidebar">
-  
   
 	<section>
 	<h1>关于博主</h1><br/>
@@ -274,8 +323,7 @@
 	</ul>
 </section>
 	
-	
-  </aside>
+</aside>
 
 
 		</div>
