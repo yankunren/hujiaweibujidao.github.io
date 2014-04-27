@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-27T11:01:45+08:00</updated>
+  <updated>2014-04-27T11:19:41+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -18,32 +18,24 @@
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/15/flying-on-mac/"/>
     <updated>2014-04-15T13:39:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/15/flying-on-mac</id>
-    <content type="html"><![CDATA[<p>该博文记录Mac使用中出现的一些问题，包括Mac中的一些软件出现异常的解决方案，使我们能够<code>Flying on Mac</code>，一直更新中&hellip;</p>
+    <content type="html"><![CDATA[<p>该博文记录Mac使用中出现的一些问题，包括Mac中的一些软件出现异常的解决方案，使我们能够<code>Flying on Mac</code>，一直更新中…</p>
 
 <p>1.如果Mou渲染Math公式有问题的话，尝试在第一行加上如下js，其src为：</p>
 
-<p>```</p>
-
-<!-- import js for mathjax -->
-
-
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
-
-
-<p>```</p>
+<p><code>
+&lt;!-- import js for mathjax --&gt;
+&lt;script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"&gt;&lt;/script&gt;
+</code></p>
 
 <p>该链接指向的是Mathjax的js，用来渲染Math公式，Mou支持Mathjax。为了减轻Octopress加载的负担，可以只在需要使用Mathjax的博文中添加一行js即可，不需要将它放在自定义的<code>head.html</code>文件中。</p>
 
-<p>不知为何，最近加上了这句Math公式还是没有显示出来，貌似Mou并没有去加载这个js的样子，于是我尝试在浏览器中直接访问，将这个js中的所有内容复制进来，这样Mou有显示正常了，数学公式都没有问题！ :&ndash;) 如果你不能访问，放心，我已经将这个js的源码放在<a href="https://gist.github.com/hujiaweibujidao/11146289">这个Gist中</a>。</p>
+<p>不知为何，最近加上了这句Math公式还是没有显示出来，貌似Mou并没有去加载这个js的样子，于是我尝试在浏览器中直接访问，将这个js中的所有内容复制进来，这样Mou有显示正常了，数学公式都没有问题！ :-) 如果你不能访问，放心，我已经将这个js的源码放在<a href="https://gist.github.com/hujiaweibujidao/11146289">这个Gist中</a>。</p>
 
 <p>如果还是不行的话，那么建议使用<a href="https://stackedit.io/">stackedit</a>，感谢@beader的建议！还有一个问题是stackedit是在线编辑的，图片要保存到Google Driver中(或者有个特定的网址)，另外，它和Mou中内置的MathJax的渲染解析工具略有不同，例如对于行内Math的插入上，这时候推荐按照<a href="http://blog-jfttt.herokuapp.com/blog/2013/12/26/add-latex/">这位博主的方式修改</a>，添加下面的代码：</p>
 
-<p>```</p>
-
-<!-- mathjax config similar to math.stackexchange -->
-
-
-<script type="text/x-mathjax-config">
+<p><code>
+&lt;!-- mathjax config similar to math.stackexchange --&gt;
+&lt;script type="text/x-mathjax-config"&gt;
 MathJax.Hub.Config({
   jax: ["input/TeX", "output/HTML-CSS"],
   tex2jax: {
@@ -55,24 +47,18 @@ MathJax.Hub.Config({
   messageStyle: "none",
   "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
 });
-</script>
-
-
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
-
-
-<p>```</p>
+&lt;/script&gt;
+&lt;script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"&gt;&lt;/script&gt;
+</code></p>
 
 <p>测试：The <em>Gamma function</em> satisfying $\Gamma(n) = (n-1)!\quad\forall
 n\in\mathbb N$ is via the Euler integral</p>
 
-<p>$$
+<script type="math/tex; mode=display">
 \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-$$</p>
+</script>
 
 <!-- mathjax config similar to math.stackexchange -->
-
-
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   jax: ["input/TeX", "output/HTML-CSS"],
@@ -86,7 +72,6 @@ MathJax.Hub.Config({
   "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
 });
 </script>
-
 
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 
@@ -281,7 +266,7 @@ Built target uninstall
 cd &lt;path-to-opencv-source&gt;
 mkdir release
 cd release
-cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/opencv ..
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/opencv .. 
 make
 sudo make install
 </code>
@@ -297,25 +282,20 @@ dyld: Library not loaded: lib/libopencv_core.2.4.dylib
 
 <p>一个常用来测试OpenCV环境的项目代码如下，需要opencv_core和opencv_highgui两个库</p>
 
-<p>```</p>
-
-<h1>include &lt;opencv2/opencv.hpp></h1>
-
-<p>using namespace cv;
-int main(int argc, char** argv) {</p>
-
-<pre><code>Mat image;
-image = imread(
-        "/Users/hujiawei/Pictures/webimages/clone-your-octopress-001.png",
-        1);
-namedWindow("Display Image", WINDOW_AUTOSIZE);
-imshow("Display Image", image);
-waitKey(0);
-return 0;
-</code></pre>
-
-<p>}
-```</p>
+<p><code>
+#include &lt;opencv2/opencv.hpp&gt;
+using namespace cv;
+int main(int argc, char** argv) {
+	Mat image;
+	image = imread(
+			"/Users/hujiawei/Pictures/webimages/clone-your-octopress-001.png",
+			1);
+	namedWindow("Display Image", WINDOW_AUTOSIZE);
+	imshow("Display Image", image);
+	waitKey(0);
+	return 0;
+}
+</code></p>
 
 <p>7.最后执行<code>brew linkapps</code>会将brew安装的python中的app链接到Applications中</p>
 
@@ -328,24 +308,21 @@ Finished linking. Find the links under /Applications.
 
 <p>使用<code>brew doctor</code>检查，修复问题。</p>
 
-<p><code>``
+<p><code>
 hujiawei-MacBook-Pro:~ hujiawei$ brew doctor
 Warning: You have unlinked kegs in your Cellar
 Leaving kegs unlinked can lead to build-trouble and cause brews that depend on
-those kegs to fail to run properly once built. Run</code>brew link` on these:</p>
-
-<pre><code>cloog
-isl
-</code></pre>
-
-<p>Warning: A newer Command Line Tools release is available
+those kegs to fail to run properly once built. Run `brew link` on these:
+    cloog
+    isl
+Warning: A newer Command Line Tools release is available
 Update them from Software Update in the App Store.
 ^C
 hujiawei-MacBook-Pro:~ hujiawei$ brew link cloog
-Linking /usr/local/Cellar/cloog/0.18.1&hellip; 8 symlinks created
+Linking /usr/local/Cellar/cloog/0.18.1... 8 symlinks created
 hujiawei-MacBook-Pro:~ hujiawei$ brew link isl
-Linking /usr/local/Cellar/isl/0.12.1&hellip; 6 symlinks created
-```</p>
+Linking /usr/local/Cellar/isl/0.12.1... 6 symlinks created
+</code></p>
 ]]></content>
   </entry>
   

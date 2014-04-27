@@ -4,7 +4,7 @@
   <title><![CDATA[Category: matlab | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/matlab/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-27T11:01:45+08:00</updated>
+  <updated>2014-04-27T11:19:41+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -26,37 +26,34 @@
 
 <p>1.1 全局阈值分割程序</p>
 
-<p>```
-original_image=imread(&lsquo;test1.png&rsquo;);
+<p><code>
+original_image=imread('test1.png');
 gray_image=rgb2gray(original_image);
 gray_image=double(gray_image);
 t=mean(gray_image(:));
 is_done=false;
 count=0;%迭代次数
 block=gray_image(1:end,1:end);%不分块
-while ~is_done</p>
-
-<pre><code>r1=find(gray_image&lt;=t);
-r2=find(gray_image&gt;t);
-temp1=mean(block(r1));
-if isnan(temp1);
-    temp1=0;
+while ~is_done
+    r1=find(gray_image&lt;=t);
+    r2=find(gray_image&gt;t);
+    temp1=mean(block(r1));
+    if isnan(temp1);
+        temp1=0;
+    end
+    temp2=mean(block(r2));
+    if isnan(temp2)
+        temp2=0;
+    end
+    t_new=(temp1+temp2)/2;
+    is_done=abs(t_new-t)&lt;1;%差异阈值是1
+    t=t_new;
+    count=count+1;
+    if count&gt;=1000
+        Error='Error:Cannot find the ideal threshold.'
+        return
+    end
 end
-temp2=mean(block(r2));
-if isnan(temp2)
-    temp2=0;
-end
-t_new=(temp1+temp2)/2;
-is_done=abs(t_new-t)&lt;1;%差异阈值是1
-t=t_new;
-count=count+1;
-if count&gt;=1000
-    Error='Error:Cannot find the ideal threshold.'
-    return
-end
-</code></pre>
-
-<p>end
 [m,n]=size(gray_image);
 result=zeros(m,n)+255;
 result(r1)=0;
@@ -64,65 +61,62 @@ result(r1)=0;
 result=uint8(result);
 figure
 imshow(result);
-```</p>
+</code></p>
 
 <p>1.2 局部阈值分割程序</p>
 
-<p>```
-original_image=imread(&lsquo;test1.png&rsquo;);
+<p><code>
+original_image=imread('test1.png');
 gray_image=rgb2gray(original_image);
 gray_image=double(gray_image);
 [m,n]=size(gray_image);
 result=zeros(m,n);
 block_size=70;%分块大小
-for i=1:block_size:m</p>
-
-<pre><code>for j=1:block_size:n
-    if ((i+block_size)&gt;m)&amp;&amp;((j+block_size)&gt;n)
-        block=gray_image(i:end,j:end);
-    elseif ((i+block_size)&gt;m)&amp;&amp;((j+block_size)&lt;=n)
-        block=gray_image(i:end,j:j+block_size-1);
-    elseif ((i+block_size)&lt;=m)&amp;&amp;((j+block_size)&gt;n)
-        block=gray_image(i:i+block_size-1,j:end);
-    else
-        block=gray_image(i:i+block_size-1,j:j+block_size-1);
-    end
-    t=mean(block(:)); t_org=t; is_done=false; count=0;
-    while ~is_done
-        r1=find(block&lt;=t); r2=find(block&gt;t); temp1=mean(block(r1));
-        if isnan(temp1);
-            temp1=0;
+for i=1:block_size:m
+    for j=1:block_size:n
+        if ((i+block_size)&gt;m)&amp;&amp;((j+block_size)&gt;n)
+            block=gray_image(i:end,j:end);
+        elseif ((i+block_size)&gt;m)&amp;&amp;((j+block_size)&lt;=n)
+            block=gray_image(i:end,j:j+block_size-1);
+        elseif ((i+block_size)&lt;=m)&amp;&amp;((j+block_size)&gt;n)
+            block=gray_image(i:i+block_size-1,j:end);
+        else
+            block=gray_image(i:i+block_size-1,j:j+block_size-1);
         end
-        temp2=mean(block(r2));
-        if isnan(temp2)
-            temp2=0;
+        t=mean(block(:)); t_org=t; is_done=false; count=0;
+        while ~is_done
+            r1=find(block&lt;=t); r2=find(block&gt;t); temp1=mean(block(r1));
+            if isnan(temp1);
+                temp1=0;
+            end
+            temp2=mean(block(r2));
+            if isnan(temp2)
+                temp2=0;
+            end
+            t_new=(temp1+temp2)/2; is_done=abs(t_new-t)&lt;1; t=t_new;
+            count=count+1;
+            if count&gt;=1000
+                Error='Error:Cannot find the ideal threshold.'
+                return
+            end
         end
-        t_new=(temp1+temp2)/2; is_done=abs(t_new-t)&lt;1; t=t_new;
-        count=count+1;
-        if count&gt;=1000
-            Error='Error:Cannot find the ideal threshold.'
-            return
+        block(r1)=0;
+        block(r2)=255;
+        if ((i+block_size)&gt;m)&amp;&amp;((j+block_size)&gt;n)
+            result(i:end,j:end)=block;
+        elseif ((i+block_size)&gt;m)&amp;&amp;((j+block_size)&lt;=n)
+            result(i:end,j:j+block_size-1)=block;
+        elseif ((i+block_size)&lt;=m)&amp;&amp;((j+block_size)&gt;n)
+            result(i:i+block_size-1,j:end)=block;
+        else
+            result(i:i+block_size-1,j:j+block_size-1)=block;
         end
-    end
-    block(r1)=0;
-    block(r2)=255;
-    if ((i+block_size)&gt;m)&amp;&amp;((j+block_size)&gt;n)
-        result(i:end,j:end)=block;
-    elseif ((i+block_size)&gt;m)&amp;&amp;((j+block_size)&lt;=n)
-        result(i:end,j:j+block_size-1)=block;
-    elseif ((i+block_size)&lt;=m)&amp;&amp;((j+block_size)&gt;n)
-        result(i:i+block_size-1,j:end)=block;
-    else
-        result(i:i+block_size-1,j:j+block_size-1)=block;
     end
 end
-</code></pre>
-
-<p>end
 resule=uint8(result);
 figure
 imshow(result);
-```</p>
+</code></p>
 
 <p>对比结果：</p>
 
@@ -130,38 +124,32 @@ imshow(result);
 
 <p>2.基于OSTU算法的自动阈值图像分割</p>
 
-<p>[这块我还没有细究&hellip;To be continued&hellip;&hellip;]</p>
+<p>[这块我还没有细究…To be continued……] </p>
 
 <p>Matlab内置的<code>graythresh</code>使用的便是OSTU算法，使得白色像素和黑色像素的类间方差最大。</p>
 
 <p>因为上面测试图像的亮度存在明显的水平差异，所以我写了一个将图像沿水平方向分成几部分分别进行OSTU算法，效果明显又比上面两种方式要好些。</p>
 
-<p><img src="/images/201403/postu.png"></p>
+<p><img src="/images/201403/postu.png"> </p>
 
-<p>```
+<p><code>
 function [ result ] = partialostu( image,part,isrgb )
 %PARTIALOSTU partial image ostu
-if isrgb</p>
-
-<pre><code>image=rgb2gray(image);
-</code></pre>
-
-<p>end
+if isrgb
+    image=rgb2gray(image);
+end
 cols=size(image,2);
 result=zeros(size(image));
-for i=1:part</p>
-
-<pre><code>fstart=floor((i-1)*cols/part)+1;
-fend=floor(i*cols/part);
-f=image(:,fstart:fend);
-t=graythresh(f);
-f=im2bw(f,t);
-result(:,fstart:fend)=f;
-</code></pre>
-
-<p>end
+for i=1:part
+    fstart=floor((i-1)*cols/part)+1;
+    fend=floor(i*cols/part);
+    f=image(:,fstart:fend);
+    t=graythresh(f);
+    f=im2bw(f,t);
+    result(:,fstart:fend)=f;
 end
-```</p>
+end
+</code></p>
 ]]></content>
   </entry>
   
