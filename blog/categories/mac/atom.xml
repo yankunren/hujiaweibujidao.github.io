@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-27T11:31:45+08:00</updated>
+  <updated>2014-04-27T11:37:48+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -57,6 +57,8 @@ n\in\mathbb N$ is via the Euler integral</p>
 <script type="math/tex; mode=display">
 \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
 </script>
+
+<p>另外，它还是存在些问题，关于inline Math公式的问题，推荐将Octopress中的</p>
 
 <!-- mathjax config similar to math.stackexchange -->
 <script type="text/x-mathjax-config">
