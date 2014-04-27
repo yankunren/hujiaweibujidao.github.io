@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Calculus Summary Chapter 10 - Hujiawei Bujidao</title>
+  <title>Principal Component Analysis - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="第十部分 微分方程 第一节 微分方程的基本概念
-引例，微分方程的基本概念 在许多问题中，我们不总是能够得到函数关系式，而是得到函数和它的导数之间的关系式，这样的关系式就是微分方程。微分方程中出现的未知函数的最高阶导数的阶数叫做微分方程的阶。 只要是能够满足微分方程的函数都是它的解， &hellip;">
+  <meta name="description" content="Materials on PCA 参考资料: 1.Lecture 15: Principal Component Analysis 介绍了PCA基本原理，也介绍了PCA在人脸识别中的应用 2.Bytefish’s Blog about Principal Component and Linear &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/28/calculus-summary-chapter-10">
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/05/principal-component-analysis">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
@@ -90,7 +89,7 @@
 		
   <header>
     
-      <h1 class="entry-title">Calculus Summary Chapter 10</h1>
+      <h1 class="entry-title">Principal Component Analysis</h1>
     
     
       <p class="meta">
@@ -106,81 +105,28 @@
   
 
 
-<time datetime="2014-04-28T14:29:00+08:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
+<time datetime="2014-04-05T22:53:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3 id="center-center"><center>第十部分 微分方程</center></h3>
+<div class="entry-content"><p>Materials on PCA</p>
 
-<h4 id="section">第一节 微分方程的基本概念</h4>
-<p>引例，微分方程的基本概念</p>
+<p>参考资料:</p>
 
-<p>在许多问题中，我们不总是能够得到函数关系式，而是得到函数和它的导数之间的关系式，这样的关系式就是微分方程。微分方程中出现的未知函数的最高阶导数的阶数叫做微分方程的阶。</p>
+<p>1.<a href="http://www.doc.ic.ac.uk/~dfg/ProbabilisticInference/IDAPILecture15.pdf">Lecture 15: Principal Component Analysis
+</a>    </p>
 
-<p>只要是能够满足微分方程的函数都是它的解，如果解中包含了任意常数，并且任意常数的个数与阶数相同，那么这个解又叫做微分方程的通解。</p>
+<p>介绍了PCA基本原理，也介绍了PCA在人脸识别中的应用     </p>
 
-<p>通常我们会有一些初始条件。确定了通解中的任意常数的话，那么就得到了微分方程的特解。</p>
+<p>2.<a href="http://bytefish.de/blog/pca_lda_with_gnu_octave/">Bytefish’s Blog about Principal Component and Linear Discriminant Analysis</a>      </p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>求微分方程<script type="math/tex">y'=f(x,y)</script>满足初始条件$$y</td>
-      <td><em>{x=x</em>{0}}=y_{0}$$的特解的问题，叫做一阶微分方程的初值问题。</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/chuzhi.png" alt="image" /></p>
-
-<h4 id="section-1">第二节 一阶微分方程</h4>
-<p>可分离变量方程，齐次方程，一阶线性微分方程，伯努利方程</p>
-
-<p>可分离变量方程：利用一阶微分方程的形式，巧妙地分离变量，一边是y的函数，另一边是x的函数，然后左右两边积分即可得到一个关于x和y的隐函数，这个隐函数即为微分方程的解。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/fenlibianliang1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/fenlibianliang2.png" alt="image" /></p>
-
-<p>齐次方程：将原微分方程进行调整，左边为一阶导数，右边为关于<script type="math/tex">\frac{y}{x}</script>的函数，然后可以利用可分离变量得到微分方程的解。有些非齐次的微分方程可以化为齐次方程。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/qici1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/qici2.png" alt="image" /></p>
-
-<p>一阶线性微分方程：对于未知函数和导数都是一次的微分方程。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/xianxing1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/xianxing2.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/xianxing3.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/xianxing4.png" alt="image" /></p>
-
-<p>伯努利方程：含二阶导数</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/bonuli1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/bonuli2.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/bonuli3.png" alt="image" /></p>
-
-<h4 id="section-2">第三节 可降阶的高阶微分方程</h4>
-<p>y(n)=f(x)型的微分方程，yn=f(x，y’)型的微分方程，yn=f(Y，y’)型的微分方程</p>
-
-<p>略过。</p>
-
-<h4 id="section-3">第四节 二阶常系数微分方程</h4>
-<p>通解的结构，二阶常系数齐次线性微分方程，二阶常系数非齐次线性微分方程</p>
-
-<p>略过。</p>
-
-<h4 id="section-4">第五节 微分方程的应用实例</h4>
-<p>物体冷却过程的数学模型，动力学问题，人口模型</p>
-
-<p>略过。</p>
-
-<center>Congratuation! Thank you!</center>
-<center>恭喜你，看完啦！</center>
+<p>Bytefish的博客中介绍了PCA和LDA，以及如何将它们应用到人脸识别中。他是OpenCV内置人脸识别算法的作者，他的博客中有算法的详细讲解。</p>
 
 <p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/28/calculus-summary-chapter-10/">http://hujiaweibujidao.github.io/blog/2014/04/28/calculus-summary-chapter-10/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/05/principal-component-analysis/">http://hujiaweibujidao.github.io/blog/2014/04/05/principal-component-analysis/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 </div>
 
 
@@ -203,12 +149,12 @@
   
 
 
-<time datetime="2014-04-28T14:29:00+08:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
+<time datetime="2014-04-05T22:53:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2014</time>
 				
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/math/'>math</a>
+    <a class='category' href='/blog/categories/ml/'>ml</a>
   
 </span>
 
@@ -224,8 +170,10 @@
 			
 			<p class="meta">
 				
-				<a class="basic-alignment left" href="/blog/2014/04/28/linearalgebra-summary/" title="Previous Post: linearalgebra_summary">&laquo; linearalgebra_summary</a>
+				<a class="basic-alignment left" href="/blog/2014/03/30/matlab-image-segmentation/" title="Previous Post: Matlab Image Segmentation">&laquo; Matlab Image Segmentation</a>
 				
+				
+				<a class="basic-alignment right" href="/blog/2014/04/08/setting-up-environments-on-new-mac/" title="Next Post: Setting Up Environments on New Mac">Setting Up Environments on New Mac &raquo;</a>
 				
 			</p>
 		</footer>
