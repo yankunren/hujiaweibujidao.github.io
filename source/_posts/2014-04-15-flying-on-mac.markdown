@@ -39,8 +39,8 @@ MathJax.Hub.Config({
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 ```
 
-测试：The *Gamma function* satisfying $\Gamma(n) = (n-1)!\quad\forall
-n\in\mathbb N$ is via the Euler integral
+测试：The *Gamma function* satisfying $$\Gamma(n) = (n-1)!\quad\forall
+n\in\mathbb N$$ is via the Euler integra
 
 $$
 \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
@@ -58,13 +58,16 @@ bug：我发现在Math公式中写入`|`，即取绝对值符号的话会影响�
 
 注意，如果该目录下有相同名称的文件的话，会被覆盖掉，利用这个方式我们就可以update文章啦！当然，Stackedit在你publish了一次之后会记住publish的目标位置，以后每次更新之后publish都会publish到那个目标位置。
 
-那如果使用Stackedit打开一个Octopress中已经写好了的文章呢？我使用的方法是`Import from URL`功能，其中的`URL`是该Markdown文档的URL，可以在Github中找到并打开那个文档，点击`Raw`按钮就会进入这份文档的源代码页面，复制该页面的URL即可，比如这篇文章的URL是`https://raw.githubusercontent.com/hujiaweibujidao/hujiaweibujidao.github.io/source/source/_posts/2014-04-15-flying-on-mac.markdown`。修改完了使用上面的方式覆盖即可。
-
-要让Octopress对这个页面进行重新渲染需要在本地执行下面代码
+那如果使用Stackedit打开一个Octopress中已经写好了的文章呢？我使用的方法是`Import from URL`功能，其中的`URL`是该Markdown文档的URL，可以在Github中找到并打开那个文档，点击`Raw`按钮就会进入这份文档的源代码页面，复制该页面的URL即可，比如这篇文章的URL是
+```
+https://raw.githubusercontent.com/hujiaweibujidao/hujiaweibujidao.github.io/source/source/_posts/2014-04-15-flying-on-mac.markdown
+```
+修改完了使用上面的方式覆盖即可。要让Octopress对这个页面进行重新渲染还需要在本地执行下面代码
 
 ```
 git pull
 rake generate
 rake deploy
 ```
+
 可以按照[Make Your Octopress Easy](http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/)的方式建立一个shell脚本简化处理流程。
