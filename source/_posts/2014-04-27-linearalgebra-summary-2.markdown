@@ -21,10 +21,9 @@ published: true
 **总结起来，我觉得，矩阵就是线性变换，作用在一个点上就是将这个点移动到该空间的另一个点，作用在向量上就是对这个向量进行放缩或者旋转或者反射等一系列的线性变换，作用在矩阵上那就是对矩阵中的每一个列向量进行线性变换之后然后进行叠加结果(这就是为什么矩阵的乘法有些奇妙的原因)。因为运动是相对的，你可以理解为坐标系没有变，被作用对象发生了变化，也可以理解为被作用对象没有变，变的是坐标系(也就是空间的基)。**
 
 > 这里借用下小苏的图和解释。
-矩阵$A=\left[ \begin{array}{cc} a11 & a12 \\\\ a21 & a22 \end{array} \right]$
-事实上是由两个向量$[a11,a21]^T$和$[a12,a22]^T$（这里的向量都是列向量）组成，它描述了一个平面（仿射）坐标系。换句话说，这两个向量其实是这个坐标系的两个基，而运算$y=Ax$则是告诉我们，在$A$这个坐标系下的$x$向量，在$I$坐标系下是怎样的。这里的$I$坐标系就是我们最常用的直角坐标系，也就是说，任何向量（包括矩阵里边的向量），只要它前面没有矩阵作用于它，那么它都是在直角坐标系下度量出来的。下图所用的
-矩阵$A=\left[ \begin{array}{cc} 3 & 2 \\\\ 1 & 3 \end{array} \right]$
-这构成了一个仿射坐标系，在这个坐标系下，有一个向量$x=[2,2]^T$，它在直角坐标系下测得的坐标为$[10,8]^T$，现在我们不难发现，直接用矩阵乘法来计算，有
+矩阵$$A=\left[ \begin{array}{cc} a11 & a12 \\ a21 & a22 \end{array} \right]$$
+事实上是由两个向量$[a11,a21]^T$和$[a12,a22]^T$（这里的向量都是列向量）组成，它描述了一个平面（仿射）坐标系。换句话说，这两个向量其实是这个坐标系的两个基，而运算$y=Ax$则是告诉我们，在$A$这个坐标系下的$x$向量，在$I$坐标系下是怎样的。这里的$I$坐标系就是我们最常用的直角坐标系，也就是说，任何向量（包括矩阵里边的向量），只要它前面没有矩阵作用于它，那么它都是在直角坐标系下度量出来的。下图所用的矩阵$$A=\left[ \begin{array}{cc} 3 & 2 \\ 1 & 3 \end{array} \right]$$
+构成了一个仿射坐标系，在这个坐标系下，有一个向量$x=[2,2]^T$，它在直角坐标系下测得的坐标为$[10,8]^T$，现在我们不难发现，直接用矩阵乘法来计算，有
 $Ax=[3∗2+2∗2,1∗2+3∗2]^T=[10,8]^T$
 小苏对此展开讨论了[它和矩阵乘法之间的联系](http://spaces.ac.cn/index.php/archives/1768/)
 
@@ -44,10 +43,10 @@ wiki中对线性变换的解释，这些变换其实主要包括缩放、旋转�
 
 (1)反射变换
 
-$
+$$
 A=\left[ \begin{array}{cc} -1 & 0 \\ 0 & 1 \end{array} \right] \quad
-\rightarrow \left\{ \begin{array}{cc} x'=-x \\y'=y \end{array} \right.
-$
+\rightarrow \left\{ \begin{array}{cc} x'=-x \\ y'=y \end{array} \right.
+$$
 
 水平反射，x变成对应的相反数，y不变。
 
@@ -60,19 +59,19 @@ $
 
 (2)放缩变换
 
-$
+$$
 A=\left[ \begin{array}{cc} \frac{3}{2} & 0 \\ 0 & \frac{3}{2} \end{array} \right] \quad
 \rightarrow \left\{ \begin{array}{c} x'=\frac{3}{2}x \\ y'=\frac{3}{2}y \end{array} \right.
-$
+$$
 
 放缩反射，x和y都变成原来的$\frac{3}{2}$倍。
 
 (3)旋转变换
 
-$
+$$
 A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\frac{\pi}{6}) & \cos(\frac{\pi}{6}) \end{array} \right] \quad
 \rightarrow \left\{ \begin{array}{c} x'=\frac{\sqrt{3}}{2}x-\frac{1}{2}y \\ y'=\frac{1}{2}x+\frac{\sqrt{3}}{2}y \end{array} \right.
-$
+$$
 
 旋转反射，[一般性的证明请看这张图](http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan1.png)，[wiki](http://zh.wikipedia.org/wiki/%E6%97%8B%E8%BD%AC)中对二维空间旋转的解释。
 
