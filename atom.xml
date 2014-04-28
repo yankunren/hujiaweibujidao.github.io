@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T14:00:45+08:00</updated>
+  <updated>2014-04-28T14:04:37+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -851,7 +851,15 @@ f(a)=A>0,f(b)=B<0 %]]&gt;</script>，那么区间中肯定有一点的函数值�
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/"/>
     <updated>2014-04-23T22:13:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab</id>
-    <content type="html"><![CDATA[<p>一本关于数值算法与应用的总结小书$x_{0}$</p>
+    <content type="html"><![CDATA[<table>
+  <tbody>
+    <tr>
+      <td>一本关于数值算法与应用的总结小书$</td>
+      <td>x_{0}</td>
+      <td>$</td>
+    </tr>
+  </tbody>
+</table>
 
 <p>目前写了四个章节：[点击章节标题可以直接查看并下载 (^o^)/~]   </p>
 
