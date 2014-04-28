@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T14:37:09+08:00</updated>
+  <updated>2014-04-28T14:41:07+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -954,7 +954,7 @@ bug：我发现在Math公式中写入<code>|</code>，即取绝对值符号的�
 
 <p>我现在的做法是，做一般的作业使用Mou，按照上面的方式肯定有一个可以，完成作业没有问题。</p>
 
-<p>写Octopress博客中的文章用StackEdit，行内Math用<code>$</code>，其他形式用<code>$$</code>。Stackedit支持直接将文档publish到Github的某个项目的某个分支下的某个文件夹中，文件名自己命名。如下图所示：</p>
+<p>写Octopress博客中的文章用StackEdit，行内Math用<code>$</code>(某些情况下可以，但是有些情况下不行，不行的话还是使用<code>$$</code>，Kramdown支持<code>$$</code>形式的行内公式)，其他形式用<code>$$</code>。Stackedit支持直接将文档publish到Github的某个项目的某个分支下的某个文件夹中，文件名自己命名。如下图所示：</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201404/stackedit_publish.png" alt="image" /></p>
 
