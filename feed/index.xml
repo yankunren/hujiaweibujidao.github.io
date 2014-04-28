@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T13:11:02+08:00</updated>
+  <updated>2014-04-28T13:16:44+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -741,7 +741,7 @@
 <p><img src="http://hujiaweibujidao.github.io/images/math/elementalfuns.png" alt="image" /></p>
 
 <p>关于指数函数：
-对于相等间隔的自变量x的取值，指数函数对应值的比例为常数。由指数运算法则可知，对任意的x，只要给定$x_{0}&gt;0$，则<script type="math/tex">a^{x+x_{0}}/a^{x}=a^{x_{0}}</script>恒成立。此性质可以作为判断两个变量之间的关系是否为指数函数关系的主要依据。此外，这个性质导出了数理统计中的指数分布，在数理统计中我们会看到。</p>
+对于相等间隔的自变量x的取值，指数函数对应值的比例为常数。由指数运算法则可知，对任意的x，只要给定<script type="math/tex">x_{0}>0</script>，则<script type="math/tex">a^{x+x_{0}}/a^{x}=a^{x_{0}}</script>恒成立。此性质可以作为判断两个变量之间的关系是否为指数函数关系的主要依据。此外，这个性质导出了数理统计中的指数分布，在数理统计中我们会看到。</p>
 
 <h4 id="section-1">第二节 函数的极限</h4>
 <p>数列极限及性质，函数极限及性质，无穷小与无穷大，极限运算法则，极限存在准则和两个重要极限，无穷小的比较</p>
