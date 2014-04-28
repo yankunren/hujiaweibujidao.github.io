@@ -4,7 +4,7 @@
   <title><![CDATA[Category: matlab | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/matlab/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T15:52:52+08:00</updated>
+  <updated>2014-04-28T15:53:53+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -120,7 +120,7 @@ imshow(result);
 
 <p>对比结果：</p>
 
-<p>{% img /images/201403/whole.png 320 210 %} {% img /images/201403/partial.png 320 210 %}</p>
+<p><img src="/images/201403/whole.png" width="320" height="210"> <img src="/images/201403/partial.png" width="320" height="210"></p>
 
 <p>2.基于OSTU算法的自动阈值图像分割</p>
 
@@ -130,7 +130,7 @@ imshow(result);
 
 <p>因为上面测试图像的亮度存在明显的水平差异，所以我写了一个将图像沿水平方向分成几部分分别进行OSTU算法，效果明显又比上面两种方式要好些。</p>
 
-<p>{% img /images/201403/postu.png %} </p>
+<p><img src="/images/201403/postu.png"> </p>
 
 <p><code>
 function [ result ] = partialostu( image,part,isrgb )
