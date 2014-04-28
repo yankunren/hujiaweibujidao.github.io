@@ -4,7 +4,7 @@
   <title><![CDATA[Category: math | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T10:40:12+08:00</updated>
+  <updated>2014-04-28T10:51:53+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -83,6 +83,121 @@
 
 <center>Congratuation! Thank you!</center>
 <center>恭喜你，看完啦！</center>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linear Algebra Summary]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/04/28/linearalgebra-summary-1/"/>
+    <updated>2014-04-28T14:03:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/04/28/linearalgebra-summary-1</id>
+    <content type="html"><![CDATA[<p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
+<strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
+
+<h4 id="center1center"><center>1.行列式</center></h4>
+
+<p><strong>什么是行列式？</strong></p>
+
+<p>这个问题一点都不简单！</p>
+
+<p>推荐阅读的博文<a href="http://spaces.ac.cn/index.php/archives/2208/">新理解矩阵5</a>以及<a href="http://www.matrix67.com/blog/archives/4294">我们需要怎样的数学教育？</a>，后者在网上比较火，简单的语言道出行列式以及矩阵的“天机”。</p>
+
+<blockquote>
+  <p>直到今天看到<a href="http://mathoverflow.net/questions/7584/what-are-the-most-misleading-alternate-definitions-in-taught-mathematics">这个网页</a>，才看见有人一语道破线性代数的真谛（这也是我终于决定写成此文的直接原因）。我终于找到了我那一个学期企图寻找的东西。就好像把 $x$ 变成 $2 x$ 一样，我们经常需要把 $(x, y)$ 变成 $(2 x + y, x – 3 y)$ 之类的东西，这就叫做线性变换。于是才想到定义矩阵乘法，用于表示一切线性变换。几何上看，把平面上的每个点 $(x, y)$ 都变到 $(2 x + y, x – 3 y)$ 的位置上去，效果就相当于对这个平面进行了一个“线性的拉扯”。
+矩阵的乘法，其实就是多个线性变换叠加的效果，它显然满足结合律，但不满足交换律。主对角线全是 1 的矩阵所对应的线性变换其实就是不变的意思，因此它叫做单位矩阵。矩阵 A 乘以矩阵 B 得单位矩阵，就是做完线性变换 A 后再做一次线性变换 B 就又变回去了的意思，难怪我们说矩阵 B 是矩阵 A的逆矩阵。课本上对行列式的定义千奇百怪，又是什么递归，又是什么逆序对，还编写口诀帮助大家记忆。其实，<strong>行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积</strong>。因此，单位矩阵的行列式当然就为 1，某行全为 0 的行列式显然为 0 （因为某一维度会被无视掉，线性变换会把整个平面压扁）， $|A·B|$ 显然等于 $|A|·|B|$ 。行列式为 0 ，对应的矩阵当然不可逆，因为这样的线性变换已经把平面压成一条线了，什么都不能把它变回去了。当然，更高阶的矩阵就对应了更高维的空间。一瞬间，所有东西都解释清楚了。</p>
+</blockquote>
+
+<!--![image][14]-->
+
+<p>我认为，上面的表达不完全正确，比如其核心[行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积]，但是，它真正让我们意识到要好好思考，到底，什么是行列式？</p>
+
+<p><strong><a href="http://zh.wikipedia.org/wiki/%E8%A1%8C%E5%88%97%E5%BC%8F">Wiki</a>的解释：行列式其实是一个函数，一个将方阵转换成一个标量的函数！[就是说，行列式本质上就相当于一个函数]</strong></p>
+
+<p><strong>行列式可以看做是有向面积或体积的概念在一般的欧几里得空间中的推广。或者说，在 n 维欧几里得空间中，行列式描述的是一个线性变换对“体积”所造成的影响。</strong></p>
+
+<p>首先要注意的是如果是指矩阵的行列式，那么矩阵中只有方阵才有行列式！对方阵求行列式得到一个值，这个值就是指这个$n \times n$方阵(因为矩阵都可以看做是一个线性变换，所以就是指一个线性变换)对n维空间中的“体积”所造成的影响。在二维空间中，这个“体积”实际上是平行四边形的面积，在三维空间中，“体积”就是指平行六面体的体积。更高维以此类推。</p>
+
+<p>先看下行列式在二维和三维空间的几何意义(wiki解释得非常详细！)</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi2.png" alt="image" /></p>
+
+<p>另一个解释(在矩阵条目中的解释)，<strong>一个方阵的行列式等于0当且仅当该方阵不可逆。系数是实数的时候，二维（三维）方阵A的行列式的绝对值表示单位面积（体积）的图形经过A对应的线性变换后得到的图形的面积（体积），而它的正负则代表了对应的线性变换是否改变空间的定向：行列式为正说明它保持空间定向，行列式为负则说明它逆转空间定向。</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi13.png" alt="image" /></p>
+
+<p>下面看下什么是用行列式怎么理解线性变换，<strong>线性变换就是把一个向量线性地变为另一个向量</strong>，<strong>行列式表示的是线性变换前后平行六面体的体积的变化系数</strong>。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi3.png" alt="image" /></p>
+
+<p>面积或体积的定义是恒正的，而行列式是有正有负的，因此需要引入有向面积和有向体积的概念。如果行列式表示的是线性变换对体积的影响，那么行列式的正负就表示了空间的定向。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi4.png" alt="image" /></p>
+
+<p><strong>由二维及三维的例子，可以看到一般的行列式应该具有怎样的性质。在n维欧几里得空间中，作为“平行多面体”的“体积”的概念的推广，行列式继承了“体积”函数的性质。首先，行列式需要是线性的，这可以由面积的性质类比得到。这里的线性是对于每一个向量来说的，因为当一个向量变为原来的a倍时，“平行多面体”的“体积”也变为原来的a倍。其次，当一个向量在其它向量组成的“超平面”上时，n维“平行多面体”的“体积”是零（可以想像三维空间的例子）[在向量组中就是指它们线性相关了]。也就是说，当向量线性相关时，行列式为零。</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi5.png" alt="image" /></p>
+
+<p>行列式的展开，代数余子式，拉普拉斯公式用于计算矩阵的行列式值</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi6.png" alt="image" /></p>
+
+<p>行列式的性质：
+<strong>若两个矩阵相似，那么它们的行列式相同。这是因为两个相似的矩阵之间只相差一个基底变换，而行列式描述的是矩阵对应的线性映射对体积的影响，而不是体积，所以基底变换并不会影响行列式的值。</strong></p>
+
+<p><strong>行列式是所有特征值（按代数重数计）的乘积。这可由矩阵必和其若尔当标准型相似推导出。特殊地，三角矩阵的行列式等于其对角线上所有元素的乘积</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi8.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi9.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi10.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi11.png" alt="image" /></p>
+
+<p>行列式与线性方程组，矩阵以及多项式还有多重积分之间的关系。</p>
+
+<p>当线性方程组对应的行列式不为零时，由克莱姆法则，可以直接以行列式的形式写出方程组的解。但用克莱姆法则求解计算量巨大，因此并没有实际应用价值，一般用于理论上的推导。</p>
+
+<p>多项式$p(x) = det(xI - A)$称为方块矩阵A的特征值多项式。这是一个由行列式定义的多项式，它的解是矩阵所有的特征值。</p>
+
+<p>行列式与多重积分的关系主要就是<a href="http://zh.wikipedia.org/wiki/%E9%9B%85%E5%8F%AF%E6%AF%94%E7%9F%A9%E9%98%B5">雅可比行列式 on wiki</a>了。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi12.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi7.png" alt="image" /></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linear Algebra Summary]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/04/28/linearalgebra-summary/"/>
+    <updated>2014-04-28T14:03:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/04/28/linearalgebra-summary</id>
+    <content type="html"><![CDATA[<p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
+<strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
+
+<h4 id="center0center"><center>0.碎碎念</center></h4>
+
+<p>到了研究生阶段才意识到本科的数学原来作用这么大，不论是在数据挖掘，还是机器学习，亦或是模式识别，数学都是基础中的基础。于是乎，我在逸夫图书馆泡了几天看了些微积分、线代和数理统计的书籍，写下三份总结，记录下重要的知识，以备后忘。本人才疏学浅，若有错误之处还请指出，让我“增长”，若有不足也请指出，使我“完备”，谢谢！:-)</p>
+
+<p><strong>[注：这些总结不会详细地讲解所有概念，只是挑选一些我个人感觉比较有用的知识点进行总结，很多时候可能只是列举知识点，并无解释，忘记了的可以自行Wiki或者翻书，另外，为了节省写作时间，对于一些定理我并没有给出详细的表达，忽略了些前提条件，请不要较真，我希望的是给自己一个感性的理解就行，具体理性的分析需要的时候再查，还有就是我还剪切粘贴了很多图片，再有就是，本文采用的是’非线性方式’进行总结的…首篇意识流作品…嗯，就是这样…强迫症者慎入…]</strong></p>
+
+<p>PS：本总结根据下面提到的武汉大学黄正华老师写的线性代数复习总结的顺序来的，因为黄老师的总结已经写得很好了，我只会提到一些我在其他地方看到或者听到的比较有用的心得分享。</p>
+
+<p>参考书籍：</p>
+
+<p>1.[线性代数 Using Matlab]</p>
+
+<p>2.[]</p>
+
+<p>它山之石：</p>
+
+<p>1.<a href="http://aff.whu.edu.cn/huangzh/">武汉大学 黄正华老师</a>写的线性代数复习总结<a href="http://hujiaweibujidao.github.io/files/linear_algebra_huangzhenghua.pdf">book</a></p>
+
+<p>全部内容：</p>
+
+<p>1.<a href="">行列式!</a></p>
+
+<p>2.<a href="">矩阵！</a></p>
 
 ]]></content>
   </entry>
@@ -217,157 +332,6 @@
 <img src="http://hujiaweibujidao.github.io/images/math/tidu5.png" alt="image" />
 <img src="http://hujiaweibujidao.github.io/images/math/tidu6.png" alt="image" />
 <img src="http://hujiaweibujidao.github.io/images/math/tidu7.png" alt="image" /></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Calculus Summary Chapter 7]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-7/"/>
-    <updated>2014-04-27T14:29:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-7</id>
-    <content type="html"><![CDATA[<h3 id="center-center"><center>第七部分 向量代数与空间解析几何</center></h3>
-<p>本部分是多元微分学的基础，而且涉及到了很多的空间知识，图形比较多，所以这部分的图片比较多，如若不清晰请Wiki或者翻书查看。</p>
-
-<h4 id="section">第一节 空间直角坐标系</h4>
-<p>空间点的直角坐标，空间两点的距离</p>
-
-<h4 id="section-1">第二节 向量代数</h4>
-<p>向量的概念，向量的线性运算，向量的坐标，向量的模、方向角、投影，向量的数量积与向量积</p>
-
-<p>方向角和方向余弦的概念：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/fangxiangjiao1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/fangxiangjiao2.png" alt="image" /></p>
-
-<p>投影的概念，投影是一个数值，当投影是指是一个向量<script type="math/tex">\overrightarrow{r}</script>在另一个向量<script type="math/tex">\overrightarrow{u}</script>上的投影时，投影就是投影到目标向量上得到的向量的模与目标向量的单位向量的模的比值。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/touying1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/touying2.png" alt="image" /></p>
-
-<p>向量的数量积的概念，即<script type="math/tex">ab=\|a\|\|b\|\cos \theta</script>，在物理中就是指力F做的功W。数量积又叫内积，是很重要的概念，在线代中同样有矩阵内积的概念，在数据挖掘中有一种很常用的度量相似度的方式，即余弦相似度，一般用于文本类似的数据求相似度。向量的向量积是<script type="math/tex">ab=\|a\|\|b\|\sin\theta</script>。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/shuliangji1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/shuliangji2.png" alt="image" /></p>
-
-<h4 id="section-2">第三节 平面及其方程</h4>
-<p>平面的点法式方程，平面的一般方程，两平面的夹角</p>
-
-<p>已知一个平面内的一点和这个平面的法向量便可以确定一个平面了；其实，任何一个三元一次方程<script type="math/tex">Ax+By+Cz+D=0</script>都可以确定一个平面，其法向量就是(A,B,C)。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/space1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/space2.png" alt="image" /></p>
-
-<p>两个平面的夹角可用两个平面的法向量之间的夹角来得到。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/spaceangle.png" alt="image" />
-       　</p>
-
-<h4 id="section-3">第四节 空间直线及其方程</h4>
-<p>空间直线的一般方程，空间直线的对称式方程与参数方程，两直线的夹角，直线与平面的夹角</p>
-
-<p>两个平面的交线就可以确定一条空间直线；已知直线上一点和直线的方向向量也可以确定一条直线。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/line1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/line2.png" alt="image" /></p>
-
-<p>两条直线之间的夹角可用两条直线的方向向量之间的夹角来得到</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/lineangle.png" alt="image" /></p>
-
-<p>直线与平面之间的夹角可用直线的方向向量和平面的法向量之间的夹角来得到。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/linespaceangle.png" alt="image" /></p>
-
-<h4 id="section-4">第五节 曲面及其方程</h4>
-<p>曲面方程的概念，旋转曲面，柱面，二次曲面</p>
-
-<p>曲面方程</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/qumian.png" alt="image" /></p>
-
-<p>旋转曲面：平面内一条曲线绕着平面上的一条直线旋转一周得到的曲面叫做旋转曲面。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/xuanzhuanqumian.png" alt="image" /></p>
-
-<p>柱面：一条直线绕着一条定曲线平行移动得到的轨迹称为柱面。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/zhumian.png" alt="image" /></p>
-
-<p>二次曲面<a href="http://zh.wikipedia.org/wiki/%E4%BA%8C%E6%AC%A1%E6%9B%B2%E9%9D%A2">on wiki</a>，与平面解析几何中定义二次曲线类似，三元二次方程<script type="math/tex">F(x,y,z)=0</script>所表示的曲面称为二次曲面，而平面是一次曲面。Wikipedia上显示了各种二次曲面的方程和二次曲面的图形。</p>
-
-<h4 id="section-5">第六节 空间曲线及其方程</h4>
-<p>空间曲线的一般方程，空间曲线的参数方程，空间曲线在坐标面上的投影</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/spaceline1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/spaceline2.png" alt="image" /></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Calculus Summary Chapter 6]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-6/"/>
-    <updated>2014-04-27T14:29:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-6</id>
-    <content type="html"><![CDATA[<h3 id="center-center"><center>第六部分 无穷级数</center></h3>
-
-<h4 id="section">第一节 常数项级数的概念与基本性质</h4>
-<p>常数项级数的概念，常数项级数的基本性质</p>
-
-<p>无穷级数的思想来源于近似计算圆面积这个问题，考虑用内接正方形来近似计算。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/infty_round.png" alt="image" /></p>
-
-<p>数列{<script type="math/tex">u_{n}</script>}的元素之和得到的表达式<script type="math/tex">u_{1}+u_{2}+\cdots+u_{n}+\cdots</script>就叫做(常数项)(无穷)级数，其前n项之和又可以组成一个新的数列{<script type="math/tex">s_{n}</script>}，即<script type="math/tex">s_{n}=\Sigma_{i=1}^{n}u_{i}</script>，一般项<script type="math/tex">s_{n}</script>称为部分和。</p>
-
-<p>如果部分和数列{<script type="math/tex">s_{n}</script>}有极限，那么这个无穷级数<script type="math/tex">u_{n}=\Sigma_{i=1}^{n}u_{i}</script>就是收敛的，极限s就叫做这个无穷级数的和。</p>
-
-<p>级数收敛的必要条件是它的一般项<script type="math/tex">u_{n}</script>趋近于0，但不是充分条件！比如，调和级数<script type="math/tex">1+\frac{1}{2}+\frac{1}{3}+\frac{1}{4}+\cdots+\frac{1}{n}+\cdots</script>的一般项<script type="math/tex">u_{n}=\frac{1}{n}</script>也是趋近于0的，但是调和级数是发散的，采用反证法即可证明得到，证明如下，<script type="math/tex">s_{2n}-s{n}>\frac{1}{2}</script>并不趋近于0，所以不收敛。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/tiaohe_series.png" alt="image" /></p>
-
-<h4 id="section-1">第二节 常数项级数敛散性的判别方法</h4>
-<p>正项级数及其敛散性的判别方法，交错级数及其敛散性的判别方法，绝对收敛与条件收敛</p>
-
-<p>正项级数<script type="math/tex">u_{n}=\Sigma_{i=1}^{n}u_{i}</script>收敛的充分必要条件是它的部分和数列{<script type="math/tex">s_{n}</script>}有界。</p>
-
-<p>比值审敛法，对于正项级数<script type="math/tex">u_{n}=\Sigma_{i=1}^{n}u_{i}</script>，若<script type="math/tex">\lim_{n\to \infty}\frac{u_{n+1}}{u_{n}}=\beta</script>，当<script type="math/tex">\beta>1</script>时级数发散，当<script type="math/tex">% &lt;![CDATA[
-\beta<1 %]]&gt;</script>时级数收敛，当<script type="math/tex">\beta=1</script>时级数可能发散可能收敛。</p>
-
-<p>还有其他的一些判断级数收敛的方法，略过。</p>
-
-<h4 id="section-2">第三节 幂级数</h4>
-<p>函数项级数的基本概念，幂级数及其敛散性，幂级数的运算，函数展开成幂级数，幂级数在近似计算中的应用</p>
-
-<p>函数项级数就是定义在某个区间上的函数族之和，表达式类似<script type="math/tex">u_{1}(x)+u_{2}(x)+u_{3}(x)+\cdots+u_{n}(x)+\cdots</script>，对于某个确定的值<script type="math/tex">x=x_{0}</script>，函数项级数<script type="math/tex">u_{1}(x_{0})+u_{2}(x_{0})+u_{3}(x_{0})+\cdots+u_{n}(x_{0})+\cdots</script>就变成常数项级数，如果该常数项级数收敛的话，那么点<script type="math/tex">x_{0}</script>就是函数项级数在定义区间上的一个收敛点，所有收敛点就组成了收敛域。</p>
-
-<p>幂级数就是最常用的一类函数项级数，它的形式如下：</p>
-
-<script type="math/tex; mode=display">\Sigma_{n=0}^{\infty}a_{n}x^{n}=a_{0}x^{0}+a_{1}x^{1}+\cdots+a_{n}x^{n}+\cdots</script>
-
-<p>一种判断幂级数收敛的办法是阿贝尔定理，如果级数<script type="math/tex">\Sigma_{n=0}^{\infty}a_{n}x^{n}</script>当<script type="math/tex">x=x_{0}(x_{0} \ne 0)</script>时收敛，那么对于开区间<script type="math/tex">(-\|x_{0}\|,\|x_{0}\|)</script>内的任何x都有幂级数收敛，反之，如果当<script type="math/tex">x=x_{0}(x_{0} \ne 0)</script>时发散，那么对于闭区间<script type="math/tex">[-\|x_{0}\|,\|x_{0}\|]</script>外的任何x都有幂级数发散。其实就是对于幂级数的收敛半径R内部任意x都收敛，外部都发散！</p>
-
-<p>许多应用中，我们都希望知道如何将一个给定的函数f(x)展开成幂级数的形式，这样相当于对函数进行近似了，可以大大简化计算量，于是便有了泰勒级数！</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/tylor_serials.png" alt="image" /></p>
-
-<p>特别地，当<script type="math/tex">x_{0}=0</script>时泰勒级数又叫麦克劳林级数，展开式称为麦克劳林展开式</p>
-
-<script type="math/tex; mode=display">f(x)=\Sigma_{n=0}^{n}\frac{1}{n!}f^{n}(0)x^{n}</script>
-
-<p>将函数展开成幂级数的步骤：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/miseries1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/miseries2.png" alt="image" /></p>
-
-<p>例如，对于函数<script type="math/tex">e^{x}</script>幂级数展开</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/ex.png" alt="image" /></p>
-
-<p>常用的幂级数：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/common_series.png" alt="image" /></p>
 
 ]]></content>
   </entry>

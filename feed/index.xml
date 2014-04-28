@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T10:40:12+08:00</updated>
+  <updated>2014-04-28T10:51:53+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -86,6 +86,125 @@
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/28/calculus-summary-chapter-10/">http://hujiaweibujidao.github.io/blog/2014/04/28/calculus-summary-chapter-10/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linear Algebra Summary]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/04/28/linearalgebra-summary-1/"/>
+    <updated>2014-04-28T14:03:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/04/28/linearalgebra-summary-1</id>
+    <content type="html"><![CDATA[<p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
+<strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
+
+<h4 id="center1center"><center>1.行列式</center></h4>
+
+<p><strong>什么是行列式？</strong></p>
+
+<p>这个问题一点都不简单！</p>
+
+<p>推荐阅读的博文<a href="http://spaces.ac.cn/index.php/archives/2208/">新理解矩阵5</a>以及<a href="http://www.matrix67.com/blog/archives/4294">我们需要怎样的数学教育？</a>，后者在网上比较火，简单的语言道出行列式以及矩阵的“天机”。</p>
+
+<blockquote>
+  <p>直到今天看到<a href="http://mathoverflow.net/questions/7584/what-are-the-most-misleading-alternate-definitions-in-taught-mathematics">这个网页</a>，才看见有人一语道破线性代数的真谛（这也是我终于决定写成此文的直接原因）。我终于找到了我那一个学期企图寻找的东西。就好像把 $x$ 变成 $2 x$ 一样，我们经常需要把 $(x, y)$ 变成 $(2 x + y, x – 3 y)$ 之类的东西，这就叫做线性变换。于是才想到定义矩阵乘法，用于表示一切线性变换。几何上看，把平面上的每个点 $(x, y)$ 都变到 $(2 x + y, x – 3 y)$ 的位置上去，效果就相当于对这个平面进行了一个“线性的拉扯”。
+矩阵的乘法，其实就是多个线性变换叠加的效果，它显然满足结合律，但不满足交换律。主对角线全是 1 的矩阵所对应的线性变换其实就是不变的意思，因此它叫做单位矩阵。矩阵 A 乘以矩阵 B 得单位矩阵，就是做完线性变换 A 后再做一次线性变换 B 就又变回去了的意思，难怪我们说矩阵 B 是矩阵 A的逆矩阵。课本上对行列式的定义千奇百怪，又是什么递归，又是什么逆序对，还编写口诀帮助大家记忆。其实，<strong>行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积</strong>。因此，单位矩阵的行列式当然就为 1，某行全为 0 的行列式显然为 0 （因为某一维度会被无视掉，线性变换会把整个平面压扁）， $|A·B|$ 显然等于 $|A|·|B|$ 。行列式为 0 ，对应的矩阵当然不可逆，因为这样的线性变换已经把平面压成一条线了，什么都不能把它变回去了。当然，更高阶的矩阵就对应了更高维的空间。一瞬间，所有东西都解释清楚了。</p>
+</blockquote>
+
+<!--![image][14]-->
+
+<p>我认为，上面的表达不完全正确，比如其核心[行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积]，但是，它真正让我们意识到要好好思考，到底，什么是行列式？</p>
+
+<p><strong><a href="http://zh.wikipedia.org/wiki/%E8%A1%8C%E5%88%97%E5%BC%8F">Wiki</a>的解释：行列式其实是一个函数，一个将方阵转换成一个标量的函数！[就是说，行列式本质上就相当于一个函数]</strong></p>
+
+<p><strong>行列式可以看做是有向面积或体积的概念在一般的欧几里得空间中的推广。或者说，在 n 维欧几里得空间中，行列式描述的是一个线性变换对“体积”所造成的影响。</strong></p>
+
+<p>首先要注意的是如果是指矩阵的行列式，那么矩阵中只有方阵才有行列式！对方阵求行列式得到一个值，这个值就是指这个$n \times n$方阵(因为矩阵都可以看做是一个线性变换，所以就是指一个线性变换)对n维空间中的“体积”所造成的影响。在二维空间中，这个“体积”实际上是平行四边形的面积，在三维空间中，“体积”就是指平行六面体的体积。更高维以此类推。</p>
+
+<p>先看下行列式在二维和三维空间的几何意义(wiki解释得非常详细！)</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi2.png" alt="image" /></p>
+
+<p>另一个解释(在矩阵条目中的解释)，<strong>一个方阵的行列式等于0当且仅当该方阵不可逆。系数是实数的时候，二维（三维）方阵A的行列式的绝对值表示单位面积（体积）的图形经过A对应的线性变换后得到的图形的面积（体积），而它的正负则代表了对应的线性变换是否改变空间的定向：行列式为正说明它保持空间定向，行列式为负则说明它逆转空间定向。</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi13.png" alt="image" /></p>
+
+<p>下面看下什么是用行列式怎么理解线性变换，<strong>线性变换就是把一个向量线性地变为另一个向量</strong>，<strong>行列式表示的是线性变换前后平行六面体的体积的变化系数</strong>。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi3.png" alt="image" /></p>
+
+<p>面积或体积的定义是恒正的，而行列式是有正有负的，因此需要引入有向面积和有向体积的概念。如果行列式表示的是线性变换对体积的影响，那么行列式的正负就表示了空间的定向。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi4.png" alt="image" /></p>
+
+<p><strong>由二维及三维的例子，可以看到一般的行列式应该具有怎样的性质。在n维欧几里得空间中，作为“平行多面体”的“体积”的概念的推广，行列式继承了“体积”函数的性质。首先，行列式需要是线性的，这可以由面积的性质类比得到。这里的线性是对于每一个向量来说的，因为当一个向量变为原来的a倍时，“平行多面体”的“体积”也变为原来的a倍。其次，当一个向量在其它向量组成的“超平面”上时，n维“平行多面体”的“体积”是零（可以想像三维空间的例子）[在向量组中就是指它们线性相关了]。也就是说，当向量线性相关时，行列式为零。</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi5.png" alt="image" /></p>
+
+<p>行列式的展开，代数余子式，拉普拉斯公式用于计算矩阵的行列式值</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi6.png" alt="image" /></p>
+
+<p>行列式的性质：
+<strong>若两个矩阵相似，那么它们的行列式相同。这是因为两个相似的矩阵之间只相差一个基底变换，而行列式描述的是矩阵对应的线性映射对体积的影响，而不是体积，所以基底变换并不会影响行列式的值。</strong></p>
+
+<p><strong>行列式是所有特征值（按代数重数计）的乘积。这可由矩阵必和其若尔当标准型相似推导出。特殊地，三角矩阵的行列式等于其对角线上所有元素的乘积</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi8.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi9.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi10.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi11.png" alt="image" /></p>
+
+<p>行列式与线性方程组，矩阵以及多项式还有多重积分之间的关系。</p>
+
+<p>当线性方程组对应的行列式不为零时，由克莱姆法则，可以直接以行列式的形式写出方程组的解。但用克莱姆法则求解计算量巨大，因此并没有实际应用价值，一般用于理论上的推导。</p>
+
+<p>多项式$p(x) = det(xI - A)$称为方块矩阵A的特征值多项式。这是一个由行列式定义的多项式，它的解是矩阵所有的特征值。</p>
+
+<p>行列式与多重积分的关系主要就是<a href="http://zh.wikipedia.org/wiki/%E9%9B%85%E5%8F%AF%E6%AF%94%E7%9F%A9%E9%98%B5">雅可比行列式 on wiki</a>了。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi12.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi7.png" alt="image" /></p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/28/linearalgebra-summary-1/">http://hujiaweibujidao.github.io/blog/2014/04/28/linearalgebra-summary-1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linear Algebra Summary]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/04/28/linearalgebra-summary/"/>
+    <updated>2014-04-28T14:03:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/04/28/linearalgebra-summary</id>
+    <content type="html"><![CDATA[<p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
+<strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
+
+<h4 id="center0center"><center>0.碎碎念</center></h4>
+
+<p>到了研究生阶段才意识到本科的数学原来作用这么大，不论是在数据挖掘，还是机器学习，亦或是模式识别，数学都是基础中的基础。于是乎，我在逸夫图书馆泡了几天看了些微积分、线代和数理统计的书籍，写下三份总结，记录下重要的知识，以备后忘。本人才疏学浅，若有错误之处还请指出，让我“增长”，若有不足也请指出，使我“完备”，谢谢！:-)</p>
+
+<p><strong>[注：这些总结不会详细地讲解所有概念，只是挑选一些我个人感觉比较有用的知识点进行总结，很多时候可能只是列举知识点，并无解释，忘记了的可以自行Wiki或者翻书，另外，为了节省写作时间，对于一些定理我并没有给出详细的表达，忽略了些前提条件，请不要较真，我希望的是给自己一个感性的理解就行，具体理性的分析需要的时候再查，还有就是我还剪切粘贴了很多图片，再有就是，本文采用的是’非线性方式’进行总结的…首篇意识流作品…嗯，就是这样…强迫症者慎入…]</strong></p>
+
+<p>PS：本总结根据下面提到的武汉大学黄正华老师写的线性代数复习总结的顺序来的，因为黄老师的总结已经写得很好了，我只会提到一些我在其他地方看到或者听到的比较有用的心得分享。</p>
+
+<p>参考书籍：</p>
+
+<p>1.[线性代数 Using Matlab]</p>
+
+<p>2.[]</p>
+
+<p>它山之石：</p>
+
+<p>1.<a href="http://aff.whu.edu.cn/huangzh/">武汉大学 黄正华老师</a>写的线性代数复习总结<a href="http://hujiaweibujidao.github.io/files/linear_algebra_huangzhenghua.pdf">book</a></p>
+
+<p>全部内容：</p>
+
+<p>1.<a href="">行列式!</a></p>
+
+<p>2.<a href="">矩阵！</a></p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/28/linearalgebra-summary/">http://hujiaweibujidao.github.io/blog/2014/04/28/linearalgebra-summary/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 ]]></content>
   </entry>
   
@@ -1816,923 +1935,6 @@ MathJax.Hub.Config({
 </span><span class="line">cmake -G Xcode -D OpenCV_DIR=$OpenCV_DIR ..</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/">http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[android ndk and opencv development 4]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/02/21/android-ndk-and-opencv-development-4/"/>
-    <updated>2014-02-21T10:15:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/02/21/android-ndk-and-opencv-development-4</id>
-    <content type="html"><![CDATA[<h4 id="android-ndkopencv">Android NDK与OpenCV的整合开发环境搭建</h4>
-
-<p>以XFace项目为例，虚拟机的操作系统为64位的Ubuntu 12.04，用户名和密码都是xface  </p>
-
-<p>为便于开始进行XFace人脸识别系统研发，提供了已配置好安卓开发环境的Linux系统（64位的Ubuntu 12.04）虚拟机，在安装好VMware（版本在VMware 8以上）之后，打开Ubuntu 64 xface.vmwarevm目录中Ubuntu 64 xface.vmx，以用户名<code>xface</code>及密码<code>xface</code>登录后，直接打开桌面上的<code>Link to eclipse</code>，便可按本文档第二部分第3步运行XFace工程。如果想要自己搭建开发环境，请从第一部分开始做起。</p>
-
-<h5 id="section">第一部分 搭建环境</h5>
-<hr />
-
-<p><strong><em>[注：以下所有下载的sdk都保存在虚拟机的<code>/home/xface/tools</code>目录下，也可以到百度网盘下载，地址是<a href="http://pan.baidu.com/s/1mg2Wdx2">http://pan.baidu.com/s/1mg2Wdx2</a>，不同版本的配置方式可能有些变化，如果不是很清楚版本问题的话，推荐使用虚拟机中使用的版本]</em></strong></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201402/tools.png" /></p>
-
-<p>1.配置Java环境</p>
-
-<p>①下载<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Oracle JDK</a>，虚拟机中下载的版本是JDK1.7.0_40</p>
-
-<p>②下载之后解压即可，解压路径为<code>/home/xface/android/jdk1.7.0</code></p>
-
-<p>③打开终端，输入<code>sudo gedit /etc/profile</code>，在文件末尾添加下面内容</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">JAVA_HOME=/home/xface/android/jdk1.7.0
-</span><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>如下图所示，后面环境配置中添加内容也是如此</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201402/etcprofile.png" /></p>
-
-<p>④重启虚拟机，打开终端输入<code>java -version</code>进行测试（重启虚拟机也可以等待下面的Android SDK和Android NDK环境都配置好了之后再重启也行）</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201402/javaversion.png" /></p>
-
-<p>2.配置Android SDK环境</p>
-
-<p>①下载<a href="https://developer.android.com/sdk/index.html">Android Developer Tools</a>，虚拟机中下载的是20130729版本</p>
-
-<p>②下载之后解压即可，解压路径为<code>/home/xface/android/adt-bundle</code></p>
-
-<p>③打开终端，输入<code>sudo gedit /etc/profile</code>，在文件末尾添加下面内容</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">ANDROID_SDK_ROOT=/home/xface/android/adt-bundle/sdk
-</span><span class="line">export PATH=${PATH}:${ANDROID_SDK_ROOT}/platform-tools:${ANDROID_SDK_ROOT}/tools</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>④因为Android SDK是32位的，而虚拟机中Ubuntu系统是64位的，所以需要添加ia32-libs库，在终端中执行下面命令（需要耗费漫长的时间等待）</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">sudo apt-get update
-</span><span class="line">sudo apt-get install ia32-libs</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>⑤重启虚拟机，打开终端输入<code>adb version</code>进行测试</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201402/adbversion.png" /></p>
-
-<p>3.配置Android NDK环境</p>
-
-<p>①下载<a href="https://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>，虚拟机中下载的是r9c版本</p>
-
-<p>②下载之后解压即可，解压路径为<code>/home/xface/android/adt-bundle/ndk</code></p>
-
-<p>③打开终端，输入<code>sudo gedit /etc/profile</code>，在文件末尾添加下面内容</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">ANDROID_NDK_ROOT=/home/xface/android/adt-bundle/ndk
-</span><span class="line">export PATH=${PATH}:${ANDROID_NDK_ROOT}</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>④重启虚拟机，打开终端输入<code>ndk-build -v</code>进行测试</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201402/ndkversion.png" /></p>
-
-<p>4.配置OpenCV环境</p>
-
-<p>①下载<a href="http://sourceforge.net/projects/opencvlibrary/files/opencv-android/">OpenCV for Android</a>，虚拟机中使用的是2.4.4版本</p>
-
-<p>②下载之后解压即可，解压路径为<code>/home/xface/android/opencv_sdk</code></p>
-
-<p>5.配置ADT开发环境</p>
-
-<p>①运行<code>/home/xface/android/adt-bundle/eclipse</code>目录中的eclipse程序，设置默认的工作空间的路径，虚拟机中设置的路径为<code>/home/xface/android/workspace</code></p>
-
-<p>②打开<code>window-&gt;preferences</code>，查看Android SDK和NDK的配置，如果路径有问题则需要修改过来</p>
-
-<p>Android SDK路径的设置</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201402/androidsdk.png" /></p>
-
-<p>Android NDK路径的设置</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201402/androidndk.png" /></p>
-
-<p>③打开<code>window-&gt;preferences</code>，找到左侧的<code>C/C++ Build-&gt;Environment</code>添加下面两个环境变量：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">NDKROOT=/home/xface/android/adt-bundle/ndk
-</span><span class="line">OPENCVROOT=/home/xface/android/opencv_sdk</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201402/environment.png" /></p>
-
-<p>④按如下步骤配置<strong>万能的javah工具</strong>的方法（这里javah工具的用途是根据Java类生成C++头文件）</p>
-
-<p>(1)在菜单<code>Run</code>-&gt;<code>External Tools</code>-&gt;<code>External Tools Configurations</code>中新建<code>Program</code>，命名为<code>javah</code></p>
-
-<p>(2)<code>Location</code>设置为<code>/usr/bin/javah</code> [如果javah命令不是在这个位置，可以试试<code>${system_path:javah}</code>]</p>
-
-<p>(3)<code>Working Directory</code>设置为<code>${project_loc}/bin/classes</code> [适用于Android项目开发]</p>
-
-<p>(4)<code>Arguments</code>设置为<code>-jni -verbose -d "${project_loc}${system_property:file.separator}jni" ${java_type_name}</code></p>
-
-<p>(5)OK，以后只要选中要进行”反编译”的Java Class，然后运行这个External Tool就可以了！</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201402/javah.png" /></p>
-
-<p>⑤为了提高编写代码的速度，打开<code>window-&gt;preferences</code>，找到左侧<code>Java-&gt;Editor-&gt;Content Assist</code>，在<code>Auto activation triggers for Java</code>中添加26个英文字母，这样，在编写Java代码时任何一个字母被按下的话都会出现智能代码提示。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201402/codeassist.png" /></p>
-
-<p>⑥为了验证环境没有问题，可以尝试新建一个Android Project并运行于移动设备上，虚拟机中eclipse下的项目xfacetest便是用来测试环境是否配置成功的默认Android应用程序，可以尝试插上手机，选中项目xfacetest点击右键，选择<code>Run As</code> -&gt; <code>Android Application</code>，如果都没问题了，说明开发环境搭建成功了。</p>
-
-<h5 id="xface">第二部分 运行XFace</h5>
-<hr />
-<p><strong><em>[注：实验使用的XFace项目源代码是稍微精简的版本，可以到百度网盘下载，地址是<a href="http://pan.baidu.com/s/1mg2Wdx2">http://pan.baidu.com/s/1mg2Wdx2</a>，下载之后解压即可，原始的XFace项目托管于Github，地址是<a href="http://github.com/hujiaweibujidao/XFace.git">http://github.com/hujiaweibujidao/XFace.git</a>]</em></strong></p>
-
-<p>XFace是一个小型的人脸识别程序，主要功能就是注册和识别人脸，界面分为3个，首先是主界面，使用者选择要进行的操作，sign up是注册，输入用户名然后保存头像即可；sign in是登录，其实就是人脸识别的过程。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201402/xface.png" /></p>
-
-<p>XFace的源码保存在虚拟机中<code>/home/xface/android/xface</code>目录下，包括两个项目，一个是<code>OpenCV Library - 2.4.4</code>，这是XFace所需的OpenCV库项目，另一个是<code>XFace</code>，这个XFace核心的Android应用程序。下面介绍如何将这两个项目导入到Eclipse开发环境中，并在手机上运行。</p>
-
-<p>1.运行Eclipse，选择<code>File-&gt;Import...</code>，在导入窗口中，选择<code>General</code>下面的<code>Existing Projects into Workspace</code>，然后点击<code>Next-&gt;</code>，在之后的窗口中，点击<code>Browser...</code>，选中<code>/home/xface/android/xface/</code>下的<code>OpenCV Library - 2.4.4</code>文件夹，建议勾选<code>Copy projects into workspace</code>（可以防止意外操作导致项目出现问题无法修复时可以删除该项目重新将其导入进来），点击<code>Finish</code>即可，如下图所示：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201402/import.png" /></p>
-
-<p>2.按照步骤1中的导入操作导入<code>/home/xface/android/xface/</code>下的<code>XFace</code>项目，导入之后，如果报出问题，可以尝试以下步骤：选中项目<code>XFace</code>，点击右键，选择<code>Properties</code>，在属性配置窗口中，选择左侧的<code>Android</code>项，查看下面的<code>Library</code>的配置，如果有错误，则选中错误的项，点击<code>Remove</code>；如果内容为空则点击<code>Add...</code>，在弹出的窗口中选中步骤1中添加的<code>OpenCV Library - 2.4.4</code>项目即可，效果如下图所示：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201402/library.png" /></p>
-
-<p>3.至此，开发环境搭建和项目导入部分都完成了，下面可以进行XFace程序了。首先插入设备（手机），如果是在虚拟机中运行，要确保手机是和虚拟机连接的，而不是和主机连接的（可以通过虚拟机右下角状态栏中<code>USB设备按钮</code>或者菜单<code>虚拟机</code>中的<code>USB和Bluetooth</code>进行设置）；然后，选中<code>XFace</code>项目，点击右键，选择<code>Run As -&gt; Android Application</code>，然后选中插入的手机，点击<code>OK</code>即可。有些情况下可能在列表中没有出现设备，可以尝试以下步骤：首先要确保手机开启了USB调试功能(一般是<code>设置</code>-&gt;<code>开发人员选项</code>-&gt;选中<code>USB调试</code>)；其次可以尝试重新插入手机或者重启Eclipse；若还是不行尝试在终端输入<code>adb kill-server</code>和<code>adb devices</code>命令；若还是不行的话尝试重启电脑。实在是不行的话，将编译好的apk文件（保存在项目的<code>bin</code>目录下）拷贝到手机中直接运行。</p>
-
-<h5 id="xface-1">第三部分 XFace分析</h5>
-<hr />
-
-<p>1.项目结构和主要文件功能大致介绍</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201402/xfacecode.png" /></p>
-
-<p>2.关键部分介绍</p>
-
-<p>(1)<code>jni</code>下的<code>edu_thu_xface_libs_XFaceLibrary.h</code>文件是由Java类<code>XFaceLibrary.java</code>通过javah工具生成的（现在要想重新生成需要将非native方法注释起来），Java类只是定义了三个重要的<code>native</code>方法，实际调用的是实现了头文件<code>edu_thu_xface_libs_XFaceLibrary.h</code>的另一个C++文件<code>xface.cpp</code>。 </p>
-
-<p>三个<code>native</code>方法如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">public static native long nativeInitFacerec(String datapath, String modelpath, int component, double threshold,
-</span><span class="line">		int facerec);
-</span><span class="line">public static native int nativeFacerec(long xfacerec, String modelpath, long addr, int width, int height);
-</span><span class="line">public static native int nativeDestoryFacerec(long xfacerec);</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>对应得到的头文件中的三个方法（注意：这里方法的名称和参数类型都是严格遵守JNI规范的，不能随便修改）</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">/*
-</span><span class="line"> * Class:     edu_thu_xface_libs_XFaceLibrary
-</span><span class="line"> * Method:    nativeInitFacerec
-</span><span class="line"> * Signature: (Ljava/lang/String;Ljava/lang/String;IDI)J
-</span><span class="line"> */
-</span><span class="line">JNIEXPORT jlong JNICALL Java_edu_thu_xface_libs_XFaceLibrary_nativeInitFacerec
-</span><span class="line">  (JNIEnv *, jclass, jstring, jstring, jint, jdouble, jint);
-</span><span class="line">/*
-</span><span class="line"> * Class:     edu_thu_xface_libs_XFaceLibrary
-</span><span class="line"> * Method:    nativeFacerec
-</span><span class="line"> * Signature: (JLjava/lang/String;JII)I
-</span><span class="line"> */
-</span><span class="line">JNIEXPORT jint JNICALL Java_edu_thu_xface_libs_XFaceLibrary_nativeFacerec
-</span><span class="line">  (JNIEnv *, jclass, jlong, jstring, jlong, jint, jint);
-</span><span class="line">/*
-</span><span class="line"> * Class:     edu_thu_xface_libs_XFaceLibrary
-</span><span class="line"> * Method:    nativeDestoryFacerec
-</span><span class="line"> * Signature: (J)I
-</span><span class="line"> */
-</span><span class="line">JNIEXPORT jint JNICALL Java_edu_thu_xface_libs_XFaceLibrary_nativeDestoryFacerec
-</span><span class="line">  (JNIEnv *, jclass, jlong);</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>第一个方法是初始化人脸识别模块，参数分别是：datapath是已有的人脸数据保存的文件路径；modelpath是已生成的人脸识别模块保存的文件路径；component是人脸识别算法中使用的一个参数，表示主成分数；threshold也是人脸识别算法中使用的一个参数，表示阈值。后面两个参数目前都是使用默认值，分别是10和0.0。</p>
-
-<p>第二个方法是人脸识别算法，参数分别是：xfacerec人脸识别算法模块对象的内存地址，之前的尝试，目前没有用了，可以忽视；modelpath是创建的人脸识别模块数据的文件保存的路径；addr是当前摄像头得到的一帧图片的灰度图像的内存地址；width和height分别是要进行识别的人脸图片压缩之后的大小，目前是240*360。</p>
-
-<p>第三个方法是销毁人脸识别对象的方法，主要用于释放JNI层中开辟的内存空间。</p>
-
-<p>(2)分析<code>FacerecCameraActivity</code>类</p>
-
-<p>①人脸检测模块</p>
-
-<p>这部分最重要的是<code>private CascadeClassifier mJavaDetector;</code>字段，它的初始化过程在方法<code>onCreate(Bundle savedInstanceState)</code>中，这里使用了重要的<code>lbpcascade_frontalface.yml</code>文件，该文件原本存放在<code>res/raw</code>目录下，初始化过程中将其拷贝到了SD卡中，并使用这个文件创建了<code>CascadeClassifier</code>。代码片段：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">try {
-</span><span class="line">	// File cascadeDir = getDir("cascade", Context.MODE_PRIVATE);
-</span><span class="line">	mCascadeFile = new File(CommonUtil.LBPCASCADE_FILEPATH);
-</span><span class="line">	if (!mCascadeFile.exists()) {// if file not exist, load from raw, otherwise, just use it!
-</span><span class="line">		// load cascade file from application resources
-</span><span class="line">		InputStream is = getResources().openRawResource(R.raw.lbpcascade_frontalface);
-</span><span class="line">		// mCascadeFile = new File(cascadeDir, "lbpcascade_frontalface.xml");
-</span><span class="line">		FileOutputStream os = new FileOutputStream(mCascadeFile);
-</span><span class="line">		byte[] buffer = new byte[4096];
-</span><span class="line">		int bytesRead;
-</span><span class="line">		while ((bytesRead = is.read(buffer)) != -1) {
-</span><span class="line">			os.write(buffer, 0, bytesRead);
-</span><span class="line">		}
-</span><span class="line">		is.close();
-</span><span class="line">		os.close();
-</span><span class="line">	}
-</span><span class="line">	mJavaDetector = new CascadeClassifier(mCascadeFile.getAbsolutePath());
-</span><span class="line">	if (mJavaDetector.empty()) {
-</span><span class="line">		Log.e(TAG, "Failed to load cascade classifier");
-</span><span class="line">		mJavaDetector = null;
-</span><span class="line">	} else
-</span><span class="line">		Log.i(TAG, "Loaded cascade classifier from " + mCascadeFile.getAbsolutePath());
-</span><span class="line">	// mNativeDetector = new DetectionBasedTracker(mCascadeFile.getAbsolutePath(), 0);// hujiawei
-</span><span class="line">	// cascadeDir.delete();//
-</span><span class="line">} catch (IOException e) {
-</span><span class="line">	e.printStackTrace();
-</span><span class="line">	Log.e(TAG, "Failed to load cascade. Exception thrown: " + e);
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>最后在摄像头的回调方法<code>onCameraFrame(CvCameraViewFrame inputFrame)</code>中对摄像头得到的图片帧进行人脸检测，将检测出来的人脸方框直接绘制在图片帧上立刻显示出来（该方法会在每次摄像头有新的一帧）。代码片段如下，其中mRgba是每次得到的图片的RGBA格式，mGray是每次得到的图片的灰度格式</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
-</span><span class="line">	// Log.i(TAG, inputFrame.gray().width() + "" + inputFrame.gray().height());
-</span><span class="line">	// landscape 640*480 || portrait [320*240]-&gt; 240*320!
-</span><span class="line">	// when portrait mode, inputframe is 320*240, so pic is rotated!
-</span><span class="line">	mRgba = inputFrame.rgba();
-</span><span class="line">	mGray = inputFrame.gray();
-</span><span class="line">	Core.flip(mRgba.t(), mRgba, 0);//counter-clock wise 90
-</span><span class="line">	Core.flip(mGray.t(), mGray, 0);
-</span><span class="line">	if (mAbsoluteFaceSize == 0) {
-</span><span class="line">		int height = mGray.rows();
-</span><span class="line">		if (Math.round(height * mRelativeFaceSize) &gt; 0) {
-</span><span class="line">			mAbsoluteFaceSize = Math.round(height * mRelativeFaceSize);
-</span><span class="line">		}
-</span><span class="line">		// mNativeDetector.setMinFaceSize(mAbsoluteFaceSize);//
-</span><span class="line">	}
-</span><span class="line">	MatOfRect faces = new MatOfRect();
-</span><span class="line">	if (mJavaDetector != null) {// use only java detector
-</span><span class="line">		mJavaDetector.detectMultiScale(mGray, faces, 1.1, 2, 2, // TODO: objdetect.CV_HAAR_SCALE_IMAGE
-</span><span class="line">				new Size(mAbsoluteFaceSize, mAbsoluteFaceSize), new Size());
-</span><span class="line">	}
-</span><span class="line">	Rect[] facesArray = faces.toArray();
-</span><span class="line">	for (int i = 0; i &lt; facesArray.length; i++) {
-</span><span class="line">		Core.rectangle(mRgba, facesArray[i].tl(), facesArray[i].br(), FACE_RECT_COLOR, 3);
-</span><span class="line">	}
-</span><span class="line">	Core.flip(mRgba.t(), mRgba, 1);//counter-clock wise 90
-</span><span class="line">	Core.flip(mGray.t(), mGray, 1);
-</span><span class="line">	return mRgba;
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>②人脸识别模块</p>
-
-<p>因为人脸识别过程需要耗费一定的时间，如果每次图片帧传入的时候便进行处理，处理完了之后再显示的话会导致界面卡死，所以人脸识别过程是在另开辟的一个线程中执行的，线程代码如下，只要摄像头还在工作，也就是还会传回图像的话，那么这个线程便会取出其灰度图像传入到JNI层进行人脸识别操作，并将结果显示出来，此处消息的传递方式使用的是Android中的Handler机制。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">new Thread(new Runnable() {
-</span><span class="line">	public void run() {
-</span><span class="line">		Log.i(TAG, "bInitFacerec= " + bInitFacerec + " $$ bExitRecognition= " + bExitRecognition
-</span><span class="line">				+ " $$ frameprocessing=" + bFrameProcessing);
-</span><span class="line">		if (!bInitFacerec) {// facerec init?
-</span><span class="line">			long result = XFaceLibrary.initFacerec();// it will take a lot of time!
-</span><span class="line">			Message message = new Message();
-</span><span class="line">			message.arg1 = (int) result;// 1/-1/-2
-</span><span class="line">			message.arg2 = 0;
-</span><span class="line">			handler.sendMessage(message);
-</span><span class="line">			bInitFacerec = true;// no longer init!
-</span><span class="line">		}
-</span><span class="line">		while (!bExitRecognition) {// is recognition exits?
-</span><span class="line">			if (!bFrameProcessing) {// is frame being processing?
-</span><span class="line">				if (null == mGray || mGray.empty()) {//it's hard to say when it is called!
-</span><span class="line">					Log.i(TAG, "gray mat is null");
-</span><span class="line">					// return;// return when no data//can not return
-</span><span class="line">				} else {
-</span><span class="line">					bFrameProcessing = true;
-</span><span class="line">					Log.i(TAG, "runFacerec! addr = " + mGray.getNativeObjAddr());// 2103032
-</span><span class="line">					// Log.i(TAG, "data addr=" + mGray.dataAddr() + " $$ native addr=" +
-</span><span class="line">					// mGray.getNativeObjAddr()
-</span><span class="line">					// + " $$ native object=" + mGray.nativeObj);// $1 not equal $2,but $2=$3
-</span><span class="line">					int result = XFaceLibrary.facerec(mGray);
-</span><span class="line">					Message message = new Message();
-</span><span class="line">					message.arg1 = result;
-</span><span class="line">					message.arg2 = 1;
-</span><span class="line">					handler.sendMessage(message);
-</span><span class="line">					bFrameProcessing = false;
-</span><span class="line">				}
-</span><span class="line">			}
-</span><span class="line">			try {
-</span><span class="line">				Thread.currentThread().sleep(1000);
-</span><span class="line">			} catch (InterruptedException e) {
-</span><span class="line">				e.printStackTrace();
-</span><span class="line">			}
-</span><span class="line">		}
-</span><span class="line">	}
-</span><span class="line">}).start();</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>3.XFace应用程序在手机SD卡中的相关文件</p>
-
-<p>XFace应用程序的使用过程中会产生一些文件夹和文件，全部存放在SD卡的<code>xface</code>文件夹下。这部分内容可以参看文件<code>CommonUtil.java</code>文件，在包<code>edu.thu.xface.util</code>下。</p>
-
-<p><code>camera</code>文件夹存放摄像头拍照得到的头像；</p>
-
-<p><code>user</code>文件夹存放灰度化和压缩处理之后的头像；</p>
-
-<p><code>demo</code>文件夹存放测试或者示例程序的数据，目前为空；</p>
-
-<p><code>facedata.txt</code>文件存放人脸图片路径和人物的对应关系，文件中<code>图片路径;数字</code>表示该数字编号的人物的头像图片所在的路径；</p>
-
-<p><code>users.properties</code>文件用来保存用户的配置和注册用户的信息，文件中<code>total</code>代表总共注册的人数；后面的<code>数字=用户名</code>表示人物编号与人物名称的对应关系，<code>1=hujiawei</code>表示1号人物代表用户<code>hujiawei</code>，再根据<code>facedata.txt</code>文件中的内容便可以知道<code>hujiawei</code>用户头像图片存储的路径；最后的<code>facerecognizer=?</code>保存当前使用的人脸识别算法，例如<code>facerecognizer=eigenface</code>表示使用的是特征脸算法，XFace虽然内置了OpenCV中的三种人脸识别算法，但是目前只有<code>eigenface</code>和<code>fisherface</code>两种算法可行，第三种<code>lbphface</code>算法暂时不可行。</p>
-
-<p><code>facerec.yml</code>文件是OpenCV中人脸识别算法用来保存创建的识别模块数据的文件；</p>
-
-<p><code>lbpcascade_frontalface.yml</code>文件是OpenCV中进行人脸检测所需要的数据文件；</p>
-
-<h5 id="section-1">第四部分 其他参考内容</h5>
-<hr />
-
-<p>其他的参考内容：</p>
-
-<p>①<a href="http://hujiaweibujidao.github.io/blog/2013/12/14/yi-dong-kai-fa-zi-liao-hui-ji/">关于Android开发的书籍和资料</a></p>
-
-<p>文章最后附有两份Android开发入门课程PPT，以及一个Android小程序魔力8号球，百度网盘同样可以下载</p>
-
-<p>②<a href="http://bujingyun23.blog.163.com/blog/static/181310243201210293950303/?suggestedreading&amp;wumii">关于在Ubuntu12.04下搭建android开发环境的教程</a></p>
-
-<p>③<a href="http://hujiaweiyinger.diandian.com/post/2013-10-30/setup_android_ndk_environment_and_solve_some_problems">关于在windows平台搭建android开发环境的教程</a> </p>
-
-<p>不推荐使用Windows进行开发，因为不仅要安装Cygwin，还要进行很多其他的配置，如果实在是不得已，可以尝试参考<a href="http://blog.csdn.net/pwh0996/article/details/8957764">这位博主的环境搭建过程</a></p>
-
-<p>④<a href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-developement/">关于android ndk和opencv整合开发以及实例项目运行的教程</a></p>
-
-<p>介绍Android NDK和OpenCV整合开发的环境搭建过程和实例项目测试，重点可以参考的是其中的人脸检测和眼镜检测的两个项目，XFace中的人脸检测便来源于此。</p>
-
-<p>⑤<a href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/">关于android ndk开发中的各种细节和问题的总结</a></p>
-
-<p>理解javah工具和Android.mk以及Application.mk文件的配置，如果是在Windows平台搭建环境的话，需要查看这部分关于<code>C/C++ Genernal -&gt; Paths and Symbols</code>的配置</p>
-
-<p>⑥<a href="http://bytefish.de/blog/opencv_facerecognizer_documentation/">关于OpenCV中的人脸识别算法 - OpenCV FaceRecognizer documentation</a></p>
-
-<p>该博客作者是OpenCV2.4之后内置的人脸识别模块的原作者，他在他的博客中详细介绍了FaceRecognizer的API以及他使用的人脸识别算法，算法讲解部分可以参考<a href="http://bytefish.de/blog/face_recognition_with_opencv2/">Face Recognition with Python/GNU Octave/Matlab</a>。
-&lt;p class=&#8217;post-footer&#8217;&gt;
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/02/21/android-ndk-and-opencv-development-4/">http://hujiaweibujidao.github.io/blog/2014/02/21/android-ndk-and-opencv-development-4/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a> Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^&lt;/p&gt;</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[android ndk and opencv development 3]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3/"/>
-    <updated>2013-11-18T21:35:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3</id>
-    <content type="html"><![CDATA[<h3 id="android-ndk--opencv-3">Android NDK 和 OpenCV 整合开发总结(3)</h3>
-
-<p>终于写到第三节啦，虽然很累，但是还是要坚持，坚持写完这3篇文章。</p>
-
-<p>这一节的主要内容是OpenCV在Android NDK开发中的应用，包括下面几个方面的内容：</p>
-
-<ul>
-  <li>如何实现Static Initialization从而不需要安装OpenCV Manager运行含OpenCV library的app</li>
-  <li>对十份论文和报告中的关于OpenCV和Android NDK开发的总结</li>
-  <li>如何使用Android中的摄像头，常见的问题有哪些? </li>
-  <li>OpenCV 和 Android NDK 整合开发的一般途径</li>
-</ul>
-
-<h4 id="static-initialization">1.实现Static Initialization</h4>
-
-<p>实现Static Initialization就是指将OpenCV Library添加到app package中，不需要安装OpenCV Manager这个app就能运行，<a href="http://docs.OpenCV.org/trunk/doc/tutorials/introduction/Android_binary_package/dev_with_OCV_on_Android.html">官方文档有介绍</a>，但是不详细，尤其是最后那句代码到底要放在什么地方很多人都不清楚，其实并不需要像官方文档中介绍的那样配置，我想在这里介绍下如何修改FaceDetection项目的源码来做到这点。(最好是找一个包含jni代码的项目进行修改)</p>
-
-<ul>
-  <li>[1]打开jni下的Android.mk文件，修改OpenCV的那一部分，将<code>off</code>设置为<code>on</code>，并设置<code>OpenCV_LIB_TYPE</code>为<code>SHARED</code>，结果如下：  </li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">OpenCV_CAMERA_MODULES:=on
-</span><span class="line">OpenCV_INSTALL_MODULES:=on
-</span><span class="line">OpenCV_LIB_TYPE:=SHARED
-</span><span class="line">include ${OpenCVROOT}/sdk/native/jni/OpenCV.mk</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>[2]打开FdActivity.java文件，在其中添加一个静态初始化块代码，它是用来加载<code>OpenCV_java</code>库的，由于FaceDetection中还用了另一个库detection_based_tracker(用于人脸跟踪)，所以要在<code>else</code>子句中加载进来：</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">static {
-</span><span class="line">	Log.i(TAG, "OpenCV library load!");
-</span><span class="line">	if (!OpenCVLoader.initDebug()) {
-</span><span class="line">		Log.i(TAG, "OpenCV load not successfully");
-</span><span class="line">	} else {
-</span><span class="line">		System.loadLibrary("detection_based_tracker");// load other libraries
-</span><span class="line">	}
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>[3]删除FdActivity.java的OnResume()方法的最后那句，不让它去访问OpenCV Manager。</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">@Override
-</span><span class="line">public void onResume() {
-</span><span class="line">	super.onResume();
-</span><span class="line">//OpenCVLoader.initAsync(OpenCVLoader.OpenCV_VERSION_2_4_3, this, mLoaderCallback);//
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>[4]修改FdActivity.java的OnCreate()方法，从上面的<code>private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this)</code>代码块中拷贝<code>try-catch</code>块放到OnCreate的<code>setContentView()</code>之后，然后拷贝<code>mOpenCVCameraView.enableView();</code>放到<code>mOpenCVCameraView = (CameraBridgeViewBase) findViewById(R.id.fd_activity_surface_view);</code>之后，修改后的OnCreate()方法如下：</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">public void onCreate(Bundle savedInstanceState) {
-</span><span class="line">	Log.i(TAG, "called onCreate");
-</span><span class="line">	super.onCreate(savedInstanceState);
-</span><span class="line">	getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-</span><span class="line">
-</span><span class="line">	setContentView(R.layout.face_detect_surface_view);
-</span><span class="line">
-</span><span class="line">	//
-</span><span class="line">	try {
-</span><span class="line">		// load cascade file from application resources
-</span><span class="line">		InputStream is = getResources().openRawResource(R.raw.lbpcascade_frontalface);
-</span><span class="line">		File cascadeDir = getDir("cascade", Context.MODE_PRIVATE);
-</span><span class="line">		mCascadeFile = new File(cascadeDir, "lbpcascade_frontalface.xml");
-</span><span class="line">		FileOutputStream os = new FileOutputStream(mCascadeFile);
-</span><span class="line">
-</span><span class="line">		byte[] buffer = new byte[4096];
-</span><span class="line">		int bytesRead;
-</span><span class="line">		while ((bytesRead = is.read(buffer)) != -1) {
-</span><span class="line">			os.write(buffer, 0, bytesRead);
-</span><span class="line">		}
-</span><span class="line">		is.close();
-</span><span class="line">		os.close();
-</span><span class="line">
-</span><span class="line">		mJavaDetector = new CascadeClassifier(mCascadeFile.getAbsolutePath());
-</span><span class="line">		if (mJavaDetector.empty()) {
-</span><span class="line">			Log.e(TAG, "Failed to load cascade classifier");
-</span><span class="line">			mJavaDetector = null;
-</span><span class="line">		} else
-</span><span class="line">			Log.i(TAG, "Loaded cascade classifier from " + mCascadeFile.getAbsolutePath());
-</span><span class="line">
-</span><span class="line">		mNativeDetector = new DetectionBasedTracker(mCascadeFile.getAbsolutePath(), 0);// hujiawei
-</span><span class="line">
-</span><span class="line">		cascadeDir.delete();
-</span><span class="line">
-</span><span class="line">	} catch (IOException e) {
-</span><span class="line">		e.printStackTrace();
-</span><span class="line">		Log.e(TAG, "Failed to load cascade. Exception thrown: " + e);
-</span><span class="line">	}
-</span><span class="line">
-</span><span class="line">	//
-</span><span class="line">
-</span><span class="line">	mOpenCVCameraView = (CameraBridgeViewBase) findViewById(R.id.fd_activity_surface_view);
-</span><span class="line">	mOpenCVCameraView.enableView();//
-</span><span class="line">	mOpenCVCameraView.setCvCameraViewListener(this);
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>[5]OK，卸载安装好的OpenCV Manager，然后重新调试运行FaceDetection试试，它已经可以自行运行了！  </li>
-</ul>
-
-<h4 id="opencvandroid-ndk">2.对十份论文和报告中的关于OpenCV和Android NDK开发的总结</h4>
-
-<p>这10篇文献大部分[<a href="http://pan.baidu.com/s/19WOVq">百度网盘下载地址</a>]都还是停留如何在Android开发中使用OpenCV library，没有牵涉到具体的实现领域。具体总结如下：</p>
-
-<ul>
-  <li>_利用OpenCV实现在Android系统下的人脸检测</li>
-</ul>
-
-<p>本文主要介绍了如何在底层通过OpenCV来对人脸部分进行检测，得到的人脸位置数据通过JNI传递给Java层，详细介绍了其中的JNI代码和共享库的构建过程，对图片是通过图片的路径来进行传递的，因为这里的检测只是对单张静态的图片进行检测。</p>
-
-<ul>
-  <li>_Tutorial-2-OpenCV-for-Android-Setup-Macintosh-API11</li>
-</ul>
-
-<p>本文主要是介绍了OpenCV和Android NDK开发环境的搭建，以及基于示例程序Face-Detection的演示。使用的方式是将OpenCV Library Project作为库，然后调用OpenCV Android API。</p>
-
-<ul>
-  <li>_Android application for Face Recognition</li>
-</ul>
-
-<p>这是一份详细的项目介绍，实现了几种基于Android平台的人脸检测和识别，包括Google API和OpenCV的，但是OpenCV的由于需要Library Project，而且算法过于复杂，作者便自行开发了人脸检测库，有6大特性，其中包括了眼镜和嘴巴的检测。</p>
-
-<ul>
-  <li>_ECCV-2012-OpenCV4Android</li>
-</ul>
-
-<p>这份报告写得精简但是内容丰富，有几个重要点：<br />
-(1) 使用OpenCV的Android应用开发方式，对应不同的开发人群：Java developer / Native developer <br />
-(2) OpenCV4Android目前的局限性，以及开发过程中对于提高性能和开发效率需要注意的事项</p>
-
-<ul>
-  <li>_Introduction to OpenCV for Android devices</li>
-</ul>
-
-<p>本文设计的内容都很基础，涉及到OpenCV和Android开发的环境搭建，亮点是最后的Using C++ OpenCV code，这里是在Android ndk中使用OpenCV本地代码的重要配置项。</p>
-
-<ul>
-  <li>_OpenCV-facedetection</li>
-</ul>
-
-<p>这份报告讲述了很多OpenCV的相关知识，另外还详细讲述了一个人脸检测的算法</p>
-
-<ul>
-  <li>_OpenCV on Android Platforms</li>
-</ul>
-
-<p>这份报告内容也比较多，但是都很基础。</p>
-
-<ul>
-  <li><em>BDTI_ARMTechCon</em>2012_OpenCV_Android</li>
-</ul>
-
-<p>这份报告讲的是OpenCV在嵌入式设备中的应用，其中介绍了OpenCV在Android上的开发，需要注意的是OpenCV2.4开始提供了native Android camera support！</p>
-
-<ul>
-  <li>_OpenCV Based Real-Time Video Processing  Using Android Smartphone</li>
-</ul>
-
-<p>这篇论文介绍了利用OpenCV对实时的视频进行处理和纯Android library进行处理的比较，发现利用OpenCV处理的结果更加准确，效率更快，而且更加省电。比较时使用的都是基本图像处理操作，例如灰度化，高斯模糊，Sobel边缘检测等等。</p>
-
-<ul>
-  <li>_Realtime Computer Vision  with OpenCV</li>
-</ul>
-
-<p>这篇文章比较有意思，大致看了下，介绍了OpenCV在移动终端的应用。</p>
-
-<h4 id="android">3.Android的摄像头</h4>
-
-<ul>
-  <li>
-    <p>关于如何使用Android的摄像头：Android设备一般有两个摄像头，前置摄像头和后置摄像头，在进行和摄像头相关的应用开发的时候很容易遇到各种问题，推荐以下几篇文章：<br />
-<a href="https://developer.Android.com/guide/topics/media/camera.html">Android Developer中有对应的文档:Camera</a><br />
-<a href="http://blog.csdn.net/yinyuan1987/article/details/6969225">这位作者的总结：Android相机</a><br />
-<a href="http://stackoverflow.com/questions/2779002/how-to-open-front-camera-on-Android-platform">StackOverflow上关于如何调用前置摄像头</a><br />
-<a href="http://blog.csdn.net/yangzl2008/article/details/9262505">如何在Android中后台开启摄像头默默拍照</a><br />
-<a href="http://blog.csdn.net/ocean20/article/details/8772196">关于Camera的三种Callback</a></p>
-  </li>
-  <li>
-    <p>关于保存预览图片：Android中的<code>BitmapFactory.decodeByteArray</code>只支持一定的格式，Camara默认的previewformat格式为<code>NV21</code>(对于大多数的Android设备，即使修改CameraParameters的设置也还是不行)，所以在获得bitmap时，需要进行转换，通过YuvImage类来转换成JPEG格式，然后再保存到文件中。<br />
-<a href="http://www.cnblogs.com/liuan/archive/2012/01/10/2318300.html">Google Group上的讨论</a>  </p>
-  </li>
-  <li>
-    <p>关于如何在预览界面上添加一个矩形框，类似二维码扫描那样，原理很简单，一个使用SurfaceView，另一个使用ImageVIew(或者SurfaceView也行)，推荐文章：<br />
-<a href="http://blog.csdn.net/yanzi1225627/article/details/8580034">Android摄像头中预览界面添加矩形框</a></p>
-  </li>
-  <li>
-    <p>关于如何进行和OpenCV有关的摄像头开发：有了OpenCV的library之后，关于摄像头的开发可谓是简单了很多，可以参见OpenCV for Android中的三个Tutorial(CameraPreview, MixingProcessing和CameraControl)，源码都在OpenCV-Android sdk的samples目录下，这里简单介绍下： <br />
-OpenCV Library中提供了两种摄像头，一种是Java摄像头-<code>org.OpenCV.Android.JavaCameraView</code>，另一种是Native摄像头-<code>org.OpenCV.Android.NativeCameraView</code> (可以运行CameraPreview这个项目来体验下两者的不同，其实差不多)。两者都继承自<code>CameraBridgeViewBase</code>这个抽象类，但是JavaCamera使用的就是Android SDK中的<code>Camera</code>，而NativeCamera使用的是OpenCV中的<code>VideoCapture</code>。    </p>
-  </li>
-  <li>
-    <p>关于OpenCV的Camera在Layout文件中的配置：<code>OpenCV:show_fps</code>在layout中如果设置为<code>true</code>的话显示界面中会出现当前摄像头帧率的信息以及图片的大小，<code>OpenCV:camera_id</code>的配置有三种<code>front</code>,<code>back</code>,<code>any</code>分别对应前置摄像头，后置摄像头和默认的摄像头(其实也就是后置摄像头)。  </p>
-  </li>
-  <li>
-    <p>关于<code>CvCameraViewListener2</code>接口：它可以方便的处理和摄像头的交互，该接口只有三个函数，分别在Camera打开(<code>onCameraViewStarted</code>)，关闭(<code>onCameraViewStopped</code>)和预览的图片帧到了的时候(<code>onCameraFrame</code>)调用。其中<code>OnCameraFrame</code>这个方法很重要，如果要对图片进行处理的话一般都是在这里面处理的，这个函数的输入参数是<code>CvCameraViewFrame</code>，需要注意的是，不要在这个方法的外面使用这个变量，因为这个对象没有它自己的状态，在回调方法的外面它的行为是不可预测的！它提供了两个有用的方法<code>rgba()</code>和<code>gray()</code>分别得到图像帧的RGBA格式和灰度图，<code>OnCameraFrame</code>的返回值是<strong>RGBA格式</strong>的图像，这个很重要！一定要保证处理了之后的图像是RGBA格式的Android系统才能正常显示！<a href="http://docs.OpenCV.org/trunk/doc/tutorials/introduction/Android_binary_package/dev_with_OCV_on_Android.html">来自OpenCV文档:Android Development with Android</a>     </p>
-  </li>
-</ul>
-
-<p><code>Note Do not save or use CvCameraViewFrame object out of onCameraFrame callback. This object does not have its own state and its behavior out of callback is unpredictable!</code>  </p>
-
-<ul>
-  <li>关于如何传递摄像头预览的图像数据给Native代码：这个很重要！我曾经试过很多的方式，大致思路有：   </li>
-</ul>
-
-<p>①传递图片路径：这是最差的方式，我使用过，速度很慢，主要用于前期开发的时候进行测试，测试Java层和Native层的互调是否正常。   </p>
-
-<p>②传递预览图像的字节数组到Native层，然后将字节数组处理成RGB或者RGBA的格式[具体哪种格式要看你的图像处理函数能否处理RGBA格式的，如果可以的话推荐转换成RGBA格式，因为返回的也是RGBA格式的。网上有很多的文章讨论如何转换：一种方式是使用一个自定义的函数进行编码转换(可以搜索到这个函数)，另一个种方式是使用OpenCV中的Mat和cvtColor函数进行转换，接着调用图像处理函数，处理完成之后，将处理的结果保存在一个整形数组中(实际上就是RGB或者RGBA格式的图像数据)，最后调用Bitmap的方法将其转换成bitmap返回。这种方法速度也比较慢，但是比第一种方案要快了不少，具体实现过程可以看下面的推荐书籍。   </p>
-
-<p>③使用OpenCV的摄像头：JavaCamera或者NativeCamera都行，好处是它进行了很多的封装，可以直接将预览图像的Mat结构传递给Native层，这种传递是使用Mat的内存地址(long型)，Native层只要根据这个地址将其封装成Mat就可以进行处理了，另外，它的回调函数的返回值也是Mat，非常方便！这种方式速度较快。详细过程可以查看OpenCV-Android sdk的samples项目中的Tutorial2-MixedProcessing。 </p>
-
-<ul>
-  <li>关于摄像头预览界面倒置的问题：很多时候(一般是将应用设置为<code>portrait</code>模式之后)在调用了OpenCV的Camera之后，出现预览内容倒置了90度的现象，原因是OpenCV的Camera默认情况下是以<code>landscape</code>模式运行的，一个可行但是不是很好的解决方案是修改OpenCV库中的<code>org.opencv.camera.CameraBridgeViewBase</code>类中的<code>deliverandDraw</code>方法，<a href="http://stackoverflow.com/questions/19190921/always-open-in-landscape-mode-orientation-for-front-camera-in-opencv-javacv">问题参考链接</a></li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-<span class="line-number">46</span>
-<span class="line-number">47</span>
-<span class="line-number">48</span>
-<span class="line-number">49</span>
-<span class="line-number">50</span>
-<span class="line-number">51</span>
-<span class="line-number">52</span>
-<span class="line-number">53</span>
-<span class="line-number">54</span>
-<span class="line-number">55</span>
-<span class="line-number">56</span>
-<span class="line-number">57</span>
-<span class="line-number">58</span>
-<span class="line-number">59</span>
-<span class="line-number">60</span>
-<span class="line-number">61</span>
-<span class="line-number">62</span>
-<span class="line-number">63</span>
-<span class="line-number">64</span>
-<span class="line-number">65</span>
-<span class="line-number">66</span>
-<span class="line-number">67</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">protected void deliverAndDrawFrame(CvCameraViewFrame frame) {
-</span><span class="line">        Mat modified;
-</span><span class="line">
-</span><span class="line">        if (mListener != null) {
-</span><span class="line">            modified = mListener.onCameraFrame(frame);
-</span><span class="line">        } else {
-</span><span class="line">            modified = frame.rgba();
-</span><span class="line">        }
-</span><span class="line">
-</span><span class="line">        boolean bmpValid = true;
-</span><span class="line">        if (modified != null) {
-</span><span class="line">            try {
-</span><span class="line">                Utils.matToBitmap(modified, mCacheBitmap);
-</span><span class="line">            } catch(Exception e) {
-</span><span class="line">                Log.e(TAG, "Mat type: " + modified);
-</span><span class="line">                Log.e(TAG, "Bitmap type: " + mCacheBitmap.getWidth() + "*" + mCacheBitmap.getHeight());
-</span><span class="line">                Log.e(TAG, "Utils.matToBitmap() throws an exception: " + e.getMessage());
-</span><span class="line">                bmpValid = false;
-</span><span class="line">            }
-</span><span class="line">        }
-</span><span class="line">
-</span><span class="line">        if (bmpValid &amp;&amp; mCacheBitmap != null) {
-</span><span class="line">            Canvas canvas = getHolder().lockCanvas();
-</span><span class="line">            if (canvas != null) {
-</span><span class="line">//                canvas.drawColor(0, android.graphics.PorterDuff.Mode.CLEAR);
-</span><span class="line">//                Log.d(TAG, "mStretch value: " + mScale);
-</span><span class="line">//
-</span><span class="line">//                if (mScale != 0) {
-</span><span class="line">//                    canvas.drawBitmap(mCacheBitmap, new Rect(0,0,mCacheBitmap.getWidth(), mCacheBitmap.getHeight()),
-</span><span class="line">//                         new Rect((int)((canvas.getWidth() - mScale*mCacheBitmap.getWidth()) / 2),
-</span><span class="line">//                         (int)((canvas.getHeight() - mScale*mCacheBitmap.getHeight()) / 2),
-</span><span class="line">//                         (int)((canvas.getWidth() - mScale*mCacheBitmap.getWidth()) / 2 + mScale*mCacheBitmap.getWidth()),
-</span><span class="line">//                         (int)((canvas.getHeight() - mScale*mCacheBitmap.getHeight()) / 2 + mScale*mCacheBitmap.getHeight())), null);
-</span><span class="line">//                } else {
-</span><span class="line">//                     canvas.drawBitmap(mCacheBitmap, new Rect(0,0,mCacheBitmap.getWidth(), mCacheBitmap.getHeight()),
-</span><span class="line">//                         new Rect((canvas.getWidth() - mCacheBitmap.getWidth()) / 2,
-</span><span class="line">//                         (canvas.getHeight() - mCacheBitmap.getHeight()) / 2,
-</span><span class="line">//                         (canvas.getWidth() - mCacheBitmap.getWidth()) / 2 + mCacheBitmap.getWidth(),
-</span><span class="line">//                         (canvas.getHeight() - mCacheBitmap.getHeight()) / 2 + mCacheBitmap.getHeight()), null);
-</span><span class="line">//                }
-</span><span class="line">
-</span><span class="line">                //ABC : Fixed for image rotation
-</span><span class="line">                //TODO Why portrait is not opening in fulls creen
-</span><span class="line">                Matrix matrix = new Matrix();
-</span><span class="line">                int height_Canvas = canvas.getHeight();
-</span><span class="line">                int width_Canvas = canvas.getWidth();
-</span><span class="line">
-</span><span class="line">                int width = mCacheBitmap.getWidth();
-</span><span class="line">                int height = mCacheBitmap.getHeight();
-</span><span class="line">
-</span><span class="line">                float f1 = (width_Canvas - width) / 2;
-</span><span class="line">                float f2 = (height_Canvas - height) / 2;
-</span><span class="line">                matrix.preTranslate(f1, f2);
-</span><span class="line">                if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
-</span><span class="line">                matrix.postRotate(270f,(width_Canvas) / 2,(height_Canvas) / 2);
-</span><span class="line">                canvas.drawBitmap(mCacheBitmap, matrix, new Paint());
-</span><span class="line">
-</span><span class="line">
-</span><span class="line">
-</span><span class="line">                if (mFpsMeter != null) {
-</span><span class="line">                    mFpsMeter.measure();
-</span><span class="line">                    mFpsMeter.draw(canvas, 20, 30);
-</span><span class="line">                }
-</span><span class="line">                getHolder().unlockCanvasAndPost(canvas);
-</span><span class="line">            }
-</span><span class="line">        }
-</span><span class="line">    }</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h4 id="opencv--opencv-ndk-">3.OpenCV 和 OpenCV NDK 整合开发的一般途径</h4>
-
-<p>在进行这类开发的时候，需要考虑如何在Android中使用OpenCV，并且如果需要调用摄像头的话，要考虑以下内容：<br />
-首先，是否是在原有的C/C++代码上进行移植，如果是的话，那么尽量考虑使用ndk开发，否则使用OpenCV for Android编写Java代码进行开发，效率不会比native代码低多少； <br />
-其次，如果是需要OpenCV library，是否能够容忍运行应用还需要安装OpenCV Manager，如果不能的话，则在开发时要考虑将OpenCV binaries添加到应用中进行static initialization，但其实使用OpenCV Manager是有很多好处的，上面的论文和OpenCV官网都有相应的文档介绍它的好处和使用方式； <br />
-接着，是否需要调用摄像头，如果需要的话，是使用原生Android的Camera还是使用OpenCV的Camera，如果是OpenCV Camera的话，是使用Java调用摄像头还是Native调用摄像头；<br />
-最后，图片如何进行传递，如果是单张静态图片进行处理的话，只需要路径就行了，但是如果是在视频状态下对图片进行处理的话，那么就只能传递图像数据了，这里涉及到了Android中如何获取预览的图像数据以及如何将其传递到底层，又如何进行转换(一般是YUV转成RGB)使得OpenCV可以进行处理，处理完了之后，又如何将处理得到的图片传递给Java层。</p>
-
-<p>推荐一本书籍《Mastering OpenCV with Practical Computer Vision Projects》，电子书可以在<a href="http://www.ppurl.com/2012/12/mastering-OpenCV-with-practical-computer-vision-projects.html">皮皮书屋</a>下载，<a href="https://github.com/MasteringOpenCV">原书源码在Github上</a>。该书第一章介绍如何开发一个使用OpenCV的Android项目-<code>Cartoonifer and Skin Changer for Android</code>，这个项目涉及到了OpenCV在Android中的方方面面，采用的是第二种图像数据传递方式，其中他提出了很多可以优化的地方，包括： <br />
-①尽量使用Mat而不要使用IplImage <br />
-②尽量保证你的图像处理函数能够处理RGBA格式的图像  <br />
-③如果可以先压缩图像大小再对图像进行处理  <br />
-④使用noise filter降低图像中的噪声。    </p>
-
-<p>总之，极力推荐此书，我以后的文章中还会提到这本书，嘿嘿。</p>
-
-<p>OK！脑子有点乱了，这节逻辑不太严谨，嘿嘿，但总算完结了！多谢关注！</p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3/">http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 ]]></content>
   </entry>
   
