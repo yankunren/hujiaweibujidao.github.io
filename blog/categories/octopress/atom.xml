@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T15:53:53+08:00</updated>
+  <updated>2014-04-28T15:55:47+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -110,7 +110,7 @@ rake deploy
 
 <p>[下面是我在Mac上的操作，其他系统自行修改]</p>
 
-<p><code>
+<p><code>java
 sudo nano ~/.bash_profile  #打开并修改.bash_profile文件，下面两行是在该文件中的修改
 export OCTOPRESS_HOME=/Users/hujiawei/git/octopress  #添加OCTOPRESS_HOME变量
 export PATH=${PATH}:${OCTOPRESS_HOME}  #添加到path中

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: opencv | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/opencv/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T15:53:53+08:00</updated>
+  <updated>2014-04-28T15:55:47+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -26,7 +26,7 @@
 
 <p>安装CMake可以使用MacPorts，也可以使用Homebrew，如果以前安装过两者中的任何一个就用那个进行安装吧，我用的是Homebrew，推荐使用Homebrew，真正的“佳酿”，命令如下：</p>
 
-<p><code>
+<p><code>java
 sudo port install cmake //macports
 sudo brew install cmake //homebrew
 </code></p>
@@ -76,7 +76,7 @@ sudo make install
 
 <p>可以修改main.cpp，代码如下，运行结果就是显示一张指定的图片。</p>
 
-<p><code>
+<p><code>c++
 #include &lt;opencv2/opencv.hpp&gt;
 using namespace cv;
 int main(int argc, char** argv) {
@@ -169,7 +169,7 @@ cmake -G Xcode -D OpenCV_DIR=$OpenCV_DIR ..
 
 <p>③打开终端，输入<code>sudo gedit /etc/profile</code>，在文件末尾添加下面内容</p>
 
-<p><code>
+<p><code>java
 JAVA_HOME=/home/xface/android/jdk1.7.0
 export PATH=$JAVA_HOME/bin:$PATH
 </code></p>
@@ -305,7 +305,7 @@ OPENCVROOT=/home/xface/android/opencv_sdk
 
 <p>三个<code>native</code>方法如下：</p>
 
-<p><code>
+<p><code>c++
 	public static native long nativeInitFacerec(String datapath, String modelpath, int component, double threshold,
 			int facerec);
 	public static native int nativeFacerec(long xfacerec, String modelpath, long addr, int width, int height);
@@ -314,7 +314,7 @@ OPENCVROOT=/home/xface/android/opencv_sdk
 
 <p>对应得到的头文件中的三个方法（注意：这里方法的名称和参数类型都是严格遵守JNI规范的，不能随便修改）</p>
 
-<p><code>
+<p><code>c++
 /*
  * Class:     edu_thu_xface_libs_XFaceLibrary
  * Method:    nativeInitFacerec
@@ -350,7 +350,7 @@ JNIEXPORT jint JNICALL Java_edu_thu_xface_libs_XFaceLibrary_nativeDestoryFacerec
 
 <p>这部分最重要的是<code>private CascadeClassifier mJavaDetector;</code>字段，它的初始化过程在方法<code>onCreate(Bundle savedInstanceState)</code>中，这里使用了重要的<code>lbpcascade_frontalface.yml</code>文件，该文件原本存放在<code>res/raw</code>目录下，初始化过程中将其拷贝到了SD卡中，并使用这个文件创建了<code>CascadeClassifier</code>。代码片段：</p>
 
-<p><code>
+<p><code>java
 try {
 	// File cascadeDir = getDir("cascade", Context.MODE_PRIVATE);
 	mCascadeFile = new File(CommonUtil.LBPCASCADE_FILEPATH);
@@ -383,7 +383,7 @@ try {
 
 <p>最后在摄像头的回调方法<code>onCameraFrame(CvCameraViewFrame inputFrame)</code>中对摄像头得到的图片帧进行人脸检测，将检测出来的人脸方框直接绘制在图片帧上立刻显示出来（该方法会在每次摄像头有新的一帧）。代码片段如下，其中mRgba是每次得到的图片的RGBA格式，mGray是每次得到的图片的灰度格式</p>
 
-<p><code>
+<p><code>java
 public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
 	// Log.i(TAG, inputFrame.gray().width() + "" + inputFrame.gray().height());
 	// landscape 640*480 || portrait [320*240]-&gt; 240*320!
@@ -418,7 +418,7 @@ public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
 
 <p>因为人脸识别过程需要耗费一定的时间，如果每次图片帧传入的时候便进行处理，处理完了之后再显示的话会导致界面卡死，所以人脸识别过程是在另开辟的一个线程中执行的，线程代码如下，只要摄像头还在工作，也就是还会传回图像的话，那么这个线程便会取出其灰度图像传入到JNI层进行人脸识别操作，并将结果显示出来，此处消息的传递方式使用的是Android中的Handler机制。</p>
 
-<p><code>
+<p><code>java
 new Thread(new Runnable() {
 	public void run() {
 		Log.i(TAG, "bInitFacerec= " + bInitFacerec + " $$ bExitRecognition= " + bExitRecognition

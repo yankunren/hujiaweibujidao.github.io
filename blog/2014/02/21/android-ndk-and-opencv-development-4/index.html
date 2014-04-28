@@ -134,10 +134,11 @@
 
 <p>③打开终端，输入<code>sudo gedit /etc/profile</code>，在文件末尾添加下面内容</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">JAVA_HOME=/home/xface/android/jdk1.7.0
-</span><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">JAVA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">xface</span><span class="o">/</span><span class="n">android</span><span class="o">/</span><span class="n">jdk1</span><span class="o">.</span><span class="mf">7.0</span>
+</span><span class="line"><span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="n">$JAVA_HOME</span><span class="o">/</span><span class="nl">bin:</span><span class="n">$PATH</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>如下图所示，后面环境配置中添加内容也是如此</p>
 
@@ -155,17 +156,19 @@
 
 <p>③打开终端，输入<code>sudo gedit /etc/profile</code>，在文件末尾添加下面内容</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">ANDROID_SDK_ROOT=/home/xface/android/adt-bundle/sdk
-</span><span class="line">export PATH=${PATH}:${ANDROID_SDK_ROOT}/platform-tools:${ANDROID_SDK_ROOT}/tools</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">ANDROID_SDK_ROOT</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">xface</span><span class="o">/</span><span class="n">android</span><span class="o">/</span><span class="n">adt</span><span class="o">-</span><span class="n">bundle</span><span class="o">/</span><span class="n">sdk</span>
+</span><span class="line"><span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="n">$</span><span class="o">{</span><span class="n">PATH</span><span class="o">}:</span><span class="n">$</span><span class="o">{</span><span class="n">ANDROID_SDK_ROOT</span><span class="o">}/</span><span class="n">platform</span><span class="o">-</span><span class="nl">tools:</span><span class="n">$</span><span class="o">{</span><span class="n">ANDROID_SDK_ROOT</span><span class="o">}/</span><span class="n">tools</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>④因为Android SDK是32位的，而虚拟机中Ubuntu系统是64位的，所以需要添加ia32-libs库，在终端中执行下面命令（需要耗费漫长的时间等待）</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">sudo apt-get update
-</span><span class="line">sudo apt-get install ia32-libs</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+</span><span class="line"><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">ia32</span><span class="o">-</span><span class="n">libs</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>⑤重启虚拟机，打开终端输入<code>adb version</code>进行测试</p>
 
@@ -179,10 +182,11 @@
 
 <p>③打开终端，输入<code>sudo gedit /etc/profile</code>，在文件末尾添加下面内容</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">ANDROID_NDK_ROOT=/home/xface/android/adt-bundle/ndk
-</span><span class="line">export PATH=${PATH}:${ANDROID_NDK_ROOT}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">ANDROID_NDK_ROOT</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">xface</span><span class="o">/</span><span class="n">android</span><span class="o">/</span><span class="n">adt</span><span class="o">-</span><span class="n">bundle</span><span class="o">/</span><span class="n">ndk</span>
+</span><span class="line"><span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="n">$</span><span class="o">{</span><span class="n">PATH</span><span class="o">}:</span><span class="n">$</span><span class="o">{</span><span class="n">ANDROID_NDK_ROOT</span><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>④重启虚拟机，打开终端输入<code>ndk-build -v</code>进行测试</p>
 
@@ -210,10 +214,11 @@
 
 <p>③打开<code>window-&gt;preferences</code>，找到左侧的<code>C/C++ Build-&gt;Environment</code>添加下面两个环境变量：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">NDKROOT=/home/xface/android/adt-bundle/ndk
-</span><span class="line">OPENCVROOT=/home/xface/android/opencv_sdk</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">NDKROOT</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">xface</span><span class="o">/</span><span class="n">android</span><span class="o">/</span><span class="n">adt</span><span class="o">-</span><span class="n">bundle</span><span class="o">/</span><span class="n">ndk</span>
+</span><span class="line"><span class="n">OPENCVROOT</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">xface</span><span class="o">/</span><span class="n">android</span><span class="o">/</span><span class="n">opencv_sdk</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><img src="/images/201402/environment.png" /></p>
 
@@ -270,18 +275,19 @@
 
 <p>三个<code>native</code>方法如下：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">public static native long nativeInitFacerec(String datapath, String modelpath, int component, double threshold,
-</span><span class="line">		int facerec);
-</span><span class="line">public static native int nativeFacerec(long xfacerec, String modelpath, long addr, int width, int height);
-</span><span class="line">public static native int nativeDestoryFacerec(long xfacerec);</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="c++"><span class="line"><span class="k">public</span> <span class="k">static</span> <span class="n">native</span> <span class="kt">long</span> <span class="n">nativeInitFacerec</span><span class="p">(</span><span class="n">String</span> <span class="n">datapath</span><span class="p">,</span> <span class="n">String</span> <span class="n">modelpath</span><span class="p">,</span> <span class="kt">int</span> <span class="n">component</span><span class="p">,</span> <span class="kt">double</span> <span class="n">threshold</span><span class="p">,</span>
+</span><span class="line">		<span class="kt">int</span> <span class="n">facerec</span><span class="p">);</span>
+</span><span class="line"><span class="k">public</span> <span class="k">static</span> <span class="n">native</span> <span class="kt">int</span> <span class="n">nativeFacerec</span><span class="p">(</span><span class="kt">long</span> <span class="n">xfacerec</span><span class="p">,</span> <span class="n">String</span> <span class="n">modelpath</span><span class="p">,</span> <span class="kt">long</span> <span class="n">addr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">);</span>
+</span><span class="line"><span class="k">public</span> <span class="k">static</span> <span class="n">native</span> <span class="kt">int</span> <span class="n">nativeDestoryFacerec</span><span class="p">(</span><span class="kt">long</span> <span class="n">xfacerec</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>对应得到的头文件中的三个方法（注意：这里方法的名称和参数类型都是严格遵守JNI规范的，不能随便修改）</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -302,27 +308,28 @@
 <span class="line-number">19</span>
 <span class="line-number">20</span>
 <span class="line-number">21</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">/*
-</span><span class="line"> * Class:     edu_thu_xface_libs_XFaceLibrary
-</span><span class="line"> * Method:    nativeInitFacerec
-</span><span class="line"> * Signature: (Ljava/lang/String;Ljava/lang/String;IDI)J
-</span><span class="line"> */
-</span><span class="line">JNIEXPORT jlong JNICALL Java_edu_thu_xface_libs_XFaceLibrary_nativeInitFacerec
-</span><span class="line">  (JNIEnv *, jclass, jstring, jstring, jint, jdouble, jint);
-</span><span class="line">/*
-</span><span class="line"> * Class:     edu_thu_xface_libs_XFaceLibrary
-</span><span class="line"> * Method:    nativeFacerec
-</span><span class="line"> * Signature: (JLjava/lang/String;JII)I
-</span><span class="line"> */
-</span><span class="line">JNIEXPORT jint JNICALL Java_edu_thu_xface_libs_XFaceLibrary_nativeFacerec
-</span><span class="line">  (JNIEnv *, jclass, jlong, jstring, jlong, jint, jint);
-</span><span class="line">/*
-</span><span class="line"> * Class:     edu_thu_xface_libs_XFaceLibrary
-</span><span class="line"> * Method:    nativeDestoryFacerec
-</span><span class="line"> * Signature: (J)I
-</span><span class="line"> */
-</span><span class="line">JNIEXPORT jint JNICALL Java_edu_thu_xface_libs_XFaceLibrary_nativeDestoryFacerec
-</span><span class="line">  (JNIEnv *, jclass, jlong);</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="c++"><span class="line"><span class="cm">/*</span>
+</span><span class="line"><span class="cm"> * Class:     edu_thu_xface_libs_XFaceLibrary</span>
+</span><span class="line"><span class="cm"> * Method:    nativeInitFacerec</span>
+</span><span class="line"><span class="cm"> * Signature: (Ljava/lang/String;Ljava/lang/String;IDI)J</span>
+</span><span class="line"><span class="cm"> */</span>
+</span><span class="line"><span class="n">JNIEXPORT</span> <span class="n">jlong</span> <span class="n">JNICALL</span> <span class="n">Java_edu_thu_xface_libs_XFaceLibrary_nativeInitFacerec</span>
+</span><span class="line">  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="p">,</span> <span class="n">jclass</span><span class="p">,</span> <span class="n">jstring</span><span class="p">,</span> <span class="n">jstring</span><span class="p">,</span> <span class="n">jint</span><span class="p">,</span> <span class="n">jdouble</span><span class="p">,</span> <span class="n">jint</span><span class="p">);</span>
+</span><span class="line"><span class="cm">/*</span>
+</span><span class="line"><span class="cm"> * Class:     edu_thu_xface_libs_XFaceLibrary</span>
+</span><span class="line"><span class="cm"> * Method:    nativeFacerec</span>
+</span><span class="line"><span class="cm"> * Signature: (JLjava/lang/String;JII)I</span>
+</span><span class="line"><span class="cm"> */</span>
+</span><span class="line"><span class="n">JNIEXPORT</span> <span class="n">jint</span> <span class="n">JNICALL</span> <span class="n">Java_edu_thu_xface_libs_XFaceLibrary_nativeFacerec</span>
+</span><span class="line">  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="p">,</span> <span class="n">jclass</span><span class="p">,</span> <span class="n">jlong</span><span class="p">,</span> <span class="n">jstring</span><span class="p">,</span> <span class="n">jlong</span><span class="p">,</span> <span class="n">jint</span><span class="p">,</span> <span class="n">jint</span><span class="p">);</span>
+</span><span class="line"><span class="cm">/*</span>
+</span><span class="line"><span class="cm"> * Class:     edu_thu_xface_libs_XFaceLibrary</span>
+</span><span class="line"><span class="cm"> * Method:    nativeDestoryFacerec</span>
+</span><span class="line"><span class="cm"> * Signature: (J)I</span>
+</span><span class="line"><span class="cm"> */</span>
+</span><span class="line"><span class="n">JNIEXPORT</span> <span class="n">jint</span> <span class="n">JNICALL</span> <span class="n">Java_edu_thu_xface_libs_XFaceLibrary_nativeDestoryFacerec</span>
+</span><span class="line">  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="p">,</span> <span class="n">jclass</span><span class="p">,</span> <span class="n">jlong</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>第一个方法是初始化人脸识别模块，参数分别是：datapath是已有的人脸数据保存的文件路径；modelpath是已生成的人脸识别模块保存的文件路径；component是人脸识别算法中使用的一个参数，表示主成分数；threshold也是人脸识别算法中使用的一个参数，表示阈值。后面两个参数目前都是使用默认值，分别是10和0.0。</p>
 
@@ -336,7 +343,7 @@
 
 <p>这部分最重要的是<code>private CascadeClassifier mJavaDetector;</code>字段，它的初始化过程在方法<code>onCreate(Bundle savedInstanceState)</code>中，这里使用了重要的<code>lbpcascade_frontalface.yml</code>文件，该文件原本存放在<code>res/raw</code>目录下，初始化过程中将其拷贝到了SD卡中，并使用这个文件创建了<code>CascadeClassifier</code>。代码片段：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -364,38 +371,39 @@
 <span class="line-number">26</span>
 <span class="line-number">27</span>
 <span class="line-number">28</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">try {
-</span><span class="line">	// File cascadeDir = getDir("cascade", Context.MODE_PRIVATE);
-</span><span class="line">	mCascadeFile = new File(CommonUtil.LBPCASCADE_FILEPATH);
-</span><span class="line">	if (!mCascadeFile.exists()) {// if file not exist, load from raw, otherwise, just use it!
-</span><span class="line">		// load cascade file from application resources
-</span><span class="line">		InputStream is = getResources().openRawResource(R.raw.lbpcascade_frontalface);
-</span><span class="line">		// mCascadeFile = new File(cascadeDir, "lbpcascade_frontalface.xml");
-</span><span class="line">		FileOutputStream os = new FileOutputStream(mCascadeFile);
-</span><span class="line">		byte[] buffer = new byte[4096];
-</span><span class="line">		int bytesRead;
-</span><span class="line">		while ((bytesRead = is.read(buffer)) != -1) {
-</span><span class="line">			os.write(buffer, 0, bytesRead);
-</span><span class="line">		}
-</span><span class="line">		is.close();
-</span><span class="line">		os.close();
-</span><span class="line">	}
-</span><span class="line">	mJavaDetector = new CascadeClassifier(mCascadeFile.getAbsolutePath());
-</span><span class="line">	if (mJavaDetector.empty()) {
-</span><span class="line">		Log.e(TAG, "Failed to load cascade classifier");
-</span><span class="line">		mJavaDetector = null;
-</span><span class="line">	} else
-</span><span class="line">		Log.i(TAG, "Loaded cascade classifier from " + mCascadeFile.getAbsolutePath());
-</span><span class="line">	// mNativeDetector = new DetectionBasedTracker(mCascadeFile.getAbsolutePath(), 0);// hujiawei
-</span><span class="line">	// cascadeDir.delete();//
-</span><span class="line">} catch (IOException e) {
-</span><span class="line">	e.printStackTrace();
-</span><span class="line">	Log.e(TAG, "Failed to load cascade. Exception thrown: " + e);
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="k">try</span> <span class="o">{</span>
+</span><span class="line">	<span class="c1">// File cascadeDir = getDir(&quot;cascade&quot;, Context.MODE_PRIVATE);</span>
+</span><span class="line">	<span class="n">mCascadeFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">CommonUtil</span><span class="o">.</span><span class="na">LBPCASCADE_FILEPATH</span><span class="o">);</span>
+</span><span class="line">	<span class="k">if</span> <span class="o">(!</span><span class="n">mCascadeFile</span><span class="o">.</span><span class="na">exists</span><span class="o">())</span> <span class="o">{</span><span class="c1">// if file not exist, load from raw, otherwise, just use it!</span>
+</span><span class="line">		<span class="c1">// load cascade file from application resources</span>
+</span><span class="line">		<span class="n">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="n">getResources</span><span class="o">().</span><span class="na">openRawResource</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">raw</span><span class="o">.</span><span class="na">lbpcascade_frontalface</span><span class="o">);</span>
+</span><span class="line">		<span class="c1">// mCascadeFile = new File(cascadeDir, &quot;lbpcascade_frontalface.xml&quot;);</span>
+</span><span class="line">		<span class="n">FileOutputStream</span> <span class="n">os</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">mCascadeFile</span><span class="o">);</span>
+</span><span class="line">		<span class="kt">byte</span><span class="o">[]</span> <span class="n">buffer</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">4096</span><span class="o">];</span>
+</span><span class="line">		<span class="kt">int</span> <span class="n">bytesRead</span><span class="o">;</span>
+</span><span class="line">		<span class="k">while</span> <span class="o">((</span><span class="n">bytesRead</span> <span class="o">=</span> <span class="n">is</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buffer</span><span class="o">))</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">			<span class="n">os</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">buffer</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">bytesRead</span><span class="o">);</span>
+</span><span class="line">		<span class="o">}</span>
+</span><span class="line">		<span class="n">is</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class="line">		<span class="n">os</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class="line">	<span class="o">}</span>
+</span><span class="line">	<span class="n">mJavaDetector</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CascadeClassifier</span><span class="o">(</span><span class="n">mCascadeFile</span><span class="o">.</span><span class="na">getAbsolutePath</span><span class="o">());</span>
+</span><span class="line">	<span class="k">if</span> <span class="o">(</span><span class="n">mJavaDetector</span><span class="o">.</span><span class="na">empty</span><span class="o">())</span> <span class="o">{</span>
+</span><span class="line">		<span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&quot;Failed to load cascade classifier&quot;</span><span class="o">);</span>
+</span><span class="line">		<span class="n">mJavaDetector</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class="line">	<span class="o">}</span> <span class="k">else</span>
+</span><span class="line">		<span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&quot;Loaded cascade classifier from &quot;</span> <span class="o">+</span> <span class="n">mCascadeFile</span><span class="o">.</span><span class="na">getAbsolutePath</span><span class="o">());</span>
+</span><span class="line">	<span class="c1">// mNativeDetector = new DetectionBasedTracker(mCascadeFile.getAbsolutePath(), 0);// hujiawei</span>
+</span><span class="line">	<span class="c1">// cascadeDir.delete();//</span>
+</span><span class="line"><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">	<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class="line">	<span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&quot;Failed to load cascade. Exception thrown: &quot;</span> <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>最后在摄像头的回调方法<code>onCameraFrame(CvCameraViewFrame inputFrame)</code>中对摄像头得到的图片帧进行人脸检测，将检测出来的人脸方框直接绘制在图片帧上立刻显示出来（该方法会在每次摄像头有新的一帧）。代码片段如下，其中mRgba是每次得到的图片的RGBA格式，mGray是每次得到的图片的灰度格式</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -423,40 +431,41 @@
 <span class="line-number">26</span>
 <span class="line-number">27</span>
 <span class="line-number">28</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
-</span><span class="line">	// Log.i(TAG, inputFrame.gray().width() + "" + inputFrame.gray().height());
-</span><span class="line">	// landscape 640*480 || portrait [320*240]-&gt; 240*320!
-</span><span class="line">	// when portrait mode, inputframe is 320*240, so pic is rotated!
-</span><span class="line">	mRgba = inputFrame.rgba();
-</span><span class="line">	mGray = inputFrame.gray();
-</span><span class="line">	Core.flip(mRgba.t(), mRgba, 0);//counter-clock wise 90
-</span><span class="line">	Core.flip(mGray.t(), mGray, 0);
-</span><span class="line">	if (mAbsoluteFaceSize == 0) {
-</span><span class="line">		int height = mGray.rows();
-</span><span class="line">		if (Math.round(height * mRelativeFaceSize) &gt; 0) {
-</span><span class="line">			mAbsoluteFaceSize = Math.round(height * mRelativeFaceSize);
-</span><span class="line">		}
-</span><span class="line">		// mNativeDetector.setMinFaceSize(mAbsoluteFaceSize);//
-</span><span class="line">	}
-</span><span class="line">	MatOfRect faces = new MatOfRect();
-</span><span class="line">	if (mJavaDetector != null) {// use only java detector
-</span><span class="line">		mJavaDetector.detectMultiScale(mGray, faces, 1.1, 2, 2, // TODO: objdetect.CV_HAAR_SCALE_IMAGE
-</span><span class="line">				new Size(mAbsoluteFaceSize, mAbsoluteFaceSize), new Size());
-</span><span class="line">	}
-</span><span class="line">	Rect[] facesArray = faces.toArray();
-</span><span class="line">	for (int i = 0; i &lt; facesArray.length; i++) {
-</span><span class="line">		Core.rectangle(mRgba, facesArray[i].tl(), facesArray[i].br(), FACE_RECT_COLOR, 3);
-</span><span class="line">	}
-</span><span class="line">	Core.flip(mRgba.t(), mRgba, 1);//counter-clock wise 90
-</span><span class="line">	Core.flip(mGray.t(), mGray, 1);
-</span><span class="line">	return mRgba;
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kd">public</span> <span class="n">Mat</span> <span class="nf">onCameraFrame</span><span class="o">(</span><span class="n">CvCameraViewFrame</span> <span class="n">inputFrame</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">	<span class="c1">// Log.i(TAG, inputFrame.gray().width() + &quot;&quot; + inputFrame.gray().height());</span>
+</span><span class="line">	<span class="c1">// landscape 640*480 || portrait [320*240]-&gt; 240*320!</span>
+</span><span class="line">	<span class="c1">// when portrait mode, inputframe is 320*240, so pic is rotated!</span>
+</span><span class="line">	<span class="n">mRgba</span> <span class="o">=</span> <span class="n">inputFrame</span><span class="o">.</span><span class="na">rgba</span><span class="o">();</span>
+</span><span class="line">	<span class="n">mGray</span> <span class="o">=</span> <span class="n">inputFrame</span><span class="o">.</span><span class="na">gray</span><span class="o">();</span>
+</span><span class="line">	<span class="n">Core</span><span class="o">.</span><span class="na">flip</span><span class="o">(</span><span class="n">mRgba</span><span class="o">.</span><span class="na">t</span><span class="o">(),</span> <span class="n">mRgba</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span><span class="c1">//counter-clock wise 90</span>
+</span><span class="line">	<span class="n">Core</span><span class="o">.</span><span class="na">flip</span><span class="o">(</span><span class="n">mGray</span><span class="o">.</span><span class="na">t</span><span class="o">(),</span> <span class="n">mGray</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+</span><span class="line">	<span class="k">if</span> <span class="o">(</span><span class="n">mAbsoluteFaceSize</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">		<span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="n">mGray</span><span class="o">.</span><span class="na">rows</span><span class="o">();</span>
+</span><span class="line">		<span class="k">if</span> <span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">height</span> <span class="o">*</span> <span class="n">mRelativeFaceSize</span><span class="o">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">			<span class="n">mAbsoluteFaceSize</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">height</span> <span class="o">*</span> <span class="n">mRelativeFaceSize</span><span class="o">);</span>
+</span><span class="line">		<span class="o">}</span>
+</span><span class="line">		<span class="c1">// mNativeDetector.setMinFaceSize(mAbsoluteFaceSize);//</span>
+</span><span class="line">	<span class="o">}</span>
+</span><span class="line">	<span class="n">MatOfRect</span> <span class="n">faces</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MatOfRect</span><span class="o">();</span>
+</span><span class="line">	<span class="k">if</span> <span class="o">(</span><span class="n">mJavaDetector</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span><span class="c1">// use only java detector</span>
+</span><span class="line">		<span class="n">mJavaDetector</span><span class="o">.</span><span class="na">detectMultiScale</span><span class="o">(</span><span class="n">mGray</span><span class="o">,</span> <span class="n">faces</span><span class="o">,</span> <span class="mf">1.1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="c1">// TODO: objdetect.CV_HAAR_SCALE_IMAGE</span>
+</span><span class="line">				<span class="k">new</span> <span class="nf">Size</span><span class="o">(</span><span class="n">mAbsoluteFaceSize</span><span class="o">,</span> <span class="n">mAbsoluteFaceSize</span><span class="o">),</span> <span class="k">new</span> <span class="n">Size</span><span class="o">());</span>
+</span><span class="line">	<span class="o">}</span>
+</span><span class="line">	<span class="n">Rect</span><span class="o">[]</span> <span class="n">facesArray</span> <span class="o">=</span> <span class="n">faces</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
+</span><span class="line">	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">facesArray</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">		<span class="n">Core</span><span class="o">.</span><span class="na">rectangle</span><span class="o">(</span><span class="n">mRgba</span><span class="o">,</span> <span class="n">facesArray</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">tl</span><span class="o">(),</span> <span class="n">facesArray</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">br</span><span class="o">(),</span> <span class="n">FACE_RECT_COLOR</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+</span><span class="line">	<span class="o">}</span>
+</span><span class="line">	<span class="n">Core</span><span class="o">.</span><span class="na">flip</span><span class="o">(</span><span class="n">mRgba</span><span class="o">.</span><span class="na">t</span><span class="o">(),</span> <span class="n">mRgba</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span><span class="c1">//counter-clock wise 90</span>
+</span><span class="line">	<span class="n">Core</span><span class="o">.</span><span class="na">flip</span><span class="o">(</span><span class="n">mGray</span><span class="o">.</span><span class="na">t</span><span class="o">(),</span> <span class="n">mGray</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+</span><span class="line">	<span class="k">return</span> <span class="n">mRgba</span><span class="o">;</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>②人脸识别模块</p>
 
 <p>因为人脸识别过程需要耗费一定的时间，如果每次图片帧传入的时候便进行处理，处理完了之后再显示的话会导致界面卡死，所以人脸识别过程是在另开辟的一个线程中执行的，线程代码如下，只要摄像头还在工作，也就是还会传回图像的话，那么这个线程便会取出其灰度图像传入到JNI层进行人脸识别操作，并将结果显示出来，此处消息的传递方式使用的是Android中的Handler机制。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -495,45 +504,46 @@
 <span class="line-number">37</span>
 <span class="line-number">38</span>
 <span class="line-number">39</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">new Thread(new Runnable() {
-</span><span class="line">	public void run() {
-</span><span class="line">		Log.i(TAG, "bInitFacerec= " + bInitFacerec + " $$ bExitRecognition= " + bExitRecognition
-</span><span class="line">				+ " $$ frameprocessing=" + bFrameProcessing);
-</span><span class="line">		if (!bInitFacerec) {// facerec init?
-</span><span class="line">			long result = XFaceLibrary.initFacerec();// it will take a lot of time!
-</span><span class="line">			Message message = new Message();
-</span><span class="line">			message.arg1 = (int) result;// 1/-1/-2
-</span><span class="line">			message.arg2 = 0;
-</span><span class="line">			handler.sendMessage(message);
-</span><span class="line">			bInitFacerec = true;// no longer init!
-</span><span class="line">		}
-</span><span class="line">		while (!bExitRecognition) {// is recognition exits?
-</span><span class="line">			if (!bFrameProcessing) {// is frame being processing?
-</span><span class="line">				if (null == mGray || mGray.empty()) {//it's hard to say when it is called!
-</span><span class="line">					Log.i(TAG, "gray mat is null");
-</span><span class="line">					// return;// return when no data//can not return
-</span><span class="line">				} else {
-</span><span class="line">					bFrameProcessing = true;
-</span><span class="line">					Log.i(TAG, "runFacerec! addr = " + mGray.getNativeObjAddr());// 2103032
-</span><span class="line">					// Log.i(TAG, "data addr=" + mGray.dataAddr() + " $$ native addr=" +
-</span><span class="line">					// mGray.getNativeObjAddr()
-</span><span class="line">					// + " $$ native object=" + mGray.nativeObj);// $1 not equal $2,but $2=$3
-</span><span class="line">					int result = XFaceLibrary.facerec(mGray);
-</span><span class="line">					Message message = new Message();
-</span><span class="line">					message.arg1 = result;
-</span><span class="line">					message.arg2 = 1;
-</span><span class="line">					handler.sendMessage(message);
-</span><span class="line">					bFrameProcessing = false;
-</span><span class="line">				}
-</span><span class="line">			}
-</span><span class="line">			try {
-</span><span class="line">				Thread.currentThread().sleep(1000);
-</span><span class="line">			} catch (InterruptedException e) {
-</span><span class="line">				e.printStackTrace();
-</span><span class="line">			}
-</span><span class="line">		}
-</span><span class="line">	}
-</span><span class="line">}).start();</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+</span><span class="line">	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span><span class="line">		<span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&quot;bInitFacerec= &quot;</span> <span class="o">+</span> <span class="n">bInitFacerec</span> <span class="o">+</span> <span class="s">&quot; $$ bExitRecognition= &quot;</span> <span class="o">+</span> <span class="n">bExitRecognition</span>
+</span><span class="line">				<span class="o">+</span> <span class="s">&quot; $$ frameprocessing=&quot;</span> <span class="o">+</span> <span class="n">bFrameProcessing</span><span class="o">);</span>
+</span><span class="line">		<span class="k">if</span> <span class="o">(!</span><span class="n">bInitFacerec</span><span class="o">)</span> <span class="o">{</span><span class="c1">// facerec init?</span>
+</span><span class="line">			<span class="kt">long</span> <span class="n">result</span> <span class="o">=</span> <span class="n">XFaceLibrary</span><span class="o">.</span><span class="na">initFacerec</span><span class="o">();</span><span class="c1">// it will take a lot of time!</span>
+</span><span class="line">			<span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Message</span><span class="o">();</span>
+</span><span class="line">			<span class="n">message</span><span class="o">.</span><span class="na">arg1</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">result</span><span class="o">;</span><span class="c1">// 1/-1/-2</span>
+</span><span class="line">			<span class="n">message</span><span class="o">.</span><span class="na">arg2</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class="line">			<span class="n">handler</span><span class="o">.</span><span class="na">sendMessage</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+</span><span class="line">			<span class="n">bInitFacerec</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span><span class="c1">// no longer init!</span>
+</span><span class="line">		<span class="o">}</span>
+</span><span class="line">		<span class="k">while</span> <span class="o">(!</span><span class="n">bExitRecognition</span><span class="o">)</span> <span class="o">{</span><span class="c1">// is recognition exits?</span>
+</span><span class="line">			<span class="k">if</span> <span class="o">(!</span><span class="n">bFrameProcessing</span><span class="o">)</span> <span class="o">{</span><span class="c1">// is frame being processing?</span>
+</span><span class="line">				<span class="k">if</span> <span class="o">(</span><span class="kc">null</span> <span class="o">==</span> <span class="n">mGray</span> <span class="o">||</span> <span class="n">mGray</span><span class="o">.</span><span class="na">empty</span><span class="o">())</span> <span class="o">{</span><span class="c1">//it&#39;s hard to say when it is called!</span>
+</span><span class="line">					<span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&quot;gray mat is null&quot;</span><span class="o">);</span>
+</span><span class="line">					<span class="c1">// return;// return when no data//can not return</span>
+</span><span class="line">				<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class="line">					<span class="n">bFrameProcessing</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class="line">					<span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&quot;runFacerec! addr = &quot;</span> <span class="o">+</span> <span class="n">mGray</span><span class="o">.</span><span class="na">getNativeObjAddr</span><span class="o">());</span><span class="c1">// 2103032</span>
+</span><span class="line">					<span class="c1">// Log.i(TAG, &quot;data addr=&quot; + mGray.dataAddr() + &quot; $$ native addr=&quot; +</span>
+</span><span class="line">					<span class="c1">// mGray.getNativeObjAddr()</span>
+</span><span class="line">					<span class="c1">// + &quot; $$ native object=&quot; + mGray.nativeObj);// $1 not equal $2,but $2=$3</span>
+</span><span class="line">					<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">XFaceLibrary</span><span class="o">.</span><span class="na">facerec</span><span class="o">(</span><span class="n">mGray</span><span class="o">);</span>
+</span><span class="line">					<span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Message</span><span class="o">();</span>
+</span><span class="line">					<span class="n">message</span><span class="o">.</span><span class="na">arg1</span> <span class="o">=</span> <span class="n">result</span><span class="o">;</span>
+</span><span class="line">					<span class="n">message</span><span class="o">.</span><span class="na">arg2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class="line">					<span class="n">handler</span><span class="o">.</span><span class="na">sendMessage</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+</span><span class="line">					<span class="n">bFrameProcessing</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class="line">				<span class="o">}</span>
+</span><span class="line">			<span class="o">}</span>
+</span><span class="line">			<span class="k">try</span> <span class="o">{</span>
+</span><span class="line">				<span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+</span><span class="line">			<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">				<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class="line">			<span class="o">}</span>
+</span><span class="line">		<span class="o">}</span>
+</span><span class="line">	<span class="o">}</span>
+</span><span class="line"><span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>3.XFace应用程序在手机SD卡中的相关文件</p>
 

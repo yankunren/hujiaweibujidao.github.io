@@ -121,10 +121,11 @@
 
 <p>安装CMake可以使用MacPorts，也可以使用Homebrew，如果以前安装过两者中的任何一个就用那个进行安装吧，我用的是Homebrew，推荐使用Homebrew，真正的“佳酿”，命令如下：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">sudo port install cmake //macports
-</span><span class="line">sudo brew install cmake //homebrew</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">sudo</span> <span class="n">port</span> <span class="n">install</span> <span class="n">cmake</span> <span class="c1">//macports</span>
+</span><span class="line"><span class="n">sudo</span> <span class="n">brew</span> <span class="n">install</span> <span class="n">cmake</span> <span class="c1">//homebrew</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h4 id="opencv">2.编译OpenCV</h4>
 
@@ -132,18 +133,19 @@
 
 <p>目前最新版本是2.4.8，我使用的是2.4.6，下载后解压，执行下面代码：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 <span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">cd &lt;path-to-opencv-source&gt;
-</span><span class="line">mkdir release
-</span><span class="line">cd release
-</span><span class="line">cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. 
-</span><span class="line">make
-</span><span class="line">sudo make install</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">cd</span> <span class="o">&lt;</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">opencv</span><span class="o">-</span><span class="n">source</span><span class="o">&gt;</span>
+</span><span class="line"><span class="n">mkdir</span> <span class="n">release</span>
+</span><span class="line"><span class="n">cd</span> <span class="n">release</span>
+</span><span class="line"><span class="n">cmake</span> <span class="o">-</span><span class="n">D</span> <span class="n">CMAKE_BUILD_TYPE</span><span class="o">=</span><span class="n">RELEASE</span> <span class="o">-</span><span class="n">D</span> <span class="n">CMAKE_INSTALL_PREFIX</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span> <span class="o">..</span>
+</span><span class="line"><span class="n">make</span>
+</span><span class="line"><span class="n">sudo</span> <span class="n">make</span> <span class="n">install</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p>[完成之后在<code>/usr/local/include</code>目录下便有了<code>opencv</code>和<code>opencv2</code>两个目录，在<code>/usr/local/lib</code>目录下有很多的<code>opencv</code>相关的动态库，例如<code>libopencv_core.dylib</code>等等，还有几个其他的文件，它们都存放在<code>/usr/local</code>目录下]</p>
 
 <p>[注1:如果不需要了，想要卸载 OpenCV的话，可以回到<code>release</code>目录，执行<code>sudo make uninstall</code>，然后手动删除一些<code>/usr/local</code>下与OpenCV有关的目录和文件]</p>
@@ -175,7 +177,7 @@
 
 <p>可以修改main.cpp，代码如下，运行结果就是显示一张指定的图片。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -185,16 +187,17 @@
 <span class="line-number">8</span>
 <span class="line-number">9</span>
 <span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">#include &lt;opencv2/opencv.hpp&gt;
-</span><span class="line">using namespace cv;
-</span><span class="line">int main(int argc, char** argv) {
-</span><span class="line">	Mat image;
-</span><span class="line">	image = imread("/Users/hujiawei/Pictures/others/other_naicha/naicha.jpg", 1);
-</span><span class="line">    namedWindow("Display Image", WINDOW_AUTOSIZE);
-</span><span class="line">	imshow("Display Image", image);
-</span><span class="line">	waitKey(0);
-</span><span class="line">	return 0;
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="c++"><span class="line"><span class="cp">#include &lt;opencv2/opencv.hpp&gt;</span>
+</span><span class="line"><span class="k">using</span> <span class="k">namespace</span> <span class="n">cv</span><span class="p">;</span>
+</span><span class="line"><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">	<span class="n">Mat</span> <span class="n">image</span><span class="p">;</span>
+</span><span class="line">	<span class="n">image</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s">&quot;/Users/hujiawei/Pictures/others/other_naicha/naicha.jpg&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class="line">    <span class="n">namedWindow</span><span class="p">(</span><span class="s">&quot;Display Image&quot;</span><span class="p">,</span> <span class="n">WINDOW_AUTOSIZE</span><span class="p">);</span>
+</span><span class="line">	<span class="n">imshow</span><span class="p">(</span><span class="s">&quot;Display Image&quot;</span><span class="p">,</span> <span class="n">image</span><span class="p">);</span>
+</span><span class="line">	<span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class="line">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>其他参考内容：   </p>
 
@@ -222,12 +225,13 @@
 
 <p>如果遇到问题<code>ld: symbol(s) not found for architecture x86_64</code>，先检查代码中是否需要包含还没有添加的库文件，再检查是否是其他问题。如果是Mac平台，下面还有一个关于问题<code>ld: symbol(s) not found for architecture x86_64</code>的解释可供参考：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">There are two implementations of the standard C++ library available on OS X: libstdc++ and libc++. They are not binary compatible and libMLi3 requires libstdc++.
-</span><span class="line">On 10.8 and earlier libstdc++ is chosen by default, on 10.9 libc++ is chosen by default. To ensure compatibility with libMLi3, we need to choose libstdc++ manually.
-</span><span class="line">To do this, add -stdlib=libstdc++ to the linking command.</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="c++"><span class="line"><span class="n">There</span> <span class="n">are</span> <span class="n">two</span> <span class="n">implementations</span> <span class="n">of</span> <span class="n">the</span> <span class="n">standard</span> <span class="n">C</span><span class="o">++</span> <span class="n">library</span> <span class="n">available</span> <span class="n">on</span> <span class="n">OS</span> <span class="nl">X:</span> <span class="n">libstdc</span><span class="o">++</span> <span class="n">and</span> <span class="n">libc</span><span class="o">++</span><span class="p">.</span> <span class="n">They</span> <span class="n">are</span> <span class="n">not</span> <span class="n">binary</span> <span class="n">compatible</span> <span class="n">and</span> <span class="n">libMLi3</span> <span class="n">requires</span> <span class="n">libstdc</span><span class="o">++</span><span class="p">.</span>
+</span><span class="line"><span class="n">On</span> <span class="mf">10.8</span> <span class="n">and</span> <span class="n">earlier</span> <span class="n">libstdc</span><span class="o">++</span> <span class="n">is</span> <span class="n">chosen</span> <span class="n">by</span> <span class="k">default</span><span class="p">,</span> <span class="n">on</span> <span class="mf">10.9</span> <span class="n">libc</span><span class="o">++</span> <span class="n">is</span> <span class="n">chosen</span> <span class="n">by</span> <span class="k">default</span><span class="p">.</span> <span class="n">To</span> <span class="n">ensure</span> <span class="n">compatibility</span> <span class="n">with</span> <span class="n">libMLi3</span><span class="p">,</span> <span class="n">we</span> <span class="n">need</span> <span class="n">to</span> <span class="n">choose</span> <span class="n">libstdc</span><span class="o">++</span> <span class="n">manually</span><span class="p">.</span>
+</span><span class="line"><span class="n">To</span> <span class="k">do</span> <span class="k">this</span><span class="p">,</span> <span class="n">add</span> <span class="o">-</span><span class="n">stdlib</span><span class="o">=</span><span class="n">libstdc</span><span class="o">++</span> <span class="n">to</span> <span class="n">the</span> <span class="n">linking</span> <span class="n">command</span><span class="p">.</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>更多相关内容参考：</p>
 
@@ -239,20 +243,21 @@
 
 <p>编写一个shell，内容如下(修改自<code>README.txt</code>)，其中的<code>OpenCV_DIR</code>为OpenCV源码编译后得到的文件夹(如上面的release目录)，执行这个shell便可以得到Xcode项目，当然打开这个项目之后还要修改相应的配置。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 <span class="line-number">6</span>
 <span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">export OpenCV_DIR="/Volumes/hujiawei/Users/hujiawei/Android/opencv-2.4.6.1/build"
-</span><span class="line">mkdir build
-</span><span class="line">cd build
-</span><span class="line">cp $OpenCV_DIR/../data/lbpcascades/lbpcascade_frontalface.xml .
-</span><span class="line">cp $OpenCV_DIR/../data/haarcascades/haarcascade_eye.xml .
-</span><span class="line">cp $OpenCV_DIR/../data/haarcascades/haarcascade_eye_tree_eyeglasses.xml .
-</span><span class="line">cmake -G Xcode -D OpenCV_DIR=$OpenCV_DIR ..</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="c++"><span class="line"><span class="k">export</span> <span class="n">OpenCV_DIR</span><span class="o">=</span><span class="s">&quot;/Volumes/hujiawei/Users/hujiawei/Android/opencv-2.4.6.1/build&quot;</span>
+</span><span class="line"><span class="n">mkdir</span> <span class="n">build</span>
+</span><span class="line"><span class="n">cd</span> <span class="n">build</span>
+</span><span class="line"><span class="n">cp</span> <span class="err">$</span><span class="n">OpenCV_DIR</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">lbpcascades</span><span class="o">/</span><span class="n">lbpcascade_frontalface</span><span class="p">.</span><span class="n">xml</span> <span class="p">.</span>
+</span><span class="line"><span class="n">cp</span> <span class="err">$</span><span class="n">OpenCV_DIR</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">haarcascades</span><span class="o">/</span><span class="n">haarcascade_eye</span><span class="p">.</span><span class="n">xml</span> <span class="p">.</span>
+</span><span class="line"><span class="n">cp</span> <span class="err">$</span><span class="n">OpenCV_DIR</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">haarcascades</span><span class="o">/</span><span class="n">haarcascade_eye_tree_eyeglasses</span><span class="p">.</span><span class="n">xml</span> <span class="p">.</span>
+</span><span class="line"><span class="n">cmake</span> <span class="o">-</span><span class="n">G</span> <span class="n">Xcode</span> <span class="o">-</span><span class="n">D</span> <span class="n">OpenCV_DIR</span><span class="o">=</span><span class="err">$</span><span class="n">OpenCV_DIR</span> <span class="p">..</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/">http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 </div>
