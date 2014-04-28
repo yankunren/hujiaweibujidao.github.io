@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T13:52:25+08:00</updated>
+  <updated>2014-04-28T13:54:09+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -51,8 +51,8 @@ MathJax.Hub.Config({
 &lt;script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"&gt;&lt;/script&gt;
 </code></p>
 
-<p>测试：The <em>Gamma function</em> satisfying $$\Gamma(n) = (n-1)!\quad\forall
-n\in\mathbb N$$ is via the Euler integra</p>
+<p>测试：The <em>Gamma function</em> satisfying $\Gamma(n) = (n-1)!\quad\forall
+n\in\mathbb N$ is via the Euler integra</p>
 
 <script type="math/tex; mode=display">
 \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
@@ -70,11 +70,13 @@ n\in\mathbb N$$ is via the Euler integra</p>
 
 <p>注意，如果该目录下有相同名称的文件的话，会被覆盖掉，利用这个方式我们就可以update文章啦！当然，Stackedit在你publish了一次之后会记住publish的目标位置，以后每次更新之后publish都会publish到那个目标位置。</p>
 
-<p>那如果使用Stackedit打开一个Octopress中已经写好了的文章呢？我使用的方法是<code>Import from URL</code>功能，其中的<code>URL</code>是该Markdown文档的URL，可以在Github中找到并打开那个文档，点击<code>Raw</code>按钮就会进入这份文档的源代码页面，复制该页面的URL即可，比如这篇文章的URL是
-<code>
+<p>那如果使用Stackedit打开一个Octopress中已经写好了的文章呢？我使用的方法是<code>Import from URL</code>功能，其中的<code>URL</code>是该Markdown文档的URL，可以在Github中找到并打开那个文档，点击<code>Raw</code>按钮就会进入这份文档的源代码页面，复制该页面的URL即可，比如这篇文章的URL是</p>
+
+<p><code>
 https://raw.githubusercontent.com/hujiaweibujidao/hujiaweibujidao.github.io/source/source/_posts/2014-04-15-flying-on-mac.markdown
-</code>
-修改完了使用上面的方式覆盖即可。要让Octopress对这个页面进行重新渲染还需要在本地执行下面代码</p>
+</code></p>
+
+<p>修改完了使用上面的方式覆盖即可。要让Octopress对这个页面进行重新渲染还需要在本地执行下面代码</p>
 
 <p><code>
 git pull
