@@ -4,7 +4,7 @@
   <title><![CDATA[Category: math | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T14:12:49+08:00</updated>
+  <updated>2014-04-28T14:17:13+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -144,14 +144,7 @@
 
 <p>通常我们会有一些初始条件。确定了通解中的任意常数的话，那么就得到了微分方程的特解。</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>求微分方程<script type="math/tex">y'=f(x,y)</script>满足初始条件$$y</td>
-      <td><em>{x=x</em>{0}}=y_{0}$$的特解的问题，叫做一阶微分方程的初值问题。</td>
-    </tr>
-  </tbody>
-</table>
+<p>求微分方程<script type="math/tex">y'=f(x,y)</script>满足初始条件<script type="math/tex">y\|_{x=x_{0}}=y_{0}</script>的特解的问题，叫做一阶微分方程的初值问题。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/chuzhi.png" alt="image" /></p>
 
