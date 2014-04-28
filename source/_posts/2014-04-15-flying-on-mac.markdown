@@ -47,6 +47,10 @@ $$
 \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
 $$
 
+另外，它还是存在些问题，关于inline Math公式的问题，推荐将Octopress中的Markdown引擎换成Kramdown，[参考教程](http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/)，另外，使用inline Math和使用block Math一样，都是两个连着的美元符。
+
+bug：我发现在Math公式中写入`|`，即取绝对值符号的话会影响排版，暂时想到的解决方案是转义，换成`\|`，它会换成双竖线，即取2范数的符号，不少情况下，不影响思考，嘿嘿。
+
 
 <!-- mathjax config similar to math.stackexchange -->
 <script type="text/x-mathjax-config">

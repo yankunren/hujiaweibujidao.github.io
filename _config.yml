@@ -35,8 +35,8 @@ plugins: plugins
 code_dir: downloads/code
 category_dir: blog/categories
 tag_dir: blog/tags
-markdown: rdiscount
-#kramdown go wrong when changing it
+markdown: kramdown
+#kramdown go wrong when changing it rdiscount
 rdiscount:
   extensions:
     - autolink

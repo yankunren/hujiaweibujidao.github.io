@@ -7,15 +7,15 @@ sharing: true
 footer: true
 ---
 
-最美的"数学心桥"： $e^{ix}=cosx+isinx$.
+最美的"数学心桥"： $$e^{ix}=cosx+isinx$$.
 
-最美的"数学符号"： $e=\lim_{x \to +\infty} (1+\frac{1}{x})^{x}$.
+最美的"数学符号"： $$e=\lim_{x \to +\infty} (1+\frac{1}{x})^{x}$$.
 
 ### 第一部分 高等数学总结
 
-第一篇 [微积分总结]()  [暂未写完]
+第一篇 [微积分总结](http://hujiaweibujidao.github.io/blog/2014/04/24/calculus-summary/)  [New!]
 
-第二篇 [线性代数总结]()  [暂未写完]
+第二篇 [线性代数总结](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary/)  [暂未写完]
 
 第三篇 [概率与数理统计总结]()   [暂未写完]
 
