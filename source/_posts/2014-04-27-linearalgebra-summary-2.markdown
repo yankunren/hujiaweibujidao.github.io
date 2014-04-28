@@ -82,44 +82,7 @@ $
 
 旋转矩阵的性质：
 **一个矩阵是旋转矩阵，当且仅当它是正交矩阵并且它的行列式是单位一。正交矩阵的行列式是 ±1；如果行列式是 −1，则它包含了一个反射而不是真旋转矩阵。**
-<<<<<<< HEAD
 
-**旋转矩阵是正交矩阵，如果它的列向量形成 ${R}^{n}$ 的一个正交基，就是说在任何两个列向量之间的标量积是零(正交性)而每个列向量的大小是单位一(单位向量)。**
-
-![image](http://hujiaweibujidao.github.io/images/math/xuanzhuanjuzhen.png)
-
-旋转矩阵中有一类非常实用的，那就是[Givens旋转](http://zh.wikipedia.org/wiki/%E5%90%89%E6%96%87%E6%96%AF%E6%97%8B%E8%BD%AC)。**Givens 旋转在数值线性代数中主要的用途是在向量或矩阵中介入零。例如，这种效果可用于计算矩阵的 QR分解。超过Householder变换的一个好处是它们可以轻易的并行化，另一个好处是对于非常稀疏的矩阵计算量更小。**
-
-Given旋转矩阵的表达：
-
-![image](http://hujiaweibujidao.github.io/images/math/givens.png)
-
-Given旋转矩阵的稳定计算：
-
-![image](http://hujiaweibujidao.github.io/images/math/givens2.png)
-
-3.逆矩阵和伴随矩阵
-
-理解了矩阵就是线性变换之后，那么就很容易明白逆矩阵就是将被作用对象从变换后的位置变换回来！
-
-那，伴随矩阵又是什么呢？
-
-[wiki](http://zh.wikipedia.org/wiki/%E4%BC%B4%E9%9A%8F%E7%9F%A9%E9%98%B5)在线性代数中，一个方形矩阵的伴随矩阵$A^{*}$是一个类似于逆矩阵$A^{-1}$的概念。如果矩阵可逆，那么它的逆矩阵和它的伴随矩阵之间只差一个系数($A^{-1}=\frac{A^{*}}{det(A)}$)。也就是说，**伴随矩阵其实是变换回来之后还进行了一次放缩，放缩的大小与矩阵的行列式值有关**。
-
-![image](http://hujiaweibujidao.github.io/images/math/bansuijuzhen.png)
-
-举例说明伴随矩阵的计算，伴随矩阵其实就是原矩阵的代数余子式矩阵的转置！
-
-![image](http://hujiaweibujidao.github.io/images/math/bansuijuzhen2.png)
-
-伴随矩阵的性质
-
-![image](http://hujiaweibujidao.github.io/images/math/bansuijuzhen3.png)
-
-还需要注意的是，**逆矩阵是对于方阵来说的，只有方阵还有逆矩阵的概念，那要不是方阵呢？那么就是广义的逆矩阵**！广义逆矩阵在最小二乘法中有重要的应用。关于逆矩阵的求解以及代码实现请参考我写的另一份总结[《Numerical Methods Using Matlab》](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)第一章 线性方程组求解，最小二乘问题请参考第四章 曲线拟合和多项式插值。
-
-矩阵的一个重要用途是解线性方程组。线性方程组中未知量的系数可以排成一个矩阵，加上常数项，则称为增广矩阵。另一个重要用途是表示线性变换，即是诸如f(x)  = 4x之类的线性函数的推广。设定基底后，某个向量v可以表示为m×1的矩阵,而线性变换f可以表示为行数为m的矩阵A，使得经过变换后得到的向量f(v)可以表示成Av的形式。矩阵的特征值和特征向量可以揭示线性变换的深层特性。
-=======
 
 **旋转矩阵是正交矩阵，如果它的列向量形成 ${R}^{n}$ 的一个正交基，就是说在任何两个列向量之间的标量积是零(正交性)而每个列向量的大小是单位一(单位向量)。**
 
@@ -158,6 +121,40 @@ Given旋转矩阵的稳定计算：
 矩阵的一个重要用途是解线性方程组。线性方程组中未知量的系数可以排成一个矩阵，加上常数项，则称为增广矩阵。另一个重要用途是表示线性变换，即是诸如f(x)  = 4x之类的线性函数的推广。设定基底后，某个向量v可以表示为m×1的矩阵,而线性变换f可以表示为行数为m的矩阵A，使得经过变换后得到的向量f(v)可以表示成Av的形式。矩阵的特征值和特征向量可以揭示线性变换的深层特性。
 
 
+**旋转矩阵是正交矩阵，如果它的列向量形成 ${R}^{n}$ 的一个正交基，就是说在任何两个列向量之间的标量积是零(正交性)而每个列向量的大小是单位一(单位向量)。**
 
->>>>>>> FETCH_HEAD
+![image](http://hujiaweibujidao.github.io/images/math/xuanzhuanjuzhen.png)
+
+旋转矩阵中有一类非常实用的，那就是[Givens旋转](http://zh.wikipedia.org/wiki/%E5%90%89%E6%96%87%E6%96%AF%E6%97%8B%E8%BD%AC)。**Givens 旋转在数值线性代数中主要的用途是在向量或矩阵中介入零。例如，这种效果可用于计算矩阵的 QR分解。超过Householder变换的一个好处是它们可以轻易的并行化，另一个好处是对于非常稀疏的矩阵计算量更小。**
+
+Given旋转矩阵的表达：
+
+![image](http://hujiaweibujidao.github.io/images/math/givens.png)
+
+Given旋转矩阵的稳定计算：
+
+![image](http://hujiaweibujidao.github.io/images/math/givens2.png)
+
+3.逆矩阵和伴随矩阵
+
+理解了矩阵就是线性变换之后，那么就很容易明白逆矩阵就是将被作用对象从变换后的位置变换回来！
+
+那，伴随矩阵又是什么呢？
+
+[wiki](http://zh.wikipedia.org/wiki/%E4%BC%B4%E9%9A%8F%E7%9F%A9%E9%98%B5)在线性代数中，一个方形矩阵的伴随矩阵$A^{*}$是一个类似于逆矩阵$A^{-1}$的概念。如果矩阵可逆，那么它的逆矩阵和它的伴随矩阵之间只差一个系数($A^{-1}=\frac{A^{*}}{det(A)}$)。也就是说，**伴随矩阵其实是变换回来之后还进行了一次放缩，放缩的大小与矩阵的行列式值有关**。
+
+![image](http://hujiaweibujidao.github.io/images/math/bansuijuzhen.png)
+
+举例说明伴随矩阵的计算，伴随矩阵其实就是原矩阵的代数余子式矩阵的转置！
+
+![image](http://hujiaweibujidao.github.io/images/math/bansuijuzhen2.png)
+
+伴随矩阵的性质
+
+![image](http://hujiaweibujidao.github.io/images/math/bansuijuzhen3.png)
+
+还需要注意的是，**逆矩阵是对于方阵来说的，只有方阵还有逆矩阵的概念，那要不是方阵呢？那么就是广义的逆矩阵**！广义逆矩阵在最小二乘法中有重要的应用。关于逆矩阵的求解以及代码实现请参考我写的另一份总结[《Numerical Methods Using Matlab》](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)第一章 线性方程组求解，最小二乘问题请参考第四章 曲线拟合和多项式插值。
+
+矩阵的一个重要用途是解线性方程组。线性方程组中未知量的系数可以排成一个矩阵，加上常数项，则称为增广矩阵。另一个重要用途是表示线性变换，即是诸如f(x)  = 4x之类的线性函数的推广。设定基底后，某个向量v可以表示为m×1的矩阵,而线性变换f可以表示为行数为m的矩阵A，使得经过变换后得到的向量f(v)可以表示成Av的形式。矩阵的特征值和特征向量可以揭示线性变换的深层特性。
+
 

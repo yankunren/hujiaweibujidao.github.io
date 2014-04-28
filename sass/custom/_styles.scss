@@ -1,6 +1,17 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
+
+//post bottom copyright
 .post-footer{border: 1px solid #61b72e;border-radius: 4px;box-shadow: 0 0 5px #F5F5F5;margin-top:10px;padding:5px;background:none repeat scroll 0pt 0pt #fff;font-size:90%;color:#61b72e} 
 
+//font
 body{font-family:'Open Sans',"Trebuchet MS",Helvetica,sans-serif;font-size:14px;line-height:1.428571429;color:#000;background-color:#fff}
 
+//block quote
+blockquote{
+	font:inherit;
+	font-size:13px;
+	font-style:normal;
+	line-height:1.0em;
+	color:rgba(0,0,0,0.5);
+}
