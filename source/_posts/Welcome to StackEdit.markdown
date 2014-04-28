@@ -1,3 +1,12 @@
+---
+layout: page
+title: "Welcome to StackEdit!"
+date: 2014-04-30 19:39
+comments: true
+sharing: true
+footer: true
+---
+
 Welcome to StackEdit!		{#welcome}
 ====================
 
