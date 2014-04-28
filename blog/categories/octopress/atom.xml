@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T15:55:47+08:00</updated>
+  <updated>2014-04-28T15:57:25+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -22,7 +22,7 @@
 
 <p>如果Mou渲染Math公式有问题的话，尝试在第一行加上如下js，表示让Mou去加载Mathjax的脚本</p>
 
-<p><code>javascript
+<p><code>js
 &lt;!-- import js for mathjax --&gt;
 &lt;script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"&gt;&lt;/script&gt;
 </code></p>
@@ -33,7 +33,7 @@
 
 <p>如果还是不行的话，那么建议使用<a href="https://stackedit.io/">stackedit</a>，感谢@beader的建议！还有一个问题是stackedit是在线编辑的，图片要保存到Google Driver中(或者有个特定的网址)，另外，它和Mou中内置的MathJax的渲染解析工具略有不同，例如对于行内Math公式的插入方式不同，Stackedit是以<code>$</code>为行内Math公式为标示符，Mou貌似不存在插入行内Math公式的方式，这时候可以在Mou中的Markdown文档中添加下面的代码让它支持行内Math公式。</p>
 
-<p><code>
+<p><code>js
 &lt;!-- mathjax config similar to math.stackexchange --&gt;
 &lt;script type="text/x-mathjax-config"&gt;
 MathJax.Hub.Config({
