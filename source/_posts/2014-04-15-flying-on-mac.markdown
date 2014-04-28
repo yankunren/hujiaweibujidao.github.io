@@ -56,7 +56,7 @@ $$
 
 我现在的做法是，做一般的作业使用Mou，按照上面的方式肯定有一个可以，完成作业没有问题。
 
-写Octopress博客中的文章用StackEdit，行内Math用`$`，其他形式用`$$`。Stackedit支持直接将文档publish到Github的某个项目的某个分支下的某个文件夹中，文件名自己命名。如下图所示：
+写Octopress博客中的文章用StackEdit，行内Math用`$`(某些情况下可以，但是有些情况下不行，不行的话还是使用`$$`，Kramdown支持`$$`形式的行内公式)，其他形式用`$$`。Stackedit支持直接将文档publish到Github的某个项目的某个分支下的某个文件夹中，文件名自己命名。如下图所示：
 
 ![image](http://hujiaweibujidao.github.io/images/201404/stackedit_publish.png)
 
