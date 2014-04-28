@@ -3,7 +3,7 @@ layout: page
 title: "Welcome to StackEdit!"
 date: 2014-04-30 19:39
 comments: true
-sharing: true
+categories: octopress
 footer: true
 ---
 
@@ -236,3 +236,6 @@ $$
   [4]: http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference
   [5]: https://code.google.com/p/google-code-prettify/
   [6]: http://highlightjs.org/
+
+
+
