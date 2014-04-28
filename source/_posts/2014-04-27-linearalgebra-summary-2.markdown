@@ -55,6 +55,7 @@ $$
 **最常用的反射变换就是[Householder变换](http://zh.wikipedia.org/wiki/%E8%B1%AA%E6%96%AF%E9%9C%8D%E5%B0%94%E5%BE%B7%E5%8F%98%E6%8D%A2)了，这一变换将一个向量变换为由一个超平面反射的镜像，是一种线性变换。豪斯霍尔德变换可以将向量的某些元素置零，同时保持该向量的范数不变。Householder变换在矩阵的QR分解中非常重要！**关于Householder的内部原理以及代码实现请参考我写的另一份总结[《Numerical Methods Using Matlab》](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)第三章 矩阵特征值和奇异值分解
 
 下图为Householder变换的图示：
+
 ![image](http://hujiaweibujidao.github.io/images/math/HouseholderReflection.png)
 
 (2)放缩变换
