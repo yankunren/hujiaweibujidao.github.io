@@ -35,4 +35,10 @@ $ P^{-1} A P = B $ 或  $ A P =P B$
 
 ![image](http://hujiaweibujidao.github.io/images/math/xiangsijuzhen3.png)
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> FETCH_HEAD
 
