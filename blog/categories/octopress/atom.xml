@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T13:49:06+08:00</updated>
+  <updated>2014-04-28T13:52:25+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -83,6 +83,13 @@ rake deploy
 </code></p>
 
 <p>可以按照<a href="http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/">Make Your Octopress Easy</a>的方式建立一个shell脚本简化处理流程。</p>
+
+<p>至于Octopress中的修改是使用kramdown代替默认的rdiscount，然后在<code>footer.html</code>中加入Stackedit的Mathjax脚本，你也可以使用上面提到的修改版本。</p>
+
+<p><code>
+&lt;script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"&gt;&lt;/script&gt;
+</code></p>
+
 ]]></content>
   </entry>
   
