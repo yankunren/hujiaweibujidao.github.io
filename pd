@@ -1,0 +1,9 @@
+#! /bin/bash
+
+path=$OCTOPRESS_HOME
+cd "$path"
+#pwd
+git pull
+rake generate
+rake deploy
+echo "git pull and generate and deploy ok"
