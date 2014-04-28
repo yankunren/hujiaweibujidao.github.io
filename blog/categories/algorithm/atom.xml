@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T19:12:20+08:00</updated>
+  <updated>2014-04-28T19:15:51+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -103,81 +103,6 @@
 <p>该算法优先队列使用的是最小堆实现的(O(nlgn))，对顶点按照边排序使用的是快速排序算法(O(nlgn))，解空间树的深度最多为顶点数目n，每层都要进行分支定界，所以每层的时间复杂度为O(nlgn)，所以算法总的时间复杂度为O(n^2 lgn)。但是，为了实现分支定界，每个节点保存的信息量较多，空间复杂度较大。(有木有分析错了，我不太会分析复杂度)</p>
 
 <p>OJ系统的结果为：时间 156ms  空间 1.0MB</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LeetCode OJ Part1]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/09/leetcode-oj-part1/"/>
-    <updated>2014-04-09T18:18:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/09/leetcode-oj-part1</id>
-    <content type="html"><![CDATA[<p>为了找以后工作嘛，挑战下LeetCode OJ，顺序可能与OJ上的顺序不同哟，慢慢增加…</p>
-
-<p>注，我附上的代码都包含了测试代码，提交的代码中不需要测试部分，我保留是因为某些题中有些测试样例比较特殊，为了提醒自己不要再犯同样的错！</p>
-
-<p>1.Reverse Words in a String</p>
-
-<p>字符串题，字符串分割再反转</p>
-
-<p><code>python
-class Solution:
-    # @param s, a string
-    # @return a string
-    def reverseWords(self, s):
-        l = s.strip().split()
-        l.reverse()
-        return ' '.join(l)
-if __name__ == '__main__':
-    teststrs = ('helo world', ' hel hj ')
-    so = Solution()
-    for test in teststrs:
-        print so.reverseWords(test)    
-</code></p>
-
-<p>2.Evaluate Reverse Polish Notation</p>
-
-<p>栈的利用，逆波兰表达式求值</p>
-
-<p>注：在Java中<code>6/(-132)=0</code>但是在Python中<code>6/(-132)=-1</code>，OJ认为0是正解，所以Python中进行除法运算时使用<code>int(float(m)/float(n))</code>。</p>
-
-<p><code>
-class Solution:
-    # @param tokens, a list of string
-    # @return an integer
-    def evalRPN(self, tokens):
-        stack = []
-        result = 0
-        for token in tokens:
-            if (token in '+-*/'):
-                result = self.calculate(token, int(stack.pop()), int(stack.pop()))
-                stack.append(result)
-            else:
-                stack.append(int(token))
-        return stack.pop()
-    def calculate(self, token, n, m):
-        if token.__eq__('+'):
-            return n + m
-        elif token.__eq__('-'):
-            return m - n
-        elif token.__eq__('*'):
-            return n * m
-        elif token.__eq__('/'):
-            return int(float(m) / float(n))
-if __name__ == '__main__':
-    tests = [["18"],["10","6","9","3","+","-11","*","/","*","17","+","5","+"]];
-    so = Solution()
-    for test in tests:
-        print so.evalRPN(test)  
-</code></p>
-
-<p>3.Max Points on a Line</p>
-
-<p>在平面上的点集合中找到在同一条线上最多的点集合的个数</p>
-
-<p>注：相同的点重复计算点个数</p>
-
-<p>To be continued……</p>
 
 ]]></content>
   </entry>
