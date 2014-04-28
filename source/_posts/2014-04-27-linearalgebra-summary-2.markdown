@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "LAS 2-Matrix"
+title: "Linear Algebra Summary 2"
 date: 2014-04-29 14:03
 comments: true
 categories: math
@@ -8,7 +8,7 @@ published: true
 ---
 
 **<center>线性代数那些事 Things of Linear Algebra</center>**
-**<center>逸夫图书馆, 2014/4/27</center>**
+**<center>逸夫图书馆, 2014/4/28</center>**
 
 ### <center>矩阵</center>
 
@@ -35,7 +35,7 @@ $Ax=[3∗2+2∗2,1∗2+3∗2]^T=[10,8]^T$
 
 2.线性变换
 
-好吧，那什么是线性变换呢？
+好吧，矩阵是线性变换，那什么是线性变换呢？
 
 wiki中对线性变换的解释，这些变换其实主要包括缩放、旋转、反射等。
 
@@ -52,9 +52,9 @@ $$
 
 什么是反射？[wiki](http://zh.wikipedia.org/wiki/%E5%8F%8D%E5%B0%84_(%E6%95%B0%E5%AD%A6))上的解释是：**反射是把一个物体变换成它的镜像的映射。要反射一个平面图形，需要“镜子”是一条直线（反射轴），对于三维空间中的反射就要使用平面作为镜子。**
 
-**最常用的反射变换就是[Householder变换](http://zh.wikipedia.org/wiki/%E8%B1%AA%E6%96%AF%E9%9C%8D%E5%B0%94%E5%BE%B7%E5%8F%98%E6%8D%A2)了，这一变换将一个向量变换为由一个超平面反射的镜像，是一种线性变换。豪斯霍尔德变换可以将向量的某些元素置零，同时保持该向量的范数不变。Householder变换在矩阵的QR分解中非常重要！**关于Householder的内部原理以及代码实现请参考我写的另一份总结[《Numerical Methods Using Matlab》](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)第三章 矩阵特征值和奇异值分解
+**最常用的反射变换就是[Householder变换](http://zh.wikipedia.org/wiki/%E8%B1%AA%E6%96%AF%E9%9C%8D%E5%B0%94%E5%BE%B7%E5%8F%98%E6%8D%A2)了，这一变换将一个向量变换为由一个超平面反射的镜像，是一种线性变换。Householder变换可以将向量的某些元素置零，同时保持该向量的范数不变。Householder变换在矩阵的QR分解中非常重要！**关于Householder的内部原理以及代码实现请参考我写的另一份总结[《Numerical Methods Using Matlab》](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)第三章 矩阵特征值和奇异值分解
 
-下图为Householder变换的图示：
+下图为Householder变换的图示，向量x在矩阵H的作用下得到的向量Hx和原向量x刚好是镜像反射关系。
 
 ![image](http://hujiaweibujidao.github.io/images/math/HouseholderReflection.png)
 
@@ -87,7 +87,7 @@ $$
 
 ![image](http://hujiaweibujidao.github.io/images/math/xuanzhuanjuzhen.png)
 
-旋转矩阵中有一类非常实用的，那就是[Givens旋转](http://zh.wikipedia.org/wiki/%E5%90%89%E6%96%87%E6%96%AF%E6%97%8B%E8%BD%AC)。**Givens 旋转在数值线性代数中主要的用途是在向量或矩阵中介入零。例如，这种效果可用于计算矩阵的 QR分解。超过Householder变换的一个好处是它们可以轻易的并行化，另一个好处是对于非常稀疏的矩阵计算量更小。**
+最常用的旋转矩阵就是[Givens旋转](http://zh.wikipedia.org/wiki/%E5%90%89%E6%96%87%E6%96%AF%E6%97%8B%E8%BD%AC)。**Givens 旋转在数值线性代数中主要的用途是在向量或矩阵中介入零。例如，这种效果可用于计算矩阵的 QR分解。超过Householder变换的一个好处是它们可以轻易的并行化，另一个好处是对于非常稀疏的矩阵计算量更小。**
 
 Given旋转矩阵的表达：
 
@@ -103,7 +103,7 @@ Given旋转矩阵的稳定计算：
 
 那，伴随矩阵又是什么呢？
 
-[wiki](http://zh.wikipedia.org/wiki/%E4%BC%B4%E9%9A%8F%E7%9F%A9%E9%98%B5)在线性代数中，一个方形矩阵的伴随矩阵$A^{*}$是一个类似于逆矩阵$A^{-1}$的概念。如果矩阵可逆，那么它的逆矩阵和它的伴随矩阵之间只差一个系数($A^{-1}=\frac{A^{*}}{det(A)}$)。也就是说，**伴随矩阵其实是变换回来之后还进行了一次放缩，放缩的大小与矩阵的行列式值有关**。
+[wiki](http://zh.wikipedia.org/wiki/%E4%BC%B4%E9%9A%8F%E7%9F%A9%E9%98%B5)在线性代数中，一个方形矩阵的伴随矩阵A*是一个类似于逆矩阵$A^{-1}$的概念。如果矩阵可逆，那么它的逆矩阵和它的伴随矩阵之间只差一个系数($A^{-1}=\frac{A^{*}}{det(A)}$)。也就是说，**伴随矩阵其实是变换回来之后还进行了一次放缩，放缩的大小与矩阵的行列式值有关**。
 
 ![image](http://hujiaweibujidao.github.io/images/math/bansuijuzhen.png)
 
@@ -116,6 +116,25 @@ Given旋转矩阵的稳定计算：
 ![image](http://hujiaweibujidao.github.io/images/math/bansuijuzhen3.png)
 
 还需要注意的是，**逆矩阵是对于方阵来说的，只有方阵还有逆矩阵的概念，那要不是方阵呢？那么就是广义的逆矩阵**！广义逆矩阵在最小二乘法中有重要的应用。关于逆矩阵的求解以及代码实现请参考我写的另一份总结[《Numerical Methods Using Matlab》](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)第一章 线性方程组求解，最小二乘问题请参考第四章 曲线拟合和多项式插值。
+
+4.秩
+
+什么是矩阵的秩？
+
+[wiki中的解释](http://zh.wikipedia.org/wiki/%E7%A7%A9_(%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0))在线性代数中，一个矩阵A的列秩是A的线性独立的纵列的极大数目。类似地，行秩是A的线性独立的横行的极大数目。矩阵的列秩和行秩总是相等的，因此它们可以简单地称作矩阵A的秩。通常表示为r(A)，rk(A)或rank A。m × n矩阵的秩最大为m和n中的较小者，表示为 min(m,n)。有尽可能大的秩的矩阵被称为有满秩；类似的，否则矩阵是秩不足（或称为“欠秩”）的。
+
+**矩阵的行秩与列秩相等，是线性代数基本定理的重要组成部分. 其基本证明思路是，矩阵可以看作线性映射的变换矩阵，列秩为像空间的维度，行秩为非零原像空间的维度，因此列秩与行秩相等，即像空间的维度与非零原像空间的维度相等（这里的非零原像空间是指约去了零空间后的商空间：原像空间）。这从矩阵的奇异值分解就可以看出来。**[证明可以参见wiki](http://zh.wikipedia.org/wiki/%E7%A7%A9_(%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0))
+
+黄老师的总结中还给出了**初等变换不改变矩阵的行秩和列秩**的证明，此外还有，以下四个表述是等价的：
+
+• A 为满秩矩阵. 
+• A 为可逆矩阵. 
+• A 为非奇异矩阵.
+• |A| $\ne$ 0.
+
+说了这么多，那，到底矩阵的秩对于矩阵表示的这个线性变换来说意味着什么？
+
+
 
 矩阵的一个重要用途是解线性方程组。线性方程组中未知量的系数可以排成一个矩阵，加上常数项，则称为增广矩阵。另一个重要用途是表示线性变换，即是诸如f(x)  = 4x之类的线性函数的推广。设定基底后，某个向量v可以表示为m×1的矩阵,而线性变换f可以表示为行数为m的矩阵A，使得经过变换后得到的向量f(v)可以表示成Av的形式。矩阵的特征值和特征向量可以揭示线性变换的深层特性。
 
