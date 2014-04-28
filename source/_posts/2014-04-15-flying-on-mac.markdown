@@ -10,7 +10,7 @@ categories: mac octopress
 
 如果Mou渲染Math公式有问题的话，尝试在第一行加上如下js，表示让Mou去加载Mathjax的脚本
 
-```
+```javascript
 <!-- import js for mathjax -->
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 ```
