@@ -129,10 +129,11 @@
 
 <blockquote>
   <p>这里借用下小苏的图和解释。
-矩阵$A=\left[ \begin{array}{cc} a11 &amp; a12 &#92; a21 &amp; a22 \end{array} \right]$
-事实上是由两个向量$[a11,a21]^T$和$[a12,a22]^T$（这里的向量都是列向量）组成，它描述了一个平面（仿射）坐标系。换句话说，这两个向量其实是这个坐标系的两个基，而运算$y=Ax$则是告诉我们，在$A$这个坐标系下的$x$向量，在$I$坐标系下是怎样的。这里的$I$坐标系就是我们最常用的直角坐标系，也就是说，任何向量（包括矩阵里边的向量），只要它前面没有矩阵作用于它，那么它都是在直角坐标系下度量出来的。下图所用的
-矩阵$A=\left[ \begin{array}{cc} 3 &amp; 2 &#92; 1 &amp; 3 \end{array} \right]$
-这构成了一个仿射坐标系，在这个坐标系下，有一个向量$x=[2,2]^T$，它在直角坐标系下测得的坐标为$[10,8]^T$，现在我们不难发现，直接用矩阵乘法来计算，有
+矩阵<script type="math/tex">% <![CDATA[
+A=\left[ \begin{array}{cc} a11 & a12 \\ a21 & a22 \end{array} \right] %]]></script>
+事实上是由两个向量$[a11,a21]^T$和$[a12,a22]^T$（这里的向量都是列向量）组成，它描述了一个平面（仿射）坐标系。换句话说，这两个向量其实是这个坐标系的两个基，而运算$y=Ax$则是告诉我们，在$A$这个坐标系下的$x$向量，在$I$坐标系下是怎样的。这里的$I$坐标系就是我们最常用的直角坐标系，也就是说，任何向量（包括矩阵里边的向量），只要它前面没有矩阵作用于它，那么它都是在直角坐标系下度量出来的。下图所用的矩阵<script type="math/tex">% <![CDATA[
+A=\left[ \begin{array}{cc} 3 & 2 \\ 1 & 3 \end{array} \right] %]]></script>
+构成了一个仿射坐标系，在这个坐标系下，有一个向量$x=[2,2]^T$，它在直角坐标系下测得的坐标为$[10,8]^T$，现在我们不难发现，直接用矩阵乘法来计算，有
 $Ax=[3∗2+2∗2,1∗2+3∗2]^T=[10,8]^T$
 小苏对此展开讨论了<a href="http://spaces.ac.cn/index.php/archives/1768/">它和矩阵乘法之间的联系</a></p>
 </blockquote>
@@ -153,10 +154,11 @@ $Ax=[3∗2+2∗2,1∗2+3∗2]^T=[10,8]^T$
 
 <p>(1)反射变换</p>
 
-<p>$
-A=\left[ \begin{array}{cc} -1 &amp; 0 \ 0 &amp; 1 \end{array} \right] \quad
-\rightarrow \left{ \begin{array}{cc} x’=-x \y’=y \end{array} \right.
-$</p>
+<script type="math/tex; mode=display">% <![CDATA[
+
+A=\left[ \begin{array}{cc} -1 & 0 \\ 0 & 1 \end{array} \right] \quad
+\rightarrow \left\{ \begin{array}{cc} x'=-x \\ y'=y \end{array} \right.
+ %]]></script>
 
 <p>水平反射，x变成对应的相反数，y不变。</p>
 
@@ -169,19 +171,21 @@ $</p>
 
 <p>(2)放缩变换</p>
 
-<p>$
-A=\left[ \begin{array}{cc} \frac{3}{2} &amp; 0 \ 0 &amp; \frac{3}{2} \end{array} \right] \quad
-\rightarrow \left{ \begin{array}{c} x’=\frac{3}{2}x \ y’=\frac{3}{2}y \end{array} \right.
-$</p>
+<script type="math/tex; mode=display">% <![CDATA[
+
+A=\left[ \begin{array}{cc} \frac{3}{2} & 0 \\ 0 & \frac{3}{2} \end{array} \right] \quad
+\rightarrow \left\{ \begin{array}{c} x'=\frac{3}{2}x \\ y'=\frac{3}{2}y \end{array} \right.
+ %]]></script>
 
 <p>放缩反射，x和y都变成原来的$\frac{3}{2}$倍。</p>
 
 <p>(3)旋转变换</p>
 
-<p>$
-A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) &amp; -\sin(\frac{\pi}{6}) \ \sin(\frac{\pi}{6}) &amp; \cos(\frac{\pi}{6}) \end{array} \right] \quad
-\rightarrow \left{ \begin{array}{c} x’=\frac{\sqrt{3}}{2}x-\frac{1}{2}y \ y’=\frac{1}{2}x+\frac{\sqrt{3}}{2}y \end{array} \right.
-$</p>
+<script type="math/tex; mode=display">% <![CDATA[
+
+A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\frac{\pi}{6}) & \cos(\frac{\pi}{6}) \end{array} \right] \quad
+\rightarrow \left\{ \begin{array}{c} x'=\frac{\sqrt{3}}{2}x-\frac{1}{2}y \\ y'=\frac{1}{2}x+\frac{\sqrt{3}}{2}y \end{array} \right.
+ %]]></script>
 
 <p>旋转反射，<a href="http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan1.png">一般性的证明请看这张图</a>，<a href="http://zh.wikipedia.org/wiki/%E6%97%8B%E8%BD%AC">wiki</a>中对二维空间旋转的解释。</p>
 
