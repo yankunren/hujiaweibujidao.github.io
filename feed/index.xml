@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T15:15:01+08:00</updated>
+  <updated>2014-04-28T15:29:04+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,170 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linear Algebra Summary 4]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-4/"/>
+    <updated>2014-04-29T14:03:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-4</id>
+    <content type="html"><![CDATA[<p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
+<strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
+
+<h4 id="center1center"><center>1.行列式</center></h4>
+
+<p><strong>什么是行列式？</strong></p>
+
+<p>这个问题一点都不简单！</p>
+
+<p>推荐阅读的博文<a href="http://spaces.ac.cn/index.php/archives/2208/">新理解矩阵5</a>以及<a href="http://www.matrix67.com/blog/archives/4294">我们需要怎样的数学教育？</a>，后者在网上比较火，简单的语言道出行列式以及矩阵的“天机”。</p>
+
+<blockquote>
+  <p>直到今天看到<a href="http://mathoverflow.net/questions/7584/what-are-the-most-misleading-alternate-definitions-in-taught-mathematics">这个网页</a>，才看见有人一语道破线性代数的真谛（这也是我终于决定写成此文的直接原因）。我终于找到了我那一个学期企图寻找的东西。就好像把 $x$ 变成 $2 x$ 一样，我们经常需要把 $(x, y)$ 变成 $(2 x + y, x – 3 y)$ 之类的东西，这就叫做线性变换。于是才想到定义矩阵乘法，用于表示一切线性变换。几何上看，把平面上的每个点 $(x, y)$ 都变到 $(2 x + y, x – 3 y)$ 的位置上去，效果就相当于对这个平面进行了一个“线性的拉扯”。
+矩阵的乘法，其实就是多个线性变换叠加的效果，它显然满足结合律，但不满足交换律。主对角线全是 1 的矩阵所对应的线性变换其实就是不变的意思，因此它叫做单位矩阵。矩阵 A 乘以矩阵 B 得单位矩阵，就是做完线性变换 A 后再做一次线性变换 B 就又变回去了的意思，难怪我们说矩阵 B 是矩阵 A的逆矩阵。课本上对行列式的定义千奇百怪，又是什么递归，又是什么逆序对，还编写口诀帮助大家记忆。其实，<strong>行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积</strong>。因此，单位矩阵的行列式当然就为 1，某行全为 0 的行列式显然为 0 （因为某一维度会被无视掉，线性变换会把整个平面压扁）， $|A·B|$ 显然等于 $|A|·|B|$ 。行列式为 0 ，对应的矩阵当然不可逆，因为这样的线性变换已经把平面压成一条线了，什么都不能把它变回去了。当然，更高阶的矩阵就对应了更高维的空间。一瞬间，所有东西都解释清楚了。</p>
+</blockquote>
+
+<!--![image][14]-->
+
+<p>我认为，上面的表达不完全正确，比如其核心[行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积]，但是，它真正让我们意识到要好好思考，到底，什么是行列式？</p>
+
+<p><strong><a href="http://zh.wikipedia.org/wiki/%E8%A1%8C%E5%88%97%E5%BC%8F">Wiki</a>的解释：行列式其实是一个函数，一个将方阵转换成一个标量的函数！[就是说，行列式本质上就相当于一个函数]</strong></p>
+
+<p><strong>行列式可以看做是有向面积或体积的概念在一般的欧几里得空间中的推广。或者说，在 n 维欧几里得空间中，行列式描述的是一个线性变换对“体积”所造成的影响。</strong></p>
+
+<p>首先要注意的是如果是指矩阵的行列式，那么矩阵中只有方阵才有行列式！对方阵求行列式得到一个值，这个值就是指这个$n \times n$方阵(因为矩阵都可以看做是一个线性变换，所以就是指一个线性变换)对n维空间中的“体积”所造成的影响。在二维空间中，这个“体积”实际上是平行四边形的面积，在三维空间中，“体积”就是指平行六面体的体积。更高维以此类推。</p>
+
+<p>先看下行列式在二维和三维空间的几何意义(wiki解释得非常详细！)</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi2.png" alt="image" /></p>
+
+<p>另一个解释(在矩阵条目中的解释)，<strong>一个方阵的行列式等于0当且仅当该方阵不可逆。系数是实数的时候，二维（三维）方阵A的行列式的绝对值表示单位面积（体积）的图形经过A对应的线性变换后得到的图形的面积（体积），而它的正负则代表了对应的线性变换是否改变空间的定向：行列式为正说明它保持空间定向，行列式为负则说明它逆转空间定向。</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi13.png" alt="image" /></p>
+
+<p>下面看下什么是用行列式怎么理解线性变换，<strong>线性变换就是把一个向量线性地变为另一个向量</strong>，<strong>行列式表示的是线性变换前后平行六面体的体积的变化系数</strong>。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi3.png" alt="image" /></p>
+
+<p>面积或体积的定义是恒正的，而行列式是有正有负的，因此需要引入有向面积和有向体积的概念。如果行列式表示的是线性变换对体积的影响，那么行列式的正负就表示了空间的定向。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi4.png" alt="image" /></p>
+
+<p><strong>由二维及三维的例子，可以看到一般的行列式应该具有怎样的性质。在n维欧几里得空间中，作为“平行多面体”的“体积”的概念的推广，行列式继承了“体积”函数的性质。首先，行列式需要是线性的，这可以由面积的性质类比得到。这里的线性是对于每一个向量来说的，因为当一个向量变为原来的a倍时，“平行多面体”的“体积”也变为原来的a倍。其次，当一个向量在其它向量组成的“超平面”上时，n维“平行多面体”的“体积”是零（可以想像三维空间的例子）[在向量组中就是指它们线性相关了]。也就是说，当向量线性相关时，行列式为零。</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi5.png" alt="image" /></p>
+
+<p>行列式的展开，代数余子式，拉普拉斯公式用于计算矩阵的行列式值</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi6.png" alt="image" /></p>
+
+<p>行列式的性质：
+<strong>若两个矩阵相似，那么它们的行列式相同。这是因为两个相似的矩阵之间只相差一个基底变换，而行列式描述的是矩阵对应的线性映射对体积的影响，而不是体积，所以基底变换并不会影响行列式的值。</strong></p>
+
+<p><strong>行列式是所有特征值（按代数重数计）的乘积。这可由矩阵必和其若尔当标准型相似推导出。特殊地，三角矩阵的行列式等于其对角线上所有元素的乘积</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi8.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi9.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi10.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi11.png" alt="image" /></p>
+
+<p>行列式与线性方程组，矩阵以及多项式还有多重积分之间的关系。</p>
+
+<p>当线性方程组对应的行列式不为零时，由克莱姆法则，可以直接以行列式的形式写出方程组的解。但用克莱姆法则求解计算量巨大，因此并没有实际应用价值，一般用于理论上的推导。</p>
+
+<p>多项式$p(x) = det(xI - A)$称为方块矩阵A的特征值多项式。这是一个由行列式定义的多项式，它的解是矩阵所有的特征值。</p>
+
+<p>行列式与多重积分的关系主要就是<a href="http://zh.wikipedia.org/wiki/%E9%9B%85%E5%8F%AF%E6%AF%94%E7%9F%A9%E9%98%B5">雅可比行列式 on wiki</a>了。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi12.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi7.png" alt="image" /></p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-4/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-4/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linear Algebra Summary 3]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-3/"/>
+    <updated>2014-04-29T14:03:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-3</id>
+    <content type="html"><![CDATA[<p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
+<strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
+
+<h4 id="center1center"><center>1.行列式</center></h4>
+
+<p><strong>什么是行列式？</strong></p>
+
+<p>这个问题一点都不简单！</p>
+
+<p>推荐阅读的博文<a href="http://spaces.ac.cn/index.php/archives/2208/">新理解矩阵5</a>以及<a href="http://www.matrix67.com/blog/archives/4294">我们需要怎样的数学教育？</a>，后者在网上比较火，简单的语言道出行列式以及矩阵的“天机”。</p>
+
+<blockquote>
+  <p>直到今天看到<a href="http://mathoverflow.net/questions/7584/what-are-the-most-misleading-alternate-definitions-in-taught-mathematics">这个网页</a>，才看见有人一语道破线性代数的真谛（这也是我终于决定写成此文的直接原因）。我终于找到了我那一个学期企图寻找的东西。就好像把 $x$ 变成 $2 x$ 一样，我们经常需要把 $(x, y)$ 变成 $(2 x + y, x – 3 y)$ 之类的东西，这就叫做线性变换。于是才想到定义矩阵乘法，用于表示一切线性变换。几何上看，把平面上的每个点 $(x, y)$ 都变到 $(2 x + y, x – 3 y)$ 的位置上去，效果就相当于对这个平面进行了一个“线性的拉扯”。
+矩阵的乘法，其实就是多个线性变换叠加的效果，它显然满足结合律，但不满足交换律。主对角线全是 1 的矩阵所对应的线性变换其实就是不变的意思，因此它叫做单位矩阵。矩阵 A 乘以矩阵 B 得单位矩阵，就是做完线性变换 A 后再做一次线性变换 B 就又变回去了的意思，难怪我们说矩阵 B 是矩阵 A的逆矩阵。课本上对行列式的定义千奇百怪，又是什么递归，又是什么逆序对，还编写口诀帮助大家记忆。其实，<strong>行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积</strong>。因此，单位矩阵的行列式当然就为 1，某行全为 0 的行列式显然为 0 （因为某一维度会被无视掉，线性变换会把整个平面压扁）， $|A·B|$ 显然等于 $|A|·|B|$ 。行列式为 0 ，对应的矩阵当然不可逆，因为这样的线性变换已经把平面压成一条线了，什么都不能把它变回去了。当然，更高阶的矩阵就对应了更高维的空间。一瞬间，所有东西都解释清楚了。</p>
+</blockquote>
+
+<!--![image][14]-->
+
+<p>我认为，上面的表达不完全正确，比如其核心[行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积]，但是，它真正让我们意识到要好好思考，到底，什么是行列式？</p>
+
+<p><strong><a href="http://zh.wikipedia.org/wiki/%E8%A1%8C%E5%88%97%E5%BC%8F">Wiki</a>的解释：行列式其实是一个函数，一个将方阵转换成一个标量的函数！[就是说，行列式本质上就相当于一个函数]</strong></p>
+
+<p><strong>行列式可以看做是有向面积或体积的概念在一般的欧几里得空间中的推广。或者说，在 n 维欧几里得空间中，行列式描述的是一个线性变换对“体积”所造成的影响。</strong></p>
+
+<p>首先要注意的是如果是指矩阵的行列式，那么矩阵中只有方阵才有行列式！对方阵求行列式得到一个值，这个值就是指这个$n \times n$方阵(因为矩阵都可以看做是一个线性变换，所以就是指一个线性变换)对n维空间中的“体积”所造成的影响。在二维空间中，这个“体积”实际上是平行四边形的面积，在三维空间中，“体积”就是指平行六面体的体积。更高维以此类推。</p>
+
+<p>先看下行列式在二维和三维空间的几何意义(wiki解释得非常详细！)</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi2.png" alt="image" /></p>
+
+<p>另一个解释(在矩阵条目中的解释)，<strong>一个方阵的行列式等于0当且仅当该方阵不可逆。系数是实数的时候，二维（三维）方阵A的行列式的绝对值表示单位面积（体积）的图形经过A对应的线性变换后得到的图形的面积（体积），而它的正负则代表了对应的线性变换是否改变空间的定向：行列式为正说明它保持空间定向，行列式为负则说明它逆转空间定向。</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi13.png" alt="image" /></p>
+
+<p>下面看下什么是用行列式怎么理解线性变换，<strong>线性变换就是把一个向量线性地变为另一个向量</strong>，<strong>行列式表示的是线性变换前后平行六面体的体积的变化系数</strong>。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi3.png" alt="image" /></p>
+
+<p>面积或体积的定义是恒正的，而行列式是有正有负的，因此需要引入有向面积和有向体积的概念。如果行列式表示的是线性变换对体积的影响，那么行列式的正负就表示了空间的定向。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi4.png" alt="image" /></p>
+
+<p><strong>由二维及三维的例子，可以看到一般的行列式应该具有怎样的性质。在n维欧几里得空间中，作为“平行多面体”的“体积”的概念的推广，行列式继承了“体积”函数的性质。首先，行列式需要是线性的，这可以由面积的性质类比得到。这里的线性是对于每一个向量来说的，因为当一个向量变为原来的a倍时，“平行多面体”的“体积”也变为原来的a倍。其次，当一个向量在其它向量组成的“超平面”上时，n维“平行多面体”的“体积”是零（可以想像三维空间的例子）[在向量组中就是指它们线性相关了]。也就是说，当向量线性相关时，行列式为零。</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi5.png" alt="image" /></p>
+
+<p>行列式的展开，代数余子式，拉普拉斯公式用于计算矩阵的行列式值</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi6.png" alt="image" /></p>
+
+<p>行列式的性质：
+<strong>若两个矩阵相似，那么它们的行列式相同。这是因为两个相似的矩阵之间只相差一个基底变换，而行列式描述的是矩阵对应的线性映射对体积的影响，而不是体积，所以基底变换并不会影响行列式的值。</strong></p>
+
+<p><strong>行列式是所有特征值（按代数重数计）的乘积。这可由矩阵必和其若尔当标准型相似推导出。特殊地，三角矩阵的行列式等于其对角线上所有元素的乘积</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi8.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi9.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi10.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi11.png" alt="image" /></p>
+
+<p>行列式与线性方程组，矩阵以及多项式还有多重积分之间的关系。</p>
+
+<p>当线性方程组对应的行列式不为零时，由克莱姆法则，可以直接以行列式的形式写出方程组的解。但用克莱姆法则求解计算量巨大，因此并没有实际应用价值，一般用于理论上的推导。</p>
+
+<p>多项式$p(x) = det(xI - A)$称为方块矩阵A的特征值多项式。这是一个由行列式定义的多项式，它的解是矩阵所有的特征值。</p>
+
+<p>行列式与多重积分的关系主要就是<a href="http://zh.wikipedia.org/wiki/%E9%9B%85%E5%8F%AF%E6%AF%94%E7%9F%A9%E9%98%B5">雅可比行列式 on wiki</a>了。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi12.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi7.png" alt="image" /></p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-3/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-3/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Linear Algebra Summary 2]]></title>
@@ -1501,382 +1665,6 @@ bug：我发现在Math公式中写入<code>|</code>，即取绝对值符号的�
 </span><span class="line">Linking /usr/local/Cellar/isl/0.12.1... 6 symlinks created</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/08/setting-up-environments-on-new-mac/">http://hujiaweibujidao.github.io/blog/2014/04/08/setting-up-environments-on-new-mac/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Matlab Image Segmentation]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/03/30/matlab-image-segmentation/"/>
-    <updated>2014-03-30T16:13:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/03/30/matlab-image-segmentation</id>
-    <content type="html"><![CDATA[<p>1.基于迭代的自动阈值图像分割方法</p>
-
-<p>参考文献: <a href="http://hujiaweibujidao.github.io/files/image_segmentation.pdf">基于迭代(自动阈值)算法的医学图像增强方法</a></p>
-
-<p>该文献实现了全局和局部的图像分割代码，使用的都是迭代算法，对比下面的结果可以看出，在灰度差异特别大的图像中，局部阈值分割要比全局阈值分割表现更好。[注:我对源码略有修改]</p>
-
-<p>1.1 全局阈值分割程序</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">original_image=imread('test1.png');
-</span><span class="line">gray_image=rgb2gray(original_image);
-</span><span class="line">gray_image=double(gray_image);
-</span><span class="line">t=mean(gray_image(:));
-</span><span class="line">is_done=false;
-</span><span class="line">count=0;%迭代次数
-</span><span class="line">block=gray_image(1:end,1:end);%不分块
-</span><span class="line">while ~is_done
-</span><span class="line">    r1=find(gray_image&lt;=t);
-</span><span class="line">    r2=find(gray_image&gt;t);
-</span><span class="line">    temp1=mean(block(r1));
-</span><span class="line">    if isnan(temp1);
-</span><span class="line">        temp1=0;
-</span><span class="line">    end
-</span><span class="line">    temp2=mean(block(r2));
-</span><span class="line">    if isnan(temp2)
-</span><span class="line">        temp2=0;
-</span><span class="line">    end
-</span><span class="line">    t_new=(temp1+temp2)/2;
-</span><span class="line">    is_done=abs(t_new-t)&lt;1;%差异阈值是1
-</span><span class="line">    t=t_new;
-</span><span class="line">    count=count+1;
-</span><span class="line">    if count&gt;=1000
-</span><span class="line">        Error='Error:Cannot find the ideal threshold.'
-</span><span class="line">        return
-</span><span class="line">    end
-</span><span class="line">end
-</span><span class="line">[m,n]=size(gray_image);
-</span><span class="line">result=zeros(m,n)+255;
-</span><span class="line">result(r1)=0;
-</span><span class="line">% resule(r2)=255;
-</span><span class="line">result=uint8(result);
-</span><span class="line">figure
-</span><span class="line">imshow(result);</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>1.2 局部阈值分割程序</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-<span class="line-number">46</span>
-<span class="line-number">47</span>
-<span class="line-number">48</span>
-<span class="line-number">49</span>
-<span class="line-number">50</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">original_image=imread('test1.png');
-</span><span class="line">gray_image=rgb2gray(original_image);
-</span><span class="line">gray_image=double(gray_image);
-</span><span class="line">[m,n]=size(gray_image);
-</span><span class="line">result=zeros(m,n);
-</span><span class="line">block_size=70;%分块大小
-</span><span class="line">for i=1:block_size:m
-</span><span class="line">    for j=1:block_size:n
-</span><span class="line">        if ((i+block_size)&gt;m)&amp;&amp;((j+block_size)&gt;n)
-</span><span class="line">            block=gray_image(i:end,j:end);
-</span><span class="line">        elseif ((i+block_size)&gt;m)&amp;&amp;((j+block_size)&lt;=n)
-</span><span class="line">            block=gray_image(i:end,j:j+block_size-1);
-</span><span class="line">        elseif ((i+block_size)&lt;=m)&amp;&amp;((j+block_size)&gt;n)
-</span><span class="line">            block=gray_image(i:i+block_size-1,j:end);
-</span><span class="line">        else
-</span><span class="line">            block=gray_image(i:i+block_size-1,j:j+block_size-1);
-</span><span class="line">        end
-</span><span class="line">        t=mean(block(:)); t_org=t; is_done=false; count=0;
-</span><span class="line">        while ~is_done
-</span><span class="line">            r1=find(block&lt;=t); r2=find(block&gt;t); temp1=mean(block(r1));
-</span><span class="line">            if isnan(temp1);
-</span><span class="line">                temp1=0;
-</span><span class="line">            end
-</span><span class="line">            temp2=mean(block(r2));
-</span><span class="line">            if isnan(temp2)
-</span><span class="line">                temp2=0;
-</span><span class="line">            end
-</span><span class="line">            t_new=(temp1+temp2)/2; is_done=abs(t_new-t)&lt;1; t=t_new;
-</span><span class="line">            count=count+1;
-</span><span class="line">            if count&gt;=1000
-</span><span class="line">                Error='Error:Cannot find the ideal threshold.'
-</span><span class="line">                return
-</span><span class="line">            end
-</span><span class="line">        end
-</span><span class="line">        block(r1)=0;
-</span><span class="line">        block(r2)=255;
-</span><span class="line">        if ((i+block_size)&gt;m)&amp;&amp;((j+block_size)&gt;n)
-</span><span class="line">            result(i:end,j:end)=block;
-</span><span class="line">        elseif ((i+block_size)&gt;m)&amp;&amp;((j+block_size)&lt;=n)
-</span><span class="line">            result(i:end,j:j+block_size-1)=block;
-</span><span class="line">        elseif ((i+block_size)&lt;=m)&amp;&amp;((j+block_size)&gt;n)
-</span><span class="line">            result(i:i+block_size-1,j:end)=block;
-</span><span class="line">        else
-</span><span class="line">            result(i:i+block_size-1,j:j+block_size-1)=block;
-</span><span class="line">        end
-</span><span class="line">    end
-</span><span class="line">end
-</span><span class="line">resule=uint8(result);
-</span><span class="line">figure
-</span><span class="line">imshow(result);</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>对比结果：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201403/whole.png" width="320" height="210" /> <img src="http://hujiaweibujidao.github.io/images/201403/partial.png" width="320" height="210" /></p>
-
-<p>2.基于OSTU算法的自动阈值图像分割</p>
-
-<p>[这块我还没有细究…To be continued……] </p>
-
-<p>Matlab内置的<code>graythresh</code>使用的便是OSTU算法，使得白色像素和黑色像素的类间方差最大。</p>
-
-<p>因为上面测试图像的亮度存在明显的水平差异，所以我写了一个将图像沿水平方向分成几部分分别进行OSTU算法，效果明显又比上面两种方式要好些。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201403/postu.png" /> </p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">function [ result ] = partialostu( image,part,isrgb )
-</span><span class="line">%PARTIALOSTU partial image ostu
-</span><span class="line">if isrgb
-</span><span class="line">    image=rgb2gray(image);
-</span><span class="line">end
-</span><span class="line">cols=size(image,2);
-</span><span class="line">result=zeros(size(image));
-</span><span class="line">for i=1:part
-</span><span class="line">    fstart=floor((i-1)*cols/part)+1;
-</span><span class="line">    fend=floor(i*cols/part);
-</span><span class="line">    f=image(:,fstart:fend);
-</span><span class="line">    t=graythresh(f);
-</span><span class="line">    f=im2bw(f,t);
-</span><span class="line">    result(:,fstart:fend)=f;
-</span><span class="line">end
-</span><span class="line">end</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/03/30/matlab-image-segmentation/">http://hujiaweibujidao.github.io/blog/2014/03/30/matlab-image-segmentation/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Material on Mobile Development]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/03/13/mobile-development-materials/"/>
-    <updated>2014-03-13T20:28:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/03/13/mobile-development-materials</id>
-    <content type="html"><![CDATA[<h3 id="android">Android部分</h3>
-
-<h5 id="section">(1)网站类</h5>
-
-<p>1.Android开发者：<a href="http://developer.android.com/index.html">http://developer.android.com/index.html</a>    </p>
-
-<p>Google官方Android开发者网站，发布关于Android的最新信息，有最权威的<a href="http://developer.android.com/training/index.html">开发教程</a>和<a href="http://developer.android.com/guide/components/index.html">API手册</a>以及<a href="http://developer.android.com/design/index.html">应用设计教程</a>，还提供最新最强大的<a href="http://developer.android.com/tools/index.html">开发工具以及SDK</a>下载！    </p>
-
-<p>2.开源中国 Android开发专区：<a href="http://www.oschina.net/android">http://www.oschina.net/android</a></p>
-
-<p>这里有关于Android开发的各种知识，小到环境搭建，大到细节实现，很多开发者在这里分享了自己的开发经验，所以如果在某个方面遇到了问题，没准可以在这里找到答案。</p>
-
-<p>3.eoe移动开发者社区：<a href="http://android.eoe.cn/">http://android.eoe.cn/</a></p>
-
-<p>国内最好的android开发社区，这里有类似开源中国中的<a href="http://www.eoe.cn/wiki/android.html">各类开发教程</a>，还有<a href="http://www.eoeandroid.com/portal.php?mod=topic&amp;topicid=7">eoe Android特刊</a>，不过后者已经很久没有更新了，社区比较好的是如果遇到什么实在解决不了的问题不妨试试在论坛中发帖询问下高手。</p>
-
-<p>4.其他资源</p>
-
-<p><a href="http://stackoverflow.com/">StackOverflow</a> 嘿嘿，没有它解决不了的问题！</p>
-
-<p><a href="http://blog.daimajia.com/?page_id=60">Android 开源资料库</a>  开源资料不少，大部分都在Github上</p>
-
-<h5 id="section-1">(2)书籍类</h5>
-
-<p>1.<a href="http://book.douban.com/subject/6515839/">《疯狂Android讲义》</a></p>
-
-<p>作者李刚，国内的Java领域大牛之一，著有多本疯狂系列的书籍，包括<a href="http://book.douban.com/subject/3246499/">《疯狂Java讲义》</a>、<a href="http://book.douban.com/subject/3333726/">《轻量级Java EE企业应用实战(第3版):Struts 2＋Spring 3＋Hibernate整合开发》</a>等等。
-《疯狂Android讲义》这本书很厚，基本上覆盖了Android开发的所有内容，作者凭借丰富的教学经验对Android开发进行讲解，对于初学者可能遇到的各种问题和各种疑惑都意义进行了分析，内容足够深入，另外，此书还有几个实例项目进行实践，可以说，学习Android开发有这一本书足够了！如果感觉Java基础不足了，推荐看他的另一本Java巨著<a href="http://book.douban.com/subject/6515839/">《疯狂Java讲义》</a>，同样，学习Java只要看这本书就足够了！当然，最好还是看下<a href="http://book.douban.com/subject/2130190/">《Java编程思想》</a></p>
-
-<p>2.其他书籍</p>
-
-<p>[入门篇]人民邮电出版社：
-<a href="http://book.douban.com/subject/3770255/">《Google Android开发入门与实战》</a>
-<a href="http://book.douban.com/subject/3788013/">《Google Android SDK开发范例大全》</a></p>
-
-<p>两本都是入门级别的书籍，而且两本时间有点早了，如果有新版本建议看新版本</p>
-
-<p>[提高篇]电子工业出版社：
-<a href="http://book.douban.com/subject/4251755/">《Android系统原理及开发要点详解》</a>
-<a href="http://book.douban.com/subject/5907455/">《Android系统级深入开发》</a></p>
-
-<p>两本书是同样两位作者写的，写的时间比较早了，内容不是很新鲜，但是还是很有参考价值，因为内容涉及到系统原理，所以并不简单，适合想了解系统原理，但是又不想精读系统原理</p>
-
-<p>[深入篇]机械工业出版社：<a href="http://book.douban.com/subject/6802440/">《深入理解Android(卷一)》</a><a href="http://book.douban.com/subject/11542973/">《深入理解Android(卷二)》</a> </p>
-
-<p>作者邓凡平，深入理解Android姊妹篇，经典中的经典，对于深入理解Android很有帮助，两本书以源码分析的方式介绍Android了各个子系统，灰常深入，适合想精通系统原理 [这两本书我还没看]</p>
-
-<p>如果真的想要深入Android系统原理的话不妨看下<a href="http://blog.csdn.net/luoshengyang/article/details/8923485">老罗是怎么做到的</a>，嘿嘿</p>
-
-<p>其他的好书：<a href="http://book.douban.com/subject/20556210/">《Android软件安全与逆向分析》</a>
-<a href="http://book.douban.com/subject/6047744/">《Android技术内幕》</a> 等等</p>
-
-<p><a href="http://www.amazon.cn/s/ref=nb_sb_noss?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&amp;url=search-alias%3Dstripbooks&amp;field-keywords=%E5%9B%BE%E7%81%B5%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%9B%E4%B9%A6%E2%80%A2%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97+android&amp;rh=n%3A658390051%2Ck%3A%E5%9B%BE%E7%81%B5%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%9B%E4%B9%A6%E2%80%A2%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97+android">图灵程序设计丛书•移动开发系列 Android</a>   </p>
-
-<p>图灵系列的书籍都是灰常的经典，一本本都是好书，但是一个人时间精力有限，难以都看完，再加上这些书籍中的很多内容是重叠了的，所以要根据自己实际的开发需求来读相应的书籍</p>
-
-<p>如果是进行Android NDK开发的话，推荐两本书籍：</p>
-
-<p><a href="http://book.douban.com/subject/20285069/">《Pro Android C++ with the NDK》</a> <a href="http://book.douban.com/subject/20469441/">《Mastering OpenCV with Practical Computer Vision Projects》</a> </p>
-
-<h4 id="android-1">Android学习总结：先专注于某本入门书籍，细读它，理解大部分内容，如果原书有源码，建议实际运行看下结果，如果原书有项目实践，建议跟着作者的步骤一步步完成。另外，读书建议先粗略读，然后细读，这样前面不懂的小知识马上就解决了，不用花时间纠缠于某个小问题，要提高读书效率。读完了入门级书之后建议自己找个项目做做，可以是小游戏，也可以是小应用，然后开始看提高篇或者深入篇的书籍。</h4>
-
-<hr />
-
-<h3 id="ios">iOS部分</h3>
-
-<h5 id="section-2">(1)网站类</h5>
-
-<p>1.Apple iOS Dev Center：<a href="https://developer.apple.com/devcenter/ios/index.actions">https://developer.apple.com/devcenter/ios/index.action</a></p>
-
-<p>苹果官方iOS开发网址，最新的资讯、教程、开发工具</p>
-
-<p>2.开源中国 iOS专区：<a href="http://www.oschina.net/ios/home">http://www.oschina.net/ios/home</a></p>
-
-<p>丰富的开发教程和开发资源，遇到什么问题可以在这里找找教程</p>
-
-<p>3.Cocoa China：<a href="http://www.cocoachina.com/">http://www.cocoachina.com/</a></p>
-
-<p>中国最大的iOS开发网站，这里真的是什么都有哟，亲！</p>
-
-<p>4.其他资源</p>
-
-<p><a href="http://code4app.com/">找代码？看这里-&gt;Code4App</a></p>
-
-<p><a href="http://ui4app.com/">找资源？看这里-&gt;UI4App</a></p>
-
-<h5 id="section-3">(2)书籍类</h5>
-
-<p><a href="http://book.douban.com/subject/4813265/">《Head First iPhone and iPad Development》</a></p>
-
-<p>iOS开发不仅开发的成本很高，入门的门槛也比较高，如果喜欢Head First系列书籍的话不妨先看下这本</p>
-
-<p><a href="http://book.douban.com/subject/19953782/">《iOS 6 Programming Cookbook》</a></p>
-
-<p>这本书介绍的是iOS6编程，虽然现在最新的是iOS7了，但是变化不大，大多数iOS开发书籍是介绍iOS4或者iOS5开发，但是不同版本差异还是比较大，所以推荐看iOS6及以上版本的iOS编程的书籍</p>
-
-<p><a href="http://book.douban.com/subject/24846574/">《iOS开发指南：从零基础到App Store上架》</a></p>
-
-<p>今年出的新书，内容非常详细，作者是关东升，国内知名的iOS开发专家，可以搜到他的新浪微博，他专注于iOS开发，录制过一些iOS开发视频  [这本书我没读过，还没看到过]</p>
-
-<p><a href="http://book.douban.com/subject/25767591/">《疯狂iOS 讲义（上） Objective-C 2.0与iPhone/iPad应用开发基础》</a></p>
-
-<p>李刚老师估计闲不下来，嘿嘿，这是他的新书，貌似要出版了，自然要赞！</p>
-
-<p>其他书籍： [我没怎么读过]</p>
-
-<p><a href="http://book.douban.com/subject_search?search_text=iOS&amp;cat=1001">豆瓣书籍：iOS开发</a></p>
-
-<h4 id="iosiosios-6-programming-cookbookhttphujiaweiyingerdiandiancompost2013-06-04ios6listobjective-ciosios-oo">iOS学习总结：对于iOS开发我还没有完整入门，只是看了英文原汁原味的《iOS 6 Programming Cookbook》，这本书还是很不错的，分不同的开发内容进行讲解，但对于入门还是不够的，我自己读的时候写了些<a href="http://hujiaweiyinger.diandian.com/post/2013-06-04/ios6_list">读书笔记</a>，不嫌难看不妨参考下，嘿嘿。建议先搞懂Objective-C，然后再开始学习iOS开发，不要直接就学习iOS开发，没打好地基是建不了摩天大厦的！另外，开发成本略高，需要苹果机，装黑苹果麻烦，速度还慢，量力而行 O(∩_∩)O</h4>
-
-<hr />
-
-<h3 id="windows-phone">Windows Phone部分</h3>
-
-<p>需要熟悉微软的.NET平台，语言主要是C#，目前Windows Phone资料不算多，图书馆里也就几本书籍，很容易找到那些常见的资源，我没有研究过，在此就不详细提了</p>
-
-<p><a href="http://developer.windowsphone.com/zh-cn">Microsoft Windows Phone Developer 开发者网站</a></p>
-
-<p><a href="http://book.douban.com/subject_search?search_text=Windows+Phone&amp;cat=1001">豆瓣书籍：Windows Phone开发</a></p>
-
-<p>OK！差不多就这些了，有什么问题请<a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#104;&#117;&#106;&#105;&#097;&#119;&#101;&#105;&#048;&#057;&#048;&#056;&#048;&#055;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;">通过邮件联系我</a>，谢谢！</p>
-
-<p>[附上两周的Android入门课件和演示应用魔力8号球的源码]</p>
-
-<p><a href="http://hujiaweibujidao.github.io/files/android01.pdf">Android入门课程(上)</a></p>
-
-<p><a href="http://hujiaweibujidao.github.io/files/android02.pdf">Android入门课程(下)</a></p>
-
-<p><a href="http://hujiaweibujidao.github.io/files/magic8.zip">魔力8号球源码</a></p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/03/13/mobile-development-materials/">http://hujiaweibujidao.github.io/blog/2014/03/13/mobile-development-materials/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 ]]></content>
   </entry>
   
