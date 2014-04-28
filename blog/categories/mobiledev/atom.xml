@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mobiledev | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mobiledev/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T15:29:04+08:00</updated>
+  <updated>2014-04-28T15:30:53+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -512,6 +512,7 @@ new Thread(new Runnable() {
 <p>⑥<a href="http://bytefish.de/blog/opencv_facerecognizer_documentation/">关于OpenCV中的人脸识别算法 - OpenCV FaceRecognizer documentation</a></p>
 
 <p>该博客作者是OpenCV2.4之后内置的人脸识别模块的原作者，他在他的博客中详细介绍了FaceRecognizer的API以及他使用的人脸识别算法，算法讲解部分可以参考<a href="http://bytefish.de/blog/face_recognition_with_opencv2/">Face Recognition with Python/GNU Octave/Matlab</a>。</p>
+
 ]]></content>
   </entry>
   
