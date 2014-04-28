@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Calculus Summary Chapter 2"
+title: "CS 2-Derivative and Differential"
 date: 2014-04-27 14:29
 comments: true
 categories: math

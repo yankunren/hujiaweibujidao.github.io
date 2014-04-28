@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Calculus Summary Chapter 7"
+title: "CS 7-Vector Algebra"
 date: 2014-04-27 14:29
 comments: true
 categories: math

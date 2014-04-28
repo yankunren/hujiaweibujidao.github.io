@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Calculus Summary Chapter 8"
+title: "CS 8-Multivariable Differential Calculus"
 date: 2014-04-27 14:29
 comments: true
 categories: math

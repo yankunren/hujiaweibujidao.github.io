@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Calculus Summary Chapter 3"
+title: "CS 3-Differential Mean Value Theorems"
 date: 2014-04-27 14:29
 comments: true
 categories: math

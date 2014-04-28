@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Linear Algebra Summary 1"
+title: "LAS 1-Determinant"
 date: 2014-04-29 14:03
 comments: true
 categories: math

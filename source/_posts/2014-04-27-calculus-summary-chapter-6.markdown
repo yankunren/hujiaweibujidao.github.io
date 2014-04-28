@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Calculus Summary Chapter 6"
+title: "CS 6-Infinite Series"
 date: 2014-04-27 14:29
 comments: true
 categories: math

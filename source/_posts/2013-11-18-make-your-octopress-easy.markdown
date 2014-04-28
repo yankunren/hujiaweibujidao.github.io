@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "make your octopress easy"
+title: "Make Your Octopress Easy"
 date: 2013-11-18 13:11
 comments: true
 categories: octopress

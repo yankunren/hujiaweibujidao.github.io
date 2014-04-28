@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Calculus Summary Chapter 1"
+title: "CS 1-Functions and Limits"
 date: 2014-04-27 14:29
 comments: true
 categories: math

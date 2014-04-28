@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Linear Algebra Summary 4"
+title: "LAS 4-Similarity Matrix"
 date: 2014-04-29 14:03
 comments: true
 categories: math

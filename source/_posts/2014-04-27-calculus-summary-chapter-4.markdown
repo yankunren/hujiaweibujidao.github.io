@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Calculus Summary Chapter 4"
+title: "CS 4-Indefinite Integral"
 date: 2014-04-27 14:29
 comments: true
 categories: math

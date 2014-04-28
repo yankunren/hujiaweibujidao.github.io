@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Calculus Summary Chapter 10"
+title: "CS 10-Differential Equations"
 date: 2014-04-28 14:29
 comments: true
 categories: math

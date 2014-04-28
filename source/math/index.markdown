@@ -15,7 +15,7 @@ footer: true
 
 第一篇 [微积分总结](http://hujiaweibujidao.github.io/blog/2014/04/24/calculus-summary/)  [New!]
 
-第二篇 [线性代数总结](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary/)  [暂未写完]
+第二篇 [线性代数总结](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary/)  [New!]
 
 第三篇 [概率与数理统计总结]()   [暂未写完]
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Linear Algebra Summary 3"
+title: "LAS 3-EigenVectors and Eigenvalues"
 date: 2014-04-29 14:03
 comments: true
 categories: math

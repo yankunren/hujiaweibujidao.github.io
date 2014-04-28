@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Calculus Summary Chapter 5"
+title: "CS 5-Definite Integral"
 date: 2014-04-27 14:29
 comments: true
 categories: math

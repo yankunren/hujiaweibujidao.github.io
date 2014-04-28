@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Calculus Summary Chapter 9"
+title: "CS 9-Multiple Integration"
 date: 2014-04-27 14:29
 comments: true
 categories: math
