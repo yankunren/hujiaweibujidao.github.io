@@ -22,7 +22,6 @@ Documents
 **StackEdit** stores your documents in your browser, which means all your documents are automatically saved locally and are accessible **offline!**
 
 > **Note:**
-
 > - StackEdit is accessible offline after the application has been loaded for the first time.
 > - Your local documents are not shared between different browsers or computers.
 > - Clearing your browser's data may **delete all your local documents!** Make sure your documents are backed up using **Google Drive** or **Dropbox** synchronization (see [<i class="icon-refresh"></i> Synchronization](#synchronization) section).
@@ -218,16 +217,11 @@ $$
 ```
 
 > **NOTE:** You can find more information:
-
 > - about **Markdown** syntax [here][2],
 > - about **Markdown Extra** extension [here][3],
 > - about **LaTeX** mathematical expressions [here][4],
 > - about **Prettify** syntax highlighting [here][5],
 > - about **Highlight.js** syntax highlighting [here][6].
-
-  [^stackedit]: [StackEdit](https://stackedit.io/) is a full-featured, open-source Markdown editor based on PageDown, the Markdown library used by Stack Overflow and the other Stack Exchange sites.
-
-  [^gfm]: **GitHub Flavored Markdown** (GFM) is supported by StackEdit.
 
 
   [1]: http://math.stackexchange.com/
