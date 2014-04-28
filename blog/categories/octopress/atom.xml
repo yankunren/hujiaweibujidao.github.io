@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T14:17:13+08:00</updated>
+  <updated>2014-04-28T14:24:40+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -22,7 +22,7 @@
 
 <p>如果Mou渲染Math公式有问题的话，尝试在第一行加上如下js，表示让Mou去加载Mathjax的脚本</p>
 
-<p><code>
+<p><code>javascript
 &lt;!-- import js for mathjax --&gt;
 &lt;script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"&gt;&lt;/script&gt;
 </code></p>
@@ -61,7 +61,7 @@ n\in\mathbb N$ is via the Euler integra</p>
 <p>如果文档是要放在Octopress中使用的话，推荐按照<a href="http://blog-jfttt.herokuapp.com/blog/2013/12/26/add-latex/">这位博主的方式修改</a>，使用kramdown代替默认的rdiscount，然后在<code>footer.html</code>中加入上面的脚本内容。</p>
 
 <blockquote>
-  <p><strong>过去的内容，也许不对…</strong>
+  <p><strong>过去的内容，也许不对…</strong> <br />
 [但是，它还是存在些问题，关于inline Math公式的问题，推荐将Octopress中的Markdown引擎换成Kramdown，<a href="http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/">参考教程</a>，另外，使用inline Math和使用block Math一样，都是两个连着的美元符。
 bug：我发现在Math公式中写入<code>|</code>，即取绝对值符号的话会影响排版，暂时想到的解决方案是转义，换成<code>\\|</code>，它会换成双竖线，即取2范数的符号，不少情况下，不影响思考，嘿嘿。]</p>
 </blockquote>
@@ -90,7 +90,7 @@ rake generate
 rake deploy
 </code></p>
 
-<p>可以按照<a href="http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/">Make Your Octopress Easy</a>的方式建立一个shell脚本简化处理流程。</p>
+<p>可以按照<a href="http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/">Make Your Octopress Easy</a>的方式建立一个shell脚本简化处理流程，方法略过。</p>
 
 ]]></content>
   </entry>
