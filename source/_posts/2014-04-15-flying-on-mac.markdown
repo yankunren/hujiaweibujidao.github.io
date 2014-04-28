@@ -48,7 +48,7 @@ $$
 
 如果文档是要放在Octopress中使用的话，推荐按照[这位博主的方式修改](http://blog-jfttt.herokuapp.com/blog/2013/12/26/add-latex/)，使用kramdown代替默认的rdiscount，然后在`footer.html`中加入上面的脚本内容。
 
->**过去的内容，也许不对...**
+>**过去的内容，也许不对...**   
 >[但是，它还是存在些问题，关于inline Math公式的问题，推荐将Octopress中的Markdown引擎换成Kramdown，[参考教程](http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/)，另外，使用inline Math和使用block Math一样，都是两个连着的美元符。
 >bug：我发现在Math公式中写入`|`，即取绝对值符号的话会影响排版，暂时想到的解决方案是转义，换成`\\|`，它会换成双竖线，即取2范数的符号，不少情况下，不影响思考，嘿嘿。]
 
@@ -76,7 +76,7 @@ rake generate
 rake deploy
 ```
 
-可以按照[Make Your Octopress Easy](http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/)的方式建立一个shell脚本简化处理流程。
+可以按照[Make Your Octopress Easy](http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/)的方式建立一个shell脚本简化处理流程，方法略过。
 
 
 
