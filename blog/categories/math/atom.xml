@@ -4,7 +4,7 @@
   <title><![CDATA[Category: math | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T18:25:55+08:00</updated>
+  <updated>2014-04-28T19:01:56+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Linear Algebra Summary 4]]></title>
+    <title type="html"><![CDATA[LAS 4-Similarity Matrix]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-4/"/>
     <updated>2014-04-29T14:03:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-4</id>
@@ -52,7 +52,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Linear Algebra Summary 3]]></title>
+    <title type="html"><![CDATA[LAS 3-EigenVectors and Eigenvalues]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-3/"/>
     <updated>2014-04-29T14:03:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-3</id>
@@ -104,7 +104,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Linear Algebra Summary 2]]></title>
+    <title type="html"><![CDATA[LAS 2-Matrix]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/"/>
     <updated>2014-04-29T14:03:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2</id>
@@ -231,7 +231,7 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Linear Algebra Summary 1]]></title>
+    <title type="html"><![CDATA[LAS 1-Determinant]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1/"/>
     <updated>2014-04-29T14:03:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1</id>
