@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Calculus Summary Chapter 4 - Hujiawei Bujidao</title>
+  <title>Linear Algebra Summary 1 - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="第四部分 不定积分 第一节 不定积分的概念与性质
-原函数与不定积分的概念，基本积分表，不定积分的性质 连续函数一定有原函数，而且原函数肯定是无穷多个的，它们组成了一个原函数族，这就是不定积分的概念，函数f(x)的不定积分在几何上就表示积分曲线族。 积分基本上就是微分的逆运算， &hellip;">
+  <meta name="description" content="线性代数那些事 Things of Linear Algebra
+逸夫图书馆, 2014/4/27 1.行列式 什么是行列式？ 这个问题一点都不简单！ 推荐阅读的博文新理解矩阵5以及我们需要怎样的数学教育？，后者在网上比较火，简单的语言道出行列式以及矩阵的“天机”。 直到今天看到这个网页， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-4">
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1+copy">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
@@ -91,7 +91,7 @@
 		
   <header>
     
-      <h1 class="entry-title">Calculus Summary Chapter 4</h1>
+      <h1 class="entry-title">Linear Algebra Summary 1</h1>
     
     
       <p class="meta">
@@ -107,57 +107,87 @@
   
 
 
-<time datetime="2014-04-27T14:29:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+<time datetime="2014-04-29T14:03:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3 id="center-center"><center>第四部分 不定积分</center></h3>
+<div class="entry-content"><p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
+<strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
 
-<h4 id="section">第一节 不定积分的概念与性质</h4>
-<p>原函数与不定积分的概念，基本积分表，不定积分的性质</p>
+<h4 id="center1center"><center>1.行列式</center></h4>
 
-<p>连续函数一定有原函数，而且原函数肯定是无穷多个的，它们组成了一个原函数族，这就是不定积分的概念，函数f(x)的不定积分<script type="math/tex">\int f(x)dx</script>在几何上就表示<script type="math/tex">f(x)</script>积分曲线族。</p>
+<p><strong>什么是行列式？</strong></p>
 
-<p>积分基本上就是微分的逆运算，所以积分表只要参照常用函数的微分表即可。</p>
+<p>这个问题一点都不简单！</p>
 
-<h4 id="section-1">第二节 换元积分法</h4>
-<p>第一类换元积分法（凑微分法），第二类积分换元法，分部积分法</p>
+<p>推荐阅读的博文<a href="http://spaces.ac.cn/index.php/archives/2208/">新理解矩阵5</a>以及<a href="http://www.matrix67.com/blog/archives/4294">我们需要怎样的数学教育？</a>，后者在网上比较火，简单的语言道出行列式以及矩阵的“天机”。</p>
 
-<p>很多时候被积函数不都是常见的初等函数，遇到复杂的情况我们需要使用其他的方法来计算积分。假设我们要求不定积分<script type="math/tex">\int g(x)dx</script></p>
+<blockquote>
+  <p>直到今天看到<a href="http://mathoverflow.net/questions/7584/what-are-the-most-misleading-alternate-definitions-in-taught-mathematics">这个网页</a>，才看见有人一语道破线性代数的真谛（这也是我终于决定写成此文的直接原因）。我终于找到了我那一个学期企图寻找的东西。就好像把 $x$ 变成 $2 x$ 一样，我们经常需要把 $(x, y)$ 变成 $(2 x + y, x – 3 y)$ 之类的东西，这就叫做线性变换。于是才想到定义矩阵乘法，用于表示一切线性变换。几何上看，把平面上的每个点 $(x, y)$ 都变到 $(2 x + y, x – 3 y)$ 的位置上去，效果就相当于对这个平面进行了一个“线性的拉扯”。
+矩阵的乘法，其实就是多个线性变换叠加的效果，它显然满足结合律，但不满足交换律。主对角线全是 1 的矩阵所对应的线性变换其实就是不变的意思，因此它叫做单位矩阵。矩阵 A 乘以矩阵 B 得单位矩阵，就是做完线性变换 A 后再做一次线性变换 B 就又变回去了的意思，难怪我们说矩阵 B 是矩阵 A的逆矩阵。课本上对行列式的定义千奇百怪，又是什么递归，又是什么逆序对，还编写口诀帮助大家记忆。其实，<strong>行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积</strong>。因此，单位矩阵的行列式当然就为 1，某行全为 0 的行列式显然为 0 （因为某一维度会被无视掉，线性变换会把整个平面压扁）， $|A·B|$ 显然等于 $|A|·|B|$ 。行列式为 0 ，对应的矩阵当然不可逆，因为这样的线性变换已经把平面压成一条线了，什么都不能把它变回去了。当然，更高阶的矩阵就对应了更高维的空间。一瞬间，所有东西都解释清楚了。</p>
+</blockquote>
 
-<p>(1)如果我们有一个函数关系<script type="math/tex">u=h(x), g=f(u)</script>，也就是说，被积函数g(x)是关于u的函数，而u又是关于x的函数，为什么要这么复杂呢？因为g(x)直接积分比较难，但是可以将它看成<script type="math/tex">g(x)=f(u)\cdot u'=f[h(x)] \cdot h'(x)</script>，那么就有</p>
+<!--![image][14]-->
 
-<script type="math/tex; mode=display">\int g(x)dx= \int f[h(x)] \cdot h'(x)dx= \int f[h(x)]d(h(x))= [\int f(u)du]_{u=h(x)}=F(u)+C</script>
+<p>我认为，上面的表达不完全正确，比如其核心[行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积]，但是，它真正让我们意识到要好好思考，到底，什么是行列式？</p>
 
-<p>这样我们就将对g(x)求积分变成了对<script type="math/tex">u=h(x)</script>求积分，这就是第一类换元积分法。例如，求<script type="math/tex">\int \frac{1}{1+2x}dx</script>，令<script type="math/tex">u=1+2x</script>即可。</p>
+<p><strong><a href="http://zh.wikipedia.org/wiki/%E8%A1%8C%E5%88%97%E5%BC%8F">Wiki</a>的解释：行列式其实是一个函数，一个将方阵转换成一个标量的函数！[就是说，行列式本质上就相当于一个函数]</strong></p>
 
-<p>(2)如果我们有一个函数关系<script type="math/tex">x=h(t)</script>，也就是说，第一类换元积分是找一个函数<script type="math/tex">u=h(x)</script>，利用du和dx的关系将dx替换掉，而第二类是直接找到x关于t的函数，这样<script type="math/tex">dx=h'(t)dt</script>就可以将dx替换掉了，那么<script type="math/tex">\int g(x)dx = [\int g[h(t)]h'(t)dt]_{t=h^{-1}(x)} </script>，这种换元积分法就是第二类换元积分法。例如，求<script type="math/tex">\int \frac{xdx}{\sqrt{x-3}}</script>，令<script type="math/tex">t=\sqrt{x-3}</script>，即<script type="math/tex">x=t^{2}+3</script>即可。</p>
+<p><strong>行列式可以看做是有向面积或体积的概念在一般的欧几里得空间中的推广。或者说，在 n 维欧几里得空间中，行列式描述的是一个线性变换对“体积”所造成的影响。</strong></p>
 
-<p>分部积分法，如果函数u=u(x)和函数v=v(x)具有连续导数，则有<script type="math/tex">\int uv'dx = uv - \int u'vdx</script>，通常还简写为<script type="math/tex">\int udv = uv - \int vdu</script>，这种方法自然常用求两个函数乘积的积分，例如，求<script type="math/tex">\int xcosxdx</script>。</p>
+<p>首先要注意的是如果是指矩阵的行列式，那么矩阵中只有方阵才有行列式！对方阵求行列式得到一个值，这个值就是指这个$n \times n$方阵(因为矩阵都可以看做是一个线性变换，所以就是指一个线性变换)对n维空间中的“体积”所造成的影响。在二维空间中，这个“体积”实际上是平行四边形的面积，在三维空间中，“体积”就是指平行六面体的体积。更高维以此类推。</p>
 
-<h4 id="section-2">第四节 有理函数的积分</h4>
-<p>有理函数的积分，可化为有理函数的积分举例</p>
+<p>先看下行列式在二维和三维空间的几何意义(wiki解释得非常详细！)</p>
 
-<p>有理函数是指两个多项式的商，即形如<script type="math/tex">\frac {P(x)}{Q(x)}= \frac {a_{0}x^{n}+a_{1}x^{n-1}+a_{2}x^{n-2}+\dots+a_{n}}{b_{0}x^{m}+b_{1}x^{m-1}+b_{2}x^{m-2}+\dots+b_{m}}</script>，若有<script type="math/tex">m>n</script>则为真分式，否则为假分式。利用多项式的除法，总可以将一个假分式分解成一个多项式和一个真分式的和的形式。任何一个有理真分式都可以分解为以下四类最简分式之和：</p>
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi2.png" alt="image" /></p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\frac{A}{x-a}, \frac{A}{(x-a)^n}, \frac{Ax+B}{x^2+px+q}, \frac{Ax+B}{(x^2+px+q)^n} \quad (n \ge 2, p^2-4q < 0) %]]></script>
+<p>另一个解释(在矩阵条目中的解释)，<strong>一个方阵的行列式等于0当且仅当该方阵不可逆。系数是实数的时候，二维（三维）方阵A的行列式的绝对值表示单位面积（体积）的图形经过A对应的线性变换后得到的图形的面积（体积），而它的正负则代表了对应的线性变换是否改变空间的定向：行列式为正说明它保持空间定向，行列式为负则说明它逆转空间定向。</strong></p>
 
-<p>若有理真分式的分母中含有因式<script type="math/tex">(x-a)^n</script>，那么分式中含有：</p>
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi13.png" alt="image" /></p>
 
-<script type="math/tex; mode=display">\frac{A1}{x-a}+\frac{A2}{(x-a)^2}+\dots+\frac{An}{(x-a)^n}</script>
+<p>下面看下什么是用行列式怎么理解线性变换，<strong>线性变换就是把一个向量线性地变为另一个向量</strong>，<strong>行列式表示的是线性变换前后平行六面体的体积的变化系数</strong>。</p>
 
-<p>若有理真分式的分母中含有因式<script type="math/tex">(x+px+q)^n</script>，那么分式中含有：</p>
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi3.png" alt="image" /></p>
 
-<script type="math/tex; mode=display">\frac{A1}{x+px+q}+\frac{A2}{(x+px+q)^2}+\dots+\frac{An}{(x+px+q)^n}</script>
+<p>面积或体积的定义是恒正的，而行列式是有正有负的，因此需要引入有向面积和有向体积的概念。如果行列式表示的是线性变换对体积的影响，那么行列式的正负就表示了空间的定向。</p>
 
-<p>对于系数，可以在确定了最简分式的组合之后利用待定系数就可求出来。</p>
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi4.png" alt="image" /></p>
+
+<p><strong>由二维及三维的例子，可以看到一般的行列式应该具有怎样的性质。在n维欧几里得空间中，作为“平行多面体”的“体积”的概念的推广，行列式继承了“体积”函数的性质。首先，行列式需要是线性的，这可以由面积的性质类比得到。这里的线性是对于每一个向量来说的，因为当一个向量变为原来的a倍时，“平行多面体”的“体积”也变为原来的a倍。其次，当一个向量在其它向量组成的“超平面”上时，n维“平行多面体”的“体积”是零（可以想像三维空间的例子）[在向量组中就是指它们线性相关了]。也就是说，当向量线性相关时，行列式为零。</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi5.png" alt="image" /></p>
+
+<p>行列式的展开，代数余子式，拉普拉斯公式用于计算矩阵的行列式值</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi6.png" alt="image" /></p>
+
+<p>行列式的性质：
+<strong>若两个矩阵相似，那么它们的行列式相同。这是因为两个相似的矩阵之间只相差一个基底变换，而行列式描述的是矩阵对应的线性映射对体积的影响，而不是体积，所以基底变换并不会影响行列式的值。</strong></p>
+
+<p><strong>行列式是所有特征值（按代数重数计）的乘积。这可由矩阵必和其若尔当标准型相似推导出。特殊地，三角矩阵的行列式等于其对角线上所有元素的乘积</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi8.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi9.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi10.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi11.png" alt="image" /></p>
+
+<p>行列式与线性方程组，矩阵以及多项式还有多重积分之间的关系。</p>
+
+<p>当线性方程组对应的行列式不为零时，由克莱姆法则，可以直接以行列式的形式写出方程组的解。但用克莱姆法则求解计算量巨大，因此并没有实际应用价值，一般用于理论上的推导。</p>
+
+<p>多项式$p(x) = det(xI - A)$称为方块矩阵A的特征值多项式。这是一个由行列式定义的多项式，它的解是矩阵所有的特征值。</p>
+
+<p>行列式与多重积分的关系主要就是<a href="http://zh.wikipedia.org/wiki/%E9%9B%85%E5%8F%AF%E6%AF%94%E7%9F%A9%E9%98%B5">雅可比行列式 on wiki</a>了。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi12.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi7.png" alt="image" /></p>
 
 <p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-4/">http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-4/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1+copy/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1+copy/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 </div>
 
 
@@ -180,7 +210,7 @@
   
 
 
-<time datetime="2014-04-27T14:29:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+<time datetime="2014-04-29T14:03:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2014</time>
 				
 
 <span class="categories">
@@ -201,10 +231,10 @@
 			
 			<p class="meta">
 				
-				<a class="basic-alignment left" href="/blog/2014/04/27/calculus-summary-chapter-3/" title="Previous Post: Calculus Summary Chapter 3">&laquo; Calculus Summary Chapter 3</a>
+				<a class="basic-alignment left" href="/blog/2014/04/29/linearalgebra-summary/" title="Previous Post: Linear Algebra Summary">&laquo; Linear Algebra Summary</a>
 				
 				
-				<a class="basic-alignment right" href="/blog/2014/04/27/calculus-summary-chapter-5/" title="Next Post: Calculus Summary Chapter 5">Calculus Summary Chapter 5 &raquo;</a>
+				<a class="basic-alignment right" href="/blog/2014/04/29/linearalgebra-summary-2/" title="Next Post: Linear Algebra Summary 2">Linear Algebra Summary 2 &raquo;</a>
 				
 			</p>
 		</footer>

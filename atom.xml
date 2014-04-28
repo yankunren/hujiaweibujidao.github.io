@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T15:09:22+08:00</updated>
+  <updated>2014-04-28T15:13:57+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Linear Algebra Summary 1]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1/"/>
+    <title type="html"><![CDATA[Linear Algebra Summary 2]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/"/>
     <updated>2014-04-29T14:03:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1</id>
+    <id>http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2</id>
     <content type="html"><![CDATA[<p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
 <strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
 
@@ -91,7 +91,89 @@
 <img src="http://hujiaweibujidao.github.io/images/math/hanglieshi7.png" alt="image" /></p>
 
 <p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linear Algebra Summary 1]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1+copy/"/>
+    <updated>2014-04-29T14:03:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1 copy</id>
+    <content type="html"><![CDATA[<p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
+<strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
+
+<h4 id="center1center"><center>1.行列式</center></h4>
+
+<p><strong>什么是行列式？</strong></p>
+
+<p>这个问题一点都不简单！</p>
+
+<p>推荐阅读的博文<a href="http://spaces.ac.cn/index.php/archives/2208/">新理解矩阵5</a>以及<a href="http://www.matrix67.com/blog/archives/4294">我们需要怎样的数学教育？</a>，后者在网上比较火，简单的语言道出行列式以及矩阵的“天机”。</p>
+
+<blockquote>
+  <p>直到今天看到<a href="http://mathoverflow.net/questions/7584/what-are-the-most-misleading-alternate-definitions-in-taught-mathematics">这个网页</a>，才看见有人一语道破线性代数的真谛（这也是我终于决定写成此文的直接原因）。我终于找到了我那一个学期企图寻找的东西。就好像把 $x$ 变成 $2 x$ 一样，我们经常需要把 $(x, y)$ 变成 $(2 x + y, x – 3 y)$ 之类的东西，这就叫做线性变换。于是才想到定义矩阵乘法，用于表示一切线性变换。几何上看，把平面上的每个点 $(x, y)$ 都变到 $(2 x + y, x – 3 y)$ 的位置上去，效果就相当于对这个平面进行了一个“线性的拉扯”。
+矩阵的乘法，其实就是多个线性变换叠加的效果，它显然满足结合律，但不满足交换律。主对角线全是 1 的矩阵所对应的线性变换其实就是不变的意思，因此它叫做单位矩阵。矩阵 A 乘以矩阵 B 得单位矩阵，就是做完线性变换 A 后再做一次线性变换 B 就又变回去了的意思，难怪我们说矩阵 B 是矩阵 A的逆矩阵。课本上对行列式的定义千奇百怪，又是什么递归，又是什么逆序对，还编写口诀帮助大家记忆。其实，<strong>行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积</strong>。因此，单位矩阵的行列式当然就为 1，某行全为 0 的行列式显然为 0 （因为某一维度会被无视掉，线性变换会把整个平面压扁）， $|A·B|$ 显然等于 $|A|·|B|$ 。行列式为 0 ，对应的矩阵当然不可逆，因为这样的线性变换已经把平面压成一条线了，什么都不能把它变回去了。当然，更高阶的矩阵就对应了更高维的空间。一瞬间，所有东西都解释清楚了。</p>
+</blockquote>
+
+<!--![image][14]-->
+
+<p>我认为，上面的表达不完全正确，比如其核心[行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积]，但是，它真正让我们意识到要好好思考，到底，什么是行列式？</p>
+
+<p><strong><a href="http://zh.wikipedia.org/wiki/%E8%A1%8C%E5%88%97%E5%BC%8F">Wiki</a>的解释：行列式其实是一个函数，一个将方阵转换成一个标量的函数！[就是说，行列式本质上就相当于一个函数]</strong></p>
+
+<p><strong>行列式可以看做是有向面积或体积的概念在一般的欧几里得空间中的推广。或者说，在 n 维欧几里得空间中，行列式描述的是一个线性变换对“体积”所造成的影响。</strong></p>
+
+<p>首先要注意的是如果是指矩阵的行列式，那么矩阵中只有方阵才有行列式！对方阵求行列式得到一个值，这个值就是指这个$n \times n$方阵(因为矩阵都可以看做是一个线性变换，所以就是指一个线性变换)对n维空间中的“体积”所造成的影响。在二维空间中，这个“体积”实际上是平行四边形的面积，在三维空间中，“体积”就是指平行六面体的体积。更高维以此类推。</p>
+
+<p>先看下行列式在二维和三维空间的几何意义(wiki解释得非常详细！)</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi2.png" alt="image" /></p>
+
+<p>另一个解释(在矩阵条目中的解释)，<strong>一个方阵的行列式等于0当且仅当该方阵不可逆。系数是实数的时候，二维（三维）方阵A的行列式的绝对值表示单位面积（体积）的图形经过A对应的线性变换后得到的图形的面积（体积），而它的正负则代表了对应的线性变换是否改变空间的定向：行列式为正说明它保持空间定向，行列式为负则说明它逆转空间定向。</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi13.png" alt="image" /></p>
+
+<p>下面看下什么是用行列式怎么理解线性变换，<strong>线性变换就是把一个向量线性地变为另一个向量</strong>，<strong>行列式表示的是线性变换前后平行六面体的体积的变化系数</strong>。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi3.png" alt="image" /></p>
+
+<p>面积或体积的定义是恒正的，而行列式是有正有负的，因此需要引入有向面积和有向体积的概念。如果行列式表示的是线性变换对体积的影响，那么行列式的正负就表示了空间的定向。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi4.png" alt="image" /></p>
+
+<p><strong>由二维及三维的例子，可以看到一般的行列式应该具有怎样的性质。在n维欧几里得空间中，作为“平行多面体”的“体积”的概念的推广，行列式继承了“体积”函数的性质。首先，行列式需要是线性的，这可以由面积的性质类比得到。这里的线性是对于每一个向量来说的，因为当一个向量变为原来的a倍时，“平行多面体”的“体积”也变为原来的a倍。其次，当一个向量在其它向量组成的“超平面”上时，n维“平行多面体”的“体积”是零（可以想像三维空间的例子）[在向量组中就是指它们线性相关了]。也就是说，当向量线性相关时，行列式为零。</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi5.png" alt="image" /></p>
+
+<p>行列式的展开，代数余子式，拉普拉斯公式用于计算矩阵的行列式值</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi6.png" alt="image" /></p>
+
+<p>行列式的性质：
+<strong>若两个矩阵相似，那么它们的行列式相同。这是因为两个相似的矩阵之间只相差一个基底变换，而行列式描述的是矩阵对应的线性映射对体积的影响，而不是体积，所以基底变换并不会影响行列式的值。</strong></p>
+
+<p><strong>行列式是所有特征值（按代数重数计）的乘积。这可由矩阵必和其若尔当标准型相似推导出。特殊地，三角矩阵的行列式等于其对角线上所有元素的乘积</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi8.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi9.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi10.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi11.png" alt="image" /></p>
+
+<p>行列式与线性方程组，矩阵以及多项式还有多重积分之间的关系。</p>
+
+<p>当线性方程组对应的行列式不为零时，由克莱姆法则，可以直接以行列式的形式写出方程组的解。但用克莱姆法则求解计算量巨大，因此并没有实际应用价值，一般用于理论上的推导。</p>
+
+<p>多项式$p(x) = det(xI - A)$称为方块矩阵A的特征值多项式。这是一个由行列式定义的多项式，它的解是矩阵所有的特征值。</p>
+
+<p>行列式与多重积分的关系主要就是<a href="http://zh.wikipedia.org/wiki/%E9%9B%85%E5%8F%AF%E6%AF%94%E7%9F%A9%E9%98%B5">雅可比行列式 on wiki</a>了。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi12.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi7.png" alt="image" /></p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1+copy/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1+copy/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 ]]></content>
   </entry>
   
@@ -1795,156 +1877,6 @@ bug：我发现在Math公式中写入<code>|</code>，即取绝对值符号的�
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/03/13/mobile-development-materials/">http://hujiaweibujidao.github.io/blog/2014/03/13/mobile-development-materials/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Develop with OpenCV on Mac]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/"/>
-    <updated>2014-03-13T19:23:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x</id>
-    <content type="html"><![CDATA[<p>今天大部分时间都是在琢磨如何在Mac OS X上进行OpenCV项目的开发，尝试的开发工具有Xcode(版本是4.6.1)和Eclipse，使用的OpenCV版本是2.4.6。</p>
-
-<p>如果只是需要OpenCV的相关头文件以及动态库，请直接执行<code>brew install opencv</code>（如果安装了Homebrew的话），如果不行，请看下面的OpenCV源码编译安装过程。</p>
-
-<h4 id="cmake">1.安装CMake</h4>
-
-<p>安装CMake可以使用MacPorts，也可以使用Homebrew，如果以前安装过两者中的任何一个就用那个进行安装吧，我用的是Homebrew，推荐使用Homebrew，真正的“佳酿”，命令如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">sudo port install cmake //macports
-</span><span class="line">sudo brew install cmake //homebrew</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h4 id="opencv">2.编译OpenCV</h4>
-
-<p>OpenCV下载地址：<a href="http://sourceforge.net/projects/opencvlibrary/">http://sourceforge.net/projects/opencvlibrary/</a></p>
-
-<p>目前最新版本是2.4.8，我使用的是2.4.6，下载后解压，执行下面代码：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">cd &lt;path-to-opencv-source&gt;
-</span><span class="line">mkdir release
-</span><span class="line">cd release
-</span><span class="line">cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. 
-</span><span class="line">make
-</span><span class="line">sudo make install</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p>[完成之后在<code>/usr/local/include</code>目录下便有了<code>opencv</code>和<code>opencv2</code>两个目录，在<code>/usr/local/lib</code>目录下有很多的<code>opencv</code>相关的动态库，例如<code>libopencv_core.dylib</code>等等，还有几个其他的文件，它们都存放在<code>/usr/local</code>目录下]</p>
-
-<p>[注1:如果不需要了，想要卸载 OpenCV的话，可以回到<code>release</code>目录，执行<code>sudo make uninstall</code>，然后手动删除一些<code>/usr/local</code>下与OpenCV有关的目录和文件]</p>
-
-<p>[注2:如果不想把OpenCV安装在默认的<code>/usr/local/</code>目录下的话，例如为了防止Homebrew中对opencv部分的报错，而又无法使用Homebrew正常安装opencv的情况下，可以考虑将opencv安装到其他的位置，修改<code>CMAKE_INSTALL_PREFIX=/usr/local</code>即可，但是在Eclipse中的项目中可能会出现问题，详情看后面]</p>
-
-<p>其他参考内容：</p>
-
-<p><a href="http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation">Building OpenCV from Source Using CMake, Using the Command Line</a></p>
-
-<p><a href="https://sites.google.com/site/learningopencv1/installing-opencv">Installing OpenCV</a></p>
-
-<h4 id="xcodeopencv">3.使用Xcode进行OpenCV项目开发</h4>
-
-<p>1.Open Xcode, choose <code>New  -&gt; New Project -&gt; Command Line Tool</code></p>
-
-<p>2.Name it and select <code>C++</code> for type</p>
-
-<p>3.Click on your project from the left menu. Click the <code>build settings</code> tab from the top. Filter all. Scroll to <code>Search Paths</code>. Under <code>header search paths</code>, for debug and release, set the path to <code>/usr/local/include</code>. Under <code>library search paths</code>, set the path to <code>$(PROJECT_DIR)</code>. Finally, check if <code>C++ standard library</code> is <code>libstdc++</code> or not, if not, change it to this!</p>
-
-<p>4.Click on your project from the left menu. <code>File-&gt;New-&gt;New Group</code>, Name the group <code>OpenCV Frameworks</code>. </p>
-
-<p>5.Select the folder (group) you just labeled, <code>OpenCV Frameworks</code> in the left menu. Go to <code>File -&gt; add Files</code>, Type <code>/</code>, which will allow you to manually go to a folder. Go to -&gt; <code>/usr/local/lib</code></p>
-
-<p>6.Select both of these files, <code>libopencv_core.dylib</code>, <code>libopencv_highgui.dylib</code>, and click <code>Add</code>. (you may need to add other library files from this folder to run other code.)</p>
-
-<p>7.You must include this line of code in the beginning of your main.cpp file:
-<code>#include &lt;opencv2/opencv.hpp&gt;</code></p>
-
-<p>可以修改main.cpp，代码如下，运行结果就是显示一张指定的图片。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">#include &lt;opencv2/opencv.hpp&gt;
-</span><span class="line">using namespace cv;
-</span><span class="line">int main(int argc, char** argv) {
-</span><span class="line">	Mat image;
-</span><span class="line">	image = imread("/Users/hujiawei/Pictures/others/other_naicha/naicha.jpg", 1);
-</span><span class="line">    namedWindow("Display Image", WINDOW_AUTOSIZE);
-</span><span class="line">	imshow("Display Image", image);
-</span><span class="line">	waitKey(0);
-</span><span class="line">	return 0;
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>其他参考内容：   </p>
-
-<p><a href="http://stackoverflow.com/questions/19637164/c-linking-error-after-upgrading-to-mac-os-x-10-9-xcode-5-0-1">C++ linking error after upgrading to Mac OS X 10.9 / Xcode 5.0.1</a></p>
-
-<p><a href="http://mathematica.stackexchange.com/questions/34692/mathlink-linking-error-after-os-x-10-9-mavericks-upgrade">MathLink linking error after OS X 10.9 (Mavericks) upgrade</a></p>
-
-<h4 id="eclipseopencv">4.使用Eclipse进行OpenCV项目开发</h4>
-
-<p>如果使用Eclipse开发的话按照下面的步骤进行：</p>
-
-<p>1.按照正常的步骤，使用Eclipse建立一个<code>Mac C++</code>工程，包含一个cpp文件   </p>
-
-<p>2.右击工程名, 选择<code>Properties</code>，在属性配置页中选择，点击<code>C/C++ Build</code>, 在下拉选项中选择 <code>Settings</code>. 在右边的选项卡中选择 <code>Tool Settings</code>。   </p>
-
-<p>3.在<code>GCC C++ Compiler</code>选项列表中选择<code>Includes</code>，在<code>Include paths(-l)</code>中添加安装好的opencv的头文件存放目录：<code>/usr/local/include/</code> [存放opencv头文件的目录，自行看情况而定]    </p>
-
-<p>4.在<code>MacOS X C++Linker</code>选项列表中选择<code>Library</code>，在<code>Library search path (-L)</code>中添加安装好的opencv dylib文件存放目录：<code>/usr/local/lib/</code> [<strong><em>经过我的测试只能是这个目录！其他目录甚至是它的子目录都不行！如果在其他路径中，复制过来也行！</em></strong>]    </p>
-
-<p>5.在<code>MacOS X C++Linker</code>选项列表中选择<code>Library</code>, 在<code>Libraries(-l)</code> 中依次点击<code>＋</code>号，添加需要使用的lib文件(通常情况下，使用前三个，注意不要包括前缀<code>lib</code>，可以添加版本号)：    </p>
-
-<p>opencv_core opencv_imgproc opencv_highgui opencv_ml opencv_video opencv_features2d opencv_calib3d opencv_objdetect opencv_contrib opencv_legacy opencv_flann   </p>
-
-<p>6.重新build项目即可。</p>
-
-<p>如果遇到问题<code>ld: symbol(s) not found for architecture x86_64</code>，先检查代码中是否需要包含还没有添加的库文件，再检查是否是其他问题。如果是Mac平台，下面还有一个关于问题<code>ld: symbol(s) not found for architecture x86_64</code>的解释可供参考：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">There are two implementations of the standard C++ library available on OS X: libstdc++ and libc++. They are not binary compatible and libMLi3 requires libstdc++.
-</span><span class="line">On 10.8 and earlier libstdc++ is chosen by default, on 10.9 libc++ is chosen by default. To ensure compatibility with libMLi3, we need to choose libstdc++ manually.
-</span><span class="line">To do this, add -stdlib=libstdc++ to the linking command.</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>更多相关内容参考：</p>
-
-<p><a href="http://blog.sciencenet.cn/blog-702148-657754.html">http://blog.sciencenet.cn/blog-702148-657754.html</a></p>
-
-<h5 id="section">5.阅读开源项目</h5>
-
-<p>阅读开源项目<a href="https://github.com/MasteringOpenCV/code">Mastering OpenCV with Practical Computer Vision Projects</a>中的代码，以第8章Face Recognition using Eigenfaces or Fisherfaces为例</p>
-
-<p>编写一个shell，内容如下(修改自<code>README.txt</code>)，其中的<code>OpenCV_DIR</code>为OpenCV源码编译后得到的文件夹(如上面的release目录)，执行这个shell便可以得到Xcode项目，当然打开这个项目之后还要修改相应的配置。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">export OpenCV_DIR="/Volumes/hujiawei/Users/hujiawei/Android/opencv-2.4.6.1/build"
-</span><span class="line">mkdir build
-</span><span class="line">cd build
-</span><span class="line">cp $OpenCV_DIR/../data/lbpcascades/lbpcascade_frontalface.xml .
-</span><span class="line">cp $OpenCV_DIR/../data/haarcascades/haarcascade_eye.xml .
-</span><span class="line">cp $OpenCV_DIR/../data/haarcascades/haarcascade_eye_tree_eyeglasses.xml .
-</span><span class="line">cmake -G Xcode -D OpenCV_DIR=$OpenCV_DIR ..</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/">http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 ]]></content>
   </entry>
   
