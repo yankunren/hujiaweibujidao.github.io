@@ -71,3 +71,12 @@ rake deploy
 ```
 
 可以按照[Make Your Octopress Easy](http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/)的方式建立一个shell脚本简化处理流程。
+
+至于Octopress中的修改是使用kramdown代替默认的rdiscount，然后在`footer.html`中加入Stackedit的Mathjax脚本，你也可以使用上面提到的修改版本。
+
+```
+<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+```
+
+
+
