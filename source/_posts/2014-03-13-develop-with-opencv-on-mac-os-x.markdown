@@ -14,7 +14,7 @@ categories: opencv
 
 安装CMake可以使用MacPorts，也可以使用Homebrew，如果以前安装过两者中的任何一个就用那个进行安装吧，我用的是Homebrew，推荐使用Homebrew，真正的“佳酿”，命令如下：
 
-```
+```java
 sudo port install cmake //macports
 sudo brew install cmake //homebrew
 ```
@@ -65,7 +65,7 @@ sudo make install
 
 可以修改main.cpp，代码如下，运行结果就是显示一张指定的图片。
 
-```
+```c++
 #include <opencv2/opencv.hpp>
 using namespace cv;
 int main(int argc, char** argv) {

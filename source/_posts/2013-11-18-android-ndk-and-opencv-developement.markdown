@@ -30,7 +30,7 @@ categories: mobiledev android opencv
 (1) 首先安装需要安装的工具和依赖包[详见前面的Linux安装教程]，Mac平台基本上只要安装CMake即可   
 (2) 使用CMake编译opencv源码，然后通过make安装opencv[完成之后在`/usr/local/include`目录下便有了`opencv`和`opencv2`两个目录，在`/usr/local/lib`目录下有很多的`opencv`相关的动态库，例如`libopencv_core.dylib`等等]
 
-```
+```java
 cd <path-to-opencv-source>
 mkdir release
 cd release
@@ -123,5 +123,13 @@ OPENCVROOT = /Users/hujiawei/Android/opencv_sdk
 {% img left /images/201311/face_detection.png 350 500 face detection %}
 {% img right /images/201311/eye_detection.png 350 500 eye detection %}
 
+
+
+
+
 OK！本节结束！如果觉得好，请看下节[Android NDK 的核心内容和开发总结](http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/)！
+
+
+
+
 

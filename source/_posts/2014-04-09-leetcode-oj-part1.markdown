@@ -14,7 +14,7 @@ published: false
 
 字符串题，字符串分割再反转
 
-```
+```python 2.x
 class Solution:
     # @param s, a string
     # @return a string

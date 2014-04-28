@@ -14,7 +14,7 @@ categories: matlab
 
 1.1 全局阈值分割程序
 
-```
+```matlab
 original_image=imread('test1.png');
 gray_image=rgb2gray(original_image);
 gray_image=double(gray_image);

@@ -28,7 +28,7 @@ Hello world! Hello Octopress!
 
 请确保ruby版本是1.9.3以上！我试过，如果版本低的话会出错，但是如果版本很高的话也有可能出错(我试过1.9.3-p2xx)，建议就安装1.9.3-p0，也可以使用[rvm](http://octopress.org/docs/setup/rvm/)来管理ruby版本，我两个都试过了，推荐使用rbenv。
 
-```
+```java
 brew update
 brew install rbenv
 brew install ruby-build

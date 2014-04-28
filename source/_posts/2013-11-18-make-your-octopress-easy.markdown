@@ -16,7 +16,7 @@ categories: octopress
 
 [下面是我在Mac上的操作，其他系统自行修改]
 
-```
+```java
 sudo nano ~/.bash_profile  #打开并修改.bash_profile文件，下面两行是在该文件中的修改
 export OCTOPRESS_HOME=/Users/hujiawei/git/octopress  #添加OCTOPRESS_HOME变量
 export PATH=${PATH}:${OCTOPRESS_HOME}  #添加到path中

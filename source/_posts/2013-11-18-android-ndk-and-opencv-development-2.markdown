@@ -18,7 +18,11 @@ categories: mobiledev android opencv
 NDK开发的核心之一便是JNI，在[Oracle官方的JNI相关文档](http://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/jniTOC.html)中重要的是里面的第3-4部分(数据类型和函数)，本文不会介绍这些，如果想快速入手可以查看[这位作者的几篇关于JNI的文章](http://my.oschina.net/zhiweiofli/blog?catalog=225458)，讲得深入浅出，另外推荐一篇[IBM DeveloperWorks上的文章:JNI 对象在函数调用中的生命周期](http://www.ibm.com/developerworks/cn/java/j-lo-jni/index.html)，讲得有点深奥哟。
 
 - [javah命令：查看命令详细参数](http://docs.oracle.com/javase/6/docs/technotes/tools/windows/javah.html)：  
-`javah produces C header files and C source files from a Java class. These files provide the connective glue that allow your Java and C code to interact.`
+
+```java
+javah produces C header files and C source files from a Java class. These files provide the connective glue that allow your Java and C code to interact.
+```
+
 
 - 在Eclipse中配置**万能的javah工具**的方法
 
@@ -282,7 +286,7 @@ version that comes with API level 9. To use it, use the following:
 
 使用自定义的将jstring转换成char*的函数，内容如下：
 
-```
+```c++
 static char* jstringToString(JNIEnv* env, jstring jstr) {
     char* rtn = NULL;
     jclass clsstring = env->FindClass("java/lang/String");

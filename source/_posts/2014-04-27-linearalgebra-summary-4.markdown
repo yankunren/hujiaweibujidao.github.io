@@ -1,0 +1,95 @@
+---
+layout: post
+title: "Linear Algebra Summary 4"
+date: 2014-04-29 14:03
+comments: true
+categories: math
+published: true
+---
+
+**<center>线性代数那些事 Things of Linear Algebra</center>**
+**<center>逸夫图书馆, 2014/4/27</center>**
+
+#### <center>1.行列式</center>
+
+**什么是行列式？**
+
+这个问题一点都不简单！
+
+推荐阅读的博文[新理解矩阵5](http://spaces.ac.cn/index.php/archives/2208/)以及[我们需要怎样的数学教育？](http://www.matrix67.com/blog/archives/4294)，后者在网上比较火，简单的语言道出行列式以及矩阵的“天机”。
+
+> 直到今天看到[这个网页](http://mathoverflow.net/questions/7584/what-are-the-most-misleading-alternate-definitions-in-taught-mathematics)，才看见有人一语道破线性代数的真谛（这也是我终于决定写成此文的直接原因）。我终于找到了我那一个学期企图寻找的东西。就好像把 $x$ 变成 $2 x$ 一样，我们经常需要把 $(x, y)$ 变成 $(2 x + y, x – 3 y)$ 之类的东西，这就叫做线性变换。于是才想到定义矩阵乘法，用于表示一切线性变换。几何上看，把平面上的每个点 $(x, y)$ 都变到 $(2 x + y, x – 3 y)$ 的位置上去，效果就相当于对这个平面进行了一个“线性的拉扯”。
+矩阵的乘法，其实就是多个线性变换叠加的效果，它显然满足结合律，但不满足交换律。主对角线全是 1 的矩阵所对应的线性变换其实就是不变的意思，因此它叫做单位矩阵。矩阵 A 乘以矩阵 B 得单位矩阵，就是做完线性变换 A 后再做一次线性变换 B 就又变回去了的意思，难怪我们说矩阵 B 是矩阵 A的逆矩阵。课本上对行列式的定义千奇百怪，又是什么递归，又是什么逆序对，还编写口诀帮助大家记忆。其实，**行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积**。因此，单位矩阵的行列式当然就为 1，某行全为 0 的行列式显然为 0 （因为某一维度会被无视掉，线性变换会把整个平面压扁）， $|A·B|$ 显然等于 $|A|·|B|$ 。行列式为 0 ，对应的矩阵当然不可逆，因为这样的线性变换已经把平面压成一条线了，什么都不能把它变回去了。当然，更高阶的矩阵就对应了更高维的空间。一瞬间，所有东西都解释清楚了。
+
+<!--![image][14]-->
+
+我认为，上面的表达不完全正确，比如其核心[行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积]，但是，它真正让我们意识到要好好思考，到底，什么是行列式？
+
+**[Wiki](http://zh.wikipedia.org/wiki/%E8%A1%8C%E5%88%97%E5%BC%8F)的解释：行列式其实是一个函数，一个将方阵转换成一个标量的函数！[就是说，行列式本质上就相当于一个函数]**
+
+**行列式可以看做是有向面积或体积的概念在一般的欧几里得空间中的推广。或者说，在 n 维欧几里得空间中，行列式描述的是一个线性变换对“体积”所造成的影响。**
+
+首先要注意的是如果是指矩阵的行列式，那么矩阵中只有方阵才有行列式！对方阵求行列式得到一个值，这个值就是指这个$n \times n$方阵(因为矩阵都可以看做是一个线性变换，所以就是指一个线性变换)对n维空间中的“体积”所造成的影响。在二维空间中，这个“体积”实际上是平行四边形的面积，在三维空间中，“体积”就是指平行六面体的体积。更高维以此类推。
+
+先看下行列式在二维和三维空间的几何意义(wiki解释得非常详细！)
+
+![image][1]
+![image][2]
+
+另一个解释(在矩阵条目中的解释)，**一个方阵的行列式等于0当且仅当该方阵不可逆。系数是实数的时候，二维（三维）方阵A的行列式的绝对值表示单位面积（体积）的图形经过A对应的线性变换后得到的图形的面积（体积），而它的正负则代表了对应的线性变换是否改变空间的定向：行列式为正说明它保持空间定向，行列式为负则说明它逆转空间定向。**
+
+![image][13]
+
+下面看下什么是用行列式怎么理解线性变换，**线性变换就是把一个向量线性地变为另一个向量**，**行列式表示的是线性变换前后平行六面体的体积的变化系数**。
+
+![image][3]
+
+面积或体积的定义是恒正的，而行列式是有正有负的，因此需要引入有向面积和有向体积的概念。如果行列式表示的是线性变换对体积的影响，那么行列式的正负就表示了空间的定向。
+
+![image][4]
+
+**由二维及三维的例子，可以看到一般的行列式应该具有怎样的性质。在n维欧几里得空间中，作为“平行多面体”的“体积”的概念的推广，行列式继承了“体积”函数的性质。首先，行列式需要是线性的，这可以由面积的性质类比得到。这里的线性是对于每一个向量来说的，因为当一个向量变为原来的a倍时，“平行多面体”的“体积”也变为原来的a倍。其次，当一个向量在其它向量组成的“超平面”上时，n维“平行多面体”的“体积”是零（可以想像三维空间的例子）[在向量组中就是指它们线性相关了]。也就是说，当向量线性相关时，行列式为零。**
+
+![image][5]
+
+行列式的展开，代数余子式，拉普拉斯公式用于计算矩阵的行列式值
+
+![image][6]
+
+行列式的性质：
+**若两个矩阵相似，那么它们的行列式相同。这是因为两个相似的矩阵之间只相差一个基底变换，而行列式描述的是矩阵对应的线性映射对体积的影响，而不是体积，所以基底变换并不会影响行列式的值。**
+
+**行列式是所有特征值（按代数重数计）的乘积。这可由矩阵必和其若尔当标准型相似推导出。特殊地，三角矩阵的行列式等于其对角线上所有元素的乘积**
+
+![image][8]
+![image][9]
+![image][10]
+![image][11]
+
+行列式与线性方程组，矩阵以及多项式还有多重积分之间的关系。
+
+当线性方程组对应的行列式不为零时，由克莱姆法则，可以直接以行列式的形式写出方程组的解。但用克莱姆法则求解计算量巨大，因此并没有实际应用价值，一般用于理论上的推导。
+
+多项式$p(x) = det(xI - A)$称为方块矩阵A的特征值多项式。这是一个由行列式定义的多项式，它的解是矩阵所有的特征值。
+
+行列式与多重积分的关系主要就是[雅可比行列式 on wiki](http://zh.wikipedia.org/wiki/%E9%9B%85%E5%8F%AF%E6%AF%94%E7%9F%A9%E9%98%B5)了。
+
+![image][12]
+![image][7]
+
+[book]: http://hujiaweibujidao.github.io/files/linear_algebra_huangzhenghua.pdf
+[1]: http://hujiaweibujidao.github.io/images/math/hanglieshi1.png
+[2]: http://hujiaweibujidao.github.io/images/math/hanglieshi2.png
+[3]: http://hujiaweibujidao.github.io/images/math/hanglieshi3.png
+[4]: http://hujiaweibujidao.github.io/images/math/hanglieshi4.png
+[5]: http://hujiaweibujidao.github.io/images/math/hanglieshi5.png
+[6]: http://hujiaweibujidao.github.io/images/math/hanglieshi6.png
+[7]: http://hujiaweibujidao.github.io/images/math/hanglieshi7.png
+[8]: http://hujiaweibujidao.github.io/images/math/hanglieshi8.png
+[9]: http://hujiaweibujidao.github.io/images/math/hanglieshi9.png
+[10]: http://hujiaweibujidao.github.io/images/math/hanglieshi10.png
+[11]: http://hujiaweibujidao.github.io/images/math/hanglieshi11.png
+[12]: http://hujiaweibujidao.github.io/images/math/hanglieshi12.png
+[13]: http://hujiaweibujidao.github.io/images/math/hanglieshi13.png
+[14]: http://hujiaweibujidao.github.io/images/math/juzhen_matrix67.jpg
+

@@ -10,7 +10,7 @@ categories: mac octopress
 
 如果Mou渲染Math公式有问题的话，尝试在第一行加上如下js，表示让Mou去加载Mathjax的脚本
 
-```javascript
+```js
 <!-- import js for mathjax -->
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 ```
@@ -21,7 +21,7 @@ categories: mac octopress
 
 如果还是不行的话，那么建议使用[stackedit](https://stackedit.io/ )，感谢@beader的建议！还有一个问题是stackedit是在线编辑的，图片要保存到Google Driver中(或者有个特定的网址)，另外，它和Mou中内置的MathJax的渲染解析工具略有不同，例如对于行内Math公式的插入方式不同，Stackedit是以`$`为行内Math公式为标示符，Mou貌似不存在插入行内Math公式的方式，这时候可以在Mou中的Markdown文档中添加下面的代码让它支持行内Math公式。
 
-```
+```js
 <!-- mathjax config similar to math.stackexchange -->
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({

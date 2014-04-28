@@ -32,7 +32,7 @@ categories: mac
 Homebrew会将安装的软件包存放在`/usr/local/`目录下，例如`/usr/local/bin`存放一些可执行文件，`/usr/local/lib`存放一些公共库，通过homebrew安装的软件包存放在`/usr/local/Cellar`目录下。
 通过`brew doctor`命令可以检查系统中软件包可能存在的一些问题。添加`export PATH=/usr/local/bin:$PATH`到`~/.bash_profile`文件中，这样默认先使用Homebrew安装的应用程序，而不是使用系统。[注：Homebrew不会破坏系统的一些软件或者环境变量，另外，Homebrew下载的安装包存放在`/Library/Caches/Homebrew`目录中，创建的Formula存放在`/usr/local/Library/Formula`目录中]
 
-```
+```java
 hujiawei-MacBook-Pro:~ hujiawei$ ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 ==> This script will install:
 /usr/local/bin/brew

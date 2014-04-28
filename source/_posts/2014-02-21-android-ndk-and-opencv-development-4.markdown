@@ -26,7 +26,7 @@ categories: mobiledev android opencv
 
 ③打开终端，输入`sudo gedit /etc/profile`，在文件末尾添加下面内容
 
-```
+```java
 JAVA_HOME=/home/xface/android/jdk1.7.0
 export PATH=$JAVA_HOME/bin:$PATH
 ```
@@ -170,7 +170,7 @@ XFace的源码保存在虚拟机中`/home/xface/android/xface`目录下，包括
 
 三个`native`方法如下：
 
-```
+```c++
 	public static native long nativeInitFacerec(String datapath, String modelpath, int component, double threshold,
 			int facerec);
 	public static native int nativeFacerec(long xfacerec, String modelpath, long addr, int width, int height);
@@ -179,7 +179,7 @@ XFace的源码保存在虚拟机中`/home/xface/android/xface`目录下，包括
 
 对应得到的头文件中的三个方法（注意：这里方法的名称和参数类型都是严格遵守JNI规范的，不能随便修改）
 
-```
+```c++
 /*
  * Class:     edu_thu_xface_libs_XFaceLibrary
  * Method:    nativeInitFacerec
@@ -215,7 +215,7 @@ JNIEXPORT jint JNICALL Java_edu_thu_xface_libs_XFaceLibrary_nativeDestoryFacerec
 
 这部分最重要的是`private CascadeClassifier mJavaDetector;`字段，它的初始化过程在方法`onCreate(Bundle savedInstanceState)`中，这里使用了重要的`lbpcascade_frontalface.yml`文件，该文件原本存放在`res/raw`目录下，初始化过程中将其拷贝到了SD卡中，并使用这个文件创建了`CascadeClassifier`。代码片段：
 
-```
+```java
 try {
 	// File cascadeDir = getDir("cascade", Context.MODE_PRIVATE);
 	mCascadeFile = new File(CommonUtil.LBPCASCADE_FILEPATH);
@@ -248,7 +248,7 @@ try {
 
 最后在摄像头的回调方法`onCameraFrame(CvCameraViewFrame inputFrame)`中对摄像头得到的图片帧进行人脸检测，将检测出来的人脸方框直接绘制在图片帧上立刻显示出来（该方法会在每次摄像头有新的一帧）。代码片段如下，其中mRgba是每次得到的图片的RGBA格式，mGray是每次得到的图片的灰度格式
 
-```
+```java
 public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
 	// Log.i(TAG, inputFrame.gray().width() + "" + inputFrame.gray().height());
 	// landscape 640*480 || portrait [320*240]-> 240*320!
@@ -283,7 +283,7 @@ public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
 
 因为人脸识别过程需要耗费一定的时间，如果每次图片帧传入的时候便进行处理，处理完了之后再显示的话会导致界面卡死，所以人脸识别过程是在另开辟的一个线程中执行的，线程代码如下，只要摄像头还在工作，也就是还会传回图像的话，那么这个线程便会取出其灰度图像传入到JNI层进行人脸识别操作，并将结果显示出来，此处消息的传递方式使用的是Android中的Handler机制。
 
-```
+```java
 new Thread(new Runnable() {
 	public void run() {
 		Log.i(TAG, "bInitFacerec= " + bInitFacerec + " $$ bExitRecognition= " + bExitRecognition
@@ -370,3 +370,6 @@ XFace应用程序的使用过程中会产生一些文件夹和文件，全部存
 ⑥[关于OpenCV中的人脸识别算法 - OpenCV FaceRecognizer documentation](http://bytefish.de/blog/opencv_facerecognizer_documentation/)
 
 该博客作者是OpenCV2.4之后内置的人脸识别模块的原作者，他在他的博客中详细介绍了FaceRecognizer的API以及他使用的人脸识别算法，算法讲解部分可以参考[Face Recognition with Python/GNU Octave/Matlab](http://bytefish.de/blog/face_recognition_with_opencv2/)。
+
+
+
