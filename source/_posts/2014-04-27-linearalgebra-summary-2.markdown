@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Linear Algebra Summary 2"
+title: "LAS 2-Matrix"
 date: 2014-04-29 14:03
 comments: true
 categories: math
