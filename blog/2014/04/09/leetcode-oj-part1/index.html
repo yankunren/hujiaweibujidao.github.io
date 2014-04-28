@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Mou and StackEdit and Mathjax - Hujiawei Bujidao</title>
+  <title>LeetCode OJ Part1 - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="该博文记录使用Mou和Stackedit中出现的一些问题，包括Mac中的一些软件出现异常的解决方案，使我们能够Flying on Mac，一直更新中… 如果Mou渲染Math公式有问题的话，尝试在第一行加上如下js，表示让Mou去加载Mathjax的脚本 1
-2
-&lt;!-- import js &hellip;">
+  <meta name="description" content="为了找以后工作嘛，挑战下LeetCode OJ，顺序可能与OJ上的顺序不同哟，慢慢增加… 注，我附上的代码都包含了测试代码，提交的代码中不需要测试部分，我保留是因为某些题中有些测试样例比较特殊，为了提醒自己不要再犯同样的错！ 1.Reverse Words in a String 字符串题， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/15/flying-on-mac">
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/09/leetcode-oj-part1">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
@@ -92,7 +90,7 @@
 		
   <header>
     
-      <h1 class="entry-title">Mou and StackEdit and Mathjax</h1>
+      <h1 class="entry-title">LeetCode OJ Part1</h1>
     
     
       <p class="meta">
@@ -108,28 +106,52 @@
   
 
 
-<time datetime="2014-04-15T13:39:00+08:00" pubdate data-updated="true">Apr 15<span>th</span>, 2014</time>
+<time datetime="2014-04-09T18:18:00+08:00" pubdate data-updated="true">Apr 9<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>该博文记录使用Mou和Stackedit中出现的一些问题，包括Mac中的一些软件出现异常的解决方案，使我们能够<code>Flying on Mac</code>，一直更新中…</p>
+<div class="entry-content"><p>为了找以后工作嘛，挑战下LeetCode OJ，顺序可能与OJ上的顺序不同哟，慢慢增加…</p>
 
-<p>如果Mou渲染Math公式有问题的话，尝试在第一行加上如下js，表示让Mou去加载Mathjax的脚本</p>
+<p>注，我附上的代码都包含了测试代码，提交的代码中不需要测试部分，我保留是因为某些题中有些测试样例比较特殊，为了提醒自己不要再犯同样的错！</p>
+
+<p>1.Reverse Words in a String</p>
+
+<p>字符串题，字符串分割再反转</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="js"><span class="line"><span class="c">&lt;!--</span> <span class="kr">import</span> <span class="nx">js</span> <span class="k">for</span> <span class="nx">mathjax</span> <span class="o">--&gt;</span>
-</span><span class="line"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span><span class="line">    <span class="c"># @param s, a string</span>
+</span><span class="line">    <span class="c"># @return a string</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">reverseWords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+</span><span class="line">        <span class="n">l</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</span><span class="line">        <span class="n">l</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+</span><span class="line">        <span class="k">return</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</span><span class="line"><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span class="line">    <span class="n">teststrs</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;helo world&#39;</span><span class="p">,</span> <span class="s">&#39; hel hj &#39;</span><span class="p">)</span>
+</span><span class="line">    <span class="n">so</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">teststrs</span><span class="p">:</span>
+</span><span class="line">        <span class="k">print</span> <span class="n">so</span><span class="o">.</span><span class="n">reverseWords</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>该链接指向的是Mathjax的js，用来渲染Math公式，Mou支持Mathjax。为了减轻Octopress加载的负担，可以只在需要使用Mathjax的博文中添加一行js即可，不需要将它放在自定义的<code>head.html</code>文件中。</p>
+<p>2.Evaluate Reverse Polish Notation</p>
 
-<p>不知为何，最近加上了这句Math公式还是没有显示出来，貌似Mou并没有去加载这个js的样子，于是我尝试在浏览器中直接访问，将这个js中的所有内容复制进来，这样Mou有显示正常了，数学公式都没有问题！ :-) 如果你不能访问，放心，我已经将这个js的源码放在<a href="https://gist.github.com/hujiaweibujidao/11146289">这个Gist中</a>。</p>
+<p>栈的利用，逆波兰表达式求值</p>
 
-<p>如果还是不行的话，那么建议使用<a href="https://stackedit.io/">stackedit</a>，感谢@beader的建议！还有一个问题是stackedit是在线编辑的，图片要保存到Google Driver中(或者有个特定的网址)，另外，它和Mou中内置的MathJax的渲染解析工具略有不同，例如对于行内Math公式的插入方式不同，Stackedit是以<code>$</code>为行内Math公式为标示符，Mou貌似不存在插入行内Math公式的方式，这时候可以在Mou中的Markdown文档中添加下面的代码让它支持行内Math公式。</p>
+<p>注：在Java中<code>6/(-132)=0</code>但是在Python中<code>6/(-132)=-1</code>，OJ认为0是正解，所以Python中进行除法运算时使用<code>int(float(m)/float(n))</code>。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -146,68 +168,57 @@
 <span class="line-number">13</span>
 <span class="line-number">14</span>
 <span class="line-number">15</span>
-</pre></td><td class="code"><pre><code class="js"><span class="line"><span class="c">&lt;!--</span> <span class="nx">mathjax</span> <span class="nx">config</span> <span class="nx">similar</span> <span class="nx">to</span> <span class="nx">math</span><span class="p">.</span><span class="nx">stackexchange</span> <span class="o">--&gt;</span>
-</span><span class="line"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/x-mathjax-config&quot;</span><span class="o">&gt;</span>
-</span><span class="line"><span class="nx">MathJax</span><span class="p">.</span><span class="nx">Hub</span><span class="p">.</span><span class="nx">Config</span><span class="p">({</span>
-</span><span class="line">  <span class="nx">jax</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;input/TeX&quot;</span><span class="p">,</span> <span class="s2">&quot;output/HTML-CSS&quot;</span><span class="p">],</span>
-</span><span class="line">  <span class="nx">tex2jax</span><span class="o">:</span> <span class="p">{</span>
-</span><span class="line">    <span class="nx">inlineMath</span><span class="o">:</span> <span class="p">[</span> <span class="p">[</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span><span class="p">]</span> <span class="p">],</span>
-</span><span class="line">    <span class="nx">displayMath</span><span class="o">:</span> <span class="p">[</span> <span class="p">[</span><span class="s1">&#39;$$&#39;</span><span class="p">,</span> <span class="s1">&#39;$$&#39;</span><span class="p">]],</span>
-</span><span class="line">    <span class="nx">processEscapes</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class="line">    <span class="nx">skipTags</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;script&#39;</span><span class="p">,</span> <span class="s1">&#39;noscript&#39;</span><span class="p">,</span> <span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="s1">&#39;pre&#39;</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="p">]</span>
-</span><span class="line">  <span class="p">},</span>
-</span><span class="line">  <span class="nx">messageStyle</span><span class="o">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
-</span><span class="line">  <span class="s2">&quot;HTML-CSS&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="nx">preferredFont</span><span class="o">:</span> <span class="s2">&quot;TeX&quot;</span><span class="p">,</span> <span class="nx">availableFonts</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;STIX&quot;</span><span class="p">,</span><span class="s2">&quot;TeX&quot;</span><span class="p">]</span> <span class="p">}</span>
-</span><span class="line"><span class="p">});</span>
-</span><span class="line"><span class="o">&lt;</span><span class="err">/script&gt;</span>
-</span><span class="line"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML&quot;</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span><span class="line">    <span class="c"># @param tokens, a list of string</span>
+</span><span class="line">    <span class="c"># @return an integer</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">evalRPN</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokens</span><span class="p">):</span>
+</span><span class="line">        <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class="line">        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="ow">in</span> <span class="s">&#39;+-*/&#39;</span><span class="p">):</span>
+</span><span class="line">                <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()),</span> <span class="nb">int</span><span class="p">(</span><span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()))</span>
+</span><span class="line">                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">):</span>
+</span><span class="line">            <span class="k">return</span> <span class="n">n</span> <span class="o">+</span> <span class="n">m</span>
+</span><span class="line">        <span class="k">elif</span> <span class="n">token</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">):</span>
+</span><span class="line">            <span class="k">return</span> <span class="n">m</span> <span class="o">-</span> <span class="n">n</span>
+</span><span class="line">        <span class="k">elif</span> <span class="n">token</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="s">&#39;*&#39;</span><span class="p">):</span>
+</span><span class="line">            <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">m</span>
+</span><span class="line">        <span class="k">elif</span> <span class="n">token</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">):</span>
+</span><span class="line">            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</span><span class="line"><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span class="line">    <span class="n">tests</span> <span class="o">=</span> <span class="p">[[</span><span class="s">&quot;18&quot;</span><span class="p">],[</span><span class="s">&quot;10&quot;</span><span class="p">,</span><span class="s">&quot;6&quot;</span><span class="p">,</span><span class="s">&quot;9&quot;</span><span class="p">,</span><span class="s">&quot;3&quot;</span><span class="p">,</span><span class="s">&quot;+&quot;</span><span class="p">,</span><span class="s">&quot;-11&quot;</span><span class="p">,</span><span class="s">&quot;*&quot;</span><span class="p">,</span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="s">&quot;*&quot;</span><span class="p">,</span><span class="s">&quot;17&quot;</span><span class="p">,</span><span class="s">&quot;+&quot;</span><span class="p">,</span><span class="s">&quot;5&quot;</span><span class="p">,</span><span class="s">&quot;+&quot;</span><span class="p">]];</span>
+</span><span class="line">    <span class="n">so</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">tests</span><span class="p">:</span>
+</span><span class="line">        <span class="k">print</span> <span class="n">so</span><span class="o">.</span><span class="n">evalRPN</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>测试：The <em>Gamma function</em> satisfying $\Gamma(n) = (n-1)!\quad\forall
-n\in\mathbb N$ is via the Euler integra</p>
+<p>3.Max Points on a Line</p>
 
-<script type="math/tex; mode=display">
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-</script>
+<p>在平面上的点集合中找到在同一条线上最多的点集合的个数</p>
 
-<p>如果文档是要放在Octopress中使用的话，推荐按照<a href="http://blog-jfttt.herokuapp.com/blog/2013/12/26/add-latex/">这位博主的方式修改</a>，使用kramdown代替默认的rdiscount，然后在<code>footer.html</code>中加入上面的脚本内容。</p>
+<p>注：相同的点重复计算点个数</p>
 
-<blockquote>
-  <p><strong>过去的内容，也许不对…</strong> <br />
-[但是，它还是存在些问题，关于inline Math公式的问题，推荐将Octopress中的Markdown引擎换成Kramdown，<a href="http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/">参考教程</a>，另外，使用inline Math和使用block Math一样，都是两个连着的美元符。
-bug：我发现在Math公式中写入<code>|</code>，即取绝对值符号的话会影响排版，暂时想到的解决方案是转义，换成<code>\\|</code>，它会换成双竖线，即取2范数的符号，不少情况下，不影响思考，嘿嘿。]</p>
-</blockquote>
-
-<p>=== At Last ===</p>
-
-<p>我现在的做法是，做一般的作业使用Mou，按照上面的方式肯定有一个可以，完成作业没有问题。</p>
-
-<p>写Octopress博客中的文章用StackEdit，行内Math用<code>$</code>(某些情况下可以，但是有些情况下不行，不行的话还是使用<code>$$</code>，Kramdown支持<code>$$</code>形式的行内公式)，其他形式用<code>$$</code>。Stackedit支持直接将文档publish到Github的某个项目的某个分支下的某个文件夹中，文件名自己命名。如下图所示：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201404/stackedit_publish.png" alt="image" /></p>
-
-<p>注意，如果该目录下有相同名称的文件的话，会被覆盖掉，利用这个方式我们就可以update以前的文章啦！当然，Stackedit在你publish了一次之后会记住publish的目标位置，以后每次更新之后publish都会publish到那个目标位置。</p>
-
-<p>那如果使用Stackedit打开一个Octopress中已经写好了的文章呢？我使用的方法是<code>Import from URL</code>功能，其中的<code>URL</code>是该Markdown文档的URL，可以在Github中找到并打开那个文档，点击<code>Raw</code>按钮就会进入这份文档的源代码页面，复制该页面的URL即可，比如这篇文章的URL是</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="js"><span class="line"><span class="nx">https</span><span class="o">:</span><span class="c1">//raw.githubusercontent.com/hujiaweibujidao/hujiaweibujidao.github.io/source/source/_posts/2014-04-15-flying-on-mac.markdown</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>修改完了使用上面的方式覆盖即可。要让Octopress对这个页面进行重新渲染还需要在本地执行下面代码</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="js"><span class="line"><span class="nx">git</span> <span class="nx">pull</span>
-</span><span class="line"><span class="nx">rake</span> <span class="nx">generate</span>
-</span><span class="line"><span class="nx">rake</span> <span class="nx">deploy</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>可以按照<a href="http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/">Make Your Octopress Easy</a>的方式建立一个shell脚本简化处理流程，方法略过。</p>
+<p>To be continued……</p>
 
 <p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/15/flying-on-mac/">http://hujiaweibujidao.github.io/blog/2014/04/15/flying-on-mac/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/09/leetcode-oj-part1/">http://hujiaweibujidao.github.io/blog/2014/04/09/leetcode-oj-part1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! ^_^</p>
 </div>
 
 
@@ -230,12 +241,12 @@ bug：我发现在Math公式中写入<code>|</code>，即取绝对值符号的�
   
 
 
-<time datetime="2014-04-15T13:39:00+08:00" pubdate data-updated="true">Apr 15<span>th</span>, 2014</time>
+<time datetime="2014-04-09T18:18:00+08:00" pubdate data-updated="true">Apr 9<span>th</span>, 2014</time>
 				
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/mac/'>mac</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>
+    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
   
 </span>
 
@@ -251,10 +262,10 @@ bug：我发现在Math公式中写入<code>|</code>，即取绝对值符号的�
 			
 			<p class="meta">
 				
-				<a class="basic-alignment left" href="/blog/2014/04/13/vertext-cover-problem/" title="Previous Post: Vertext Cover Problem">&laquo; Vertext Cover Problem</a>
+				<a class="basic-alignment left" href="/blog/2014/04/08/setting-up-environments-on-new-mac/" title="Previous Post: Setting Up Environments on New Mac">&laquo; Setting Up Environments on New Mac</a>
 				
 				
-				<a class="basic-alignment right" href="/blog/2014/04/22/probability-and-statistics-summary/" title="Next Post: probability and statistics summary">probability and statistics summary &raquo;</a>
+				<a class="basic-alignment right" href="/blog/2014/04/13/vertext-cover-problem/" title="Next Post: Vertext Cover Problem">Vertext Cover Problem &raquo;</a>
 				
 			</p>
 		</footer>
