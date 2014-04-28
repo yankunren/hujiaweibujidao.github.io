@@ -10,86 +10,115 @@ published: true
 **<center>线性代数那些事 Things of Linear Algebra</center>**
 **<center>逸夫图书馆, 2014/4/27</center>**
 
-#### <center>1.行列式</center>
+### <center>矩阵</center>
 
-**什么是行列式？**
+1.什么是矩阵？
 
-这个问题一点都不简单！
+这个问题很多人进行过探讨，在网上也比较火，比如[孟岩的三篇《理解矩阵》](http://blog.csdn.net/myan/article/details/647511)，知乎上[如何直观理解矩阵和线代](http://www.zhihu.com/question/21082351)，还有其他人对矩阵的理解，例如[新理解矩阵1](http://spaces.ac.cn/index.php/archives/1765/)和[新理解矩阵2](http://spaces.ac.cn/index.php/archives/1768/)等等。
 
-推荐阅读的博文[新理解矩阵5](http://spaces.ac.cn/index.php/archives/2208/)以及[我们需要怎样的数学教育？](http://www.matrix67.com/blog/archives/4294)，后者在网上比较火，简单的语言道出行列式以及矩阵的“天机”。
+那，到底什么是矩阵呢？
 
-> 直到今天看到[这个网页](http://mathoverflow.net/questions/7584/what-are-the-most-misleading-alternate-definitions-in-taught-mathematics)，才看见有人一语道破线性代数的真谛（这也是我终于决定写成此文的直接原因）。我终于找到了我那一个学期企图寻找的东西。就好像把 $x$ 变成 $2 x$ 一样，我们经常需要把 $(x, y)$ 变成 $(2 x + y, x – 3 y)$ 之类的东西，这就叫做线性变换。于是才想到定义矩阵乘法，用于表示一切线性变换。几何上看，把平面上的每个点 $(x, y)$ 都变到 $(2 x + y, x – 3 y)$ 的位置上去，效果就相当于对这个平面进行了一个“线性的拉扯”。
-矩阵的乘法，其实就是多个线性变换叠加的效果，它显然满足结合律，但不满足交换律。主对角线全是 1 的矩阵所对应的线性变换其实就是不变的意思，因此它叫做单位矩阵。矩阵 A 乘以矩阵 B 得单位矩阵，就是做完线性变换 A 后再做一次线性变换 B 就又变回去了的意思，难怪我们说矩阵 B 是矩阵 A的逆矩阵。课本上对行列式的定义千奇百怪，又是什么递归，又是什么逆序对，还编写口诀帮助大家记忆。其实，**行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积**。因此，单位矩阵的行列式当然就为 1，某行全为 0 的行列式显然为 0 （因为某一维度会被无视掉，线性变换会把整个平面压扁）， $|A·B|$ 显然等于 $|A|·|B|$ 。行列式为 0 ，对应的矩阵当然不可逆，因为这样的线性变换已经把平面压成一条线了，什么都不能把它变回去了。当然，更高阶的矩阵就对应了更高维的空间。一瞬间，所有东西都解释清楚了。
+**总结起来，我觉得，矩阵就是线性变换，作用在一个点上就是将这个点移动到该空间的另一个点，作用在向量上就是对这个向量进行放缩或者旋转或者反射等一系列的线性变换，作用在矩阵上那就是对矩阵中的每一个列向量进行线性变换之后然后进行叠加结果(这就是为什么矩阵的乘法有些奇妙的原因)。因为运动是相对的，你可以理解为坐标系没有变，被作用对象发生了变化，也可以理解为被作用对象没有变，变的是坐标系(也就是空间的基)。**
 
-<!--![image][14]-->
+> 这里借用下小苏的图和解释。
+矩阵$A=\left[ \begin{array}{cc} a11 & a12 \\ a21 & a22 \end{array} \right]$
+事实上是由两个向量$[a11,a21]^T$和$[a12,a22]^T$（这里的向量都是列向量）组成，它描述了一个平面（仿射）坐标系。换句话说，这两个向量其实是这个坐标系的两个基，而运算$y=Ax$则是告诉我们，在$A$这个坐标系下的$x$向量，在$I$坐标系下是怎样的。这里的$I$坐标系就是我们最常用的直角坐标系，也就是说，任何向量（包括矩阵里边的向量），只要它前面没有矩阵作用于它，那么它都是在直角坐标系下度量出来的。下图所用的
+矩阵$A=\left[ \begin{array}{cc} 3 & 2 \\ 1 & 3 \end{array} \right]$
+这构成了一个仿射坐标系，在这个坐标系下，有一个向量$x=[2,2]^T$，它在直角坐标系下测得的坐标为$[10,8]^T$，现在我们不难发现，直接用矩阵乘法来计算，有
+$Ax=[3∗2+2∗2,1∗2+3∗2]^T=[10,8]^T$
+小苏对此展开讨论了[它和矩阵乘法之间的联系](http://spaces.ac.cn/index.php/archives/1768/)
 
-我认为，上面的表达不完全正确，比如其核心[行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积]，但是，它真正让我们意识到要好好思考，到底，什么是行列式？
+![image](http://hujiaweibujidao.github.io/images/math/xianxinbianhua.png)
 
-**[Wiki](http://zh.wikipedia.org/wiki/%E8%A1%8C%E5%88%97%E5%BC%8F)的解释：行列式其实是一个函数，一个将方阵转换成一个标量的函数！[就是说，行列式本质上就相当于一个函数]**
+[wiki](http://zh.wikipedia.org/wiki/%E7%9F%A9%E9%98%B5)上关于矩阵和线性变换关系的解释，其中提到了从n维空间到m维空间的任何线性变换都对应于一个矩阵，其中也提到了相似矩阵其实是相同的线性变换在不同的坐标基下的不同表示而已。
 
-**行列式可以看做是有向面积或体积的概念在一般的欧几里得空间中的推广。或者说，在 n 维欧几里得空间中，行列式描述的是一个线性变换对“体积”所造成的影响。**
+![image](http://hujiaweibujidao.github.io/images/math/xianxingbianhuan.png)
 
-首先要注意的是如果是指矩阵的行列式，那么矩阵中只有方阵才有行列式！对方阵求行列式得到一个值，这个值就是指这个$n \times n$方阵(因为矩阵都可以看做是一个线性变换，所以就是指一个线性变换)对n维空间中的“体积”所造成的影响。在二维空间中，这个“体积”实际上是平行四边形的面积，在三维空间中，“体积”就是指平行六面体的体积。更高维以此类推。
+2.线性变换
 
-先看下行列式在二维和三维空间的几何意义(wiki解释得非常详细！)
+好吧，那什么是线性变换呢？
 
-![image][1]
-![image][2]
+wiki中对线性变换的解释，这些变换其实主要包括缩放、旋转、反射等。
 
-另一个解释(在矩阵条目中的解释)，**一个方阵的行列式等于0当且仅当该方阵不可逆。系数是实数的时候，二维（三维）方阵A的行列式的绝对值表示单位面积（体积）的图形经过A对应的线性变换后得到的图形的面积（体积），而它的正负则代表了对应的线性变换是否改变空间的定向：行列式为正说明它保持空间定向，行列式为负则说明它逆转空间定向。**
+![image](http://hujiaweibujidao.github.io/images/math/xianxinbianhua2.png)
 
-![image][13]
+(1)反射变换
 
-下面看下什么是用行列式怎么理解线性变换，**线性变换就是把一个向量线性地变为另一个向量**，**行列式表示的是线性变换前后平行六面体的体积的变化系数**。
+$
+A=\left[ \begin{array}{cc} -1 & 0 \\ 0 & 1 \end{array} \right] \quad
+\rightarrow \left\{ \begin{array}{cc} x'=-x \\y'=y \end{array} \right.
+$
 
-![image][3]
+水平反射，x变成对应的相反数，y不变。
 
-面积或体积的定义是恒正的，而行列式是有正有负的，因此需要引入有向面积和有向体积的概念。如果行列式表示的是线性变换对体积的影响，那么行列式的正负就表示了空间的定向。
+什么是反射？[wiki](http://zh.wikipedia.org/wiki/%E5%8F%8D%E5%B0%84_(%E6%95%B0%E5%AD%A6))上的解释是：**反射是把一个物体变换成它的镜像的映射。要反射一个平面图形，需要“镜子”是一条直线（反射轴），对于三维空间中的反射就要使用平面作为镜子。**
 
-![image][4]
+**最常用的反射变换就是[Householder变换](http://zh.wikipedia.org/wiki/%E8%B1%AA%E6%96%AF%E9%9C%8D%E5%B0%94%E5%BE%B7%E5%8F%98%E6%8D%A2)了，这一变换将一个向量变换为由一个超平面反射的镜像，是一种线性变换。豪斯霍尔德变换可以将向量的某些元素置零，同时保持该向量的范数不变。Householder变换在矩阵的QR分解中非常重要！**关于Householder的内部原理以及代码实现请参考我写的另一份总结[《Numerical Methods Using Matlab》](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)第三章 矩阵特征值和奇异值分解
 
-**由二维及三维的例子，可以看到一般的行列式应该具有怎样的性质。在n维欧几里得空间中，作为“平行多面体”的“体积”的概念的推广，行列式继承了“体积”函数的性质。首先，行列式需要是线性的，这可以由面积的性质类比得到。这里的线性是对于每一个向量来说的，因为当一个向量变为原来的a倍时，“平行多面体”的“体积”也变为原来的a倍。其次，当一个向量在其它向量组成的“超平面”上时，n维“平行多面体”的“体积”是零（可以想像三维空间的例子）[在向量组中就是指它们线性相关了]。也就是说，当向量线性相关时，行列式为零。**
+下图为Householder变换的图示：
+![image](http://hujiaweibujidao.github.io/images/math/HouseholderReflection.png)
 
-![image][5]
+(2)放缩变换
 
-行列式的展开，代数余子式，拉普拉斯公式用于计算矩阵的行列式值
+$
+A=\left[ \begin{array}{cc} \frac{3}{2} & 0 \\ 0 & \frac{3}{2} \end{array} \right] \quad
+\rightarrow \left\{ \begin{array}{c} x'=\frac{3}{2}x \\ y'=\frac{3}{2}y \end{array} \right.
+$
 
-![image][6]
+放缩反射，x和y都变成原来的$\frac{3}{2}$倍。
 
-行列式的性质：
-**若两个矩阵相似，那么它们的行列式相同。这是因为两个相似的矩阵之间只相差一个基底变换，而行列式描述的是矩阵对应的线性映射对体积的影响，而不是体积，所以基底变换并不会影响行列式的值。**
+(3)旋转变换
 
-**行列式是所有特征值（按代数重数计）的乘积。这可由矩阵必和其若尔当标准型相似推导出。特殊地，三角矩阵的行列式等于其对角线上所有元素的乘积**
+$
+A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\frac{\pi}{6}) & \cos(\frac{\pi}{6}) \end{array} \right] \quad
+\rightarrow \left\{ \begin{array}{c} x'=\frac{\sqrt{3}}{2}x-\frac{1}{2}y \\ y'=\frac{1}{2}x+\frac{\sqrt{3}}{2}y \end{array} \right.
+$
 
-![image][8]
-![image][9]
-![image][10]
-![image][11]
+旋转反射，[一般性的证明请看这张图](http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan1.png)，[wiki](http://zh.wikipedia.org/wiki/%E6%97%8B%E8%BD%AC)中对二维空间旋转的解释。
 
-行列式与线性方程组，矩阵以及多项式还有多重积分之间的关系。
+![image](http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan2.png)
 
-当线性方程组对应的行列式不为零时，由克莱姆法则，可以直接以行列式的形式写出方程组的解。但用克莱姆法则求解计算量巨大，因此并没有实际应用价值，一般用于理论上的推导。
+**旋转矩阵是在乘以一个向量的时候有改变向量的方向但不改变大小的效果的矩阵。旋转矩阵不包括点反演，它可以把右手坐标系改变成左手坐标系或反之。所有旋转加上反演形成了正交矩阵的集合。旋转可分为主动旋转与被动旋转。主动旋转是指将向量逆时针围绕旋转轴所做出的旋转。被动旋转是对坐标轴本身进行的逆时针旋转，它相当于主动旋转的逆操作。**
 
-多项式$p(x) = det(xI - A)$称为方块矩阵A的特征值多项式。这是一个由行列式定义的多项式，它的解是矩阵所有的特征值。
+旋转矩阵的性质：
+**一个矩阵是旋转矩阵，当且仅当它是正交矩阵并且它的行列式是单位一。正交矩阵的行列式是 ±1；如果行列式是 −1，则它包含了一个反射而不是真旋转矩阵。**
 
-行列式与多重积分的关系主要就是[雅可比行列式 on wiki](http://zh.wikipedia.org/wiki/%E9%9B%85%E5%8F%AF%E6%AF%94%E7%9F%A9%E9%98%B5)了。
+**旋转矩阵是正交矩阵，如果它的列向量形成 ${R}^{n}$ 的一个正交基，就是说在任何两个列向量之间的标量积是零(正交性)而每个列向量的大小是单位一(单位向量)。**
 
-![image][12]
-![image][7]
+![image](http://hujiaweibujidao.github.io/images/math/xuanzhuanjuzhen.png)
 
-[book]: http://hujiaweibujidao.github.io/files/linear_algebra_huangzhenghua.pdf
-[1]: http://hujiaweibujidao.github.io/images/math/hanglieshi1.png
-[2]: http://hujiaweibujidao.github.io/images/math/hanglieshi2.png
-[3]: http://hujiaweibujidao.github.io/images/math/hanglieshi3.png
-[4]: http://hujiaweibujidao.github.io/images/math/hanglieshi4.png
-[5]: http://hujiaweibujidao.github.io/images/math/hanglieshi5.png
-[6]: http://hujiaweibujidao.github.io/images/math/hanglieshi6.png
-[7]: http://hujiaweibujidao.github.io/images/math/hanglieshi7.png
-[8]: http://hujiaweibujidao.github.io/images/math/hanglieshi8.png
-[9]: http://hujiaweibujidao.github.io/images/math/hanglieshi9.png
-[10]: http://hujiaweibujidao.github.io/images/math/hanglieshi10.png
-[11]: http://hujiaweibujidao.github.io/images/math/hanglieshi11.png
-[12]: http://hujiaweibujidao.github.io/images/math/hanglieshi12.png
-[13]: http://hujiaweibujidao.github.io/images/math/hanglieshi13.png
-[14]: http://hujiaweibujidao.github.io/images/math/juzhen_matrix67.jpg
+旋转矩阵中有一类非常实用的，那就是[Givens旋转](http://zh.wikipedia.org/wiki/%E5%90%89%E6%96%87%E6%96%AF%E6%97%8B%E8%BD%AC)。**Givens 旋转在数值线性代数中主要的用途是在向量或矩阵中介入零。例如，这种效果可用于计算矩阵的 QR分解。超过Householder变换的一个好处是它们可以轻易的并行化，另一个好处是对于非常稀疏的矩阵计算量更小。**
+
+Given旋转矩阵的表达：
+
+![image](http://hujiaweibujidao.github.io/images/math/givens.png)
+
+Given旋转矩阵的稳定计算：
+
+![image](http://hujiaweibujidao.github.io/images/math/givens2.png)
+
+3.逆矩阵和伴随矩阵
+
+理解了矩阵就是线性变换之后，那么就很容易明白逆矩阵就是将被作用对象从变换后的位置变换回来！
+
+那，伴随矩阵又是什么呢？
+
+[wiki](http://zh.wikipedia.org/wiki/%E4%BC%B4%E9%9A%8F%E7%9F%A9%E9%98%B5)在线性代数中，一个方形矩阵的伴随矩阵$A^{*}$是一个类似于逆矩阵$A^{-1}$的概念。如果矩阵可逆，那么它的逆矩阵和它的伴随矩阵之间只差一个系数($A^{-1}=\frac{A^{*}}{det(A)}$)。也就是说，**伴随矩阵其实是变换回来之后还进行了一次放缩，放缩的大小与矩阵的行列式值有关**。
+
+![image](http://hujiaweibujidao.github.io/images/math/bansuijuzhen.png)
+
+举例说明伴随矩阵的计算，伴随矩阵其实就是原矩阵的代数余子式矩阵的转置！
+
+![image](http://hujiaweibujidao.github.io/images/math/bansuijuzhen2.png)
+
+伴随矩阵的性质
+
+![image](http://hujiaweibujidao.github.io/images/math/bansuijuzhen3.png)
+
+还需要注意的是，**逆矩阵是对于方阵来说的，只有方阵还有逆矩阵的概念，那要不是方阵呢？那么就是广义的逆矩阵**！广义逆矩阵在最小二乘法中有重要的应用。关于逆矩阵的求解以及代码实现请参考我写的另一份总结[《Numerical Methods Using Matlab》](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)第一章 线性方程组求解，最小二乘问题请参考第四章 曲线拟合和多项式插值。
+
+矩阵的一个重要用途是解线性方程组。线性方程组中未知量的系数可以排成一个矩阵，加上常数项，则称为增广矩阵。另一个重要用途是表示线性变换，即是诸如f(x)  = 4x之类的线性函数的推广。设定基底后，某个向量v可以表示为m×1的矩阵,而线性变换f可以表示为行数为m的矩阵A，使得经过变换后得到的向量f(v)可以表示成Av的形式。矩阵的特征值和特征向量可以揭示线性变换的深层特性。
+
+
+
 
