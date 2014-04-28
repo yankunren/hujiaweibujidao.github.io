@@ -1,10 +1,10 @@
 /*
-Syntax error: Invalid CSS after "... block quote-->": expected "{", was "<!--"
-        on line 11 of /Volumes/hujiawei/Users/hujiawei/git/octopress/sass/custom/_styles.scss
+Syntax error: Invalid CSS after "... block quote-->": expected "{", was ""
+        on line 12 of /Volumes/hujiawei/Users/hujiawei/git/octopress/sass/custom/_styles.scss
         from line 10 of /Volumes/hujiawei/Users/hujiawei/git/octopress/sass/screen.scss
 
 Backtrace:
-/Volumes/hujiawei/Users/hujiawei/git/octopress/sass/custom/_styles.scss:11
+/Volumes/hujiawei/Users/hujiawei/git/octopress/sass/custom/_styles.scss:12
 /Volumes/hujiawei/Users/hujiawei/git/octopress/sass/screen.scss:10
 /Library/Ruby/Gems/2.0.0/gems/sass-3.2.9/lib/sass/scss/parser.rb:1146:in `expected'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.2.9/lib/sass/scss/parser.rb:1084:in `expected'
@@ -59,4 +59,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Invalid CSS after \"... block quote-->\": expected \"{\", was \"<!--\"\A         on line 11 of /Volumes/hujiawei/Users/hujiawei/git/octopress/sass/custom/_styles.scss\A         from line 10 of /Volumes/hujiawei/Users/hujiawei/git/octopress/sass/screen.scss"; }
+  content: "Syntax error: Invalid CSS after \"... block quote-->\": expected \"{\", was \"\"\A         on line 12 of /Volumes/hujiawei/Users/hujiawei/git/octopress/sass/custom/_styles.scss\A         from line 10 of /Volumes/hujiawei/Users/hujiawei/git/octopress/sass/screen.scss"; }
