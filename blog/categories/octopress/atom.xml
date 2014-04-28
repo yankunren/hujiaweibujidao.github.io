@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T15:51:43+08:00</updated>
+  <updated>2014-04-28T15:52:52+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -288,7 +288,7 @@ newpost "test new post" #当这条命令完成生成了Markdown文件之后，�
 
 <p>请确保ruby版本是1.9.3以上！我试过，如果版本低的话会出错，但是如果版本很高的话也有可能出错(我试过1.9.3-p2xx)，建议就安装1.9.3-p0，也可以使用<a href="http://octopress.org/docs/setup/rvm/">rvm</a>来管理ruby版本，我两个都试过了，推荐使用rbenv。</p>
 
-<p><code>PowerShell
+<p><code>Python
 brew update
 brew install rbenv
 brew install ruby-build

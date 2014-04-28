@@ -4,7 +4,7 @@
   <title><![CDATA[Category: opencv | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/opencv/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-28T15:51:43+08:00</updated>
+  <updated>2014-04-28T15:52:52+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -831,7 +831,7 @@ protected void deliverAndDrawFrame(CvCameraViewFrame frame) {
   <li><a href="http://docs.oracle.com/javase/6/docs/technotes/tools/windows/javah.html">javah命令：查看命令详细参数</a>：  </li>
 </ul>
 
-<p><code>
+<p><code>Python
 javah produces C header files and C source files from a Java class. These files provide the connective glue that allow your Java and C code to interact.
 </code></p>
 
@@ -1125,7 +1125,7 @@ version that comes with API level 9. To use it, use the following:</p>
 
 <p>使用自定义的将jstring转换成char*的函数，内容如下：</p>
 
-<p><code>
+<p><code>c++
 static char* jstringToString(JNIEnv* env, jstring jstr) {
     char* rtn = NULL;
     jclass clsstring = env-&gt;FindClass("java/lang/String");
@@ -1185,7 +1185,7 @@ static char* jstringToString(JNIEnv* env, jstring jstr) {
 <p>(1) 首先安装需要安装的工具和依赖包[详见前面的Linux安装教程]，Mac平台基本上只要安装CMake即可 <br />
 (2) 使用CMake编译opencv源码，然后通过make安装opencv[完成之后在<code>/usr/local/include</code>目录下便有了<code>opencv</code>和<code>opencv2</code>两个目录，在<code>/usr/local/lib</code>目录下有很多的<code>opencv</code>相关的动态库，例如<code>libopencv_core.dylib</code>等等]</p>
 
-<p><code>PowerShell
+<p><code>Python
 cd &lt;path-to-opencv-source&gt;
 mkdir release
 cd release
