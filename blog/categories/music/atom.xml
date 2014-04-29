@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: music | Hujiawei Bujidao]]></title>
+  <link href="http://hujiaweibujidao.github.io/blog/categories/music/atom.xml" rel="self"/>
+  <link href="http://hujiaweibujidao.github.io/"/>
+  <updated>2014-04-30T00:08:22+08:00</updated>
+  <id>http://hujiaweibujidao.github.io/</id>
+  <author>
+    <name><![CDATA[hujiawei]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Wouldn't it be nice]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/04/30/wouldnt-it-be-nice/"/>
+    <updated>2014-04-30T00:07:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/04/30/wouldnt-it-be-nice</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+</feed>
