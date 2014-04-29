@@ -119,17 +119,13 @@ OPENCVROOT = /Users/hujiawei/Android/opencv_sdk
 [如果配置完了之后提示一个`app_platform`的警告的话，可以在`Application.mk`文件中添加 `APP_PLATFORM := android-8`]  
 仔细理解上面的配置和操作，如果还有啥问题或者不清楚的可以查看[OpenCV官方这篇入门文档:Manual OpenCV4Android SDK setup](http://docs.opencv.org/doc/tutorials/introduction/android_binary_package/O4A_SDK.html)
 
-两个项目运行结果：[帮主，对不住啦，谁叫您长得这么帅呢！我的脸识别不了，只能用您老的啦！]   
-{% img left /images/201311/face_detection.png 350 500 face detection %}
-{% img right /images/201311/eye_detection.png 350 500 eye detection %}
+两个项目运行结果：[帮主，对不住啦，谁叫您长得这么帅呢！我的脸识别不了，只能用您老的啦！] 
 
+![image](http://hujiaweibujidao.github.io/images/201311/face_detection.png)
 
-
+![image](http://hujiaweibujidao.github.io/images/201311/eye_detection.png)
 
 
 OK！本节结束！如果觉得好，请看下节[Android NDK 的核心内容和开发总结](http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/)！
-
-
-
 
 

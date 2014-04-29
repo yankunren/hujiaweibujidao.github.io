@@ -6,6 +6,10 @@ comments: true
 categories: math
 published: true
 ---
+
+**<center>微积分总结 Summary of Calculus</center>**
+**<center>逸夫图书馆, 2014/4/26</center>**
+
 ###<center>第五部分 定积分及其应用</center>
 
 ####第一节 定积分的概念

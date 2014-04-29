@@ -6,6 +6,10 @@ comments: true
 categories: math
 published: true
 ---
+
+**<center>微积分总结 Summary of Calculus</center>**
+**<center>逸夫图书馆, 2014/4/26</center>**
+
 ###<center>第四部分 不定积分</center>
 
 ####第一节 不定积分的概念与性质

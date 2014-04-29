@@ -30,25 +30,25 @@ PS：本总结的大纲是按照参考书籍[高等数学 中国环境出版社]
 
 本总结共十个部分，内容较多，分页查看，谢谢！
 
-[第一部分 函数与极限 ](http://localhost:4000/blog/2014/04/27/calculus-summary-chapter-1/)
+[第一部分 函数与极限 ](http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-1/)
 
-[第二部分 导数与微分](http://localhost:4000/blog/2014/04/27/calculus-summary-chapter-2/)
+[第二部分 导数与微分](http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-2/)
 
-[第三部分 微分中值定理与导数的应用 ](http://localhost:4000/blog/2014/04/27/calculus-summary-chapter-3/)
+[第三部分 微分中值定理与导数的应用 ](http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-3/)
 
-[第四部分 不定积分](http://localhost:4000/blog/2014/04/27/calculus-summary-chapter-4/)
+[第四部分 不定积分](http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-4/)
 
-[第五部分 定积分及其应用](http://localhost:4000/blog/2014/04/27/calculus-summary-chapter-5/)
+[第五部分 定积分及其应用](http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-5/)
 
-[第六部分 无穷级数](http://localhost:4000/blog/2014/04/27/calculus-summary-chapter-6/)
+[第六部分 无穷级数](http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-6/)
 
-[第七部分 向量代数与空间解析几何](http://localhost:4000/blog/2014/04/27/calculus-summary-chapter-7/)
+[第七部分 向量代数与空间解析几何](http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-7/)
 
-[第八部分 多元函数微分法及其应用](http://localhost:4000/blog/2014/04/27/calculus-summary-chapter-8/)
+[第八部分 多元函数微分法及其应用](http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-8/)
 
-[第九部分 重积分](http://localhost:4000/blog/2014/04/27/calculus-summary-chapter-9/)
+[第九部分 重积分](http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-9/)
 
-[第十部分 微分方程](http://localhost:4000/blog/2014/04/27/calculus-summary-chapter-10/)
+[第十部分 微分方程](http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-10/)
 
   [book1]: http://hujiaweibujidao.github.io/files/calculus1_huangzhenghua.pdf
   [book2]: http://hujiaweibujidao.github.io/files/calculus2_huangzhenghua.pdf

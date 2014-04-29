@@ -6,6 +6,10 @@ comments: true
 categories: math
 published: true
 ---
+
+**<center>微积分总结 Summary of Calculus</center>**
+**<center>逸夫图书馆, 2014/4/26</center>**
+
 ### <center>第三部分 微分中值定理与导数的应用 </center>
 
 ####第一节 微分中值定理

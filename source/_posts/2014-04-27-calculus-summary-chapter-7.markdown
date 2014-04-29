@@ -6,6 +6,10 @@ comments: true
 categories: math
 published: true
 ---
+
+**<center>微积分总结 Summary of Calculus</center>**
+**<center>逸夫图书馆, 2014/4/26</center>**
+
 ### <center>第七部分 向量代数与空间解析几何</center>
 本部分是多元微分学的基础，而且涉及到了很多的空间知识，图形比较多，所以这部分的图片比较多，如若不清晰请Wiki或者翻书查看。
 
