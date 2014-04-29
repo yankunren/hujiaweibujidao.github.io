@@ -4,7 +4,7 @@
   <title><![CDATA[Category: android | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-29T15:59:29+08:00</updated>
+  <updated>2014-04-29T16:01:27+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -1304,8 +1304,9 @@ OPENCVROOT = /Users/hujiawei/Android/opencv_sdk
 [如果配置完了之后提示一个<code>app_platform</code>的警告的话，可以在<code>Application.mk</code>文件中添加 <code>APP_PLATFORM := android-8</code>]<br />
 仔细理解上面的配置和操作，如果还有啥问题或者不清楚的可以查看<a href="http://docs.opencv.org/doc/tutorials/introduction/android_binary_package/O4A_SDK.html">OpenCV官方这篇入门文档:Manual OpenCV4Android SDK setup</a></p>
 
-<p>两个项目运行结果：[帮主，对不住啦，谁叫您长得这么帅呢！我的脸识别不了，只能用您老的啦！] <br />
-<img class="left" src="/images/201311/face_detection.png" width="350" height="500" title="face detection" >
+<p>两个项目运行结果：[帮主，对不住啦，谁叫您长得这么帅呢！我的脸识别不了，只能用您老的啦！] </p>
+
+<p><img class="left" src="/images/201311/face_detection.png" width="350" height="500" title="face detection" >
 <img class="right" src="/images/201311/eye_detection.png" width="350" height="500" title="eye detection" ></p>
 
 <p>OK！本节结束！如果觉得好，请看下节<a href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/">Android NDK 的核心内容和开发总结</a>！</p>
