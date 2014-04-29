@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-29T09:34:26+08:00</updated>
+  <updated>2014-04-29T09:36:43+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -379,7 +379,10 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/28/calculus-summary-chapter-10/"/>
     <updated>2014-04-28T14:29:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/28/calculus-summary-chapter-10</id>
-    <content type="html"><![CDATA[<h3 id="center-center"><center>第十部分 微分方程</center></h3>
+    <content type="html"><![CDATA[<p><strong><center>微积分总结 Summary of Calculus</center></strong>
+<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
+
+<h3 id="center-center"><center>第十部分 微分方程</center></h3>
 
 <h4 id="section">第一节 微分方程的基本概念</h4>
 <p>引例，微分方程的基本概念</p>
@@ -448,7 +451,10 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-9/"/>
     <updated>2014-04-27T14:29:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-9</id>
-    <content type="html"><![CDATA[<h3 id="center-center"><center>第九部分 重积分</center></h3>
+    <content type="html"><![CDATA[<p><strong><center>微积分总结 Summary of Calculus</center></strong>
+<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
+
+<h3 id="center-center"><center>第九部分 重积分</center></h3>
 
 <h4 id="section">第一节 二重积分的概念与性质</h4>
 <p>二重积分的概念，二重积分的性质</p>
@@ -489,7 +495,10 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-8/"/>
     <updated>2014-04-27T14:29:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-8</id>
-    <content type="html"><![CDATA[<h3 id="center-center"><center>第八部分 多元函数微分法及其应用</center></h3>
+    <content type="html"><![CDATA[<p><strong><center>微积分总结 Summary of Calculus</center></strong>
+<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
+
+<h3 id="center-center"><center>第八部分 多元函数微分法及其应用</center></h3>
 
 <h4 id="section">第一节 多元函数的基本概念</h4>
 <p>平面点集、n维空间，多元函数的概念，二元函数的极限，二元函数的连续</p>
@@ -586,7 +595,10 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-7/"/>
     <updated>2014-04-27T14:29:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-7</id>
-    <content type="html"><![CDATA[<h3 id="center-center"><center>第七部分 向量代数与空间解析几何</center></h3>
+    <content type="html"><![CDATA[<p><strong><center>微积分总结 Summary of Calculus</center></strong>
+<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
+
+<h3 id="center-center"><center>第七部分 向量代数与空间解析几何</center></h3>
 <p>本部分是多元微分学的基础，而且涉及到了很多的空间知识，图形比较多，所以这部分的图片比较多，如若不清晰请Wiki或者翻书查看。</p>
 
 <h4 id="section">第一节 空间直角坐标系</h4>
@@ -672,7 +684,10 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-6/"/>
     <updated>2014-04-27T14:29:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-6</id>
-    <content type="html"><![CDATA[<h3 id="center-center"><center>第六部分 无穷级数</center></h3>
+    <content type="html"><![CDATA[<p><strong><center>微积分总结 Summary of Calculus</center></strong>
+<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
+
+<h3 id="center-center"><center>第六部分 无穷级数</center></h3>
 
 <h4 id="section">第一节 常数项级数的概念与基本性质</h4>
 <p>常数项级数的概念，常数项级数的基本性质</p>
@@ -741,7 +756,10 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-5/"/>
     <updated>2014-04-27T14:29:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-5</id>
-    <content type="html"><![CDATA[<h3 id="center-center"><center>第五部分 定积分及其应用</center></h3>
+    <content type="html"><![CDATA[<p><strong><center>微积分总结 Summary of Calculus</center></strong>
+<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
+
+<h3 id="center-center"><center>第五部分 定积分及其应用</center></h3>
 
 <h4 id="section">第一节 定积分的概念</h4>
 <p>引例，定积分的概念，定积分的几何意义，定积分的基本性质</p>
@@ -807,7 +825,10 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-4/"/>
     <updated>2014-04-27T14:29:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-4</id>
-    <content type="html"><![CDATA[<h3 id="center-center"><center>第四部分 不定积分</center></h3>
+    <content type="html"><![CDATA[<p><strong><center>微积分总结 Summary of Calculus</center></strong>
+<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
+
+<h3 id="center-center"><center>第四部分 不定积分</center></h3>
 
 <h4 id="section">第一节 不定积分的概念与性质</h4>
 <p>原函数与不定积分的概念，基本积分表，不定积分的性质</p>
@@ -859,7 +880,10 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-3/"/>
     <updated>2014-04-27T14:29:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-3</id>
-    <content type="html"><![CDATA[<h3 id="center--center"><center>第三部分 微分中值定理与导数的应用 </center></h3>
+    <content type="html"><![CDATA[<p><strong><center>微积分总结 Summary of Calculus</center></strong>
+<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
+
+<h3 id="center--center"><center>第三部分 微分中值定理与导数的应用 </center></h3>
 
 <h4 id="section">第一节 微分中值定理</h4>
 <p>罗尔中值定理，拉格朗日中值定理，泰勒中值定理，柯西中值定理</p>
@@ -909,7 +933,10 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-2/"/>
     <updated>2014-04-27T14:29:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-2</id>
-    <content type="html"><![CDATA[<h3 id="center-center"><center>第二部分 导数与微分</center></h3>
+    <content type="html"><![CDATA[<p><strong><center>微积分总结 Summary of Calculus</center></strong>
+<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
+
+<h3 id="center-center"><center>第二部分 导数与微分</center></h3>
 
 <h4 id="section">第一节 导数概念</h4>
 <p>引例，导数的定义，导数的几何意义，可导与连续的关系</p>
@@ -966,7 +993,10 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
     <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-1/"/>
     <updated>2014-04-27T14:29:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-1</id>
-    <content type="html"><![CDATA[<h3 id="center--center"><center>第一部分 函数与极限 </center></h3>
+    <content type="html"><![CDATA[<p><strong><center>微积分总结 Summary of Calculus</center></strong>
+<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
+
+<h3 id="center--center"><center>第一部分 函数与极限 </center></h3>
 
 <h4 id="section">第一节 函数</h4>
 <p>集合、区间与邻域，函数的概念与性质，反函数与复合函数，初等函数</p>
