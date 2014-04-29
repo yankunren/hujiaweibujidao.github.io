@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mobiledev | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mobiledev/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-04-29T16:19:46+08:00</updated>
+  <updated>2014-04-29T16:22:23+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -1311,9 +1311,9 @@ OPENCVROOT = /Users/hujiawei/Android/opencv_sdk
 <img class="right" src="/images/201311/eye_detection.png" width="350" height="500" title="eye detection" >     
 -->
 
-<p><img src="/images/201311/face_detection.png" alt="image" /></p>
+<p><img src="http://hujiaweibujidao.github.io/images/201311/face_detection.png" alt="image" /></p>
 
-<p><img src="/images/201311/face_detection.png" alt="image" /></p>
+<p><img src="http://hujiaweibujidao.github.io/images/201311/face_detection.png" alt="image" /></p>
 
 <p>OK！本节结束！如果觉得好，请看下节<a href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/">Android NDK 的核心内容和开发总结</a>！</p>
 
