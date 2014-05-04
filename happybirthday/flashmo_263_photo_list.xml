@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<photos>
+	
+	<config
+		folder="photos/"
+
+		thumbnail_black_white="true"
+		thumbnail_alpha="1"
+		thumbnail_x_spacing="20"
+		thumbnail_y_spacing="20"
+		max_thumbnail_width="100"
+		max_thumbnail_height="100"
+		thumbnail_border_size="5"
+		thumbnail_border_color="#FFFFFF"
+		no_of_rows="4"
+		no_of_columns="4"
+		
+		photo_border_size="10"
+		photo_border_color="#FFFFFF"
+		close_button="true"
+		previous_button="true"
+		next_button="true"
+		
+		description="true"
+		description_bg_color="#000000"
+		description_bg_alpha="0.7"
+		css_file="flashmo_210_style.css"
+		
+		tween_in_effect="easeOutExpo"
+		tween_out_effect="easeInExpo"
+		tween_duration="0.6"
+		tween_delay="0.03"
+		tween_distance="120"
+		tween_rotation="90"
+		tween_scale="0.4">
+	</config>
+	
+<photo><thumbnail>small-000.jpg</thumbnail><filename>big-000.jpg</filename></photo>
+<photo><thumbnail>small-001.jpg</thumbnail><filename>big-001.jpg</filename></photo>
+<photo><thumbnail>small-002.jpg</thumbnail><filename>big-002.jpg</filename></photo>
+<photo><thumbnail>small-003.jpg</thumbnail><filename>big-003.jpg</filename></photo>
+<photo><thumbnail>small-004.jpg</thumbnail><filename>big-004.jpg</filename></photo>
+<photo><thumbnail>small-005.jpg</thumbnail><filename>big-005.jpg</filename></photo>
+<photo><thumbnail>small-006.jpg</thumbnail><filename>big-006.jpg</filename></photo>
+<photo><thumbnail>small-007.jpg</thumbnail><filename>big-007.jpg</filename></photo>
+<photo><thumbnail>small-008.jpg</thumbnail><filename>big-008.jpg</filename></photo>
+<photo><thumbnail>small-009.jpg</thumbnail><filename>big-009.jpg</filename></photo>
+<photo><thumbnail>small-010.jpg</thumbnail><filename>big-010.jpg</filename></photo>
+<photo><thumbnail>small-011.jpg</thumbnail><filename>big-011.jpg</filename></photo>
+<photo><thumbnail>small-012.jpg</thumbnail><filename>big-012.jpg</filename></photo>
+<photo><thumbnail>small-013.jpg</thumbnail><filename>big-013.jpg</filename></photo>
+<photo><thumbnail>small-014.jpg</thumbnail><filename>big-014.jpg</filename></photo>
+<photo><thumbnail>small-015.jpg</thumbnail><filename>big-015.jpg</filename></photo>
+<photo><thumbnail>small-016.jpg</thumbnail><filename>big-016.jpg</filename></photo>
+<photo><thumbnail>small-017.jpg</thumbnail><filename>big-017.jpg</filename></photo>
+<photo><thumbnail>small-018.jpg</thumbnail><filename>big-018.jpg</filename></photo>
+<photo><thumbnail>small-019.jpg</thumbnail><filename>big-019.jpg</filename></photo>
+<photo><thumbnail>small-020.jpg</thumbnail><filename>big-020.jpg</filename></photo>
+<photo><thumbnail>small-021.jpg</thumbnail><filename>big-021.jpg</filename></photo>
+<photo><thumbnail>small-022.jpg</thumbnail><filename>big-022.jpg</filename></photo>
+<photo><thumbnail>small-023.jpg</thumbnail><filename>big-023.jpg</filename></photo>
+<photo><thumbnail>small-024.jpg</thumbnail><filename>big-024.jpg</filename></photo>
+<photo><thumbnail>small-025.jpg</thumbnail><filename>big-025.jpg</filename></photo>
+<photo><thumbnail>small-026.jpg</thumbnail><filename>big-026.jpg</filename></photo>
+<photo><thumbnail>small-027.jpg</thumbnail><filename>big-027.jpg</filename></photo>
+<photo><thumbnail>small-028.jpg</thumbnail><filename>big-028.jpg</filename></photo>
+<photo><thumbnail>small-029.jpg</thumbnail><filename>big-029.jpg</filename></photo>
+<photo><thumbnail>small-030.jpg</thumbnail><filename>big-030.jpg</filename></photo>
+<photo><thumbnail>small-031.jpg</thumbnail><filename>big-031.jpg</filename></photo>
+<photo><thumbnail>small-032.jpg</thumbnail><filename>big-032.jpg</filename></photo>
+<photo><thumbnail>small-033.jpg</thumbnail><filename>big-033.jpg</filename></photo>
+<photo><thumbnail>small-034.jpg</thumbnail><filename>big-034.jpg</filename></photo>
+<photo><thumbnail>small-035.jpg</thumbnail><filename>big-035.jpg</filename></photo>
+<photo><thumbnail>small-036.jpg</thumbnail><filename>big-036.jpg</filename></photo>
+<photo><thumbnail>small-037.jpg</thumbnail><filename>big-037.jpg</filename></photo>
+<photo><thumbnail>small-038.jpg</thumbnail><filename>big-038.jpg</filename></photo>
+<photo><thumbnail>small-039.jpg</thumbnail><filename>big-039.jpg</filename></photo>
+<photo><thumbnail>small-040.jpg</thumbnail><filename>big-040.jpg</filename></photo>
+<photo><thumbnail>small-041.jpg</thumbnail><filename>big-041.jpg</filename></photo>
+<photo><thumbnail>small-042.jpg</thumbnail><filename>big-042.jpg</filename></photo>
+<photo><thumbnail>small-043.jpg</thumbnail><filename>big-043.jpg</filename></photo>
+<photo><thumbnail>small-044.jpg</thumbnail><filename>big-044.jpg</filename></photo>
+<photo><thumbnail>small-045.jpg</thumbnail><filename>big-045.jpg</filename></photo>
+<photo><thumbnail>small-046.jpg</thumbnail><filename>big-046.jpg</filename></photo>
+<photo><thumbnail>small-047.jpg</thumbnail><filename>big-047.jpg</filename></photo>
+<photo><thumbnail>small-048.jpg</thumbnail><filename>big-048.jpg</filename></photo>
+<photo><thumbnail>small-049.jpg</thumbnail><filename>big-049.jpg</filename></photo>
+<photo><thumbnail>small-050.jpg</thumbnail><filename>big-050.jpg</filename></photo>
+<photo><thumbnail>small-051.jpg</thumbnail><filename>big-051.jpg</filename></photo>
+<photo><thumbnail>small-052.jpg</thumbnail><filename>big-052.jpg</filename></photo>
+<photo><thumbnail>small-053.jpg</thumbnail><filename>big-053.jpg</filename></photo>
+<photo><thumbnail>small-054.jpg</thumbnail><filename>big-054.jpg</filename></photo>
+<photo><thumbnail>small-055.jpg</thumbnail><filename>big-055.jpg</filename></photo>
+<photo><thumbnail>small-056.jpg</thumbnail><filename>big-056.jpg</filename></photo>
+<photo><thumbnail>small-057.jpg</thumbnail><filename>big-057.jpg</filename></photo>
+<photo><thumbnail>small-058.jpg</thumbnail><filename>big-058.jpg</filename></photo>
+<photo><thumbnail>small-059.jpg</thumbnail><filename>big-059.jpg</filename></photo>
+
+
+</photos>

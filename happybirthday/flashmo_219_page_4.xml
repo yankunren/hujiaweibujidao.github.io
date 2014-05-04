@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items>
+
+	<item>
+		<content><![CDATA[<span class="title">细数那些87瞬间(秒杀了爷)</span> ]]></content>
+	</item>
+
+	<item>
+		<content><![CDATA[
+<span class="subtitle">最美的瞬间</span>
+<img src="thumbnails/m_zuimeili.jpg" width="400" height="300" />
+]]></content>
+	</item>
+
+	<item>
+		<content><![CDATA[
+<span class="subtitle">最可爱的瞬间</span>
+<img src="thumbnails/m_zuikeai.jpg" width="300" height="400" />
+]]></content>
+	</item>
+
+	<item>
+		<content><![CDATA[
+<span class="subtitle">最想吃人的瞬间</span>
+<img src="thumbnails/m_zuixiangchiren.jpg" width="300" height="500" />
+]]></content>
+	</item>
+
+
+	<item>
+		<content><![CDATA[
+<span class="subtitle">最清纯的瞬间</span>
+<img src="thumbnails/m_zuiqingchun.jpg" width="400" height="320" />
+]]></content>
+	</item>
+
+	<item>
+		<content><![CDATA[
+<span class="subtitle">最二的瞬间</span>
+<img src="thumbnails/m_zuier.jpg" width="400" height="300" />
+]]></content>
+	</item>
+
+	<item>
+		<content><![CDATA[
+<span class="subtitle">最无语的瞬间</span>
+<img src="thumbnails/m_zuiwuyu.jpg" width="400" height="330" />
+]]></content>
+	</item>
+
+
+	<item>
+		<content><![CDATA[
+<span class="subtitle">最得瑟的瞬间</span>
+<img src="thumbnails/m_zuidese.jpg" width="400" height="711" />
+]]></content>
+	</item>
+</items>
