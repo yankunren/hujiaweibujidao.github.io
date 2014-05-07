@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-08T00:17:10+08:00</updated>
+  <updated>2014-05-08T00:18:37+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -33,7 +33,7 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/bubblesort.png" alt="image" /></p>
 
-<p>```
+<p>```python
 def short_bubble_sort(a_list):
     exchanges = True
     pass_num = len(a_list) - 1
@@ -153,7 +153,7 @@ print(a_list)
 
 <p>算法导论2-4题利用合并排序可以在$O(nlogn)$的最坏情况下得到包含n个元素的数组的逆序对的数目。[下面使用的是C++来实现的，合并排序的代码格式类似算法导论]</p>
 
-<p>```
+<p>```C++
 #include <iostream>
 using namespace std;</iostream></p>
 
@@ -391,7 +391,7 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 
 <p>下面的代码包含了顺序查找，二分查找，哈希查找(size=11, plus 1, reminder method)</p>
 
-<p>```
+<p>```python
 def sequential_search(a_list, item):
     pos = 0
     found = False
