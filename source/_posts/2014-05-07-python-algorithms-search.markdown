@@ -7,11 +7,13 @@ categories: algorithm
 published: true
 ---
 
-英文原始内容：[Problem Solving with Python](http://interactivepython.org/courselib/static/pythonds/index.html)
+参考内容：
 
-#### Chapter5: Search and Sorting
+1.[Problem Solving with Python](http://interactivepython.org/courselib/static/pythonds/index.html)
+Chapter5: Search and Sorting [online_link](http://interactivepython.org/courselib/static/pythonds/SortSearch/searching.html#searching)
 
-##### Searching  [online_link](http://interactivepython.org/courselib/static/pythonds/SortSearch/searching.html#searching)
+2.[算法导论](http://en.wikipedia.org/wiki/Introduction_to_Algorithms)
+
 
 (1)顺序查找：O(n)
 
