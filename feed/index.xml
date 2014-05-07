@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-07T23:43:39+08:00</updated>
+  <updated>2014-05-07T23:59:44+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -14,15 +14,533 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Python Algorithms - Sort]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/"/>
+    <updated>2014-05-07T22:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort</id>
+    <content type="html"><![CDATA[<p>参考内容：</p>
+
+<p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a>
+Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/sorting.html">online_link</a></p>
+
+<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
+
+<h4 id="section">排序算法总结</h4>
+
+<p>1.冒泡排序(bubble sort)：每个回合都从第一个元素开始和它后面的元素比较，如果比它后面的元素更大的话就交换，一直重复，直到这个元素到了它能到达的位置。注意检测是否已经完成了排序，如果已完成就可以退出了。时间复杂度$O(n^2)$</p>
+
+<p>Python支持对两个数字同时进行交换！<code>a,b = b,a</code>就可以交换a和b的值了。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bubblesort.png" alt="image" /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">def short_bubble_sort(a_list):
+</span><span class="line">    exchanges = True
+</span><span class="line">    pass_num = len(a_list) - 1
+</span><span class="line">    while pass_num &gt; 0 and exchanges:
+</span><span class="line">        exchanges = False
+</span><span class="line">        for i in range(pass_num):
+</span><span class="line">            if a_list[i] &gt; a_list[i + 1]:
+</span><span class="line">                exchanges = True
+</span><span class="line">                # temp = a_list[i]
+</span><span class="line">                # a_list[i] = a_list[i + 1]
+</span><span class="line">                # a_list[i + 1] = temp
+</span><span class="line">                a_list[i],a_list[i+1] = a_list[i+1], a_list[i]
+</span><span class="line">        pass_num = pass_num - 1
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">if __name__ == '__main__':
+</span><span class="line">    a_list=[20, 40, 30, 90, 50, 80, 70, 60, 110, 100]
+</span><span class="line">    short_bubble_sort(a_list)
+</span><span class="line">    print(a_list)</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>2.选择排序(selection sort)：每个回合都选择出剩下的元素中最大的那个，选择的方法是首先默认第一元素是最大的，如果后面的元素比它大的话，那就更新剩下的最大的元素值，找到剩下元素中最大的之后将它放入到合适的位置就行了。时间复杂度$O(n^2)$</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/selectionsort.png" alt="image" /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">def selection_sort(a_list):
+</span><span class="line">    for fill_slot in range(len(a_list) - 1, 0, -1):
+</span><span class="line">        pos_of_max = 0
+</span><span class="line">        for location in range(1, fill_slot + 1):
+</span><span class="line">            if a_list[location] &gt; a_list[pos_of_max]:
+</span><span class="line">                pos_of_max = location
+</span><span class="line">        # temp = a_list[fill_slot]
+</span><span class="line">        # a_list[fill_slot] = a_list[pos_of_max]
+</span><span class="line">        # a_list[pos_of_max] = temp
+</span><span class="line">        a_list[fill_slot],a_list[pos_of_max]=a_list[pos_of_max],a_list[fill_slot]
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+</span><span class="line">selection_sort(a_list)
+</span><span class="line">print(a_list)</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>3.插入排序(insertion sort)：每次假设前面的元素都是已经排好序了的，然后将当前位置的元素插入到原来的序列中，为了尽快地查找合适的插入位置，可以使用二分查找。时间复杂度$O(n^2)$，别误以为二分查找可以降低它的复杂度，因为插入排序还需要移动元素的操作！</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/insertionsort.png" alt="image" /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">def insertion_sort(a_list):
+</span><span class="line">    for index in range(1, len(a_list)):
+</span><span class="line">        current_value = a_list[index]
+</span><span class="line">        position = index
+</span><span class="line">        while position &gt; 0 and a_list[position - 1] &gt; current_value:
+</span><span class="line">            a_list[position] = a_list[position - 1]
+</span><span class="line">            position = position - 1
+</span><span class="line">        a_list[position] = current_value
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">def insertion_sort_binarysearch(a_list):
+</span><span class="line">    for index in range(1, len(a_list)):
+</span><span class="line">        current_value = a_list[index]
+</span><span class="line">        position = index
+</span><span class="line">        low=0
+</span><span class="line">        high=index-1
+</span><span class="line">        while low&lt;=high:
+</span><span class="line">            mid=(low+high)/2
+</span><span class="line">            if a_list[mid]&gt;current_value:
+</span><span class="line">                high=mid-1
+</span><span class="line">            else:
+</span><span class="line">                low=mid+1
+</span><span class="line">        while position &gt; low:
+</span><span class="line">            a_list[position] = a_list[position - 1]
+</span><span class="line">        a_list[position] = current_value
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">a_list = [54, 26, 93, 15, 77, 31, 44, 55, 20]
+</span><span class="line">insertion_sort(a_list)
+</span><span class="line">print(a_list)
+</span><span class="line">insertion_sort_binarysearch(a_list)
+</span><span class="line">print(a_list)</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>4.合并排序(merge sort)：典型的是二路合并排序，将原始数据集分成两部分(不一定能够均分)，分别对它们进行排序，然后将排序后的子数据集进行合并，这是典型的分治法策略。时间复杂度$O(nlogn)$</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/mergesort.png" alt="image" /></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/mergesort2.png" alt="image" /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">def merge_sort(a_list):
+</span><span class="line">    print("Splitting ", a_list)
+</span><span class="line">    if len(a_list) &gt; 1:
+</span><span class="line">        mid = len(a_list) // 2
+</span><span class="line">        left_half = a_list[:mid]
+</span><span class="line">        right_half = a_list[mid:]
+</span><span class="line">        merge_sort(left_half)
+</span><span class="line">        merge_sort(right_half)
+</span><span class="line">        i=0;j=0;k=0;
+</span><span class="line">        while i &lt; len(left_half) and j &lt; len(right_half):
+</span><span class="line">            if left_half[i] &lt; right_half[j]:
+</span><span class="line">                a_list[k] = left_half[i]
+</span><span class="line">                i=i+1
+</span><span class="line">            else:
+</span><span class="line">                a_list[k] = right_half[j]
+</span><span class="line">                j=j+1
+</span><span class="line">            k=k+1
+</span><span class="line">        while i &lt; len(left_half):
+</span><span class="line">            a_list[k] = left_half[i]
+</span><span class="line">            i=i+1
+</span><span class="line">            k=k+1
+</span><span class="line">        while j &lt; len(right_half):
+</span><span class="line">            a_list[k] = right_half[j]
+</span><span class="line">            j=j+1
+</span><span class="line">            k=k+1
+</span><span class="line">    print("Merging ", a_list)
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+</span><span class="line">merge_sort(a_list)
+</span><span class="line">print(a_list)</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>算法导论2-4题利用合并排序可以在$O(nlogn)$的最坏情况下得到包含n个元素的数组的逆序对的数目。[下面使用的是C++来实现的，合并排序的代码格式类似算法导论]</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">#include &lt;iostream&gt;
+</span><span class="line">using namespace std;
+</span><span class="line">
+</span><span class="line">int calculateInversions(int arr[], int p, int r);
+</span><span class="line">int mergeInversions(int arr[], int p, int q, int r);
+</span><span class="line">
+</span><span class="line">int main(int argc, const char * argv[])
+</span><span class="line">{
+</span><span class="line">    int arr[] = {2,3,8,6,1};
+</span><span class="line">    int count = calculateInversions(arr, 0, 4);
+</span><span class="line">    cout &lt;&lt; "count inversions : " &lt;&lt; count &lt;&lt; endl;
+</span><span class="line">    return 0;
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">int calculateInversions(int arr[], int p, int r) {
+</span><span class="line">	int count=0;
+</span><span class="line">	if(p &lt; r) {
+</span><span class="line">		int q = (p + r) / 2;
+</span><span class="line">        count += calculateInversions(arr, p, q);
+</span><span class="line">        count += calculateInversions(arr, q+1, r);
+</span><span class="line">        count += mergeInversions(arr, p, q, r);
+</span><span class="line">	}
+</span><span class="line">	return count;
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">int mergeInversions(int arr[], int p, int q, int r){
+</span><span class="line">    int count=0;
+</span><span class="line">    int n1=q-p+1, n2=r-q;
+</span><span class="line">    int left[n1+1], right[n2+1];
+</span><span class="line">    for (int i=0; i&lt;n1; i++) {
+</span><span class="line">        left[i]=arr[p+i];
+</span><span class="line">    }
+</span><span class="line">    for (int j=0; j&lt;n2; j++) {
+</span><span class="line">        right[j]=arr[q+1+j];
+</span><span class="line">    }
+</span><span class="line">    left[n1]=INT32_MAX;
+</span><span class="line">    right[n2]=INT32_MAX;
+</span><span class="line">    int i=0, j=0;
+</span><span class="line">    for (int k=p; k&lt;=r; k++) {
+</span><span class="line">        if (left[i]&lt;=right[j]) {
+</span><span class="line">            arr[k]=left[i];
+</span><span class="line">            i++;
+</span><span class="line">        }else{
+</span><span class="line">            arr[k]=right[j];
+</span><span class="line">            count += n1-i;
+</span><span class="line">            j++;
+</span><span class="line">        }
+</span><span class="line">    }
+</span><span class="line">    return count;
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>5.快速排序(quick sort)：</p>
+
+<p>想法一：如下图所示，它选择第一个元素作为主元，它同样可以按照下面提到的算法导论中将数组分成了4个不同的部分，但是这里其实有更好的解释方法。首先，它每次都是选择第一个元素都为主元，也就是要确定主元的位置；然后，有两个指针，一个leftmark指向主元的后面一个位置，另一个rightmark指向最后一个元素；接着，两个指针分别向中间移动，leftmark遇到比主元大的元素停止，rightmark遇到比主元小的元素停止，如果此时leftmark&lt;rightmark，也就是说中间还有未处理(未确定与主元大小关系)的元素，那么就交换leftmark和rightmark位置上的元素，然后重复刚才的移动操作，直到rightmark&lt;leftmark；最后，停止移动时候rightmark就是主元要放置的位置，因为它停在一个比主元小的元素的位置上，之后交换主元和rightmark指向的元素即可。完了之后，递归地对主元左右两边的数组进行排序。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/quicksort.png" alt="image" /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">def quick_sort(a_list):
+</span><span class="line">    quick_sort_helper(a_list, 0, len(a_list) - 1)
+</span><span class="line">
+</span><span class="line">def quick_sort_helper(a_list, first, last):
+</span><span class="line">    if first &lt; last:
+</span><span class="line">        split_point = partition(a_list, first, last)
+</span><span class="line">        quick_sort_helper(a_list, first, split_point - 1)
+</span><span class="line">        quick_sort_helper(a_list, split_point + 1, last)
+</span><span class="line">
+</span><span class="line">def partition(a_list, first, last):
+</span><span class="line">    pivot_value = a_list[first]
+</span><span class="line">    left_mark = first + 1
+</span><span class="line">    right_mark = last
+</span><span class="line">    done = False
+</span><span class="line">    while not done:
+</span><span class="line">        while left_mark &lt;= right_mark and a_list[left_mark] &lt;= pivot_value:
+</span><span class="line">            left_mark = left_mark + 1
+</span><span class="line">        while a_list[right_mark] &gt;= pivot_value and right_mark &gt;= left_mark:
+</span><span class="line">            right_mark = right_mark - 1
+</span><span class="line">        if right_mark &lt; left_mark:
+</span><span class="line">            done = True
+</span><span class="line">        else:
+</span><span class="line">            temp = a_list[left_mark]
+</span><span class="line">            a_list[left_mark] = a_list[right_mark]
+</span><span class="line">            a_list[right_mark] = temp
+</span><span class="line">    temp = a_list[first]
+</span><span class="line">    a_list[first] = a_list[right_mark]
+</span><span class="line">    a_list[right_mark] = temp
+</span><span class="line">    return right_mark
+</span><span class="line">
+</span><span class="line">a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+</span><span class="line">quick_sort(a_list)
+</span><span class="line">print(a_list)</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>想法二：如下图所示，它选择最后的那个元素作为主元，它的思路是将数据划分成4部分：</p>
+
+<p>第一部分：$p \le k \le i, A[k] \le pivot$</p>
+
+<p>第二部分：$i+1 \le k \le j-1, A[k] \gt pivot$</p>
+
+<p>第三部分：$j \le k \le r-1, A[k]$可以取任何值(因为它们还没有进行处理)。</p>
+
+<p>第四部分：$p \le k \le i, A[k] = pivot$</p>
+
+<p>首先让i指向要排序的数组的第一个元素的前面，p和j都指向第一个元素，一直移动j直到主元前一个位置，如果发现一个大于主元的元素就让i指向它的下一个位置，然后交换i和j对应位置上的元素。这样一定是可行的，因为i一直都是指向小于主元的元素中的最后一个，从i+1开始就大于主元了，而j一直都是指向大于主元的元素中最后一个的后面一个位置。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/quicksort_cn.png" alt="image" /></p>
+
+<p>根据算法导论中的伪代码的C++版本实现</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">#include &lt;iostream&gt;
+</span><span class="line">using namespace std;
+</span><span class="line">
+</span><span class="line">// partition, locate the pivot value in properate position
+</span><span class="line">int partition(int a[], int low, int high){
+</span><span class="line">    int key = a[high];//pivot
+</span><span class="line">    int i=low-1, temp;
+</span><span class="line">    for (int j=low; j&lt;high; j++) {
+</span><span class="line">        if (a[j]&lt;key) {
+</span><span class="line">            i++;
+</span><span class="line">            temp = a[j];
+</span><span class="line">            a[j]=a[i];
+</span><span class="line">            a[i]=temp;
+</span><span class="line">        }
+</span><span class="line">    }
+</span><span class="line">    temp = a[high];
+</span><span class="line">    a[high] = a[i+1];
+</span><span class="line">    a[i+1] = temp;//i+1 is the split point
+</span><span class="line">    return i+1;
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">// quick sort
+</span><span class="line">void quicksort(int a[], int low, int high) {
+</span><span class="line">    if (low &lt; high) {
+</span><span class="line">        int p = partition(a,low,high);
+</span><span class="line">        quicksort(a, low, p-1);
+</span><span class="line">        quicksort(a, p+1, high);
+</span><span class="line">    }
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">// print array
+</span><span class="line">void print(int a[],int len){
+</span><span class="line">    for (int i=0; i&lt;len; i++) {
+</span><span class="line">        cout &lt;&lt; a[i] &lt;&lt; " ";
+</span><span class="line">    }
+</span><span class="line">    cout &lt;&lt; endl;
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">int main(int argc, const char * argv[])
+</span><span class="line">{
+</span><span class="line">    int a[]={3,5,2,7,9,10,33,28,19,6,8};
+</span><span class="line">    quicksort(a, 0, 10);
+</span><span class="line">    print(a,11);
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/">http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Python Algorithms - Search]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/"/>
     <updated>2014-05-07T16:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search</id>
-    <content type="html"><![CDATA[<p>英文原始内容：<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a></p>
+    <content type="html"><![CDATA[<p>参考内容：</p>
 
-<h4 id="chapter5-search-and-sorting">Chapter5: Search and Sorting</h4>
+<p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a>
+Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/searching.html#searching">online_link</a></p>
 
-<h5 id="searching--onlinelinkhttpinteractivepythonorgcourselibstaticpythondssortsearchsearchinghtmlsearching">Searching  <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/searching.html#searching">online_link</a></h5>
+<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
 
 <p>(1)顺序查找：O(n)</p>
 
@@ -1450,107 +1968,6 @@ f(a)=A>0,f(b)=B<0 %]]&gt;</script>，那么区间中肯定有一点的函数值�
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mou and StackEdit and Mathjax]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/15/flying-on-mac/"/>
-    <updated>2014-04-15T13:39:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/15/flying-on-mac</id>
-    <content type="html"><![CDATA[<p>该博文记录使用Mou和Stackedit中出现的一些问题，包括Mac中的一些软件出现异常的解决方案，使我们能够<code>Flying on Mac</code>，一直更新中…</p>
-
-<p>如果Mou渲染Math公式有问题的话，尝试在第一行加上如下js，表示让Mou去加载Mathjax的脚本</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="js"><span class="line"><span class="c">&lt;!--</span> <span class="kr">import</span> <span class="nx">js</span> <span class="k">for</span> <span class="nx">mathjax</span> <span class="o">--&gt;</span>
-</span><span class="line"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>该链接指向的是Mathjax的js，用来渲染Math公式，Mou支持Mathjax。为了减轻Octopress加载的负担，可以只在需要使用Mathjax的博文中添加一行js即可，不需要将它放在自定义的<code>head.html</code>文件中。</p>
-
-<p>不知为何，最近加上了这句Math公式还是没有显示出来，貌似Mou并没有去加载这个js的样子，于是我尝试在浏览器中直接访问，将这个js中的所有内容复制进来，这样Mou有显示正常了，数学公式都没有问题！ :-) 如果你不能访问，放心，我已经将这个js的源码放在<a href="https://gist.github.com/hujiaweibujidao/11146289">这个Gist中</a>。</p>
-
-<p>如果还是不行的话，那么建议使用<a href="https://stackedit.io/">stackedit</a>，感谢@beader的建议！还有一个问题是stackedit是在线编辑的，图片要保存到Google Driver中(或者有个特定的网址)，另外，它和Mou中内置的MathJax的渲染解析工具略有不同，例如对于行内Math公式的插入方式不同，Stackedit是以<code>$</code>为行内Math公式为标示符，Mou貌似不存在插入行内Math公式的方式，这时候可以在Mou中的Markdown文档中添加下面的代码让它支持行内Math公式。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-</pre></td><td class="code"><pre><code class="js"><span class="line"><span class="c">&lt;!--</span> <span class="nx">mathjax</span> <span class="nx">config</span> <span class="nx">similar</span> <span class="nx">to</span> <span class="nx">math</span><span class="p">.</span><span class="nx">stackexchange</span> <span class="o">--&gt;</span>
-</span><span class="line"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/x-mathjax-config&quot;</span><span class="o">&gt;</span>
-</span><span class="line"><span class="nx">MathJax</span><span class="p">.</span><span class="nx">Hub</span><span class="p">.</span><span class="nx">Config</span><span class="p">({</span>
-</span><span class="line">  <span class="nx">jax</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;input/TeX&quot;</span><span class="p">,</span> <span class="s2">&quot;output/HTML-CSS&quot;</span><span class="p">],</span>
-</span><span class="line">  <span class="nx">tex2jax</span><span class="o">:</span> <span class="p">{</span>
-</span><span class="line">    <span class="nx">inlineMath</span><span class="o">:</span> <span class="p">[</span> <span class="p">[</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span><span class="p">]</span> <span class="p">],</span>
-</span><span class="line">    <span class="nx">displayMath</span><span class="o">:</span> <span class="p">[</span> <span class="p">[</span><span class="s1">&#39;$$&#39;</span><span class="p">,</span> <span class="s1">&#39;$$&#39;</span><span class="p">]],</span>
-</span><span class="line">    <span class="nx">processEscapes</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class="line">    <span class="nx">skipTags</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;script&#39;</span><span class="p">,</span> <span class="s1">&#39;noscript&#39;</span><span class="p">,</span> <span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="s1">&#39;pre&#39;</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="p">]</span>
-</span><span class="line">  <span class="p">},</span>
-</span><span class="line">  <span class="nx">messageStyle</span><span class="o">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
-</span><span class="line">  <span class="s2">&quot;HTML-CSS&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="nx">preferredFont</span><span class="o">:</span> <span class="s2">&quot;TeX&quot;</span><span class="p">,</span> <span class="nx">availableFonts</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;STIX&quot;</span><span class="p">,</span><span class="s2">&quot;TeX&quot;</span><span class="p">]</span> <span class="p">}</span>
-</span><span class="line"><span class="p">});</span>
-</span><span class="line"><span class="o">&lt;</span><span class="err">/script&gt;</span>
-</span><span class="line"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML&quot;</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>测试：The <em>Gamma function</em> satisfying $\Gamma(n) = (n-1)!\quad\forall
-n\in\mathbb N$ is via the Euler integra</p>
-
-<script type="math/tex; mode=display">
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-</script>
-
-<p>如果文档是要放在Octopress中使用的话，推荐按照<a href="http://blog-jfttt.herokuapp.com/blog/2013/12/26/add-latex/">这位博主的方式修改</a>，使用kramdown代替默认的rdiscount，然后在<code>footer.html</code>中加入上面的脚本内容。</p>
-
-<blockquote>
-  <p><strong>过去的内容，也许不对…</strong> <br />
-[但是，它还是存在些问题，关于inline Math公式的问题，推荐将Octopress中的Markdown引擎换成Kramdown，<a href="http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/">参考教程</a>，另外，使用inline Math和使用block Math一样，都是两个连着的美元符。
-bug：我发现在Math公式中写入<code>|</code>，即取绝对值符号的话会影响排版，暂时想到的解决方案是转义，换成<code>\\|</code>，它会换成双竖线，即取2范数的符号，不少情况下，不影响思考，嘿嘿。]</p>
-</blockquote>
-
-<p>=== At Last ===</p>
-
-<p>我现在的做法是，做一般的作业使用Mou，按照上面的方式肯定有一个可以，完成作业没有问题。</p>
-
-<p>写Octopress博客中的文章用StackEdit，行内Math用<code>$</code>(某些情况下可以，但是有些情况下不行，不行的话还是使用<code>$$</code>，Kramdown支持<code>$$</code>形式的行内公式)，其他形式用<code>$$</code>。Stackedit支持直接将文档publish到Github的某个项目的某个分支下的某个文件夹中，文件名自己命名。如下图所示：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201404/stackedit_publish.png" alt="image" /></p>
-
-<p>注意，如果该目录下有相同名称的文件的话，会被覆盖掉，利用这个方式我们就可以update以前的文章啦！当然，Stackedit在你publish了一次之后会记住publish的目标位置，以后每次更新之后publish都会publish到那个目标位置。</p>
-
-<p>那如果使用Stackedit打开一个Octopress中已经写好了的文章呢？我使用的方法是<code>Import from URL</code>功能，其中的<code>URL</code>是该Markdown文档的URL，可以在Github中找到并打开那个文档，点击<code>Raw</code>按钮就会进入这份文档的源代码页面，复制该页面的URL即可，比如这篇文章的URL是</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="js"><span class="line"><span class="nx">https</span><span class="o">:</span><span class="c1">//raw.githubusercontent.com/hujiaweibujidao/hujiaweibujidao.github.io/source/source/_posts/2014-04-15-flying-on-mac.markdown</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>修改完了使用上面的方式覆盖即可。要让Octopress对这个页面进行重新渲染还需要在本地执行下面代码</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="js"><span class="line"><span class="nx">git</span> <span class="nx">pull</span>
-</span><span class="line"><span class="nx">rake</span> <span class="nx">generate</span>
-</span><span class="line"><span class="nx">rake</span> <span class="nx">deploy</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>可以按照<a href="http://hujiaweibujidao.github.io/blog/2013/11/18/make-your-octopress-easy/">Make Your Octopress Easy</a>的方式建立一个shell脚本简化处理流程，方法略过。</p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/15/flying-on-mac/">http://hujiaweibujidao.github.io/blog/2014/04/15/flying-on-mac/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
