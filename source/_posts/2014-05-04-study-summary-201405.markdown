@@ -22,31 +22,40 @@ published: true
 概念：hash，hash table，hash function
 常用的哈希函数：
 1.reminder method：取余数（size=11）
+
 ![image](http://hujiaweibujidao.github.io/images/201405/reminder.png)
 
 2.folding method
+
 ![image](http://hujiaweibujidao.github.io/images/201405/folding.png)
 
-3.mid-square method：
+3.mid-square method
+
 ![image](http://hujiaweibujidao.github.io/images/201405/mid-square.png)
 
 4.对于由字符的元素可以尝试使用`ord`函数来将字符串转换成一个有序的数值序列。
+
 ![image](http://hujiaweibujidao.github.io/images/201405/stringord1.png)
 
 但是，对于通过回文构词法构成的字符串它们得到的值总是一样，为了解决这个问题，可以根据字符的位置添加一个权重。
+
 ![image](http://hujiaweibujidao.github.io/images/201405/stringord2.png)
 
 使用哈希查找，很可能会遇到冲突，要么避免冲突，要么解决冲突(Collision Resolution)
 1.open address(开放地址)：线性探测(linear probing)下一个位置，缺点是容易造成堆积现象(cluster)，解决堆积现象的办法是跳跃式地查找下一个空槽。
+
 ![image](http://hujiaweibujidao.github.io/images/201405/linearprob.png)
 
 2.quadratic probing：一开始的hash值为h，如果不是空槽，那就尝试h+1，还不是空槽就尝试h+4，依次继续尝试h+9，h+16等等。
+
 ![image](http://hujiaweibujidao.github.io/images/201405/quadraticprob.png)
 
 3.chain：利用链表链接起来
+
 ![image](http://hujiaweibujidao.github.io/images/201405/chain.png)
 
 下面的代码包含了顺序查找，二分查找，哈希查找(size=11, plus 1, reminder method)
+
 ```
 def sequential_search(a_list, item):
     pos = 0
@@ -153,11 +162,12 @@ if __name__ == '__main__':
 
 ##### [2] Sorting [online link](http://interactivepython.org/courselib/static/pythonds/SortSearch/sorting.html)
 
-1.冒泡排序(bubble sort)：注意检测是否已经完成了排序，如果已完成就可以退出了
+1.冒泡排序(bubble sort)：每个回合都从第一个元素开始和它后面的元素比较，如果比它后面的元素更大的话就交换，一直重复，直到这个元素到了它能到达的位置。注意检测是否已经完成了排序，如果已完成就可以退出了。
 
 Python支持对两个数字同时进行交换！`a,b = b,a`就可以交换a和b的值了。
 
 ![image](http://hujiaweibujidao.github.io/images/201405/bubblesort.png)
+
 ```
 def short_bubble_sort(a_list):
     exchanges = True
@@ -176,4 +186,27 @@ if __name__ == '__main__':
     a_list=[20, 40, 30, 90, 50, 80, 70, 60, 110, 100]
     short_bubble_sort(a_list)
     print(a_list)
+```
+
+
+2.选择排序(selection sort)：每个回合都选择出剩下的元素中最大的那个，选择的方法是首先默认第一元素是最大的，如果后面的元素比它大的话，那就更新剩下的最大的元素值，找到剩下元素中最大的之后将它放入到合适的位置就行了。
+
+![image](http://hujiaweibujidao.github.io/images/201405/selectionsort.png)
+
+```
+def selection_sort(a_list):
+    for fill_slot in range(len(a_list) - 1, 0, -1):
+        pos_of_max = 0
+        for location in range(1, fill_slot + 1):
+            if a_list[location] > a_list[pos_of_max]:
+                pos_of_max = location
+        # temp = a_list[fill_slot]
+        # a_list[fill_slot] = a_list[pos_of_max]
+        # a_list[pos_of_max] = temp
+        a_list[fill_slot],a_list[pos_of_max]=a_list[pos_of_max],a_list[fill_slot]
+
+
+a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+selection_sort(a_list)
+print(a_list)
 ```
