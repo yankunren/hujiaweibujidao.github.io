@@ -1,0 +1,769 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Study Summary 201405 - Hujiawei Bujidao</title>
+  <meta name="author" content="hujiawei">
+
+  
+  <meta name="description" content="1.Python Problem Solving with Python Chapter5: Search and Sorting [1] Searching online link (1)顺序查找：O(n)
+(2)二分查找：O(lgn)
+(3)Hash查找：O(1)
+概念：hash，hash &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/05/07/study-summary-201405">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+
+  
+
+</head>
+
+<body   >
+
+	<header role="banner">
+		
+<hgroup style="text-align: center">
+	<h1><a href="/"><img src="/images/conan-paper-small.png"  />Hujiawei Bujidao<img src="/images/conan-hat-small.png"  /></a></h1>
+	
+	<h2>I will always be your savior! A secret makes a man man!</h2>
+	
+</hgroup>
+
+
+	</header>
+	<nav role="navigation">
+		<ul class="subscription" data-subscription="rss">
+  <!--<li><a href="https://github.com/hujiaweibujidao" rel="subscribe-rss" title="subscribe via RSS">View me on GitHub</a></li>-->
+  <!--
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+  --> 
+</ul>
+<!--
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hujiaweibujidao.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form> 
+  
+-->
+<ul class="main-navigation">
+  <li><a href="/blog/archives/">Blog</a></li>
+  <li><a href="/aboutme/">AboutMe</a></li>
+  <li><a href="/math/">Math</a></li>
+  <!--
+  <li><a href="/datamining/">DataMining</a></li>
+  -->
+  <li><a href="/blog/categories/mobiledev/">MobileDev</a></li>
+  <!--
+  <li><a href="/xjava/">XJava</a></li>
+  -->
+  <!-- <li><a href="/datamining/">Projects</a></li> -->
+</ul>
+
+
+	</nav>
+	<div id="main">
+		<div id="content">
+			<div>
+
+<article class="hentry" role="article">
+		
+  <header>
+    
+      <h1 class="entry-title">Study Summary 201405</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-07T16:00:00+08:00" pubdate data-updated="true">May 7<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3 id="python">1.Python</h3>
+
+<p><a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a></p>
+
+<h4 id="chapter5-search-and-sorting">Chapter5: Search and Sorting</h4>
+
+<h5 id="searching--online-linkhttpinteractivepythonorgcourselibstaticpythondssortsearchsearchinghtmlsearching">[1] Searching  <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/searching.html#searching">online link</a></h5>
+
+<p>(1)顺序查找：O(n)
+(2)二分查找：O(lgn)
+(3)Hash查找：O(1)
+概念：hash，hash table，hash function
+常用的哈希函数：
+1.reminder method：取余数（size=11）
+<img src="http://hujiaweibujidao.github.io/images/201405/reminder.png" alt="image" /></p>
+
+<p>2.folding method
+<img src="http://hujiaweibujidao.github.io/images/201405/folding.png" alt="image" /></p>
+
+<p>3.mid-square method：
+<img src="http://hujiaweibujidao.github.io/images/201405/mid-square.png" alt="image" /></p>
+
+<p>4.对于由字符的元素可以尝试使用<code>ord</code>函数来将字符串转换成一个有序的数值序列。
+<img src="http://hujiaweibujidao.github.io/images/201405/stringord1.png" alt="image" /></p>
+
+<p>但是，对于通过回文构词法构成的字符串它们得到的值总是一样，为了解决这个问题，可以根据字符的位置添加一个权重。
+<img src="http://hujiaweibujidao.github.io/images/201405/stringord2.png" alt="image" /></p>
+
+<p>使用哈希查找，很可能会遇到冲突，要么避免冲突，要么解决冲突(Collision Resolution)
+1.open address(开放地址)：线性探测(linear probing)下一个位置，缺点是容易造成堆积现象(cluster)，解决堆积现象的办法是跳跃式地查找下一个空槽。
+<img src="http://hujiaweibujidao.github.io/images/201405/linearprob.png" alt="image" /></p>
+
+<p>2.quadratic probing：一开始的hash值为h，如果不是空槽，那就尝试h+1，还不是空槽就尝试h+4，依次继续尝试h+9，h+16等等。
+<img src="http://hujiaweibujidao.github.io/images/201405/quadraticprob.png" alt="image" /></p>
+
+<p>3.chain：利用链表链接起来
+<img src="http://hujiaweibujidao.github.io/images/201405/chain.png" alt="image" /></p>
+
+<p>下面的代码包含了顺序查找，二分查找，哈希查找(size=11, plus 1, reminder method)
+&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span>
+<span class="line-number">81</span>
+<span class="line-number">82</span>
+<span class="line-number">83</span>
+<span class="line-number">84</span>
+<span class="line-number">85</span>
+<span class="line-number">86</span>
+<span class="line-number">87</span>
+<span class="line-number">88</span>
+<span class="line-number">89</span>
+<span class="line-number">90</span>
+<span class="line-number">91</span>
+<span class="line-number">92</span>
+<span class="line-number">93</span>
+<span class="line-number">94</span>
+<span class="line-number">95</span>
+<span class="line-number">96</span>
+<span class="line-number">97</span>
+<span class="line-number">98</span>
+<span class="line-number">99</span>
+<span class="line-number">100</span>
+<span class="line-number">101</span>
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">def sequential_search(a_list, item):
+</span><span class="line">    pos = 0
+</span><span class="line">    found = False
+</span><span class="line">    while pos &lt; len(a_list) and not found:
+</span><span class="line">        if a_list[pos] == item:
+</span><span class="line">            found = True
+</span><span class="line">        else:
+</span><span class="line">            pos = pos+1
+</span><span class="line">    return found
+</span><span class="line">
+</span><span class="line">test_list = [1, 2, 32, 8, 17, 19, 42, 13, 0]
+</span><span class="line">print(sequential_search(test_list, 3))
+</span><span class="line">print(sequential_search(test_list, 13))
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">def binary_search(a_list, item):
+</span><span class="line">    first = 0
+</span><span class="line">    last = len(a_list) - 1
+</span><span class="line">    found = False
+</span><span class="line">    while first &lt;= last and not found:
+</span><span class="line">        midpoint = (first + last) // 2
+</span><span class="line">        if a_list[midpoint] == item:
+</span><span class="line">            found = True
+</span><span class="line">        else:
+</span><span class="line">            if item &lt; a_list[midpoint]:
+</span><span class="line">                last = midpoint - 1
+</span><span class="line">            else:
+</span><span class="line">                first = midpoint + 1
+</span><span class="line">    return found
+</span><span class="line">
+</span><span class="line">test_list = [0, 1, 2, 8, 13, 17, 19, 32, 42,]
+</span><span class="line">print(binary_search(test_list, 3))
+</span><span class="line">print(binary_search(test_list, 13))
+</span><span class="line">
+</span><span class="line">class HashTable:
+</span><span class="line">    def __init__(self):
+</span><span class="line">        self.size = 11
+</span><span class="line">        self.slots = [None] * self.size
+</span><span class="line">        self.data = [None] * self.size
+</span><span class="line">
+</span><span class="line">    def put(self, key, data):
+</span><span class="line">        hash_value = self.hash_function(key,len(self.slots))
+</span><span class="line">        if self.slots[hash_value] == None: # '==None' ? or  'is None' ?
+</span><span class="line">            self.slots[hash_value] = key
+</span><span class="line">            self.data[hash_value] = data
+</span><span class="line">        else:
+</span><span class="line">            if self.slots[hash_value] == key:
+</span><span class="line">                self.data[hash_value] = data #replace
+</span><span class="line">            else:
+</span><span class="line">                next_slot = self.rehash(hash_value, len(self.slots))
+</span><span class="line">                while self.slots[next_slot] != None and self.slots[next_slot] != key:
+</span><span class="line">                    next_slot = self.rehash(next_slot, len(self.slots))
+</span><span class="line">                    if self.slots[next_slot] == None:
+</span><span class="line">                        self.slots[next_slot] = key
+</span><span class="line">                        self.data[next_slot] = data
+</span><span class="line">                    else:
+</span><span class="line">                        self.data[next_slot] = data #replacea
+</span><span class="line">
+</span><span class="line">    #reminder method
+</span><span class="line">    def hash_function(self, key, size):
+</span><span class="line">        return key % size
+</span><span class="line">
+</span><span class="line">    #plus 1
+</span><span class="line">    def rehash(self, old_hash, size):
+</span><span class="line">        return (old_hash + 1) % size
+</span><span class="line">
+</span><span class="line">    def get(self, key):
+</span><span class="line">        start_slot = self.hash_function(key, len(self.slots))
+</span><span class="line">        data = None
+</span><span class="line">        stop = False
+</span><span class="line">        found = False
+</span><span class="line">        position = start_slot
+</span><span class="line">        while self.slots[position] != None and not found and not stop:
+</span><span class="line">            if self.slots[position] == key:
+</span><span class="line">                found = True
+</span><span class="line">                data = self.data[position]
+</span><span class="line">            else:
+</span><span class="line">                position=self.rehash(position, len(self.slots))
+</span><span class="line">                if position == start_slot:
+</span><span class="line">                    stop = True
+</span><span class="line">        return data
+</span><span class="line">
+</span><span class="line">    def __getitem__(self, key):
+</span><span class="line">        return self.get(key)
+</span><span class="line">
+</span><span class="line">    def __setitem__(self, key, data):
+</span><span class="line">        self.put(key, data)
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">if __name__ == '__main__':
+</span><span class="line">    table=HashTable();
+</span><span class="line">    table[54]='cat';
+</span><span class="line">    table[26]='dog';
+</span><span class="line">    table[93]='lion';
+</span><span class="line">    table[17]="tiger";
+</span><span class="line">    table[77]="bird";
+</span><span class="line">    table[44]="goat";
+</span><span class="line">    table[55]="pig";
+</span><span class="line">    table[20]="chicken";
+</span><span class="line">    print table.slots;
+</span><span class="line">    print table.data;</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;</p>
+
+<h5 id="sorting-online-linkhttpinteractivepythonorgcourselibstaticpythondssortsearchsortinghtml">[2] Sorting <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/sorting.html">online link</a></h5>
+
+<p>1.冒泡排序(bubble sort)：注意检测是否已经完成了排序，如果已完成就可以退出了</p>
+
+<p>Python支持对两个数字同时进行交换！<code>a,b = b,a</code>就可以交换a和b的值了。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bubblesort.png" alt="image" />
+&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">def short_bubble_sort(a_list):
+</span><span class="line">    exchanges = True
+</span><span class="line">    pass_num = len(a_list) - 1
+</span><span class="line">    while pass_num &gt; 0 and exchanges:
+</span><span class="line">        exchanges = False
+</span><span class="line">        for i in range(pass_num):
+</span><span class="line">            if a_list[i] &gt; a_list[i + 1]:
+</span><span class="line">                exchanges = True
+</span><span class="line">                # temp = a_list[i]
+</span><span class="line">                # a_list[i] = a_list[i + 1]
+</span><span class="line">                # a_list[i + 1] = temp
+</span><span class="line">                a_list[i],a_list[i+1] = a_list[i+1], a_list[i]
+</span><span class="line">        pass_num = pass_num - 1
+</span><span class="line">if __name__ == '__main__':
+</span><span class="line">    a_list=[20, 40, 30, 90, 50, 80, 70, 60, 110, 100]
+</span><span class="line">    short_bubble_sort(a_list)
+</span><span class="line">    print(a_list)</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
+&lt;p class=&#8217;post-footer&#8217;&gt;
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/study-summary-201405/">http://hujiaweibujidao.github.io/blog/2014/05/07/study-summary-201405/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a> Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)&lt;/p&gt;</p>
+</div>
+
+
+		<footer>
+			<p class="meta">
+				
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hujiawei</span></span>
+
+				
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-07T16:00:00+08:00" pubdate data-updated="true">May 7<span>th</span>, 2014</time>
+				
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/math/'>math</a>
+  
+</span>
+
+
+			</p>
+			
+			<div class="sharing">
+  
+  
+  
+</div>
+
+			
+			<p class="meta">
+				
+				<a class="basic-alignment left" href="/blog/2014/04/30/wouldnt-it-be-nice/" title="Previous Post: Wouldn't it be nice">&laquo; Wouldn't it be nice</a>
+				
+				
+			</p>
+		</footer>
+	</article>
+	
+
+	
+	<section>
+		<h1>Comments</h1>
+		<div id="comments" aria-live="polite">
+			<!-- Duoshuo Comment BEGIN   data-title=""-->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hujiaweibujidao"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+
+		</div>
+	</section>
+	
+</div>
+
+<aside class="sidebar">
+  
+	<section>
+	<h1>关于博主</h1><br/>
+  <a href="/aboutme/"><img src="/images/me-small.png" width="250px" height="210px" alt="protrait"/></a><br/>
+  <p>Hi, I'm Hujiawei, from P.R.China. Now I'm a postgraduate student studying in <a href="http://www.tsinghua.edu.cn/publish/th/index.html">Tsinghua University</a>.
+  Wanna know me? <a href="/aboutme/">See here.</a> 
+  </p>
+  
+  <img src="/images/conan-mainperson.png" width="250px" height="210px" alt="conan"/>
+  
+  <br/>
+  
+    <a href="http://weibo.com/hujiaweiyinger"><img src="/images/sinaweibo.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://github.com/hujiaweibujidao"><img src="/images/github.png" width="40px" height="40px"/></a>&nbsp;
+  <a href="http://hujiawei.tumblr.com"><img src="/images/tumblr.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://twitter.com/hujiaweiyinger"><img src="/images/twitter.png" width="40px" height="40px"/></a>&nbsp;
+  <a href="http://www.douban.com/people/60272837/"><img src="/images/douban.png" width="40px" height="40px"/></a>
+ 
+ <br/>
+    
+    <!--autoplay="autoplay" -->
+    <!--
+<audio width="200" height="32" 
+style="margin: auto; top: 0; right: 0; bottom: 0; left: 0;" 
+controls="controls" 
+name="media" 
+src="http://hujiaweibujidao.github.io/music/Wouldnt-It-Be-Nice.mp3">
+</audio>
+-->
+  
+  
+  <!--baidu-->
+  <!--
+  <div class="bdsharebuttonbox"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>  
+-->
+
+</section>
+<section>
+ <h1>分类目录</h1>
+ <ul id="categories">
+	 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (1)</a></li>
+<li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
+<li class='category'><a href='/blog/categories/ios/'>ios (1)</a></li>
+<li class='category'><a href='/blog/categories/mac/'>mac (2)</a></li>
+<li class='category'><a href='/blog/categories/math/'>math (18)</a></li>
+<li class='category'><a href='/blog/categories/matlab/'>matlab (1)</a></li>
+<li class='category'><a href='/blog/categories/mobiledev/'>mobiledev (5)</a></li>
+<li class='category'><a href='/blog/categories/music/'>music (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (3)</a></li>
+<li class='category'><a href='/blog/categories/opencv/'>opencv (5)</a></li>
+
+ </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/05/07/study-summary-201405/">Study Summary 201405</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/30/wouldnt-it-be-nice/">Wouldn't It Be Nice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/29/linearalgebra-summary-4/">LAS 4-Similarity Matrix</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/29/linearalgebra-summary-3/">LAS 3-EigenVectors and Eigenvalues</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/29/linearalgebra-summary-2/">LAS 2-Matrix</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+	<h1>好友博客</h1>
+	<ul>
+		<li>
+			<a href="http://doufunao.github.io/">豆腐脑的幻想乡</a>
+		</li>
+		<li>
+			<a href="http://c4fun.cn/">Code 4 Fun</a>
+		</li>
+		<li>
+			<a href="http://www.tanglei.name/">TangLei blog</a>
+		</li>
+		<li>
+			<a href="http://ontheroad.sinaapp.com/">Tian Jun-Find My Way</a>
+		</li>
+		
+		<li>
+			<a href="http://www.liaoxuefeng.com/">廖雪峰的官方网站</a>
+		</li>
+		<li>
+			<a href="http://wufawei.com/">Ted's Homepage</a>
+		</li>
+		<li>
+			<a href="http://www.renfei.org/blog/">Renfei Song</a>
+		</li>
+		<li>
+			<a href="http://bluedavy.me">BlueDavy之技术blog</a>
+		</li>
+		
+		<li>
+			<a href="#">这里会是你吗?</a>
+		</li>
+	</ul>
+</section>
+	
+</aside>
+
+
+		</div>
+	</div>
+	
+	<footer role="contentinfo">
+		<p>
+  	Copyright &copy; 2014 - hujiawei - <a href="http://hujiaweibujidao.github.io/happybirthday/">Happy birthday to MY QUEEN</a> - <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
+  	
+<!-- mathjax config similar to math.stackexchange  -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+<!-- the following line is incorrect! -->
+<!--
+<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+-->
+
+<!--baidu-->
+<!--
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"1","bdPos":"left","bdTop":"250"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+-->
+
+	<!-- CNZZ -->
+	&nbsp;&nbsp;
+	<script type="text/javascript">
+		var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+		document.write(unescape("%3Cspan id='cnzz_stat_icon_1000165127'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000165127%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	
+	<!--baidu share-->
+	<!--
+	<div class="bdsharebuttonbox" style="display: inline;"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+	-->
+	<!-- license -->
+	<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="http://i.creativecommons.org/l/by-nd/3.0/88x31.png" /></a>
+	本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh">知识共享署名-禁止演绎 3.0 未本地化版本许可协议</a>进行许可。
+
+</p>
+
+<!--hujiawei custom blockquote-->
+<!--for block quote
+<style>
+blockquote{
+	font:inherit;
+	font-size:60%;
+	font-style:normal;
+	line-height:1.0em;
+	color:rgba(0,0,0,0.5);
+}
+</style>-->
+
+<!-- gutter for code line-numbers!! -->
+<!--for block quote-->
+<!--
+<style>
+blockquote{
+	font:inherit;
+	font-size:60%;
+	font-style:normal;
+	line-height:1.0em;
+	color:rgba(0,0,0,0.5);
+}
+
+.gutter{
+	display: none;
+}
+
+.highlight, .gist-highlight {
+margin-bottom: 1.8em;
+background: #002b36;
+overflow-y: hidden;
+overflow-x: auto;
+}
+</style>
+-->
+
+<!--return to top-->
+<style>
+	.returnTop {
+		position: fixed;
+		_position: absolute;
+		right: 10px;
+		bottom: 200px;
+		_bottom: auto;
+		display: none;
+		width: 40px;
+		height: 40px;
+		border: 1px solid #61b72e;
+		border-radius: 4px;
+		background: #fff;
+		box-shadow: 0 0 5px #F5F5F5;
+		text-indent: -9999px;
+		cursor: pointer;
+	}
+	.returnTop .s {
+		position: absolute;
+		top: -2px;
+		_top: -20px;
+		left: 10px;
+		width: 0;
+		height: 0;
+		border-width: 10px;
+		border-color: transparent transparent #61b72e;
+		border-style: dashed dashed solid;
+	}
+	.returnTop .b {
+		position: absolute;
+		top: 18px;
+		left: 16px;
+		height: 12px;
+		width: 8px;
+		background: #61b72e;
+	}
+</style>
+<div class="returnTop" title="嗖的就上去了！">
+	<span class="s"></span>
+	<span class="b"></span>
+	返回顶部
+</div>
+<script type="text/javascript">
+$(function(){
+$(window).bind("scroll", function(){
+
+var scrollTopNum = $(document).scrollTop(),
+winHeight = $(window).height(),
+returnTop = $("div.returnTop");
+
+(scrollTopNum > 0) ? returnTop.fadeIn("fast") : returnTop.fadeOut("fast");
+
+if (!-[1,]&&!window.XMLHttpRequest) {
+returnTop.css("top", scrollTopNum + winHeight - 200);
+}
+
+});
+
+$("div.returnTop").click(function() {
+$("html, body").animate({ scrollTop: 0 }, 100);
+});
+
+});
+</script>
+
+	</footer>
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
