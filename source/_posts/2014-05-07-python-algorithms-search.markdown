@@ -55,7 +55,7 @@ From wiki
 
 常用的解决冲突的办法：
 
-1.open address(开放寻址)：线性探测(linear probing)下一个位置，缺点是容易造成聚集现象(cluster)，解决聚集现象的办法是跳跃式地查找下一个空槽。
+1.open address(开放寻址)：线性探测(linear probing)下一个位置，缺点是容易造成聚集现象(cluster)，解决聚集现象的办法是跳跃式地查找下一个空槽。数值的顺序：(54, 26, 93, 17, 77, 31, 44, 55, 20).
 
 ![image](http://hujiaweibujidao.github.io/images/201405/linearprob.png)
 
