@@ -4,7 +4,7 @@ title: "Study Summary 201405"
 date: 2014-05-07 16:00
 comments: true
 categories: math
-published: true
+published: false
 ---
 
 
@@ -17,10 +17,15 @@ published: true
 ##### [1] Searching  [online link](http://interactivepython.org/courselib/static/pythonds/SortSearch/searching.html#searching)
 
 (1)顺序查找：O(n)
+
 (2)二分查找：O(lgn)
+
 (3)Hash查找：O(1)
+
 概念：hash，hash table，hash function
-常用的哈希函数：
+
+常用的哈希函数：     
+
 1.reminder method：取余数（size=11）
 
 ![image](http://hujiaweibujidao.github.io/images/201405/reminder.png)
@@ -42,6 +47,7 @@ published: true
 ![image](http://hujiaweibujidao.github.io/images/201405/stringord2.png)
 
 使用哈希查找，很可能会遇到冲突，要么避免冲突，要么解决冲突(Collision Resolution)
+
 1.open address(开放地址)：线性探测(linear probing)下一个位置，缺点是容易造成堆积现象(cluster)，解决堆积现象的办法是跳跃式地查找下一个空槽。
 
 ![image](http://hujiaweibujidao.github.io/images/201405/linearprob.png)
@@ -182,6 +188,8 @@ def short_bubble_sort(a_list):
                 # a_list[i + 1] = temp
                 a_list[i],a_list[i+1] = a_list[i+1], a_list[i]
         pass_num = pass_num - 1
+
+
 if __name__ == '__main__':
     a_list=[20, 40, 30, 90, 50, 80, 70, 60, 110, 100]
     short_bubble_sort(a_list)
@@ -210,3 +218,44 @@ a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
 selection_sort(a_list)
 print(a_list)
 ```
+
+
+3.插入排序(insertion sort)：每次假设前面的元素都是已经排好序了的，然后将当前位置的元素插入到原来的序列中，为了尽快地查找合适的插入位置，可以使用二分查找。
+
+![image](http://hujiaweibujidao.github.io/images/201405/insertionsort.png)
+
+```
+def insertion_sort(a_list):
+    for index in range(1, len(a_list)):
+        current_value = a_list[index]
+        position = index
+        while position > 0 and a_list[position - 1] > current_value:
+            a_list[position] = a_list[position - 1]
+            position = position - 1
+        a_list[position] = current_value
+
+
+def insertion_sort_binarysearch(a_list):
+    for index in range(1, len(a_list)):
+        current_value = a_list[index]
+        position = index
+        low=0
+        high=index-1
+        while low<=high:
+            mid=(low+high)/2
+            if a_list[mid]>current_value:
+                high=mid-1
+            else:
+                low=mid+1
+        while position > low:
+            a_list[position] = a_list[position - 1]
+        a_list[position] = current_value
+
+
+a_list = [54, 26, 93, 15, 77, 31, 44, 55, 20]
+insertion_sort(a_list)
+print(a_list)
+insertion_sort_binarysearch(a_list)
+print(a_list)
+```
+
