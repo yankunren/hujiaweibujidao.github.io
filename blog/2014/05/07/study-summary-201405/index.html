@@ -129,33 +129,42 @@
 (3)Hash查找：O(1)
 概念：hash，hash table，hash function
 常用的哈希函数：
-1.reminder method：取余数（size=11）
-<img src="http://hujiaweibujidao.github.io/images/201405/reminder.png" alt="image" /></p>
+1.reminder method：取余数（size=11）</p>
 
-<p>2.folding method
-<img src="http://hujiaweibujidao.github.io/images/201405/folding.png" alt="image" /></p>
+<p><img src="http://hujiaweibujidao.github.io/images/201405/reminder.png" alt="image" /></p>
 
-<p>3.mid-square method：
-<img src="http://hujiaweibujidao.github.io/images/201405/mid-square.png" alt="image" /></p>
+<p>2.folding method</p>
 
-<p>4.对于由字符的元素可以尝试使用<code>ord</code>函数来将字符串转换成一个有序的数值序列。
-<img src="http://hujiaweibujidao.github.io/images/201405/stringord1.png" alt="image" /></p>
+<p><img src="http://hujiaweibujidao.github.io/images/201405/folding.png" alt="image" /></p>
 
-<p>但是，对于通过回文构词法构成的字符串它们得到的值总是一样，为了解决这个问题，可以根据字符的位置添加一个权重。
-<img src="http://hujiaweibujidao.github.io/images/201405/stringord2.png" alt="image" /></p>
+<p>3.mid-square method</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/mid-square.png" alt="image" /></p>
+
+<p>4.对于由字符的元素可以尝试使用<code>ord</code>函数来将字符串转换成一个有序的数值序列。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/stringord1.png" alt="image" /></p>
+
+<p>但是，对于通过回文构词法构成的字符串它们得到的值总是一样，为了解决这个问题，可以根据字符的位置添加一个权重。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/stringord2.png" alt="image" /></p>
 
 <p>使用哈希查找，很可能会遇到冲突，要么避免冲突，要么解决冲突(Collision Resolution)
-1.open address(开放地址)：线性探测(linear probing)下一个位置，缺点是容易造成堆积现象(cluster)，解决堆积现象的办法是跳跃式地查找下一个空槽。
-<img src="http://hujiaweibujidao.github.io/images/201405/linearprob.png" alt="image" /></p>
+1.open address(开放地址)：线性探测(linear probing)下一个位置，缺点是容易造成堆积现象(cluster)，解决堆积现象的办法是跳跃式地查找下一个空槽。</p>
 
-<p>2.quadratic probing：一开始的hash值为h，如果不是空槽，那就尝试h+1，还不是空槽就尝试h+4，依次继续尝试h+9，h+16等等。
-<img src="http://hujiaweibujidao.github.io/images/201405/quadraticprob.png" alt="image" /></p>
+<p><img src="http://hujiaweibujidao.github.io/images/201405/linearprob.png" alt="image" /></p>
 
-<p>3.chain：利用链表链接起来
-<img src="http://hujiaweibujidao.github.io/images/201405/chain.png" alt="image" /></p>
+<p>2.quadratic probing：一开始的hash值为h，如果不是空槽，那就尝试h+1，还不是空槽就尝试h+4，依次继续尝试h+9，h+16等等。</p>
 
-<p>下面的代码包含了顺序查找，二分查找，哈希查找(size=11, plus 1, reminder method)
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<p><img src="http://hujiaweibujidao.github.io/images/201405/quadraticprob.png" alt="image" /></p>
+
+<p>3.chain：利用链表链接起来</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/chain.png" alt="image" /></p>
+
+<p>下面的代码包含了顺序查找，二分查找，哈希查找(size=11, plus 1, reminder method)</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -256,7 +265,7 @@
 <span class="line-number">99</span>
 <span class="line-number">100</span>
 <span class="line-number">101</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">def sequential_search(a_list, item):
+</pre></td><td class="code"><pre><code class=""><span class="line">def sequential_search(a_list, item):
 </span><span class="line">    pos = 0
 </span><span class="line">    found = False
 </span><span class="line">    while pos &lt; len(a_list) and not found:
@@ -356,16 +365,17 @@
 </span><span class="line">    table[55]="pig";
 </span><span class="line">    table[20]="chicken";
 </span><span class="line">    print table.slots;
-</span><span class="line">    print table.data;</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;</p>
+</span><span class="line">    print table.data;</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h5 id="sorting-online-linkhttpinteractivepythonorgcourselibstaticpythondssortsearchsortinghtml">[2] Sorting <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/sorting.html">online link</a></h5>
 
-<p>1.冒泡排序(bubble sort)：注意检测是否已经完成了排序，如果已完成就可以退出了</p>
+<p>1.冒泡排序(bubble sort)：每个回合都从第一个元素开始和它后面的元素比较，如果比它后面的元素更大的话就交换，一直重复，直到这个元素到了它能到达的位置。注意检测是否已经完成了排序，如果已完成就可以退出了。</p>
 
 <p>Python支持对两个数字同时进行交换！<code>a,b = b,a</code>就可以交换a和b的值了。</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/201405/bubblesort.png" alt="image" />
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bubblesort.png" alt="image" /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -382,7 +392,7 @@
 <span class="line-number">15</span>
 <span class="line-number">16</span>
 <span class="line-number">17</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">def short_bubble_sort(a_list):
+</pre></td><td class="code"><pre><code class=""><span class="line">def short_bubble_sort(a_list):
 </span><span class="line">    exchanges = True
 </span><span class="line">    pass_num = len(a_list) - 1
 </span><span class="line">    while pass_num &gt; 0 and exchanges:
@@ -398,9 +408,44 @@
 </span><span class="line">if __name__ == '__main__':
 </span><span class="line">    a_list=[20, 40, 30, 90, 50, 80, 70, 60, 110, 100]
 </span><span class="line">    short_bubble_sort(a_list)
-</span><span class="line">    print(a_list)</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-&lt;p class=&#8217;post-footer&#8217;&gt;
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/study-summary-201405/">http://hujiaweibujidao.github.io/blog/2014/05/07/study-summary-201405/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a> Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)&lt;/p&gt;</p>
+</span><span class="line">    print(a_list)</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>2.选择排序(selection sort)：每个回合都选择出剩下的元素中最大的那个，选择的方法是首先默认第一元素是最大的，如果后面的元素比它大的话，那就更新剩下的最大的元素值，找到剩下元素中最大的之后将它放入到合适的位置就行了。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/selectionsort.png" alt="image" /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">def selection_sort(a_list):
+</span><span class="line">    for fill_slot in range(len(a_list) - 1, 0, -1):
+</span><span class="line">        pos_of_max = 0
+</span><span class="line">        for location in range(1, fill_slot + 1):
+</span><span class="line">            if a_list[location] &gt; a_list[pos_of_max]:
+</span><span class="line">                pos_of_max = location
+</span><span class="line">        # temp = a_list[fill_slot]
+</span><span class="line">        # a_list[fill_slot] = a_list[pos_of_max]
+</span><span class="line">        # a_list[pos_of_max] = temp
+</span><span class="line">        a_list[fill_slot],a_list[pos_of_max]=a_list[pos_of_max],a_list[fill_slot]
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+</span><span class="line">selection_sort(a_list)
+</span><span class="line">print(a_list)</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/study-summary-201405/">http://hujiaweibujidao.github.io/blog/2014/05/07/study-summary-201405/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 </div>
 
 
