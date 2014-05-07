@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-08T00:18:37+08:00</updated>
+  <updated>2014-05-08T00:51:32+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -25,7 +25,7 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 
 <p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
 
-<h4 id="section">排序算法总结</h4>
+<h4 id="section">排序总结</h4>
 
 <p>1.冒泡排序(bubble sort)：每个回合都从第一个元素开始和它后面的元素比较，如果比它后面的元素更大的话就交换，一直重复，直到这个元素到了它能到达的位置。注意检测是否已经完成了排序，如果已完成就可以退出了。时间复杂度$O(n^2)$</p>
 
@@ -325,6 +325,8 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 
 <p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
 
+<h4 id="section">搜索总结</h4>
+
 <p>(1)顺序查找：O(n)</p>
 
 <p>(2)二分查找：O(lgn)</p>
@@ -391,7 +393,7 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 
 <p>下面的代码包含了顺序查找，二分查找，哈希查找(size=11, plus 1, reminder method)</p>
 
-<p>```python
+<p>``` python
 def sequential_search(a_list, item):
     pos = 0
     found = False
@@ -431,23 +433,25 @@ print(binary_search(test_list, 13))</p>
         self.slots = [None] * self.size
         self.data = [None] * self.size</p>
 
-<pre><code>def put(self, key, data):
-    hash_value = self.hash_function(key,len(self.slots))
-    if self.slots[hash_value] == None: # '==None' ? or  'is None' ?
-        self.slots[hash_value] = key
-        self.data[hash_value] = data
+<pre><code>#put data in slot
+def put_data_in_slot(self,key,data,slot):
+    if self.slots[slot] == None: # '==None' ? or  'is None' ?
+        self.slots[slot] = key
+        self.data[slot] = data
+        return True
     else:
-        if self.slots[hash_value] == key:
-            self.data[hash_value] = data #replace
+        if self.slots[slot] == key: # not None
+            self.data[slot] = data #replace
+            return True
         else:
-            next_slot = self.rehash(hash_value, len(self.slots))
-            while self.slots[next_slot] != None and self.slots[next_slot] != key:
-                next_slot = self.rehash(next_slot, len(self.slots))
-                if self.slots[next_slot] == None:
-                    self.slots[next_slot] = key
-                    self.data[next_slot] = data
-                else:
-                    self.data[next_slot] = data #replacea
+            return False
+
+def put(self, key, data):
+    slot = self.hash_function(key, self.size);
+    result = self.put_data_in_slot(key,data,slot);
+    while not result:
+        slot = self.rehash(slot, self.size);
+        result=self.put_data_in_slot(key,data,slot);
 
 #reminder method
 def hash_function(self, key, size):
@@ -491,7 +495,10 @@ def __setitem__(self, key, data):
     table[55]=”pig”;
     table[20]=”chicken”;
     print table.slots;
-    print table.data;
+    print table.data;</p>
+
+<h1 id="none-26-93-17-none-none-20-54">[77, 44, 55, None, 26, 93, 17, None, None, 20, 54]</h1>
+<p># [‘bird’, ‘goat’, ‘pig’, None, ‘dog’, ‘lion’, ‘tiger’, None, None, ‘chicken’, ‘cat’]
 ```</p>
 ]]></content>
   </entry>
