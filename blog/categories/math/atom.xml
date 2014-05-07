@@ -4,7 +4,7 @@
   <title><![CDATA[Category: math | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-07T18:23:38+08:00</updated>
+  <updated>2014-05-07T18:42:47+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,213 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Study Summary 201405]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/05/07/study-summary-201405/"/>
-    <updated>2014-05-07T16:00:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/05/07/study-summary-201405</id>
-    <content type="html"><![CDATA[<h3 id="python">1.Python</h3>
-
-<p><a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a></p>
-
-<h4 id="chapter5-search-and-sorting">Chapter5: Search and Sorting</h4>
-
-<h5 id="searching--online-linkhttpinteractivepythonorgcourselibstaticpythondssortsearchsearchinghtmlsearching">[1] Searching  <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/searching.html#searching">online link</a></h5>
-
-<p>(1)顺序查找：O(n)
-(2)二分查找：O(lgn)
-(3)Hash查找：O(1)
-概念：hash，hash table，hash function
-常用的哈希函数：
-1.reminder method：取余数（size=11）</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/reminder.png" alt="image" /></p>
-
-<p>2.folding method</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/folding.png" alt="image" /></p>
-
-<p>3.mid-square method</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/mid-square.png" alt="image" /></p>
-
-<p>4.对于由字符的元素可以尝试使用<code>ord</code>函数来将字符串转换成一个有序的数值序列。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/stringord1.png" alt="image" /></p>
-
-<p>但是，对于通过回文构词法构成的字符串它们得到的值总是一样，为了解决这个问题，可以根据字符的位置添加一个权重。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/stringord2.png" alt="image" /></p>
-
-<p>使用哈希查找，很可能会遇到冲突，要么避免冲突，要么解决冲突(Collision Resolution)
-1.open address(开放地址)：线性探测(linear probing)下一个位置，缺点是容易造成堆积现象(cluster)，解决堆积现象的办法是跳跃式地查找下一个空槽。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/linearprob.png" alt="image" /></p>
-
-<p>2.quadratic probing：一开始的hash值为h，如果不是空槽，那就尝试h+1，还不是空槽就尝试h+4，依次继续尝试h+9，h+16等等。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/quadraticprob.png" alt="image" /></p>
-
-<p>3.chain：利用链表链接起来</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/chain.png" alt="image" /></p>
-
-<p>下面的代码包含了顺序查找，二分查找，哈希查找(size=11, plus 1, reminder method)</p>
-
-<p>```
-def sequential_search(a_list, item):
-    pos = 0
-    found = False
-    while pos &lt; len(a_list) and not found:
-        if a_list[pos] == item:
-            found = True
-        else:
-            pos = pos+1
-    return found</p>
-
-<p>test_list = [1, 2, 32, 8, 17, 19, 42, 13, 0]
-print(sequential_search(test_list, 3))
-print(sequential_search(test_list, 13))</p>
-
-<p>def binary_search(a_list, item):
-    first = 0
-    last = len(a_list) - 1
-    found = False
-    while first &lt;= last and not found:
-        midpoint = (first + last) // 2
-        if a_list[midpoint] == item:
-            found = True
-        else:
-            if item &lt; a_list[midpoint]:
-                last = midpoint - 1
-            else:
-                first = midpoint + 1
-    return found</p>
-
-<p>test_list = [0, 1, 2, 8, 13, 17, 19, 32, 42,]
-print(binary_search(test_list, 3))
-print(binary_search(test_list, 13))</p>
-
-<p>class HashTable:
-    def <strong>init</strong>(self):
-        self.size = 11
-        self.slots = [None] * self.size
-        self.data = [None] * self.size</p>
-
-<pre><code>def put(self, key, data):
-    hash_value = self.hash_function(key,len(self.slots))
-    if self.slots[hash_value] == None: # '==None' ? or  'is None' ?
-        self.slots[hash_value] = key
-        self.data[hash_value] = data
-    else:
-        if self.slots[hash_value] == key:
-            self.data[hash_value] = data #replace
-        else:
-            next_slot = self.rehash(hash_value, len(self.slots))
-            while self.slots[next_slot] != None and self.slots[next_slot] != key:
-                next_slot = self.rehash(next_slot, len(self.slots))
-                if self.slots[next_slot] == None:
-                    self.slots[next_slot] = key
-                    self.data[next_slot] = data
-                else:
-                    self.data[next_slot] = data #replacea
-
-#reminder method
-def hash_function(self, key, size):
-    return key % size
-
-#plus 1
-def rehash(self, old_hash, size):
-    return (old_hash + 1) % size
-
-def get(self, key):
-    start_slot = self.hash_function(key, len(self.slots))
-    data = None
-    stop = False
-    found = False
-    position = start_slot
-    while self.slots[position] != None and not found and not stop:
-        if self.slots[position] == key:
-            found = True
-            data = self.data[position]
-        else:
-            position=self.rehash(position, len(self.slots))
-            if position == start_slot:
-                stop = True
-    return data
-
-def __getitem__(self, key):
-    return self.get(key)
-
-def __setitem__(self, key, data):
-    self.put(key, data)
-</code></pre>
-
-<p>if <strong>name</strong> == ‘<strong>main</strong>’:
-    table=HashTable();
-    table[54]=’cat’;
-    table[26]=’dog’;
-    table[93]=’lion’;
-    table[17]=”tiger”;
-    table[77]=”bird”;
-    table[44]=”goat”;
-    table[55]=”pig”;
-    table[20]=”chicken”;
-    print table.slots;
-    print table.data;
-```</p>
-
-<h5 id="sorting-online-linkhttpinteractivepythonorgcourselibstaticpythondssortsearchsortinghtml">[2] Sorting <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/sorting.html">online link</a></h5>
-
-<p>1.冒泡排序(bubble sort)：每个回合都从第一个元素开始和它后面的元素比较，如果比它后面的元素更大的话就交换，一直重复，直到这个元素到了它能到达的位置。注意检测是否已经完成了排序，如果已完成就可以退出了。</p>
-
-<p>Python支持对两个数字同时进行交换！<code>a,b = b,a</code>就可以交换a和b的值了。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/bubblesort.png" alt="image" /></p>
-
-<p><code>
-def short_bubble_sort(a_list):
-    exchanges = True
-    pass_num = len(a_list) - 1
-    while pass_num &gt; 0 and exchanges:
-        exchanges = False
-        for i in range(pass_num):
-            if a_list[i] &gt; a_list[i + 1]:
-                exchanges = True
-                # temp = a_list[i]
-                # a_list[i] = a_list[i + 1]
-                # a_list[i + 1] = temp
-                a_list[i],a_list[i+1] = a_list[i+1], a_list[i]
-        pass_num = pass_num - 1
-if __name__ == '__main__':
-    a_list=[20, 40, 30, 90, 50, 80, 70, 60, 110, 100]
-    short_bubble_sort(a_list)
-    print(a_list)
-</code></p>
-
-<p>2.选择排序(selection sort)：每个回合都选择出剩下的元素中最大的那个，选择的方法是首先默认第一元素是最大的，如果后面的元素比它大的话，那就更新剩下的最大的元素值，找到剩下元素中最大的之后将它放入到合适的位置就行了。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/selectionsort.png" alt="image" /></p>
-
-<p>```
-def selection_sort(a_list):
-    for fill_slot in range(len(a_list) - 1, 0, -1):
-        pos_of_max = 0
-        for location in range(1, fill_slot + 1):
-            if a_list[location] &gt; a_list[pos_of_max]:
-                pos_of_max = location
-        # temp = a_list[fill_slot]
-        # a_list[fill_slot] = a_list[pos_of_max]
-        # a_list[pos_of_max] = temp
-        a_list[fill_slot],a_list[pos_of_max]=a_list[pos_of_max],a_list[fill_slot]</p>
-
-<p>a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-selection_sort(a_list)
-print(a_list)
-```</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[LAS 4-Similarity Matrix]]></title>
@@ -530,6 +323,43 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi12.png" alt="image" />
 <img src="http://hujiaweibujidao.github.io/images/math/hanglieshi7.png" alt="image" /></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linear Algebra Summary]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary/"/>
+    <updated>2014-04-29T14:03:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary</id>
+    <content type="html"><![CDATA[<p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
+<strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
+
+<h4 id="center0center"><center>0.碎碎念</center></h4>
+
+<p>到了研究阶段才意识到本科的数学原来作用这么大，不论是在数据挖掘，还是机器学习，亦或是模式识别，数学都是基础中的基础。于是乎，我在逸夫图书馆泡了几天看了些微积分、线代和数理统计的书籍，写下三份总结，记录下重要的知识，以备后忘。本人才疏学浅，若有错误之处还请指出，让我“增长”，若有不足也请指出，使我“完备”，谢谢！:-)</p>
+
+<p><strong>[注：这些总结不会详细地讲解所有概念，只是挑选一些我个人感觉比较有用的知识点进行总结，很多时候可能只是列举知识点，并无解释，忘记了的可以自行Wiki或者翻书，另外，为了节省写作时间，对于一些定理我并没有给出详细的表达，忽略了些前提条件，请不要较真，我希望的是给自己一个感性的理解就行，具体理性的分析需要的时候再查，还有就是我还剪切粘贴了很多图片，再有就是，本文采用的是’非线性方式’进行总结的…首篇意识流作品…嗯，就是这样…强迫症者慎入…]</strong></p>
+
+<p>PS：本总结根据下面提到的武汉大学黄正华老师写的线性代数复习总结的顺序来的，因为黄老师的总结已经写得很好了，我只会提到一些我在其他地方看到或者听到的比较有用的心得分享。</p>
+
+<p>参考书籍：</p>
+
+<p>1.[线性代数 Using Matlab]</p>
+
+<p>它山之石：</p>
+
+<p>1.<a href="http://aff.whu.edu.cn/huangzh/">武汉大学 黄正华老师</a>写的线性代数复习总结<a href="http://hujiaweibujidao.github.io/files/linear_algebra_huangzhenghua.pdf">book</a></p>
+
+<p>全部内容：</p>
+
+<p>1.<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1/">行列式！</a></p>
+
+<p>2.<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/">矩阵！</a></p>
+
+<p>3.<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-3/">特征值和特征向量！</a></p>
+
+<p>4.<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-4/">相似矩阵！</a></p>
 
 ]]></content>
   </entry>

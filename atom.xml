@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-07T18:23:38+08:00</updated>
+  <updated>2014-05-07T18:42:47+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,344 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Study Summary 201405]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/05/07/study-summary-201405/"/>
-    <updated>2014-05-07T16:00:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/05/07/study-summary-201405</id>
-    <content type="html"><![CDATA[<h3 id="python">1.Python</h3>
-
-<p><a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a></p>
-
-<h4 id="chapter5-search-and-sorting">Chapter5: Search and Sorting</h4>
-
-<h5 id="searching--online-linkhttpinteractivepythonorgcourselibstaticpythondssortsearchsearchinghtmlsearching">[1] Searching  <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/searching.html#searching">online link</a></h5>
-
-<p>(1)顺序查找：O(n)
-(2)二分查找：O(lgn)
-(3)Hash查找：O(1)
-概念：hash，hash table，hash function
-常用的哈希函数：
-1.reminder method：取余数（size=11）</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/reminder.png" alt="image" /></p>
-
-<p>2.folding method</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/folding.png" alt="image" /></p>
-
-<p>3.mid-square method</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/mid-square.png" alt="image" /></p>
-
-<p>4.对于由字符的元素可以尝试使用<code>ord</code>函数来将字符串转换成一个有序的数值序列。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/stringord1.png" alt="image" /></p>
-
-<p>但是，对于通过回文构词法构成的字符串它们得到的值总是一样，为了解决这个问题，可以根据字符的位置添加一个权重。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/stringord2.png" alt="image" /></p>
-
-<p>使用哈希查找，很可能会遇到冲突，要么避免冲突，要么解决冲突(Collision Resolution)
-1.open address(开放地址)：线性探测(linear probing)下一个位置，缺点是容易造成堆积现象(cluster)，解决堆积现象的办法是跳跃式地查找下一个空槽。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/linearprob.png" alt="image" /></p>
-
-<p>2.quadratic probing：一开始的hash值为h，如果不是空槽，那就尝试h+1，还不是空槽就尝试h+4，依次继续尝试h+9，h+16等等。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/quadraticprob.png" alt="image" /></p>
-
-<p>3.chain：利用链表链接起来</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/chain.png" alt="image" /></p>
-
-<p>下面的代码包含了顺序查找，二分查找，哈希查找(size=11, plus 1, reminder method)</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-<span class="line-number">46</span>
-<span class="line-number">47</span>
-<span class="line-number">48</span>
-<span class="line-number">49</span>
-<span class="line-number">50</span>
-<span class="line-number">51</span>
-<span class="line-number">52</span>
-<span class="line-number">53</span>
-<span class="line-number">54</span>
-<span class="line-number">55</span>
-<span class="line-number">56</span>
-<span class="line-number">57</span>
-<span class="line-number">58</span>
-<span class="line-number">59</span>
-<span class="line-number">60</span>
-<span class="line-number">61</span>
-<span class="line-number">62</span>
-<span class="line-number">63</span>
-<span class="line-number">64</span>
-<span class="line-number">65</span>
-<span class="line-number">66</span>
-<span class="line-number">67</span>
-<span class="line-number">68</span>
-<span class="line-number">69</span>
-<span class="line-number">70</span>
-<span class="line-number">71</span>
-<span class="line-number">72</span>
-<span class="line-number">73</span>
-<span class="line-number">74</span>
-<span class="line-number">75</span>
-<span class="line-number">76</span>
-<span class="line-number">77</span>
-<span class="line-number">78</span>
-<span class="line-number">79</span>
-<span class="line-number">80</span>
-<span class="line-number">81</span>
-<span class="line-number">82</span>
-<span class="line-number">83</span>
-<span class="line-number">84</span>
-<span class="line-number">85</span>
-<span class="line-number">86</span>
-<span class="line-number">87</span>
-<span class="line-number">88</span>
-<span class="line-number">89</span>
-<span class="line-number">90</span>
-<span class="line-number">91</span>
-<span class="line-number">92</span>
-<span class="line-number">93</span>
-<span class="line-number">94</span>
-<span class="line-number">95</span>
-<span class="line-number">96</span>
-<span class="line-number">97</span>
-<span class="line-number">98</span>
-<span class="line-number">99</span>
-<span class="line-number">100</span>
-<span class="line-number">101</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">def sequential_search(a_list, item):
-</span><span class="line">    pos = 0
-</span><span class="line">    found = False
-</span><span class="line">    while pos &lt; len(a_list) and not found:
-</span><span class="line">        if a_list[pos] == item:
-</span><span class="line">            found = True
-</span><span class="line">        else:
-</span><span class="line">            pos = pos+1
-</span><span class="line">    return found
-</span><span class="line">
-</span><span class="line">test_list = [1, 2, 32, 8, 17, 19, 42, 13, 0]
-</span><span class="line">print(sequential_search(test_list, 3))
-</span><span class="line">print(sequential_search(test_list, 13))
-</span><span class="line">
-</span><span class="line">
-</span><span class="line">def binary_search(a_list, item):
-</span><span class="line">    first = 0
-</span><span class="line">    last = len(a_list) - 1
-</span><span class="line">    found = False
-</span><span class="line">    while first &lt;= last and not found:
-</span><span class="line">        midpoint = (first + last) // 2
-</span><span class="line">        if a_list[midpoint] == item:
-</span><span class="line">            found = True
-</span><span class="line">        else:
-</span><span class="line">            if item &lt; a_list[midpoint]:
-</span><span class="line">                last = midpoint - 1
-</span><span class="line">            else:
-</span><span class="line">                first = midpoint + 1
-</span><span class="line">    return found
-</span><span class="line">
-</span><span class="line">test_list = [0, 1, 2, 8, 13, 17, 19, 32, 42,]
-</span><span class="line">print(binary_search(test_list, 3))
-</span><span class="line">print(binary_search(test_list, 13))
-</span><span class="line">
-</span><span class="line">class HashTable:
-</span><span class="line">    def __init__(self):
-</span><span class="line">        self.size = 11
-</span><span class="line">        self.slots = [None] * self.size
-</span><span class="line">        self.data = [None] * self.size
-</span><span class="line">
-</span><span class="line">    def put(self, key, data):
-</span><span class="line">        hash_value = self.hash_function(key,len(self.slots))
-</span><span class="line">        if self.slots[hash_value] == None: # '==None' ? or  'is None' ?
-</span><span class="line">            self.slots[hash_value] = key
-</span><span class="line">            self.data[hash_value] = data
-</span><span class="line">        else:
-</span><span class="line">            if self.slots[hash_value] == key:
-</span><span class="line">                self.data[hash_value] = data #replace
-</span><span class="line">            else:
-</span><span class="line">                next_slot = self.rehash(hash_value, len(self.slots))
-</span><span class="line">                while self.slots[next_slot] != None and self.slots[next_slot] != key:
-</span><span class="line">                    next_slot = self.rehash(next_slot, len(self.slots))
-</span><span class="line">                    if self.slots[next_slot] == None:
-</span><span class="line">                        self.slots[next_slot] = key
-</span><span class="line">                        self.data[next_slot] = data
-</span><span class="line">                    else:
-</span><span class="line">                        self.data[next_slot] = data #replacea
-</span><span class="line">
-</span><span class="line">    #reminder method
-</span><span class="line">    def hash_function(self, key, size):
-</span><span class="line">        return key % size
-</span><span class="line">
-</span><span class="line">    #plus 1
-</span><span class="line">    def rehash(self, old_hash, size):
-</span><span class="line">        return (old_hash + 1) % size
-</span><span class="line">
-</span><span class="line">    def get(self, key):
-</span><span class="line">        start_slot = self.hash_function(key, len(self.slots))
-</span><span class="line">        data = None
-</span><span class="line">        stop = False
-</span><span class="line">        found = False
-</span><span class="line">        position = start_slot
-</span><span class="line">        while self.slots[position] != None and not found and not stop:
-</span><span class="line">            if self.slots[position] == key:
-</span><span class="line">                found = True
-</span><span class="line">                data = self.data[position]
-</span><span class="line">            else:
-</span><span class="line">                position=self.rehash(position, len(self.slots))
-</span><span class="line">                if position == start_slot:
-</span><span class="line">                    stop = True
-</span><span class="line">        return data
-</span><span class="line">
-</span><span class="line">    def __getitem__(self, key):
-</span><span class="line">        return self.get(key)
-</span><span class="line">
-</span><span class="line">    def __setitem__(self, key, data):
-</span><span class="line">        self.put(key, data)
-</span><span class="line">
-</span><span class="line">
-</span><span class="line">if __name__ == '__main__':
-</span><span class="line">    table=HashTable();
-</span><span class="line">    table[54]='cat';
-</span><span class="line">    table[26]='dog';
-</span><span class="line">    table[93]='lion';
-</span><span class="line">    table[17]="tiger";
-</span><span class="line">    table[77]="bird";
-</span><span class="line">    table[44]="goat";
-</span><span class="line">    table[55]="pig";
-</span><span class="line">    table[20]="chicken";
-</span><span class="line">    print table.slots;
-</span><span class="line">    print table.data;</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h5 id="sorting-online-linkhttpinteractivepythonorgcourselibstaticpythondssortsearchsortinghtml">[2] Sorting <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/sorting.html">online link</a></h5>
-
-<p>1.冒泡排序(bubble sort)：每个回合都从第一个元素开始和它后面的元素比较，如果比它后面的元素更大的话就交换，一直重复，直到这个元素到了它能到达的位置。注意检测是否已经完成了排序，如果已完成就可以退出了。</p>
-
-<p>Python支持对两个数字同时进行交换！<code>a,b = b,a</code>就可以交换a和b的值了。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/bubblesort.png" alt="image" /></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">def short_bubble_sort(a_list):
-</span><span class="line">    exchanges = True
-</span><span class="line">    pass_num = len(a_list) - 1
-</span><span class="line">    while pass_num &gt; 0 and exchanges:
-</span><span class="line">        exchanges = False
-</span><span class="line">        for i in range(pass_num):
-</span><span class="line">            if a_list[i] &gt; a_list[i + 1]:
-</span><span class="line">                exchanges = True
-</span><span class="line">                # temp = a_list[i]
-</span><span class="line">                # a_list[i] = a_list[i + 1]
-</span><span class="line">                # a_list[i + 1] = temp
-</span><span class="line">                a_list[i],a_list[i+1] = a_list[i+1], a_list[i]
-</span><span class="line">        pass_num = pass_num - 1
-</span><span class="line">if __name__ == '__main__':
-</span><span class="line">    a_list=[20, 40, 30, 90, 50, 80, 70, 60, 110, 100]
-</span><span class="line">    short_bubble_sort(a_list)
-</span><span class="line">    print(a_list)</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>2.选择排序(selection sort)：每个回合都选择出剩下的元素中最大的那个，选择的方法是首先默认第一元素是最大的，如果后面的元素比它大的话，那就更新剩下的最大的元素值，找到剩下元素中最大的之后将它放入到合适的位置就行了。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/selectionsort.png" alt="image" /></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">def selection_sort(a_list):
-</span><span class="line">    for fill_slot in range(len(a_list) - 1, 0, -1):
-</span><span class="line">        pos_of_max = 0
-</span><span class="line">        for location in range(1, fill_slot + 1):
-</span><span class="line">            if a_list[location] &gt; a_list[pos_of_max]:
-</span><span class="line">                pos_of_max = location
-</span><span class="line">        # temp = a_list[fill_slot]
-</span><span class="line">        # a_list[fill_slot] = a_list[pos_of_max]
-</span><span class="line">        # a_list[pos_of_max] = temp
-</span><span class="line">        a_list[fill_slot],a_list[pos_of_max]=a_list[pos_of_max],a_list[fill_slot]
-</span><span class="line">
-</span><span class="line">
-</span><span class="line">a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-</span><span class="line">selection_sort(a_list)
-</span><span class="line">print(a_list)</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/study-summary-201405/">http://hujiaweibujidao.github.io/blog/2014/05/07/study-summary-201405/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Wouldn't it be nice]]></title>
@@ -1605,6 +1267,102 @@ bug：我发现在Math公式中写入<code>|</code>，即取绝对值符号的�
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/15/flying-on-mac/">http://hujiaweibujidao.github.io/blog/2014/04/15/flying-on-mac/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vertext Cover Problem]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem/"/>
+    <updated>2014-04-13T23:57:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem</id>
+    <content type="html"><![CDATA[<h4 id="section">1.问题描述</h4>
+
+<p>给定一个N个点M条边的无向图G（点的编号从1至N），问是否存在一个不超过K个点的集合S，使得G中的每条边都至少有一个点在集合S中。</p>
+
+<p>例如，如下图所示的无向图G（报告中算法分析过程中一直使用下面的图G）  </p>
+
+<p>(1)如果选择包含点1,2,6这3个点的集合S不能满足条件，因为边(3,7)两个端点都不在S中。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201404/exp1-3.png" alt="image" /></p>
+
+<p>(2)如果选择包含点1,2,6,7这4个点的集合S虽然满足条件，但是它使用了4个点，其实可以使用更少的点，如下面(3)所示</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201404/exp1-2.png" alt="image" /></p>
+
+<p>(3)如果选择包含点1,3,5这3个点的集合S便满足条件，使得G中的每条边都至少有一个点在集合S中。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201404/exp1-1.png" alt="image" /></p>
+
+<h4 id="section-1">2.解题思路</h4>
+
+<p>我的解题思路基于分支定界和贪心两个策略，用一个优先队列维护当前可行的节点，每个节点维护着该节点情况下还可以选择的顶点数目k、需要覆盖的剩余边数e、顶点的状态state、顶点的边数edge等信息，这些节点的排序遵循下面的贪心策略，节点的扩展遵循下面的分支定界策略。总体思路是：</p>
+
+<p>①将原图数据构造成一个解空间树的节点，利用定界策略判断是否有解，如果无解直接退出，如果有可能有解则插入到优先队列中；</p>
+
+<p>②若优先队列不为空，那么便从优先队列中取出第一个可行的节点，进入步骤③，如果优先队列为空则退出；</p>
+
+<p>③判断当前节点是否满足解的条件，如果满足便输出解退出，如果不满足便进入步骤④；</p>
+
+<p>④检查当前节点是否可以扩展，不能扩展的话便进入②继续循环，如果能扩展的话则扩展，然后验证扩展到左右节点是否有解，将有解的扩展节点插入到优先队列中，然后进入②继续循环。</p>
+
+<p>下面分别介绍下分支定界和贪心这两个策略：</p>
+
+<h5 id="section-2">(1)分支定界策略</h5>
+
+<p>首先，界的选择。在一个确定的无向图G中，每个顶点的边即确定了，那么对于该无向图中k个顶点能够覆盖的最多的边数e也就可以确定了！只要对顶点按照边的数目降序排列，然后选择前k个顶点，将它们的边数相加即能得到一个边数上界！因为这k个顶点相互之间可能有边存在也可能没有，所以这是个上界，而且有可能达到。以图G为例，各个顶点的边数统计，并采用降序排列的结果如下：</p>
+
+<!--顶点 | 2 | 3 | 1| 5 | 6| 4| 7 
+--| --| --|--|--|--|--|--
+边数 | 3 | 3 | 2| 2| 2| 1| 1-->
+<!--
+顶点 | 边数
+----| ---- 
+2 | 3 
+3 | 3
+1 | 2 
+5 | 2
+6 | 2
+4 | 1
+7 | 1-->
+
+<p><img src="http://hujiaweibujidao.github.io/images/201404/exp1-f3.png" alt="image" /></p>
+
+<p>假设取k=3个点，那么有Up(e)=(3+3+2)=8 &gt; 7 条边（7为图G的总边数），也就是说，如果从图G中取3个点，要覆盖8条边是有可能的。但是，如果取k=2个点，那么有Up(e)=(3+3)=6 &lt; 7 条边，说明从图G中取2个点，是不可能覆盖G中的全部7条边的！基于这个上界，可以在分支树中扩展出来的节点进行验证，已知它还可以选择的顶点数目以及还需要覆盖的边的条数，加上顶点的状态（下面会分析说明）即可判断当前节点是否存在解！如果不存在即可进行剪枝了。</p>
+
+<p>其次，顶点的状态。该策略中顶点有三种状态，分别为已经选择了的状态S1，不选择的状态S2，可以选择的状态S3。其中，不选择的状态S2对应解空间树中的右节点，不选择该节点，然后设置该节点为不选择状态S2。这点很重要，因为有了这个状态，可以使得上界的判断更为精确，因为只能从剩余顶点集中选择那些状态S3的顶点，状态S1和S2都不行，那么上界便会更小，也就更加精确，从而利于剪枝！</p>
+
+<h5 id="section-3">(2)贪心策略</h5>
+
+<p>贪心的策略是指可行的结点都是按照还需要覆盖的剩余边数的降序排列，即，每次选择的节点都是可行节点中还需要覆盖的边数最小的那个节点，因为它最接近结果了。</p>
+
+<h5 id="section-4">(3)例子分析</h5>
+
+<p>以图G为例，此时e=7（要覆盖的边数），取k=3，图G用邻接矩阵保存为全局数据，计算每个顶点的边数，然后降序排列。</p>
+
+<p>步骤①判断是否可能有解，Up(e)=3+3+2=8&gt;7，可能有解，那么将图G构造成一个解空间树的节点，它包含了还能选择的点数k=3，还需要覆盖的边数e=7，每个顶点的边数以及按边数大小的降序排列（上表），每个顶点的状态（初始时都是可选择的状态S3）。然后，将该节点插入到优先队列中，该优先队列是用最小堆实现的，按照前面的贪心策略对队列中的节点进行降序排列。</p>
+
+<p>步骤②取出了优先队列中的根节点，很显然，还需要覆盖的边数为7，不为0，所以还不满足条件。接下来要检查是否能够进行扩展，从顶点集合中选择状态为可以选择的顶点中边数最多的点，该点存在为顶点2，接着进行扩展，扩展左节点时将还能选择的点数k-1=2，然后计算选择了该点之后删除了几条未覆盖的边，得到还需要覆盖的边数e=4，然后更新所有其他顶点的边数，并重新排序，最后将顶点2的状态设置为已经选择了；扩展右节点时，只要将顶点2的状态设置为不能选择，还能选择的点数k(=3)，还需要覆盖的边数e(=7)保持不变。扩展完了之后，同样判断左右节点是否可能有解，如果有解，将该节点插入到优先队列中。这里左右节点都有解，那么将左右节点都插入到优先队列中，因为左节点还需要覆盖的边数e=4小于右节点的e=7，所以根据贪心策略，左节点在右节点的前面。上面两个步骤的图示如下，其中标明了顶点状态颜色。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201404/exp1-f1.png" alt="image" /></p>
+
+<p>算法然后继续进入步骤②，此时取出的是节点是刚才插入的左节点，很显然，还需要覆盖的边数为4，不为0，所以还不满足条件。接下来要检查是否能够进行扩展，从顶点集合中选择状态为可以选择的顶点中边数最多的点，该点存在为顶点3，接着进行扩展，扩展左节点时将还能选择的点数k-1=1，然后计算选择了该点之后删除了几条未覆盖的边，得到还需要覆盖的边数e=2，然后更新所有其他顶点的边数，并重新排序，最后将顶点3的状态设置为已经选择了；扩展右节点时，只要将顶点3的状态设置为不能选择，还能选择的点数k(=3)，还需要覆盖的边数e(=7)保持不变。扩展完了之后，同样判断左右节点是否可能有解，如果有解，将该节点插入到优先队列中。这里左右节点都不可能有解，那么直接进入步骤②继续循环。上面这一步的图示如下：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201404/exp1-f2.png" alt="image" /></p>
+
+<p>算法按照上面的方式不断进行，最后满足条件的分支的过程是：</p>
+
+<p>①不选择顶点2；②选择顶点3；③选择顶点1；④选择顶点5。</p>
+
+<p>最后得到的满足条件的解是选择顶点1,3,5。</p>
+
+<h4 id="section-5">(4)复杂度分析</h4>
+
+<p>该算法优先队列使用的是最小堆实现的(O(nlgn))，对顶点按照边排序使用的是快速排序算法(O(nlgn))，解空间树的深度最多为顶点数目n，每层都要进行分支定界，所以每层的时间复杂度为O(nlgn)，所以算法总的时间复杂度为O(n^2 lgn)。但是，为了实现分支定界，每个节点保存的信息量较多，空间复杂度较大。(有木有分析错了，我不太会分析复杂度)</p>
+
+<p>OJ系统的结果为：时间 156ms  空间 1.0MB</p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem/">http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
