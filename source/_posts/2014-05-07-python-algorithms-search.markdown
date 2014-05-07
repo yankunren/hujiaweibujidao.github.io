@@ -14,6 +14,7 @@ Chapter5: Search and Sorting [online_link](http://interactivepython.org/courseli
 
 2.[算法导论](http://en.wikipedia.org/wiki/Introduction_to_Algorithms)
 
+#### 搜索总结
 
 (1)顺序查找：O(n)
 
