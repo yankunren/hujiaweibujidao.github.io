@@ -81,7 +81,7 @@ From wiki
 
 下面的代码包含了顺序查找，二分查找，哈希查找(size=11, plus 1, reminder method)
 
-```python
+``` python
 def sequential_search(a_list, item):
     pos = 0
     found = False
@@ -122,23 +122,25 @@ class HashTable:
         self.slots = [None] * self.size
         self.data = [None] * self.size
 
-    def put(self, key, data):
-        hash_value = self.hash_function(key,len(self.slots))
-        if self.slots[hash_value] == None: # '==None' ? or  'is None' ?
-            self.slots[hash_value] = key
-            self.data[hash_value] = data
+    #put data in slot
+    def put_data_in_slot(self,key,data,slot):
+        if self.slots[slot] == None: # '==None' ? or  'is None' ?
+            self.slots[slot] = key
+            self.data[slot] = data
+            return True
         else:
-            if self.slots[hash_value] == key:
-                self.data[hash_value] = data #replace
+            if self.slots[slot] == key: # not None
+                self.data[slot] = data #replace
+                return True
             else:
-                next_slot = self.rehash(hash_value, len(self.slots))
-                while self.slots[next_slot] != None and self.slots[next_slot] != key:
-                    next_slot = self.rehash(next_slot, len(self.slots))
-                    if self.slots[next_slot] == None:
-                        self.slots[next_slot] = key
-                        self.data[next_slot] = data
-                    else:
-                        self.data[next_slot] = data #replacea
+                return False
+
+    def put(self, key, data):
+        slot = self.hash_function(key, self.size);
+        result = self.put_data_in_slot(key,data,slot);
+        while not result:
+            slot = self.rehash(slot, self.size);
+            result=self.put_data_in_slot(key,data,slot);
 
     #reminder method
     def hash_function(self, key, size):
@@ -183,4 +185,7 @@ if __name__ == '__main__':
     table[20]="chicken";
     print table.slots;
     print table.data;
+    
+# [77, 44, 55, None, 26, 93, 17, None, None, 20, 54]
+# ['bird', 'goat', 'pig', None, 'dog', 'lion', 'tiger', None, None, 'chicken', 'cat']
 ```
