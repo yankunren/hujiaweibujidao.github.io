@@ -81,7 +81,7 @@ From wiki
 
 下面的代码包含了顺序查找，二分查找，哈希查找(size=11, plus 1, reminder method)
 
-```
+```python
 def sequential_search(a_list, item):
     pos = 0
     found = False
