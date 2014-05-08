@@ -738,17 +738,27 @@ Chapter 6 Trees and Tree Algorithms</p>
 <p>难点在于删除节点的操作：</p>
 
 <blockquote>
-  <p>From wiki 
-在二叉查找树删去一个结点，分三种情况讨论：
-1.若<em>p结点为叶子结点，即PL(左子树)和PR(右子树)均为空树。由于删去叶子结点不破坏整棵树的结构，则只需修改其双亲结点的指针即可。
-2.若</em>p结点只有左子树PL或右子树PR，此时只要令PL或PR直接成为其双亲结点<em>f的左子树（当</em>p是左子树）或右子树（当<em>p是右子树）即可，作此修改也不破坏二叉查找树的特性。
-3.若</em>p结点的左子树和右子树均不空。<em>*在删去</em>p之后，为保持其它元素之间的相对位置不变，可按中序遍历保持有序进行调整<em>*，可以有两种做法：其一是令</em>p的左子树为<em>f的左/右(依</em>p是<em>f的左子树还是右子树而定)子树，</em>s为<em>p左子树的最右下的结点，而</em>p的右子树为<em>s的右子树；其二是令</em>p的直接前驱（in-order predecessor）或直接后继（in-order successor）替代*p，然后再从二叉查找树中删去它的直接前驱（或直接后继）。</p>
+  <p>From wiki </p>
+</blockquote>
+
+<blockquote>
+  <p>在二叉查找树删去一个结点，分三种情况讨论：</p>
+</blockquote>
+
+<blockquote>
+  <p>1.若*p结点为叶子结点，即PL(左子树)和PR(右子树)均为空树。由于删去叶子结点不破坏整棵树的结构，则只需修改其双亲结点的指针即可。</p>
+</blockquote>
+
+<blockquote>
+  <p>2.若<em>p结点只有左子树PL或右子树PR，此时只要令PL或PR直接成为其双亲结点</em>f的左子树（当<em>p是左子树）或右子树（当</em>p是右子树）即可，作此修改也不破坏二叉查找树的特性。</p>
+</blockquote>
+
+<blockquote>
+  <p>3.若<em>p结点的左子树和右子树均不空。<strong>在删去*p之后，为保持其它元素之间的相对位置不变，可按中序遍历保持有序进行调整</strong>，可以有两种做法：其一是令</em>p的左子树为<em>f的左/右(依</em>p是<em>f的左子树还是右子树而定)子树，</em>s为<em>p左子树的最右下的结点，而</em>p的右子树为<em>s的右子树；其二是令</em>p的直接前驱（in-order predecessor）或直接后继（in-order successor）替代*p，然后再从二叉查找树中删去它的直接前驱（或直接后继）。</p>
 
 </blockquote>
 
-<p>一份不错的讲解<a href="http://www.cnblogs.com/Anker/archive/2013/01/28/2880581.html">来自博客园</a></p>
-
-<p><strong>引用开始</strong></p>
+<p><strong>引用开始</strong> 一份不错的讲解<a href="http://www.cnblogs.com/Anker/archive/2013/01/28/2880581.html">来自博客园</a></p>
 
 <hr />
 
@@ -759,6 +769,8 @@ Chapter 6 Trees and Tree Algorithms</p>
 <p>查找前驱步骤：先判断x是否有左子树，如果有则在left[x]中查找关键字最大的结点，即是x的前驱。如果没有左子树，则从x继续向上执行此操作，直到遇到某个结点是其父节点的右孩子结点，<strong>此时该父节点就是前驱</strong>。例如下图查找结点7的前驱结点6过程：</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/bst_pre.png" alt="image" /></p>
+
+<p>伪代码</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
