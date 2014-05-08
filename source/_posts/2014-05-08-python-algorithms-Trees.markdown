@@ -21,12 +21,7 @@ Chapter 6 Trees and Tree Algorithms
 
 难点在于删除节点的操作：
 
-> From wiki 
-> 在二叉查找树删去一个结点，分三种情况讨论：
-> 1.若*p结点为叶子结点，即PL(左子树)和PR(右子树)均为空树。由于删去叶子结点不破坏整棵树的结构，则只需修改其双亲结点的指针即可。   
-> 2.若*p结点只有左子树PL或右子树PR，此时只要令PL或PR直接成为其双亲结点*f的左子树（当*p是左子树）或右子树（当*p是右子树）即可，作此修改也不破坏二叉查找树的特性。    
-> 3.若*p结点的左子树和右子树均不空。**在删去*p之后，为保持其它元素之间的相对位置不变，可按中序遍历保持有序进行调整，可以有两种做法：其一是令*p的左子树为*f的左/右(依*p是*f的左子树还是右子树而定)子树，*s为*p左子树的最右下的结点，而*p的右子树为*s的右子树；其二是令*p的直接前驱（in-order predecessor）或直接后继（in-order successor）替代*p，然后再从二叉查找树中删去它的直接前驱（或直接后继）**。
->
+![image](http://hujiaweibujidao.github.io/images/201405/bst_del_wiki.png)
 
 **引用开始** [一份不错的讲解[来自博客园](http://www.cnblogs.com/Anker/archive/2013/01/28/2880581.html)]
 
@@ -347,6 +342,59 @@ print(mytree[2])
 
 ![image](http://hujiaweibujidao.github.io/images/201405/bst_worst.png)
 
-8.平衡二叉查找树
+8.平衡二叉查找树：为了避免得到前面提到的扭曲的二叉查找树，就有了平衡二叉查找树的概念
+
+AVL是最先发明的平衡二叉树，它得名于它的发明者G.M. Adelson-Velsky和E.M. Landis，他们在1962年的论文《An algorithm for the organization of information》中发表了它。
+
+[on_wiki](http://zh.wikipedia.org/wiki/AVL%E6%A0%91)
+
+AVL树的基本操作的实现
+
+![image](http://hujiaweibujidao.github.io/images/201405/avl_operations.png)
+
+如何进行旋转
+
+![image](http://hujiaweibujidao.github.io/images/201405/avl_rotate.png)
+
+旋转的实现描述
+
+![image](http://hujiaweibujidao.github.io/images/201405/avl_rotatedetails.png)
+
+[参考内容1关于AVL树的讲解](http://interactivepython.org/courselib/static/pythonds/Trees/balanced.html) ---> [如果访问较慢可以点击这里下载](http://hujiaweibujidao.github.io/files/avltrees.pdf)
+
+(1)平衡因子：左子树与右子树的高度之差
+
+![image](http://hujiaweibujidao.github.io/images/201405/avl_bf.png)
+
+(2)分析为什么AVL树能够对查找，插入，删除操作都达到$O(logn)$的效率
+
+其中关于斐波那契数列在N很大的时候后项与前项之商接近黄金分割比可见[斐波那契数列on_wiki](http://zh.wikipedia.org/wiki/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B8)
+
+![image](http://hujiaweibujidao.github.io/images/201405/avl1.png)
+![image](http://hujiaweibujidao.github.io/images/201405/avl2.png)
+
+(3)左旋，右旋以及左右旋和右左旋
+
+左旋：如果新的根节点有左孩子结点，那么左孩子结点就成为原来的根节点的右孩子结点
+
+![image](http://hujiaweibujidao.github.io/images/201405/avl_left.png)
+
+右旋：如果新的根节点有右孩子结点，那么右孩子结点就成为原来的根节点的左孩子结点
+
+![image](http://hujiaweibujidao.github.io/images/201405/avl_right.png)
+
+一种特殊的情况，单一的左旋和右旋都不行，不停地重复交替，所以需要左右旋(或者右左旋)
+
+![image](http://hujiaweibujidao.github.io/images/201405/avl_leftright.png)
+
+![image](http://hujiaweibujidao.github.io/images/201405/avl_leftright2.png)
+
+(4)如何在不重新计算子树的高度情况下修改旋转前的根节点和旋转后的根节点的平衡因子值
+
+下面是左旋的例子
+
+![image](http://hujiaweibujidao.github.io/images/201405/avl_rebal1.png)
+![image](http://hujiaweibujidao.github.io/images/201405/avl_rebal2.png)
+
 
 
