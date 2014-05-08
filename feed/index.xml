@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-08T10:04:09+08:00</updated>
+  <updated>2014-05-08T10:05:58+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,187 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python Algorithms - Data Structures]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/"/>
+    <updated>2014-05-08T10:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures</id>
+    <content type="html"><![CDATA[<p>参考内容：</p>
+
+<p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a>
+Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/sorting.html">online_link</a></p>
+
+<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
+
+<h4 id="section">数据结构总结</h4>
+
+<p>1.栈：LIFO结构，后进先出</p>
+
+<p>栈能解决的问题很多，比如逆波兰表达式求值，得到一个十进制数的二进制表达，检查括号匹配问题以及图的深度搜索等等，都很简单，可查看参考内容1学习。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/stack.png" alt="image" /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># Completed implementation of a stack ADT</span>
+</span><span class="line"><span class="k">class</span> <span class="nc">Stack</span><span class="p">:</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">       <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">==</span> <span class="p">[]</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span><span class="line">       <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">peek</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">       <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="n">s</span> <span class="o">=</span> <span class="n">Stack</span><span class="p">()</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">is_empty</span><span class="p">())</span>
+</span><span class="line"><span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span><span class="line"><span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="s">&#39;dog&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">peek</span><span class="p">())</span>
+</span><span class="line"><span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">is_empty</span><span class="p">())</span>
+</span><span class="line"><span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="mf">8.4</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>2.队列：FIFO结构，先进先出</p>
+
+<p>队列一般用于解决需要优先队列的问题或者进行广度优先搜索的问题，也很简单。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># Completed implementation of a queue ADT</span>
+</span><span class="line"><span class="k">class</span> <span class="nc">Queue</span><span class="p">:</span>
+</span><span class="line">   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">      <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class="line">   <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">==</span> <span class="p">[]</span>
+</span><span class="line">   <span class="k">def</span> <span class="nf">enqueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span><span class="line">      <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">item</span><span class="p">)</span>
+</span><span class="line">   <span class="k">def</span> <span class="nf">dequeue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span><span class="line">   <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">      <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="n">q</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+</span><span class="line"><span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="s">&#39;hello&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="s">&#39;dog&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+</span><span class="line"><span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span class="line"><span class="n">q</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>3.双向队列：左右两边都可以插入和删除的队列</p>
+
+<p>下面的实现是以右端为front，左端为rear</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># Completed implementation of a deque ADT</span>
+</span><span class="line"><span class="k">class</span> <span class="nc">Deque</span><span class="p">:</span>
+</span><span class="line">   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">      <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class="line">   <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">==</span> <span class="p">[]</span>
+</span><span class="line">   <span class="k">def</span> <span class="nf">add_front</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span><span class="line">       <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span class="line">   <span class="k">def</span> <span class="nf">add_rear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span><span class="line">      <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">item</span><span class="p">)</span>
+</span><span class="line">   <span class="k">def</span> <span class="nf">remove_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span><span class="line">   <span class="k">def</span> <span class="nf">remove_rear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class="line">   <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">      <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="n">dq</span><span class="o">=</span><span class="n">Deque</span><span class="p">();</span>
+</span><span class="line"><span class="n">dq</span><span class="o">.</span><span class="n">add_front</span><span class="p">(</span><span class="s">&#39;dog&#39;</span><span class="p">);</span>
+</span><span class="line"><span class="n">dq</span><span class="o">.</span><span class="n">add_rear</span><span class="p">(</span><span class="s">&#39;cat&#39;</span><span class="p">);</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">dq</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+</span><span class="line"><span class="n">dq</span><span class="o">.</span><span class="n">remove_front</span><span class="p">();</span>
+</span><span class="line"><span class="n">dq</span><span class="o">.</span><span class="n">add_front</span><span class="p">(</span><span class="s">&#39;pig&#39;</span><span class="p">);</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">dq</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/">http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Python Algorithms - Sort]]></title>
@@ -2001,49 +2182,6 @@ f(a)=A>0,f(b)=B<0 %]]&gt;</script>，那么区间中肯定有一点的函数值�
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/24/calculus-summary/">http://hujiaweibujidao.github.io/blog/2014/04/24/calculus-summary/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Numerical Methods using Matlab]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/"/>
-    <updated>2014-04-23T22:13:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab</id>
-    <content type="html"><![CDATA[<p>一本关于数值算法与应用的总结小书</p>
-
-<p>目前写了四个章节：[点击章节标题可以直接查看并下载 (^o^)/~]   </p>
-
-<ul>
-  <li><a href="http://hujiaweibujidao.github.io/files/nm-chapter1.pdf">第一章 线性方程组求解</a></li>
-</ul>
-
-<p>内容包括：高斯消去法，LU分解，Cholesky分解，矩阵的逆矩阵求解</p>
-
-<ul>
-  <li><a href="http://hujiaweibujidao.github.io/files/nm-chapter2.pdf">第二章 非线性方程求解</a></li>
-</ul>
-
-<p>内容包括：二分法，牛顿法，割线法，IQI法，Zeroin算法</p>
-
-<ul>
-  <li><a href="http://hujiaweibujidao.github.io/files/nm-chapter3.pdf">第三章 矩阵特征值和奇异值求解</a></li>
-</ul>
-
-<p>内容包括：基本幂法，逆幂法和移位幂法，QR分解，Householder变换，实用QR分解技术，奇异值分解SVD</p>
-
-<ul>
-  <li><a href="http://hujiaweibujidao.github.io/files/nm-chapter4.pdf">第四章 曲线拟合和多项式插值</a></li>
-</ul>
-
-<p>内容包括：曲线拟合，拉格朗日插值多项式，牛顿插值多项式，分段线性插值，保形分段三次插值，三次样条插值</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201311/nm-cover.png" width="600" height="600" title="" />
-<img src="http://hujiaweibujidao.github.io/images/201311/nm-chapter.png" width="600" height="600" title="" />
-<img src="http://hujiaweibujidao.github.io/images/201311/nm-math.png" width="600" height="600" title="" />
-<img src="http://hujiaweibujidao.github.io/images/201311/nm-code.png" width="600" height="600" title="" /></p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   

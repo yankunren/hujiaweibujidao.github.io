@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-08T10:04:09+08:00</updated>
+  <updated>2014-05-08T10:05:58+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,117 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python Algorithms - Data Structures]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/"/>
+    <updated>2014-05-08T10:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures</id>
+    <content type="html"><![CDATA[<p>参考内容：</p>
+
+<p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a>
+Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/sorting.html">online_link</a></p>
+
+<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
+
+<h4 id="section">数据结构总结</h4>
+
+<p>1.栈：LIFO结构，后进先出</p>
+
+<p>栈能解决的问题很多，比如逆波兰表达式求值，得到一个十进制数的二进制表达，检查括号匹配问题以及图的深度搜索等等，都很简单，可查看参考内容1学习。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/stack.png" alt="image" /></p>
+
+<p>```python
+# Completed implementation of a stack ADT
+class Stack:
+    def <strong>init</strong>(self):
+       self.items = []
+    def is_empty(self):
+       return self.items == []
+    def push(self, item):
+       self.items.append(item)
+    def pop(self):
+       return self.items.pop()
+    def peek(self):
+       return self.items[len(self.items)-1]
+    def size(self):
+       return len(self.items)</p>
+
+<p>s = Stack()
+print(s.is_empty())
+s.push(4)
+s.push(‘dog’)
+print(s.peek())
+s.push(True)
+print(s.size())
+print(s.is_empty())
+s.push(8.4)
+print(s.pop())
+print(s.pop())
+print(s.size())
+```</p>
+
+<p>2.队列：FIFO结构，先进先出</p>
+
+<p>队列一般用于解决需要优先队列的问题或者进行广度优先搜索的问题，也很简单。</p>
+
+<p>```python
+# Completed implementation of a queue ADT
+class Queue:
+   def <strong>init</strong>(self):
+      self.items = []
+   def is_empty(self):
+      return self.items == []
+   def enqueue(self, item):
+      self.items.insert(0,item)
+   def dequeue(self):
+      return self.items.pop()
+   def size(self):
+      return len(self.items)</p>
+
+<p>q = Queue()
+q.enqueue(‘hello’)
+q.enqueue(‘dog’)
+print(q.items)
+q.enqueue(3)
+q.dequeue()
+print(q.items)
+```</p>
+
+<p>3.双向队列：左右两边都可以插入和删除的队列</p>
+
+<p>下面的实现是以右端为front，左端为rear</p>
+
+<p>```python
+# Completed implementation of a deque ADT
+class Deque:
+   def <strong>init</strong>(self):
+      self.items = []
+   def is_empty(self):
+      return self.items == []
+   def add_front(self, item):
+       self.items.append(item)
+   def add_rear(self, item):
+      self.items.insert(0,item)
+   def remove_front(self):
+      return self.items.pop()
+   def remove_rear(self):
+      return self.items.pop(0)
+   def size(self):
+      return len(self.items)</p>
+
+<p>dq=Deque();
+dq.add_front(‘dog’);
+dq.add_rear(‘cat’);
+print(dq.items)
+dq.remove_front();
+dq.add_front(‘pig’);
+print(dq.items)
+```</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Python Algorithms - Sort]]></title>
