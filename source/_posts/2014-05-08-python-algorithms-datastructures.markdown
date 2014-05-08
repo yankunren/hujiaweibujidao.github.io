@@ -10,7 +10,9 @@ published: true
 参考内容：
 
 1.[Problem Solving with Python](http://interactivepython.org/courselib/static/pythonds/index.html)
-Chapter 2 and Chapter 3
+Chapter 2 Algorithm Analysis
+Chapter 3 Basic Data Structures
+Chapter 6 Trees and Tree Algorithms
 
 2.[算法导论](http://en.wikipedia.org/wiki/Introduction_to_Algorithms)
 
@@ -372,11 +374,18 @@ print(bh.heap_list)
 print(bh.current_size)
 ```
 
-7.二叉搜索树：一种特殊的二叉树，它满足下面的性质：任何一个节点的key值都比它左子树上的节点的key值要大，但是比它右子树上的节点的key值要小。
+7.二叉搜索树 [on_wiki](http://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9)：一种特殊的二叉树，它满足下面的性质：任何一个节点的key值都比它左子树上的节点的key值要大，但是比它右子树上的节点的key值要小。
 
+难点在于删除节点的操作：
 
-删除节点的操作：
+>From wiki 
+在二叉查找树删去一个结点，分三种情况讨论：
+1.若*p结点为叶子结点，即PL(左子树)和PR(右子树)均为空树。由于删去叶子结点不破坏整棵树的结构，则只需修改其双亲结点的指针即可。
+2.若*p结点只有左子树PL或右子树PR，此时只要令PL或PR直接成为其双亲结点*f的左子树（当*p是左子树）或右子树（当*p是右子树）即可，作此修改也不破坏二叉查找树的特性。
+3.若*p结点的左子树和右子树均不空。**在删去*p之后，为保持其它元素之间的相对位置不变，可按中序遍历保持有序进行调整**，可以有两种做法：其一是令*p的左子树为*f的左/右(依*p是*f的左子树还是右子树而定)子树，*s为*p左子树的最右下的结点，而*p的右子树为*s的右子树；其二是令*p的直接前驱（in-order predecessor）或直接后继（in-order successor）替代*p，然后再从二叉查找树中删去它的直接前驱（或直接后继）。
+>
 
+参考内容1中在第三种情况下使用的是第二种方案，并且是使用直接前驱来代替要删除的节点。
 
 完整实现[参考内容1中的代码，有些冗余，但是可读性好]
 
