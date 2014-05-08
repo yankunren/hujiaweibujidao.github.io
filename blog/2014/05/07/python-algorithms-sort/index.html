@@ -629,7 +629,11 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 </span><span class="line"><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>由于快排每次都能够确定一个元素在数组中最终的位置，所以可以用快排来解决很多变种问题，例如在线性时间内求中位数问题。</p>
+<p>由于快排每次都能够确定一个元素在数组中最终的位置，所以可以用快排来解决很多变种问题，例如在线性时间内求中位数或者其他顺序统计量的问题(例如第k大或者第k小的元素)，该部分内容可以参考<a href="http://www.cnblogs.com/Anker/archive/2013/01/25/2877311.html">来自博客园</a></p>
+
+<p>关于快排的性能分析可以参考<a href="http://www.cnblogs.com/Anker/archive/2013/01/24/2875234.html">来自博客园</a>，一般来说划分之后两边越均衡的话快排的性能更好。为了避免最坏的情况出现(原始的数组是已经是有序的)可以使用随机化版本的快排。</p>
+
+<p>另外，为了减少快排的栈深度可以使用尾递归技术，该内容可以参见算法导论习题7-4。</p>
 
 <p>6.希尔排序：类似合并排序和插入排序的结合体，二路合并排序将原来的数组分成左右两部分，希尔排序则将数组按照一定的间隔分成几部分，每部分采用插入排序来排序，有意思的是这样做了之后，元素很多情况下就差不多在它应该呆的位置，所以效率不一定比插入排序差。时间复杂度为$[O(n),O(n^2)]$。</p>
 
@@ -684,8 +688,25 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 </span><span class="line"><span class="n">shell_sort</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
 </span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/">http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+
+<p>7.堆排序见该系列文章中的DataStrctures部分中的二叉堆部分。</p>
+
+<p>8.其他线性排序可以参见算法导论第8章或者看下<a href="http://www.cnblogs.com/Anker/archive/2013/01/25/2876397.html">这篇不错的文章</a></p>
+
+<p>其实看个图就明白了，图摘自上面的博客，版权归原作者，谢谢！</p>
+
+<p>计数排序：在数的范围很小时还是不错的，当数的范围很大的时候就不适用了，计数排序一般用于基数排序中。需要注意的是，计数完了之后进行插入时，为了保证排序的稳定性，需要从后往前插入。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/sortcount.png" alt="image" /></p>
+
+<p>基数排序</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/sortradix.png" alt="image" /></p>
+
+<p>桶排序：适用于元素是均匀分布的，在每个桶内采用插入排序。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/sortbucket.png" alt="image" />&lt;p class=&#8217;post-footer&#8217;&gt;
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/">http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a> Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)&lt;/p&gt;</p>
 </div>
 
 
