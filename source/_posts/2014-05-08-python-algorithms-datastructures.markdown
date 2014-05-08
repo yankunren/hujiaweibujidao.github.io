@@ -389,9 +389,7 @@ print(bh.current_size)
 > 3.若*p结点的左子树和右子树均不空。**在删去*p之后，为保持其它元素之间的相对位置不变，可按中序遍历保持有序进行调整**，可以有两种做法：其一是令*p的左子树为*f的左/右(依*p是*f的左子树还是右子树而定)子树，*s为*p左子树的最右下的结点，而*p的右子树为*s的右子树；其二是令*p的直接前驱（in-order predecessor）或直接后继（in-order successor）替代*p，然后再从二叉查找树中删去它的直接前驱（或直接后继）。
 >
 
-一份不错的讲解[来自博客园](http://www.cnblogs.com/Anker/archive/2013/01/28/2880581.html)
-
-**引用开始**
+**引用开始** 一份不错的讲解[来自博客园](http://www.cnblogs.com/Anker/archive/2013/01/28/2880581.html)
 
 ----------
 
@@ -402,6 +400,8 @@ print(bh.current_size)
 查找前驱步骤：先判断x是否有左子树，如果有则在left[x]中查找关键字最大的结点，即是x的前驱。如果没有左子树，则从x继续向上执行此操作，直到遇到某个结点是其父节点的右孩子结点，**此时该父节点就是前驱**。例如下图查找结点7的前驱结点6过程：
 
 ![image](http://hujiaweibujidao.github.io/images/201405/bst_pre.png)
+
+伪代码
 
 ```cpp
 TREE_SUCCESSOR(x)
