@@ -379,6 +379,6 @@ print(bh.heap_list)
 print(bh.current_size)
 ```
 
-关于二叉查找树等内容请见树的总结。
+关于二叉查找树等内容请见[树的总结](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees/)。
 
 
