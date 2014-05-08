@@ -313,7 +313,7 @@ print(r.get_right_child().get_root_val())
 
 注意，下面的实现中默认在初始的堆列表中插入了一个元素0，这样做可以保证堆的真实有效的元素个数和current_size值对应，而且最后一个元素的索引就对应了current_size。
 
-此外，从list中建堆的过程需要从最后一个非叶子节点开始到第一个非叶子节点(根节点)进行。这篇文章[来自博客园](http://www.cnblogs.com/Anker/archive/2013/01/23/2873422.html)解释了这个问题。建堆的过程如下：
+此外，从list中建堆的过程需要从最后一个非叶子节点开始到第一个非叶子节点(根节点)进行。这篇文章[来自博客园](http://www.cnblogs.com/Anker/archive/2013/01/23/2873422.html)解释了这个问题。建堆的过程如下：[下图摘自原博客，版权归原作者，谢谢]
 
 ![image](http://hujiaweibujidao.github.io/images/201405/heapbuild.png)
 
