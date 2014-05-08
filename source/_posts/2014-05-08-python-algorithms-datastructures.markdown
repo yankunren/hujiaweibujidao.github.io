@@ -143,6 +143,8 @@ print(s.size())
 
 队列一般用于解决需要优先队列的问题或者进行广度优先搜索的问题，也很简单。
 
+![image](http://hujiaweibujidao.github.io/images/201405/queue.png)
+
 ```python
 # Completed implementation of a queue ADT
 class Queue:
@@ -167,6 +169,8 @@ print(q.items)
 ```
 
 4.双向队列：左右两边都可以插入和删除的队列
+
+![image](http://hujiaweibujidao.github.io/images/201405/deque.png)
 
 下面的实现是以右端为front，左端为rear
 
@@ -197,3 +201,171 @@ dq.add_front('pig');
 print(dq.items)
 ```
 
+5.二叉树：一个节点最多有两个孩子节点的树。如果是从0索引开始存储，那么对应于节点p的孩子节点是2p+1和2p+2两个节点，相反，节点p的父亲节点是(p-1)/2位置上的点
+
+![image](http://hujiaweibujidao.github.io/images/201405/bt2.png)
+
+第一种，直接使用list来实现二叉树，可读性差
+
+```python
+def binary_tree(r):
+    return [r, [], []]
+def insert_left(root, new_branch):
+    t = root.pop(1)
+    if len(t) > 1:
+        #new_branch becomes the left node of root, and original left
+        #node t becomes left node of new_branch, right node is none
+        root.insert(1, [new_branch, t, []])
+    else:
+        root.insert(1, [new_branch, [], []])
+    return root
+def insert_right(root, new_branch):
+    t = root.pop(2)
+    if len(t) > 1:
+        root.insert(2, [new_branch, [], t])
+    else:
+        root.insert(2, [new_branch, [], []])
+    return root
+def get_root_val(root):
+    return root[0]
+def set_root_val(root, new_val):
+    root[0] = new_val
+def get_left_child(root):
+    return root[1]
+def get_right_child(root):
+    return root[2]
+
+r = binary_tree(3)
+insert_left(r, 4)
+insert_left(r, 5)
+insert_right(r, 6)
+insert_right(r, 7)
+print(r)
+l = get_left_child(r)
+print(l)
+set_root_val(l, 9)
+print(r)
+insert_left(l, 11)
+print(r)
+print(get_right_child(get_right_child(r)))
+```
+
+第二种，使用类的形式定义二叉树，可读性更好
+
+![image](http://hujiaweibujidao.github.io/images/201405/btclass.png)
+
+```
+class BinaryTree:
+    def __init__(self, root):
+        self.key = root
+        self.left_child = None
+        self.right_child = None
+    def insert_left(self, new_node):
+        if self.left_child == None:
+            self.left_child = BinaryTree(new_node)
+        else:
+            t = BinaryTree(new_node)
+            t.left_child = self.left_child
+            self.left_child = t
+    def insert_right(self, new_node):
+        if self.right_child == None:
+            self.right_child = BinaryTree(new_node)
+        else:
+            t = BinaryTree(new_node)
+            t.right_child = self.right_child
+            self.right_child = t
+    def get_right_child(self):
+        return self.right_child
+    def get_left_child(self):
+        return self.left_child
+    def set_root_val(self, obj):
+        self.key = obj
+    def get_root_val(self):
+        return self.key
+
+r = BinaryTree('a')
+print(r.get_root_val())
+print(r.get_left_child())
+r.insert_left('b')
+print(r.get_left_child())
+print(r.get_left_child().get_root_val())
+r.insert_right('c')
+print(r.get_right_child())
+print(r.get_right_child().get_root_val())
+r.get_right_child().set_root_val('hello')
+print(r.get_right_child().get_root_val())
+```
+
+6.二叉堆：根据堆的性质又可以分为最小堆和最大堆，是一种非常好的优先队列。在最小堆中孩子节点一定大于等于其父亲节点，最大堆反之。二叉堆实际上一棵完全二叉树，并且满足堆的性质。对于插入和查找操作的时间复杂度度都是$O(nlogn)$。
+
+它的插入操作图示：
+
+![image](http://hujiaweibujidao.github.io/images/201405/heapinsert.png)
+
+去除根节点的操作图示：
+
+![image](http://hujiaweibujidao.github.io/images/201405/heapdel.png)
+
+注意，下面的实现中默认在初始的堆列表中插入了一个元素0，这样做可以保证堆的真实有效的元素个数和current_size值对应，而且最后一个元素的索引就对应了current_size。
+
+```python
+class BinHeap:
+    def __init__(self):
+        self.heap_list = [0]
+        self.current_size = 0
+    def perc_up(self, i):
+        while i // 2 > 0: # >0 means this node is still available
+            if self.heap_list[i] < self.heap_list[i // 2]:
+                tmp = self.heap_list[i // 2]
+                self.heap_list[i // 2] = self.heap_list[i]
+                self.heap_list[i] = tmp
+            i = i // 2
+    def insert(self, k):
+        self.heap_list.append(k)
+        self.current_size = self.current_size + 1
+        self.perc_up(self.current_size)
+    def perc_down(self, i):
+        while (i * 2) <= self.current_size:
+            mc = self.min_child(i)
+            if self.heap_list[i] > self.heap_list[mc]:
+                tmp = self.heap_list[i]
+                self.heap_list[i] = self.heap_list[mc]
+                self.heap_list[mc] = tmp
+            i = mc
+    def min_child(self, i):
+        if i * 2 + 1 > self.current_size:
+            return i * 2
+        else:
+            if self.heap_list[i * 2] < self.heap_list[i * 2 + 1]:
+                return i * 2
+            else:
+                return i * 2 + 1
+    def del_min(self):
+        ret_val = self.heap_list[1]
+        self.heap_list[1] = self.heap_list[self.current_size]
+        self.current_size = self.current_size - 1
+        self.heap_list.pop()
+        self.perc_down(1)
+        return ret_val
+
+    def build_heap(self, a_list):
+        i = len(a_list) // 2
+        self.current_size = len(a_list)
+        self.heap_list = [0] + a_list[:] #append original list
+        while (i > 0):
+            #build the heap we only need to deal the first part!
+            self.perc_down(i)
+            i=i-1
+
+a_list=[9, 6, 5, 2, 3];
+bh=BinHeap();
+bh.build_heap(a_list);
+print(bh.heap_list)
+print(bh.current_size)
+bh.insert(10)
+bh.insert(7)
+print(bh.heap_list)
+bh.del_min();
+print(bh.heap_list)
+print(bh.current_size)
+```
