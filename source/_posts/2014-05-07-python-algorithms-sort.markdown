@@ -10,6 +10,7 @@ published: true
 参考内容：
 
 1.[Problem Solving with Python](http://interactivepython.org/courselib/static/pythonds/index.html)
+
 Chapter5: Search and Sorting [online_link](http://interactivepython.org/courselib/static/pythonds/SortSearch/sorting.html)
 
 2.[算法导论](http://en.wikipedia.org/wiki/Introduction_to_Algorithms)
