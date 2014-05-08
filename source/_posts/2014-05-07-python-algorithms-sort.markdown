@@ -259,7 +259,7 @@ print(a_list)
 
 根据算法导论中的伪代码的C++版本实现
 
-```
+```cpp
 #include <iostream>
 using namespace std;
 
