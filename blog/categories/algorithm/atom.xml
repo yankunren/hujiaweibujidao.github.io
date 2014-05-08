@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-08T17:29:24+08:00</updated>
+  <updated>2014-05-08T18:19:03+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -20,10 +20,11 @@
     <id>http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures</id>
     <content type="html"><![CDATA[<p>参考内容：</p>
 
-<p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a>
-Chapter 2 Algorithm Analysis
-Chapter 3 Basic Data Structures
-Chapter 6 Trees and Tree Algorithms</p>
+<p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a></p>
+
+<p>Chapter 2 Algorithm Analysis <br />
+Chapter 3 Basic Data Structures <br />
+Chapter 6 Trees and Tree Algorithms   </p>
 
 <p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
 
@@ -391,23 +392,11 @@ print(bh.current_size)
 <p>难点在于删除节点的操作：</p>
 
 <blockquote>
-  <p>From wiki </p>
-</blockquote>
-
-<blockquote>
-  <p>在二叉查找树删去一个结点，分三种情况讨论：</p>
-</blockquote>
-
-<blockquote>
-  <p>1.若*p结点为叶子结点，即PL(左子树)和PR(右子树)均为空树。由于删去叶子结点不破坏整棵树的结构，则只需修改其双亲结点的指针即可。</p>
-</blockquote>
-
-<blockquote>
-  <p>2.若<em>p结点只有左子树PL或右子树PR，此时只要令PL或PR直接成为其双亲结点</em>f的左子树（当<em>p是左子树）或右子树（当</em>p是右子树）即可，作此修改也不破坏二叉查找树的特性。</p>
-</blockquote>
-
-<blockquote>
-  <p>3.若<em>p结点的左子树和右子树均不空。<strong>在删去*p之后，为保持其它元素之间的相对位置不变，可按中序遍历保持有序进行调整</strong>，可以有两种做法：其一是令</em>p的左子树为<em>f的左/右(依</em>p是<em>f的左子树还是右子树而定)子树，</em>s为<em>p左子树的最右下的结点，而</em>p的右子树为<em>s的右子树；其二是令</em>p的直接前驱（in-order predecessor）或直接后继（in-order successor）替代*p，然后再从二叉查找树中删去它的直接前驱（或直接后继）。</p>
+  <p>From wiki 
+在二叉查找树删去一个结点，分三种情况讨论：
+1.若<em>p结点为叶子结点，即PL(左子树)和PR(右子树)均为空树。由于删去叶子结点不破坏整棵树的结构，则只需修改其双亲结点的指针即可。
+2.若</em>p结点只有左子树PL或右子树PR，此时只要令PL或PR直接成为其双亲结点<em>f的左子树（当</em>p是左子树）或右子树（当<em>p是右子树）即可，作此修改也不破坏二叉查找树的特性。
+3.若</em>p结点的左子树和右子树均不空。<strong>在删去<em>p之后，为保持其它元素之间的相对位置不变，可按中序遍历保持有序进行调整，可以有两种做法：其一是令</em>p的左子树为<em>f的左/右(依</em>p是<em>f的左子树还是右子树而定)子树，</em>s为<em>p左子树的最右下的结点，而</em>p的右子树为<em>s的右子树；其二是令</em>p的直接前驱（in-order predecessor）或直接后继（in-order successor）替代*p，然后再从二叉查找树中删去它的直接前驱（或直接后继）</strong>。</p>
 
 </blockquote>
 
