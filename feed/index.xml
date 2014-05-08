@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-08T19:56:05+08:00</updated>
+  <updated>2014-05-08T20:00:40+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -1259,8 +1259,9 @@ Chapter 6 Trees and Tree Algorithms   </p>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort</id>
     <content type="html"><![CDATA[<p>参考内容：</p>
 
-<p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a>
-Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/sorting.html">online_link</a></p>
+<p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a></p>
+
+<p>Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/sorting.html">online_link</a></p>
 
 <p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
 
@@ -1832,7 +1833,7 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 </span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>7.堆排序见该系列文章中的DataStrctures部分中的二叉堆部分。</p>
+<p>7.堆排序请参见该系列文章中的DataStrctures章节中的二叉堆部分的内容。</p>
 
 <p>8.其他线性排序可以参见算法导论第8章或者看下<a href="http://www.cnblogs.com/Anker/archive/2013/01/25/2876397.html">这篇不错的文章</a></p>
 
@@ -1848,8 +1849,10 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 
 <p>桶排序：适用于元素是均匀分布的，在每个桶内采用插入排序。</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/201405/sortbucket.png" alt="image" />&lt;p class=&#8217;post-footer&#8217;&gt;
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/">http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a> Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)&lt;/p&gt;</p>
+<p><img src="http://hujiaweibujidao.github.io/images/201405/sortbucket.png" alt="image" /></p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/">http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
