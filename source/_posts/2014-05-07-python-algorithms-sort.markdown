@@ -71,7 +71,7 @@ print(a_list)
 
 ![image](http://hujiaweibujidao.github.io/images/201405/insertionsort.png)
 
-```
+```python
 def insertion_sort(a_list):
     for index in range(1, len(a_list)):
         current_value = a_list[index]
@@ -112,7 +112,7 @@ print(a_list)
 
 ![image](http://hujiaweibujidao.github.io/images/201405/mergesort2.png)
 
-```
+```python
 def merge_sort(a_list):
     print("Splitting ", a_list)
     if len(a_list) > 1:
@@ -148,7 +148,7 @@ print(a_list)
 
 算法导论2-4题利用合并排序可以在$O(nlogn)$的最坏情况下得到包含n个元素的数组的逆序对的数目。[下面使用的是C++来实现的，合并排序的代码格式类似算法导论]
 
-```C++
+```c
 #include <iostream>
 using namespace std;
 
@@ -207,7 +207,7 @@ int mergeInversions(int arr[], int p, int q, int r){
 
 ![image](http://hujiaweibujidao.github.io/images/201405/quicksort.png)
 
-```
+```python
 def quick_sort(a_list):
     quick_sort_helper(a_list, 0, len(a_list) - 1)
 
@@ -259,7 +259,7 @@ print(a_list)
 
 根据算法导论中的伪代码的C++版本实现
 
-```
+```C
 #include <iostream>
 using namespace std;
 
@@ -307,3 +307,35 @@ int main(int argc, const char * argv[])
 ```
 
 由于快排每次都能够确定一个元素在数组中最终的位置，所以可以用快排来解决很多变种问题，例如在线性时间内求中位数问题。
+
+6.希尔排序：类似合并排序和插入排序的结合体，二路合并排序将原来的数组分成左右两部分，希尔排序则将数组按照一定的间隔分成几部分，每部分采用插入排序来排序，有意思的是这样做了之后，元素很多情况下就差不多在它应该呆的位置，所以效率不一定比插入排序差。时间复杂度为$[O(n),O(n^2)]$。
+
+![image](http://hujiaweibujidao.github.io/images/201405/shellsort.png)
+
+![image](http://hujiaweibujidao.github.io/images/201405/shellsort2.png)
+
+```python
+def shell_sort(a_list):
+    #how many sublists, also how many elements in a sublist
+    sublist_count = len(a_list) // 2
+    while sublist_count > 0:
+        for start_position in range(sublist_count):
+            gap_insertion_sort(a_list, start_position, sublist_count)
+        print("After increments of size", sublist_count, "The list is", a_list)
+        sublist_count = sublist_count // 2
+
+def gap_insertion_sort(a_list, start, gap):
+    #start+gap is the second element in this sublist
+    for i in range(start + gap, len(a_list), gap):
+        current_value = a_list[i]
+        position = i
+        while position >= gap and a_list[position - gap] > current_value:
+            a_list[position] = a_list[position - gap] #move backward
+            position = position - gap
+            a_list[position] = current_value
+
+
+a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20, 88]
+shell_sort(a_list)
+print(a_list)
+```
