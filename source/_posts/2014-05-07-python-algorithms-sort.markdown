@@ -345,7 +345,7 @@ shell_sort(a_list)
 print(a_list)
 ```
 
-7.堆排序见该系列文章中的DataStrctures部分中的二叉堆部分。
+7.堆排序请参见该系列文章中的DataStrctures章节中的二叉堆部分的内容。
 
 8.其他线性排序可以参见算法导论第8章或者看下[这篇不错的文章](http://www.cnblogs.com/Anker/archive/2013/01/25/2876397.html)
 
@@ -362,3 +362,5 @@ print(a_list)
 桶排序：适用于元素是均匀分布的，在每个桶内采用插入排序。
 
 ![image](http://hujiaweibujidao.github.io/images/201405/sortbucket.png)
+
+
