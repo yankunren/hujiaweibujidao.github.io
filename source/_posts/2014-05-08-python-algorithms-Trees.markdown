@@ -17,9 +17,9 @@ Chapter 6 Trees and Tree Algorithms
 
 #### 树的总结 
 
-1.二叉搜索树 [on_wiki](http://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9)：一种特殊的二叉树，它满足下面的性质：任何一个节点的key值都比它左子树上的节点的key值要大，但是比它右子树上的节点的key值要小。节点插入，删除等操作的时间复杂度都是$O(log_{2}n)$
+1.二叉搜索树 [on_wiki](http://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9)：一种特殊的二叉树，它满足下面的性质：任何一个节点的key值都比它左子树上的节点的key值要大，但是比它右子树上的节点的key值要小。节点查找，插入，删除等操作的时间复杂度都是$O(log_{2}n)$
 
-难点在于删除节点的操作：
+难点在于删除节点的操作(下面摘自wiki)：
 
 ![image](http://hujiaweibujidao.github.io/images/201405/bst_del_wiki.png)
 
@@ -67,15 +67,17 @@ TREE_PROCESSOR(x)
 
 2.删除节点操作
 
-(1)结点z没有左右子树，则修改其父节点p[z]，使其为NULL。
+(1)结点z没有左右子树，则修改其父节点p[z]，**删除父节点对它的链接**。
 
 ![image](http://hujiaweibujidao.github.io/images/201405/bst_del1.png)
 
-(2)如果结点z只有一个子树（左子树或者右子树），通过在其子结点与父节点建立一条链来删除z。
+(2)如果结点z只有一个子树（左子树或者右子树），通过在其子结点与父节点建立一条链接来删除z。
 
 ![image](http://hujiaweibujidao.github.io/images/201405/bst_del2.png)
 
-(3)如果z有两个子女，则先删除z的后继y（y没有左孩子），在用y的内容来替代z的内容。
+(3)如果z有两个子女，则先删除z的后继y(y没有左孩子)，再用y的内容来替代z的内容。
+
+**[博主提示：这里找到z的后继就是利用上面的查找后继的方法，根据wiki也可以是用z的前驱来替换。另外，删除后继和替换内容的操作其实也可以反过来，保证数据不丢失就行了]**
 
 ![image](http://hujiaweibujidao.github.io/images/201405/bst_del3.png)
 
@@ -123,7 +125,7 @@ def binary_tree_delete(self, key):
 
 参考内容1中在第三种情况下使用的是wiki中的第二种方案，并且是使用直接后继来代替要删除的节点。
 
-完整实现[参考内容1中的代码，相当冗余，但是可读性较好，个人认为如果要实现删除节点操作的话建议参考wiki上python代码的实现，也可以查看参考内容1中对代码的详细解释]
+完整实现[参考内容1中的代码相当冗余，但是可读性蛮好，个人认为如果要实现删除节点操作的话建议参考wiki上python代码的实现，也可以查看参考内容1中对代码的详细解释加深理解]
 
 ```python
 class TreeNode:
@@ -338,13 +340,13 @@ print(mytree[2])
 
 ```
 
-如果原始的列表是基本有序的，那么得到的二叉树的高度会很高，变成一个扭曲的二叉树。
+如果原始的列表是基本有序的，那么得到的二叉树会变成一个扭曲的二叉树，性能就相当于一个链表了。
 
 ![image](http://hujiaweibujidao.github.io/images/201405/bst_worst.png)
 
-8.平衡二叉查找树：为了避免得到前面提到的扭曲的二叉查找树，就有了平衡二叉查找树的概念
+8.平衡二叉查找树：为了避免得到前面提到的扭曲的二叉查找树，于是就有了平衡二叉查找树的概念。
 
-AVL是最先发明的平衡二叉树，它得名于它的发明者G.M. Adelson-Velsky和E.M. Landis，他们在1962年的论文《An algorithm for the organization of information》中发表了它。
+AVL树是最先发明的平衡二叉树，它得名于它的发明者G.M. Adelson-Velsky和E.M. Landis，他们在1962年的论文《An algorithm for the organization of information》中发表了它。
 
 [on_wiki](http://zh.wikipedia.org/wiki/AVL%E6%A0%91)
 
@@ -368,7 +370,7 @@ AVL树的基本操作的实现
 
 (2)分析为什么AVL树能够对查找，插入，删除操作都达到$O(logn)$的效率
 
-其中关于斐波那契数列在N很大的时候后项与前项之商接近黄金分割比可见[斐波那契数列on_wiki](http://zh.wikipedia.org/wiki/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B8)
+推理当中关于斐波那契数列在N很大的时候后项与前项之商接近黄金分割比的内容可参见[斐波那契数列on_wiki](http://zh.wikipedia.org/wiki/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B8)
 
 ![image](http://hujiaweibujidao.github.io/images/201405/avl1.png)
 ![image](http://hujiaweibujidao.github.io/images/201405/avl2.png)
@@ -386,7 +388,6 @@ AVL树的基本操作的实现
 一种特殊的情况，单一的左旋和右旋都不行，不停地重复交替，所以需要左右旋(或者右左旋)
 
 ![image](http://hujiaweibujidao.github.io/images/201405/avl_leftright.png)
-
 ![image](http://hujiaweibujidao.github.io/images/201405/avl_leftright2.png)
 
 (4)如何在不重新计算子树的高度情况下修改旋转前的根节点和旋转后的根节点的平衡因子值
