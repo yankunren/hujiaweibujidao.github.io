@@ -148,7 +148,7 @@ print(a_list)
 
 算法导论2-4题利用合并排序可以在$O(nlogn)$的最坏情况下得到包含n个元素的数组的逆序对的数目。[下面使用的是C++来实现的，合并排序的代码格式类似算法导论]
 
-```c
+```cpp
 #include <iostream>
 using namespace std;
 
@@ -259,7 +259,7 @@ print(a_list)
 
 根据算法导论中的伪代码的C++版本实现
 
-```C
+```
 #include <iostream>
 using namespace std;
 
