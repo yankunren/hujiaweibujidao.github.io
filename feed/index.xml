@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-08T00:17:10+08:00</updated>
+  <updated>2014-05-08T09:37:59+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -25,15 +25,15 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 
 <p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
 
-<h4 id="section">排序算法总结</h4>
+<h4 id="section">排序总结</h4>
 
 <p>1.冒泡排序(bubble sort)：每个回合都从第一个元素开始和它后面的元素比较，如果比它后面的元素更大的话就交换，一直重复，直到这个元素到了它能到达的位置。注意检测是否已经完成了排序，如果已完成就可以退出了。时间复杂度$O(n^2)$</p>
 
-<p>Python支持对两个数字同时进行交换！<code>a,b = b,a</code>就可以交换a和b的值了。</p>
+<p><strong>Python支持对两个数字同时进行交换！<code>a,b = b,a</code>就可以交换a和b的值了。</strong></p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/bubblesort.png" alt="image" /></p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -52,31 +52,32 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 <span class="line-number">17</span>
 <span class="line-number">18</span>
 <span class="line-number">19</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">def short_bubble_sort(a_list):
-</span><span class="line">    exchanges = True
-</span><span class="line">    pass_num = len(a_list) - 1
-</span><span class="line">    while pass_num &gt; 0 and exchanges:
-</span><span class="line">        exchanges = False
-</span><span class="line">        for i in range(pass_num):
-</span><span class="line">            if a_list[i] &gt; a_list[i + 1]:
-</span><span class="line">                exchanges = True
-</span><span class="line">                # temp = a_list[i]
-</span><span class="line">                # a_list[i] = a_list[i + 1]
-</span><span class="line">                # a_list[i + 1] = temp
-</span><span class="line">                a_list[i],a_list[i+1] = a_list[i+1], a_list[i]
-</span><span class="line">        pass_num = pass_num - 1
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">short_bubble_sort</span><span class="p">(</span><span class="n">a_list</span><span class="p">):</span>
+</span><span class="line">    <span class="n">exchanges</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="line">    <span class="n">pass_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span class="line">    <span class="k">while</span> <span class="n">pass_num</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">exchanges</span><span class="p">:</span>
+</span><span class="line">        <span class="n">exchanges</span> <span class="o">=</span> <span class="bp">False</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pass_num</span><span class="p">):</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">a_list</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+</span><span class="line">                <span class="n">exchanges</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="line">                <span class="c"># temp = a_list[i]</span>
+</span><span class="line">                <span class="c"># a_list[i] = a_list[i + 1]</span>
+</span><span class="line">                <span class="c"># a_list[i + 1] = temp</span>
+</span><span class="line">                <span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span class="line">        <span class="n">pass_num</span> <span class="o">=</span> <span class="n">pass_num</span> <span class="o">-</span> <span class="mi">1</span>
 </span><span class="line">
 </span><span class="line">
-</span><span class="line">if __name__ == '__main__':
-</span><span class="line">    a_list=[20, 40, 30, 90, 50, 80, 70, 60, 110, 100]
-</span><span class="line">    short_bubble_sort(a_list)
-</span><span class="line">    print(a_list)</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line"><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span class="line">    <span class="n">a_list</span><span class="o">=</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+</span><span class="line">    <span class="n">short_bubble_sort</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>2.选择排序(selection sort)：每个回合都选择出剩下的元素中最大的那个，选择的方法是首先默认第一元素是最大的，如果后面的元素比它大的话，那就更新剩下的最大的元素值，找到剩下元素中最大的之后将它放入到合适的位置就行了。时间复杂度$O(n^2)$</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/selectionsort.png" alt="image" /></p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -91,27 +92,28 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 <span class="line-number">13</span>
 <span class="line-number">14</span>
 <span class="line-number">15</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">def selection_sort(a_list):
-</span><span class="line">    for fill_slot in range(len(a_list) - 1, 0, -1):
-</span><span class="line">        pos_of_max = 0
-</span><span class="line">        for location in range(1, fill_slot + 1):
-</span><span class="line">            if a_list[location] &gt; a_list[pos_of_max]:
-</span><span class="line">                pos_of_max = location
-</span><span class="line">        # temp = a_list[fill_slot]
-</span><span class="line">        # a_list[fill_slot] = a_list[pos_of_max]
-</span><span class="line">        # a_list[pos_of_max] = temp
-</span><span class="line">        a_list[fill_slot],a_list[pos_of_max]=a_list[pos_of_max],a_list[fill_slot]
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">selection_sort</span><span class="p">(</span><span class="n">a_list</span><span class="p">):</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">fill_slot</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span class="line">        <span class="n">pos_of_max</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">location</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">fill_slot</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">a_list</span><span class="p">[</span><span class="n">location</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">a_list</span><span class="p">[</span><span class="n">pos_of_max</span><span class="p">]:</span>
+</span><span class="line">                <span class="n">pos_of_max</span> <span class="o">=</span> <span class="n">location</span>
+</span><span class="line">        <span class="c"># temp = a_list[fill_slot]</span>
+</span><span class="line">        <span class="c"># a_list[fill_slot] = a_list[pos_of_max]</span>
+</span><span class="line">        <span class="c"># a_list[pos_of_max] = temp</span>
+</span><span class="line">        <span class="n">a_list</span><span class="p">[</span><span class="n">fill_slot</span><span class="p">],</span><span class="n">a_list</span><span class="p">[</span><span class="n">pos_of_max</span><span class="p">]</span><span class="o">=</span><span class="n">a_list</span><span class="p">[</span><span class="n">pos_of_max</span><span class="p">],</span><span class="n">a_list</span><span class="p">[</span><span class="n">fill_slot</span><span class="p">]</span>
 </span><span class="line">
 </span><span class="line">
-</span><span class="line">a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-</span><span class="line">selection_sort(a_list)
-</span><span class="line">print(a_list)</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line"><span class="n">a_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">54</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">93</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+</span><span class="line"><span class="n">selection_sort</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>3.插入排序(insertion sort)：每次假设前面的元素都是已经排好序了的，然后将当前位置的元素插入到原来的序列中，为了尽快地查找合适的插入位置，可以使用二分查找。时间复杂度$O(n^2)$，别误以为二分查找可以降低它的复杂度，因为插入排序还需要移动元素的操作！</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/insertionsort.png" alt="image" /></p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -143,38 +145,39 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 <span class="line-number">30</span>
 <span class="line-number">31</span>
 <span class="line-number">32</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">def insertion_sort(a_list):
-</span><span class="line">    for index in range(1, len(a_list)):
-</span><span class="line">        current_value = a_list[index]
-</span><span class="line">        position = index
-</span><span class="line">        while position &gt; 0 and a_list[position - 1] &gt; current_value:
-</span><span class="line">            a_list[position] = a_list[position - 1]
-</span><span class="line">            position = position - 1
-</span><span class="line">        a_list[position] = current_value
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">insertion_sort</span><span class="p">(</span><span class="n">a_list</span><span class="p">):</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)):</span>
+</span><span class="line">        <span class="n">current_value</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+</span><span class="line">        <span class="n">position</span> <span class="o">=</span> <span class="n">index</span>
+</span><span class="line">        <span class="k">while</span> <span class="n">position</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">a_list</span><span class="p">[</span><span class="n">position</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">current_value</span><span class="p">:</span>
+</span><span class="line">            <span class="n">a_list</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[</span><span class="n">position</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class="line">            <span class="n">position</span> <span class="o">=</span> <span class="n">position</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span class="line">        <span class="n">a_list</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_value</span>
 </span><span class="line">
 </span><span class="line">
-</span><span class="line">def insertion_sort_binarysearch(a_list):
-</span><span class="line">    for index in range(1, len(a_list)):
-</span><span class="line">        current_value = a_list[index]
-</span><span class="line">        position = index
-</span><span class="line">        low=0
-</span><span class="line">        high=index-1
-</span><span class="line">        while low&lt;=high:
-</span><span class="line">            mid=(low+high)/2
-</span><span class="line">            if a_list[mid]&gt;current_value:
-</span><span class="line">                high=mid-1
-</span><span class="line">            else:
-</span><span class="line">                low=mid+1
-</span><span class="line">        while position &gt; low:
-</span><span class="line">            a_list[position] = a_list[position - 1]
-</span><span class="line">        a_list[position] = current_value
+</span><span class="line"><span class="k">def</span> <span class="nf">insertion_sort_binarysearch</span><span class="p">(</span><span class="n">a_list</span><span class="p">):</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)):</span>
+</span><span class="line">        <span class="n">current_value</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+</span><span class="line">        <span class="n">position</span> <span class="o">=</span> <span class="n">index</span>
+</span><span class="line">        <span class="n">low</span><span class="o">=</span><span class="mi">0</span>
+</span><span class="line">        <span class="n">high</span><span class="o">=</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span>
+</span><span class="line">        <span class="k">while</span> <span class="n">low</span><span class="o">&lt;=</span><span class="n">high</span><span class="p">:</span>
+</span><span class="line">            <span class="n">mid</span><span class="o">=</span><span class="p">(</span><span class="n">low</span><span class="o">+</span><span class="n">high</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">a_list</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span><span class="o">&gt;</span><span class="n">current_value</span><span class="p">:</span>
+</span><span class="line">                <span class="n">high</span><span class="o">=</span><span class="n">mid</span><span class="o">-</span><span class="mi">1</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">low</span><span class="o">=</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span>
+</span><span class="line">        <span class="k">while</span> <span class="n">position</span> <span class="o">&gt;</span> <span class="n">low</span><span class="p">:</span>
+</span><span class="line">            <span class="n">a_list</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[</span><span class="n">position</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class="line">        <span class="n">a_list</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_value</span>
 </span><span class="line">
 </span><span class="line">
-</span><span class="line">a_list = [54, 26, 93, 15, 77, 31, 44, 55, 20]
-</span><span class="line">insertion_sort(a_list)
-</span><span class="line">print(a_list)
-</span><span class="line">insertion_sort_binarysearch(a_list)
-</span><span class="line">print(a_list)</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line"><span class="n">a_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">54</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">93</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+</span><span class="line"><span class="n">insertion_sort</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+</span><span class="line"><span class="n">insertion_sort_binarysearch</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>4.合并排序(merge sort)：典型的是二路合并排序，将原始数据集分成两部分(不一定能够均分)，分别对它们进行排序，然后将排序后的子数据集进行合并，这是典型的分治法策略。时间复杂度$O(nlogn)$</p>
 
@@ -182,7 +185,7 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/mergesort2.png" alt="image" /></p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -213,41 +216,42 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 <span class="line-number">29</span>
 <span class="line-number">30</span>
 <span class="line-number">31</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">def merge_sort(a_list):
-</span><span class="line">    print("Splitting ", a_list)
-</span><span class="line">    if len(a_list) &gt; 1:
-</span><span class="line">        mid = len(a_list) // 2
-</span><span class="line">        left_half = a_list[:mid]
-</span><span class="line">        right_half = a_list[mid:]
-</span><span class="line">        merge_sort(left_half)
-</span><span class="line">        merge_sort(right_half)
-</span><span class="line">        i=0;j=0;k=0;
-</span><span class="line">        while i &lt; len(left_half) and j &lt; len(right_half):
-</span><span class="line">            if left_half[i] &lt; right_half[j]:
-</span><span class="line">                a_list[k] = left_half[i]
-</span><span class="line">                i=i+1
-</span><span class="line">            else:
-</span><span class="line">                a_list[k] = right_half[j]
-</span><span class="line">                j=j+1
-</span><span class="line">            k=k+1
-</span><span class="line">        while i &lt; len(left_half):
-</span><span class="line">            a_list[k] = left_half[i]
-</span><span class="line">            i=i+1
-</span><span class="line">            k=k+1
-</span><span class="line">        while j &lt; len(right_half):
-</span><span class="line">            a_list[k] = right_half[j]
-</span><span class="line">            j=j+1
-</span><span class="line">            k=k+1
-</span><span class="line">    print("Merging ", a_list)
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">merge_sort</span><span class="p">(</span><span class="n">a_list</span><span class="p">):</span>
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Splitting &quot;</span><span class="p">,</span> <span class="n">a_list</span><span class="p">)</span>
+</span><span class="line">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+</span><span class="line">        <span class="n">mid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+</span><span class="line">        <span class="n">left_half</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[:</span><span class="n">mid</span><span class="p">]</span>
+</span><span class="line">        <span class="n">right_half</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[</span><span class="n">mid</span><span class="p">:]</span>
+</span><span class="line">        <span class="n">merge_sort</span><span class="p">(</span><span class="n">left_half</span><span class="p">)</span>
+</span><span class="line">        <span class="n">merge_sort</span><span class="p">(</span><span class="n">right_half</span><span class="p">)</span>
+</span><span class="line">        <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span><span class="line">        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">left_half</span><span class="p">)</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">right_half</span><span class="p">):</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">left_half</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">right_half</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+</span><span class="line">                <span class="n">a_list</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">left_half</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span class="line">                <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">a_list</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">right_half</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+</span><span class="line">                <span class="n">j</span><span class="o">=</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span>
+</span><span class="line">            <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span>
+</span><span class="line">        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">left_half</span><span class="p">):</span>
+</span><span class="line">            <span class="n">a_list</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">left_half</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span class="line">            <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+</span><span class="line">            <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span>
+</span><span class="line">        <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">right_half</span><span class="p">):</span>
+</span><span class="line">            <span class="n">a_list</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">right_half</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+</span><span class="line">            <span class="n">j</span><span class="o">=</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span>
+</span><span class="line">            <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span>
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Merging &quot;</span><span class="p">,</span> <span class="n">a_list</span><span class="p">)</span>
 </span><span class="line">
 </span><span class="line">
-</span><span class="line">a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-</span><span class="line">merge_sort(a_list)
-</span><span class="line">print(a_list)</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line"><span class="n">a_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">54</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">93</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+</span><span class="line"><span class="n">merge_sort</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>算法导论2-4题利用合并排序可以在$O(nlogn)$的最坏情况下得到包含n个元素的数组的逆序对的数目。[下面使用的是C++来实现的，合并排序的代码格式类似算法导论]</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -297,64 +301,65 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 <span class="line-number">48</span>
 <span class="line-number">49</span>
 <span class="line-number">50</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">#include &lt;iostream&gt;
-</span><span class="line">using namespace std;
+</pre></td><td class="code"><pre><code class="cpp"><span class="line"><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class="line"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 </span><span class="line">
-</span><span class="line">int calculateInversions(int arr[], int p, int r);
-</span><span class="line">int mergeInversions(int arr[], int p, int q, int r);
+</span><span class="line"><span class="kt">int</span> <span class="n">calculateInversions</span><span class="p">(</span><span class="kt">int</span> <span class="n">arr</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">p</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">);</span>
+</span><span class="line"><span class="kt">int</span> <span class="n">mergeInversions</span><span class="p">(</span><span class="kt">int</span> <span class="n">arr</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">p</span><span class="p">,</span> <span class="kt">int</span> <span class="n">q</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">);</span>
 </span><span class="line">
-</span><span class="line">int main(int argc, const char * argv[])
-</span><span class="line">{
-</span><span class="line">    int arr[] = {2,3,8,6,1};
-</span><span class="line">    int count = calculateInversions(arr, 0, 4);
-</span><span class="line">    cout &lt;&lt; "count inversions : " &lt;&lt; count &lt;&lt; endl;
-</span><span class="line">    return 0;
-</span><span class="line">}
+</span><span class="line"><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">};</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">calculateInversions</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+</span><span class="line">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;count inversions : &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">count</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
 </span><span class="line">
-</span><span class="line">int calculateInversions(int arr[], int p, int r) {
-</span><span class="line">	int count=0;
-</span><span class="line">	if(p &lt; r) {
-</span><span class="line">		int q = (p + r) / 2;
-</span><span class="line">        count += calculateInversions(arr, p, q);
-</span><span class="line">        count += calculateInversions(arr, q+1, r);
-</span><span class="line">        count += mergeInversions(arr, p, q, r);
-</span><span class="line">	}
-</span><span class="line">	return count;
-</span><span class="line">}
+</span><span class="line"><span class="kt">int</span> <span class="n">calculateInversions</span><span class="p">(</span><span class="kt">int</span> <span class="n">arr</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">p</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">	<span class="kt">int</span> <span class="n">count</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span><span class="line">	<span class="k">if</span><span class="p">(</span><span class="n">p</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">		<span class="kt">int</span> <span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class="line">        <span class="n">count</span> <span class="o">+=</span> <span class="n">calculateInversions</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">);</span>
+</span><span class="line">        <span class="n">count</span> <span class="o">+=</span> <span class="n">calculateInversions</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">q</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
+</span><span class="line">        <span class="n">count</span> <span class="o">+=</span> <span class="n">mergeInversions</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
+</span><span class="line">	<span class="p">}</span>
+</span><span class="line">	<span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
 </span><span class="line">
-</span><span class="line">int mergeInversions(int arr[], int p, int q, int r){
-</span><span class="line">    int count=0;
-</span><span class="line">    int n1=q-p+1, n2=r-q;
-</span><span class="line">    int left[n1+1], right[n2+1];
-</span><span class="line">    for (int i=0; i&lt;n1; i++) {
-</span><span class="line">        left[i]=arr[p+i];
-</span><span class="line">    }
-</span><span class="line">    for (int j=0; j&lt;n2; j++) {
-</span><span class="line">        right[j]=arr[q+1+j];
-</span><span class="line">    }
-</span><span class="line">    left[n1]=INT32_MAX;
-</span><span class="line">    right[n2]=INT32_MAX;
-</span><span class="line">    int i=0, j=0;
-</span><span class="line">    for (int k=p; k&lt;=r; k++) {
-</span><span class="line">        if (left[i]&lt;=right[j]) {
-</span><span class="line">            arr[k]=left[i];
-</span><span class="line">            i++;
-</span><span class="line">        }else{
-</span><span class="line">            arr[k]=right[j];
-</span><span class="line">            count += n1-i;
-</span><span class="line">            j++;
-</span><span class="line">        }
-</span><span class="line">    }
-</span><span class="line">    return count;
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line"><span class="kt">int</span> <span class="n">mergeInversions</span><span class="p">(</span><span class="kt">int</span> <span class="n">arr</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">p</span><span class="p">,</span> <span class="kt">int</span> <span class="n">q</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">){</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">count</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">n1</span><span class="o">=</span><span class="n">q</span><span class="o">-</span><span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n2</span><span class="o">=</span><span class="n">r</span><span class="o">-</span><span class="n">q</span><span class="p">;</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">left</span><span class="p">[</span><span class="n">n1</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">right</span><span class="p">[</span><span class="n">n2</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+</span><span class="line">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="n">left</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">arr</span><span class="p">[</span><span class="n">p</span><span class="o">+</span><span class="n">i</span><span class="p">];</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n2</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="n">right</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">arr</span><span class="p">[</span><span class="n">q</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">j</span><span class="p">];</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="n">left</span><span class="p">[</span><span class="n">n1</span><span class="p">]</span><span class="o">=</span><span class="n">INT32_MAX</span><span class="p">;</span>
+</span><span class="line">    <span class="n">right</span><span class="p">[</span><span class="n">n2</span><span class="p">]</span><span class="o">=</span><span class="n">INT32_MAX</span><span class="p">;</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span><span class="line">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="n">p</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;=</span><span class="n">r</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="n">left</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">right</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+</span><span class="line">            <span class="n">arr</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">left</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class="line">            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span><span class="line">        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span><span class="line">            <span class="n">arr</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">right</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span><span class="line">            <span class="n">count</span> <span class="o">+=</span> <span class="n">n1</span><span class="o">-</span><span class="n">i</span><span class="p">;</span>
+</span><span class="line">            <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>5.快速排序(quick sort)：</p>
 
-<p>想法一：如下图所示，它选择第一个元素作为主元，它同样可以按照下面提到的算法导论中将数组分成了4个不同的部分，但是这里其实有更好的解释方法。首先，它每次都是选择第一个元素都为主元，也就是要确定主元的位置；然后，有两个指针，一个leftmark指向主元的后面一个位置，另一个rightmark指向最后一个元素；接着，两个指针分别向中间移动，leftmark遇到比主元大的元素停止，rightmark遇到比主元小的元素停止，如果此时leftmark&lt;rightmark，也就是说中间还有未处理(未确定与主元大小关系)的元素，那么就交换leftmark和rightmark位置上的元素，然后重复刚才的移动操作，直到rightmark&lt;leftmark；最后，停止移动时候rightmark就是主元要放置的位置，因为它停在一个比主元小的元素的位置上，之后交换主元和rightmark指向的元素即可。完了之后，递归地对主元左右两边的数组进行排序。</p>
+<p>想法一：如下图所示，它选择第一个元素作为主元，它同样可以按照下面提到的算法导论中将数组分成了4个不同的部分，但是这里其实有更好的解释方法。<strong>首先，它每次都是选择第一个元素都为主元，这个回合就是要确定主元的位置；然后，有两个指针，一个leftmark指向主元的后面一个位置，另一个rightmark指向要排序的数组最后一个元素；接着，两个指针分别向中间移动，leftmark遇到比主元大的元素停止，rightmark遇到比主元小的元素停止，如果此时leftmark&lt;rightmark，也就是说中间还有未处理(未确定与主元大小关系)的元素，那么就交换leftmark和rightmark位置上的元素，然后重复刚才的移动操作，直到rightmark&lt;leftmark；最后，停止移动时候rightmark就是主元要放置的位置，因为它停在一个比主元小的元素的位置上，之后交换主元和rightmark指向的元素即可。完了之后，递归地对主元左右两边的数组进行排序即可。</strong></p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/quicksort.png" alt="image" /></p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -387,41 +392,42 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 <span class="line-number">31</span>
 <span class="line-number">32</span>
 <span class="line-number">33</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">def quick_sort(a_list):
-</span><span class="line">    quick_sort_helper(a_list, 0, len(a_list) - 1)
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">quick_sort</span><span class="p">(</span><span class="n">a_list</span><span class="p">):</span>
+</span><span class="line">    <span class="n">quick_sort_helper</span><span class="p">(</span><span class="n">a_list</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 </span><span class="line">
-</span><span class="line">def quick_sort_helper(a_list, first, last):
-</span><span class="line">    if first &lt; last:
-</span><span class="line">        split_point = partition(a_list, first, last)
-</span><span class="line">        quick_sort_helper(a_list, first, split_point - 1)
-</span><span class="line">        quick_sort_helper(a_list, split_point + 1, last)
+</span><span class="line"><span class="k">def</span> <span class="nf">quick_sort_helper</span><span class="p">(</span><span class="n">a_list</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">):</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">first</span> <span class="o">&lt;</span> <span class="n">last</span><span class="p">:</span>
+</span><span class="line">        <span class="n">split_point</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">a_list</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">)</span>
+</span><span class="line">        <span class="n">quick_sort_helper</span><span class="p">(</span><span class="n">a_list</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">split_point</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class="line">        <span class="n">quick_sort_helper</span><span class="p">(</span><span class="n">a_list</span><span class="p">,</span> <span class="n">split_point</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">last</span><span class="p">)</span>
 </span><span class="line">
-</span><span class="line">def partition(a_list, first, last):
-</span><span class="line">    pivot_value = a_list[first]
-</span><span class="line">    left_mark = first + 1
-</span><span class="line">    right_mark = last
-</span><span class="line">    done = False
-</span><span class="line">    while not done:
-</span><span class="line">        while left_mark &lt;= right_mark and a_list[left_mark] &lt;= pivot_value:
-</span><span class="line">            left_mark = left_mark + 1
-</span><span class="line">        while a_list[right_mark] &gt;= pivot_value and right_mark &gt;= left_mark:
-</span><span class="line">            right_mark = right_mark - 1
-</span><span class="line">        if right_mark &lt; left_mark:
-</span><span class="line">            done = True
-</span><span class="line">        else:
-</span><span class="line">            temp = a_list[left_mark]
-</span><span class="line">            a_list[left_mark] = a_list[right_mark]
-</span><span class="line">            a_list[right_mark] = temp
-</span><span class="line">    temp = a_list[first]
-</span><span class="line">    a_list[first] = a_list[right_mark]
-</span><span class="line">    a_list[right_mark] = temp
-</span><span class="line">    return right_mark
+</span><span class="line"><span class="k">def</span> <span class="nf">partition</span><span class="p">(</span><span class="n">a_list</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">):</span>
+</span><span class="line">    <span class="n">pivot_value</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[</span><span class="n">first</span><span class="p">]</span>
+</span><span class="line">    <span class="n">left_mark</span> <span class="o">=</span> <span class="n">first</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span class="line">    <span class="n">right_mark</span> <span class="o">=</span> <span class="n">last</span>
+</span><span class="line">    <span class="n">done</span> <span class="o">=</span> <span class="bp">False</span>
+</span><span class="line">    <span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+</span><span class="line">        <span class="k">while</span> <span class="n">left_mark</span> <span class="o">&lt;=</span> <span class="n">right_mark</span> <span class="ow">and</span> <span class="n">a_list</span><span class="p">[</span><span class="n">left_mark</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">pivot_value</span><span class="p">:</span>
+</span><span class="line">            <span class="n">left_mark</span> <span class="o">=</span> <span class="n">left_mark</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span class="line">        <span class="k">while</span> <span class="n">a_list</span><span class="p">[</span><span class="n">right_mark</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">pivot_value</span> <span class="ow">and</span> <span class="n">right_mark</span> <span class="o">&gt;=</span> <span class="n">left_mark</span><span class="p">:</span>
+</span><span class="line">            <span class="n">right_mark</span> <span class="o">=</span> <span class="n">right_mark</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">right_mark</span> <span class="o">&lt;</span> <span class="n">left_mark</span><span class="p">:</span>
+</span><span class="line">            <span class="n">done</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="n">temp</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[</span><span class="n">left_mark</span><span class="p">]</span>
+</span><span class="line">            <span class="n">a_list</span><span class="p">[</span><span class="n">left_mark</span><span class="p">]</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[</span><span class="n">right_mark</span><span class="p">]</span>
+</span><span class="line">            <span class="n">a_list</span><span class="p">[</span><span class="n">right_mark</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+</span><span class="line">    <span class="n">temp</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[</span><span class="n">first</span><span class="p">]</span>
+</span><span class="line">    <span class="n">a_list</span><span class="p">[</span><span class="n">first</span><span class="p">]</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[</span><span class="n">right_mark</span><span class="p">]</span>
+</span><span class="line">    <span class="n">a_list</span><span class="p">[</span><span class="n">right_mark</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">right_mark</span>
 </span><span class="line">
-</span><span class="line">a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-</span><span class="line">quick_sort(a_list)
-</span><span class="line">print(a_list)</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line"><span class="n">a_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">54</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">93</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+</span><span class="line"><span class="n">quick_sort</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>想法二：如下图所示，它选择最后的那个元素作为主元，它的思路是将数据划分成4部分：</p>
+<p>想法二：如下图所示，它选择最后的那个元素作为主元，它的思路是将数组划分成4部分：</p>
 
 <p>第一部分：$p \le k \le i, A[k] \le pivot$</p>
 
@@ -431,13 +437,13 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 
 <p>第四部分：$p \le k \le i, A[k] = pivot$</p>
 
-<p>首先让i指向要排序的数组的第一个元素的前面，p和j都指向第一个元素，一直移动j直到主元前一个位置，如果发现一个大于主元的元素就让i指向它的下一个位置，然后交换i和j对应位置上的元素。这样一定是可行的，因为i一直都是指向小于主元的元素中的最后一个，从i+1开始就大于主元了，而j一直都是指向大于主元的元素中最后一个的后面一个位置。</p>
+<p><strong>首先，让i指向要排序的数组的第一个元素的前面，p和j都指向第一个元素；然后，一直移动j直到主元前一个位置，一旦发现一个大于主元的元素就让i指向它的下一个位置，然后交换i和j对应位置上的元素。这样一定是可行的，因为i一直都是指向已发现的小于主元的元素中的最后一个，从i+1开始就大于主元了(或者还未确定/未处理)，而j一直都是指向大于主元的元素中最后一个的后面一个位置，所以i+1和j位置上的元素交换就可以使得j发现的这个小于主元的元素移动到第一部分，而i+1位置上大于主元的元素移动到j的位置上，即第二部分的最后一个位置上。</strong></p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/quicksort_cn.png" alt="image" /></p>
 
 <p>根据算法导论中的伪代码的C++版本实现</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -481,50 +487,107 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 <span class="line-number">42</span>
 <span class="line-number">43</span>
 <span class="line-number">44</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">#include &lt;iostream&gt;
-</span><span class="line">using namespace std;
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c">#include &lt;iostream&gt;</span>
+</span><span class="line"><span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
 </span><span class="line">
-</span><span class="line">// partition, locate the pivot value in properate position
-</span><span class="line">int partition(int a[], int low, int high){
-</span><span class="line">    int key = a[high];//pivot
-</span><span class="line">    int i=low-1, temp;
-</span><span class="line">    for (int j=low; j&lt;high; j++) {
-</span><span class="line">        if (a[j]&lt;key) {
-</span><span class="line">            i++;
-</span><span class="line">            temp = a[j];
-</span><span class="line">            a[j]=a[i];
-</span><span class="line">            a[i]=temp;
-</span><span class="line">        }
-</span><span class="line">    }
-</span><span class="line">    temp = a[high];
-</span><span class="line">    a[high] = a[i+1];
-</span><span class="line">    a[i+1] = temp;//i+1 is the split point
-</span><span class="line">    return i+1;
-</span><span class="line">}
+</span><span class="line"><span class="o">//</span> <span class="n">partition</span><span class="p">,</span> <span class="n">locate</span> <span class="n">the</span> <span class="n">pivot</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">properate</span> <span class="n">position</span>
+</span><span class="line"><span class="nb">int</span> <span class="n">partition</span><span class="p">(</span><span class="nb">int</span> <span class="n">a</span><span class="p">[],</span> <span class="nb">int</span> <span class="n">low</span><span class="p">,</span> <span class="nb">int</span> <span class="n">high</span><span class="p">){</span>
+</span><span class="line">    <span class="nb">int</span> <span class="n">key</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">high</span><span class="p">];</span><span class="o">//</span><span class="n">pivot</span>
+</span><span class="line">    <span class="nb">int</span> <span class="n">i</span><span class="o">=</span><span class="n">low</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">temp</span><span class="p">;</span>
+</span><span class="line">    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">j</span><span class="o">=</span><span class="n">low</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">high</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span><span class="line">            <span class="n">temp</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span><span class="line">            <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class="line">            <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">temp</span><span class="p">;</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="n">temp</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">high</span><span class="p">];</span>
+</span><span class="line">    <span class="n">a</span><span class="p">[</span><span class="n">high</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+</span><span class="line">    <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span><span class="o">//</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">split</span> <span class="n">point</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
 </span><span class="line">
-</span><span class="line">// quick sort
-</span><span class="line">void quicksort(int a[], int low, int high) {
-</span><span class="line">    if (low &lt; high) {
-</span><span class="line">        int p = partition(a,low,high);
-</span><span class="line">        quicksort(a, low, p-1);
-</span><span class="line">        quicksort(a, p+1, high);
-</span><span class="line">    }
-</span><span class="line">}
+</span><span class="line"><span class="o">//</span> <span class="n">quick</span> <span class="n">sort</span>
+</span><span class="line"><span class="n">void</span> <span class="n">quicksort</span><span class="p">(</span><span class="nb">int</span> <span class="n">a</span><span class="p">[],</span> <span class="nb">int</span> <span class="n">low</span><span class="p">,</span> <span class="nb">int</span> <span class="n">high</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="n">low</span> <span class="o">&lt;</span> <span class="n">high</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="nb">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">low</span><span class="p">,</span><span class="n">high</span><span class="p">);</span>
+</span><span class="line">        <span class="n">quicksort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span><span class="line">        <span class="n">quicksort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="p">);</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
 </span><span class="line">
-</span><span class="line">// print array
-</span><span class="line">void print(int a[],int len){
-</span><span class="line">    for (int i=0; i&lt;len; i++) {
-</span><span class="line">        cout &lt;&lt; a[i] &lt;&lt; " ";
-</span><span class="line">    }
-</span><span class="line">    cout &lt;&lt; endl;
-</span><span class="line">}
+</span><span class="line"><span class="o">//</span> <span class="k">print</span> <span class="n">array</span>
+</span><span class="line"><span class="n">void</span> <span class="k">print</span><span class="p">(</span><span class="nb">int</span> <span class="n">a</span><span class="p">[],</span><span class="nb">int</span> <span class="nb">len</span><span class="p">){</span>
+</span><span class="line">    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
 </span><span class="line">
-</span><span class="line">int main(int argc, const char * argv[])
-</span><span class="line">{
-</span><span class="line">    int a[]={3,5,2,7,9,10,33,28,19,6,8};
-</span><span class="line">    quicksort(a, 0, 10);
-</span><span class="line">    print(a,11);
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line"><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">const</span> <span class="n">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="nb">int</span> <span class="n">a</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">};</span>
+</span><span class="line">    <span class="n">quicksort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">11</span><span class="p">);</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>由于快排每次都能够确定一个元素在数组中最终的位置，所以可以用快排来解决很多变种问题，例如在线性时间内求中位数问题。</p>
+
+<p>6.希尔排序：类似合并排序和插入排序的结合体，二路合并排序将原来的数组分成左右两部分，希尔排序则将数组按照一定的间隔分成几部分，每部分采用插入排序来排序，有意思的是这样做了之后，元素很多情况下就差不多在它应该呆的位置，所以效率不一定比插入排序差。时间复杂度为$[O(n),O(n^2)]$。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/shellsort.png" alt="image" /></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/shellsort2.png" alt="image" /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">shell_sort</span><span class="p">(</span><span class="n">a_list</span><span class="p">):</span>
+</span><span class="line">    <span class="c">#how many sublists, also how many elements in a sublist</span>
+</span><span class="line">    <span class="n">sublist_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+</span><span class="line">    <span class="k">while</span> <span class="n">sublist_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">start_position</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sublist_count</span><span class="p">):</span>
+</span><span class="line">            <span class="n">gap_insertion_sort</span><span class="p">(</span><span class="n">a_list</span><span class="p">,</span> <span class="n">start_position</span><span class="p">,</span> <span class="n">sublist_count</span><span class="p">)</span>
+</span><span class="line">        <span class="k">print</span><span class="p">(</span><span class="s">&quot;After increments of size&quot;</span><span class="p">,</span> <span class="n">sublist_count</span><span class="p">,</span> <span class="s">&quot;The list is&quot;</span><span class="p">,</span> <span class="n">a_list</span><span class="p">)</span>
+</span><span class="line">        <span class="n">sublist_count</span> <span class="o">=</span> <span class="n">sublist_count</span> <span class="o">//</span> <span class="mi">2</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">gap_insertion_sort</span><span class="p">(</span><span class="n">a_list</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">gap</span><span class="p">):</span>
+</span><span class="line">    <span class="c">#start+gap is the second element in this sublist</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">gap</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">),</span> <span class="n">gap</span><span class="p">):</span>
+</span><span class="line">        <span class="n">current_value</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span class="line">        <span class="n">position</span> <span class="o">=</span> <span class="n">i</span>
+</span><span class="line">        <span class="k">while</span> <span class="n">position</span> <span class="o">&gt;=</span> <span class="n">gap</span> <span class="ow">and</span> <span class="n">a_list</span><span class="p">[</span><span class="n">position</span> <span class="o">-</span> <span class="n">gap</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">current_value</span><span class="p">:</span>
+</span><span class="line">            <span class="n">a_list</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[</span><span class="n">position</span> <span class="o">-</span> <span class="n">gap</span><span class="p">]</span> <span class="c">#move backward</span>
+</span><span class="line">            <span class="n">position</span> <span class="o">=</span> <span class="n">position</span> <span class="o">-</span> <span class="n">gap</span>
+</span><span class="line">            <span class="n">a_list</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_value</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line"><span class="n">a_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">54</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">93</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">88</span><span class="p">]</span>
+</span><span class="line"><span class="n">shell_sort</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/">http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
@@ -541,6 +604,8 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/searching.html#searching">online_link</a></p>
 
 <p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
+
+<h4 id="section">搜索总结</h4>
 
 <p>(1)顺序查找：O(n)</p>
 
@@ -608,7 +673,7 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 
 <p>下面的代码包含了顺序查找，二分查找，哈希查找(size=11, plus 1, reminder method)</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -709,107 +774,118 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 <span class="line-number">99</span>
 <span class="line-number">100</span>
 <span class="line-number">101</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">def sequential_search(a_list, item):
-</span><span class="line">    pos = 0
-</span><span class="line">    found = False
-</span><span class="line">    while pos &lt; len(a_list) and not found:
-</span><span class="line">        if a_list[pos] == item:
-</span><span class="line">            found = True
-</span><span class="line">        else:
-</span><span class="line">            pos = pos+1
-</span><span class="line">    return found
+<span class="line-number">102</span>
+<span class="line-number">103</span>
+<span class="line-number">104</span>
+<span class="line-number">105</span>
+<span class="line-number">106</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">sequential_search</span><span class="p">(</span><span class="n">a_list</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span><span class="line">    <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="line">    <span class="n">found</span> <span class="o">=</span> <span class="bp">False</span>
+</span><span class="line">    <span class="k">while</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">a_list</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">==</span> <span class="n">item</span><span class="p">:</span>
+</span><span class="line">            <span class="n">found</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span><span class="o">+</span><span class="mi">1</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">found</span>
 </span><span class="line">
-</span><span class="line">test_list = [1, 2, 32, 8, 17, 19, 42, 13, 0]
-</span><span class="line">print(sequential_search(test_list, 3))
-</span><span class="line">print(sequential_search(test_list, 13))
-</span><span class="line">
-</span><span class="line">
-</span><span class="line">def binary_search(a_list, item):
-</span><span class="line">    first = 0
-</span><span class="line">    last = len(a_list) - 1
-</span><span class="line">    found = False
-</span><span class="line">    while first &lt;= last and not found:
-</span><span class="line">        midpoint = (first + last) // 2
-</span><span class="line">        if a_list[midpoint] == item:
-</span><span class="line">            found = True
-</span><span class="line">        else:
-</span><span class="line">            if item &lt; a_list[midpoint]:
-</span><span class="line">                last = midpoint - 1
-</span><span class="line">            else:
-</span><span class="line">                first = midpoint + 1
-</span><span class="line">    return found
-</span><span class="line">
-</span><span class="line">test_list = [0, 1, 2, 8, 13, 17, 19, 32, 42,]
-</span><span class="line">print(binary_search(test_list, 3))
-</span><span class="line">print(binary_search(test_list, 13))
-</span><span class="line">
-</span><span class="line">class HashTable:
-</span><span class="line">    def __init__(self):
-</span><span class="line">        self.size = 11
-</span><span class="line">        self.slots = [None] * self.size
-</span><span class="line">        self.data = [None] * self.size
-</span><span class="line">
-</span><span class="line">    def put(self, key, data):
-</span><span class="line">        hash_value = self.hash_function(key,len(self.slots))
-</span><span class="line">        if self.slots[hash_value] == None: # '==None' ? or  'is None' ?
-</span><span class="line">            self.slots[hash_value] = key
-</span><span class="line">            self.data[hash_value] = data
-</span><span class="line">        else:
-</span><span class="line">            if self.slots[hash_value] == key:
-</span><span class="line">                self.data[hash_value] = data #replace
-</span><span class="line">            else:
-</span><span class="line">                next_slot = self.rehash(hash_value, len(self.slots))
-</span><span class="line">                while self.slots[next_slot] != None and self.slots[next_slot] != key:
-</span><span class="line">                    next_slot = self.rehash(next_slot, len(self.slots))
-</span><span class="line">                    if self.slots[next_slot] == None:
-</span><span class="line">                        self.slots[next_slot] = key
-</span><span class="line">                        self.data[next_slot] = data
-</span><span class="line">                    else:
-</span><span class="line">                        self.data[next_slot] = data #replacea
-</span><span class="line">
-</span><span class="line">    #reminder method
-</span><span class="line">    def hash_function(self, key, size):
-</span><span class="line">        return key % size
-</span><span class="line">
-</span><span class="line">    #plus 1
-</span><span class="line">    def rehash(self, old_hash, size):
-</span><span class="line">        return (old_hash + 1) % size
-</span><span class="line">
-</span><span class="line">    def get(self, key):
-</span><span class="line">        start_slot = self.hash_function(key, len(self.slots))
-</span><span class="line">        data = None
-</span><span class="line">        stop = False
-</span><span class="line">        found = False
-</span><span class="line">        position = start_slot
-</span><span class="line">        while self.slots[position] != None and not found and not stop:
-</span><span class="line">            if self.slots[position] == key:
-</span><span class="line">                found = True
-</span><span class="line">                data = self.data[position]
-</span><span class="line">            else:
-</span><span class="line">                position=self.rehash(position, len(self.slots))
-</span><span class="line">                if position == start_slot:
-</span><span class="line">                    stop = True
-</span><span class="line">        return data
-</span><span class="line">
-</span><span class="line">    def __getitem__(self, key):
-</span><span class="line">        return self.get(key)
-</span><span class="line">
-</span><span class="line">    def __setitem__(self, key, data):
-</span><span class="line">        self.put(key, data)
+</span><span class="line"><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">sequential_search</span><span class="p">(</span><span class="n">test_list</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">sequential_search</span><span class="p">(</span><span class="n">test_list</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>
 </span><span class="line">
 </span><span class="line">
-</span><span class="line">if __name__ == '__main__':
-</span><span class="line">    table=HashTable();
-</span><span class="line">    table[54]='cat';
-</span><span class="line">    table[26]='dog';
-</span><span class="line">    table[93]='lion';
-</span><span class="line">    table[17]="tiger";
-</span><span class="line">    table[77]="bird";
-</span><span class="line">    table[44]="goat";
-</span><span class="line">    table[55]="pig";
-</span><span class="line">    table[20]="chicken";
-</span><span class="line">    print table.slots;
-</span><span class="line">    print table.data;</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line"><span class="k">def</span> <span class="nf">binary_search</span><span class="p">(</span><span class="n">a_list</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span><span class="line">    <span class="n">first</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="line">    <span class="n">last</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span class="line">    <span class="n">found</span> <span class="o">=</span> <span class="bp">False</span>
+</span><span class="line">    <span class="k">while</span> <span class="n">first</span> <span class="o">&lt;=</span> <span class="n">last</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
+</span><span class="line">        <span class="n">midpoint</span> <span class="o">=</span> <span class="p">(</span><span class="n">first</span> <span class="o">+</span> <span class="n">last</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">a_list</span><span class="p">[</span><span class="n">midpoint</span><span class="p">]</span> <span class="o">==</span> <span class="n">item</span><span class="p">:</span>
+</span><span class="line">            <span class="n">found</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">item</span> <span class="o">&lt;</span> <span class="n">a_list</span><span class="p">[</span><span class="n">midpoint</span><span class="p">]:</span>
+</span><span class="line">                <span class="n">last</span> <span class="o">=</span> <span class="n">midpoint</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">first</span> <span class="o">=</span> <span class="n">midpoint</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">found</span>
+</span><span class="line">
+</span><span class="line"><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">42</span><span class="p">,]</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">binary_search</span><span class="p">(</span><span class="n">test_list</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">binary_search</span><span class="p">(</span><span class="n">test_list</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>
+</span><span class="line">
+</span><span class="line"><span class="k">class</span> <span class="nc">HashTable</span><span class="p">:</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">11</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">slots</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+</span><span class="line">
+</span><span class="line">    <span class="c">#put data in slot</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">put_data_in_slot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">slot</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span> <span class="c"># &#39;==None&#39; ? or  &#39;is None&#39; ?</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
+</span><span class="line">            <span class="k">return</span> <span class="bp">True</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span> <span class="c"># not None</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span> <span class="c">#replace</span>
+</span><span class="line">                <span class="k">return</span> <span class="bp">True</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="k">return</span> <span class="bp">False</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+</span><span class="line">        <span class="n">slot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_function</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">);</span>
+</span><span class="line">        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">put_data_in_slot</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">slot</span><span class="p">);</span>
+</span><span class="line">        <span class="k">while</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+</span><span class="line">            <span class="n">slot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rehash</span><span class="p">(</span><span class="n">slot</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">);</span>
+</span><span class="line">            <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">put_data_in_slot</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">slot</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line">    <span class="c">#reminder method</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">hash_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">key</span> <span class="o">%</span> <span class="n">size</span>
+</span><span class="line">
+</span><span class="line">    <span class="c">#plus 1</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">rehash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old_hash</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="p">(</span><span class="n">old_hash</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">size</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+</span><span class="line">        <span class="n">start_slot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_function</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">))</span>
+</span><span class="line">        <span class="n">data</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class="line">        <span class="n">stop</span> <span class="o">=</span> <span class="bp">False</span>
+</span><span class="line">        <span class="n">found</span> <span class="o">=</span> <span class="bp">False</span>
+</span><span class="line">        <span class="n">position</span> <span class="o">=</span> <span class="n">start_slot</span>
+</span><span class="line">        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">found</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">stop</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+</span><span class="line">                <span class="n">found</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="line">                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">position</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rehash</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">))</span>
+</span><span class="line">                <span class="k">if</span> <span class="n">position</span> <span class="o">==</span> <span class="n">start_slot</span><span class="p">:</span>
+</span><span class="line">                    <span class="n">stop</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">data</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line"><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span class="line">    <span class="n">table</span><span class="o">=</span><span class="n">HashTable</span><span class="p">();</span>
+</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">54</span><span class="p">]</span><span class="o">=</span><span class="s">&#39;cat&#39;</span><span class="p">;</span>
+</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">26</span><span class="p">]</span><span class="o">=</span><span class="s">&#39;dog&#39;</span><span class="p">;</span>
+</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">93</span><span class="p">]</span><span class="o">=</span><span class="s">&#39;lion&#39;</span><span class="p">;</span>
+</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;tiger&quot;</span><span class="p">;</span>
+</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">77</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;bird&quot;</span><span class="p">;</span>
+</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">44</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;goat&quot;</span><span class="p">;</span>
+</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">55</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;pig&quot;</span><span class="p">;</span>
+</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;chicken&quot;</span><span class="p">;</span>
+</span><span class="line">    <span class="k">print</span> <span class="n">table</span><span class="o">.</span><span class="n">slots</span><span class="p">;</span>
+</span><span class="line">    <span class="k">print</span> <span class="n">table</span><span class="o">.</span><span class="n">data</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># [77, 44, 55, None, 26, 93, 17, None, None, 20, 54]</span>
+</span><span class="line"><span class="c"># [&#39;bird&#39;, &#39;goat&#39;, &#39;pig&#39;, None, &#39;dog&#39;, &#39;lion&#39;, &#39;tiger&#39;, None, None, &#39;chicken&#39;, &#39;cat&#39;]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/">http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>

@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="参考内容： 1.Problem Solving with Python
-Chapter5: Search and Sorting online_link 2.算法导论 (1)顺序查找：O(n) (2)二分查找：O(lgn) (3)Hash查找：O(1) 概念：hash，hash table， &hellip;">
+Chapter5: Search and Sorting online_link 2.算法导论 搜索总结 (1)顺序查找：O(n) (2)二分查找：O(lgn) (3)Hash查找：O(1) 概念：hash，hash &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -121,6 +121,8 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 
 <p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
 
+<h4 id="section">搜索总结</h4>
+
 <p>(1)顺序查找：O(n)</p>
 
 <p>(2)二分查找：O(lgn)</p>
@@ -187,7 +189,7 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 
 <p>下面的代码包含了顺序查找，二分查找，哈希查找(size=11, plus 1, reminder method)</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -288,107 +290,118 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 <span class="line-number">99</span>
 <span class="line-number">100</span>
 <span class="line-number">101</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">def sequential_search(a_list, item):
-</span><span class="line">    pos = 0
-</span><span class="line">    found = False
-</span><span class="line">    while pos &lt; len(a_list) and not found:
-</span><span class="line">        if a_list[pos] == item:
-</span><span class="line">            found = True
-</span><span class="line">        else:
-</span><span class="line">            pos = pos+1
-</span><span class="line">    return found
+<span class="line-number">102</span>
+<span class="line-number">103</span>
+<span class="line-number">104</span>
+<span class="line-number">105</span>
+<span class="line-number">106</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">sequential_search</span><span class="p">(</span><span class="n">a_list</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span><span class="line">    <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="line">    <span class="n">found</span> <span class="o">=</span> <span class="bp">False</span>
+</span><span class="line">    <span class="k">while</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">a_list</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">==</span> <span class="n">item</span><span class="p">:</span>
+</span><span class="line">            <span class="n">found</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span><span class="o">+</span><span class="mi">1</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">found</span>
 </span><span class="line">
-</span><span class="line">test_list = [1, 2, 32, 8, 17, 19, 42, 13, 0]
-</span><span class="line">print(sequential_search(test_list, 3))
-</span><span class="line">print(sequential_search(test_list, 13))
-</span><span class="line">
-</span><span class="line">
-</span><span class="line">def binary_search(a_list, item):
-</span><span class="line">    first = 0
-</span><span class="line">    last = len(a_list) - 1
-</span><span class="line">    found = False
-</span><span class="line">    while first &lt;= last and not found:
-</span><span class="line">        midpoint = (first + last) // 2
-</span><span class="line">        if a_list[midpoint] == item:
-</span><span class="line">            found = True
-</span><span class="line">        else:
-</span><span class="line">            if item &lt; a_list[midpoint]:
-</span><span class="line">                last = midpoint - 1
-</span><span class="line">            else:
-</span><span class="line">                first = midpoint + 1
-</span><span class="line">    return found
-</span><span class="line">
-</span><span class="line">test_list = [0, 1, 2, 8, 13, 17, 19, 32, 42,]
-</span><span class="line">print(binary_search(test_list, 3))
-</span><span class="line">print(binary_search(test_list, 13))
-</span><span class="line">
-</span><span class="line">class HashTable:
-</span><span class="line">    def __init__(self):
-</span><span class="line">        self.size = 11
-</span><span class="line">        self.slots = [None] * self.size
-</span><span class="line">        self.data = [None] * self.size
-</span><span class="line">
-</span><span class="line">    def put(self, key, data):
-</span><span class="line">        hash_value = self.hash_function(key,len(self.slots))
-</span><span class="line">        if self.slots[hash_value] == None: # '==None' ? or  'is None' ?
-</span><span class="line">            self.slots[hash_value] = key
-</span><span class="line">            self.data[hash_value] = data
-</span><span class="line">        else:
-</span><span class="line">            if self.slots[hash_value] == key:
-</span><span class="line">                self.data[hash_value] = data #replace
-</span><span class="line">            else:
-</span><span class="line">                next_slot = self.rehash(hash_value, len(self.slots))
-</span><span class="line">                while self.slots[next_slot] != None and self.slots[next_slot] != key:
-</span><span class="line">                    next_slot = self.rehash(next_slot, len(self.slots))
-</span><span class="line">                    if self.slots[next_slot] == None:
-</span><span class="line">                        self.slots[next_slot] = key
-</span><span class="line">                        self.data[next_slot] = data
-</span><span class="line">                    else:
-</span><span class="line">                        self.data[next_slot] = data #replacea
-</span><span class="line">
-</span><span class="line">    #reminder method
-</span><span class="line">    def hash_function(self, key, size):
-</span><span class="line">        return key % size
-</span><span class="line">
-</span><span class="line">    #plus 1
-</span><span class="line">    def rehash(self, old_hash, size):
-</span><span class="line">        return (old_hash + 1) % size
-</span><span class="line">
-</span><span class="line">    def get(self, key):
-</span><span class="line">        start_slot = self.hash_function(key, len(self.slots))
-</span><span class="line">        data = None
-</span><span class="line">        stop = False
-</span><span class="line">        found = False
-</span><span class="line">        position = start_slot
-</span><span class="line">        while self.slots[position] != None and not found and not stop:
-</span><span class="line">            if self.slots[position] == key:
-</span><span class="line">                found = True
-</span><span class="line">                data = self.data[position]
-</span><span class="line">            else:
-</span><span class="line">                position=self.rehash(position, len(self.slots))
-</span><span class="line">                if position == start_slot:
-</span><span class="line">                    stop = True
-</span><span class="line">        return data
-</span><span class="line">
-</span><span class="line">    def __getitem__(self, key):
-</span><span class="line">        return self.get(key)
-</span><span class="line">
-</span><span class="line">    def __setitem__(self, key, data):
-</span><span class="line">        self.put(key, data)
+</span><span class="line"><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">sequential_search</span><span class="p">(</span><span class="n">test_list</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">sequential_search</span><span class="p">(</span><span class="n">test_list</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>
 </span><span class="line">
 </span><span class="line">
-</span><span class="line">if __name__ == '__main__':
-</span><span class="line">    table=HashTable();
-</span><span class="line">    table[54]='cat';
-</span><span class="line">    table[26]='dog';
-</span><span class="line">    table[93]='lion';
-</span><span class="line">    table[17]="tiger";
-</span><span class="line">    table[77]="bird";
-</span><span class="line">    table[44]="goat";
-</span><span class="line">    table[55]="pig";
-</span><span class="line">    table[20]="chicken";
-</span><span class="line">    print table.slots;
-</span><span class="line">    print table.data;</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line"><span class="k">def</span> <span class="nf">binary_search</span><span class="p">(</span><span class="n">a_list</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span><span class="line">    <span class="n">first</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="line">    <span class="n">last</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span class="line">    <span class="n">found</span> <span class="o">=</span> <span class="bp">False</span>
+</span><span class="line">    <span class="k">while</span> <span class="n">first</span> <span class="o">&lt;=</span> <span class="n">last</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
+</span><span class="line">        <span class="n">midpoint</span> <span class="o">=</span> <span class="p">(</span><span class="n">first</span> <span class="o">+</span> <span class="n">last</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">a_list</span><span class="p">[</span><span class="n">midpoint</span><span class="p">]</span> <span class="o">==</span> <span class="n">item</span><span class="p">:</span>
+</span><span class="line">            <span class="n">found</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">item</span> <span class="o">&lt;</span> <span class="n">a_list</span><span class="p">[</span><span class="n">midpoint</span><span class="p">]:</span>
+</span><span class="line">                <span class="n">last</span> <span class="o">=</span> <span class="n">midpoint</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">first</span> <span class="o">=</span> <span class="n">midpoint</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">found</span>
+</span><span class="line">
+</span><span class="line"><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">42</span><span class="p">,]</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">binary_search</span><span class="p">(</span><span class="n">test_list</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">binary_search</span><span class="p">(</span><span class="n">test_list</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>
+</span><span class="line">
+</span><span class="line"><span class="k">class</span> <span class="nc">HashTable</span><span class="p">:</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">11</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">slots</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+</span><span class="line">
+</span><span class="line">    <span class="c">#put data in slot</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">put_data_in_slot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">slot</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span> <span class="c"># &#39;==None&#39; ? or  &#39;is None&#39; ?</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
+</span><span class="line">            <span class="k">return</span> <span class="bp">True</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span> <span class="c"># not None</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span> <span class="c">#replace</span>
+</span><span class="line">                <span class="k">return</span> <span class="bp">True</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="k">return</span> <span class="bp">False</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+</span><span class="line">        <span class="n">slot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_function</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">);</span>
+</span><span class="line">        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">put_data_in_slot</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">slot</span><span class="p">);</span>
+</span><span class="line">        <span class="k">while</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+</span><span class="line">            <span class="n">slot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rehash</span><span class="p">(</span><span class="n">slot</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">);</span>
+</span><span class="line">            <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">put_data_in_slot</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">slot</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line">    <span class="c">#reminder method</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">hash_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">key</span> <span class="o">%</span> <span class="n">size</span>
+</span><span class="line">
+</span><span class="line">    <span class="c">#plus 1</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">rehash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old_hash</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="p">(</span><span class="n">old_hash</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">size</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+</span><span class="line">        <span class="n">start_slot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_function</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">))</span>
+</span><span class="line">        <span class="n">data</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class="line">        <span class="n">stop</span> <span class="o">=</span> <span class="bp">False</span>
+</span><span class="line">        <span class="n">found</span> <span class="o">=</span> <span class="bp">False</span>
+</span><span class="line">        <span class="n">position</span> <span class="o">=</span> <span class="n">start_slot</span>
+</span><span class="line">        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">found</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">stop</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+</span><span class="line">                <span class="n">found</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="line">                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">position</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rehash</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">))</span>
+</span><span class="line">                <span class="k">if</span> <span class="n">position</span> <span class="o">==</span> <span class="n">start_slot</span><span class="p">:</span>
+</span><span class="line">                    <span class="n">stop</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">data</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line"><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span class="line">    <span class="n">table</span><span class="o">=</span><span class="n">HashTable</span><span class="p">();</span>
+</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">54</span><span class="p">]</span><span class="o">=</span><span class="s">&#39;cat&#39;</span><span class="p">;</span>
+</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">26</span><span class="p">]</span><span class="o">=</span><span class="s">&#39;dog&#39;</span><span class="p">;</span>
+</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">93</span><span class="p">]</span><span class="o">=</span><span class="s">&#39;lion&#39;</span><span class="p">;</span>
+</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;tiger&quot;</span><span class="p">;</span>
+</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">77</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;bird&quot;</span><span class="p">;</span>
+</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">44</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;goat&quot;</span><span class="p">;</span>
+</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">55</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;pig&quot;</span><span class="p">;</span>
+</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;chicken&quot;</span><span class="p">;</span>
+</span><span class="line">    <span class="k">print</span> <span class="n">table</span><span class="o">.</span><span class="n">slots</span><span class="p">;</span>
+</span><span class="line">    <span class="k">print</span> <span class="n">table</span><span class="o">.</span><span class="n">data</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># [77, 44, 55, None, 26, 93, 17, None, None, 20, 54]</span>
+</span><span class="line"><span class="c"># [&#39;bird&#39;, &#39;goat&#39;, &#39;pig&#39;, None, &#39;dog&#39;, &#39;lion&#39;, &#39;tiger&#39;, None, None, &#39;chicken&#39;, &#39;cat&#39;]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/">http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 </div>
