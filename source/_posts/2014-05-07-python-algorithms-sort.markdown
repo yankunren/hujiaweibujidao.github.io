@@ -18,7 +18,7 @@ Chapter5: Search and Sorting [online_link](http://interactivepython.org/courseli
 
 1.冒泡排序(bubble sort)：每个回合都从第一个元素开始和它后面的元素比较，如果比它后面的元素更大的话就交换，一直重复，直到这个元素到了它能到达的位置。注意检测是否已经完成了排序，如果已完成就可以退出了。时间复杂度$O(n^2)$
 
-Python支持对两个数字同时进行交换！`a,b = b,a`就可以交换a和b的值了。
+**Python支持对两个数字同时进行交换！`a,b = b,a`就可以交换a和b的值了。**
 
 ![image](http://hujiaweibujidao.github.io/images/201405/bubblesort.png)
 
