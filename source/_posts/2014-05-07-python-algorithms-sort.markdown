@@ -345,7 +345,7 @@ shell_sort(a_list)
 print(a_list)
 ```
 
-7.堆排序请参见该系列文章中的DataStrctures章节中的二叉堆部分的内容。
+7.堆排序请参见该系列文章中的[DataStrctures章节中的二叉堆部分的内容](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)。
 
 8.其他线性排序可以参见算法导论第8章或者看下[这篇不错的文章](http://www.cnblogs.com/Anker/archive/2013/01/25/2876397.html)
 
