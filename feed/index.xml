@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-08T17:10:34+08:00</updated>
+  <updated>2014-05-08T17:24:24+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -648,9 +648,151 @@ Chapter 6 Trees and Tree Algorithms</p>
 
 </blockquote>
 
+<p>一份不错的讲解<a href="http://www.cnblogs.com/Anker/archive/2013/01/28/2880581.html">来自博客园</a></p>
+
+<p><strong>引用开始</strong></p>
+
+<hr />
+
+<p>1.在二叉查找树中找某个节点的前驱和后继节点</p>
+
+<p>给定一个二叉查找树中的结点，找出在中序遍历顺序下某个节点的前驱和后继。如果树中所有关键字都不相同，则某一结点x的前驱就是小于key[x]的所有关键字中最大的那个结点，后继即是大于key[x]中的所有关键字中最小的那个结点。根据二叉查找树的结构和性质，不用对关键字做任何比较，就可以找到某个结点的前驱和后继。</p>
+
+<p>查找前驱步骤：先判断x是否有左子树，如果有则在left[x]中查找关键字最大的结点，即是x的前驱。如果没有左子树，则从x继续向上执行此操作，直到遇到某个结点是其父节点的右孩子结点，<strong>此时该父节点就是前驱</strong>。例如下图查找结点7的前驱结点6过程：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_pre.png" alt="image" /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="cpp"><span class="line"><span class="n">TREE_SUCCESSOR</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">right</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">NULL</span>
+</span><span class="line">        <span class="n">then</span> <span class="k">return</span> <span class="n">TREE_MINMUM</span><span class="p">(</span><span class="n">right</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</span><span class="line">    <span class="n">y</span><span class="o">=</span><span class="n">parent</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+</span><span class="line">    <span class="k">while</span> <span class="n">y</span><span class="o">!=</span> <span class="nb">NULL</span> <span class="n">and</span> <span class="n">x</span> <span class="o">==</span><span class="n">left</span><span class="p">[</span><span class="n">y</span><span class="p">]</span>
+</span><span class="line">           <span class="k">do</span> <span class="n">x</span> <span class="o">=</span> <span class="n">y</span>
+</span><span class="line">              <span class="n">y</span><span class="o">=</span><span class="n">parent</span><span class="p">[</span><span class="n">y</span><span class="p">]</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">y</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>查找后继步骤：先判断x是否有右子树，如果有则在right[x]中查找关键字最小的结点，即使x的后继。如果没有右子树，则从x的父节点开始向上查找，直到遇到某个结点是其父结点的左儿子的结点时为止，<strong>此时该父节点就是后继</strong>。例如下图查找结点13的后继结点15的过程：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_later.png" alt="image" /></p>
+
+<p>伪代码</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="cpp"><span class="line"><span class="n">TREE_PROCESSOR</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">right</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">NULL</span>
+</span><span class="line">        <span class="n">then</span> <span class="k">return</span> <span class="n">TREE_MINMUM</span><span class="p">(</span><span class="n">right</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</span><span class="line">    <span class="n">y</span><span class="o">=</span><span class="n">parent</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+</span><span class="line">    <span class="k">while</span> <span class="n">y</span><span class="o">!=</span> <span class="nb">NULL</span> <span class="n">and</span> <span class="n">x</span> <span class="o">==</span><span class="n">right</span><span class="p">[</span><span class="n">y</span><span class="p">]</span>
+</span><span class="line">           <span class="k">do</span> <span class="n">x</span> <span class="o">=</span> <span class="n">y</span>
+</span><span class="line">              <span class="n">y</span><span class="o">=</span><span class="n">parent</span><span class="p">[</span><span class="n">y</span><span class="p">]</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">y</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>2.删除节点操作</p>
+
+<p>(1)结点z没有左右子树，则修改其父节点p[z]，使其为NULL。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_del1.png" alt="image" /></p>
+
+<p>(2)如果结点z只有一个子树（左子树或者右子树），通过在其子结点与父节点建立一条链来删除z。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_del2.png" alt="image" /></p>
+
+<p>(3)如果z有两个子女，则先删除z的后继y（y没有左孩子），在用y的内容来替代z的内容。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_del3.png" alt="image" /></p>
+
+<hr />
+
+<p><strong>引用结束</strong></p>
+
+<p><a href="http://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9">wiki</a>上的python代码实现节点删除操作，比后面的python代码更加简洁易懂</p>
+
+<p>代码采用了递归的形式处理，相当于只需要考虑了要删除的节点就在当前位置该如何处理，然后，对于只有左孩子节点或者只有右孩子结点或者没有孩子节点的情况直接进行节点覆盖就行了，但是，对于复杂的第三种情况，在左右孩子节点都存在的情况下，只需从它的右孩子结点中找到最小的那个元素即为要删除节点的后继(同理，可以找到左孩子结点中找到最大的那个元素，即为要删除节点的前驱)，然后复制后继节点中的内容到要删除的节点，最后删除后继节点即可。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">find_min</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>   <span class="c"># Gets minimum node (leftmost leaf) in a subtree</span>
+</span><span class="line">    <span class="n">current_node</span> <span class="o">=</span> <span class="bp">self</span>
+</span><span class="line">    <span class="k">while</span> <span class="n">current_node</span><span class="o">.</span><span class="n">left_child</span><span class="p">:</span>
+</span><span class="line">        <span class="n">current_node</span> <span class="o">=</span> <span class="n">current_node</span><span class="o">.</span><span class="n">left_child</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">current_node</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">replace_node_in_parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_value</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+</span><span class="line">    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">:</span>
+</span><span class="line">        <span class="k">if</span> <span class="bp">self</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">left_child</span><span class="p">:</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">left_child</span> <span class="o">=</span> <span class="n">new_value</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">right_child</span> <span class="o">=</span> <span class="n">new_value</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">new_value</span><span class="p">:</span>
+</span><span class="line">        <span class="n">new_value</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">binary_tree_delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span><span class="o">.</span><span class="n">binary_tree_delete</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span class="line">    <span class="k">elif</span> <span class="n">key</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span><span class="o">.</span><span class="n">binary_tree_delete</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span class="line">    <span class="k">else</span><span class="p">:</span> <span class="c"># delete the key here</span>
+</span><span class="line">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span><span class="p">:</span> <span class="c"># if both children are present</span>
+</span><span class="line">            <span class="n">successor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span><span class="o">.</span><span class="n">find_min</span><span class="p">()</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">successor</span><span class="o">.</span><span class="n">key</span>
+</span><span class="line">            <span class="n">successor</span><span class="o">.</span><span class="n">binary_tree_delete</span><span class="p">(</span><span class="n">successor</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+</span><span class="line">        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span><span class="p">:</span>   <span class="c"># if the node has only a *left* child</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">replace_node_in_parent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left_child</span><span class="p">)</span>
+</span><span class="line">        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span><span class="p">:</span>  <span class="c"># if the node has only a *right* child</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">replace_node_in_parent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right_child</span><span class="p">)</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span> <span class="c"># this node has no children</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">replace_node_in_parent</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 <p>参考内容1中在第三种情况下使用的是第二种方案，并且是使用直接前驱来代替要删除的节点。</p>
 
-<p>完整实现[参考内容1中的代码，有些冗余，但是可读性好]</p>
+<p>完整实现[参考内容1中的代码，相当冗余，但是可读性较好，个人认为如果要实现删除节点操作的话建议参考wiki上python代码的实现，也可以查看参考内容1中对代码的详细解释]</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
