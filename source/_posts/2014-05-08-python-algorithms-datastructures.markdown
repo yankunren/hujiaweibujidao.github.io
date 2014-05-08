@@ -10,9 +10,10 @@ published: true
 参考内容：
 
 1.[Problem Solving with Python](http://interactivepython.org/courselib/static/pythonds/index.html)
-Chapter 2 Algorithm Analysis
-Chapter 3 Basic Data Structures
-Chapter 6 Trees and Tree Algorithms
+
+Chapter 2 Algorithm Analysis   
+Chapter 3 Basic Data Structures   
+Chapter 6 Trees and Tree Algorithms   
 
 2.[算法导论](http://en.wikipedia.org/wiki/Introduction_to_Algorithms)
 
