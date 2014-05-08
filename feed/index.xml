@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-08T18:19:03+08:00</updated>
+  <updated>2014-05-08T18:21:13+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -643,13 +643,13 @@ Chapter 6 Trees and Tree Algorithms   </p>
 <blockquote>
   <p>From wiki 
 在二叉查找树删去一个结点，分三种情况讨论：
-1.若<em>p结点为叶子结点，即PL(左子树)和PR(右子树)均为空树。由于删去叶子结点不破坏整棵树的结构，则只需修改其双亲结点的指针即可。
-2.若</em>p结点只有左子树PL或右子树PR，此时只要令PL或PR直接成为其双亲结点<em>f的左子树（当</em>p是左子树）或右子树（当<em>p是右子树）即可，作此修改也不破坏二叉查找树的特性。
+1.若<em>p结点为叶子结点，即PL(左子树)和PR(右子树)均为空树。由于删去叶子结点不破坏整棵树的结构，则只需修改其双亲结点的指针即可。 <br />
+2.若</em>p结点只有左子树PL或右子树PR，此时只要令PL或PR直接成为其双亲结点<em>f的左子树（当</em>p是左子树）或右子树（当<em>p是右子树）即可，作此修改也不破坏二叉查找树的特性。  <br />
 3.若</em>p结点的左子树和右子树均不空。<strong>在删去<em>p之后，为保持其它元素之间的相对位置不变，可按中序遍历保持有序进行调整，可以有两种做法：其一是令</em>p的左子树为<em>f的左/右(依</em>p是<em>f的左子树还是右子树而定)子树，</em>s为<em>p左子树的最右下的结点，而</em>p的右子树为<em>s的右子树；其二是令</em>p的直接前驱（in-order predecessor）或直接后继（in-order successor）替代*p，然后再从二叉查找树中删去它的直接前驱（或直接后继）</strong>。</p>
 
 </blockquote>
 
-<p><strong>引用开始</strong> 一份不错的讲解<a href="http://www.cnblogs.com/Anker/archive/2013/01/28/2880581.html">来自博客园</a></p>
+<p><strong>引用开始</strong> [一份不错的讲解<a href="http://www.cnblogs.com/Anker/archive/2013/01/28/2880581.html">来自博客园</a>]</p>
 
 <hr />
 
@@ -791,7 +791,7 @@ Chapter 6 Trees and Tree Algorithms   </p>
 </span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">replace_node_in_parent</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>参考内容1中在第三种情况下使用的是第二种方案，并且是使用直接前驱来代替要删除的节点。</p>
+<p>参考内容1中在第三种情况下使用的是wiki中的第二种方案，并且是使用直接后继来代替要删除的节点。</p>
 
 <p>完整实现[参考内容1中的代码，相当冗余，但是可读性较好，个人认为如果要实现删除节点操作的话建议参考wiki上python代码的实现，也可以查看参考内容1中对代码的详细解释]</p>
 
