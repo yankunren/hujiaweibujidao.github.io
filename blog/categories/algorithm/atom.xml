@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-08T09:23:15+08:00</updated>
+  <updated>2014-05-08T09:37:13+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -29,7 +29,7 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 
 <p>1.冒泡排序(bubble sort)：每个回合都从第一个元素开始和它后面的元素比较，如果比它后面的元素更大的话就交换，一直重复，直到这个元素到了它能到达的位置。注意检测是否已经完成了排序，如果已完成就可以退出了。时间复杂度$O(n^2)$</p>
 
-<p>Python支持对两个数字同时进行交换！<code>a,b = b,a</code>就可以交换a和b的值了。</p>
+<p><strong>Python支持对两个数字同时进行交换！<code>a,b = b,a</code>就可以交换a和b的值了。</strong></p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/bubblesort.png" alt="image" /></p>
 
@@ -79,7 +79,7 @@ print(a_list)
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/insertionsort.png" alt="image" /></p>
 
-<p>```
+<p>```python
 def insertion_sort(a_list):
     for index in range(1, len(a_list)):
         current_value = a_list[index]
@@ -118,7 +118,7 @@ print(a_list)
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/mergesort2.png" alt="image" /></p>
 
-<p>```
+<p>```python
 def merge_sort(a_list):
     print(“Splitting “, a_list)
     if len(a_list) &gt; 1:
@@ -153,7 +153,7 @@ print(a_list)
 
 <p>算法导论2-4题利用合并排序可以在$O(nlogn)$的最坏情况下得到包含n个元素的数组的逆序对的数目。[下面使用的是C++来实现的，合并排序的代码格式类似算法导论]</p>
 
-<p>```C++
+<p>```c
 #include <iostream>
 using namespace std;</iostream></p>
 
@@ -208,11 +208,11 @@ int mergeInversions(int arr[], int p, int q, int r);</p>
 
 <p>5.快速排序(quick sort)：</p>
 
-<p>想法一：如下图所示，它选择第一个元素作为主元，它同样可以按照下面提到的算法导论中将数组分成了4个不同的部分，但是这里其实有更好的解释方法。首先，它每次都是选择第一个元素都为主元，也就是要确定主元的位置；然后，有两个指针，一个leftmark指向主元的后面一个位置，另一个rightmark指向最后一个元素；接着，两个指针分别向中间移动，leftmark遇到比主元大的元素停止，rightmark遇到比主元小的元素停止，如果此时leftmark&lt;rightmark，也就是说中间还有未处理(未确定与主元大小关系)的元素，那么就交换leftmark和rightmark位置上的元素，然后重复刚才的移动操作，直到rightmark&lt;leftmark；最后，停止移动时候rightmark就是主元要放置的位置，因为它停在一个比主元小的元素的位置上，之后交换主元和rightmark指向的元素即可。完了之后，递归地对主元左右两边的数组进行排序。</p>
+<p>想法一：如下图所示，它选择第一个元素作为主元，它同样可以按照下面提到的算法导论中将数组分成了4个不同的部分，但是这里其实有更好的解释方法。<strong>首先，它每次都是选择第一个元素都为主元，这个回合就是要确定主元的位置；然后，有两个指针，一个leftmark指向主元的后面一个位置，另一个rightmark指向要排序的数组最后一个元素；接着，两个指针分别向中间移动，leftmark遇到比主元大的元素停止，rightmark遇到比主元小的元素停止，如果此时leftmark&lt;rightmark，也就是说中间还有未处理(未确定与主元大小关系)的元素，那么就交换leftmark和rightmark位置上的元素，然后重复刚才的移动操作，直到rightmark&lt;leftmark；最后，停止移动时候rightmark就是主元要放置的位置，因为它停在一个比主元小的元素的位置上，之后交换主元和rightmark指向的元素即可。完了之后，递归地对主元左右两边的数组进行排序即可。</strong></p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/quicksort.png" alt="image" /></p>
 
-<p>```
+<p>```python
 def quick_sort(a_list):
     quick_sort_helper(a_list, 0, len(a_list) - 1)</p>
 
@@ -248,7 +248,7 @@ quick_sort(a_list)
 print(a_list)
 ```</p>
 
-<p>想法二：如下图所示，它选择最后的那个元素作为主元，它的思路是将数据划分成4部分：</p>
+<p>想法二：如下图所示，它选择最后的那个元素作为主元，它的思路是将数组划分成4部分：</p>
 
 <p>第一部分：$p \le k \le i, A[k] \le pivot$</p>
 
@@ -258,13 +258,13 @@ print(a_list)
 
 <p>第四部分：$p \le k \le i, A[k] = pivot$</p>
 
-<p>首先让i指向要排序的数组的第一个元素的前面，p和j都指向第一个元素，一直移动j直到主元前一个位置，如果发现一个大于主元的元素就让i指向它的下一个位置，然后交换i和j对应位置上的元素。这样一定是可行的，因为i一直都是指向小于主元的元素中的最后一个，从i+1开始就大于主元了，而j一直都是指向大于主元的元素中最后一个的后面一个位置。</p>
+<p><strong>首先，让i指向要排序的数组的第一个元素的前面，p和j都指向第一个元素；然后，一直移动j直到主元前一个位置，一旦发现一个大于主元的元素就让i指向它的下一个位置，然后交换i和j对应位置上的元素。这样一定是可行的，因为i一直都是指向已发现的小于主元的元素中的最后一个，从i+1开始就大于主元了(或者还未确定/未处理)，而j一直都是指向大于主元的元素中最后一个的后面一个位置，所以i+1和j位置上的元素交换就可以使得j发现的这个小于主元的元素移动到第一部分，而i+1位置上大于主元的元素移动到j的位置上，即第二部分的最后一个位置上。</strong></p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/quicksort_cn.png" alt="image" /></p>
 
 <p>根据算法导论中的伪代码的C++版本实现</p>
 
-<p>```
+<p>```C
 #include <iostream>
 using namespace std;</iostream></p>
 
@@ -309,6 +309,39 @@ void print(int a[],int len){
     quicksort(a, 0, 10);
     print(a,11);
 }
+```</p>
+
+<p>由于快排每次都能够确定一个元素在数组中最终的位置，所以可以用快排来解决很多变种问题，例如在线性时间内求中位数问题。</p>
+
+<p>6.希尔排序：类似合并排序和插入排序的结合体，二路合并排序将原来的数组分成左右两部分，希尔排序则将数组按照一定的间隔分成几部分，每部分采用插入排序来排序，有意思的是这样做了之后，元素很多情况下就差不多在它应该呆的位置，所以效率不一定比插入排序差。时间复杂度为$[O(n),O(n^2)]$。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/shellsort.png" alt="image" /></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/shellsort2.png" alt="image" /></p>
+
+<p>```python
+def shell_sort(a_list):
+    #how many sublists, also how many elements in a sublist
+    sublist_count = len(a_list) // 2
+    while sublist_count &gt; 0:
+        for start_position in range(sublist_count):
+            gap_insertion_sort(a_list, start_position, sublist_count)
+        print(“After increments of size”, sublist_count, “The list is”, a_list)
+        sublist_count = sublist_count // 2</p>
+
+<p>def gap_insertion_sort(a_list, start, gap):
+    #start+gap is the second element in this sublist
+    for i in range(start + gap, len(a_list), gap):
+        current_value = a_list[i]
+        position = i
+        while position &gt;= gap and a_list[position - gap] &gt; current_value:
+            a_list[position] = a_list[position - gap] #move backward
+            position = position - gap
+            a_list[position] = current_value</p>
+
+<p>a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20, 88]
+shell_sort(a_list)
+print(a_list)
 ```</p>
 ]]></content>
   </entry>
