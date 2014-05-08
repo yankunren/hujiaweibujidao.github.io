@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-08T11:26:53+08:00</updated>
+  <updated>2014-05-08T11:28:01+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -37,7 +37,7 @@ Chapter 2 and Chapter 3</p>
 
 <p>同样是执行1000次创建一个包含1-1000的列表，四种方式使用的时间差距很大！使用append比逐次增加要快很多，另外，使用python的列表产生式比append要快，而第四种方式更加快！</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -68,37 +68,38 @@ Chapter 2 and Chapter 3</p>
 <span class="line-number">29</span>
 <span class="line-number">30</span>
 <span class="line-number">31</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">def test1():
-</span><span class="line">   l = []
-</span><span class="line">   for i in range(1000):
-</span><span class="line">      l = l + [i]
-</span><span class="line">def test2():
-</span><span class="line">   l = []
-</span><span class="line">   for i in range(1000):
-</span><span class="line">      l.append(i)
-</span><span class="line">def test3():
-</span><span class="line">   l = [i for i in range(1000)]
-</span><span class="line">def test4():
-</span><span class="line">   l = list(range(1000))
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">test1</span><span class="p">():</span>
+</span><span class="line">   <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class="line">   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+</span><span class="line">      <span class="n">l</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">test2</span><span class="p">():</span>
+</span><span class="line">   <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class="line">   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+</span><span class="line">      <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">test3</span><span class="p">():</span>
+</span><span class="line">   <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">test4</span><span class="p">():</span>
+</span><span class="line">   <span class="n">l</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
 </span><span class="line">
-</span><span class="line"># Import the timeit module -&gt; import timeit
-</span><span class="line"># Import the Timer class defined in the module
-</span><span class="line">from timeit import Timer
-</span><span class="line"># If the above line is excluded, you need to replace Timer with
-</span><span class="line"># timeit.Timer when defining a Timer object
-</span><span class="line">t1 = Timer("test1()", "from __main__ import test1")
-</span><span class="line">print("concat ",t1.timeit(number=1000), "milliseconds")
-</span><span class="line">t2 = Timer("test2()", "from __main__ import test2")
-</span><span class="line">print("append ",t2.timeit(number=1000), "milliseconds")
-</span><span class="line">t3 = Timer("test3()", "from __main__ import test3")
-</span><span class="line">print("comprehension ",t3.timeit(number=1000), "milliseconds")
-</span><span class="line">t4 = Timer("test4()", "from __main__ import test4")
-</span><span class="line">print("list range ",t4.timeit(number=1000), "milliseconds")
+</span><span class="line"><span class="c"># Import the timeit module -&gt; import timeit</span>
+</span><span class="line"><span class="c"># Import the Timer class defined in the module</span>
+</span><span class="line"><span class="kn">from</span> <span class="nn">timeit</span> <span class="kn">import</span> <span class="n">Timer</span>
+</span><span class="line"><span class="c"># If the above line is excluded, you need to replace Timer with</span>
+</span><span class="line"><span class="c"># timeit.Timer when defining a Timer object</span>
+</span><span class="line"><span class="n">t1</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="s">&quot;test1()&quot;</span><span class="p">,</span> <span class="s">&quot;from __main__ import test1&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&quot;concat &quot;</span><span class="p">,</span><span class="n">t1</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> <span class="s">&quot;milliseconds&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="n">t2</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="s">&quot;test2()&quot;</span><span class="p">,</span> <span class="s">&quot;from __main__ import test2&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&quot;append &quot;</span><span class="p">,</span><span class="n">t2</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> <span class="s">&quot;milliseconds&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="n">t3</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="s">&quot;test3()&quot;</span><span class="p">,</span> <span class="s">&quot;from __main__ import test3&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&quot;comprehension &quot;</span><span class="p">,</span><span class="n">t3</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> <span class="s">&quot;milliseconds&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="n">t4</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="s">&quot;test4()&quot;</span><span class="p">,</span> <span class="s">&quot;from __main__ import test4&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&quot;list range &quot;</span><span class="p">,</span><span class="n">t4</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> <span class="s">&quot;milliseconds&quot;</span><span class="p">)</span>
 </span><span class="line">
-</span><span class="line"># ('concat ', 1.7890608310699463, 'milliseconds')
-</span><span class="line"># ('append ', 0.13796091079711914, 'milliseconds')
-</span><span class="line"># ('comprehension ', 0.05671119689941406, 'milliseconds')
-</span><span class="line"># ('list range ', 0.014147043228149414, 'milliseconds')</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line"><span class="c"># (&#39;concat &#39;, 1.7890608310699463, &#39;milliseconds&#39;)</span>
+</span><span class="line"><span class="c"># (&#39;append &#39;, 0.13796091079711914, &#39;milliseconds&#39;)</span>
+</span><span class="line"><span class="c"># (&#39;comprehension &#39;, 0.05671119689941406, &#39;milliseconds&#39;)</span>
+</span><span class="line"><span class="c"># (&#39;list range &#39;, 0.014147043228149414, &#39;milliseconds&#39;)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><code>timeit</code>模块的解释：</p>
 
@@ -106,7 +107,7 @@ Chapter 2 and Chapter 3</p>
 
 <p>测试pop操作：从结果可以看出，pop最后一个元素的效率远远高于pop第一个元素</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -115,15 +116,16 @@ Chapter 2 and Chapter 3</p>
 <span class="line-number">7</span>
 <span class="line-number">8</span>
 <span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">x = list(range(2000000))
-</span><span class="line">pop_zero = Timer("x.pop(0)","from __main__ import x")
-</span><span class="line">print("pop_zero ",pop_zero.timeit(number=1000), "milliseconds")
-</span><span class="line">x = list(range(2000000))
-</span><span class="line">pop_end = Timer("x.pop()","from __main__ import x")
-</span><span class="line">print("pop_end ",pop_end.timeit(number=1000), "milliseconds")
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2000000</span><span class="p">))</span>
+</span><span class="line"><span class="n">pop_zero</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="s">&quot;x.pop(0)&quot;</span><span class="p">,</span><span class="s">&quot;from __main__ import x&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&quot;pop_zero &quot;</span><span class="p">,</span><span class="n">pop_zero</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> <span class="s">&quot;milliseconds&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2000000</span><span class="p">))</span>
+</span><span class="line"><span class="n">pop_end</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="s">&quot;x.pop()&quot;</span><span class="p">,</span><span class="s">&quot;from __main__ import x&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&quot;pop_end &quot;</span><span class="p">,</span><span class="n">pop_end</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> <span class="s">&quot;milliseconds&quot;</span><span class="p">)</span>
 </span><span class="line">
-</span><span class="line"># ('pop_zero ', 1.9101738929748535, 'milliseconds')
-</span><span class="line"># ('pop_end ', 0.00023603439331054688, 'milliseconds')</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line"><span class="c"># (&#39;pop_zero &#39;, 1.9101738929748535, &#39;milliseconds&#39;)</span>
+</span><span class="line"><span class="c"># (&#39;pop_end &#39;, 0.00023603439331054688, &#39;milliseconds&#39;)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>(2)Dictionary</p>
 
@@ -133,7 +135,7 @@ Chapter 2 and Chapter 3</p>
 
 <p>Dictionary和List的性能比较：list基本上随着其元素的数目呈线性增长，而dictionary一直维持在很短很短的时间内(我的机子测试的结果都是<code>0.001ms</code>)。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -143,16 +145,17 @@ Chapter 2 and Chapter 3</p>
 <span class="line-number">8</span>
 <span class="line-number">9</span>
 <span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">import timeit
-</span><span class="line">import random
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">import</span> <span class="nn">timeit</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">random</span>
 </span><span class="line">
-</span><span class="line">for i in range(10000,1000001,20000):
-</span><span class="line">    t = timeit.Timer("random.randrange(%d) in x"%i,"from __main__ import random,x")
-</span><span class="line">    x = list(range(i))
-</span><span class="line">    lst_time = t.timeit(number=1000)
-</span><span class="line">    x = {j:None for j in range(i)}
-</span><span class="line">    d_time = t.timeit(number=1000)
-</span><span class="line">    print("%d,%10.3f,%10.3f" % (i, lst_time, d_time))</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span><span class="mi">1000001</span><span class="p">,</span><span class="mi">20000</span><span class="p">):</span>
+</span><span class="line">    <span class="n">t</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="s">&quot;random.randrange(</span><span class="si">%d</span><span class="s">) in x&quot;</span><span class="o">%</span><span class="n">i</span><span class="p">,</span><span class="s">&quot;from __main__ import random,x&quot;</span><span class="p">)</span>
+</span><span class="line">    <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+</span><span class="line">    <span class="n">lst_time</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</span><span class="line">    <span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="n">j</span><span class="p">:</span><span class="bp">None</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">)}</span>
+</span><span class="line">    <span class="n">d_time</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%d</span><span class="s">,</span><span class="si">%10.3f</span><span class="s">,</span><span class="si">%10.3f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">lst_time</span><span class="p">,</span> <span class="n">d_time</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>结果图</p>
 
