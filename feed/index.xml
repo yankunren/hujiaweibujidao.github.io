@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-08T15:41:38+08:00</updated>
+  <updated>2014-05-08T16:34:27+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -21,7 +21,9 @@
     <content type="html"><![CDATA[<p>参考内容：</p>
 
 <p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a>
-Chapter 2 and Chapter 3</p>
+Chapter 2 Algorithm Analysis
+Chapter 3 Basic Data Structures
+Chapter 6 Trees and Tree Algorithms</p>
 
 <p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
 
@@ -227,6 +229,8 @@ Chapter 2 and Chapter 3</p>
 
 <p>队列一般用于解决需要优先队列的问题或者进行广度优先搜索的问题，也很简单。</p>
 
+<p><img src="http://hujiaweibujidao.github.io/images/201405/queue.png" alt="image" /></p>
+
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -270,6 +274,8 @@ Chapter 2 and Chapter 3</p>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>4.双向队列：左右两边都可以插入和删除的队列</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/deque.png" alt="image" /></p>
 
 <p>下面的实现是以右端为front，左端为rear</p>
 
@@ -323,6 +329,748 @@ Chapter 2 and Chapter 3</p>
 </span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">dq</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<p>5.二叉树：一个节点最多有两个孩子节点的树。如果是从0索引开始存储，那么对应于节点p的孩子节点是2p+1和2p+2两个节点，相反，节点p的父亲节点是(p-1)/2位置上的点</p>
+
+<p>二叉树的应用很多，比如对算术表达式建立一颗二叉树可以清楚看出表达式是如何计算的(详情请见参考内容1)，二叉树的变种可以得到其他的有一定特性的数据结构，例如后面的二叉堆。二叉树的三种遍历方法(前序，中序，后序)同样有很多的应用，比较简单，略过。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bt2.png" alt="image" /></p>
+
+<p>第一种，直接使用list来实现二叉树，可读性差</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">binary_tree</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+</span><span class="line">    <span class="k">return</span> <span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[]]</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">insert_left</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">new_branch</span><span class="p">):</span>
+</span><span class="line">    <span class="n">t</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class="line">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+</span><span class="line">        <span class="c">#new_branch becomes the left node of root, and original left</span>
+</span><span class="line">        <span class="c">#node t becomes left node of new_branch, right node is none</span>
+</span><span class="line">        <span class="n">root</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">new_branch</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="p">[]])</span>
+</span><span class="line">    <span class="k">else</span><span class="p">:</span>
+</span><span class="line">        <span class="n">root</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">new_branch</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[]])</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">root</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">insert_right</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">new_branch</span><span class="p">):</span>
+</span><span class="line">    <span class="n">t</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span class="line">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+</span><span class="line">        <span class="n">root</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="n">new_branch</span><span class="p">,</span> <span class="p">[],</span> <span class="n">t</span><span class="p">])</span>
+</span><span class="line">    <span class="k">else</span><span class="p">:</span>
+</span><span class="line">        <span class="n">root</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="n">new_branch</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[]])</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">root</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">get_root_val</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">set_root_val</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">new_val</span><span class="p">):</span>
+</span><span class="line">    <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_val</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">get_left_child</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">get_right_child</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">root</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</span><span class="line">
+</span><span class="line"><span class="n">r</span> <span class="o">=</span> <span class="n">binary_tree</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span class="line"><span class="n">insert_left</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</span><span class="line"><span class="n">insert_left</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</span><span class="line"><span class="n">insert_right</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</span><span class="line"><span class="n">insert_right</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</span><span class="line"><span class="n">l</span> <span class="o">=</span> <span class="n">get_left_child</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</span><span class="line"><span class="n">set_root_val</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</span><span class="line"><span class="n">insert_left</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">get_right_child</span><span class="p">(</span><span class="n">get_right_child</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>第二种，使用类的形式定义二叉树，可读性更好</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/btclass.png" alt="image" /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">class</span> <span class="nc">BinaryTree</span><span class="p">:</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">root</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">insert_left</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_node</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="n">new_node</span><span class="p">)</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="n">t</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="n">new_node</span><span class="p">)</span>
+</span><span class="line">            <span class="n">t</span><span class="o">.</span><span class="n">left_child</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span> <span class="o">=</span> <span class="n">t</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">insert_right</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_node</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="n">new_node</span><span class="p">)</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="n">t</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="n">new_node</span><span class="p">)</span>
+</span><span class="line">            <span class="n">t</span><span class="o">.</span><span class="n">right_child</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span> <span class="o">=</span> <span class="n">t</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">get_right_child</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">get_left_child</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">set_root_val</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">obj</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">get_root_val</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span>
+</span><span class="line">
+</span><span class="line"><span class="n">r</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">get_root_val</span><span class="p">())</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">get_left_child</span><span class="p">())</span>
+</span><span class="line"><span class="n">r</span><span class="o">.</span><span class="n">insert_left</span><span class="p">(</span><span class="s">&#39;b&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">get_left_child</span><span class="p">())</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">get_left_child</span><span class="p">()</span><span class="o">.</span><span class="n">get_root_val</span><span class="p">())</span>
+</span><span class="line"><span class="n">r</span><span class="o">.</span><span class="n">insert_right</span><span class="p">(</span><span class="s">&#39;c&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">get_right_child</span><span class="p">())</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">get_right_child</span><span class="p">()</span><span class="o">.</span><span class="n">get_root_val</span><span class="p">())</span>
+</span><span class="line"><span class="n">r</span><span class="o">.</span><span class="n">get_right_child</span><span class="p">()</span><span class="o">.</span><span class="n">set_root_val</span><span class="p">(</span><span class="s">&#39;hello&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">get_right_child</span><span class="p">()</span><span class="o">.</span><span class="n">get_root_val</span><span class="p">())</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>6.二叉堆：根据堆的性质又可以分为最小堆和最大堆，是一种非常好的优先队列。在最小堆中孩子节点一定大于等于其父亲节点，最大堆反之。二叉堆实际上一棵完全二叉树，并且满足堆的性质。对于插入和查找操作的时间复杂度度都是$O(nlogn)$。</p>
+
+<p>它的插入操作图示：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/heapinsert.png" alt="image" /></p>
+
+<p>去除根节点的操作图示：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/heapdel.png" alt="image" /></p>
+
+<p>注意，下面的实现中默认在初始的堆列表中插入了一个元素0，这样做可以保证堆的真实有效的元素个数和current_size值对应，而且最后一个元素的索引就对应了current_size。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">class</span> <span class="nc">BinHeap</span><span class="p">:</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">current_size</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">perc_up</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+</span><span class="line">        <span class="k">while</span> <span class="n">i</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># &gt;0 means this node is still available</span>
+</span><span class="line">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]:</span>
+</span><span class="line">                <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
+</span><span class="line">            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">//</span> <span class="mi">2</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">current_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_size</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">perc_up</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_size</span><span class="p">)</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">perc_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+</span><span class="line">        <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_size</span><span class="p">:</span>
+</span><span class="line">            <span class="n">mc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_child</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span><span class="line">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">mc</span><span class="p">]:</span>
+</span><span class="line">                <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">mc</span><span class="p">]</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">mc</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
+</span><span class="line">            <span class="n">i</span> <span class="o">=</span> <span class="n">mc</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">min_child</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_size</span><span class="p">:</span>
+</span><span class="line">            <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+</span><span class="line">                <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">del_min</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="n">ret_val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">current_size</span><span class="p">]</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">current_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_size</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">perc_down</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">ret_val</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">build_heap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a_list</span><span class="p">):</span>
+</span><span class="line">        <span class="n">i</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">current_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">a_list</span><span class="p">[:]</span> <span class="c">#append original list</span>
+</span><span class="line">        <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+</span><span class="line">            <span class="c">#build the heap we only need to deal the first part!</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">perc_down</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span><span class="line">            <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span>
+</span><span class="line">
+</span><span class="line"><span class="n">a_list</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+</span><span class="line"><span class="n">bh</span><span class="o">=</span><span class="n">BinHeap</span><span class="p">();</span>
+</span><span class="line"><span class="n">bh</span><span class="o">.</span><span class="n">build_heap</span><span class="p">(</span><span class="n">a_list</span><span class="p">);</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">bh</span><span class="o">.</span><span class="n">heap_list</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">bh</span><span class="o">.</span><span class="n">current_size</span><span class="p">)</span>
+</span><span class="line"><span class="n">bh</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class="line"><span class="n">bh</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">bh</span><span class="o">.</span><span class="n">heap_list</span><span class="p">)</span>
+</span><span class="line"><span class="n">bh</span><span class="o">.</span><span class="n">del_min</span><span class="p">();</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">bh</span><span class="o">.</span><span class="n">heap_list</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">bh</span><span class="o">.</span><span class="n">current_size</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>7.二叉搜索树 <a href="http://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9">on_wiki</a>：一种特殊的二叉树，它满足下面的性质：任何一个节点的key值都比它左子树上的节点的key值要大，但是比它右子树上的节点的key值要小。</p>
+
+<p>难点在于删除节点的操作：</p>
+
+<blockquote>
+  <p>From wiki 
+在二叉查找树删去一个结点，分三种情况讨论：
+1.若<em>p结点为叶子结点，即PL(左子树)和PR(右子树)均为空树。由于删去叶子结点不破坏整棵树的结构，则只需修改其双亲结点的指针即可。
+2.若</em>p结点只有左子树PL或右子树PR，此时只要令PL或PR直接成为其双亲结点<em>f的左子树（当</em>p是左子树）或右子树（当<em>p是右子树）即可，作此修改也不破坏二叉查找树的特性。
+3.若</em>p结点的左子树和右子树均不空。<em>*在删去</em>p之后，为保持其它元素之间的相对位置不变，可按中序遍历保持有序进行调整<em>*，可以有两种做法：其一是令</em>p的左子树为<em>f的左/右(依</em>p是<em>f的左子树还是右子树而定)子树，</em>s为<em>p左子树的最右下的结点，而</em>p的右子树为<em>s的右子树；其二是令</em>p的直接前驱（in-order predecessor）或直接后继（in-order successor）替代*p，然后再从二叉查找树中删去它的直接前驱（或直接后继）。</p>
+
+</blockquote>
+
+<p>参考内容1中在第三种情况下使用的是第二种方案，并且是使用直接前驱来代替要删除的节点。</p>
+
+<p>完整实现[参考内容1中的代码，有些冗余，但是可读性好]</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span>
+<span class="line-number">81</span>
+<span class="line-number">82</span>
+<span class="line-number">83</span>
+<span class="line-number">84</span>
+<span class="line-number">85</span>
+<span class="line-number">86</span>
+<span class="line-number">87</span>
+<span class="line-number">88</span>
+<span class="line-number">89</span>
+<span class="line-number">90</span>
+<span class="line-number">91</span>
+<span class="line-number">92</span>
+<span class="line-number">93</span>
+<span class="line-number">94</span>
+<span class="line-number">95</span>
+<span class="line-number">96</span>
+<span class="line-number">97</span>
+<span class="line-number">98</span>
+<span class="line-number">99</span>
+<span class="line-number">100</span>
+<span class="line-number">101</span>
+<span class="line-number">102</span>
+<span class="line-number">103</span>
+<span class="line-number">104</span>
+<span class="line-number">105</span>
+<span class="line-number">106</span>
+<span class="line-number">107</span>
+<span class="line-number">108</span>
+<span class="line-number">109</span>
+<span class="line-number">110</span>
+<span class="line-number">111</span>
+<span class="line-number">112</span>
+<span class="line-number">113</span>
+<span class="line-number">114</span>
+<span class="line-number">115</span>
+<span class="line-number">116</span>
+<span class="line-number">117</span>
+<span class="line-number">118</span>
+<span class="line-number">119</span>
+<span class="line-number">120</span>
+<span class="line-number">121</span>
+<span class="line-number">122</span>
+<span class="line-number">123</span>
+<span class="line-number">124</span>
+<span class="line-number">125</span>
+<span class="line-number">126</span>
+<span class="line-number">127</span>
+<span class="line-number">128</span>
+<span class="line-number">129</span>
+<span class="line-number">130</span>
+<span class="line-number">131</span>
+<span class="line-number">132</span>
+<span class="line-number">133</span>
+<span class="line-number">134</span>
+<span class="line-number">135</span>
+<span class="line-number">136</span>
+<span class="line-number">137</span>
+<span class="line-number">138</span>
+<span class="line-number">139</span>
+<span class="line-number">140</span>
+<span class="line-number">141</span>
+<span class="line-number">142</span>
+<span class="line-number">143</span>
+<span class="line-number">144</span>
+<span class="line-number">145</span>
+<span class="line-number">146</span>
+<span class="line-number">147</span>
+<span class="line-number">148</span>
+<span class="line-number">149</span>
+<span class="line-number">150</span>
+<span class="line-number">151</span>
+<span class="line-number">152</span>
+<span class="line-number">153</span>
+<span class="line-number">154</span>
+<span class="line-number">155</span>
+<span class="line-number">156</span>
+<span class="line-number">157</span>
+<span class="line-number">158</span>
+<span class="line-number">159</span>
+<span class="line-number">160</span>
+<span class="line-number">161</span>
+<span class="line-number">162</span>
+<span class="line-number">163</span>
+<span class="line-number">164</span>
+<span class="line-number">165</span>
+<span class="line-number">166</span>
+<span class="line-number">167</span>
+<span class="line-number">168</span>
+<span class="line-number">169</span>
+<span class="line-number">170</span>
+<span class="line-number">171</span>
+<span class="line-number">172</span>
+<span class="line-number">173</span>
+<span class="line-number">174</span>
+<span class="line-number">175</span>
+<span class="line-number">176</span>
+<span class="line-number">177</span>
+<span class="line-number">178</span>
+<span class="line-number">179</span>
+<span class="line-number">180</span>
+<span class="line-number">181</span>
+<span class="line-number">182</span>
+<span class="line-number">183</span>
+<span class="line-number">184</span>
+<span class="line-number">185</span>
+<span class="line-number">186</span>
+<span class="line-number">187</span>
+<span class="line-number">188</span>
+<span class="line-number">189</span>
+<span class="line-number">190</span>
+<span class="line-number">191</span>
+<span class="line-number">192</span>
+<span class="line-number">193</span>
+<span class="line-number">194</span>
+<span class="line-number">195</span>
+<span class="line-number">196</span>
+<span class="line-number">197</span>
+<span class="line-number">198</span>
+<span class="line-number">199</span>
+<span class="line-number">200</span>
+<span class="line-number">201</span>
+<span class="line-number">202</span>
+<span class="line-number">203</span>
+<span class="line-number">204</span>
+<span class="line-number">205</span>
+<span class="line-number">206</span>
+<span class="line-number">207</span>
+<span class="line-number">208</span>
+<span class="line-number">209</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">class</span> <span class="nc">TreeNode</span><span class="p">:</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">left</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">payload</span> <span class="o">=</span> <span class="n">val</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">left</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">right</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">hasLeftChild</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">hasRightChild</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">isLeftChild</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">==</span> <span class="bp">self</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">isRightChild</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">==</span> <span class="bp">self</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">isRoot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">isLeaf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">hasAnyChildren</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">hasBothChildren</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">replaceNodeData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">lc</span><span class="p">,</span><span class="n">rc</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">payload</span> <span class="o">=</span> <span class="n">value</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">lc</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">rc</span>
+</span><span class="line">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span>
+</span><span class="line">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasRightChild</span><span class="p">():</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line"><span class="k">class</span> <span class="nc">BinarySearchTree</span><span class="p">:</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">:</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">_put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">currentNode</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="p">)</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="n">currentNode</span><span class="p">)</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">hasRightChild</span><span class="p">():</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="n">currentNode</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">:</span>
+</span><span class="line">            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
+</span><span class="line">                <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">payload</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="k">return</span> <span class="bp">None</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">return</span> <span class="bp">None</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">currentNode</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="ow">not</span> <span class="n">currentNode</span><span class="p">:</span>
+</span><span class="line">            <span class="k">return</span> <span class="bp">None</span>
+</span><span class="line">        <span class="k">elif</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+</span><span class="line">            <span class="k">return</span> <span class="n">currentNode</span>
+</span><span class="line">        <span class="k">elif</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+</span><span class="line">            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="p">)</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">):</span>
+</span><span class="line">            <span class="k">return</span> <span class="bp">True</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">return</span> <span class="bp">False</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+</span><span class="line">            <span class="n">nodeToRemove</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">nodeToRemove</span><span class="p">:</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">nodeToRemove</span><span class="p">)</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&#39;Error, key not in tree&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&#39;Error, key not in tree&#39;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">spliceOut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isLeaf</span><span class="p">():</span>
+</span><span class="line">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class="line">        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasAnyChildren</span><span class="p">():</span>
+</span><span class="line">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+</span><span class="line">                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+</span><span class="line">                    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
+</span><span class="line">                <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+</span><span class="line">                    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span>
+</span><span class="line">                <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">findSuccessor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="n">succ</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class="line">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasRightChild</span><span class="p">():</span>
+</span><span class="line">            <span class="n">succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">findMin</span><span class="p">()</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">:</span>
+</span><span class="line">                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+</span><span class="line">                    <span class="n">succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span>
+</span><span class="line">                <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class="line">                    <span class="n">succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">findSuccessor</span><span class="p">()</span>
+</span><span class="line">                    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="bp">self</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">succ</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">findMin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span>
+</span><span class="line">        <span class="k">while</span> <span class="n">current</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+</span><span class="line">            <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">leftChild</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">current</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">currentNode</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">isLeaf</span><span class="p">():</span> <span class="c">#leaf</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">currentNode</span> <span class="o">==</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span><span class="p">:</span>
+</span><span class="line">                <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class="line">        <span class="k">elif</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">hasBothChildren</span><span class="p">():</span> <span class="c">#interior</span>
+</span><span class="line">            <span class="n">succ</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">findSuccessor</span><span class="p">()</span>
+</span><span class="line">            <span class="n">succ</span><span class="o">.</span><span class="n">spliceOut</span><span class="p">()</span>
+</span><span class="line">            <span class="n">currentNode</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">succ</span><span class="o">.</span><span class="n">key</span>
+</span><span class="line">            <span class="n">currentNode</span><span class="o">.</span><span class="n">payload</span> <span class="o">=</span> <span class="n">succ</span><span class="o">.</span><span class="n">payload</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span> <span class="c"># this node has one child</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+</span><span class="line">                <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+</span><span class="line">                    <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span>
+</span><span class="line">                    <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span>
+</span><span class="line">                <span class="k">elif</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">isRightChild</span><span class="p">():</span>
+</span><span class="line">                    <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span>
+</span><span class="line">                    <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span>
+</span><span class="line">                <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                    <span class="n">currentNode</span><span class="o">.</span><span class="n">replaceNodeData</span><span class="p">(</span><span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
+</span><span class="line">                                                <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">payload</span><span class="p">,</span>
+</span><span class="line">                                                <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">leftChild</span><span class="p">,</span>
+</span><span class="line">                                                <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+</span><span class="line">                    <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span>
+</span><span class="line">                    <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span>
+</span><span class="line">                <span class="k">elif</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">isRightChild</span><span class="p">():</span>
+</span><span class="line">                    <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span>
+</span><span class="line">                    <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span>
+</span><span class="line">                <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                    <span class="n">currentNode</span><span class="o">.</span><span class="n">replaceNodeData</span><span class="p">(</span><span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
+</span><span class="line">                                                <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">payload</span><span class="p">,</span>
+</span><span class="line">                                                <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">leftChild</span><span class="p">,</span>
+</span><span class="line">                                                <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line"><span class="n">mytree</span> <span class="o">=</span> <span class="n">BinarySearchTree</span><span class="p">()</span>
+</span><span class="line"><span class="n">mytree</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;red&quot;</span>
+</span><span class="line"><span class="n">mytree</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;blue&quot;</span>
+</span><span class="line"><span class="n">mytree</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;yellow&quot;</span>
+</span><span class="line"><span class="n">mytree</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;at&quot;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">mytree</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">mytree</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/">http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
