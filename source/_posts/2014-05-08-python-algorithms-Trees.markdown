@@ -17,7 +17,7 @@ Chapter 6 Trees and Tree Algorithms
 
 #### 树的总结 
 
-1.二叉搜索树 [on_wiki](http://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9)：一种特殊的二叉树，它满足下面的性质：任何一个节点的key值都比它左子树上的节点的key值要大，但是比它右子树上的节点的key值要小。节点查找，插入，删除等操作的时间复杂度都是$O(log_{2}n)$
+1.二叉搜索树 [on_wiki](http://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9)：一种特殊的二叉树，它满足下面的性质：任何一个节点的key值都比它左子树上的节点的key值要大，但是比它右子树上的节点的key值要小。节点查找，插入，删除等操作的时间复杂度都是$O(n)$
 
 难点在于删除节点的操作(下面摘自wiki)：
 
