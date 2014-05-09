@@ -545,11 +545,3 @@ mytree.levelorder(mytree.root)
 ![images](http://hujiaweibujidao.github.io/images/201405/bst_avl.png)
 
 
-
-
-
-
-
-
-
-
