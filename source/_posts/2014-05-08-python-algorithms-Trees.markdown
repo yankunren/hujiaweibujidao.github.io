@@ -362,7 +362,7 @@ AVL树的基本操作的实现
 
 ![image](http://hujiaweibujidao.github.io/images/201405/avl_rotatedetails.png)
 
-[参考内容1关于AVL树的讲解](http://interactivepython.org/courselib/static/pythonds/Trees/balanced.html) ---> [如果访问较慢可以点击这里下载](http://hujiaweibujidao.github.io/files/avltrees.pdf)
+[参考内容1关于AVL树的讲解](http://interactivepython.org/courselib/static/pythonds/Trees/balanced.html) ---> [如果访问较慢可以点击这里下载](http://hujiaweibujidao.github.io/files/avltree.pdf)
 
 (1)平衡因子：左子树与右子树的高度之差
 
