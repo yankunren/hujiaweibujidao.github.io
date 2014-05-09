@@ -132,7 +132,94 @@ if __name__=='__main__':
     print(Solution().maxPoints(points))
 ```
 
+4.Sort List
 
+数据结构题，在常数空间复杂度以及$O(nlogn)$的空间复杂度情况下对一个单链表进行排序
+
+注：1.有不少人用快排超时了，因为快排在最坏的情况下时间复杂度是$O(n^2)$，所以不能通过，但是如果是[使用一种特别的partition函数的话可以通过](http://oj.leetcode.com/discuss/584/think-the-complexity-of-my-method-is-nlogn-why-still-gets-tle)，具体为啥未考究，[这个也可以参考](http://oj.leetcode.com/discuss/3344/anyone-solve-this-in-python)。
+
+2.我用的是合并排序，时间肯定能过，但是用了递归，空间不能满足。[提交的话要把ListNode类注释掉，不然会报错]
+
+```
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+class Solution:
+    # @param head, a ListNode
+    # @return a ListNode
+    def sortList(self, head):
+        pointer=head
+        len=0
+        while pointer: #calculate the length
+            len=len+1
+            pointer=pointer.next
+        head=self.mergesort(head,len)
+        pointer=head
+        while len>1:
+            pointer=pointer.next
+            len=len-1
+        if pointer:
+            pointer.next=None
+        return head
+
+    def mergesort(self,node,len):
+        if len<= 1:
+            return node
+        mid=len//2
+        pointer=node
+        fh=node #fisrt head
+        fl=mid #first len
+        t=mid
+        while t>0:
+            t=t-1
+            pointer=pointer.next
+        #fisrt: mid (head to mid) second: len-mid (mid+1 to tail)
+        sh=pointer #second head
+        sl=len-mid #second len
+        fh=self.mergesort(fh,fl)
+        sh=self.mergesort(sh,sl)
+        newlist=ListNode(0) #
+        pointer=newlist
+        while fl>0 and sl>0: #do not use `fh and sh`, fh.next is not None!
+            if fh.val < sh.val:
+                pointer.next=fh
+                pointer=pointer.next
+                fh=fh.next
+                fl=fl-1
+            else:
+                pointer.next=sh
+                pointer=pointer.next
+                sh=sh.next
+                sl=sl-1
+        while fl>0:
+            pointer.next=fh
+            pointer=pointer.next
+            fh=fh.next
+            fl=fl-1
+        while sl>0:
+            pointer.next=sh
+            pointer=pointer.next
+            sh=sh.next
+            sl=sl-1
+        if newlist.next:
+            return newlist.next
+        else:
+            return None
+
+if __name__=='__main__':
+    head=ListNode(2)
+    head.next=ListNode(9)
+    head.next.next=ListNode(5)
+    head.next.next.next=ListNode(4)
+    head=Solution().sortList(head)
+    while head:
+        print(head.val)
+        head=head.next
+    pass
+```
 
 
 To be continued......
