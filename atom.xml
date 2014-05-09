@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-09T09:47:26+08:00</updated>
+  <updated>2014-05-09T09:52:00+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -28,7 +28,7 @@
 
 <h4 id="section">树的总结</h4>
 
-<p>1.二叉搜索树 <a href="http://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9">on_wiki</a>：一种特殊的二叉树，它满足下面的性质：任何一个节点的key值都比它左子树上的节点的key值要大，但是比它右子树上的节点的key值要小。节点查找，插入，删除等操作的时间复杂度都是$O(log_{2}n)$</p>
+<p>1.二叉搜索树 <a href="http://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9">on_wiki</a>：一种特殊的二叉树，它满足下面的性质：任何一个节点的key值都比它左子树上的节点的key值要大，但是比它右子树上的节点的key值要小。节点查找，插入，删除等操作的时间复杂度都是$O(n)$</p>
 
 <p>难点在于删除节点的操作(下面摘自wiki)：</p>
 
@@ -180,7 +180,66 @@
 
 <p>参考内容1中在第三种情况下使用的是wiki中的第二种方案，并且是使用直接后继来代替要删除的节点。</p>
 
-<p>完整实现[参考内容1中的代码相当冗余，但是可读性蛮好，个人认为如果要实现删除节点操作的话建议参考wiki上python代码的实现，也可以查看参考内容1中对代码的详细解释加深理解]</p>
+<p>二叉查找树的python完整实现见下面AVL树的完整实现(除去AVLTree即可)[参考内容1中的代码相当冗余，但是可读性蛮好，个人认为如果要实现删除节点操作的话建议参考wiki上python代码的实现，也可以查看参考内容1中对代码的详细解释加深理解]</p>
+
+<p>如果原始的列表是基本有序的，那么得到的二叉树会变成一个扭曲的二叉树，性能就相当于一个链表了。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_worst.png" alt="image" /></p>
+
+<p>8.平衡二叉查找树：为了避免得到前面提到的扭曲的二叉查找树，于是就有了平衡二叉查找树的概念。</p>
+
+<p>AVL树是最先发明的平衡二叉树，它得名于它的发明者G.M. Adelson-Velsky和E.M. Landis，他们在1962年的论文《An algorithm for the organization of information》中发表了它。</p>
+
+<p><a href="http://zh.wikipedia.org/wiki/AVL%E6%A0%91">on_wiki</a></p>
+
+<p>AVL树的基本操作的实现</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_operations.png" alt="image" /></p>
+
+<p>如何进行旋转</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_rotate.png" alt="image" /></p>
+
+<p>旋转的实现描述</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_rotatedetails.png" alt="image" /></p>
+
+<p><a href="http://interactivepython.org/courselib/static/pythonds/Trees/balanced.html">参考内容1关于AVL树的讲解</a> —&gt; <a href="http://hujiaweibujidao.github.io/files/avltree.pdf">如果访问较慢可以点击这里下载</a></p>
+
+<p>(1)平衡因子：左子树与右子树的高度之差</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_bf.png" alt="image" /></p>
+
+<p>(2)分析为什么AVL树能够对查找，插入，删除操作都达到$O(logn)$的效率</p>
+
+<p>推理当中关于斐波那契数列在N很大的时候后项与前项之商接近黄金分割比的内容可参见<a href="http://zh.wikipedia.org/wiki/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B8">斐波那契数列on_wiki</a></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/201405/avl2.png" alt="image" /></p>
+
+<p>(3)左旋，右旋以及左右旋和右左旋</p>
+
+<p>左旋：如果新的根节点有左孩子结点，那么左孩子结点就成为原来的根节点的右孩子结点</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_left.png" alt="image" /></p>
+
+<p>右旋：如果新的根节点有右孩子结点，那么右孩子结点就成为原来的根节点的左孩子结点</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_right.png" alt="image" /></p>
+
+<p>一种特殊的情况，单一的左旋和右旋都不行，不停地重复交替，所以需要左右旋(或者右左旋)</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_leftright.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/201405/avl_leftright2.png" alt="image" /></p>
+
+<p>(4)如何在不重新计算子树的高度情况下修改旋转前的根节点和旋转后的根节点的平衡因子值</p>
+
+<p>下面是左旋的例子</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_rebal1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/201405/avl_rebal2.png" alt="image" /></p>
+
+<p>python代码实现[参考内容1未给出完整代码，下面代码是我自己补充的，添加了测试，如果有误请回复我]</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -391,13 +450,154 @@
 <span class="line-number">207</span>
 <span class="line-number">208</span>
 <span class="line-number">209</span>
+<span class="line-number">210</span>
+<span class="line-number">211</span>
+<span class="line-number">212</span>
+<span class="line-number">213</span>
+<span class="line-number">214</span>
+<span class="line-number">215</span>
+<span class="line-number">216</span>
+<span class="line-number">217</span>
+<span class="line-number">218</span>
+<span class="line-number">219</span>
+<span class="line-number">220</span>
+<span class="line-number">221</span>
+<span class="line-number">222</span>
+<span class="line-number">223</span>
+<span class="line-number">224</span>
+<span class="line-number">225</span>
+<span class="line-number">226</span>
+<span class="line-number">227</span>
+<span class="line-number">228</span>
+<span class="line-number">229</span>
+<span class="line-number">230</span>
+<span class="line-number">231</span>
+<span class="line-number">232</span>
+<span class="line-number">233</span>
+<span class="line-number">234</span>
+<span class="line-number">235</span>
+<span class="line-number">236</span>
+<span class="line-number">237</span>
+<span class="line-number">238</span>
+<span class="line-number">239</span>
+<span class="line-number">240</span>
+<span class="line-number">241</span>
+<span class="line-number">242</span>
+<span class="line-number">243</span>
+<span class="line-number">244</span>
+<span class="line-number">245</span>
+<span class="line-number">246</span>
+<span class="line-number">247</span>
+<span class="line-number">248</span>
+<span class="line-number">249</span>
+<span class="line-number">250</span>
+<span class="line-number">251</span>
+<span class="line-number">252</span>
+<span class="line-number">253</span>
+<span class="line-number">254</span>
+<span class="line-number">255</span>
+<span class="line-number">256</span>
+<span class="line-number">257</span>
+<span class="line-number">258</span>
+<span class="line-number">259</span>
+<span class="line-number">260</span>
+<span class="line-number">261</span>
+<span class="line-number">262</span>
+<span class="line-number">263</span>
+<span class="line-number">264</span>
+<span class="line-number">265</span>
+<span class="line-number">266</span>
+<span class="line-number">267</span>
+<span class="line-number">268</span>
+<span class="line-number">269</span>
+<span class="line-number">270</span>
+<span class="line-number">271</span>
+<span class="line-number">272</span>
+<span class="line-number">273</span>
+<span class="line-number">274</span>
+<span class="line-number">275</span>
+<span class="line-number">276</span>
+<span class="line-number">277</span>
+<span class="line-number">278</span>
+<span class="line-number">279</span>
+<span class="line-number">280</span>
+<span class="line-number">281</span>
+<span class="line-number">282</span>
+<span class="line-number">283</span>
+<span class="line-number">284</span>
+<span class="line-number">285</span>
+<span class="line-number">286</span>
+<span class="line-number">287</span>
+<span class="line-number">288</span>
+<span class="line-number">289</span>
+<span class="line-number">290</span>
+<span class="line-number">291</span>
+<span class="line-number">292</span>
+<span class="line-number">293</span>
+<span class="line-number">294</span>
+<span class="line-number">295</span>
+<span class="line-number">296</span>
+<span class="line-number">297</span>
+<span class="line-number">298</span>
+<span class="line-number">299</span>
+<span class="line-number">300</span>
+<span class="line-number">301</span>
+<span class="line-number">302</span>
+<span class="line-number">303</span>
+<span class="line-number">304</span>
+<span class="line-number">305</span>
+<span class="line-number">306</span>
+<span class="line-number">307</span>
+<span class="line-number">308</span>
+<span class="line-number">309</span>
+<span class="line-number">310</span>
+<span class="line-number">311</span>
+<span class="line-number">312</span>
+<span class="line-number">313</span>
+<span class="line-number">314</span>
+<span class="line-number">315</span>
+<span class="line-number">316</span>
+<span class="line-number">317</span>
+<span class="line-number">318</span>
+<span class="line-number">319</span>
+<span class="line-number">320</span>
+<span class="line-number">321</span>
+<span class="line-number">322</span>
+<span class="line-number">323</span>
+<span class="line-number">324</span>
+<span class="line-number">325</span>
+<span class="line-number">326</span>
+<span class="line-number">327</span>
+<span class="line-number">328</span>
+<span class="line-number">329</span>
+<span class="line-number">330</span>
+<span class="line-number">331</span>
+<span class="line-number">332</span>
+<span class="line-number">333</span>
+<span class="line-number">334</span>
+<span class="line-number">335</span>
+<span class="line-number">336</span>
+<span class="line-number">337</span>
+<span class="line-number">338</span>
+<span class="line-number">339</span>
+<span class="line-number">340</span>
+<span class="line-number">341</span>
+<span class="line-number">342</span>
+<span class="line-number">343</span>
+<span class="line-number">344</span>
+<span class="line-number">345</span>
+<span class="line-number">346</span>
+<span class="line-number">347</span>
+<span class="line-number">348</span>
+<span class="line-number">349</span>
 </pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">class</span> <span class="nc">TreeNode</span><span class="p">:</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">left</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">left</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">balanceFactor</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 </span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
 </span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">payload</span> <span class="o">=</span> <span class="n">val</span>
 </span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">left</span>
 </span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">right</span>
 </span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">balanceFactor</span><span class="o">=</span><span class="n">balanceFactor</span><span class="p">;</span> <span class="c">#default new node balance factor is 0</span>
 </span><span class="line">
 </span><span class="line">    <span class="k">def</span> <span class="nf">hasLeftChild</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 </span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
@@ -445,6 +645,30 @@
 </span><span class="line">
 </span><span class="line">    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 </span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">inorder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">node</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">leftChild</span><span class="p">:</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">inorder</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">leftChild</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">print_node</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">rightChild</span><span class="p">:</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">inorder</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">levelorder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">node</span><span class="p">):</span>
+</span><span class="line">        <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class="line">        <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span><span class="line">        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+</span><span class="line">            <span class="n">current_node</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">print_node</span><span class="p">(</span><span class="n">current_node</span><span class="p">)</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">current_node</span><span class="o">.</span><span class="n">leftChild</span><span class="p">:</span>
+</span><span class="line">                <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_node</span><span class="o">.</span><span class="n">leftChild</span><span class="p">)</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">current_node</span><span class="o">.</span><span class="n">rightChild</span><span class="p">:</span>
+</span><span class="line">                <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_node</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">print_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">node</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="p">:</span>
+</span><span class="line">            <span class="k">print</span><span class="p">([</span><span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">,</span><span class="n">node</span><span class="o">.</span><span class="n">payload</span><span class="p">,</span><span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">key</span><span class="p">])</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">print</span><span class="p">([</span><span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">,</span><span class="n">node</span><span class="o">.</span><span class="n">payload</span><span class="p">])</span>
 </span><span class="line">
 </span><span class="line">    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
 </span><span class="line">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">:</span>
@@ -592,72 +816,134 @@
 </span><span class="line">                                                <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
 </span><span class="line">
 </span><span class="line">
+</span><span class="line"><span class="k">class</span> <span class="nc">AVLTree</span><span class="p">(</span><span class="n">BinarySearchTree</span><span class="p">):</span>
+</span><span class="line">
+</span><span class="line">    <span class="c"># def put(self,key,val):</span>
+</span><span class="line">    <span class="c">#     if self.root:</span>
+</span><span class="line">    <span class="c">#         self._put(key,val,self.root)</span>
+</span><span class="line">    <span class="c">#     else:</span>
+</span><span class="line">    <span class="c">#         self.root = TreeNode(key,val)</span>
+</span><span class="line">    <span class="c">#         self.root.balanceFactor = 0</span>
+</span><span class="line">    <span class="c">#     self.size = self.size + 1</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">_put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">currentNode</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="p">)</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="n">currentNode</span><span class="p">)</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">updateBalance</span><span class="p">(</span><span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="p">)</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">hasRightChild</span><span class="p">():</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="n">currentNode</span><span class="p">)</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">updateBalance</span><span class="p">(</span><span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">updateBalance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">node</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">node</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">rebalance</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span><span class="line">            <span class="k">return</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+</span><span class="line">                <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class="line">            <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">isRightChild</span><span class="p">():</span>
+</span><span class="line">                <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">-=</span> <span class="mi">1</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">updateBalance</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">rotateLeft</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rotRoot</span><span class="p">):</span> <span class="c">#rotate left</span>
+</span><span class="line">        <span class="n">newRoot</span> <span class="o">=</span> <span class="n">rotRoot</span><span class="o">.</span><span class="n">rightChild</span>
+</span><span class="line">        <span class="n">rotRoot</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">newRoot</span><span class="o">.</span><span class="n">leftChild</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">newRoot</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+</span><span class="line">            <span class="n">newRoot</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">rotRoot</span>
+</span><span class="line">        <span class="n">newRoot</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">rotRoot</span><span class="o">.</span><span class="n">parent</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">rotRoot</span><span class="o">.</span><span class="n">isRoot</span><span class="p">():</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">newRoot</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">rotRoot</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+</span><span class="line">                <span class="n">rotRoot</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">newRoot</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">rotRoot</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">newRoot</span>
+</span><span class="line">        <span class="n">newRoot</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">rotRoot</span>
+</span><span class="line">        <span class="n">rotRoot</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">newRoot</span>
+</span><span class="line">        <span class="n">rotRoot</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">=</span> <span class="n">rotRoot</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">newRoot</span><span class="o">.</span><span class="n">balanceFactor</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class="line">        <span class="n">newRoot</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">=</span> <span class="n">newRoot</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">rotRoot</span><span class="o">.</span><span class="n">balanceFactor</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">rotateRight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rotRoot</span><span class="p">):</span> <span class="c">#rotate right</span>
+</span><span class="line">        <span class="n">newRoot</span> <span class="o">=</span> <span class="n">rotRoot</span><span class="o">.</span><span class="n">leftChild</span>
+</span><span class="line">        <span class="n">rotRoot</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">newRoot</span><span class="o">.</span><span class="n">rightChild</span> <span class="c"># deal child</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">newRoot</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+</span><span class="line">            <span class="n">newRoot</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">rotRoot</span> <span class="c">#deal child parent</span>
+</span><span class="line">        <span class="n">newRoot</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">rotRoot</span><span class="o">.</span><span class="n">parent</span> <span class="c">#deal root parent</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">rotRoot</span><span class="o">.</span><span class="n">isRoot</span><span class="p">():</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">newRoot</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">rotRoot</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+</span><span class="line">                <span class="n">rotRoot</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">newRoot</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">rotRoot</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">newRoot</span>
+</span><span class="line">        <span class="n">newRoot</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">rotRoot</span> <span class="c">#deal new root right child</span>
+</span><span class="line">        <span class="n">rotRoot</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">newRoot</span> <span class="c">#deal old root parent</span>
+</span><span class="line">        <span class="n">rotRoot</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">=</span> <span class="n">rotRoot</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">newRoot</span><span class="o">.</span><span class="n">balanceFactor</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class="line">        <span class="n">newRoot</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">=</span> <span class="n">newRoot</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">rotRoot</span><span class="o">.</span><span class="n">balanceFactor</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">rebalance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">node</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">rotateRight</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">rotateLeft</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">rotateLeft</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span><span class="line">        <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">balanceFactor</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">rotateLeft</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">leftChild</span><span class="p">)</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">rotateRight</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">rotateRight</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c">#test code</span>
+</span><span class="line"><span class="c"># test avl tree</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&#39;test avl&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="n">mytree</span> <span class="o">=</span> <span class="n">AVLTree</span><span class="p">()</span>
+</span><span class="line"><span class="n">mytree</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;red&quot;</span>
+</span><span class="line"><span class="n">mytree</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;blue&quot;</span>
+</span><span class="line"><span class="n">mytree</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;yellow&quot;</span>
+</span><span class="line"><span class="n">mytree</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;at&quot;</span>
+</span><span class="line"><span class="n">mytree</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">=</span><span class="s">&#39;dog&#39;</span>
+</span><span class="line"><span class="n">mytree</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="s">&#39;cat&#39;</span>
+</span><span class="line"><span class="n">mytree</span><span class="o">.</span><span class="n">levelorder</span><span class="p">(</span><span class="n">mytree</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># test bst</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&#39;test bst&#39;</span><span class="p">)</span>
 </span><span class="line"><span class="n">mytree</span> <span class="o">=</span> <span class="n">BinarySearchTree</span><span class="p">()</span>
 </span><span class="line"><span class="n">mytree</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;red&quot;</span>
 </span><span class="line"><span class="n">mytree</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;blue&quot;</span>
 </span><span class="line"><span class="n">mytree</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;yellow&quot;</span>
 </span><span class="line"><span class="n">mytree</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;at&quot;</span>
+</span><span class="line"><span class="n">mytree</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">=</span><span class="s">&#39;dog&#39;</span>
+</span><span class="line"><span class="n">mytree</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="s">&#39;cat&#39;</span>
+</span><span class="line"><span class="n">mytree</span><span class="o">.</span><span class="n">levelorder</span><span class="p">(</span><span class="n">mytree</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
 </span><span class="line">
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">mytree</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">mytree</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</span><span class="line"><span class="c"># test avl</span>
+</span><span class="line"><span class="c"># [4, &#39;blue&#39;]</span>
+</span><span class="line"><span class="c"># [2, &#39;at&#39;, 4]</span>
+</span><span class="line"><span class="c"># [6, &#39;yellow&#39;, 4]</span>
+</span><span class="line"><span class="c"># [1, &#39;cat&#39;, 2]</span>
+</span><span class="line"><span class="c"># [3, &#39;red&#39;, 2]</span>
+</span><span class="line"><span class="c"># [5, &#39;dog&#39;, 6]</span>
+</span><span class="line"><span class="c"># test bst</span>
+</span><span class="line"><span class="c"># [3, &#39;red&#39;]</span>
+</span><span class="line"><span class="c"># [2, &#39;at&#39;, 3]</span>
+</span><span class="line"><span class="c"># [4, &#39;blue&#39;, 3]</span>
+</span><span class="line"><span class="c"># [1, &#39;cat&#39;, 2]</span>
+</span><span class="line"><span class="c"># [6, &#39;yellow&#39;, 4]</span>
+</span><span class="line"><span class="c"># [5, &#39;dog&#39;, 6]</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>如果原始的列表是基本有序的，那么得到的二叉树会变成一个扭曲的二叉树，性能就相当于一个链表了。</p>
+<p>对于我给定的测试数据，对应得到的二叉查找树和AVL树如下图所示，二叉查找树明显不平衡，AVL树中所有节点的平衡因子为0或者1，在构造的过程中，共发生了一次左旋和一次右旋。</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_worst.png" alt="image" /></p>
-
-<p>8.平衡二叉查找树：为了避免得到前面提到的扭曲的二叉查找树，于是就有了平衡二叉查找树的概念。</p>
-
-<p>AVL树是最先发明的平衡二叉树，它得名于它的发明者G.M. Adelson-Velsky和E.M. Landis，他们在1962年的论文《An algorithm for the organization of information》中发表了它。</p>
-
-<p><a href="http://zh.wikipedia.org/wiki/AVL%E6%A0%91">on_wiki</a></p>
-
-<p>AVL树的基本操作的实现</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_operations.png" alt="image" /></p>
-
-<p>如何进行旋转</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_rotate.png" alt="image" /></p>
-
-<p>旋转的实现描述</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_rotatedetails.png" alt="image" /></p>
-
-<p><a href="http://interactivepython.org/courselib/static/pythonds/Trees/balanced.html">参考内容1关于AVL树的讲解</a> —&gt; <a href="http://hujiaweibujidao.github.io/files/avltrees.pdf">如果访问较慢可以点击这里下载</a></p>
-
-<p>(1)平衡因子：左子树与右子树的高度之差</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_bf.png" alt="image" /></p>
-
-<p>(2)分析为什么AVL树能够对查找，插入，删除操作都达到$O(logn)$的效率</p>
-
-<p>推理当中关于斐波那契数列在N很大的时候后项与前项之商接近黄金分割比的内容可参见<a href="http://zh.wikipedia.org/wiki/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B8">斐波那契数列on_wiki</a></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/201405/avl2.png" alt="image" /></p>
-
-<p>(3)左旋，右旋以及左右旋和右左旋</p>
-
-<p>左旋：如果新的根节点有左孩子结点，那么左孩子结点就成为原来的根节点的右孩子结点</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_left.png" alt="image" /></p>
-
-<p>右旋：如果新的根节点有右孩子结点，那么右孩子结点就成为原来的根节点的左孩子结点</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_right.png" alt="image" /></p>
-
-<p>一种特殊的情况，单一的左旋和右旋都不行，不停地重复交替，所以需要左右旋(或者右左旋)</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_leftright.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/201405/avl_leftright2.png" alt="image" /></p>
-
-<p>(4)如何在不重新计算子树的高度情况下修改旋转前的根节点和旋转后的根节点的平衡因子值</p>
-
-<p>下面是左旋的例子</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_rebal1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/201405/avl_rebal2.png" alt="image" /></p>
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_avl.png" alt="images" /></p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees/">http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
