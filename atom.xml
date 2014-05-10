@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-10T20:16:32+08:00</updated>
+  <updated>2014-05-10T21:55:31+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -148,26 +148,135 @@
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/"/>
     <updated>2014-05-10T13:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1</id>
-    <content type="html"><![CDATA[<p>1.使用PyCharm中，在一个Project中新建一个Directory和新建一个Package之后，IDE都会创建对应的目录，并添加默认的<code>__init__.py</code>文件，但是，两者还是不一样的，如果在目录下新建一个python脚本测试输出<code>os.getcwd()</code>，如果是在Directory中得到的是Project的根目录<code>/Users/hujiawei/PycharmProjects/leetcodeoj</code>，如果是在Package中得到的是Package的根目录，如<code>/Users/hujiawei/PycharmProjects/leetcodeoj/pypackage</code>！</p>
+    <content type="html"><![CDATA[<p>1.使用<code>glob</code>模块可以用通配符的方式搜索某个目录下的特定文件，返回结果是一个list</p>
 
-<p>2.如果要在代码中添加中文注释的话，最好在文档开头加上<code># coding=utf-8</code>或者<code># -*- coding: utf-8 -*-</code>，关于Python中的字符串编码可见<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386819196283586a37629844456ca7e5a7faa9b94ee8000">廖雪峰的python教程</a></p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">import glob
+</span><span class="line">flist=glob.glob('*.jpeg')</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>使用<code>os.getcwd()</code>可以得到当前目录，如果想切换到其他目录，可以使用<code>os.chdir('str/to/path')</code>，如果想执行Shell脚本，可以使用<code>os.system('mkdir newfolder')</code>。</p>
+
+<p>对于日常文件和目录的管理, <code>shutil</code>模块提供了更便捷、更高层次的接口</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">import shutil
+</span><span class="line">shutil.copyfile('data.db', 'archive.db')
+</span><span class="line">shutil.move('/build/executables', 'installdir')</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>使用PyCharm中，在一个Project中新建一个Directory和新建一个Package之后，IDE都会创建对应的目录，并添加默认的<code>__init__.py</code>文件，但是，两者还是不一样的。
+如果在它们的目录下各新建一个python脚本测试输出<code>os.getcwd()</code>，如果是在Directory中得到的是Project的根目录’/Users/hujiawei/PycharmProjects/leetcodeoj’；如果是在Package中得到的是Package的根目录，如’/Users/hujiawei/PycharmProjects/leetcodeoj/pypackage’。</p>
+
+<p>2.如果要在代码中添加中文注释的话，最好在文档开头加上下面的编码声明语句。关于Python中的字符串编码可见<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386819196283586a37629844456ca7e5a7faa9b94ee8000">廖雪峰的python教程</a></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line"># coding=utf-8 
+</span><span class="line">或者
+</span><span class="line"># -*- coding: utf-8 -*-</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>3.关于Python中的变量，摘自<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820042500060e2921830a4adf94fb31bcea8d6f5c000">廖雪峰的python教程</a></p>
 
 <p>在Python中，变量名类似<code>__xxx__</code>的，也就是以双下划线开头，并且以双下划线结尾的，是特殊变量，特殊变量是可以直接访问的，不是private变量，所以，不能用<code>__name__</code>、<code>__score__</code>这样的变量名。</p>
 
-<p>有些时候，你会看到以一个下划线开头的实例变量名，比如<code>_name</code>，这样的实例变量外部是可以访问的，但是，按照约定俗成的规定，当你看到这样的变量时，意思就是，<code>“虽然我可以被访问，但是，请把我视为私有变量，不要随意访问”</code>。</p>
+<p>有些时候，你会看到以一个下划线开头的实例变量名(<strong>两个下划线开头的也一样算，其实任何以下划线开头的都算</strong>)，比如<code>_name</code>，这样的实例变量外部是可以访问的，但是，按照约定俗成的规定，当你看到这样的变量时，意思就是，<strong>“虽然我可以被访问，但是，请把我视为私有变量，不要随意访问”</strong>。</p>
 
-<p>双下划线开头的实例变量是不是一定不能从外部访问呢？其实也不是。不能直接访问<code>__name</code>是因为Python解释器对外把<code>__name</code>变量改成了<code>_Student__name</code>，所以，仍然可以通过<code>_Student__name</code>来访问<code>__name</code>变量：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">bart._Student__name
-</span><span class="line">'Bart Simpson'</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>但是强烈建议你不要这么干，因为不同版本的Python解释器可能会把<code>__name</code>改成不同的变量名。</p>
+<p>双下划线开头的实例变量是不是一定不能从外部访问呢？其实也不是。不能直接访问<code>__name</code>是因为Python解释器对外把<code>__name</code>变量改成了<code>_Student__name</code>，所以，仍然可以通过<code>_Student__name</code>来访问<code>__name</code>变量。但是强烈建议你不要这么干，因为不同版本的Python解释器可能会把<code>__name</code>改成不同的变量名。</p>
 
 <p>总的来说就是，Python本身没有任何机制阻止你干坏事，一切全靠自觉。</p>
+
+<p>下面我写了两个python脚本，大家可以对照看下哪些能够访问，哪些不能，不能的情况下如何操作变得可以访问(注释后面的<code>yes</code>和<code>no</code>表示能不能被访问)。</p>
+
+<p>文件<code>APythonTestA.py</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># coding=utf-8</span>
+</span><span class="line">
+</span><span class="line"><span class="k">class</span> <span class="nc">ListNode</span><span class="p">:</span>
+</span><span class="line">    <span class="n">__class_field20</span> <span class="o">=</span> <span class="s">&#39;node class field 2-0&#39;</span>
+</span><span class="line">    <span class="n">__class_field22__</span> <span class="o">=</span> <span class="s">&#39;node class field 2-2&#39;</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">x</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">__class_inner_field20</span> <span class="o">=</span> <span class="s">&#39;node class inner field 2-0&#39;</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">__class_inner_field22__</span> <span class="o">=</span> <span class="s">&#39;node class inner field 2-2&#39;</span>
+</span><span class="line">
+</span><span class="line"><span class="n">__class_field20</span> <span class="o">=</span> <span class="s">&#39;node class field 2-0&#39;</span>
+</span><span class="line"><span class="n">__class_field22__</span> <span class="o">=</span> <span class="s">&#39;node class field 2-2&#39;</span>
+</span><span class="line">
+</span><span class="line"><span class="n">_class_field10</span> <span class="o">=</span> <span class="s">&#39;node class field 1-0&#39;</span>
+</span><span class="line"><span class="n">_class_field12__</span> <span class="o">=</span> <span class="s">&#39;node class field 1-2&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>文件<code>APythonTestB.py</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># coding=utf-8</span>
+</span><span class="line"><span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;hujiawei&#39;</span>
+</span><span class="line"><span class="n">__doc__</span> <span class="o">=</span> <span class="s">&#39;for python test 2&#39;</span>
+</span><span class="line">
+</span><span class="line"><span class="kn">import</span> <span class="nn">APythonTestA</span>
+</span><span class="line">
+</span><span class="line"><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">APythonTestA</span><span class="o">.</span><span class="n">ListNode</span><span class="p">))</span>
+</span><span class="line">    <span class="c">#[&#39;_ListNode__class_field20&#39;, &#39;__class_field22__&#39;, &#39;__doc__&#39;, &#39;__init__&#39;, &#39;__module__&#39;]</span>
+</span><span class="line">    <span class="n">node</span> <span class="o">=</span> <span class="n">APythonTestA</span><span class="o">.</span><span class="n">ListNode</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span><span class="line">    <span class="c"># print(node.__class_field20) #no</span>
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">_ListNode__class_field20</span><span class="p">)</span> <span class="c">#yes</span>
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">__class_field22__</span><span class="p">)</span> <span class="c">#yes</span>
+</span><span class="line">    <span class="c"># print(node.__class_inner_field20) #no</span>
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">_ListNode__class_inner_field20</span><span class="p">)</span> <span class="c">#yes</span>
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">__class_inner_field22__</span><span class="p">)</span> <span class="c">#yes</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">APythonTestA</span><span class="p">))</span>
+</span><span class="line">    <span class="c">#[&#39;ListNode&#39;, &#39;__builtins__&#39;, &#39;__class_field20&#39;, &#39;__class_field22__&#39;, &#39;__doc__&#39;, &#39;__file__&#39;, &#39;__name__&#39;, &#39;__package__&#39;, &#39;_class_field10&#39;, &#39;_class_field12__&#39;]</span>
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="n">APythonTestA</span><span class="o">.</span><span class="n">__class_field20</span><span class="p">)</span> <span class="c">#yes</span>
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="n">APythonTestA</span><span class="o">.</span><span class="n">__class_field22__</span><span class="p">)</span> <span class="c">#yes</span>
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="n">APythonTestA</span><span class="o">.</span><span class="n">_class_field10</span><span class="p">)</span> <span class="c">#yes</span>
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="n">APythonTestA</span><span class="o">.</span><span class="n">_class_field12__</span><span class="p">)</span> <span class="c">#yes</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>4.关于Python中函数的参数，摘自<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001374738449338c8a122a7f2e047899fc162f4a7205ea3000">廖雪峰的python教程</a></p>
 
@@ -188,29 +297,185 @@
 
 <p>使用<code>*args</code>和<code>**kw</code>是Python的习惯写法，当然也可以用其他参数名，但最好使用习惯用法。</p>
 
-<p>5.关于Python的函数式编程，参见<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386819866394c3f9efcd1a454b2a8c57933e976445c0000">廖雪峰的python教程</a></p>
-
-<p>高阶函数，匿名函数，装饰器和偏函数</p>
-
-<p>6.关于Python的高级特性，参见<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868196169906eb9ca5864384546bf3405ae6a172b3e000">廖雪峰的python教程</a></p>
+<p>5.关于Python的高级特性，参见<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868196169906eb9ca5864384546bf3405ae6a172b3e000">廖雪峰的python教程</a></p>
 
 <p>切片，迭代，列表生成式，生成器</p>
 
-<p>7.使用<code>glob</code>模块可以用通配符的方式搜索某个目录下的特定文件，返回结果是一个list</p>
+<p>使用生成器得到当前目录及其子目录中的所有文件的代码，下面代码来自<a href="http://blog.jobbole.com/61171/">伯乐在线-python高级编程技巧</a></p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">import glob
-</span><span class="line">flist=glob.glob('*.jpeg')</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>8.使用<code>os.getcwd()</code>可以得到当前目录，如果想切换到其他目录，可以使用<code>os.chdir('str/to/path')</code>，如果想执行Shell脚本，可以使用<code>os.system('mkdir newfolder')</code>。对于日常文件和目录的管理, <code>shutil</code>模块提供了更便捷、更高层次的接口</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">import shutil
-</span><span class="line">shutil.copyfile('data.db', 'archive.db')
-</span><span class="line">shutil.move('/build/executables', 'installdir')</span></code></pre></td></tr></table></div></figure></notextile></div>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">import</span> <span class="nn">os</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">tree</span><span class="p">(</span><span class="n">top</span><span class="p">):</span>
+</span><span class="line">    <span class="c">#path,folder list,file list</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">path</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">fnames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">top</span><span class="p">):</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">fnames</span><span class="p">:</span>
+</span><span class="line">            <span class="k">yield</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">tree</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()):</span>
+</span><span class="line">    <span class="k">print</span> <span class="n">name</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p><strong>除非特殊的原因，应该经常在代码中使用生成器表达式。但除非是面对非常大的列表，否则是不会看出明显区别的。</strong>另一个使用生成器的代码示例：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">num</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">square_generator</span><span class="p">(</span><span class="n">optional_parameter</span><span class="p">):</span>
+</span><span class="line">    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">num</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">optional_parameter</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="k">print</span> <span class="n">square_generator</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class="line"><span class="c"># &lt;generator object &lt;genexpr&gt; at 0x004E6418&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># Option I</span>
+</span><span class="line"><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">square_generator</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+</span><span class="line">    <span class="k">print</span> <span class="n">k</span>
+</span><span class="line"><span class="c"># 1, 16, 100, 4, 9</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># Option II</span>
+</span><span class="line"><span class="n">g</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">square_generator</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</span><span class="line"><span class="k">print</span> <span class="n">g</span>
+</span><span class="line"><span class="c"># [1, 16, 100, 4, 9]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>6.关于Python的函数式编程，参见<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386819866394c3f9efcd1a454b2a8c57933e976445c0000">廖雪峰的python教程</a>，讲解得很好</p>
+
+<p>高阶函数(使用函数作为参数或者返回一个函数的函数称为高阶函数)，匿名函数(lambda)，装饰器(decorator)和偏函数</p>
+
+<p>用来测试一个函数花费的运行时间的装饰器，当然你也可以使用其他的方式，比如<code>Timer</code>来得到运行时间。下面代码来自<a href="http://blog.jobbole.com/61171/">伯乐在线-python高级编程技巧</a></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">timethis</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+</span><span class="line">    <span class="sd">&#39;&#39;&#39;</span>
+</span><span class="line"><span class="sd">    Decorator that reports the execution time.</span>
+</span><span class="line"><span class="sd">    &#39;&#39;&#39;</span>
+</span><span class="line">    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span class="line">        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</span><span class="line">        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span class="line">        <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</span><span class="line">        <span class="k">print</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">result</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">wrapper</span>
+</span><span class="line">
+</span><span class="line"><span class="nd">@timethis</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">countdown</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span class="line">    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class="line">        <span class="n">n</span> <span class="o">-=</span> <span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>其中代码</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="nd">@timethis</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">countdown</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>就相当于：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">countdown</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span class="line"><span class="o">...</span>
+</span><span class="line"><span class="n">countdown</span> <span class="o">=</span> <span class="n">timethis</span><span class="p">(</span><span class="n">countdown</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>装饰器除了可以使用函数实现，也可以使用类来实现，<strong>对装饰器的类实现唯一要求是它必须能如函数一般使用，也就是说它必须是可调用的。所以，如果想这么做这个类必须实现<code>__call__</code>方法。</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">class</span> <span class="nc">decorator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+</span><span class="line">        <span class="k">print</span><span class="p">(</span><span class="s">&quot;inside decorator.__init__()&quot;</span><span class="p">)</span>
+</span><span class="line">        <span class="n">f</span><span class="p">()</span> <span class="c"># Prove that function definition has completed</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="k">print</span><span class="p">(</span><span class="s">&quot;inside decorator.__call__()&quot;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="nd">@decorator</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">function</span><span class="p">():</span>
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="s">&quot;inside function()&quot;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&quot;Finished decorating function()&quot;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="n">function</span><span class="p">()</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># inside decorator.__init__()</span>
+</span><span class="line"><span class="c"># inside function()</span>
+</span><span class="line"><span class="c"># Finished decorating function()</span>
+</span><span class="line"><span class="c"># inside decorator.__call__()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ol>
+  <li>语法糖<code>@decorator</code>相当于<code>function=decorator(function)</code>，在此调用decorator的<code>__init__</code>打印<code>“inside decorator.__init__()”</code></li>
+  <li>随后执行f()打印<code>“inside function()”</code></li>
+  <li>随后执行<code>“print(“Finished decorating function()”)”</code></li>
+  <li>最后再调用function函数时，由于使用装饰器包装，因此执行decorator的<code>__call__</code>打印 <code>“inside decorator.__call__()”</code>。</li>
+</ol>
+
+<p>7.</p>
+
+<p>描述器，元类，上下文管理库的介绍参见<a href="http://blog.jobbole.com/61171/">伯乐在线-python高级编程技巧</a></p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/">http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
