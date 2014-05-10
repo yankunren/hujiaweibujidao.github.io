@@ -4,7 +4,7 @@ title: "LeetCode OJ Part1"
 date: 2014-04-09 18:18
 comments: true
 categories: algorithm
-published: false
+published: true
 ---
 
 为了找以后工作嘛，挑战下LeetCode OJ，顺序可能与OJ上的顺序不同哟，慢慢增加...
