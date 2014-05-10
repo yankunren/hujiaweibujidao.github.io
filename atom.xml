@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-10T13:25:36+08:00</updated>
+  <updated>2014-05-10T13:58:02+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -56,6 +56,80 @@
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/10/tsinghua-9ers-pictures/">http://hujiaweibujidao.github.io/blog/2014/05/10/tsinghua-9ers-pictures/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Python Tips 1]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/"/>
+    <updated>2014-05-10T13:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1</id>
+    <content type="html"><![CDATA[<p>1.使用PyCharm中，在一个Project中新建一个Directory和新建一个Package之后，IDE都会创建对应的目录，并添加默认的<code>__init__.py</code>文件，但是，两者还是不一样的，如果在目录下新建一个python脚本测试输出<code>os.getcwd()</code>，如果是在Directory中得到的是Project的根目录<code>/Users/hujiawei/PycharmProjects/leetcodeoj</code>，如果是在Package中得到的是Package的根目录，如<code>/Users/hujiawei/PycharmProjects/leetcodeoj/pypackage</code>！</p>
+
+<p>2.如果要在代码中添加中文注释的话，最好在文档开头加上<code># coding=utf-8</code>或者<code># -*- coding: utf-8 -*-</code>，关于Python中的字符串编码可见<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386819196283586a37629844456ca7e5a7faa9b94ee8000">廖雪峰的python教程</a></p>
+
+<p>3.关于Python中的变量，摘自<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820042500060e2921830a4adf94fb31bcea8d6f5c000">廖雪峰的python教程</a></p>
+
+<p>在Python中，变量名类似<code>__xxx__</code>的，也就是以双下划线开头，并且以双下划线结尾的，是特殊变量，特殊变量是可以直接访问的，不是private变量，所以，不能用<code>__name__</code>、<code>__score__</code>这样的变量名。</p>
+
+<p>有些时候，你会看到以一个下划线开头的实例变量名，比如<code>_name</code>，这样的实例变量外部是可以访问的，但是，按照约定俗成的规定，当你看到这样的变量时，意思就是，<code>“虽然我可以被访问，但是，请把我视为私有变量，不要随意访问”</code>。</p>
+
+<p>双下划线开头的实例变量是不是一定不能从外部访问呢？其实也不是。不能直接访问<code>__name</code>是因为Python解释器对外把<code>__name</code>变量改成了<code>_Student__name</code>，所以，仍然可以通过<code>_Student__name</code>来访问<code>__name</code>变量：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">bart._Student__name
+</span><span class="line">'Bart Simpson'</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>但是强烈建议你不要这么干，因为不同版本的Python解释器可能会把<code>__name</code>改成不同的变量名。</p>
+
+<p>总的来说就是，Python本身没有任何机制阻止你干坏事，一切全靠自觉。</p>
+
+<p>4.关于Python中函数的参数，摘自<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001374738449338c8a122a7f2e047899fc162f4a7205ea3000">廖雪峰的python教程</a></p>
+
+<p>Python的函数具有非常灵活的参数形态，既可以实现简单的调用，又可以传入非常复杂的参数。
+默认参数一定要用不可变对象，如果是可变对象，运行会有逻辑错误！</p>
+
+<p>要注意定义可变参数和关键字参数的语法：</p>
+
+<p><code>*args</code>是可变参数，args接收的是一个tuple；</p>
+
+<p><code>**kw</code>是关键字参数，kw接收的是一个dict。</p>
+
+<p>以及调用函数时如何传入可变参数和关键字参数的语法：</p>
+
+<p>可变参数既可以直接传入：<code>func(1, 2, 3)</code>，又可以先组装list或tuple，再通过<code>*args</code>传入：<code>func(*(1, 2, 3))；</code></p>
+
+<p>关键字参数既可以直接传入：<code>func(a=1, b=2)</code>，又可以先组装dict，再通过<code>**kw</code>传入：<code>func(**{'a': 1, 'b': 2})</code>。</p>
+
+<p>使用<code>*args</code>和<code>**kw</code>是Python的习惯写法，当然也可以用其他参数名，但最好使用习惯用法。</p>
+
+<p>5.关于Python的函数式编程，参见<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386819866394c3f9efcd1a454b2a8c57933e976445c0000">廖雪峰的python教程</a></p>
+
+<p>高阶函数，匿名函数，装饰器和偏函数</p>
+
+<p>6.关于Python的高级特性，参见<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868196169906eb9ca5864384546bf3405ae6a172b3e000">廖雪峰的python教程</a></p>
+
+<p>切片，迭代，列表生成式，生成器</p>
+
+<p>7.使用<code>glob</code>模块可以用通配符的方式搜索某个目录下的特定文件，返回结果是一个list</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">import glob
+</span><span class="line">flist=glob.glob('*.jpeg')</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>8.使用<code>os.getcwd()</code>可以得到当前目录，如果想切换到其他目录，可以使用<code>os.chdir('str/to/path')</code>，如果想执行Shell脚本，可以使用<code>os.system('mkdir newfolder')</code>。对于日常文件和目录的管理, <code>shutil</code>模块提供了更便捷、更高层次的接口</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">import shutil
+</span><span class="line">shutil.copyfile('data.db', 'archive.db')
+</span><span class="line">shutil.move('/build/executables', 'installdir')</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/">http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
@@ -3461,66 +3535,6 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-3/">http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-3/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CS 2-Derivative and Differential]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-2/"/>
-    <updated>2014-04-27T14:29:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-2</id>
-    <content type="html"><![CDATA[<p><strong><center>微积分总结 Summary of Calculus</center></strong>
-<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
-
-<h3 id="center-center"><center>第二部分 导数与微分</center></h3>
-
-<h4 id="section">第一节 导数概念</h4>
-<p>引例，导数的定义，导数的几何意义，可导与连续的关系</p>
-
-<p>导数的几何意义就是曲线在某点的切线的斜率，反应了变化的快慢，理解这个很重要，后面的偏导数的理解也类似。如果用物体的运动来解释的话，导数就是物体在那个时刻的加速度了。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/deviration_meaning.png" alt="image" /></p>
-
-<h4 id="section-1">第二节 函数的求导法则</h4>
-<p>函数的和、差、积、商的求导法则，反函数的求导法则，复合函数的求导法则，基本求导法则与导数公式</p>
-
-<p>关于反函数的求导法则：<script type="math/tex">\frac{dy}{dx}=\frac{1}{\frac{dx}{dy}}</script></p>
-
-<p>关于复合函数的求导法则：<script type="math/tex">\frac{dy}{dx}=\frac{dy}{du} \cdot \frac{du}{dx}</script></p>
-
-<p>关于基本初等函数求导法则</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/deviration.png" alt="image" /></p>
-
-<h4 id="section-2">第三节 高阶导数</h4>
-
-<p>二阶及二阶以上的导数称为高阶导数</p>
-
-<h4 id="section-3">第四节 隐函数及其参数方程所确定的函数的导数</h4>
-<p>隐函数的导数，由参数方程所确定的函数的导数</p>
-
-<p>如果方程<script type="math/tex">F(x,y)=0</script>确定了<script type="math/tex">y</script>是<script type="math/tex">x</script>的函数，那么这样的函数就叫做隐函数。
-一般它的求导分为两种方法：
-(1)如果能够解出<script type="math/tex">y=f(x)</script>关系式的话(即隐函数显化)，就先解出然后求导；
-(2)如果不能解出，那么就利用复合函数求导方式进行求导，例如两边同时对x求导，遇到复杂的还可以两边先取对数然后求导。</p>
-
-<h4 id="section-4">第五节 函数的微分</h4>
-<p>微分的定义，微分的几何意义，基本微分公式与微分法则，微分形式的不变性，微分的应用</p>
-
-<p>先看看微分是怎么引入的？</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/weifen.png" alt="image" /></p>
-
-<p>简言之，在实际应用中，常常需要知道当自变量x有细微变化的时候，函数y的变化量<script type="math/tex">\vartriangle y</script>是多少？为了方便计算，我们需要将增量表达式线性化处理，从而计算出<script type="math/tex">\vartriangle y</script>的近似值。如上面所示，我们只需要用<script type="math/tex">A \vartriangle x</script>来近似代替<script type="math/tex">\vartriangle y</script>。</p>
-
-<p>微分的几何意义，这其实是数学中常用的非线性函数的局部线性化，这里是利用曲线的切线段(MP)来近似代替曲线段(MN)。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/weifen_meaning.png" alt="image" /></p>
-
-<p>微分最大的应用就是求近似值，利用<script type="math/tex">\vartriangle y \approx dy = f'(x) \vartriangle x</script>。例如，求<script type="math/tex">\sqrt[3]{1.02}</script>的近似值，取函数<script type="math/tex">f(x)=\sqrt[3]{x}, x_{0}=1, \vartriangle x=0.02</script>即可。</p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-2/">http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-2/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
