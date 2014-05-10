@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-10T13:59:51+08:00</updated>
+  <updated>2014-05-10T20:11:10+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,88 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Happy Mother's Day]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/10/happy-mothers-day/"/>
+    <updated>2014-05-10T20:08:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/10/happy-mothers-day</id>
+    <content type="html"><![CDATA[<p>老妈，节日快乐！</p>
+
+<p><img src="http://hujiaweibujidao.github.io/mothersday.png" alt="image" /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">import</span> <span class="nn">turtle</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">random</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span><span class="line">    <span class="n">tList</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class="line">    <span class="n">head</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="line">    <span class="n">numTurtles</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numTurtles</span><span class="p">):</span>
+</span><span class="line">        <span class="n">nt</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Turtle</span><span class="p">()</span>   <span class="c"># Make a new turtle, initialize values</span>
+</span><span class="line">        <span class="n">nt</span><span class="o">.</span><span class="n">setheading</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
+</span><span class="line">        <span class="n">nt</span><span class="o">.</span><span class="n">pensize</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span class="line">        <span class="n">nt</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span>
+</span><span class="line">        <span class="n">nt</span><span class="o">.</span><span class="n">speed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class="line">        <span class="n">nt</span><span class="o">.</span><span class="n">tracer</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</span><span class="line">        <span class="n">tList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nt</span><span class="p">)</span>       <span class="c"># Add the new turtle to the list</span>
+</span><span class="line">        <span class="n">head</span> <span class="o">=</span> <span class="n">head</span> <span class="o">+</span> <span class="mi">360</span><span class="o">/</span><span class="n">numTurtles</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+</span><span class="line">        <span class="n">moveTurtles</span><span class="p">(</span><span class="n">tList</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="n">w</span> <span class="o">=</span> <span class="n">tList</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class="line">    <span class="n">w</span><span class="o">.</span><span class="n">up</span><span class="p">()</span>
+</span><span class="line">    <span class="n">w</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="o">-</span><span class="mi">130</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
+</span><span class="line">    <span class="n">w</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;You are my favorite lady!&quot;</span><span class="p">,</span><span class="bp">True</span><span class="p">,</span><span class="s">&quot;center&quot;</span><span class="p">,</span><span class="s">&quot;20px Arial&quot;</span><span class="p">)</span>
+</span><span class="line">    <span class="n">w</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="o">-</span><span class="mi">130</span><span class="p">,</span><span class="o">-</span><span class="mi">35</span><span class="p">)</span>
+</span><span class="line">    <span class="n">w</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;Happy Mother&#39;s Day&quot;</span><span class="p">,</span><span class="bp">True</span><span class="p">,</span><span class="s">&quot;center&quot;</span><span class="p">,</span><span class="s">&quot;24px Arial&quot;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">moveTurtles</span><span class="p">(</span><span class="n">turtleList</span><span class="p">,</span><span class="n">dist</span><span class="p">,</span><span class="n">angle</span><span class="p">):</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">turtle</span> <span class="ow">in</span> <span class="n">turtleList</span><span class="p">:</span>   <span class="c"># Make every turtle on the list do the same actions.</span>
+</span><span class="line">        <span class="n">turtle</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+</span><span class="line">        <span class="n">turtle</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="n">main</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/10/happy-mothers-day/">http://hujiaweibujidao.github.io/blog/2014/05/10/happy-mothers-day/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tsinghua 9ers Pictures]]></title>
@@ -3482,59 +3564,6 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-4/">http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-4/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CS 3-Differential Mean Value Theorems]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-3/"/>
-    <updated>2014-04-27T14:29:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-3</id>
-    <content type="html"><![CDATA[<p><strong><center>微积分总结 Summary of Calculus</center></strong>
-<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
-
-<h3 id="center--center"><center>第三部分 微分中值定理与导数的应用 </center></h3>
-
-<h4 id="section">第一节 微分中值定理</h4>
-<p>罗尔中值定理，拉格朗日中值定理，泰勒中值定理，柯西中值定理</p>
-
-<p>罗尔中值定理就是说对于在区间<script type="math/tex">(a,b)</script>上的连续可导函数f(x)，若左右端点的函数值相等，那么区间内至少有一个点满足它的导数为0，即<script type="math/tex">f'(\varepsilon)=0, \varepsilon \in (a,b)</script>；</p>
-
-<p>拉格朗日中值定理就是说对于在区间<script type="math/tex">(a,b)</script>上的连续可导函数f(x)，区间内至少有一个点满足<script type="math/tex">f'(\varepsilon)=\frac{f(a)-f(b)}{a-b}, \varepsilon \in (a,b)</script>，该定理就没有罗尔中值定理的条件那么严格了，所以后者是前者的一个特殊情况。拉格朗日中值定理的几何意义如下，曲线在C点处的切线平行于弦AB；</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/langrant.png" alt="image" /></p>
-
-<p>柯西中值定理就扩展到区间<script type="math/tex">(a,b)</script>上的两个连续可导函数f(x)和F(x)，区间内至少有一个点满足<script type="math/tex">\frac{f'(\varepsilon)}{F'(\varepsilon)}=\frac{f(a)-f(b)}{F(a)-F(b)}, \varepsilon \in (a,b)</script>。</p>
-
-<p>当<script type="math/tex">F(x)=x</script>时，<script type="math/tex">F(a)=a,F(b)=b</script>，即有<script type="math/tex">f(a)-f(b)=f'(\varepsilon)(a-b), \varepsilon \in (a,b)</script>，这个式子是不是就是拉格朗日中值定理的内容？</p>
-
-<p>泰勒中值定理略过，和后面泰勒展开式差不多。</p>
-
-<h4 id="section-1">第二节 洛必达法则</h4>
-<p>0/0型未定式，∞/∞型未定式，其他类型未定式</p>
-
-<p>洛必达法则很重要，因为很多时候我们总是会遇到各种不同特殊形式的未定式，它们的极限可以试试使用洛必达法则来求。</p>
-
-<p>条件略过，简言之就是<script type="math/tex">\lim_{x \to x_{0}} \frac{f(x)}{g(x)}=\lim_{x \to x_{0}} \frac{f'(x)}{g'(x)}</script>，也就是说我们可以先对分子分母求导然后求极限。</p>
-
-<h4 id="section-2">第三节 函数单调增减性及曲线的凸凹性</h4>
-<p>函数的单调性，曲线的凹凸性及拐点</p>
-
-<p>驻点：函数f(x)一阶导数为0的点，根据它的正负可以判断函数的单调性，大于0为单调递增；
-拐点：函数f(x)二阶导数为0的点，根据它的正负可以判断函数的凹凸性，大于0为凹的；</p>
-
-<h4 id="section-3">第四节 函数的极值与最大值、最小值</h4>
-<p>极值的定义，极值存在的条件，最大值、最小值</p>
-
-<p>极值存在的条件就是判断该点和该点两边的一阶导数的正负情况。</p>
-
-<h4 id="section-4">第五节 函数图形的描绘</h4>
-<p>要根据函数的极值和最值以及渐近线来近似绘图</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/fun_figure.png" alt="image" /></p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-3/">http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-3/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   

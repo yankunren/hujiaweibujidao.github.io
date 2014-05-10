@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: blog | Hujiawei Bujidao]]></title>
+  <link href="http://hujiaweibujidao.github.io/blog/categories/blog/atom.xml" rel="self"/>
+  <link href="http://hujiaweibujidao.github.io/"/>
+  <updated>2014-05-10T20:11:10+08:00</updated>
+  <id>http://hujiaweibujidao.github.io/</id>
+  <author>
+    <name><![CDATA[hujiawei]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Happy Mother's Day]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/10/happy-mothers-day/"/>
+    <updated>2014-05-10T20:08:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/10/happy-mothers-day</id>
+    <content type="html"><![CDATA[<p>老妈，节日快乐！</p>
+
+<p><img src="http://hujiaweibujidao.github.io/mothersday.png" alt="image" /></p>
+
+<p>```python
+import turtle
+import random</p>
+
+<p>def main():
+    tList = []
+    head = 0
+    numTurtles = 10
+    for i in range(numTurtles):
+        nt = turtle.Turtle()   # Make a new turtle, initialize values
+        nt.setheading(head)
+        nt.pensize(2)
+        nt.color(random.randrange(256),random.randrange(256),random.randrange(256))
+        nt.speed(10)
+        nt.tracer(30,0)
+        tList.append(nt)       # Add the new turtle to the list
+        head = head + 360/numTurtles</p>
+
+<pre><code>for i in range(100):
+    moveTurtles(tList,15,i)
+
+w = tList[0]
+w.up()
+w.goto(-130,40)
+w.write("You are my favorite lady!",True,"center","20px Arial")
+w.goto(-130,-35)
+w.write("Happy Mother's Day",True,"center","24px Arial")
+</code></pre>
+
+<p>def moveTurtles(turtleList,dist,angle):
+    for turtle in turtleList:   # Make every turtle on the list do the same actions.
+        turtle.forward(dist)
+        turtle.right(angle)</p>
+
+<p>main()
+```</p>
+
+]]></content>
+  </entry>
+  
+</feed>
