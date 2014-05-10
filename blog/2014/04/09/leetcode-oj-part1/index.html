@@ -1,0 +1,861 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>LeetCode OJ Part1 - Hujiawei Bujidao</title>
+  <meta name="author" content="hujiawei">
+
+  
+  <meta name="description" content="为了找以后工作嘛，挑战下LeetCode OJ，顺序可能与OJ上的顺序不同哟，慢慢增加… 1
+注：我附上的代码都包含了测试代码，提交的代码中不需要测试部分，我保留是因为某些题中有些测试样例比较特殊，为了提醒自己不要再犯同样的错！ 1.Reverse Words in a String 字符串题， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/09/leetcode-oj-part1">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+
+  
+
+</head>
+
+<body   >
+
+	<header role="banner">
+		
+<hgroup style="text-align: center">
+	<h1><a href="/"><img src="/images/conan-paper-small.png"  />Hujiawei Bujidao<img src="/images/conan-hat-small.png"  /></a></h1>
+	
+	<h2>I will always be your savior! A secret makes a man man!</h2>
+	
+</hgroup>
+
+
+	</header>
+	<nav role="navigation">
+		<ul class="subscription" data-subscription="rss">
+  <!--<li><a href="https://github.com/hujiaweibujidao" rel="subscribe-rss" title="subscribe via RSS">View me on GitHub</a></li>-->
+  <!--
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+  --> 
+</ul>
+<!--
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hujiaweibujidao.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form> 
+  
+-->
+<ul class="main-navigation">
+  <li><a href="/blog/archives/">Blog</a></li>
+  <li><a href="/aboutme/">AboutMe</a></li>
+  <li><a href="/math/">Math</a></li>
+  <!--
+  <li><a href="/datamining/">DataMining</a></li>
+  -->
+  <li><a href="/blog/categories/mobiledev/">MobileDev</a></li>
+  <!--
+  <li><a href="/xjava/">XJava</a></li>
+  -->
+  <!-- <li><a href="/datamining/">Projects</a></li> -->
+</ul>
+
+
+	</nav>
+	<div id="main">
+		<div id="content">
+			<div>
+
+<article class="hentry" role="article">
+		
+  <header>
+    
+      <h1 class="entry-title">LeetCode OJ Part1</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-09T18:18:00+08:00" pubdate data-updated="true">Apr 9<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>为了找以后工作嘛，挑战下LeetCode OJ，顺序可能与OJ上的顺序不同哟，慢慢增加…</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">注：我附上的代码都包含了测试代码，提交的代码中不需要测试部分，我保留是因为某些题中有些测试样例比较特殊，为了提醒自己不要再犯同样的错！</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>1.Reverse Words in a String</p>
+
+<p>字符串题，字符串分割再反转</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span><span class="line">    <span class="c"># @param s, a string</span>
+</span><span class="line">    <span class="c"># @return a string</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">reverseWords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+</span><span class="line">        <span class="n">l</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</span><span class="line">        <span class="n">l</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+</span><span class="line">        <span class="k">return</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</span><span class="line"><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span class="line">    <span class="n">teststrs</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;helo world&#39;</span><span class="p">,</span> <span class="s">&#39; hel hj &#39;</span><span class="p">)</span>
+</span><span class="line">    <span class="n">so</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">teststrs</span><span class="p">:</span>
+</span><span class="line">        <span class="k">print</span> <span class="n">so</span><span class="o">.</span><span class="n">reverseWords</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>2.Evaluate Reverse Polish Notation</p>
+
+<p>栈的利用，逆波兰表达式求值</p>
+
+<p><strong>注：在Java中<code>6/(-132)=0</code>但是在Python中<code>6/(-132)=-1</code>，OJ认为0是正解，所以Python中进行除法运算时使用<code>int(float(m)/float(n))</code>。</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span><span class="line">    <span class="c"># @param tokens, a list of string</span>
+</span><span class="line">    <span class="c"># @return an integer</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">evalRPN</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokens</span><span class="p">):</span>
+</span><span class="line">        <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class="line">        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="ow">in</span> <span class="s">&#39;+-*/&#39;</span><span class="p">):</span>
+</span><span class="line">                <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()),</span> <span class="nb">int</span><span class="p">(</span><span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()))</span>
+</span><span class="line">                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">):</span>
+</span><span class="line">            <span class="k">return</span> <span class="n">n</span> <span class="o">+</span> <span class="n">m</span>
+</span><span class="line">        <span class="k">elif</span> <span class="n">token</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">):</span>
+</span><span class="line">            <span class="k">return</span> <span class="n">m</span> <span class="o">-</span> <span class="n">n</span>
+</span><span class="line">        <span class="k">elif</span> <span class="n">token</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="s">&#39;*&#39;</span><span class="p">):</span>
+</span><span class="line">            <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">m</span>
+</span><span class="line">        <span class="k">elif</span> <span class="n">token</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">):</span>
+</span><span class="line">            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</span><span class="line"><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span class="line">    <span class="n">tests</span> <span class="o">=</span> <span class="p">[[</span><span class="s">&quot;18&quot;</span><span class="p">],[</span><span class="s">&quot;10&quot;</span><span class="p">,</span><span class="s">&quot;6&quot;</span><span class="p">,</span><span class="s">&quot;9&quot;</span><span class="p">,</span><span class="s">&quot;3&quot;</span><span class="p">,</span><span class="s">&quot;+&quot;</span><span class="p">,</span><span class="s">&quot;-11&quot;</span><span class="p">,</span><span class="s">&quot;*&quot;</span><span class="p">,</span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="s">&quot;*&quot;</span><span class="p">,</span><span class="s">&quot;17&quot;</span><span class="p">,</span><span class="s">&quot;+&quot;</span><span class="p">,</span><span class="s">&quot;5&quot;</span><span class="p">,</span><span class="s">&quot;+&quot;</span><span class="p">]];</span>
+</span><span class="line">    <span class="n">so</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">tests</span><span class="p">:</span>
+</span><span class="line">        <span class="k">print</span> <span class="n">so</span><span class="o">.</span><span class="n">evalRPN</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>3.Max Points on a Line</p>
+
+<p>在平面上的点集合中找到在同一条线上最多的点集合的个数</p>
+
+<p>注：1.<a href="http://oj.leetcode.com/discuss/1023/input-3-10-0-2-0-2-3-10-output-3-expected-4">相同的点重复计算点个数</a></p>
+
+<p>2.可以使用计算直线的斜率的办法，个人觉得可能精度不对导致误差所以不是很好，但是OJ通过测试没有问题，如果仔细来算的话，我觉得应该采用下面的式子来判断点$P(x<em>{3},y</em>{3})$在由点$P(x<em>{1},y</em>{1})$和点$P(x<em>{2},y</em>{2})$组成的直线上，要注意该直线可能是垂直于x轴的哟。</p>
+
+<script type="math/tex; mode=display">
+(y_{2}-y_{1})(x_{3}-x_{1})=(y_{3}-y_{1})(x_{2}-x_{1})
+</script>
+
+<p>AC的代码修改自<a href="http://oj.leetcode.com/discuss/3899/python-solution">这里</a>，将j的范围进行了修改，稍微提高了原来代码的性能。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># Definition for a point</span>
+</span><span class="line"><span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">a</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">b</span>
+</span><span class="line">
+</span><span class="line"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span><span class="line">    <span class="c"># @param points, a list of Points</span>
+</span><span class="line">    <span class="c"># @return an integer</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">maxPoints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
+</span><span class="line">        <span class="n">lines</span><span class="o">=</span><span class="p">{}</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">points</span><span class="o">==</span><span class="p">[]:</span> <span class="k">return</span> <span class="mi">0</span>
+</span><span class="line">        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>
+</span><span class="line">        <span class="n">maxPoints</span><span class="o">=</span><span class="mi">2</span> <span class="c">#init points 2</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)):</span>
+</span><span class="line">            <span class="n">countlist</span><span class="o">=</span><span class="p">{}</span>
+</span><span class="line">            <span class="n">duplicate</span><span class="o">=</span><span class="mi">0</span>
+</span><span class="line">
+</span><span class="line">            <span class="c">#point i and point j form a line!</span>
+</span><span class="line">            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)):</span>
+</span><span class="line">                <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="n">j</span><span class="p">:</span> <span class="k">continue</span>
+</span><span class="line">                <span class="k">if</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="o">==</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="ow">and</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="o">==</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">:</span>
+</span><span class="line">                    <span class="n">duplicate</span><span class="o">+=</span><span class="mi">1</span> <span class="c">#duplicate point! not count here!</span>
+</span><span class="line">                    <span class="k">continue</span>
+</span><span class="line">                <span class="n">deltax</span><span class="o">=</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="o">-</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">x</span>
+</span><span class="line">                <span class="n">deltay</span><span class="o">=</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="o">-</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">y</span>
+</span><span class="line">                <span class="k">if</span> <span class="p">(</span><span class="n">deltax</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span> <span class="c">#vertical line, use x to be the key!</span>
+</span><span class="line">                    <span class="n">key</span><span class="o">=</span><span class="p">(</span><span class="n">deltax</span><span class="p">)</span>
+</span><span class="line">                <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                    <span class="n">key</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">deltay</span><span class="p">)</span><span class="o">/</span><span class="n">deltax</span>
+</span><span class="line">                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">countlist</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span><span class="line">                    <span class="n">countlist</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span> <span class="c"># not exist this line, so add 2</span>
+</span><span class="line">                <span class="k">else</span><span class="p">:</span> <span class="n">countlist</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span> <span class="c">#line exists, so add only 1</span>
+</span><span class="line">
+</span><span class="line">            <span class="c">#if point i is in that final line, what&#39;s its max points?</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">countlist</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="o">!=</span><span class="p">[]:</span>
+</span><span class="line">                <span class="c">#add duplicate here!</span>
+</span><span class="line">                <span class="n">maxPoints</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">maxPoints</span><span class="p">,</span><span class="nb">max</span><span class="p">(</span><span class="n">countlist</span><span class="o">.</span><span class="n">values</span><span class="p">())</span><span class="o">+</span><span class="n">duplicate</span><span class="p">)</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span> <span class="c">#if countlist.values() ==[] that is to say all points are duplicated!</span>
+</span><span class="line">                <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">maxPoints</span><span class="p">,</span><span class="n">duplicate</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">        <span class="k">return</span> <span class="n">maxPoints</span>
+</span><span class="line">
+</span><span class="line"><span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span class="line">    <span class="c"># [(3,10),(0,2),(0,2),(3,10)]</span>
+</span><span class="line">    <span class="n">points</span><span class="o">=</span><span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">)]</span>
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">maxPoints</span><span class="p">(</span><span class="n">points</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>4.Sort List</p>
+
+<p>数据结构题，在常数空间复杂度以及$O(nlogn)$的空间复杂度情况下对一个单链表进行排序</p>
+
+<p>注：1.有不少人用快排超时了，因为快排在最坏的情况下时间复杂度是$O(n^2)$，所以不能通过，但是如果是<a href="http://oj.leetcode.com/discuss/584/think-the-complexity-of-my-method-is-nlogn-why-still-gets-tle">使用一种特别的partition函数的话可以通过</a>，具体为啥未考究，<a href="http://oj.leetcode.com/discuss/3344/anyone-solve-this-in-python">这个也可以参考</a>。</p>
+
+<p>2.我用的是合并排序，时间肯定能过，但是用了递归，空间不能满足。[提交的话要把ListNode类注释掉，不然会报错]</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># Definition for singly-linked list.</span>
+</span><span class="line"><span class="k">class</span> <span class="nc">ListNode</span><span class="p">:</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">x</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class="line">
+</span><span class="line"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span><span class="line">    <span class="c"># @param head, a ListNode</span>
+</span><span class="line">    <span class="c"># @return a ListNode</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">sortList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
+</span><span class="line">        <span class="n">pointer</span><span class="o">=</span><span class="n">head</span>
+</span><span class="line">        <span class="nb">len</span><span class="o">=</span><span class="mi">0</span>
+</span><span class="line">        <span class="k">while</span> <span class="n">pointer</span><span class="p">:</span> <span class="c">#calculate the length</span>
+</span><span class="line">            <span class="nb">len</span><span class="o">=</span><span class="nb">len</span><span class="o">+</span><span class="mi">1</span>
+</span><span class="line">            <span class="n">pointer</span><span class="o">=</span><span class="n">pointer</span><span class="o">.</span><span class="n">next</span>
+</span><span class="line">        <span class="n">head</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mergesort</span><span class="p">(</span><span class="n">head</span><span class="p">,</span><span class="nb">len</span><span class="p">)</span>
+</span><span class="line">        <span class="n">pointer</span><span class="o">=</span><span class="n">head</span>
+</span><span class="line">        <span class="k">while</span> <span class="nb">len</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+</span><span class="line">            <span class="n">pointer</span><span class="o">=</span><span class="n">pointer</span><span class="o">.</span><span class="n">next</span>
+</span><span class="line">            <span class="nb">len</span><span class="o">=</span><span class="nb">len</span><span class="o">-</span><span class="mi">1</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">pointer</span><span class="p">:</span>
+</span><span class="line">            <span class="n">pointer</span><span class="o">.</span><span class="n">next</span><span class="o">=</span><span class="bp">None</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">head</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">mergesort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">node</span><span class="p">,</span><span class="nb">len</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="nb">len</span><span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+</span><span class="line">            <span class="k">return</span> <span class="n">node</span>
+</span><span class="line">        <span class="n">mid</span><span class="o">=</span><span class="nb">len</span><span class="o">//</span><span class="mi">2</span>
+</span><span class="line">        <span class="n">pointer</span><span class="o">=</span><span class="n">node</span>
+</span><span class="line">        <span class="n">fh</span><span class="o">=</span><span class="n">node</span> <span class="c">#fisrt head</span>
+</span><span class="line">        <span class="n">fl</span><span class="o">=</span><span class="n">mid</span> <span class="c">#first len</span>
+</span><span class="line">        <span class="n">t</span><span class="o">=</span><span class="n">mid</span>
+</span><span class="line">        <span class="k">while</span> <span class="n">t</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+</span><span class="line">            <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span>
+</span><span class="line">            <span class="n">pointer</span><span class="o">=</span><span class="n">pointer</span><span class="o">.</span><span class="n">next</span>
+</span><span class="line">        <span class="c">#fisrt: mid (head to mid) second: len-mid (mid+1 to tail)</span>
+</span><span class="line">        <span class="n">sh</span><span class="o">=</span><span class="n">pointer</span> <span class="c">#second head</span>
+</span><span class="line">        <span class="n">sl</span><span class="o">=</span><span class="nb">len</span><span class="o">-</span><span class="n">mid</span> <span class="c">#second len</span>
+</span><span class="line">        <span class="n">fh</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mergesort</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span><span class="n">fl</span><span class="p">)</span>
+</span><span class="line">        <span class="n">sh</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mergesort</span><span class="p">(</span><span class="n">sh</span><span class="p">,</span><span class="n">sl</span><span class="p">)</span>
+</span><span class="line">        <span class="n">newlist</span><span class="o">=</span><span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c">#</span>
+</span><span class="line">        <span class="n">pointer</span><span class="o">=</span><span class="n">newlist</span>
+</span><span class="line">        <span class="k">while</span> <span class="n">fl</span><span class="o">&gt;</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">sl</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span> <span class="c">#do not use `fh and sh`, fh.next is not None!</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">fh</span><span class="o">.</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">sh</span><span class="o">.</span><span class="n">val</span><span class="p">:</span>
+</span><span class="line">                <span class="n">pointer</span><span class="o">.</span><span class="n">next</span><span class="o">=</span><span class="n">fh</span>
+</span><span class="line">                <span class="n">pointer</span><span class="o">=</span><span class="n">pointer</span><span class="o">.</span><span class="n">next</span>
+</span><span class="line">                <span class="n">fh</span><span class="o">=</span><span class="n">fh</span><span class="o">.</span><span class="n">next</span>
+</span><span class="line">                <span class="n">fl</span><span class="o">=</span><span class="n">fl</span><span class="o">-</span><span class="mi">1</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">pointer</span><span class="o">.</span><span class="n">next</span><span class="o">=</span><span class="n">sh</span>
+</span><span class="line">                <span class="n">pointer</span><span class="o">=</span><span class="n">pointer</span><span class="o">.</span><span class="n">next</span>
+</span><span class="line">                <span class="n">sh</span><span class="o">=</span><span class="n">sh</span><span class="o">.</span><span class="n">next</span>
+</span><span class="line">                <span class="n">sl</span><span class="o">=</span><span class="n">sl</span><span class="o">-</span><span class="mi">1</span>
+</span><span class="line">        <span class="k">while</span> <span class="n">fl</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+</span><span class="line">            <span class="n">pointer</span><span class="o">.</span><span class="n">next</span><span class="o">=</span><span class="n">fh</span>
+</span><span class="line">            <span class="n">pointer</span><span class="o">=</span><span class="n">pointer</span><span class="o">.</span><span class="n">next</span>
+</span><span class="line">            <span class="n">fh</span><span class="o">=</span><span class="n">fh</span><span class="o">.</span><span class="n">next</span>
+</span><span class="line">            <span class="n">fl</span><span class="o">=</span><span class="n">fl</span><span class="o">-</span><span class="mi">1</span>
+</span><span class="line">        <span class="k">while</span> <span class="n">sl</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+</span><span class="line">            <span class="n">pointer</span><span class="o">.</span><span class="n">next</span><span class="o">=</span><span class="n">sh</span>
+</span><span class="line">            <span class="n">pointer</span><span class="o">=</span><span class="n">pointer</span><span class="o">.</span><span class="n">next</span>
+</span><span class="line">            <span class="n">sh</span><span class="o">=</span><span class="n">sh</span><span class="o">.</span><span class="n">next</span>
+</span><span class="line">            <span class="n">sl</span><span class="o">=</span><span class="n">sl</span><span class="o">-</span><span class="mi">1</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">newlist</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
+</span><span class="line">            <span class="k">return</span> <span class="n">newlist</span><span class="o">.</span><span class="n">next</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">return</span> <span class="bp">None</span>
+</span><span class="line">
+</span><span class="line"><span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span class="line">    <span class="n">head</span><span class="o">=</span><span class="n">ListNode</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span class="line">    <span class="n">head</span><span class="o">.</span><span class="n">next</span><span class="o">=</span><span class="n">ListNode</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+</span><span class="line">    <span class="n">head</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span><span class="o">=</span><span class="n">ListNode</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span><span class="line">    <span class="n">head</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span><span class="o">=</span><span class="n">ListNode</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span><span class="line">    <span class="n">head</span><span class="o">=</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">sortList</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
+</span><span class="line">    <span class="k">while</span> <span class="n">head</span><span class="p">:</span>
+</span><span class="line">        <span class="k">print</span><span class="p">(</span><span class="n">head</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+</span><span class="line">        <span class="n">head</span><span class="o">=</span><span class="n">head</span><span class="o">.</span><span class="n">next</span>
+</span><span class="line">    <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>To be continued……</p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/09/leetcode-oj-part1/">http://hujiaweibujidao.github.io/blog/2014/04/09/leetcode-oj-part1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+</div>
+
+
+		<footer>
+			<p class="meta">
+				
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hujiawei</span></span>
+
+				
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-09T18:18:00+08:00" pubdate data-updated="true">Apr 9<span>th</span>, 2014</time>
+				
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
+  
+</span>
+
+
+			</p>
+			
+			<div class="sharing">
+  
+  
+  
+</div>
+
+			
+			<p class="meta">
+				
+				<a class="basic-alignment left" href="/blog/2014/04/08/setting-up-environments-on-new-mac/" title="Previous Post: Setting Up Environments on New Mac">&laquo; Setting Up Environments on New Mac</a>
+				
+				
+				<a class="basic-alignment right" href="/blog/2014/04/13/vertext-cover-problem/" title="Next Post: Vertext Cover Problem">Vertext Cover Problem &raquo;</a>
+				
+			</p>
+		</footer>
+	</article>
+	
+
+	
+	<section>
+		<h1>Comments</h1>
+		<div id="comments" aria-live="polite">
+			<!-- Duoshuo Comment BEGIN   data-title=""-->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hujiaweibujidao"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+
+		</div>
+	</section>
+	
+</div>
+
+<aside class="sidebar">
+  
+	<section>
+	<h1>关于博主</h1><br/>
+  <a href="/aboutme/"><img src="/images/me-small.png" width="250px" height="210px" alt="protrait"/></a><br/>
+  <p>Hi, I'm Hujiawei, from P.R.China. Now I'm a postgraduate student studying in <a href="http://www.tsinghua.edu.cn/publish/th/index.html">Tsinghua University</a>.
+  Wanna know me? <a href="/aboutme/">See here.</a> 
+  </p>
+  
+  <img src="/images/conan-mainperson.png" width="250px" height="210px" alt="conan"/>
+  
+  <br/>
+  
+    <a href="http://weibo.com/hujiaweiyinger"><img src="/images/sinaweibo.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://github.com/hujiaweibujidao"><img src="/images/github.png" width="40px" height="40px"/></a>&nbsp;
+  <a href="http://hujiawei.tumblr.com"><img src="/images/tumblr.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://twitter.com/hujiaweiyinger"><img src="/images/twitter.png" width="40px" height="40px"/></a>&nbsp;
+  <a href="http://www.douban.com/people/60272837/"><img src="/images/douban.png" width="40px" height="40px"/></a>
+ 
+ <br/>
+    
+    <!--autoplay="autoplay" -->
+    <!--
+<audio width="200" height="32" 
+style="margin: auto; top: 0; right: 0; bottom: 0; left: 0;" 
+controls="controls" 
+name="media" 
+src="http://hujiaweibujidao.github.io/music/Wouldnt-It-Be-Nice.mp3">
+</audio>
+-->
+  
+  
+  <!--baidu-->
+  <!--
+  <div class="bdsharebuttonbox"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>  
+-->
+
+</section>
+<section>
+ <h1>分类目录</h1>
+ <ul id="categories">
+	 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (6)</a></li>
+<li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
+<li class='category'><a href='/blog/categories/ios/'>ios (1)</a></li>
+<li class='category'><a href='/blog/categories/mac/'>mac (2)</a></li>
+<li class='category'><a href='/blog/categories/math/'>math (17)</a></li>
+<li class='category'><a href='/blog/categories/matlab/'>matlab (1)</a></li>
+<li class='category'><a href='/blog/categories/mobiledev/'>mobiledev (5)</a></li>
+<li class='category'><a href='/blog/categories/music/'>music (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (3)</a></li>
+<li class='category'><a href='/blog/categories/opencv/'>opencv (5)</a></li>
+
+ </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/05/08/python-algorithms-Trees/">Python Algorithms - Trees</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/08/python-algorithms-datastructures/">Python Algorithms - Data Structures</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/07/python-algorithms-sort/">Python Algorithms - Sort</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/07/python-algorithms-search/">Python Algorithms - Search</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/30/wouldnt-it-be-nice/">Wouldn't It Be Nice</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+	<h1>好友博客</h1>
+	<ul>
+		<li>
+			<a href="http://doufunao.github.io/">豆腐脑的幻想乡</a>
+		</li>
+		<li>
+			<a href="http://c4fun.cn/">Code 4 Fun</a>
+		</li>
+		<li>
+			<a href="http://www.tanglei.name/">TangLei blog</a>
+		</li>
+		<li>
+			<a href="http://ontheroad.sinaapp.com/">Tian Jun-Find My Way</a>
+		</li>
+		
+		<li>
+			<a href="http://www.liaoxuefeng.com/">廖雪峰的官方网站</a>
+		</li>
+		<li>
+			<a href="http://wufawei.com/">Ted's Homepage</a>
+		</li>
+		<li>
+			<a href="http://www.renfei.org/blog/">Renfei Song</a>
+		</li>
+		<li>
+			<a href="http://bluedavy.me">BlueDavy之技术blog</a>
+		</li>
+		
+		<li>
+			<a href="#">这里会是你吗?</a>
+		</li>
+	</ul>
+</section>
+	
+</aside>
+
+
+		</div>
+	</div>
+	
+	<footer role="contentinfo">
+		<p>
+  	Copyright &copy; 2014 - hujiawei - <a href="http://hujiaweibujidao.github.io/happybirthday/">Happy birthday to MY QUEEN</a> - <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
+  	
+<!-- mathjax config similar to math.stackexchange  -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+<!-- the following line is incorrect! -->
+<!--
+<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+-->
+
+<!--baidu-->
+<!--
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"1","bdPos":"left","bdTop":"250"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+-->
+
+	<!-- CNZZ -->
+	&nbsp;&nbsp;
+	<script type="text/javascript">
+		var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+		document.write(unescape("%3Cspan id='cnzz_stat_icon_1000165127'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000165127%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	
+	<!--baidu share-->
+	<!--
+	<div class="bdsharebuttonbox" style="display: inline;"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+	-->
+	<!-- license -->
+	<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="http://i.creativecommons.org/l/by-nd/3.0/88x31.png" /></a>
+	本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh">知识共享署名-禁止演绎 3.0 未本地化版本许可协议</a>进行许可。
+
+</p>
+
+<!--hujiawei custom blockquote-->
+<!--for block quote
+<style>
+blockquote{
+	font:inherit;
+	font-size:60%;
+	font-style:normal;
+	line-height:1.0em;
+	color:rgba(0,0,0,0.5);
+}
+</style>-->
+
+<!-- gutter for code line-numbers!! -->
+<!--for block quote-->
+<!--
+<style>
+blockquote{
+	font:inherit;
+	font-size:60%;
+	font-style:normal;
+	line-height:1.0em;
+	color:rgba(0,0,0,0.5);
+}
+
+.gutter{
+	display: none;
+}
+
+.highlight, .gist-highlight {
+margin-bottom: 1.8em;
+background: #002b36;
+overflow-y: hidden;
+overflow-x: auto;
+}
+</style>
+-->
+
+<!--return to top-->
+<style>
+	.returnTop {
+		position: fixed;
+		_position: absolute;
+		right: 10px;
+		bottom: 200px;
+		_bottom: auto;
+		display: none;
+		width: 40px;
+		height: 40px;
+		border: 1px solid #61b72e;
+		border-radius: 4px;
+		background: #fff;
+		box-shadow: 0 0 5px #F5F5F5;
+		text-indent: -9999px;
+		cursor: pointer;
+	}
+	.returnTop .s {
+		position: absolute;
+		top: -2px;
+		_top: -20px;
+		left: 10px;
+		width: 0;
+		height: 0;
+		border-width: 10px;
+		border-color: transparent transparent #61b72e;
+		border-style: dashed dashed solid;
+	}
+	.returnTop .b {
+		position: absolute;
+		top: 18px;
+		left: 16px;
+		height: 12px;
+		width: 8px;
+		background: #61b72e;
+	}
+</style>
+<div class="returnTop" title="嗖的就上去了！">
+	<span class="s"></span>
+	<span class="b"></span>
+	返回顶部
+</div>
+<script type="text/javascript">
+$(function(){
+$(window).bind("scroll", function(){
+
+var scrollTopNum = $(document).scrollTop(),
+winHeight = $(window).height(),
+returnTop = $("div.returnTop");
+
+(scrollTopNum > 0) ? returnTop.fadeIn("fast") : returnTop.fadeOut("fast");
+
+if (!-[1,]&&!window.XMLHttpRequest) {
+returnTop.css("top", scrollTopNum + winHeight - 200);
+}
+
+});
+
+$("div.returnTop").click(function() {
+$("html, body").animate({ scrollTop: 0 }, 100);
+});
+
+});
+</script>
+
+	</footer>
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

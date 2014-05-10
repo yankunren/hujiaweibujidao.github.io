@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-09T09:52:00+08:00</updated>
+  <updated>2014-05-10T09:09:42+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -203,6 +203,8 @@
 <p>旋转的实现描述</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/avl_rotatedetails.png" alt="image" /></p>
+
+<p><a href="http://zhuyanfeng.com/archives/743">这篇文章对AVL树的讲解很好，并使用C++语言进行实现</a>以及<a href="http://zhuyanfeng.com/archives/716">另一篇文章</a></p>
 
 <p><a href="http://interactivepython.org/courselib/static/pythonds/Trees/balanced.html">参考内容1关于AVL树的讲解</a> —&gt; <a href="http://hujiaweibujidao.github.io/files/avltree.pdf">如果访问较慢可以点击这里下载</a></p>
 
