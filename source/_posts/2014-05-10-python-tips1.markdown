@@ -143,7 +143,7 @@ def tree(top):
 for name in tree(os.getcwd()):
     print name
 ```
-**除非特殊的原因，应该经常在代码中使用生成器表达式。但除非是面对非常大的列表，否则是不会看出明显区别的。**
+**除非特殊的原因，应该经常在代码中使用生成器表达式。但除非是面对非常大的列表，否则是不会看出明显区别的。**另一个使用生成器的代码示例：
 
 ```
 num = [1, 4, -5, 10, -7, 2, 3, -1]
@@ -172,7 +172,9 @@ import glob
 flist=glob.glob('*.jpeg')
 ```
 
-8.使用`os.getcwd()`可以得到当前目录，如果想切换到其他目录，可以使用`os.chdir('str/to/path')`，如果想执行Shell脚本，可以使用`os.system('mkdir newfolder')`。对于日常文件和目录的管理, `shutil`模块提供了更便捷、更高层次的接口
+8.使用`os.getcwd()`可以得到当前目录，如果想切换到其他目录，可以使用`os.chdir('str/to/path')`，如果想执行Shell脚本，可以使用`os.system('mkdir newfolder')`。
+
+对于日常文件和目录的管理, `shutil`模块提供了更便捷、更高层次的接口
 
 ```
 import shutil
