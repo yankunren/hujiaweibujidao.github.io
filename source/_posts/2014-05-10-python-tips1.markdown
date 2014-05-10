@@ -19,7 +19,7 @@ published: true
 
 双下划线开头的实例变量是不是一定不能从外部访问呢？其实也不是。不能直接访问`__name`是因为Python解释器对外把`__name`变量改成了`_Student__name`，所以，仍然可以通过`_Student__name`来访问`__name`变量：
 
-```
+```python
 bart._Student__name
 'Bart Simpson'
 ```
