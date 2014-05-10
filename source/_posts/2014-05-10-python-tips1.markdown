@@ -7,7 +7,24 @@ categories: python
 published: true
 ---
 
-1.使用PyCharm中，在一个Project中新建一个Directory和新建一个Package之后，IDE都会创建对应的目录，并添加默认的`__init__.py`文件，但是，两者还是不一样的。
+1.使用`glob`模块可以用通配符的方式搜索某个目录下的特定文件，返回结果是一个list
+
+```
+import glob
+flist=glob.glob('*.jpeg')
+```
+
+使用`os.getcwd()`可以得到当前目录，如果想切换到其他目录，可以使用`os.chdir('str/to/path')`，如果想执行Shell脚本，可以使用`os.system('mkdir newfolder')`。
+
+对于日常文件和目录的管理, `shutil`模块提供了更便捷、更高层次的接口
+
+```
+import shutil
+shutil.copyfile('data.db', 'archive.db')
+shutil.move('/build/executables', 'installdir')
+```
+
+使用PyCharm中，在一个Project中新建一个Directory和新建一个Package之后，IDE都会创建对应的目录，并添加默认的`__init__.py`文件，但是，两者还是不一样的。
 如果在它们的目录下各新建一个python脚本测试输出`os.getcwd()`，如果是在Directory中得到的是Project的根目录'/Users/hujiawei/PycharmProjects/leetcodeoj'；如果是在Package中得到的是Package的根目录，如'/Users/hujiawei/PycharmProjects/leetcodeoj/pypackage'。
 
 2.如果要在代码中添加中文注释的话，最好在文档开头加上下面的编码声明语句。关于Python中的字符串编码可见[廖雪峰的python教程](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386819196283586a37629844456ca7e5a7faa9b94ee8000)
@@ -99,34 +116,7 @@ Python的函数具有非常灵活的参数形态，既可以实现简单的调�
 
 使用`*args`和`**kw`是Python的习惯写法，当然也可以用其他参数名，但最好使用习惯用法。
 
-5.关于Python的函数式编程，参见[廖雪峰的python教程](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386819866394c3f9efcd1a454b2a8c57933e976445c0000)，讲解得很好
-
-高阶函数(使用函数作为参数或者返回一个函数的函数称为高阶函数)，匿名函数(lambda)，装饰器(decorator)和偏函数
-
-用来测试一个函数花费的运行时间的装饰器，当然你也可以使用其他的方式，比如`Timer`来得到运行时间。下面代码来自[伯乐在线-python高级编程技巧](http://blog.jobbole.com/61171/)
-
-```
-def timethis(func):
-    '''
-    Decorator that reports the execution time.
-    '''
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        start = time.time()
-        result = func(*args, **kwargs)
-        end = time.time()
-        print(func.__name__, end-start)
-        return result
-    return wrapper
-
-@timethis
-def countdown(n):
-    while n > 0:
-        n -= 1
-```
-
-
-6.关于Python的高级特性，参见[廖雪峰的python教程](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868196169906eb9ca5864384546bf3405ae6a172b3e000)
+5.关于Python的高级特性，参见[廖雪峰的python教程](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868196169906eb9ca5864384546bf3405ae6a172b3e000)
 
 切片，迭代，列表生成式，生成器
 
@@ -165,21 +155,85 @@ print g
 # [1, 16, 100, 4, 9]
 ```
 
-7.使用`glob`模块可以用通配符的方式搜索某个目录下的特定文件，返回结果是一个list
+6.关于Python的函数式编程，参见[廖雪峰的python教程](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386819866394c3f9efcd1a454b2a8c57933e976445c0000)，讲解得很好
+
+高阶函数(使用函数作为参数或者返回一个函数的函数称为高阶函数)，匿名函数(lambda)，装饰器(decorator)和偏函数
+
+用来测试一个函数花费的运行时间的装饰器，当然你也可以使用其他的方式，比如`Timer`来得到运行时间。下面代码来自[伯乐在线-python高级编程技巧](http://blog.jobbole.com/61171/)
 
 ```
-import glob
-flist=glob.glob('*.jpeg')
+def timethis(func):
+    '''
+    Decorator that reports the execution time.
+    '''
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print(func.__name__, end-start)
+        return result
+    return wrapper
+
+@timethis
+def countdown(n):
+    while n > 0:
+        n -= 1
 ```
 
-8.使用`os.getcwd()`可以得到当前目录，如果想切换到其他目录，可以使用`os.chdir('str/to/path')`，如果想执行Shell脚本，可以使用`os.system('mkdir newfolder')`。
-
-对于日常文件和目录的管理, `shutil`模块提供了更便捷、更高层次的接口
+其中代码
 
 ```
-import shutil
-shutil.copyfile('data.db', 'archive.db')
-shutil.move('/build/executables', 'installdir')
+@timethis
+def countdown(n):
 ```
+
+就相当于：
+
+```
+def countdown(n):
+...
+countdown = timethis(countdown)
+```
+
+装饰器除了可以使用函数实现，也可以使用类来实现，**对装饰器的类实现唯一要求是它必须能如函数一般使用，也就是说它必须是可调用的。所以，如果想这么做这个类必须实现`__call__`方法。**
+
+```
+class decorator(object):
+ 
+    def __init__(self, f):
+        print("inside decorator.__init__()")
+        f() # Prove that function definition has completed
+ 
+    def __call__(self):
+        print("inside decorator.__call__()")
+ 
+@decorator
+def function():
+    print("inside function()")
+ 
+print("Finished decorating function()")
+ 
+function()
+ 
+# inside decorator.__init__()
+# inside function()
+# Finished decorating function()
+# inside decorator.__call__()
+```
+
+1. 语法糖`@decorator`相当于`function=decorator(function)`，在此调用decorator的`__init__`打印`“inside decorator.__init__()”`
+2. 随后执行f()打印`“inside function()”`
+3. 随后执行`“print(“Finished decorating function()”)”`
+4. 最后再调用function函数时，由于使用装饰器包装，因此执行decorator的`__call__`打印 `“inside decorator.__call__()”`。
+
+7.
+
+
+
+
+
+
+描述器，元类，上下文管理库的介绍参见[伯乐在线-python高级编程技巧](http://blog.jobbole.com/61171/)
 
 
