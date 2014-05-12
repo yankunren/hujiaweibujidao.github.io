@@ -1,0 +1,717 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Hadoop Installation - Single Node Setup - Hujiawei Bujidao</title>
+  <meta name="author" content="hujiawei">
+
+  
+  <meta name="description" content="上学期在Mac上搭建好了Hadoop，因为这学期开学重装了系统就没了，以为不会再折腾，结果大数据作业又要整hadoop，于是乎，爱折腾的程序猿又整了下，有过一次经历，这次简单多了，下面简单的列举主要步骤。 感谢下面两份教程： 1.[en]Running Hadoop on Ubuntu Linux &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/05/12/hadoop-installation">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+
+  
+
+</head>
+
+<body   >
+
+	<header role="banner">
+		
+<hgroup style="text-align: center">
+	<h1><a href="/"><img src="/images/conan-paper-small.png"  />Hujiawei Bujidao<img src="/images/conan-hat-small.png"  /></a></h1>
+	
+	<h2>I will always be your savior! A secret makes a man man!</h2>
+	
+</hgroup>
+
+
+	</header>
+	<nav role="navigation">
+		<ul class="subscription" data-subscription="rss">
+  <!--<li><a href="https://github.com/hujiaweibujidao" rel="subscribe-rss" title="subscribe via RSS">View me on GitHub</a></li>-->
+  <!--
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+  --> 
+</ul>
+<!--
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hujiaweibujidao.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form> 
+  
+-->
+<ul class="main-navigation">
+  <li><a href="/blog/archives/">Blog</a></li>
+  <li><a href="/aboutme/">AboutMe</a></li>
+  <li><a href="/math/">Math</a></li>
+  <!--
+  <li><a href="/datamining/">DataMining</a></li>
+  -->
+  <li><a href="/blog/categories/mobiledev/">MobileDev</a></li>
+  <!--
+  <li><a href="/xjava/">XJava</a></li>
+  -->
+  <!-- <li><a href="/datamining/">Projects</a></li> -->
+</ul>
+
+
+	</nav>
+	<div id="main">
+		<div id="content">
+			<div>
+
+<article class="hentry" role="article">
+		
+  <header>
+    
+      <h1 class="entry-title">Hadoop Installation - Single Node Setup</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-12T20:00:00+08:00" pubdate data-updated="true">May 12<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>上学期在Mac上搭建好了Hadoop，因为这学期开学重装了系统就没了，以为不会再折腾，结果大数据作业又要整hadoop，于是乎，爱折腾的程序猿又整了下，有过一次经历，这次简单多了，下面简单的列举主要步骤。</p>
+
+<p>感谢下面两份教程：</p>
+
+<p>1.[en]<a href="http://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/">Running Hadoop on Ubuntu Linux (Single-Node Cluster)</a></p>
+
+<p>2.[cn]<a href="http://www.tianjun.ml/essays/16">田俊童鞋的Hadoop的安装部署与配置</a></p>
+
+<hr />
+
+<p>1.下载部分</p>
+
+<p>(0)你肯定不是安装到本地的啦，先安装VMware吧，我会告诉你这货需要序列号吗?</p>
+
+<p>(1)Ubuntu：http://www.ubuntu.com/</p>
+
+<p>随便这个Desktop版本下载，我的是12.04 LTS</p>
+
+<p>(2)JDK：http://hadoop.apache.org/</p>
+
+<p>个人喜欢从Oracle上下载JDK来安装，不喜欢<code>apt-get</code>模式，我使用的是<code>JDK1.7</code></p>
+
+<p>(3)Hadoop：http://hadoop.apache.org/</p>
+
+<p>我使用的是上学期用的1.2.1版本，名称<code>hadoop-1.2.1-bin.tar.gz</code></p>
+
+<p>2.配置Java环境 [该部分直接摘自我之前<a href="http://hujiaweibujidao.github.io/blog/2014/02/21/android-ndk-and-opencv-development-4/">Android和OpenCV开发中的配置</a>]</p>
+
+<p>①下载<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Oracle JDK</a>，下载的版本是JDK1.7.0_40</p>
+
+<p>②下载之后解压即可，解压路径为<code>/home/xface/android/jdk1.7.0</code></p>
+
+<p>③打开终端，输入<code>sudo gedit /etc/profile</code>，在文件末尾添加下面内容</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">JAVA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">xface</span><span class="o">/</span><span class="n">android</span><span class="o">/</span><span class="n">jdk1</span><span class="o">.</span><span class="mf">7.0</span>
+</span><span class="line"><span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="err">$</span><span class="n">JAVA_HOME</span><span class="o">/</span><span class="nb">bin</span><span class="p">:</span><span class="err">$</span><span class="n">PATH</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>如下图所示，后面环境配置中添加内容也是如此</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201402/etcprofile.png" alt="image" /></p>
+
+<p>④打开终端输入<code>java -version</code>进行测试</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201402/javaversion.png" alt="image" /></p>
+
+<p>3.配置Hadoop环境</p>
+
+<p>(1)添加账户和组</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">sudo</span> <span class="n">addgroup</span> <span class="n">hadoop</span>
+</span><span class="line"><span class="n">sudo</span> <span class="n">adduser</span> <span class="o">--</span><span class="n">ingroup</span> <span class="n">hadoop</span> <span class="n">hduser</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(2)安装openssh-server，并配置公钥</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+</span><span class="line"><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">openssh</span><span class="o">-</span><span class="n">server</span>
+</span><span class="line"><span class="n">su</span> <span class="o">-</span> <span class="n">hduser</span>
+</span><span class="line"><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span> <span class="o">-</span><span class="n">t</span> <span class="n">rsa</span> <span class="o">-</span><span class="n">P</span> <span class="s">&quot;&quot;</span>
+</span><span class="line"><span class="n">cat</span> <span class="err">$</span><span class="n">HOME</span><span class="o">/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span><span class="o">.</span><span class="n">pub</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="n">HOME</span><span class="o">/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">authorized_keys</span>
+</span><span class="line"><span class="n">ssh</span> <span class="n">localhost</span> <span class="c">#测试</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(3)Disabling IPv6? </p>
+
+<p>这步我没有操作，如果需要请参考上面的教程<a href="http://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/">Running Hadoop on Ubuntu Linux (Single-Node Cluster)</a></p>
+
+<p>(4)解压<code>hadoop-1.2.1-bin.tar.gz</code>，然后重命名为<code>hadoop</code>，接着修改文件夹所有者</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">mv</span> <span class="n">hadoop</span><span class="o">-</span><span class="mf">1.2</span><span class="o">.</span><span class="mi">1</span> <span class="n">hadoop</span>
+</span><span class="line"><span class="n">chown</span> <span class="o">-</span><span class="n">R</span> <span class="n">hduser</span><span class="p">:</span><span class="n">hadoop</span> <span class="n">hadoop</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(5)修改文件<code>/etc/profile</code>中系统环境变量的配置</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c">#set hadoop environment</span>
+</span><span class="line">
+</span><span class="line"><span class="n">HADOOP_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">xface</span><span class="o">/</span><span class="n">hadoop</span><span class="o">/</span><span class="n">hadoop</span>
+</span><span class="line"><span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">PATH</span><span class="p">}:</span><span class="err">$</span><span class="p">{</span><span class="n">HADOOP_HOME</span><span class="p">}</span><span class="o">/</span><span class="nb">bin</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(6)在hadoop安装目录下新建临时文件目录<code>tmp</code>和日志文件目录<code>logs</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">tmp</span>
+</span><span class="line"><span class="n">sudo</span> <span class="n">chown</span> <span class="n">hduser</span><span class="p">:</span><span class="n">hadoop</span> <span class="n">tmp</span>
+</span><span class="line"><span class="c"># ...and if you want to tighten up security, chmod from 755 to 750...</span>
+</span><span class="line"><span class="n">sudo</span> <span class="n">chmod</span> <span class="mi">750</span> <span class="n">tmp</span> <span class="c">#我习惯用777</span>
+</span><span class="line"><span class="c">#logs的配置和tmp一样</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(7)配置hadoop的<code>conf</code>文件夹下的文件</p>
+
+<p>①<code>hadoop-env.sh</code> 修改Java配置</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">export</span> <span class="n">JAVA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">xface</span><span class="o">/</span><span class="n">android</span><span class="o">/</span><span class="n">jdk1</span><span class="o">.</span><span class="mf">7.0</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>②<code>core-site.xml</code> 添加下面的配置</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&lt;</span><span class="nb">property</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="n">hadoop</span><span class="o">.</span><span class="n">tmp</span><span class="o">.</span><span class="n">dir</span><span class="o">&lt;/</span><span class="n">name</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;/</span><span class="n">home</span><span class="o">/</span><span class="n">xface</span><span class="o">/</span><span class="n">hadoop</span><span class="o">/</span><span class="n">tmp</span><span class="o">&lt;/</span><span class="n">value</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">description</span><span class="o">&gt;</span><span class="n">A</span> <span class="n">base</span> <span class="k">for</span> <span class="n">other</span> <span class="n">temporary</span> <span class="n">directories</span><span class="o">.&lt;/</span><span class="n">description</span><span class="o">&gt;</span>
+</span><span class="line"><span class="o">&lt;/</span><span class="nb">property</span><span class="o">&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="o">&lt;</span><span class="nb">property</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="n">fs</span><span class="o">.</span><span class="n">default</span><span class="o">.</span><span class="n">name</span><span class="o">&lt;/</span><span class="n">name</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;</span><span class="n">hdfs</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">9000</span><span class="o">&lt;/</span><span class="n">value</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">description</span><span class="o">&gt;</span><span class="n">The</span> <span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">default</span> <span class="nb">file</span> <span class="n">system</span><span class="o">.</span>  <span class="n">A</span> <span class="n">URI</span> <span class="n">whose</span>
+</span><span class="line">  <span class="n">scheme</span> <span class="ow">and</span> <span class="n">authority</span> <span class="n">determine</span> <span class="n">the</span> <span class="n">FileSystem</span> <span class="n">implementation</span><span class="o">.</span>  <span class="n">The</span>
+</span><span class="line">  <span class="n">uri</span><span class="s">&#39;s scheme determines the config property (fs.SCHEME.impl) naming</span>
+</span><span class="line">  <span class="n">the</span> <span class="n">FileSystem</span> <span class="n">implementation</span> <span class="n">class</span><span class="o">.</span>  <span class="n">The</span> <span class="n">uri</span><span class="s">&#39;s authority is used to</span>
+</span><span class="line">  <span class="n">determine</span> <span class="n">the</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span> <span class="k">for</span> <span class="n">a</span> <span class="n">filesystem</span><span class="o">.&lt;/</span><span class="n">description</span><span class="o">&gt;</span>
+</span><span class="line"><span class="o">&lt;/</span><span class="nb">property</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>③<code>mapred-site.xml</code> 添加下面的配置</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&lt;</span><span class="nb">property</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="n">mapred</span><span class="o">.</span><span class="n">job</span><span class="o">.</span><span class="n">tracker</span><span class="o">&lt;/</span><span class="n">name</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;</span><span class="n">localhost</span><span class="p">:</span><span class="mi">9001</span><span class="o">&lt;/</span><span class="n">value</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">description</span><span class="o">&gt;</span><span class="n">The</span> <span class="n">host</span> <span class="ow">and</span> <span class="n">port</span> <span class="n">that</span> <span class="n">the</span> <span class="n">MapReduce</span> <span class="n">job</span> <span class="n">tracker</span> <span class="n">runs</span>
+</span><span class="line">  <span class="n">at</span><span class="o">.</span>  <span class="n">If</span> <span class="s">&quot;local&quot;</span><span class="p">,</span> <span class="n">then</span> <span class="n">jobs</span> <span class="n">are</span> <span class="n">run</span> <span class="ow">in</span><span class="o">-</span><span class="n">process</span> <span class="k">as</span> <span class="n">a</span> <span class="n">single</span> <span class="nb">map</span>
+</span><span class="line">  <span class="ow">and</span> <span class="nb">reduce</span> <span class="n">task</span><span class="o">.</span>
+</span><span class="line">  <span class="o">&lt;/</span><span class="n">description</span><span class="o">&gt;</span>
+</span><span class="line"><span class="o">&lt;/</span><span class="nb">property</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>④<code>hdfs-site.xml</code> 添加下面的配置 [还可以配置namenode和datanode数据的保存位置，可以参见教程<a href="http://www.tianjun.ml/essays/16">田俊童鞋的Hadoop的安装部署与配置</a>]</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&lt;</span><span class="nb">property</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="n">dfs</span><span class="o">.</span><span class="n">replication</span><span class="o">&lt;/</span><span class="n">name</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">value</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">description</span><span class="o">&gt;</span><span class="n">Default</span> <span class="n">block</span> <span class="n">replication</span><span class="o">.</span>
+</span><span class="line">  <span class="n">The</span> <span class="n">actual</span> <span class="n">number</span> <span class="n">of</span> <span class="n">replications</span> <span class="n">can</span> <span class="n">be</span> <span class="n">specified</span> <span class="n">when</span> <span class="n">the</span> <span class="nb">file</span> <span class="ow">is</span> <span class="n">created</span><span class="o">.</span>
+</span><span class="line">  <span class="n">The</span> <span class="n">default</span> <span class="ow">is</span> <span class="n">used</span> <span class="k">if</span> <span class="n">replication</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">specified</span> <span class="ow">in</span> <span class="n">create</span> <span class="n">time</span><span class="o">.</span>
+</span><span class="line">  <span class="o">&lt;/</span><span class="n">description</span><span class="o">&gt;</span>
+</span><span class="line"><span class="o">&lt;/</span><span class="nb">property</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(8)格式化namenode</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">hduser</span><span class="nd">@ubuntu</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">hadoop</span> <span class="n">namenode</span> <span class="o">-</span><span class="n">format</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(9)执行<code>start-all.sh</code>启动测试</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">hduser</span><span class="nd">@ubuntu</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">start</span><span class="o">-</span><span class="nb">all</span><span class="o">.</span><span class="n">sh</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(10)执行<code>jps</code>查看进程</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">hduser</span><span class="nd">@ubuntu</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">jps</span>
+</span><span class="line"><span class="mi">5620</span> <span class="n">JobTracker</span>
+</span><span class="line"><span class="mi">5313</span> <span class="n">DataNode</span>
+</span><span class="line"><span class="mi">5541</span> <span class="n">SecondaryNameNode</span>
+</span><span class="line"><span class="mi">5897</span> <span class="n">Jps</span>
+</span><span class="line"><span class="mi">5851</span> <span class="n">TaskTracker</span>
+</span><span class="line"><span class="mi">5041</span> <span class="n">NameNode</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>OK！恭喜你！至此安装过程就大功告成了！</p>
+
+<p>如果你需要配置成集群模式的话还是可以参考好友<a href="http://www.tianjun.ml/essays/16">田俊童鞋的Hadoop的安装部署与配置</a>，不能推荐的更多，哈哈哈！</p>
+
+<p>安装过程中所有执行的命令及其输出见<a href="https://gist.github.com/hujiaweibujidao/a83fca7b7f40d0029c60">这个Gist</a></p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/12/hadoop-installation/">http://hujiaweibujidao.github.io/blog/2014/05/12/hadoop-installation/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+</div>
+
+
+		<footer>
+			<p class="meta">
+				
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hujiawei</span></span>
+
+				
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-12T20:00:00+08:00" pubdate data-updated="true">May 12<span>th</span>, 2014</time>
+				
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/hadoop/'>hadoop</a>
+  
+</span>
+
+
+			</p>
+			
+			<div class="sharing">
+  
+  
+  
+</div>
+
+			
+			<p class="meta">
+				
+				<a class="basic-alignment left" href="/blog/2014/05/12/algorithms-pagerank/" title="Previous Post: Algorithms-PageRank">&laquo; Algorithms-PageRank</a>
+				
+				
+			</p>
+		</footer>
+	</article>
+	
+
+	
+	<section>
+		<h1>Comments</h1>
+		<div id="comments" aria-live="polite">
+			<!-- Duoshuo Comment BEGIN   data-title=""-->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hujiaweibujidao"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+
+		</div>
+	</section>
+	
+</div>
+
+<aside class="sidebar">
+  
+	<section>
+	<h1>关于博主</h1><br/>
+  <a href="/aboutme/"><img src="/images/me-small.png" width="250px" height="210px" alt="protrait"/></a><br/>
+  <p>Hi, I'm Hujiawei, from P.R.China. Now I'm a postgraduate student studying in <a href="http://www.tsinghua.edu.cn/publish/th/index.html">Tsinghua University</a>.
+  Wanna know me? <a href="/aboutme/">See here.</a> 
+  </p>
+  
+  <img src="/images/conan-mainperson.png" width="250px" height="210px" alt="conan"/>
+  
+  <br/>
+  
+    <a href="http://weibo.com/hujiaweiyinger"><img src="/images/sinaweibo.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://github.com/hujiaweibujidao"><img src="/images/github.png" width="40px" height="40px"/></a>&nbsp;
+  <a href="http://hujiawei.tumblr.com"><img src="/images/tumblr.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://twitter.com/hujiaweiyinger"><img src="/images/twitter.png" width="40px" height="40px"/></a>&nbsp;
+  <a href="http://www.douban.com/people/60272837/"><img src="/images/douban.png" width="40px" height="40px"/></a>
+ 
+ <br/>
+    
+    <!--autoplay="autoplay" -->
+    <!--
+<audio width="200" height="32" 
+style="margin: auto; top: 0; right: 0; bottom: 0; left: 0;" 
+controls="controls" 
+name="media" 
+src="http://hujiaweibujidao.github.io/music/Wouldnt-It-Be-Nice.mp3">
+</audio>
+-->
+  
+  
+  <!--baidu-->
+  <!--
+  <div class="bdsharebuttonbox"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>  
+-->
+
+</section>
+<section>
+ <h1>分类目录</h1>
+ <ul id="categories">
+	 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (6)</a></li>
+<li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
+<li class='category'><a href='/blog/categories/blog/'>blog (1)</a></li>
+<li class='category'><a href='/blog/categories/hadoop/'>hadoop (1)</a></li>
+<li class='category'><a href='/blog/categories/ios/'>ios (1)</a></li>
+<li class='category'><a href='/blog/categories/mac/'>mac (2)</a></li>
+<li class='category'><a href='/blog/categories/math/'>math (17)</a></li>
+<li class='category'><a href='/blog/categories/matlab/'>matlab (1)</a></li>
+<li class='category'><a href='/blog/categories/mobiledev/'>mobiledev (5)</a></li>
+<li class='category'><a href='/blog/categories/music/'>music (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (3)</a></li>
+<li class='category'><a href='/blog/categories/opencv/'>opencv (5)</a></li>
+<li class='category'><a href='/blog/categories/picture/'>picture (1)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (1)</a></li>
+
+ </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/05/12/hadoop-installation/">Hadoop Installation - Single Node Setup</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/12/algorithms-pagerank/">Algorithms-PageRank</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/10/happy-mothers-day/">Happy Mother's Day</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/10/tsinghua-9ers-pictures/">Tsinghua 9ers Pictures</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/10/python-tips1/">Python Tips 1</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+	<h1>好友博客</h1>
+	<ul>
+		<li>
+			<a href="http://doufunao.github.io/">豆腐脑的幻想乡</a>
+		</li>
+		<li>
+			<a href="http://c4fun.cn/">Code 4 Fun</a>
+		</li>
+		<li>
+			<a href="http://www.tanglei.name/">TangLei blog</a>
+		</li>
+		<li>
+			<a href="http://ontheroad.sinaapp.com/">Tian Jun-Find My Way</a>
+		</li>
+		
+		<li>
+			<a href="http://www.liaoxuefeng.com/">廖雪峰的官方网站</a>
+		</li>
+		<li>
+			<a href="http://wufawei.com/">Ted's Homepage</a>
+		</li>
+		<li>
+			<a href="http://www.renfei.org/blog/">Renfei Song</a>
+		</li>
+		<li>
+			<a href="http://bluedavy.me">BlueDavy之技术blog</a>
+		</li>
+		
+		<li>
+			<a href="#">这里会是你吗?</a>
+		</li>
+	</ul>
+</section>
+	
+</aside>
+
+
+		</div>
+	</div>
+	
+	<footer role="contentinfo">
+		<p>
+  	Copyright &copy; 2014 - hujiawei - <a href="http://hujiaweibujidao.github.io/happybirthday/">Happy birthday to MY QUEEN</a> - <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
+  	
+<!-- mathjax config similar to math.stackexchange  -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+<!-- the following line is incorrect! -->
+<!--
+<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+-->
+
+<!--baidu-->
+<!--
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"1","bdPos":"left","bdTop":"250"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+-->
+
+	<!-- CNZZ -->
+	&nbsp;&nbsp;
+	<script type="text/javascript">
+		var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+		document.write(unescape("%3Cspan id='cnzz_stat_icon_1000165127'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000165127%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	
+	<!--baidu share-->
+	<!--
+	<div class="bdsharebuttonbox" style="display: inline;"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+	-->
+	<!-- license -->
+	<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="http://i.creativecommons.org/l/by-nd/3.0/88x31.png" /></a>
+	本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh">知识共享署名-禁止演绎 3.0 未本地化版本许可协议</a>进行许可。
+
+</p>
+
+<!--hujiawei custom blockquote-->
+<!--for block quote
+<style>
+blockquote{
+	font:inherit;
+	font-size:60%;
+	font-style:normal;
+	line-height:1.0em;
+	color:rgba(0,0,0,0.5);
+}
+</style>-->
+
+<!-- gutter for code line-numbers!! -->
+<!--for block quote-->
+<!--
+<style>
+blockquote{
+	font:inherit;
+	font-size:60%;
+	font-style:normal;
+	line-height:1.0em;
+	color:rgba(0,0,0,0.5);
+}
+
+.gutter{
+	display: none;
+}
+
+.highlight, .gist-highlight {
+margin-bottom: 1.8em;
+background: #002b36;
+overflow-y: hidden;
+overflow-x: auto;
+}
+</style>
+-->
+
+<!--return to top-->
+<style>
+	.returnTop {
+		position: fixed;
+		_position: absolute;
+		right: 10px;
+		bottom: 200px;
+		_bottom: auto;
+		display: none;
+		width: 40px;
+		height: 40px;
+		border: 1px solid #61b72e;
+		border-radius: 4px;
+		background: #fff;
+		box-shadow: 0 0 5px #F5F5F5;
+		text-indent: -9999px;
+		cursor: pointer;
+	}
+	.returnTop .s {
+		position: absolute;
+		top: -2px;
+		_top: -20px;
+		left: 10px;
+		width: 0;
+		height: 0;
+		border-width: 10px;
+		border-color: transparent transparent #61b72e;
+		border-style: dashed dashed solid;
+	}
+	.returnTop .b {
+		position: absolute;
+		top: 18px;
+		left: 16px;
+		height: 12px;
+		width: 8px;
+		background: #61b72e;
+	}
+</style>
+<div class="returnTop" title="嗖的就上去了！">
+	<span class="s"></span>
+	<span class="b"></span>
+	返回顶部
+</div>
+<script type="text/javascript">
+$(function(){
+$(window).bind("scroll", function(){
+
+var scrollTopNum = $(document).scrollTop(),
+winHeight = $(window).height(),
+returnTop = $("div.returnTop");
+
+(scrollTopNum > 0) ? returnTop.fadeIn("fast") : returnTop.fadeOut("fast");
+
+if (!-[1,]&&!window.XMLHttpRequest) {
+returnTop.css("top", scrollTopNum + winHeight - 200);
+}
+
+});
+
+$("div.returnTop").click(function() {
+$("html, body").animate({ scrollTop: 0 }, 100);
+});
+
+});
+</script>
+
+	</footer>
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

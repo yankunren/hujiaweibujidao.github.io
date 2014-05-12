@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-12T18:13:04+08:00</updated>
+  <updated>2014-05-12T21:04:55+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,246 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Hadoop Installation - Single Node Setup]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/12/hadoop-installation/"/>
+    <updated>2014-05-12T20:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/12/hadoop-installation</id>
+    <content type="html"><![CDATA[<p>上学期在Mac上搭建好了Hadoop，因为这学期开学重装了系统就没了，以为不会再折腾，结果大数据作业又要整hadoop，于是乎，爱折腾的程序猿又整了下，有过一次经历，这次简单多了，下面简单的列举主要步骤。</p>
+
+<p>感谢下面两份教程：</p>
+
+<p>1.[en]<a href="http://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/">Running Hadoop on Ubuntu Linux (Single-Node Cluster)</a></p>
+
+<p>2.[cn]<a href="http://www.tianjun.ml/essays/16">田俊童鞋的Hadoop的安装部署与配置</a></p>
+
+<hr />
+
+<p>1.下载部分</p>
+
+<p>(0)你肯定不是安装到本地的啦，先安装VMware吧，我会告诉你这货需要序列号吗?</p>
+
+<p>(1)Ubuntu：http://www.ubuntu.com/</p>
+
+<p>随便这个Desktop版本下载，我的是12.04 LTS</p>
+
+<p>(2)JDK：http://hadoop.apache.org/</p>
+
+<p>个人喜欢从Oracle上下载JDK来安装，不喜欢<code>apt-get</code>模式，我使用的是<code>JDK1.7</code></p>
+
+<p>(3)Hadoop：http://hadoop.apache.org/</p>
+
+<p>我使用的是上学期用的1.2.1版本，名称<code>hadoop-1.2.1-bin.tar.gz</code></p>
+
+<p>2.配置Java环境 [该部分直接摘自我之前<a href="http://hujiaweibujidao.github.io/blog/2014/02/21/android-ndk-and-opencv-development-4/">Android和OpenCV开发中的配置</a>]</p>
+
+<p>①下载<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Oracle JDK</a>，下载的版本是JDK1.7.0_40</p>
+
+<p>②下载之后解压即可，解压路径为<code>/home/xface/android/jdk1.7.0</code></p>
+
+<p>③打开终端，输入<code>sudo gedit /etc/profile</code>，在文件末尾添加下面内容</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">JAVA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">xface</span><span class="o">/</span><span class="n">android</span><span class="o">/</span><span class="n">jdk1</span><span class="o">.</span><span class="mf">7.0</span>
+</span><span class="line"><span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="err">$</span><span class="n">JAVA_HOME</span><span class="o">/</span><span class="nb">bin</span><span class="p">:</span><span class="err">$</span><span class="n">PATH</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>如下图所示，后面环境配置中添加内容也是如此</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201402/etcprofile.png" alt="image" /></p>
+
+<p>④打开终端输入<code>java -version</code>进行测试</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201402/javaversion.png" alt="image" /></p>
+
+<p>3.配置Hadoop环境</p>
+
+<p>(1)添加账户和组</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">sudo</span> <span class="n">addgroup</span> <span class="n">hadoop</span>
+</span><span class="line"><span class="n">sudo</span> <span class="n">adduser</span> <span class="o">--</span><span class="n">ingroup</span> <span class="n">hadoop</span> <span class="n">hduser</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(2)安装openssh-server，并配置公钥</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+</span><span class="line"><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">openssh</span><span class="o">-</span><span class="n">server</span>
+</span><span class="line"><span class="n">su</span> <span class="o">-</span> <span class="n">hduser</span>
+</span><span class="line"><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span> <span class="o">-</span><span class="n">t</span> <span class="n">rsa</span> <span class="o">-</span><span class="n">P</span> <span class="s">&quot;&quot;</span>
+</span><span class="line"><span class="n">cat</span> <span class="err">$</span><span class="n">HOME</span><span class="o">/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span><span class="o">.</span><span class="n">pub</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="n">HOME</span><span class="o">/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">authorized_keys</span>
+</span><span class="line"><span class="n">ssh</span> <span class="n">localhost</span> <span class="c">#测试</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(3)Disabling IPv6? </p>
+
+<p>这步我没有操作，如果需要请参考上面的教程<a href="http://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/">Running Hadoop on Ubuntu Linux (Single-Node Cluster)</a></p>
+
+<p>(4)解压<code>hadoop-1.2.1-bin.tar.gz</code>，然后重命名为<code>hadoop</code>，接着修改文件夹所有者</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">mv</span> <span class="n">hadoop</span><span class="o">-</span><span class="mf">1.2</span><span class="o">.</span><span class="mi">1</span> <span class="n">hadoop</span>
+</span><span class="line"><span class="n">chown</span> <span class="o">-</span><span class="n">R</span> <span class="n">hduser</span><span class="p">:</span><span class="n">hadoop</span> <span class="n">hadoop</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(5)修改文件<code>/etc/profile</code>中系统环境变量的配置</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c">#set hadoop environment</span>
+</span><span class="line">
+</span><span class="line"><span class="n">HADOOP_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">xface</span><span class="o">/</span><span class="n">hadoop</span><span class="o">/</span><span class="n">hadoop</span>
+</span><span class="line"><span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">PATH</span><span class="p">}:</span><span class="err">$</span><span class="p">{</span><span class="n">HADOOP_HOME</span><span class="p">}</span><span class="o">/</span><span class="nb">bin</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(6)在hadoop安装目录下新建临时文件目录<code>tmp</code>和日志文件目录<code>logs</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">tmp</span>
+</span><span class="line"><span class="n">sudo</span> <span class="n">chown</span> <span class="n">hduser</span><span class="p">:</span><span class="n">hadoop</span> <span class="n">tmp</span>
+</span><span class="line"><span class="c"># ...and if you want to tighten up security, chmod from 755 to 750...</span>
+</span><span class="line"><span class="n">sudo</span> <span class="n">chmod</span> <span class="mi">750</span> <span class="n">tmp</span> <span class="c">#我习惯用777</span>
+</span><span class="line"><span class="c">#logs的配置和tmp一样</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(7)配置hadoop的<code>conf</code>文件夹下的文件</p>
+
+<p>①<code>hadoop-env.sh</code> 修改Java配置</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">export</span> <span class="n">JAVA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">xface</span><span class="o">/</span><span class="n">android</span><span class="o">/</span><span class="n">jdk1</span><span class="o">.</span><span class="mf">7.0</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>②<code>core-site.xml</code> 添加下面的配置</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&lt;</span><span class="nb">property</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="n">hadoop</span><span class="o">.</span><span class="n">tmp</span><span class="o">.</span><span class="n">dir</span><span class="o">&lt;/</span><span class="n">name</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;/</span><span class="n">home</span><span class="o">/</span><span class="n">xface</span><span class="o">/</span><span class="n">hadoop</span><span class="o">/</span><span class="n">tmp</span><span class="o">&lt;/</span><span class="n">value</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">description</span><span class="o">&gt;</span><span class="n">A</span> <span class="n">base</span> <span class="k">for</span> <span class="n">other</span> <span class="n">temporary</span> <span class="n">directories</span><span class="o">.&lt;/</span><span class="n">description</span><span class="o">&gt;</span>
+</span><span class="line"><span class="o">&lt;/</span><span class="nb">property</span><span class="o">&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="o">&lt;</span><span class="nb">property</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="n">fs</span><span class="o">.</span><span class="n">default</span><span class="o">.</span><span class="n">name</span><span class="o">&lt;/</span><span class="n">name</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;</span><span class="n">hdfs</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">9000</span><span class="o">&lt;/</span><span class="n">value</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">description</span><span class="o">&gt;</span><span class="n">The</span> <span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">default</span> <span class="nb">file</span> <span class="n">system</span><span class="o">.</span>  <span class="n">A</span> <span class="n">URI</span> <span class="n">whose</span>
+</span><span class="line">  <span class="n">scheme</span> <span class="ow">and</span> <span class="n">authority</span> <span class="n">determine</span> <span class="n">the</span> <span class="n">FileSystem</span> <span class="n">implementation</span><span class="o">.</span>  <span class="n">The</span>
+</span><span class="line">  <span class="n">uri</span><span class="s">&#39;s scheme determines the config property (fs.SCHEME.impl) naming</span>
+</span><span class="line">  <span class="n">the</span> <span class="n">FileSystem</span> <span class="n">implementation</span> <span class="n">class</span><span class="o">.</span>  <span class="n">The</span> <span class="n">uri</span><span class="s">&#39;s authority is used to</span>
+</span><span class="line">  <span class="n">determine</span> <span class="n">the</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span> <span class="k">for</span> <span class="n">a</span> <span class="n">filesystem</span><span class="o">.&lt;/</span><span class="n">description</span><span class="o">&gt;</span>
+</span><span class="line"><span class="o">&lt;/</span><span class="nb">property</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>③<code>mapred-site.xml</code> 添加下面的配置</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&lt;</span><span class="nb">property</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="n">mapred</span><span class="o">.</span><span class="n">job</span><span class="o">.</span><span class="n">tracker</span><span class="o">&lt;/</span><span class="n">name</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;</span><span class="n">localhost</span><span class="p">:</span><span class="mi">9001</span><span class="o">&lt;/</span><span class="n">value</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">description</span><span class="o">&gt;</span><span class="n">The</span> <span class="n">host</span> <span class="ow">and</span> <span class="n">port</span> <span class="n">that</span> <span class="n">the</span> <span class="n">MapReduce</span> <span class="n">job</span> <span class="n">tracker</span> <span class="n">runs</span>
+</span><span class="line">  <span class="n">at</span><span class="o">.</span>  <span class="n">If</span> <span class="s">&quot;local&quot;</span><span class="p">,</span> <span class="n">then</span> <span class="n">jobs</span> <span class="n">are</span> <span class="n">run</span> <span class="ow">in</span><span class="o">-</span><span class="n">process</span> <span class="k">as</span> <span class="n">a</span> <span class="n">single</span> <span class="nb">map</span>
+</span><span class="line">  <span class="ow">and</span> <span class="nb">reduce</span> <span class="n">task</span><span class="o">.</span>
+</span><span class="line">  <span class="o">&lt;/</span><span class="n">description</span><span class="o">&gt;</span>
+</span><span class="line"><span class="o">&lt;/</span><span class="nb">property</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>④<code>hdfs-site.xml</code> 添加下面的配置 [还可以配置namenode和datanode数据的保存位置，可以参见教程<a href="http://www.tianjun.ml/essays/16">田俊童鞋的Hadoop的安装部署与配置</a>]</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&lt;</span><span class="nb">property</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="n">dfs</span><span class="o">.</span><span class="n">replication</span><span class="o">&lt;/</span><span class="n">name</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">value</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="n">description</span><span class="o">&gt;</span><span class="n">Default</span> <span class="n">block</span> <span class="n">replication</span><span class="o">.</span>
+</span><span class="line">  <span class="n">The</span> <span class="n">actual</span> <span class="n">number</span> <span class="n">of</span> <span class="n">replications</span> <span class="n">can</span> <span class="n">be</span> <span class="n">specified</span> <span class="n">when</span> <span class="n">the</span> <span class="nb">file</span> <span class="ow">is</span> <span class="n">created</span><span class="o">.</span>
+</span><span class="line">  <span class="n">The</span> <span class="n">default</span> <span class="ow">is</span> <span class="n">used</span> <span class="k">if</span> <span class="n">replication</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">specified</span> <span class="ow">in</span> <span class="n">create</span> <span class="n">time</span><span class="o">.</span>
+</span><span class="line">  <span class="o">&lt;/</span><span class="n">description</span><span class="o">&gt;</span>
+</span><span class="line"><span class="o">&lt;/</span><span class="nb">property</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(8)格式化namenode</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">hduser</span><span class="nd">@ubuntu</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">hadoop</span> <span class="n">namenode</span> <span class="o">-</span><span class="n">format</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(9)执行<code>start-all.sh</code>启动测试</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">hduser</span><span class="nd">@ubuntu</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">start</span><span class="o">-</span><span class="nb">all</span><span class="o">.</span><span class="n">sh</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(10)执行<code>jps</code>查看进程</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">hduser</span><span class="nd">@ubuntu</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">jps</span>
+</span><span class="line"><span class="mi">5620</span> <span class="n">JobTracker</span>
+</span><span class="line"><span class="mi">5313</span> <span class="n">DataNode</span>
+</span><span class="line"><span class="mi">5541</span> <span class="n">SecondaryNameNode</span>
+</span><span class="line"><span class="mi">5897</span> <span class="n">Jps</span>
+</span><span class="line"><span class="mi">5851</span> <span class="n">TaskTracker</span>
+</span><span class="line"><span class="mi">5041</span> <span class="n">NameNode</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>OK！恭喜你！至此安装过程就大功告成了！</p>
+
+<p>如果你需要配置成集群模式的话还是可以参考好友<a href="http://www.tianjun.ml/essays/16">田俊童鞋的Hadoop的安装部署与配置</a>，不能推荐的更多，哈哈哈！</p>
+
+<p>安装过程中所有执行的命令及其输出见<a href="https://gist.github.com/hujiaweibujidao/a83fca7b7f40d0029c60">这个Gist</a></p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/12/hadoop-installation/">http://hujiaweibujidao.github.io/blog/2014/05/12/hadoop-installation/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Algorithms-PageRank]]></title>
@@ -3826,75 +4066,6 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-6/">http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-6/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CS 5-Definite Integral]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-5/"/>
-    <updated>2014-04-27T14:29:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-5</id>
-    <content type="html"><![CDATA[<p><strong><center>微积分总结 Summary of Calculus</center></strong>
-<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
-
-<h3 id="center-center"><center>第五部分 定积分及其应用</center></h3>
-
-<h4 id="section">第一节 定积分的概念</h4>
-<p>引例，定积分的概念，定积分的几何意义，定积分的基本性质</p>
-
-<p>为什么会有定积分？定积分最开始是为了解决平面内不规则图形的面积或者不规则物体的体积而提出的实际问题。但是，这个问题直到17世纪牛顿和莱布尼茨发现了微分和积分之间的内在联系之后，提出了计算定积分的基本方法。需要注意的是，定积分并不是直接就建立在不定积分之上的，不是有了不定积分才有了定积分，两者是不同的概念，但是又有内在联系！这个联系就是牛顿-莱布尼茨公式！</p>
-
-<p>不定积分是微分的逆运算，它是函数f(x)的原函数，是由无穷多个函数组成的函数族；而定积分是一个确定的数值，是一种特殊的和的极限(定积分常常使用<strong>分割-近似代替-求和-取极限</strong>的方式来解释)，该数值与积分变量使用的字母无关，即<script type="math/tex">\int_{a}^{b} f(x)dx = \int_{a}^{b} f(t)dt </script>。</p>
-
-<p>如果函数f(x)在区间(a,b)上连续或者在[a,b]上有界且只有有限个间断点，则函数f(x)在[a,b]上可积。</p>
-
-<p>定积分的几何意义自然就是曲线与坐标轴和代表积分区间的直线围成的曲边梯形的面积。这个面积可正可负，定积分是这些面积的代数和(即有加有减)，如下便有<script type="math/tex">\int_{a}^{b}=S1-S2+S3</script>。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/dingjifen.png" alt="image" /></p>
-
-<p>定积分的性质：<script type="math/tex">\int_{a}^{b}f(x)dx=-\int_{b}^{a}f(x)dx, ( a>b )</script></p>
-
-<p>定积分中值定理：函数f(x)在区间[a,b]上连续，则在[a,b]上至少有一点满则<script type="math/tex">\int_{a}^{b}f(x)dx=f(\varepsilon)(b-a), a \le \varepsilon \le b</script>，这个中值定理(又叫中值公式)和微分中的拉格朗日中值定理的结构很相似，但是几何意义完全不同了，<strong>拉格朗日中值定理指的是微分也就是斜率相等，而定积分中值定理的几何意义指的其实就是面积相等！</strong>如果用物体运动来解释的话，那就是<script type="math/tex">f(\varepsilon)</script>其实就是物体在a到b的时间段内的平均速度，平均速度乘以运动时间就是总位移了。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/jifen_midvalue.png" alt="image" /></p>
-
-<h4 id="section-1">第二节 微积分的基本定理</h4>
-<p>变速直线运动中位置函数与速度函数之间的联系，积分上限函数及其导数，牛顿一莱布尼兹公式</p>
-
-<p>如果我们用物体的运动来解释定积分的话，那么定积分<script type="math/tex">\int_{a}^{b}vdt</script>表示的就是物体从时刻a到时刻b内运动的位移。</p>
-
-<p>积分上限函数，这个函数很重要，而且来源有些巧妙，正是这个函数引出了后面的牛顿-莱布尼茨公式。</p>
-
-<p>假设x是区间[a,b]上的任意一点，那么对于区间[a,x]上的定积分<script type="math/tex">\int_{a}^{x}f(x)dx</script>，因为定积分与积分变量的字母无关，即<script type="math/tex">\int_{a}^{x}f(x)dx=\int_{a}^{x}f(t)dt</script>，如果积分上限x在区间[a,b]上任意变动的话，那么对于任意一个x，定积分都有一个值对应，所以它在区间[a,b]上定义了一个函数！假设这个函数记为<script type="math/tex">\Phi(x)=\int_{a}^{x}f(t)dt, (a \le x \le b)</script>，该函数不仅是连续的，而且可导，导数就是f(x)。由此联想下原函数的定义，我们发现一个结论，<strong>一个连续函数f(x)的原函数是存在的，而且这个原函数之一就是它对应的积分上限函数</strong>！这就表明了积分学中的定积分和原函数之间的联系！</p>
-
-<p>在上面的基础之上，便有了牛顿-莱布尼茨公式！它就更加巧妙地找到了定积分的计算和原函数之间的联系，即<script type="math/tex">\int_{a}^{b}f(x)dx=F(b)-F(a)</script>，<strong>这个公式的意义就是一个连续函数在区间[a,b]上的定积分等于它的任一原函数在该区间上的增量！</strong></p>
-
-<h4 id="section-2">第三节 定积分的换元法和分部积分法</h4>
-<p>定积分的换元法，定积分的分部积分法</p>
-
-<p>求定积分方法其实和求不定积分的方法差不多，找到了原函数然后使用牛顿-莱布尼茨公式即可。</p>
-
-<h4 id="section-3">第四节 反常积分</h4>
-<p>无穷限的反常积分，无界函数的反常积分</p>
-
-<p>反常积分有两类：
-一类是指函数是无穷限的，也就是积分区间是从[<script type="math/tex">-\infty</script>,b]或者从[a,<script type="math/tex">+\infty</script>]或者从[<script type="math/tex">-\infty</script>,<script type="math/tex">+\infty</script>]，即区间包含了无穷，这一类要考虑函数f(x)在无穷限时极限是否存在，如果存在则根据牛顿-莱布尼茨公式即可求解，如果不存在那么反常积分发散；
-一类是指函数是无界的，也就是函数f(x)在a的领域内是无界的，也就是趋近<script type="math/tex">\pm\infty</script>，此时a称为瑕点(无界间断点)，如果极限<script type="math/tex">\lim_{t \to a^{+}}\int_{t}^{b}f(x)dx,(t>a)</script>存在则根据牛顿-莱布尼茨公式即可求解，否则它就是发散的。</p>
-
-<h4 id="section-4">第五节 定积分的应用</h4>
-<p>定积分的元素法，定积分的几何应用，定积分的物理应用</p>
-
-<p>定积分的应用自然是和定积分概念引入时一样，主要是为了计算面积和体积。元素法是定积分计算的老办法，也就是四部曲(<strong>分割-近似代替-求和-取极限</strong>)。</p>
-
-<p>面积的计算包括直角坐标和极坐标下两种情况，定积分还可以用来计算旋转体的体积</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/dingjifen_area.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/xuanzhuanti.png" alt="image" /></p>
-
-<p>定积分还可以用来求平面曲线的弧长，例子略过。</p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-5/">http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-5/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: hadoop | Hujiawei Bujidao]]></title>
+  <link href="http://hujiaweibujidao.github.io/blog/categories/hadoop/atom.xml" rel="self"/>
+  <link href="http://hujiaweibujidao.github.io/"/>
+  <updated>2014-05-12T21:04:55+08:00</updated>
+  <id>http://hujiaweibujidao.github.io/</id>
+  <author>
+    <name><![CDATA[hujiawei]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hadoop Installation - Single Node Setup]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/12/hadoop-installation/"/>
+    <updated>2014-05-12T20:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/12/hadoop-installation</id>
+    <content type="html"><![CDATA[<p>上学期在Mac上搭建好了Hadoop，因为这学期开学重装了系统就没了，以为不会再折腾，结果大数据作业又要整hadoop，于是乎，爱折腾的程序猿又整了下，有过一次经历，这次简单多了，下面简单的列举主要步骤。</p>
+
+<p>感谢下面两份教程：</p>
+
+<p>1.[en]<a href="http://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/">Running Hadoop on Ubuntu Linux (Single-Node Cluster)</a></p>
+
+<p>2.[cn]<a href="http://www.tianjun.ml/essays/16">田俊童鞋的Hadoop的安装部署与配置</a></p>
+
+<hr />
+
+<p>1.下载部分</p>
+
+<p>(0)你肯定不是安装到本地的啦，先安装VMware吧，我会告诉你这货需要序列号吗?</p>
+
+<p>(1)Ubuntu：http://www.ubuntu.com/</p>
+
+<p>随便这个Desktop版本下载，我的是12.04 LTS</p>
+
+<p>(2)JDK：http://hadoop.apache.org/</p>
+
+<p>个人喜欢从Oracle上下载JDK来安装，不喜欢<code>apt-get</code>模式，我使用的是<code>JDK1.7</code></p>
+
+<p>(3)Hadoop：http://hadoop.apache.org/</p>
+
+<p>我使用的是上学期用的1.2.1版本，名称<code>hadoop-1.2.1-bin.tar.gz</code></p>
+
+<p>2.配置Java环境 [该部分直接摘自我之前<a href="http://hujiaweibujidao.github.io/blog/2014/02/21/android-ndk-and-opencv-development-4/">Android和OpenCV开发中的配置</a>]</p>
+
+<p>①下载<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Oracle JDK</a>，下载的版本是JDK1.7.0_40</p>
+
+<p>②下载之后解压即可，解压路径为<code>/home/xface/android/jdk1.7.0</code></p>
+
+<p>③打开终端，输入<code>sudo gedit /etc/profile</code>，在文件末尾添加下面内容</p>
+
+<p><code>python
+JAVA_HOME=/home/xface/android/jdk1.7.0
+export PATH=$JAVA_HOME/bin:$PATH
+</code></p>
+
+<p>如下图所示，后面环境配置中添加内容也是如此</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201402/etcprofile.png" alt="image" /></p>
+
+<p>④打开终端输入<code>java -version</code>进行测试</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201402/javaversion.png" alt="image" /></p>
+
+<p>3.配置Hadoop环境</p>
+
+<p>(1)添加账户和组</p>
+
+<p><code>
+sudo addgroup hadoop
+sudo adduser --ingroup hadoop hduser
+</code></p>
+
+<p>(2)安装openssh-server，并配置公钥</p>
+
+<p><code>
+sudo apt-get update
+sudo apt-get install openssh-server
+su - hduser
+ssh-keygen -t rsa -P ""
+cat $HOME/.ssh/id_rsa.pub &gt;&gt; $HOME/.ssh/authorized_keys
+ssh localhost #测试
+</code></p>
+
+<p>(3)Disabling IPv6? </p>
+
+<p>这步我没有操作，如果需要请参考上面的教程<a href="http://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/">Running Hadoop on Ubuntu Linux (Single-Node Cluster)</a></p>
+
+<p>(4)解压<code>hadoop-1.2.1-bin.tar.gz</code>，然后重命名为<code>hadoop</code>，接着修改文件夹所有者</p>
+
+<p><code>
+mv hadoop-1.2.1 hadoop
+chown -R hduser:hadoop hadoop
+</code></p>
+
+<p>(5)修改文件<code>/etc/profile</code>中系统环境变量的配置</p>
+
+<p>```
+#set hadoop environment</p>
+
+<p>HADOOP_HOME=/home/xface/hadoop/hadoop
+export PATH=${PATH}:${HADOOP_HOME}/bin
+```</p>
+
+<p>(6)在hadoop安装目录下新建临时文件目录<code>tmp</code>和日志文件目录<code>logs</code></p>
+
+<p><code>
+sudo mkdir -p tmp
+sudo chown hduser:hadoop tmp
+# ...and if you want to tighten up security, chmod from 755 to 750...
+sudo chmod 750 tmp #我习惯用777
+#logs的配置和tmp一样
+</code></p>
+
+<p>(7)配置hadoop的<code>conf</code>文件夹下的文件</p>
+
+<p>①<code>hadoop-env.sh</code> 修改Java配置</p>
+
+<p><code>
+export JAVA_HOME=/home/xface/android/jdk1.7.0
+</code></p>
+
+<p>②<code>core-site.xml</code> 添加下面的配置</p>
+
+<p>```</p>
+<property>
+  <name>hadoop.tmp.dir</name>
+  <value>/home/xface/hadoop/tmp</value>
+  <description>A base for other temporary directories.</description>
+</property>
+
+<property>
+  <name>fs.default.name</name>
+  <value>hdfs://localhost:9000</value>
+  <description>The name of the default file system.  A URI whose
+  scheme and authority determine the FileSystem implementation.  The
+  uri's scheme determines the config property (fs.SCHEME.impl) naming
+  the FileSystem implementation class.  The uri's authority is used to
+  determine the host, port, etc. for a filesystem.</description>
+</property>
+<p>```</p>
+
+<p>③<code>mapred-site.xml</code> 添加下面的配置</p>
+
+<p>```</p>
+<property>
+  <name>mapred.job.tracker</name>
+  <value>localhost:9001</value>
+  <description>The host and port that the MapReduce job tracker runs
+  at.  If "local", then jobs are run in-process as a single map
+  and reduce task.
+  </description>
+</property>
+<p>```</p>
+
+<p>④<code>hdfs-site.xml</code> 添加下面的配置 [还可以配置namenode和datanode数据的保存位置，可以参见教程<a href="http://www.tianjun.ml/essays/16">田俊童鞋的Hadoop的安装部署与配置</a>]</p>
+
+<p>```</p>
+<property>
+  <name>dfs.replication</name>
+  <value>1</value>
+  <description>Default block replication.
+  The actual number of replications can be specified when the file is created.
+  The default is used if replication is not specified in create time.
+  </description>
+</property>
+<p>```</p>
+
+<p>(8)格式化namenode</p>
+
+<p><code>
+hduser@ubuntu:~$ hadoop namenode -format
+</code></p>
+
+<p>(9)执行<code>start-all.sh</code>启动测试</p>
+
+<p><code>
+hduser@ubuntu:~$ start-all.sh
+</code></p>
+
+<p>(10)执行<code>jps</code>查看进程</p>
+
+<p><code>
+hduser@ubuntu:~$ jps
+5620 JobTracker
+5313 DataNode
+5541 SecondaryNameNode
+5897 Jps
+5851 TaskTracker
+5041 NameNode
+</code></p>
+
+<p>OK！恭喜你！至此安装过程就大功告成了！</p>
+
+<p>如果你需要配置成集群模式的话还是可以参考好友<a href="http://www.tianjun.ml/essays/16">田俊童鞋的Hadoop的安装部署与配置</a>，不能推荐的更多，哈哈哈！</p>
+
+<p>安装过程中所有执行的命令及其输出见<a href="https://gist.github.com/hujiaweibujidao/a83fca7b7f40d0029c60">这个Gist</a></p>
+
+]]></content>
+  </entry>
+  
+</feed>
