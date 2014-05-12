@@ -7,7 +7,7 @@ categories: hadoop
 published: true
 ---
 
-上学期在Mac上搭建好了Hadoop，因为这学期开学重装了系统就没了，以为不会再折腾，结果大数据作业又要整hadoop，于是乎，爱折腾的程序猿又整了下，有过一次经历，这次简单多了，下面简单的列举主要步骤。
+上学期在Mac上搭建好了Hadoop，因为这学期开学重装了系统就没了，以为不会再折腾，结果大数据作业又要整hadoop，于是乎，爱折腾的程序猿又来折腾咯，有过上一次安装的经历，这次简单多了，下面简单的列举主要步骤。
 
 感谢下面两份教程：
 
@@ -21,15 +21,15 @@ published: true
 
 (0)你肯定不是安装到本地的啦，先安装VMware吧，我会告诉你这货需要序列号吗?
 
-(1)Ubuntu：http://www.ubuntu.com/
+(1)Ubuntu：[http://www.ubuntu.com/](http://www.ubuntu.com/)
 
 随便这个Desktop版本下载，我的是12.04 LTS
 
-(2)JDK：http://hadoop.apache.org/
+(2)JDK：[http://hadoop.apache.org/](http://hadoop.apache.org/)
 
 个人喜欢从Oracle上下载JDK来安装，不喜欢`apt-get`模式，我使用的是`JDK1.7`
 
-(3)Hadoop：http://hadoop.apache.org/
+(3)Hadoop：[http://hadoop.apache.org/](http://hadoop.apache.org/)
 
 我使用的是上学期用的1.2.1版本，名称`hadoop-1.2.1-bin.tar.gz`
 
