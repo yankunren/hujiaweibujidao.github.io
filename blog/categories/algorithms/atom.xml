@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: algorithms | Hujiawei Bujidao]]></title>
+  <link href="http://hujiaweibujidao.github.io/blog/categories/algorithms/atom.xml" rel="self"/>
+  <link href="http://hujiaweibujidao.github.io/"/>
+  <updated>2014-05-12T21:29:15+08:00</updated>
+  <id>http://hujiaweibujidao.github.io/</id>
+  <author>
+    <name><![CDATA[hujiawei]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Algorithms-PageRank]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank/"/>
+    <updated>2014-05-12T18:12:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank</id>
+    <content type="html"><![CDATA[<p>PageRank算法</p>
+
+<p>TODO</p>
+
+]]></content>
+  </entry>
+  
+</feed>
