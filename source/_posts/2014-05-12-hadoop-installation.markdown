@@ -182,9 +182,9 @@ hduser@ubuntu:~$ jps
 5041 NameNode
 ```
 
-OK！恭喜你！至此安装过程就大功告成了！
+OK！恭喜你！至此安装过程就大功告成了！如果比较心急，可以按照[推荐的教程](http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/#running-a-mapreduce-job)运行个MapReduce任务试试看啦，哈哈哈
 
-如果你需要配置成集群模式的话还是可以参考好友[田俊童鞋的Hadoop的安装部署与配置](http://www.tianjun.ml/essays/16)，不能推荐的更多，哈哈哈！
+如果你需要配置成集群模式的话还是可以参考好友[田俊童鞋的Hadoop的安装部署与配置](http://www.tianjun.ml/essays/16)，不能推荐的更多，哈哈哈
 
 安装过程中所有执行的命令及其输出见[这个Gist](https://gist.github.com/hujiaweibujidao/a83fca7b7f40d0029c60)
 
