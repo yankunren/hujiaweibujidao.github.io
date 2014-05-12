@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-12T21:06:54+08:00</updated>
+  <updated>2014-05-12T21:10:13+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -18,7 +18,7 @@
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/12/hadoop-installation/"/>
     <updated>2014-05-12T20:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/12/hadoop-installation</id>
-    <content type="html"><![CDATA[<p>上学期在Mac上搭建好了Hadoop，因为这学期开学重装了系统就没了，以为不会再折腾，结果大数据作业又要整hadoop，于是乎，爱折腾的程序猿又整了下，有过一次经历，这次简单多了，下面简单的列举主要步骤。</p>
+    <content type="html"><![CDATA[<p>上学期在Mac上搭建好了Hadoop，因为这学期开学重装了系统就没了，以为不会再折腾，结果大数据作业又要整hadoop，于是乎，爱折腾的程序猿又来折腾咯，有过上一次安装的经历，这次简单多了，下面简单的列举主要步骤。</p>
 
 <p>感谢下面两份教程：</p>
 
@@ -32,15 +32,15 @@
 
 <p>(0)你肯定不是安装到本地的啦，先安装VMware吧，我会告诉你这货需要序列号吗?</p>
 
-<p>(1)Ubuntu：http://www.ubuntu.com/</p>
+<p>(1)Ubuntu：<a href="http://www.ubuntu.com/">http://www.ubuntu.com/</a></p>
 
 <p>随便这个Desktop版本下载，我的是12.04 LTS</p>
 
-<p>(2)JDK：http://hadoop.apache.org/</p>
+<p>(2)JDK：<a href="http://hadoop.apache.org/">http://hadoop.apache.org/</a></p>
 
 <p>个人喜欢从Oracle上下载JDK来安装，不喜欢<code>apt-get</code>模式，我使用的是<code>JDK1.7</code></p>
 
-<p>(3)Hadoop：http://hadoop.apache.org/</p>
+<p>(3)Hadoop：<a href="http://hadoop.apache.org/">http://hadoop.apache.org/</a></p>
 
 <p>我使用的是上学期用的1.2.1版本，名称<code>hadoop-1.2.1-bin.tar.gz</code></p>
 
