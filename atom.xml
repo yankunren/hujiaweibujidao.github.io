@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-12T21:04:55+08:00</updated>
+  <updated>2014-05-12T21:06:54+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -242,9 +242,9 @@
 </span><span class="line"><span class="mi">5041</span> <span class="n">NameNode</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>OK！恭喜你！至此安装过程就大功告成了！</p>
+<p>OK！恭喜你！至此安装过程就大功告成了！如果比较心急，可以按照<a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/#running-a-mapreduce-job">推荐的教程</a>运行个MapReduce任务试试看啦，哈哈哈</p>
 
-<p>如果你需要配置成集群模式的话还是可以参考好友<a href="http://www.tianjun.ml/essays/16">田俊童鞋的Hadoop的安装部署与配置</a>，不能推荐的更多，哈哈哈！</p>
+<p>如果你需要配置成集群模式的话还是可以参考好友<a href="http://www.tianjun.ml/essays/16">田俊童鞋的Hadoop的安装部署与配置</a>，不能推荐的更多，哈哈哈</p>
 
 <p>安装过程中所有执行的命令及其输出见<a href="https://gist.github.com/hujiaweibujidao/a83fca7b7f40d0029c60">这个Gist</a></p>
 
