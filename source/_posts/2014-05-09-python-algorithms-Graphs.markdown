@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Python Algorithms - Trees"
-date: 2014-05-08 20:00
+title: "Python Algorithms - Graphs"
+date: 2014-05-08 22:00
 comments: true
 categories: algorithm
 published: true
