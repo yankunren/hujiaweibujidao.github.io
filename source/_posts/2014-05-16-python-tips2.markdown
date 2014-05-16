@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Python Tips 1"
+title: "Python Tips 2"
 date: 2014-05-16 10:00
 comments: true
 categories: python
