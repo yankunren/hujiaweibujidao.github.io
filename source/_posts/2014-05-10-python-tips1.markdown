@@ -287,6 +287,28 @@ function()
 # inside decorator.__call__() end
 ```
 
+在提供一个装饰器的例子，实现自顶向下的带备忘录的DP算法来解决斐波那契数列求值，来源于[Python Algorithms- Mastering Basic Algorithms in the Python Language](http://link.springer.com/book/10.1007%2F978-1-4302-3238-4)
+
+```
+from functools import wraps
+
+def memo(func):
+    cache={}
+    @wraps(func)
+    def wrap(*args):
+        if args not in cache:
+            cache[args]=func(*args)
+        return cache[args]
+    return wrap
+
+@memo
+def fib(i):
+    if i<2: return 1
+    return fib(i-1)+fib(i-2)
+
+print(fib(100))
+```
+
 7.描述器，元类，上下文管理库的介绍参见[伯乐在线-python高级编程技巧](http://blog.jobbole.com/61171/)
 
 
