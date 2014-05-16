@@ -552,6 +552,44 @@ flist=glob.glob(&#39;*.jpeg&#39;) 使用os.getcwd()可以得到当前目录，�
 </span><span class="line"><span class="c"># inside decorator.__call__() end</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<p>在提供一个装饰器的例子，实现自顶向下的带备忘录的DP算法来解决斐波那契数列求值，来源于<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms- Mastering Basic Algorithms in the Python Language</a></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">memo</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+</span><span class="line">    <span class="n">cache</span><span class="o">=</span><span class="p">{}</span>
+</span><span class="line">    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">args</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
+</span><span class="line">            <span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span><span class="o">=</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">wrap</span>
+</span><span class="line">
+</span><span class="line"><span class="nd">@memo</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">fib</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">fib</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 <p>7.描述器，元类，上下文管理库的介绍参见<a href="http://blog.jobbole.com/61171/">伯乐在线-python高级编程技巧</a></p>
 
 <p class="post-footer">
@@ -675,7 +713,7 @@ src="http://hujiaweibujidao.github.io/music/Wouldnt-It-Be-Nice.mp3">
 <section>
  <h1>分类目录</h1>
  <ul id="categories">
-	 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (7)</a></li>
+	 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (8)</a></li>
 <li class='category'><a href='/blog/categories/algorithms/'>algorithms (1)</a></li>
 <li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
 <li class='category'><a href='/blog/categories/blog/'>blog (1)</a></li>
@@ -689,13 +727,17 @@ src="http://hujiaweibujidao.github.io/music/Wouldnt-It-Be-Nice.mp3">
 <li class='category'><a href='/blog/categories/octopress/'>octopress (3)</a></li>
 <li class='category'><a href='/blog/categories/opencv/'>opencv (5)</a></li>
 <li class='category'><a href='/blog/categories/picture/'>picture (1)</a></li>
-<li class='category'><a href='/blog/categories/python/'>python (1)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (2)</a></li>
 
  </ul>
 </section>
 <section>
   <h1>近期文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/05/16/python-tips2/">Python Tips 1</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/05/12/hadoop-installation/">Hadoop Installation - Single Node Setup</a>
@@ -706,15 +748,11 @@ src="http://hujiaweibujidao.github.io/music/Wouldnt-It-Be-Nice.mp3">
       </li>
     
       <li class="post">
+        <a href="/blog/2014/05/12/Algorithms/">Algorithms系列</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/10/happy-mothers-day/">Happy Mother's Day</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/10/tsinghua-9ers-pictures/">Tsinghua 9ers Pictures</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/10/python-tips1/">Python Tips 1</a>
       </li>
     
   </ul>

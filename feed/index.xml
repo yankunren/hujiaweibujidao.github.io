@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-15T16:38:01+08:00</updated>
+  <updated>2014-05-16T11:02:40+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python Tips 1]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/16/python-tips2/"/>
+    <updated>2014-05-16T10:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/16/python-tips2</id>
+    <content type="html"><![CDATA[<p>关于Python的好文章集锦：</p>
+
+<p>1.<a href="http://www.toptal.com/python/top-10-mistakes-that-python-programmers-make">Top 10 Mistakes that Python Programmers Make</a></p>
+
+<p>2.TO BE CONTINUED…</p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/16/python-tips2/">http://hujiaweibujidao.github.io/blog/2014/05/16/python-tips2/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hadoop Installation - Single Node Setup]]></title>
@@ -264,6 +280,20 @@
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank/">http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Algorithms系列]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/12/Algorithms/"/>
+    <updated>2014-05-12T11:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/12/Algorithms</id>
+    <content type="html"><![CDATA[<p>战线拉得有点长，囫囵吞枣地看了写书写了些代码，时间久了可能就会忘了当时怎么想的，所以，总结是很有必要的一个过程，重新捋一捋思路，重新写写代码，势必对自己的知识储备有很大的好处，不求一语惊人，只求若有所获。</p>
+
+<p>故有了此系列，主要记录些在数据挖掘、机器学习、模式识别等领域的相关算法，算法不求全，但求质量佳，肯定会附上实现的源码，可能是Matlab版本的，也可能是Java或者Python版本的，如果我比较熟悉的算法会结合一个实际的案例进行分析，嗯，就捞到这些，慢慢来，持续添加各个算法，需要的敬请期待。</p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/12/Algorithms/">http://hujiaweibujidao.github.io/blog/2014/05/12/Algorithms/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
@@ -836,6 +866,44 @@
 </span><span class="line"><span class="c"># inside decorator.__call__() begin</span>
 </span><span class="line"><span class="c"># inside function()</span>
 </span><span class="line"><span class="c"># inside decorator.__call__() end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>在提供一个装饰器的例子，实现自顶向下的带备忘录的DP算法来解决斐波那契数列求值，来源于<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms- Mastering Basic Algorithms in the Python Language</a></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">memo</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+</span><span class="line">    <span class="n">cache</span><span class="o">=</span><span class="p">{}</span>
+</span><span class="line">    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">args</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
+</span><span class="line">            <span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span><span class="o">=</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">wrap</span>
+</span><span class="line">
+</span><span class="line"><span class="nd">@memo</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">fib</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">fib</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>7.描述器，元类，上下文管理库的介绍参见<a href="http://blog.jobbole.com/61171/">伯乐在线-python高级编程技巧</a></p>
@@ -3831,195 +3899,6 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-9/">http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-9/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CS 8-Multivariable Differential Calculus]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-8/"/>
-    <updated>2014-04-27T14:29:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-8</id>
-    <content type="html"><![CDATA[<p><strong><center>微积分总结 Summary of Calculus</center></strong>
-<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
-
-<h3 id="center-center"><center>第八部分 多元函数微分法及其应用</center></h3>
-
-<h4 id="section">第一节 多元函数的基本概念</h4>
-<p>平面点集、n维空间，多元函数的概念，二元函数的极限，二元函数的连续</p>
-
-<p>将前面的一元函数的知识扩展下就知道了。</p>
-
-<p>二元函数的极限称为二重极限，二重极限的存在是指<script type="math/tex">P(x,y)</script>以任何方式趋近<script type="math/tex">P_{0}(x_{0},y_{0})</script>(有别于在一元函数中只有从左边或者从右边趋近两种方式)，如果不同方式趋近时的极限值不同的话，说明二重极限不存在！</p>
-
-<h4 id="section-1">第二节 偏导数</h4>
-<p>偏导数的定义及其计算方法，二元函数偏导数的几何意义，高阶偏导数</p>
-
-<p>在多元微分学中，自变量多了，所以导数变成偏导数了。对于二元函数偏导数的几何意义如下，也是斜率，但是要看如何过该点确定曲面的切线以及切线是对哪个轴的斜率！</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/piandaoshu.png" alt="image" /></p>
-
-<p>高阶偏导数和前面的高阶导数类似，但是因为自变量多了，也就多了个混合偏导数，对于连续函数<script type="math/tex">z=f(x,y)</script>，在其连续区域内，两个二阶混合偏导数相等！</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/gaojipiandaoshu.png" alt="image" /></p>
-
-<h4 id="section-2">第三节 全微分</h4>
-<p>全微分的定义，可微、偏导数及连续之间的关系，全微分在近似计算中的应用</p>
-
-<p>在多元微分学中对于某一个变量的微分叫做偏微分，对全部变量的微分就扩展成了全微分的概念，同样，多元函数微分学中微分的意义也是希望使用自变量的线性函数来近似代替函数的全增量<script type="math/tex">\vartriangle z</script>。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/quanweifen.png" alt="image" /></p>
-
-<p>全微分同样可以用于近似计算。</p>
-
-<h4 id="section-3">第四节 多元复合函数和隐函数的求导法则</h4>
-<p>多元复合函数的求导法则，隐函数求导法则</p>
-
-<p>多元复合函数的求导可以使用“链式法则”，即<strong>“分段相乘，分叉相加，单路全导，叉路偏导”</strong>！</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/chainrule.png" alt="image" /></p>
-
-<p>对应上面两种情况下的“链式图”如下，第一种情况，z到x和y是分叉，分叉相加，z到x到t是分段，分段相乘，x到t是单路，单路全导；第二种情况，z到u和v是分叉，分叉相加，z到u到x是分段，分段相乘，u到t是叉路，叉路偏导！</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/chainrulefig.png" alt="image" /></p>
-
-<p>隐函数求导是很重要的一部分，因为在实际应用中，很多时候得到的都是一个隐函数，并没有具体的函数表达式，对于它的求导有下面三个存在定理。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/yinfun1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/yinfun2.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/yinfun3.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/yinfun4.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/yinfun5.png" alt="image" /></p>
-
-<p>最后的雅可比式比较重要，在数值分析中有相应的应用，理解它和行列式之间的关系，详情可看<a href="http://zh.wikipedia.org/wiki/%E8%A1%8C%E5%88%97%E5%BC%8F">行列式 on wiki</a>。<a href="http://zh.wikipedia.org/wiki/%E9%9B%85%E5%8F%AF%E6%AF%94%E7%9F%A9%E9%98%B5">雅可比矩阵 on wiki</a></p>
-
-<h4 id="section-4">第五节 偏导数的几何应用</h4>
-<p>空间曲线的切线与法平面，曲面切平面与法线</p>
-
-<p>空间曲线的切线需要得到该点的各个方向的偏导数，法平面是过该点并垂直于切线的平面。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/spaceline_qiexian.png" alt="image" /></p>
-
-<p>曲面的切平面与法线略过。</p>
-
-<h4 id="section-5">第六节 多元函数的极值及其最值</h4>
-<p>极值的定义，极值存在的条件，最大值与最小值，拉格朗日乘数法</p>
-
-<p>条件极值问题转化成无条件极值问题，使用拉格朗日乘数法，这是一个非常重要的解决条件极值问题的方法，在机器学习的很多算法中使用这种方法，比如Fisher判别等等。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/lagerang1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/lagerang2.png" alt="image" /></p>
-
-<h4 id="section-6">补充节 方向导数和梯度</h4>
-
-<p>方向导数：很多时候我们想知道函数沿着某个方向的变化率，这个方向不一定是坐标轴方向。
-<img src="http://hujiaweibujidao.github.io/images/math/fangxiangdaoshu1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/fangxiangdaoshu2.png" alt="image" /></p>
-
-<p>梯度：梯度就是一个向量，表示曲线上某点沿着曲线的某个方向发生移动的向量。梯度的应用自然是梯度下降法，该方法可以让我们的优化问题的极值函数尽快地趋近问题的最优解。</p>
-
-<p>这里还有等值线和等值面的概念，对于二元函数<script type="math/tex">f(x,y)</script>可以得到其对应的等值线<script type="math/tex">f(x,y)=c</script>，函数在某一点的梯度方向就是等值线在该点的法线方向。</p>
-
-<p>还要理解梯度和方向导数之间的关系，如果梯度的方向与方向导数取得最大值的方向相同的话，那么该方向就是函数变化最快的方向。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/tidu1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/tidu2.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/tidu3.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/tidu4.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/tidu5.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/tidu6.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/tidu7.png" alt="image" /></p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-8/">http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-8/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CS 7-Vector Algebra]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-7/"/>
-    <updated>2014-04-27T14:29:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-7</id>
-    <content type="html"><![CDATA[<p><strong><center>微积分总结 Summary of Calculus</center></strong>
-<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
-
-<h3 id="center-center"><center>第七部分 向量代数与空间解析几何</center></h3>
-<p>本部分是多元微分学的基础，而且涉及到了很多的空间知识，图形比较多，所以这部分的图片比较多，如若不清晰请Wiki或者翻书查看。</p>
-
-<h4 id="section">第一节 空间直角坐标系</h4>
-<p>空间点的直角坐标，空间两点的距离</p>
-
-<h4 id="section-1">第二节 向量代数</h4>
-<p>向量的概念，向量的线性运算，向量的坐标，向量的模、方向角、投影，向量的数量积与向量积</p>
-
-<p>方向角和方向余弦的概念：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/fangxiangjiao1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/fangxiangjiao2.png" alt="image" /></p>
-
-<p>投影的概念，投影是一个数值，当投影是指是一个向量<script type="math/tex">\overrightarrow{r}</script>在另一个向量<script type="math/tex">\overrightarrow{u}</script>上的投影时，投影就是投影到目标向量上得到的向量的模与目标向量的单位向量的模的比值。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/touying1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/touying2.png" alt="image" /></p>
-
-<p>向量的数量积的概念，即<script type="math/tex">ab=\|a\|\|b\|\cos \theta</script>，在物理中就是指力F做的功W。数量积又叫内积，是很重要的概念，在线代中同样有矩阵内积的概念，在数据挖掘中有一种很常用的度量相似度的方式，即余弦相似度，一般用于文本类似的数据求相似度。向量的向量积是<script type="math/tex">ab=\|a\|\|b\|\sin\theta</script>。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/shuliangji1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/shuliangji2.png" alt="image" /></p>
-
-<h4 id="section-2">第三节 平面及其方程</h4>
-<p>平面的点法式方程，平面的一般方程，两平面的夹角</p>
-
-<p>已知一个平面内的一点和这个平面的法向量便可以确定一个平面了；其实，任何一个三元一次方程<script type="math/tex">Ax+By+Cz+D=0</script>都可以确定一个平面，其法向量就是(A,B,C)。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/space1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/space2.png" alt="image" /></p>
-
-<p>两个平面的夹角可用两个平面的法向量之间的夹角来得到。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/spaceangle.png" alt="image" />
-       　</p>
-
-<h4 id="section-3">第四节 空间直线及其方程</h4>
-<p>空间直线的一般方程，空间直线的对称式方程与参数方程，两直线的夹角，直线与平面的夹角</p>
-
-<p>两个平面的交线就可以确定一条空间直线；已知直线上一点和直线的方向向量也可以确定一条直线。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/line1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/line2.png" alt="image" /></p>
-
-<p>两条直线之间的夹角可用两条直线的方向向量之间的夹角来得到</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/lineangle.png" alt="image" /></p>
-
-<p>直线与平面之间的夹角可用直线的方向向量和平面的法向量之间的夹角来得到。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/linespaceangle.png" alt="image" /></p>
-
-<h4 id="section-4">第五节 曲面及其方程</h4>
-<p>曲面方程的概念，旋转曲面，柱面，二次曲面</p>
-
-<p>曲面方程</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/qumian.png" alt="image" /></p>
-
-<p>旋转曲面：平面内一条曲线绕着平面上的一条直线旋转一周得到的曲面叫做旋转曲面。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/xuanzhuanqumian.png" alt="image" /></p>
-
-<p>柱面：一条直线绕着一条定曲线平行移动得到的轨迹称为柱面。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/zhumian.png" alt="image" /></p>
-
-<p>二次曲面<a href="http://zh.wikipedia.org/wiki/%E4%BA%8C%E6%AC%A1%E6%9B%B2%E9%9D%A2">on wiki</a>，与平面解析几何中定义二次曲线类似，三元二次方程<script type="math/tex">F(x,y,z)=0</script>所表示的曲面称为二次曲面，而平面是一次曲面。Wikipedia上显示了各种二次曲面的方程和二次曲面的图形。</p>
-
-<h4 id="section-5">第六节 空间曲线及其方程</h4>
-<p>空间曲线的一般方程，空间曲线的参数方程，空间曲线在坐标面上的投影</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/spaceline1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/spaceline2.png" alt="image" /></p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-7/">http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-7/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
