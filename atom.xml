@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-17T22:01:03+08:00</updated>
+  <updated>2014-05-17T23:28:00+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -949,9 +949,11 @@
 
 <p>4.Clustering: K-Means, Hierarchial Clustering…</p>
 
-<p>5.SVM, Percepton…</p>
+<p>5.SVM, Percepton, Nueral Network…</p>
 
-<p>6.Apriori, FP-Growth…</p>
+<p>6.Assosiation Analysis: Apriori, FP-Growth…</p>
+
+<p>7.Others: gradient descent, stochastic gradient descent, (Gussian) Mixture Model, Recommendation System</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/12/Algorithms/">http://hujiaweibujidao.github.io/blog/2014/05/12/Algorithms/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
@@ -1571,6 +1573,39 @@
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/">http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Python Algorithms - Dynamic Programming]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/"/>
+    <updated>2014-05-08T23:30:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming</id>
+    <content type="html"><![CDATA[<p>参考内容：</p>
+
+<p>1.<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms: Mastering Basic Algorithms in the Python Language</a></p>
+
+<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
+
+<p>Todo&lt;p class=&#8217;post-footer&#8217;&gt;
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/">http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a> Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)&lt;/p&gt;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Python Algorithms - Greedy]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-greedy/"/>
+    <updated>2014-05-08T23:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-greedy</id>
+    <content type="html"><![CDATA[<p>参考内容：</p>
+
+<p>1.<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms: Mastering Basic Algorithms in the Python Language</a></p>
+
+<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
+
+<p>Todo
+&lt;p class=&#8217;post-footer&#8217;&gt;
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-greedy/">http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-greedy/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a> Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)&lt;/p&gt;</p>
 ]]></content>
   </entry>
   
@@ -4466,122 +4501,6 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CS 10-Differential Equations]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/28/calculus-summary-chapter-10/"/>
-    <updated>2014-04-28T14:29:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/28/calculus-summary-chapter-10</id>
-    <content type="html"><![CDATA[<p><strong><center>微积分总结 Summary of Calculus</center></strong>
-<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
-
-<h3 id="center-center"><center>第十部分 微分方程</center></h3>
-
-<h4 id="section">第一节 微分方程的基本概念</h4>
-<p>引例，微分方程的基本概念</p>
-
-<p>在许多问题中，我们不总是能够得到函数关系式，而是得到函数和它的导数之间的关系式，这样的关系式就是微分方程。微分方程中出现的未知函数的最高阶导数的阶数叫做微分方程的阶。</p>
-
-<p>只要是能够满足微分方程的函数都是它的解，如果解中包含了任意常数，并且任意常数的个数与阶数相同，那么这个解又叫做微分方程的通解。</p>
-
-<p>通常我们会有一些初始条件。确定了通解中的任意常数的话，那么就得到了微分方程的特解。</p>
-
-<p>求微分方程<script type="math/tex">y'=f(x,y)</script>满足初始条件<script type="math/tex">y\|_{x=x_{0}}=y_{0}</script>的特解的问题，叫做一阶微分方程的初值问题。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/chuzhi.png" alt="image" /></p>
-
-<h4 id="section-1">第二节 一阶微分方程</h4>
-<p>可分离变量方程，齐次方程，一阶线性微分方程，伯努利方程</p>
-
-<p>可分离变量方程：利用一阶微分方程的形式，巧妙地分离变量，一边是y的函数，另一边是x的函数，然后左右两边积分即可得到一个关于x和y的隐函数，这个隐函数即为微分方程的解。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/fenlibianliang1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/fenlibianliang2.png" alt="image" /></p>
-
-<p>齐次方程：将原微分方程进行调整，左边为一阶导数，右边为关于<script type="math/tex">\frac{y}{x}</script>的函数，然后可以利用可分离变量得到微分方程的解。有些非齐次的微分方程可以化为齐次方程。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/qici1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/qici2.png" alt="image" /></p>
-
-<p>一阶线性微分方程：对于未知函数和导数都是一次的微分方程。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/xianxing1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/xianxing2.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/xianxing3.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/xianxing4.png" alt="image" /></p>
-
-<p>伯努利方程：含二阶导数</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/bonuli1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/bonuli2.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/bonuli3.png" alt="image" /></p>
-
-<h4 id="section-2">第三节 可降阶的高阶微分方程</h4>
-<p>y(n)=f(x)型的微分方程，yn=f(x，y’)型的微分方程，yn=f(Y，y’)型的微分方程</p>
-
-<p>略过。</p>
-
-<h4 id="section-3">第四节 二阶常系数微分方程</h4>
-<p>通解的结构，二阶常系数齐次线性微分方程，二阶常系数非齐次线性微分方程</p>
-
-<p>略过。</p>
-
-<h4 id="section-4">第五节 微分方程的应用实例</h4>
-<p>物体冷却过程的数学模型，动力学问题，人口模型</p>
-
-<p>略过。</p>
-
-<center>Congratuation! Thank you!</center>
-<center>恭喜你，看完啦！</center>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/28/calculus-summary-chapter-10/">http://hujiaweibujidao.github.io/blog/2014/04/28/calculus-summary-chapter-10/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CS 9-Multiple Integration]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-9/"/>
-    <updated>2014-04-27T14:29:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-9</id>
-    <content type="html"><![CDATA[<p><strong><center>微积分总结 Summary of Calculus</center></strong>
-<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
-
-<h3 id="center-center"><center>第九部分 重积分</center></h3>
-
-<h4 id="section">第一节 二重积分的概念与性质</h4>
-<p>二重积分的概念，二重积分的性质</p>
-
-<p>将一元函数积分进行扩展，如果是对闭区域D进行积分的话就叫做二重积分，很重要的一类二重积分问题是求曲顶柱体的体积，利用前面的定积分的思想来看，二重积分是取很小的积分面积元素，以它们为底，以函数值为高，然后求对应的曲顶柱体的体积。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/erchongjifen.png" alt="image" /></p>
-
-<h4 id="section-1">第二节 二重积分的计算方法</h4>
-<p>直角坐标下二重积分的计算，利用极坐标计算二重积分</p>
-
-<p>直角坐标下的二重积分的计算可以看做是做两次单独的定积分。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/erchongjifen2.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/erchongjifen3.png" alt="image" /></p>
-
-<p>有些情况下实际计算时需要根据区域D的情况考虑它属于X型还是Y型，还是需要分段进行考虑。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/erchongjifen4.png" alt="image" /></p>
-
-<h4 id="section-2">第三节 三重积分</h4>
-<p>三重积分的概念，三重积分的计算</p>
-
-<p>三重积分可以看做是求密度不均匀的物体的体积，它取的是很小很小的体积元素。它的计算使用先一后二或者先二后一的方式来计算，此处略过。</p>
-
-<h4 id="section-3">第四节 重积分的应用</h4>
-<p>曲面的面积，质心</p>
-
-<p>略过。</p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-9/">http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-9/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
