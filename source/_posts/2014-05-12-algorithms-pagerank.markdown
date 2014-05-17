@@ -43,12 +43,16 @@ PageRank的核心思想有2点：
 
 ### 2.数学建模
 
-来自参考内容3，理解网页连接矩阵$G$，马尔科夫过程("冲浪")，转移矩阵$A$，概率$p$为用户点击当前网页中的某个链接地址的概率(一般都为0.85)。
+来自参考内容3，理解网页连接矩阵$G$，马尔科夫过程("网上冲浪")，转移矩阵$A$，概率$p$为用户点击当前网页中的某个链接地址的概率(一般都为0.85)。
 
 ![image](http://hujiaweibujidao.github.io/images/algos/pk-2.png)
 ![image](http://hujiaweibujidao.github.io/images/algos/pk-3.png)
 
-最后得到一个等式$Ax=x \quad (\Sigma_{i=1}^{n}x_{i}=1)$，这实际上就是求矩阵$A$的特征值为1的特征向量！下面的内容使用圆盘定理解释了1是矩阵$A$的主特征值，所以我们可以使用幂法来求解。关于幂法的详细介绍参考另一篇文章[Numerical Methods Using Matlab: 第三章 矩阵特征值和奇异值求解](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)
+最后得到一个等式$Ax=x$，这实际上就是求矩阵$A$的特征值为1的特征向量！
+
+下面的内容使用圆盘定理解释了1是矩阵$A$的主特征值，所以我们可以使用幂法来求解。
+
+关于幂法的详细介绍参考另一篇文章[Numerical Methods Using Matlab: 第三章 矩阵特征值和奇异值求解](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)
 
 ![image](http://hujiaweibujidao.github.io/images/algos/pk-4.png)
 ![image](http://hujiaweibujidao.github.io/images/algos/pk-5.png)
@@ -63,7 +67,7 @@ PageRank的核心思想有2点：
 
 (1) 幂法
 
-wiki上有一个PageRank的简便算法，它不考虑转移概率，而是采用的是迭代的方式，每次都更新下网页的pagerank值直到全部网页的pagerank值收敛了或者满足一定的阈值条件就停止，更新的方式就是将每个网页的pagerank值平摊分给它指向的所有网页，每个网页累计所有指向它的网页平摊给它的值作为它该回合的pagerank值。后面的MapReduce框架下PageRank算法的实现就采用了这个思想。考虑转移概率的情况和这个算法类似，乘上一个转移概率再加上一个随机跳转的概率。
+wiki上有一个PageRank的简便算法，它不考虑转移概率，而是采用的是迭代的方式，每次都更新所有网页的pagerank值，更新的方式就是将每个网页的pagerank值平摊分给它指向的所有网页，每个网页累计所有指向它的网页平摊给它的值作为它该回合的pagerank值，直到全部网页的pagerank值收敛了或者满足一定的阈值条件就停止。后面的MapReduce框架下PageRank算法的实现就采用了这个思想。考虑转移概率的情况和这个算法类似，乘上一个转移概率再加上一个随机跳转的概率。
 
 ![image](http://hujiaweibujidao.github.io/images/algos/pagerank-Simplified-algorithm.png)
 
