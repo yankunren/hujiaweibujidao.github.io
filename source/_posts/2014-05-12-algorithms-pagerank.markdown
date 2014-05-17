@@ -67,7 +67,9 @@ PageRank的核心思想有2点：
 
 (1) 幂法
 
-wiki上有一个PageRank的简便算法，它不考虑转移概率，而是采用的是迭代的方式，每次都更新所有网页的pagerank值，更新的方式就是将每个网页的pagerank值平摊分给它指向的所有网页，每个网页累计所有指向它的网页平摊给它的值作为它该回合的pagerank值，直到全部网页的pagerank值收敛了或者满足一定的阈值条件就停止。后面的MapReduce框架下PageRank算法的实现就采用了这个思想。考虑转移概率的情况和这个算法类似，乘上一个转移概率再加上一个随机跳转的概率。
+wiki上有一个PageRank的简便算法，它不考虑转移概率，而是采用的是迭代的方式，每次都更新所有网页的pagerank值，更新的方式就是将每个网页的pagerank值平摊分给它指向的所有网页，每个网页累计所有指向它的网页平摊给它的值作为它该回合的pagerank值，直到全部网页的pagerank值收敛了或者满足一定的阈值条件就停止。
+
+后面的MapReduce框架下PageRank算法的实现就采用了这个思想。考虑转移概率的情况和这个算法类似，乘上一个转移概率再加上一个随机跳转的概率。
 
 ![image](http://hujiaweibujidao.github.io/images/algos/pagerank-Simplified-algorithm.png)
 
@@ -116,7 +118,7 @@ x =
     0.1156
 ```
 
-[该算法的一个Python版本实现](http://www.chenjunlu.com/2012/09/pagerank-algorithm-implemented-in-python/)
+[该算法的一个Python版本实现](http://www.chenjunlu.com/2012/09/pagerank-algorithm-implemented-in-python/)，该博主使用第三方模块[python-graph](https://code.google.com/p/python-graph/)，也可以参考下面我给出的Python版本实现。
 
 (2) 利用马尔可夫矩阵的特殊结构
 
@@ -124,7 +126,7 @@ x =
 
 ![image](http://hujiaweibujidao.github.io/images/algos/pk-8.png)
 
-也就是将矩阵$A$进行分解，之后便是求解一个线性方程组即可。
+也就是将矩阵$A$进行分解，并不需要显示求出矩阵$A$，然后便是求解一个线性方程组即可。
 
 ```
 function x = pagerank1(G)
@@ -161,7 +163,7 @@ x = x/sum(x);
 
 (3) 巧妙解法：逆迭代算法
 
-巧妙利用Matlab中的精度误差导致本来是一个奇异矩阵的$A$变成一个非奇异矩阵。
+巧妙利用Matlab中的精度误差导致原本是一个奇异矩阵的$I-A$变成一个非奇异矩阵，运行时只是会有些警告提示，但是运行结果和其他算法一样。
 
 ![image](http://hujiaweibujidao.github.io/images/algos/pk-9.png)
 
@@ -204,9 +206,9 @@ x = x/sum(x);
 
 ### 4.MapReduce框架下PageRank算法的实现
 
-利用前面的迭代(或者幂法)的思想来实现MapReduce框架下PageRank算法很简单，可以先阅读下参考内容5。
+利用前面wiki上的迭代(或者幂法)的思想来实现MapReduce框架下PageRank算法很简单，可以先阅读下参考内容5。
 
-以下是我的大数据的一次作业，要求使用的是wiki上的简便算法，实现MapReduce框架下的PageRank算法。
+以下是我的大数据的一次作业，要求是参考wiki上的简便算法，实现MapReduce框架下的PageRank算法。给的数据集是Twitter的用户之间的关系，可以看做是网页之间的关系，但是助教没要求写代码以及运行这个数据集(有1G多)，所以下面只是一个Python版本的理想可行版本，并没有通过实际大数据集的验证，另外，博主暂时还不太会Python的mapreduce框架中的一些函数，所以实现的是一个简明的可以测试的PageRank算法。
 
 ####1.输入输出格式
 
@@ -214,7 +216,7 @@ x = x/sum(x);
 
 **reduce函数的输入是<节点，反向节点pagerank值/反向节点引出边的总数>，输出是<节点，从该节点引出的边列表>，其中节点包含了其更新后的pagerank值。**
 
-伪代码： [一时犯二写了个英文形式的，请助教将就着看吧，还望谅解，看到伪代码三个字的条件反射，若不好理解还是看后面的代码吧，根据伪代码写的 :-) ]
+伪代码： [一时犯二写了个英文形式的 ]
 
 ```
 process the data to the form of {node i:[its adjacent node list],...}
@@ -402,5 +404,5 @@ if __name__ == '__main__':
 
 上面的结果和Matlab用幂法得到的pagerank值差别很小，可以认为是正确的，所以说明了使用这种mapreduce输入输出格式的正确性。
 
-
+哦了，希望对需要理解PageRank算法的人有帮助！ :-) 
 
