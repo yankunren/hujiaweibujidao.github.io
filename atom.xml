@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-17T20:52:01+08:00</updated>
+  <updated>2014-05-17T21:01:25+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -295,6 +295,627 @@
     <updated>2014-05-12T18:12:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank</id>
     <content type="html"><![CDATA[<p>PageRank算法</p>
+
+<p>PageRank算法是谷歌曾经独步天下的“倚天剑”，该算法由Larry Page和Sergey Brin在斯坦福大学读研时发明的，<a href="http://ilpubs.stanford.edu:8090/422/1/1999-66.pdf">论文点击下载: The PageRank Citation Ranking: Bringing Order to the Web</a>。</p>
+
+<p>本文首先引用了些参考文献引出问题，然后给出了PageRank的几种实现方式，最后将其推广至在MapReduce框架下如何实现PageRank算法。</p>
+
+<p>PageRank的核心思想有2点：</p>
+
+<p>1.如果一个网页被很多其他网页链接到的话说明这个网页比较重要，也就是pagerank值会相对较高；</p>
+
+<p>2.如果一个pagerank值很高的网页链接到一个其他的网页，那么被链接到的网页的pagerank值会相应地因此而提高。</p>
+
+<p>下面是一张来自<a href="http://en.wikipedia.org/wiki/PageRank">WikiPedia</a>的图，每个球代表一个网页，球的大小反应了网页的pagerank值的大小。虽然很少有网页指向C，但是最重要的网页B指向了C，所以C的pagerank值比E还要大。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/pagerank-fig.png" alt="image" /></p>
+
+<p>参考内容：</p>
+
+<p>1.<a href="http://en.wikipedia.org/wiki/PageRank">Wiki about PageRank</a></p>
+
+<p>2.<a href="http://www.itlearner.com/good/pagerank_cn.htm">Google 的秘密- PageRank 彻底解说 中文版</a></p>
+
+<p>3.<a href="http://book.douban.com/subject/7161824/">数值分析与算法</a></p>
+
+<p>Page 161 应用实例：Google的PageRank算法</p>
+
+<p>4.<a href="http://www.mathworks.cn/moler/chapters.html">Numeric Methods with Matlab</a></p>
+
+<p>或者<a href="http://book.douban.com/subject/1836464/">中文翻译版本Matlab数值计算</a></p>
+
+<p>5.<a href="http://www.chenjunlu.com/2012/10/pagerank-on-mapreduce/">使用 MapReduce 思想计算 PageRank</a></p>
+
+<p>Page 62 PageRank和马尔可夫链</p>
+
+<h3 id="section">1.问题背景</h3>
+
+<p>来自参考内容3</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/pk-1.png" alt="image" /></p>
+
+<h3 id="section-1">2.数学建模</h3>
+
+<p>来自参考内容3，理解网页连接矩阵$G$，马尔科夫过程(“冲浪”)，转移矩阵$A$，概率$p$为用户点击当前网页中的某个链接地址的概率(一般都为0.85)。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/pk-2.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/algos/pk-3.png" alt="image" /></p>
+
+<p>最后得到一个等式$Ax=x \quad (\Sigma<em>{i=1}^{n}x</em>{i}=1)$，这实际上就是求矩阵$A$的特征值为1的特征向量！下面的内容使用圆盘定理解释了1是矩阵$A$的主特征值，所以我们可以使用幂法来求解。关于幂法的详细介绍参考另一篇文章<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">Numerical Methods Using Matlab: 第三章 矩阵特征值和奇异值求解</a></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/pk-4.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/algos/pk-5.png" alt="image" /></p>
+
+<!--
+![image](http://hujiaweibujidao.github.io/images/algos/pk-6.png)
+-->
+
+<h3 id="pagerank">3.求解PageRank</h3>
+
+<p>假设有如上图右侧所示的网页链接模型。</p>
+
+<p>(1) 幂法</p>
+
+<p>wiki上有一个PageRank的简便算法，它不考虑转移概率，而是采用的是迭代的方式，每次都更新下网页的pagerank值直到全部网页的pagerank值收敛了或者满足一定的阈值条件就停止，更新的方式就是将每个网页的pagerank值平摊分给它指向的所有网页，每个网页累计所有指向它的网页平摊给它的值作为它该回合的pagerank值。后面的MapReduce框架下PageRank算法的实现就采用了这个思想。考虑转移概率的情况和这个算法类似，乘上一个转移概率再加上一个随机跳转的概率。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/pagerank-Simplified-algorithm.png" alt="image" /></p>
+
+<p>根据上面的思想，下面Matlab代码实现可以得到各个网页的PageRank值。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+</pre></td><td class="code"><pre><code class="matlab"><span class="line"><span class="n">n</span><span class="p">=</span>6<span class="p">;</span>
+</span><span class="line"><span class="nb">i</span><span class="p">=[</span>2 3 4 4 5 6 1 6 1<span class="p">];</span>
+</span><span class="line"><span class="nb">j</span><span class="p">=[</span>1 2 2 3 3 3 4 5 6<span class="p">];</span>
+</span><span class="line"><span class="n">G</span><span class="p">=</span><span class="n">sparse</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">,</span>1<span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line"><span class="c">% Power method</span>
+</span><span class="line"><span class="k">for</span> <span class="nb">j</span> <span class="p">=</span> 1<span class="p">:</span><span class="n">n</span>
+</span><span class="line">   <span class="n">L</span><span class="p">{</span><span class="nb">j</span><span class="p">}</span> <span class="p">=</span> <span class="nb">find</span><span class="p">(</span><span class="n">G</span><span class="p">(:,</span><span class="nb">j</span><span class="p">));</span>
+</span><span class="line">   <span class="n">c</span><span class="p">(</span><span class="nb">j</span><span class="p">)</span> <span class="p">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">L</span><span class="p">{</span><span class="nb">j</span><span class="p">});</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line">
+</span><span class="line"><span class="n">p</span> <span class="p">=</span> <span class="p">.</span>85<span class="p">;</span>
+</span><span class="line"><span class="n">delta</span> <span class="p">=</span> <span class="p">(</span>1<span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="p">;</span>
+</span><span class="line"><span class="n">x</span> <span class="p">=</span> <span class="nb">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,</span>1<span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="p">;</span>
+</span><span class="line"><span class="n">z</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span>1<span class="p">);</span>
+</span><span class="line"><span class="n">cnt</span> <span class="p">=</span> 0<span class="p">;</span>
+</span><span class="line"><span class="k">while</span> <span class="n">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">z</span><span class="p">))</span> <span class="o">&gt;</span> <span class="p">.</span>0001
+</span><span class="line">   <span class="n">z</span> <span class="p">=</span> <span class="n">x</span><span class="p">;</span>
+</span><span class="line">   <span class="n">x</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span>1<span class="p">);</span>
+</span><span class="line">   <span class="k">for</span> <span class="nb">j</span> <span class="p">=</span> 1<span class="p">:</span><span class="n">n</span>
+</span><span class="line">      <span class="k">if</span> <span class="n">c</span><span class="p">(</span><span class="nb">j</span><span class="p">)</span> <span class="o">==</span> 0
+</span><span class="line">         <span class="n">x</span> <span class="p">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">z</span><span class="p">(</span><span class="nb">j</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="p">;</span><span class="c">%转移到任意一个网页</span>
+</span><span class="line">      <span class="k">else</span>
+</span><span class="line">         <span class="n">x</span><span class="p">(</span><span class="n">L</span><span class="p">{</span><span class="nb">j</span><span class="p">})</span> <span class="p">=</span> <span class="n">x</span><span class="p">(</span><span class="n">L</span><span class="p">{</span><span class="nb">j</span><span class="p">})</span> <span class="o">+</span> <span class="n">z</span><span class="p">(</span><span class="nb">j</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">(</span><span class="nb">j</span><span class="p">);</span><span class="c">%将上次的pagerank值平摊给所有指向的网页</span>
+</span><span class="line">      <span class="k">end</span>
+</span><span class="line">   <span class="k">end</span>
+</span><span class="line">   <span class="n">x</span> <span class="p">=</span> <span class="n">p</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">delta</span><span class="p">;</span>
+</span><span class="line">   <span class="n">cnt</span> <span class="p">=</span> <span class="n">cnt</span><span class="o">+</span>1<span class="p">;</span>
+</span><span class="line"><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>得到的向量$x$保存了各个网页的pagerank值，虽然链接数目一样，但是网页①比网页④和网页⑤都高，而网页②的pagerank值第二高，因为网页①链接到了它上面，相当于沾了网页①的光。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="matlab"><span class="line"><span class="n">x</span> <span class="p">=</span>
+</span><span class="line">    0<span class="p">.</span>2675
+</span><span class="line">    0<span class="p">.</span>2524
+</span><span class="line">    0<span class="p">.</span>1323
+</span><span class="line">    0<span class="p">.</span>1698
+</span><span class="line">    0<span class="p">.</span>0625
+</span><span class="line">    0<span class="p">.</span>1156
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><a href="http://www.chenjunlu.com/2012/09/pagerank-algorithm-implemented-in-python/">该算法的一个Python版本实现</a></p>
+
+<p>(2) 利用马尔可夫矩阵的特殊结构</p>
+
+<p>来自参考内容4，其中$\delta=\frac{1-p}{n}$</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/pk-8.png" alt="image" /></p>
+
+<p>也就是将矩阵$A$进行分解，之后便是求解一个线性方程组即可。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+</pre></td><td class="code"><pre><code class="matlab"><span class="line"><span class="k">function</span><span class="w"> </span>x <span class="p">=</span><span class="w"> </span><span class="nf">pagerank1</span><span class="p">(</span>G<span class="p">)</span><span class="w"></span>
+</span><span class="line"><span class="c">% PAGERANK1  Google&#39;s PageRank modified version 1 - hujiawei</span>
+</span><span class="line">
+</span><span class="line"><span class="c">%if nargin &lt; 3, p = .85; end</span>
+</span><span class="line"><span class="n">p</span><span class="p">=</span>0<span class="p">.</span>85<span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="c">% Eliminate any self-referential links</span>
+</span><span class="line">
+</span><span class="line"><span class="n">G</span> <span class="p">=</span> <span class="n">G</span> <span class="o">-</span> <span class="nb">diag</span><span class="p">(</span><span class="nb">diag</span><span class="p">(</span><span class="n">G</span><span class="p">));</span>
+</span><span class="line">
+</span><span class="line"><span class="c">% c = out-degree, r = in-degree</span>
+</span><span class="line">
+</span><span class="line"><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="p">=</span> <span class="nb">size</span><span class="p">(</span><span class="n">G</span><span class="p">);</span>
+</span><span class="line"><span class="n">c</span> <span class="p">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>1<span class="p">);</span><span class="c">%each row&#39;s sum</span>
+</span><span class="line"><span class="n">r</span> <span class="p">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>2<span class="p">);</span><span class="c">%each col&#39;s sum</span>
+</span><span class="line">
+</span><span class="line"><span class="c">% Scale column sums to be 1 (or 0 where there are no out links).</span>
+</span><span class="line">
+</span><span class="line"><span class="n">k</span> <span class="p">=</span> <span class="nb">find</span><span class="p">(</span><span class="n">c</span><span class="o">~=</span>0<span class="p">);</span>
+</span><span class="line"><span class="n">D</span> <span class="p">=</span> <span class="n">sparse</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">,</span>1<span class="o">./</span><span class="n">c</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line"><span class="c">% Solve (I - p*G*D)*x = e</span>
+</span><span class="line">
+</span><span class="line"><span class="n">e</span> <span class="p">=</span> <span class="nb">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,</span>1<span class="p">);</span>
+</span><span class="line"><span class="n">I</span> <span class="p">=</span> <span class="n">speye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+</span><span class="line"><span class="n">x</span> <span class="p">=</span> <span class="p">(</span><span class="n">I</span> <span class="o">-</span> <span class="n">p</span><span class="o">*</span><span class="n">G</span><span class="o">*</span><span class="n">D</span><span class="p">)</span><span class="o">\</span><span class="n">e</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="c">% Normalize so that sum(x) == 1.</span>
+</span><span class="line">
+</span><span class="line"><span class="n">x</span> <span class="p">=</span> <span class="n">x</span><span class="o">/</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(3) 巧妙解法：逆迭代算法</p>
+
+<p>巧妙利用Matlab中的精度误差导致本来是一个奇异矩阵的$A$变成一个非奇异矩阵。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/pk-9.png" alt="image" /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+</pre></td><td class="code"><pre><code class="matlab"><span class="line"><span class="k">function</span><span class="w"> </span>x <span class="p">=</span><span class="w"> </span><span class="nf">pagerank2</span><span class="p">(</span>G<span class="p">)</span><span class="w"></span>
+</span><span class="line"><span class="c">% PAGERANK1  Google&#39;s PageRank modified version 2 - hujiawei</span>
+</span><span class="line"><span class="c">% using inverse iteration method</span>
+</span><span class="line">
+</span><span class="line"><span class="c">%if nargin &lt; 3, p = .85; end</span>
+</span><span class="line"><span class="n">p</span><span class="p">=</span>0<span class="p">.</span>85<span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="c">% Eliminate any self-referential links</span>
+</span><span class="line">
+</span><span class="line"><span class="n">G</span> <span class="p">=</span> <span class="n">G</span> <span class="o">-</span> <span class="nb">diag</span><span class="p">(</span><span class="nb">diag</span><span class="p">(</span><span class="n">G</span><span class="p">));</span>
+</span><span class="line">
+</span><span class="line"><span class="c">% c = out-degree, r = in-degree</span>
+</span><span class="line">
+</span><span class="line"><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="p">=</span> <span class="nb">size</span><span class="p">(</span><span class="n">G</span><span class="p">);</span>
+</span><span class="line"><span class="n">c</span> <span class="p">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>1<span class="p">);</span><span class="c">%each row&#39;s sum</span>
+</span><span class="line"><span class="n">r</span> <span class="p">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>2<span class="p">);</span><span class="c">%each col&#39;s sum</span>
+</span><span class="line">
+</span><span class="line"><span class="c">% Scale column sums to be 1 (or 0 where there are no out links).</span>
+</span><span class="line">
+</span><span class="line"><span class="n">k</span> <span class="p">=</span> <span class="nb">find</span><span class="p">(</span><span class="n">c</span><span class="o">~=</span>0<span class="p">);</span>
+</span><span class="line"><span class="n">D</span> <span class="p">=</span> <span class="n">sparse</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">,</span>1<span class="o">./</span><span class="n">c</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line"><span class="c">% Solve (I - p*G*D)*x = e</span>
+</span><span class="line">
+</span><span class="line"><span class="n">e</span> <span class="p">=</span> <span class="nb">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,</span>1<span class="p">);</span>
+</span><span class="line"><span class="n">I</span> <span class="p">=</span> <span class="n">speye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+</span><span class="line"><span class="c">% x = (I - p*G*D)\e;</span>
+</span><span class="line"><span class="n">delta</span><span class="p">=(</span>1<span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="p">;</span>
+</span><span class="line"><span class="n">A</span><span class="p">=</span><span class="n">p</span><span class="o">*</span><span class="n">G</span><span class="o">*</span><span class="n">D</span><span class="o">+</span><span class="n">delta</span><span class="p">;</span>
+</span><span class="line"><span class="n">x</span><span class="p">=(</span><span class="n">I</span><span class="o">-</span><span class="n">A</span><span class="p">)</span><span class="o">\</span><span class="n">e</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="c">% Normalize so that sum(x) == 1.</span>
+</span><span class="line">
+</span><span class="line"><span class="n">x</span> <span class="p">=</span> <span class="n">x</span><span class="o">/</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="mapreducepagerank">4.MapReduce框架下PageRank算法的实现</h3>
+
+<p>利用前面的迭代(或者幂法)的思想来实现MapReduce框架下PageRank算法很简单，可以先阅读下参考内容5。</p>
+
+<p>以下是我的大数据的一次作业，要求使用的是wiki上的简便算法，实现MapReduce框架下的PageRank算法。</p>
+
+<h4 id="section-2">1.输入输出格式</h4>
+
+<p><strong>map函数的输入是&lt;节点，从该节点引出的边列表&gt;，其中节点是一个类，包含了其当前的pagerank值，输出是&lt;节点，反向节点pagerank值/反向节点引出边的总数&gt;；</strong></p>
+
+<p><strong>reduce函数的输入是&lt;节点，反向节点pagerank值/反向节点引出边的总数&gt;，输出是&lt;节点，从该节点引出的边列表&gt;，其中节点包含了其更新后的pagerank值。</strong></p>
+
+<p>伪代码： [一时犯二写了个英文形式的，请助教将就着看吧，还望谅解，看到伪代码三个字的条件反射，若不好理解还是看后面的代码吧，根据伪代码写的 :-) ]</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+</pre></td><td class="code"><pre><code class="matlab"><span class="line"><span class="n">process</span> <span class="n">the</span> <span class="n">data</span> <span class="n">to</span> <span class="n">the</span> <span class="n">form</span> <span class="n">of</span> <span class="p">{</span><span class="n">node</span> <span class="nb">i</span><span class="p">:[</span><span class="n">its</span> <span class="n">adjacent</span> <span class="n">node</span> <span class="n">list</span><span class="p">],</span><span class="c">...}</span>
+</span><span class="line"><span class="k">while</span> <span class="n">the</span> <span class="n">sum</span> <span class="n">of</span> <span class="n">difference</span> <span class="n">between</span> <span class="n">the</span> <span class="n">last</span> <span class="n">two</span> <span class="n">pagerank</span> <span class="n">values</span> <span class="o">&lt;</span> <span class="n">threshold</span>
+</span><span class="line">	<span class="n">map</span><span class="p">({</span><span class="n">node</span> <span class="nb">i</span><span class="p">:[</span><span class="n">its</span> <span class="n">adjacent</span> <span class="n">node</span> <span class="n">list</span><span class="p">],</span><span class="c">...}):</span>
+</span><span class="line">	    <span class="n">map_output</span><span class="p">={}</span>
+</span><span class="line">	    <span class="k">for</span> <span class="n">every</span> <span class="n">node</span> <span class="nb">j</span> <span class="n">in</span> <span class="n">adjacent</span> <span class="n">node</span> <span class="n">list</span><span class="p">:</span>
+</span><span class="line">	        <span class="n">put</span> <span class="n">or</span> <span class="n">sum</span> <span class="n">up</span> <span class="p">{</span><span class="nb">j</span><span class="p">:(</span><span class="nb">i</span><span class="p">,</span> <span class="n">PageRank</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">/</span><span class="nb">length</span><span class="p">(</span><span class="n">adjacent</span> <span class="n">node</span> <span class="n">list</span><span class="p">))}</span> <span class="n">into</span> <span class="n">map_output</span>
+</span><span class="line">	    <span class="k">return</span> <span class="n">map_output</span>
+</span><span class="line">	
+</span><span class="line">	<span class="n">reduce</span><span class="p">(</span><span class="n">map_output</span><span class="p">):</span>
+</span><span class="line">	    <span class="n">reduce_output</span><span class="p">={}</span>
+</span><span class="line">	    <span class="k">for</span> <span class="n">every</span> <span class="n">entry</span> <span class="p">{</span><span class="nb">j</span><span class="p">:(</span><span class="nb">i</span><span class="p">,</span> <span class="n">PageRank</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">/</span><span class="nb">length</span><span class="p">(</span><span class="n">adjacent</span> <span class="n">node</span> <span class="n">list</span><span class="p">))}</span> <span class="n">in</span> <span class="n">map_output</span><span class="p">:</span>
+</span><span class="line">	        <span class="n">put</span> <span class="n">or</span> <span class="n">sum</span> <span class="n">up</span> <span class="n">all</span> <span class="n">values</span> <span class="n">pagerank</span> <span class="n">values</span> <span class="k">for</span> <span class="n">node</span> <span class="nb">j</span> <span class="n">with</span> <span class="n">its</span> <span class="n">adjacent</span> <span class="n">node</span> <span class="n">list</span> <span class="n">into</span> <span class="n">reduce_output</span>
+</span><span class="line">	    <span class="k">return</span> <span class="n">reduce_output</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="section-3">2.示例演示</h4>
+
+<p>假设用户1，2，3，4是如下图所示的关系：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/others/pagerankdemo.png" alt="image" /></p>
+
+<p>假设有2个mapper(A和B)和1个reducer(C)，初始时4个节点的pagerank值都是0.25</p>
+
+<p>其中，关于用户1和2的数据被mapperA读取并处理，关于用户3和4的数据被mapperB读取并处理 [经验证，即使一个用户的数据是由不同的mapper来读取的，最终收敛到的结果差不多]</p>
+
+<p>map的输入输出结果如下：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/others/mapper.png" alt="image" /></p>
+
+<p>reduce的输入输出结果如下，输入是2个mapper的输出，输出的结果中更新了节点的pagerank值</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/others/reducer.png" alt="image" /></p>
+
+<p>reducer处理完了之后又将它的结果输入给mapper处理，直到迭代的次数超过了设定值或者两次迭代之后得到的所有节点的pagerank值之差的总和(也可以是取二范数)小于设定的阈值。</p>
+
+<h4 id="section-4">3.示例的实验结果</h4>
+
+<p>(1)首先是使用Matlab采用幂法的方式计算出在p=1.0的情况下示例得到的结果 [它的主要作用是验证后面python版本的正确性]</p>
+
+<p>matlab源码如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+</pre></td><td class="code"><pre><code class="matlab"><span class="line"><span class="n">n</span><span class="p">=</span>4<span class="p">;</span>
+</span><span class="line"><span class="nb">i</span><span class="p">=[</span>2 3 4 3 4 4 1 2<span class="p">];</span>
+</span><span class="line"><span class="nb">j</span><span class="p">=[</span>1 1 1 2 2 3 3 4<span class="p">];</span>
+</span><span class="line"><span class="n">G</span><span class="p">=</span><span class="n">sparse</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">,</span>1<span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line"><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="p">=</span> <span class="nb">size</span><span class="p">(</span><span class="n">G</span><span class="p">);</span>
+</span><span class="line"><span class="k">for</span> <span class="nb">j</span> <span class="p">=</span> 1<span class="p">:</span><span class="n">n</span>
+</span><span class="line">   <span class="n">L</span><span class="p">{</span><span class="nb">j</span><span class="p">}</span> <span class="p">=</span> <span class="nb">find</span><span class="p">(</span><span class="n">G</span><span class="p">(:,</span><span class="nb">j</span><span class="p">));</span>
+</span><span class="line">   <span class="n">c</span><span class="p">(</span><span class="nb">j</span><span class="p">)</span> <span class="p">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">L</span><span class="p">{</span><span class="nb">j</span><span class="p">});</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line">
+</span><span class="line"><span class="c">% Power method</span>
+</span><span class="line"><span class="n">p</span><span class="p">=</span>1<span class="p">.</span>0<span class="p">;</span>
+</span><span class="line"><span class="n">delta</span> <span class="p">=</span> <span class="p">(</span>1<span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="p">;</span>
+</span><span class="line"><span class="n">x</span> <span class="p">=</span> <span class="nb">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,</span>1<span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="p">;</span>
+</span><span class="line"><span class="n">z</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span>1<span class="p">);</span>
+</span><span class="line"><span class="n">cnt</span> <span class="p">=</span> 0<span class="p">;</span>
+</span><span class="line"><span class="k">while</span> <span class="n">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">z</span><span class="p">))</span> <span class="o">&gt;</span> <span class="p">.</span>0001
+</span><span class="line">   <span class="n">z</span> <span class="p">=</span> <span class="n">x</span><span class="p">;</span>
+</span><span class="line">   <span class="n">x</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span>1<span class="p">);</span>
+</span><span class="line">   <span class="k">for</span> <span class="nb">j</span> <span class="p">=</span> 1<span class="p">:</span><span class="n">n</span>
+</span><span class="line">      <span class="k">if</span> <span class="n">c</span><span class="p">(</span><span class="nb">j</span><span class="p">)</span> <span class="o">==</span> 0
+</span><span class="line">         <span class="n">x</span> <span class="p">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">z</span><span class="p">(</span><span class="nb">j</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="p">;</span>
+</span><span class="line">      <span class="k">else</span>
+</span><span class="line">         <span class="n">x</span><span class="p">(</span><span class="n">L</span><span class="p">{</span><span class="nb">j</span><span class="p">})</span> <span class="p">=</span> <span class="n">x</span><span class="p">(</span><span class="n">L</span><span class="p">{</span><span class="nb">j</span><span class="p">})</span> <span class="o">+</span> <span class="n">z</span><span class="p">(</span><span class="nb">j</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">(</span><span class="nb">j</span><span class="p">);</span>
+</span><span class="line">      <span class="k">end</span>
+</span><span class="line">   <span class="k">end</span>
+</span><span class="line">   <span class="n">x</span> <span class="p">=</span> <span class="n">p</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">delta</span><span class="p">;</span>
+</span><span class="line">   <span class="n">cnt</span> <span class="p">=</span> <span class="n">cnt</span><span class="o">+</span>1<span class="p">;</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line"><span class="n">sprintf</span><span class="p">(</span><span class="s">&#39;pagerank result:&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="n">x</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>结果为：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="matlab"><span class="line">0<span class="p">.</span>1072
+</span><span class="line">0<span class="p">.</span>3571
+</span><span class="line">0<span class="p">.</span>2143
+</span><span class="line">0<span class="p">.</span>3214
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(2)matlab版本的page rank没有采用mapreduce的思想进行迭代，所以我另外写了一个python版本的利用mapreduce思想实现的pagerank算法(注：我并没有使用python的map和reduce函数去实现，而是使用更加容易明白的实现)，使用的阈值为0.0001，最多迭代的次数为100次。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span>
+<span class="line-number">81</span>
+<span class="line-number">82</span>
+<span class="line-number">83</span>
+</pre></td><td class="code"><pre><code class="matlab"><span class="line"># <span class="n">coding</span><span class="p">=</span><span class="n">utf</span><span class="o">-</span>8
+</span><span class="line">
+</span><span class="line"><span class="n">__author__</span> <span class="p">=</span> <span class="s">&#39;hujiawei&#39;</span>
+</span><span class="line"><span class="n">__doc__</span> <span class="p">=</span> <span class="s">&#39;pagerank mapreduce&#39;</span>
+</span><span class="line">
+</span><span class="line"><span class="n">class</span> <span class="n">Node</span><span class="p">:</span>
+</span><span class="line">    <span class="n">def</span> <span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">id</span><span class="p">,</span><span class="n">pk</span><span class="p">):</span>
+</span><span class="line">        <span class="n">self</span><span class="p">.</span><span class="n">id</span><span class="p">=</span><span class="n">id</span>
+</span><span class="line">        <span class="n">self</span><span class="p">.</span><span class="n">pk</span><span class="p">=</span><span class="n">pk</span>
+</span><span class="line">
+</span><span class="line"><span class="n">def</span> <span class="n">pk_map</span><span class="p">(</span><span class="n">map_input</span><span class="p">):</span>
+</span><span class="line">    <span class="n">map_output</span><span class="p">={}</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">node</span><span class="p">,</span><span class="n">outlinks</span> <span class="n">in</span> <span class="n">map_input</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">link</span> <span class="n">in</span> <span class="n">outlinks</span><span class="p">:</span>
+</span><span class="line">            <span class="nb">size</span><span class="p">=</span><span class="n">len</span><span class="p">(</span><span class="n">outlinks</span><span class="p">)</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">link</span> <span class="n">in</span> <span class="n">map_output</span><span class="p">:</span>
+</span><span class="line">                <span class="n">map_output</span><span class="p">[</span><span class="n">link</span><span class="p">]</span><span class="o">+</span><span class="p">=(</span><span class="n">float</span><span class="p">)(</span><span class="n">node</span><span class="p">.</span><span class="n">pk</span><span class="p">)</span><span class="o">/</span><span class="nb">size</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">map_output</span><span class="p">[</span><span class="n">link</span><span class="p">]=(</span><span class="n">float</span><span class="p">)(</span><span class="n">node</span><span class="p">.</span><span class="n">pk</span><span class="p">)</span><span class="o">/</span><span class="nb">size</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">map_output</span>
+</span><span class="line">
+</span><span class="line"><span class="n">def</span> <span class="n">pk_reduce</span><span class="p">(</span><span class="n">reduce_input</span><span class="p">):</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">result</span> <span class="n">in</span> <span class="n">reduce_input</span><span class="p">:</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">node</span><span class="p">,</span><span class="n">value</span> <span class="n">in</span> <span class="n">result</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+</span><span class="line">            <span class="n">node</span><span class="p">.</span><span class="n">pk</span><span class="o">+</span><span class="p">=</span><span class="n">value</span>
+</span><span class="line">
+</span><span class="line"><span class="n">def</span> <span class="n">pk_clear</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">node</span> <span class="n">in</span> <span class="n">nodes</span><span class="p">:</span>
+</span><span class="line">        <span class="n">node</span><span class="p">.</span><span class="n">pk</span><span class="p">=</span>0
+</span><span class="line">
+</span><span class="line"><span class="n">def</span> <span class="n">pk_last</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+</span><span class="line">    <span class="n">lastnodes</span><span class="p">=[]</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">node</span> <span class="n">in</span> <span class="n">nodes</span><span class="p">:</span>
+</span><span class="line">        <span class="n">lastnodes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">Node</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="n">node</span><span class="p">.</span><span class="n">pk</span><span class="p">))</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">lastnodes</span>
+</span><span class="line">
+</span><span class="line"><span class="n">def</span> <span class="n">pk_diff</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span><span class="n">lastnodes</span><span class="p">):</span>
+</span><span class="line">    <span class="n">diff</span><span class="p">=</span>0
+</span><span class="line">    <span class="k">for</span> <span class="nb">i</span> <span class="n">in</span> <span class="n">range</span><span class="p">(</span><span class="n">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)):</span>
+</span><span class="line">        <span class="n">print</span><span class="p">(</span><span class="s">&#39;node pk %f, last node pk %f &#39;</span> <span class="c">% (nodes[i].pk, lastnodes[i].pk))</span>
+</span><span class="line">        <span class="n">diff</span><span class="o">+</span><span class="p">=</span><span class="nb">abs</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="nb">i</span><span class="p">].</span><span class="n">pk</span><span class="o">-</span><span class="n">lastnodes</span><span class="p">[</span><span class="nb">i</span><span class="p">].</span><span class="n">pk</span><span class="p">)</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">diff</span>
+</span><span class="line">
+</span><span class="line"><span class="n">def</span> <span class="n">pk_test1</span><span class="p">():</span>
+</span><span class="line">    <span class="n">node1</span> <span class="p">=</span> <span class="n">Node</span><span class="p">(</span>1<span class="p">,</span> 0<span class="p">.</span>25<span class="p">)</span>
+</span><span class="line">    <span class="n">node2</span> <span class="p">=</span> <span class="n">Node</span><span class="p">(</span>2<span class="p">,</span> 0<span class="p">.</span>25<span class="p">)</span>
+</span><span class="line">    <span class="n">node3</span> <span class="p">=</span> <span class="n">Node</span><span class="p">(</span>3<span class="p">,</span> 0<span class="p">.</span>25<span class="p">)</span>
+</span><span class="line">    <span class="n">node4</span> <span class="p">=</span> <span class="n">Node</span><span class="p">(</span>4<span class="p">,</span> 0<span class="p">.</span>25<span class="p">)</span>
+</span><span class="line">    <span class="n">nodes</span> <span class="p">=</span> <span class="p">[</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">,</span> <span class="n">node3</span><span class="p">,</span> <span class="n">node4</span><span class="p">]</span>
+</span><span class="line">    <span class="n">threshold</span> <span class="p">=</span> 0<span class="p">.</span>0001
+</span><span class="line">    <span class="n">max_iters</span> <span class="p">=</span> 100
+</span><span class="line">
+</span><span class="line">    <span class="k">for</span> <span class="n">iter_count</span> <span class="n">in</span> <span class="n">range</span><span class="p">(</span><span class="n">max_iters</span><span class="p">):</span>
+</span><span class="line">        <span class="n">iter_count</span> <span class="o">+</span><span class="p">=</span> 1
+</span><span class="line">        <span class="n">lastnodes</span><span class="p">=</span><span class="n">pk_last</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+</span><span class="line">        <span class="n">print</span><span class="p">(</span><span class="s">&#39;============ map count %d =================&#39;</span> <span class="c">% (iter_count))</span>
+</span><span class="line">        <span class="n">in1</span> <span class="p">=</span> <span class="p">{</span><span class="n">node1</span><span class="p">:</span> <span class="p">[</span><span class="n">node2</span><span class="p">,</span> <span class="n">node3</span><span class="p">,</span> <span class="n">node4</span><span class="p">],</span> <span class="n">node2</span><span class="p">:</span> <span class="p">[</span><span class="n">node3</span><span class="p">,</span> <span class="n">node4</span><span class="p">]}</span>
+</span><span class="line">        <span class="n">in2</span> <span class="p">=</span> <span class="p">{</span><span class="n">node3</span><span class="p">:</span> <span class="p">[</span><span class="n">node1</span><span class="p">,</span> <span class="n">node4</span><span class="p">],</span> <span class="n">node4</span><span class="p">:</span> <span class="p">[</span><span class="n">node2</span><span class="p">]}</span>
+</span><span class="line">
+</span><span class="line">        <span class="n">mapout1</span> <span class="p">=</span> <span class="n">pk_map</span><span class="p">(</span><span class="n">in1</span><span class="p">)</span>
+</span><span class="line">        <span class="n">mapout2</span> <span class="p">=</span> <span class="n">pk_map</span><span class="p">(</span><span class="n">in2</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">        <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">value</span> <span class="n">in</span> <span class="n">mapout1</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+</span><span class="line">            <span class="n">print</span> <span class="n">str</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39; &#39;</span> <span class="o">+</span> <span class="n">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">        <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">value</span> <span class="n">in</span> <span class="n">mapout2</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+</span><span class="line">            <span class="n">print</span> <span class="n">str</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39; &#39;</span> <span class="o">+</span> <span class="n">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">        <span class="n">print</span><span class="p">(</span><span class="s">&#39;============ reduce count %d =================&#39;</span> <span class="c">% (iter_count))</span>
+</span><span class="line">
+</span><span class="line">        <span class="n">reducein</span> <span class="p">=</span> <span class="p">[</span><span class="n">mapout1</span><span class="p">,</span> <span class="n">mapout2</span><span class="p">]</span>
+</span><span class="line">        <span class="n">pk_clear</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+</span><span class="line">        <span class="n">pk_reduce</span><span class="p">(</span><span class="n">reducein</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">        <span class="k">for</span> <span class="n">node</span> <span class="n">in</span> <span class="n">nodes</span><span class="p">:</span>
+</span><span class="line">            <span class="n">print</span> <span class="n">str</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39; &#39;</span> <span class="o">+</span> <span class="n">str</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">pk</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">        <span class="n">diff</span><span class="p">=</span><span class="n">pk_diff</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span><span class="n">lastnodes</span><span class="p">)</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">:</span>
+</span><span class="line">            <span class="k">break</span>
+</span><span class="line">
+</span><span class="line"><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span class="line">    <span class="n">pk_test1</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>得到的结果为如下，总共迭代了15次</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="matlab"><span class="line">1 0<span class="p">.</span>107138774577
+</span><span class="line">2 0<span class="p">.</span>35712924859
+</span><span class="line">3 0<span class="p">.</span>214296601128
+</span><span class="line">4 0<span class="p">.</span>321435375705
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>上面的结果和Matlab用幂法得到的pagerank值差别很小，可以认为是正确的，所以说明了使用这种mapreduce输入输出格式的正确性。</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank/">http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
