@@ -47,7 +47,10 @@ wiki上对特征向量的定义，首先要明确的是**这个线性变换(也�
 特征值的计算，简单的矩阵可以使用解特征多项式的方法，但是一般情况下都是采用数值计算的方法，其中基于迭代技术的幂法可以用来计算矩阵的主特征值，反幂法类似，不过计算的是模最小的特征值，实际中常用的是QR分解。
 ![image](http://hujiaweibujidao.github.io/images/math/eigenvectors5.png)
 
-到此，我觉得特征向量应该是清晰了，关于特征值和奇异值分解以及代码实现请参考我写的另一份总结[《Numerical Methods Using Matlab》](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)第三章 矩阵特征值和奇异值分解，其他的利用了特征值分解的算法，例如PCA等等，以后我会进一步分析。
+到此，我觉得特征向量应该是清晰了，关于特征值和奇异值分解以及代码实现请参考我写的另一份总结[Numerical Methods Using Matlab 第三章 矩阵特征值和奇异值分解](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)。
 
-矩阵特征值的应用特别广，例如因子分析，特征脸，PageRank等等算法都是基于特征值分解，若有时间和精力，我后续会一一介绍。
+矩阵特征值的应用特别广，例如因子分析，特征脸，[PageRank](http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank/)等等算法都是基于特征值分解，若有时间和精力，我后续会一一介绍(有链接的是已经完成的部分)。
 
+还想看看其他的介绍？
+
+这篇文章介绍的不错[What are eigenvectors and eigenvalues?](http://www.visiondummy.com/2014/03/eigenvalues-eigenvectors/)
