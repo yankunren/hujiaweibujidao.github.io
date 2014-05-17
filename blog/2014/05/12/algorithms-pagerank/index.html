@@ -117,7 +117,7 @@
 
 <p>PageRank算法是谷歌曾经独步天下的“倚天剑”，该算法由Larry Page和Sergey Brin在斯坦福大学读研时发明的，<a href="http://ilpubs.stanford.edu:8090/422/1/1999-66.pdf">论文点击下载: The PageRank Citation Ranking: Bringing Order to the Web</a>。</p>
 
-<p>本文首先引用了些参考文献引出问题，然后给出了PageRank的几种实现方式，最后将其推广至在MapReduce框架下如何实现PageRank算法。</p>
+<p>本文首先通过一些参考文献引出问题，然后给出了PageRank的几种实现算法，最后将其推广至在MapReduce框架下如何实现PageRank算法。</p>
 
 <p>PageRank的核心思想有2点：</p>
 
@@ -125,7 +125,7 @@
 
 <p>2.如果一个pagerank值很高的网页链接到一个其他的网页，那么被链接到的网页的pagerank值会相应地因此而提高。</p>
 
-<p>下面是一张来自<a href="http://en.wikipedia.org/wiki/PageRank">WikiPedia</a>的图，每个球代表一个网页，球的大小反应了网页的pagerank值的大小。虽然很少有网页指向C，但是最重要的网页B指向了C，所以C的pagerank值比E还要大。</p>
+<p>下面是一张来自<a href="http://en.wikipedia.org/wiki/PageRank">WikiPedia</a>的图，每个球代表一个网页，球的大小反应了网页的pagerank值的大小。指向网页B和网页E的链接很多，所以B和E的pagerank值较高，另外，虽然很少有网页指向C，但是最重要的网页B指向了C，所以C的pagerank值比E还要大。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/pagerank-fig.png" alt="image" /></p>
 
@@ -135,17 +135,11 @@
 
 <p>2.<a href="http://www.itlearner.com/good/pagerank_cn.htm">Google 的秘密- PageRank 彻底解说 中文版</a></p>
 
-<p>3.<a href="http://book.douban.com/subject/7161824/">数值分析与算法</a></p>
+<p>3.<a href="http://book.douban.com/subject/7161824/">数值分析与算法</a> Page 161 应用实例：Google的PageRank算法</p>
 
-<p>Page 161 应用实例：Google的PageRank算法</p>
+<p>4.<a href="http://www.mathworks.cn/moler/chapters.html">Numeric Methods with Matlab</a> 或者<a href="http://book.douban.com/subject/1836464/">中文翻译版本Matlab数值计算</a></p>
 
-<p>4.<a href="http://www.mathworks.cn/moler/chapters.html">Numeric Methods with Matlab</a></p>
-
-<p>或者<a href="http://book.douban.com/subject/1836464/">中文翻译版本Matlab数值计算</a></p>
-
-<p>5.<a href="http://www.chenjunlu.com/2012/10/pagerank-on-mapreduce/">使用 MapReduce 思想计算 PageRank</a></p>
-
-<p>Page 62 PageRank和马尔可夫链</p>
+<p>5.<a href="http://www.chenjunlu.com/2012/10/pagerank-on-mapreduce/">使用 MapReduce 思想计算 PageRank</a> Page 62 PageRank和马尔可夫链</p>
 
 <h3 id="section">1.问题背景</h3>
 
@@ -155,12 +149,16 @@
 
 <h3 id="section-1">2.数学建模</h3>
 
-<p>来自参考内容3，理解网页连接矩阵$G$，马尔科夫过程(“冲浪”)，转移矩阵$A$，概率$p$为用户点击当前网页中的某个链接地址的概率(一般都为0.85)。</p>
+<p>来自参考内容3，理解网页连接矩阵$G$，马尔科夫过程(“网上冲浪”)，转移矩阵$A$，概率$p$为用户点击当前网页中的某个链接地址的概率(一般都为0.85)。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/pk-2.png" alt="image" />
 <img src="http://hujiaweibujidao.github.io/images/algos/pk-3.png" alt="image" /></p>
 
-<p>最后得到一个等式$Ax=x \quad (\Sigma<em>{i=1}^{n}x</em>{i}=1)$，这实际上就是求矩阵$A$的特征值为1的特征向量！下面的内容使用圆盘定理解释了1是矩阵$A$的主特征值，所以我们可以使用幂法来求解。关于幂法的详细介绍参考另一篇文章<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">Numerical Methods Using Matlab: 第三章 矩阵特征值和奇异值求解</a></p>
+<p>最后得到一个等式$Ax=x$，这实际上就是求矩阵$A$的特征值为1的特征向量！</p>
+
+<p>下面的内容使用圆盘定理解释了1是矩阵$A$的主特征值，所以我们可以使用幂法来求解。</p>
+
+<p>关于幂法的详细介绍参考另一篇文章<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">Numerical Methods Using Matlab: 第三章 矩阵特征值和奇异值求解</a></p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/pk-4.png" alt="image" />
 <img src="http://hujiaweibujidao.github.io/images/algos/pk-5.png" alt="image" /></p>
@@ -175,7 +173,9 @@
 
 <p>(1) 幂法</p>
 
-<p>wiki上有一个PageRank的简便算法，它不考虑转移概率，而是采用的是迭代的方式，每次都更新下网页的pagerank值直到全部网页的pagerank值收敛了或者满足一定的阈值条件就停止，更新的方式就是将每个网页的pagerank值平摊分给它指向的所有网页，每个网页累计所有指向它的网页平摊给它的值作为它该回合的pagerank值。后面的MapReduce框架下PageRank算法的实现就采用了这个思想。考虑转移概率的情况和这个算法类似，乘上一个转移概率再加上一个随机跳转的概率。</p>
+<p>wiki上有一个PageRank的简便算法，它不考虑转移概率，而是采用的是迭代的方式，每次都更新所有网页的pagerank值，更新的方式就是将每个网页的pagerank值平摊分给它指向的所有网页，每个网页累计所有指向它的网页平摊给它的值作为它该回合的pagerank值，直到全部网页的pagerank值收敛了或者满足一定的阈值条件就停止。</p>
+
+<p>后面的MapReduce框架下PageRank算法的实现就采用了这个思想。考虑转移概率的情况和这个算法类似，乘上一个转移概率再加上一个随机跳转的概率。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/pagerank-Simplified-algorithm.png" alt="image" /></p>
 
@@ -258,7 +258,7 @@
 </span><span class="line">    0<span class="p">.</span>1156
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p><a href="http://www.chenjunlu.com/2012/09/pagerank-algorithm-implemented-in-python/">该算法的一个Python版本实现</a></p>
+<p><a href="http://www.chenjunlu.com/2012/09/pagerank-algorithm-implemented-in-python/">该算法的一个Python版本实现</a>，该博主使用第三方模块<a href="https://code.google.com/p/python-graph/">python-graph</a>，也可以参考下面我给出的Python版本实现。</p>
 
 <p>(2) 利用马尔可夫矩阵的特殊结构</p>
 
@@ -266,7 +266,7 @@
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/pk-8.png" alt="image" /></p>
 
-<p>也就是将矩阵$A$进行分解，之后便是求解一个线性方程组即可。</p>
+<p>也就是将矩阵$A$进行分解，并不需要显示求出矩阵$A$，然后便是求解一个线性方程组即可。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -332,7 +332,7 @@
 
 <p>(3) 巧妙解法：逆迭代算法</p>
 
-<p>巧妙利用Matlab中的精度误差导致本来是一个奇异矩阵的$A$变成一个非奇异矩阵。</p>
+<p>巧妙利用Matlab中的精度误差导致原本是一个奇异矩阵的$I-A$变成一个非奇异矩阵，运行时只是会有些警告提示，但是运行结果和其他算法一样。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/pk-9.png" alt="image" /></p>
 
@@ -408,9 +408,9 @@
 
 <h3 id="mapreducepagerank">4.MapReduce框架下PageRank算法的实现</h3>
 
-<p>利用前面的迭代(或者幂法)的思想来实现MapReduce框架下PageRank算法很简单，可以先阅读下参考内容5。</p>
+<p>利用前面wiki上的迭代(或者幂法)的思想来实现MapReduce框架下PageRank算法很简单，可以先阅读下参考内容5。</p>
 
-<p>以下是我的大数据的一次作业，要求使用的是wiki上的简便算法，实现MapReduce框架下的PageRank算法。</p>
+<p>以下是我的大数据的一次作业，要求是参考wiki上的简便算法，实现MapReduce框架下的PageRank算法。给的数据集是Twitter的用户之间的关系，可以看做是网页之间的关系，但是助教没要求写代码以及运行这个数据集(有1G多)，所以下面只是一个Python版本的理想可行版本，并没有通过实际大数据集的验证，另外，博主暂时还不太会Python的mapreduce框架中的一些函数，所以实现的是一个简明的可以测试的PageRank算法。</p>
 
 <h4 id="section-2">1.输入输出格式</h4>
 
@@ -418,7 +418,7 @@
 
 <p><strong>reduce函数的输入是&lt;节点，反向节点pagerank值/反向节点引出边的总数&gt;，输出是&lt;节点，从该节点引出的边列表&gt;，其中节点包含了其更新后的pagerank值。</strong></p>
 
-<p>伪代码： [一时犯二写了个英文形式的，请助教将就着看吧，还望谅解，看到伪代码三个字的条件反射，若不好理解还是看后面的代码吧，根据伪代码写的 :-) ]</p>
+<p>伪代码： [一时犯二写了个英文形式的 ]</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -735,6 +735,8 @@
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>上面的结果和Matlab用幂法得到的pagerank值差别很小，可以认为是正确的，所以说明了使用这种mapreduce输入输出格式的正确性。</p>
+
+<p>哦了，希望对需要理解PageRank算法的人有帮助！ :-) </p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank/">http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
