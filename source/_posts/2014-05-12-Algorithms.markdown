@@ -15,9 +15,19 @@ published: true
 
 1.[PageRank算法](http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank/)
 
+Todo List  下面是重要的将来会介绍的算法(有几个我还没写过......)
 
+1.Feature/Dimension: PCA,SVD,LDA,ICA,FA...
 
+2.Regression: Linear Regression, Logistic Regression, Tree Regression...
 
+3.Classifier: Bayesian Classifier, Minmum Distance, kNN, EM, Linear Classifier...
+
+4.Clustering: K-Means, Hierarchial Clustering...
+
+5.SVM, Percepton...
+
+6.Apriori, FP-Growth...
 
 
 
