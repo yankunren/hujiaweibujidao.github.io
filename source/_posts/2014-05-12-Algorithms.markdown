@@ -13,6 +13,10 @@ published: true
 
 嗯，就唠叨这些，慢慢来，持续添加各个算法，需要的敬请期待。
 
+1.[PageRank算法](http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank/)
+
+
+
 
 
 
