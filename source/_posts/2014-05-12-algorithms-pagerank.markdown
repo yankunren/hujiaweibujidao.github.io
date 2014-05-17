@@ -208,6 +208,8 @@ x = x/sum(x);
 
 利用前面wiki上的迭代(或者幂法)的思想来实现MapReduce框架下PageRank算法很简单，可以先阅读下参考内容5。
 
+这篇文章[using-mapreduce-to-compute-pagerank](http://michaelnielsen.org/blog/using-mapreduce-to-compute-pagerank/)更加详细，可以参考
+
 以下是我的大数据的一次作业，要求是参考wiki上的简便算法，实现MapReduce框架下的PageRank算法。给的数据集是Twitter的用户之间的关系，可以看做是网页之间的关系，但是助教没要求写代码以及运行这个数据集(有1G多)，所以下面只是一个Python版本的理想可行版本，并没有通过实际大数据集的验证，另外，博主暂时还不太会Python的mapreduce框架中的一些函数，所以实现的是一个简明的可以测试的PageRank算法。
 
 ####1.输入输出格式
