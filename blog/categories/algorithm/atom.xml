@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-17T23:33:10+08:00</updated>
+  <updated>2014-05-17T23:59:28+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -129,7 +129,112 @@ x =
     0.1156
 </code></p>
 
-<p><a href="http://www.chenjunlu.com/2012/09/pagerank-algorithm-implemented-in-python/">该算法的一个Python版本实现</a>，该博主使用第三方模块<a href="https://code.google.com/p/python-graph/">python-graph</a>，也可以参考下面我给出的Python版本实现。</p>
+<p><a href="http://www.chenjunlu.com/2012/09/pagerank-algorithm-implemented-in-python/">这篇文章给出该算法的一个Python版本实现</a>，该博主使用第三方模块<a href="https://code.google.com/p/python-graph/">python-graph</a>，python-graph模块实现了很多图算法，<a href="https://code.google.com/p/python-graph/wiki/Example">该模块的使用示例</a>，使用前需要先安装，代码如下：</p>
+
+<p><code>python
+easy_install python-graph-core
+easy_install python-graph-dot
+</code></p>
+
+<p>Python版本的算法实现：</p>
+
+<p>```
+# coding=utf-8</p>
+
+<h1 id="python-graph-httpscodegooglecomppython-graph">python-graph https://code.google.com/p/python-graph/</h1>
+
+<h1 id="import-graphviz">Import graphviz</h1>
+<p>import graphviz as gv</p>
+
+<h1 id="import-pygraph">Import pygraph</h1>
+<p>from pygraph.classes.digraph import digraph
+from pygraph.readwrite.dot import write</p>
+
+<h1 id="define-pagerank-function">Define pagerank function</h1>
+<p>def pagerank(graph, damping_factor=0.85, max_iterations=100, \
+             min_delta=0.00001):
+    “””
+    Compute and return the PageRank in an directed graph.</p>
+
+<pre><code>@type  graph: digraph
+@param graph: Digraph.
+
+@type  damping_factor: number
+@param damping_factor: PageRank dumping factor.
+
+@type  max_iterations: number
+@param max_iterations: Maximum number of iterations.
+
+@type  min_delta: number
+@param min_delta: Smallest variation required for a new iteration.
+
+@rtype:  Dict
+@return: Dict containing all the nodes PageRank.
+"""
+
+nodes = graph.nodes()
+graph_size = len(nodes)
+if graph_size == 0:
+    return {}
+# value for nodes without inbound links
+min_value = (1.0-damping_factor)/graph_size
+
+# itialize the page rank dict with 1/N for all nodes
+#pagerank = dict.fromkeys(nodes, 1.0/graph_size)
+pagerank = dict.fromkeys(nodes, 1.0)
+
+for i in range(max_iterations):
+    diff = 0 #total difference compared to last iteraction
+    # computes each node PageRank based on inbound links
+    for node in nodes:
+        rank = min_value
+        for referring_page in graph.incidents(node):
+            rank += damping_factor * pagerank[referring_page] / \
+                    len(graph.neighbors(referring_page))
+
+        diff += abs(pagerank[node] - rank)
+        pagerank[node] = rank
+
+    print 'This is NO.%s iteration' % (i+1)
+    print pagerank
+    print ''
+
+    #stop if PageRank has converged
+    if diff &lt; min_delta:
+        break
+
+return pagerank
+</code></pre>
+
+<h1 id="graph-creation">Graph creation</h1>
+<p>gr = digraph()</p>
+
+<h1 id="add-nodes-and-edges">Add nodes and edges</h1>
+<p>gr.add_nodes([“1”,”2”,”3”,”4”])</p>
+
+<p>gr.add_edge((“1”,”2”))
+gr.add_edge((“1”,”3”))
+gr.add_edge((“1”,”4”))
+gr.add_edge((“2”,”3”))
+gr.add_edge((“2”,”4”))
+gr.add_edge((“3”,”4”))
+gr.add_edge((“4”,”2”))</p>
+
+<h1 id="draw-as-png">Draw as PNG</h1>
+<p># dot = write(gr)
+# gvv = gv.readstring(dot)
+# gv.layout(gvv,’dot’)
+# gv.render(gvv,’png’,’Model.png’)</p>
+
+<p>pagerank(gr)
+```</p>
+
+<p>经过32次迭代之后得到的结果如下，和前面的结果一致：</p>
+
+<p><code>
+This is NO.32 iteration
+{'1': 0.2675338708706491, '3': 0.13227261904986046, '2': 0.2524037902400518, '5': 0.062477242064127136, '4': 0.1697488529161491, '6': 0.1155828978186352}
+</code></p>
 
 <p>(2) 利用马尔可夫矩阵的特殊结构</p>
 
@@ -419,7 +524,7 @@ x
 
 <p>上面的结果和Matlab用幂法得到的pagerank值差别很小，可以认为是正确的，所以说明了使用这种mapreduce输入输出格式的正确性。</p>
 
-<p>哦了，希望对需要理解PageRank算法的人有帮助！ :-) </p>
+<p>OK，差不多了，希望对需要理解PageRank算法的人有帮助！ :-) </p>
 
 ]]></content>
   </entry>
@@ -465,9 +570,10 @@ x
 
 <p>1.<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms: Mastering Basic Algorithms in the Python Language</a></p>
 
+<p>Chapter 8 Tangled Dependencies and Memoization</p>
+
 <p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
 
-<p>Todo</p>
 ]]></content>
   </entry>
   
