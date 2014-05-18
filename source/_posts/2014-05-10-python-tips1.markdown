@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Python Tips 1"
+title: "Python Basics"
 date: 2014-05-10 13:00
 comments: true
 categories: python
@@ -309,6 +309,7 @@ def fib(i):
 print(fib(100))
 ```
 
-7.描述器，元类，上下文管理库的介绍参见[伯乐在线-python高级编程技巧](http://blog.jobbole.com/61171/)
+
+
 
 
