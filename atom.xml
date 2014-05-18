@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-18T10:24:08+08:00</updated>
+  <updated>2014-05-18T10:26:48+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -2069,6 +2069,8 @@
 
 <p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
 
+<p>3.<a href="http://book.douban.com/subject/4875278/">算法设计、分析与实现从入门到精通</a></p>
+
 <p>大家都知道，动态规划算法一般都有两种实现方式：</p>
 
 <p><strong>1.直接自顶向下实现递归式，并将中间结果保存，这叫备忘录法；</strong></p>
@@ -2090,7 +2092,7 @@
 
 <p>所以，我们需要改进下，我们保存每次计算出来的子问题的解，用什么保存呢？用Python中的dict！那怎么实现保存子问题的解呢？用Python中的装饰器！</p>
 
-<p>如果不是很了解Python的装饰器，可以快速看下<a href="http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/">这篇总结中关于装饰器的解释：Python Tips 1</a></p>
+<p>如果不是很了解Python的装饰器，可以快速看下<a href="http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/">这篇总结中关于装饰器的解释：Python Basics</a></p>
 
 <p>修改刚才的程序，得到如下代码，定义一个函数<code>memo</code>返回我们需要的装饰器，这里用<code>cache</code>保存子问题的解，key是方法的参数，也就是数字<code>n</code>，值就是<code>fib(n)</code>返回的解。</p>
 
@@ -2124,9 +2126,9 @@
 </span><span class="line">def fib(i):
 </span><span class="line">    if i&lt;2: return 1
 </span><span class="line">    return fib(i-1)+fib(i-2)</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p>重新运行下<code>fib(100)</code>，你会发现这次很快就得到了结果<code>573147844013817084101</code>，这就是动态规划的威力，这种第一种带备忘录的递归方式。</p>
+<p>重新运行下<code>fib(100)</code>，你会发现这次很快就得到了结果<code>573147844013817084101</code>，这就是动态规划的威力，上面使用的是第一种带备忘录的递归实现方式。</p>
 
-<p><strong>带备忘录的递归方式的优点就是易于理解，易于实现，代码简洁干净，运行速度也快，直接从需要求解的问题出发，而且只计算需要求解的子问题，没有多余的计算。但是，它也有自己的缺点，因为是递归形式，所以有限的栈深度是它的硬伤，有些问题难免会出现栈溢出了。</strong></p>
+<p><strong>带备忘录的递归方式的优点就是易于理解，易于实现，代码简洁干净，运行速度也不错，直接从需要求解的问题出发，而且只计算需要求解的子问题，没有多余的计算。但是，它也有自己的缺点，因为是递归形式，所以有限的栈深度是它的硬伤，有些问题难免会出现栈溢出了。</strong></p>
 
 <p>于是，迭代版本的实现方式就诞生了！</p>
 
@@ -2136,7 +2138,7 @@
 
 <p><strong>这就是递归实现和迭代实现的重要区别：递归实现不需要去考虑计算顺序，只要给出问题，然后自顶向下去解就行；而迭代实现需要考虑计算顺序，并且顺序很重要，算法在运行的过程中要保证当前要计算的问题中的子问题的解已经是求解好了的。</strong></p>
 
-<p>斐波那契数列的迭代版本很简单，就是按顺序来计算就行了，不解释。</p>
+<p>斐波那契数列的迭代版本很简单，就是按顺序来计算就行了，不解释，关键是你可以看到我们就用了3个简单变量就求解出来了，没有使用任何高级的数据结构，节省了大量的空间。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -2157,11 +2159,11 @@
 </span><span class="line">        n=n-1
 </span><span class="line">    return c</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>斐波那契数列数列的变种问题经常出现在上楼梯的走法，每次只能走一个台阶或者两个台阶，广义上思考的话，也就是一个<strong>决策问题</strong>，到底当前这一步是选择它(走一步)还是不选择它(走两步)呢?</p>
+<p>斐波那契数列的变种经常出现在上楼梯的走法问题中，每次只能走一个台阶或者两个台阶，广义上思考的话，<strong>动态规划也就是一个连续决策问题，到底当前这一步是选择它(走一步)还是不选择它(走两步)呢?</strong></p>
 
-<p>这种动态规划问题还有，例如求二项式系数<code>C(n,k)</code>，杨辉三角(求从源点到目标点有多少种走法)等等问题。</p>
+<p>其他问题也可以很快地变相思考发现它们其实是一样的，例如求二项式系数<code>C(n,k)</code>，杨辉三角(求从源点到目标点有多少种走法)等等问题。</p>
 
-<p>二项式系数<code>C(n,k)</code>表示从n个中选k个，假设我们现在考虑n个中的某一个，如果选择它的话，那么我们还需要从剩下的n-1个中选k-1个，即<code>C(n-1,k-1)</code>；如果不选择它的话，我们需要从剩下的n-1中选k个，即<code>C(n-1,k)</code>。所以，<code>C(n,k)=C(n-1,k-1)+C(n-1,k)</code>。</p>
+<p>二项式系数<code>C(n,k)</code>表示从n个中选k个，假设我们现在n个中的第1个，考虑是否选择它。如果选择它的话，那么我们还需要从剩下的n-1个中选k-1个，即<code>C(n-1,k-1)</code>；如果不选择它的话，我们需要从剩下的n-1中选k个，即<code>C(n-1,k)</code>。所以，<code>C(n,k)=C(n-1,k-1)+C(n-1,k)</code>。</p>
 
 <p>结合前面的装饰器，我们很快便可以实现求二项式系数的递归实现代码，其中的<code>memo</code>函数完全没变，只是在函数<code>cnk</code>前面添加了<code>@memo</code>而已，就这么简单！</p>
 
@@ -2198,6 +2200,134 @@
 </span><span class="line">    if n==0: return 0
 </span><span class="line">    return cnk(n-1,k)+cnk(n-1,k-1)</span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<p>它的迭代版本也比较简单，这里使用了<code>defaultdict</code>，略高级的数据结构，和dict不同的是，当查找的key不存在对应的value时，会返回一个默认的值，这个很有用，下面的代码可以看到。</p>
+
+<p>如果不了解<code>defaultdict</code>的话可以看下<a href="http://blog.jobbole.com/65218/">这篇文章：Python中的高级数据结构</a></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">from collections import defaultdict
+</span><span class="line">
+</span><span class="line">n,k=10,7
+</span><span class="line">C=defaultdict(int)
+</span><span class="line">for row in range(n+1):
+</span><span class="line">    C[row,0]=1
+</span><span class="line">    for col in range(1,k+1):
+</span><span class="line">        C[row,col]=C[row-1,col-1]+C[row-1,col]
+</span><span class="line">
+</span><span class="line">print(C[n,k]) #120</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>杨辉三角大家都熟悉，在国外这个叫<code>Pascal Triangle</code>，它和二项式系数特别相似，看下图，除了两边的数字之外，里面的任何一个数字都是由它上面相邻的两个元素相加得到，想想<code>C(n,k)=C(n-1,k-1)+C(n-1,k)</code>不也就是这儿含义吗?</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/sanjiao.png" alt="image" /></p>
+
+<p>另外，还记得矩阵连乘问题最后的图示吗?和上面的三角有异曲同工之妙，不同的是选择哪两个去计算新的值！</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/matrixmulti.png" alt="image" /></p>
+
+<p>所以说，顺序对于迭代版本的动态规划实现很重要，下面举个实例，用动态规划解决有向无环图的单源最短路径问题。假设有如下图所示的图，当然，我们看到的是这个有向无环图经过了拓扑排序之后的结果，从a到f的最短路径用灰色标明了。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/dag_sp.png" alt="image" /></p>
+
+<p>好，怎么实现呢? </p>
+
+<p><strong>我们有两种思考方式：</strong></p>
+
+<p><strong>1.”去哪里?”：我们顺向思维，首先假设从a点出发到所有其他点的距离都是无穷大，然后，按照拓扑排序的顺序，从a点出发，接着更新a点能够到达的其他的点的距离，那么就是b点和f点，b点的距离变成2，f点的距离变成9。因为这个有向无环图是经过了拓扑排序的，所以按照拓扑顺序访问一遍所有的点(到了目标点就可以停止了)就能够得到a点到所有已访问到的点的最短距离，也就是说，当到达哪个点的时候，我们就找到了从a点到该点的最短距离，拓扑排序保证了后面的点不会指向前面的点，所以访问到后面的点时不可能再更新它前面的点的最短距离！这种思维方式的代码实现就是迭代版本。</strong></p>
+
+<p>这里涉及到了拓扑排序，我的博客中还没有讲解，所以下面的代码已经将输入的点进行了拓扑排序，待我更新了图算法那篇文章再来更新这里的代码，谅解。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">def topsort(W):
+</span><span class="line">    return W
+</span><span class="line">
+</span><span class="line">def dag_sp(W, s, t):
+</span><span class="line">    d = {u:float('inf') for u in W} #
+</span><span class="line">    d[s] = 0
+</span><span class="line">    for u in topsort(W):
+</span><span class="line">        if u == t: break
+</span><span class="line">        for v in W[u]:
+</span><span class="line">            d[v] = min(d[v], d[u] + W[u][v])
+</span><span class="line">    return d[t]
+</span><span class="line">
+</span><span class="line">#邻接表
+</span><span class="line">W={0:{1:2,5:9},1:{2:1,3:2,5:6},2:{3:7},3:{4:2,5:3},4:{5:4},5:{}}
+</span><span class="line">s,t=0,5
+</span><span class="line">print(dag_sp(W,s,t)) #7</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>用图来表示计算过程就是下面所示：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/dag_sp_iter.png" alt="image" /></p>
+
+<p><strong>2.”从哪里来?”：我们逆向思维，目标是要到f，那从哪个点到f点会近呢?</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">from functools import wraps
+</span><span class="line">def memo(func):
+</span><span class="line">    cache={}
+</span><span class="line">    @wraps(func)
+</span><span class="line">    def wrap(*args):
+</span><span class="line">        if args not in cache:
+</span><span class="line">            cache[args]=func(*args)
+</span><span class="line">            # print('cache {0} = {1}'.format(args[0],cache[args]))
+</span><span class="line">        return cache[args]
+</span><span class="line">    return wrap
+</span><span class="line">
+</span><span class="line">def rec_dag_sp(W, s, t):
+</span><span class="line">    @memo
+</span><span class="line">    def d(u):
+</span><span class="line">        if u == t: return 0
+</span><span class="line">        return min(W[u][v]+d(v) for v in W[u])
+</span><span class="line">    return d(s)
+</span><span class="line">
+</span><span class="line">#邻接表
+</span><span class="line">W={0:{1:2,5:9},1:{2:1,3:2,5:6},2:{3:7},3:{4:2,5:3},4:{5:4},5:{}}
+</span><span class="line">s,t=0,5
+</span><span class="line">print(rec_dag_sp(W,s,t)) #7</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/">http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
