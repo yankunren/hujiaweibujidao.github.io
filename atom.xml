@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-18T08:54:50+08:00</updated>
+  <updated>2014-05-18T09:04:50+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Python Tips 2]]></title>
+    <title type="html"><![CDATA[Python Advances]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/16/python-tips2/"/>
     <updated>2014-05-16T10:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/16/python-tips2</id>
@@ -41,6 +41,8 @@
 <p>6.<a href="http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html">30 Python Language Features and Tricks You May Not Know About</a></p>
 
 <p><a href="http://blog.jobbole.com/63320/">中文翻译版本：30个Python编程技巧</a></p>
+
+<p>7.描述器，元类，上下文管理库的介绍参见<a href="http://blog.jobbole.com/61171/">伯乐在线-python高级编程技巧</a></p>
 
 <p>TO BE CONTINUED…</p>
 
@@ -1571,7 +1573,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Python Tips 1]]></title>
+    <title type="html"><![CDATA[Python Basics]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/"/>
     <updated>2014-05-10T13:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1</id>
@@ -2049,8 +2051,6 @@
 </span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">fib</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>7.描述器，元类，上下文管理库的介绍参见<a href="http://blog.jobbole.com/61171/">伯乐在线-python高级编程技巧</a></p>
-
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/">http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
@@ -2071,11 +2071,11 @@
 
 <p>大家都知道，动态规划算法一般都有两种实现方式：</p>
 
-<p><strong>1.直接自顶向下实现递归式，并将结果保存，这叫备忘录方法；</strong></p>
+<p><strong>1.直接自顶向下实现递归式，并将中间结果保存，这叫备忘录法；</strong></p>
 
 <p><strong>2.将递归式翻转，自底向上地迭代，将结果保存在某个数据结构中。</strong></p>
 
-<p>编程有一个原则<code>DRY=Don’t Repeat Yourself</code>，就是说你的代码不要重复来重复去的，这个原则同样可以用于理解动态规划，动态规划除了满足最优子结构，它还存在子问题重叠问题，我们不能重复地去解决这些子问题，所以我们将子问题的解保存起来，类似缓存机制，之后遇到这个子问题时直接取出子问题的解。</p>
+<p>编程有一个原则<code>DRY=Don’t Repeat Yourself</code>，就是说你的代码不要重复来重复去的，这个原则同样可以用于理解动态规划，动态规划除了满足最优子结构，它还存在子问题重叠的性质，我们不能重复地去解决这些子问题，所以我们将子问题的解保存起来，类似缓存机制，之后遇到这个子问题时直接取出子问题的解。</p>
 
 <p>举个简单的例子，斐波那契数列中的元素的计算，很简单，我们写下如下的代码：</p>
 
@@ -2088,7 +2088,9 @@
 
 <p>好，来测试下，运行<code>fib(10)</code>得到结果69，不错，速度也还行，换个大的数字，试试100，这时你会发现，这个程序执行不出结果了，为什么？递归太深了！要计算的子问题太多了！</p>
 
-<p>所以，我们需要改进下，我们保存每次计算出来的子问题的解，用什么保存呢？用Python中的dict！那怎么实现保存子问题的解呢？用Python中的装饰器！如果不是很了解Python的装饰器，可以快速看下<a href="http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/">这篇总结中关于装饰器的解释：Python Tips 1</a></p>
+<p>所以，我们需要改进下，我们保存每次计算出来的子问题的解，用什么保存呢？用Python中的dict！那怎么实现保存子问题的解呢？用Python中的装饰器！</p>
+
+<p>如果不是很了解Python的装饰器，可以快速看下<a href="http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/">这篇总结中关于装饰器的解释：Python Tips 1</a></p>
 
 <p>修改刚才的程序，得到如下代码，定义一个函数<code>memo</code>返回我们需要的装饰器，这里用<code>cache</code>保存子问题的解，key是方法的参数，也就是数字<code>n</code>，值就是<code>fib(n)</code>返回的解。</p>
 

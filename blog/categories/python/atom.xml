@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-18T08:54:50+08:00</updated>
+  <updated>2014-05-18T09:04:50+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Python Tips 2]]></title>
+    <title type="html"><![CDATA[Python Advances]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/16/python-tips2/"/>
     <updated>2014-05-16T10:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/16/python-tips2</id>
@@ -42,13 +42,15 @@
 
 <p><a href="http://blog.jobbole.com/63320/">中文翻译版本：30个Python编程技巧</a></p>
 
+<p>7.描述器，元类，上下文管理库的介绍参见<a href="http://blog.jobbole.com/61171/">伯乐在线-python高级编程技巧</a></p>
+
 <p>TO BE CONTINUED…</p>
 
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Python Tips 1]]></title>
+    <title type="html"><![CDATA[Python Basics]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/"/>
     <updated>2014-05-10T13:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1</id>
@@ -359,8 +361,6 @@ def fib(i):
 
 <p>print(fib(100))
 ```</p>
-
-<p>7.描述器，元类，上下文管理库的介绍参见<a href="http://blog.jobbole.com/61171/">伯乐在线-python高级编程技巧</a></p>
 
 ]]></content>
   </entry>
