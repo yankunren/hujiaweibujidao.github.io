@@ -1,0 +1,24 @@
+---
+layout: post
+title: "Love you"
+date: 2014-05-18 00:07
+comments: true
+categories: music
+---
+
+
+G.E.M 邓紫棋 翻唱的《喜欢你》，真的太好听了！
+
+
+<audio width="300" height="32" 
+style="margin: auto; top: 0; right: 0; bottom: 0; left: 0;" 
+controls="controls" 
+autoplay="autoplay" 
+name="media" 
+src="http://hujiaweibujidao.github.io/music/love-you.mp3">
+</audio>
+
+
+
+
+

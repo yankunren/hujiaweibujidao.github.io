@@ -7,7 +7,7 @@ sharing: true
 footer: true
 ---
 
-```
+```python
 #! /bin/sh
 gender='male'
 name='Hujiawei'
@@ -33,7 +33,7 @@ echo "Hope you enjoy my bolg site here! Have fun! :-) "
 
 我的GitHub主页： <https://github.com/hujiaweibujidao>
 
-中南大学计科0902班毕业纪念网址：<http://csucs0902.duapp.com>
+中南大学计科0902班毕业纪念网址：<http://hujiaweibujidao.github.io/csucs0902/>
 
 PS：以后都会呆在北京，如果有不错的实习机会请和我联系，最好是和移动开发或者数据挖掘有关，谢谢！
 
