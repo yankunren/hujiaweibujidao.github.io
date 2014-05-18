@@ -7,6 +7,10 @@ sharing: true
 footer: true
 ---
 
+![image](http://hujiaweibujidao.github.io/images/matlab.jpg)
+
+数学是计算机的基础，自认为学得不怎么样，诚惶诚恐地写下些总结，只为自己迷茫时这些数学知识能让我度过难关。
+
 最美的"数学心桥"： $$e^{ix}=cosx+isinx$$.
 
 最美的"数学符号"： $$e=\lim_{x \to +\infty} (1+\frac{1}{x})^{x}$$.
@@ -17,7 +21,7 @@ footer: true
 
 第二篇 [线性代数总结](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary/)  [New!]
 
-第三篇 [概率与数理统计总结]()   [暂未写完]
+第三篇 [概率与数理统计总结]() [暂未写完]
 
 
 ### 第二部分 数值算法与应用
