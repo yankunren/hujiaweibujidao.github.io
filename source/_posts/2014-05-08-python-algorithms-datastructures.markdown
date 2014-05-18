@@ -7,6 +7,11 @@ categories: algorithm
 published: true
 ---
 
+**<center>Python Algorithms Python算法系列</center>**
+**<center>逸夫图书馆, 2014/5/8</center>**
+
+### <center>数据结构</center>
+
 参考内容：
 
 1.[Problem Solving with Python](http://interactivepython.org/courselib/static/pythonds/index.html)
