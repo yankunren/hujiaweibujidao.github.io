@@ -171,7 +171,7 @@ print(dag_sp(W,s,t)) #7
 
 ![image](http://hujiaweibujidao.github.io/images/algos/dag_sp_iter.png)
 
-**2."从哪里来?"：我们逆向思维，目标是要到f，那从哪个点到f点会近呢?**
+**2."从哪里来?"：我们逆向思维，目标是要到f，那从a点经过哪个点到f点会近些呢?只能是求解从a点出发能够到达的那些点哪个距离f点更近，这里a点能够到达b点和f点，f点到f点距离是0，但是a到f点的距离是9，可能不是最近的路，所以还要看b点到f点有多近，看b点到f点有多近就是求解从b点出发能够到达的那些点哪个距离f点更近，所以又绕回来，也就是递归下去，直到我们遇到了目标点f。这种思维方式的代码实现就是递归版本。**
 
 ```
 from functools import wraps
@@ -197,3 +197,7 @@ W={0:{1:2,5:9},1:{2:1,3:2,5:6},2:{3:7},3:{4:2,5:3},4:{5:4},5:{}}
 s,t=0,5
 print(rec_dag_sp(W,s,t)) #7
 ```
+
+用图来表示计算过程就是下面所示：
+
+![image](http://hujiaweibujidao.github.io/images/algos/dag_sp_rec.png)
