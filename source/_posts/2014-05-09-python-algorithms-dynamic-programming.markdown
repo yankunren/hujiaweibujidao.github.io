@@ -203,3 +203,10 @@ print(rec_dag_sp(W,s,t)) #7
 用图来表示计算过程就是下面所示：
 
 ![image](http://hujiaweibujidao.github.io/images/algos/dag_sp_rec.png)
+
+下面是参考内容1对DAG求单源最短路径的动态规划问题的总结，比较难理解，不知道我自己理解得对不对，可以忽视注释，:-)
+
+![image](http://hujiaweibujidao.github.io/images/algos/dp_summary.png)
+
+OK，动态规划暂时告一段落，嘿嘿，待我写了些其他动规实现再回来！
+
