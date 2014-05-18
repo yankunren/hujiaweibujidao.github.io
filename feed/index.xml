@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-18T11:14:35+08:00</updated>
+  <updated>2014-05-18T11:16:30+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -2286,7 +2286,9 @@
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/dag_sp_iter.png" alt="image" /></p>
 
-<p><strong>2.”从哪里来?”：我们逆向思维，目标是要到f，那从哪个点到f点会近呢?</strong></p>
+<p><strong>2.”从哪里来?”：我们逆向思维，目标是要到f，那从a点经过哪个点到f点会近些呢?只能是求解从a点出发能够到达的那些点哪个距离f点更近，这里a点能够到达b点和f点，f点到f点距离是0，但是a到f点的距离是9，可能不是最近的路，所以还要看b点到f点有多近，看b点到f点有多近就是求解从b点出发能够到达的那些点哪个距离f点更近，所以又绕回来了，也就是递归下去，直到我们能够回答从a点经过哪个点到f点会更近。这种思维方式的代码实现就是递归版本。</strong></p>
+
+<p>这种情况下，不需要输入是经过了拓扑排序的，所以你可以任意修改输入<code>W</code>中节点的顺序，结果都是一样的，而上面采用迭代实现方式必须要是拓扑排序了的，从中你就可以看出迭代版本和递归版本的区别了。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -2333,6 +2335,17 @@
 </span><span class="line"><span class="n">s</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span>
 </span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">rec_dag_sp</span><span class="p">(</span><span class="n">W</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">t</span><span class="p">))</span> <span class="c">#7</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>用图来表示计算过程就是下面所示：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/dag_sp_rec.png" alt="image" /></p>
+
+<p>下面是参考内容1对DAG求单源最短路径的动态规划问题的总结，比较难理解，不知道我自己理解得对不对，可以忽视注释，:-)</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/dp_summary.png" alt="image" /></p>
+
+<p>OK，动态规划暂时告一段落，嘿嘿，待我写了些其他动规实现再回来！</p>
+
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/">http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
