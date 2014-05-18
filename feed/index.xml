@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-18T01:01:11+08:00</updated>
+  <updated>2014-05-18T08:54:50+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -1411,9 +1411,9 @@
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/12/Algorithms/"/>
     <updated>2014-05-12T11:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/12/Algorithms</id>
-    <content type="html"><![CDATA[<p>战线拉得有点长，囫囵吞枣地看了写书写了些代码，时间久了可能就会忘了当时怎么想的，所以，总结是很有必要的一个过程，重新捋一捋思路，重新写写代码，势必对自己的知识储备有很大的好处，不求一语惊人，只求若有所获。</p>
+    <content type="html"><![CDATA[<p>战线拉得有点长，囫囵吞枣地看了写书写了些代码，时间久了可能就会忘了当时怎么想的，所以，总结是很有必要的一个过程，重新捋一捋思路，重新写写代码，势必对自己的知识储备有很大的好处，不求一语惊人，只求若有所获，本人学识似五柳，不求甚解，但求一二，能够心中有数，胸有成竹地编码且举一反三即可。</p>
 
-<p>故有了此系列，主要记录些在数据挖掘、机器学习、模式识别等领域的相关算法，算法不求全，但求质量佳，肯定会附上实现的源码，可能是Matlab版本的，也可能是Java或者Python版本的，如果我比较熟悉的算法会结合一个实际的案例进行分析。</p>
+<p>此系列因此而生，主要记录些在数据挖掘、机器学习、模式识别等领域的相关算法，算法不求全，但求质量佳，肯定会附上实现的源码，可能是Matlab版本的，也可能是Java或者Python版本的，如果我比较熟悉的算法会结合一个实际的案例进行分析。</p>
 
 <p>嗯，就唠叨这些，慢慢来，持续添加各个算法，需要的敬请期待。</p>
 
@@ -1433,7 +1433,7 @@
 
 <p>6.Assosiation Analysis: Apriori, FP-Growth…</p>
 
-<p>7.Others: gradient descent, stochastic gradient descent, (Gussian) Mixture Model, Recommendation System</p>
+<p>7.Others: gradient descent, stochastic gradient descent, (Gussian) Mixture Model, Recommendation System, Template Matching…</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/12/Algorithms/">http://hujiaweibujidao.github.io/blog/2014/05/12/Algorithms/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
