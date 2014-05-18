@@ -212,7 +212,7 @@
     </url>
     <url>
         <loc>http://hujiaweibujidao.github.io/datamining/</loc>
-        <lastmod>2014-05-18T20:54:41+08:00</lastmod>
+        <lastmod>2014-05-18T20:58:21+08:00</lastmod>
     </url>
     <url>
         <loc>http://hujiaweibujidao.github.io/feed/index.xml</loc>
@@ -229,6 +229,10 @@
     <url>
         <loc>http://hujiaweibujidao.github.io/math/</loc>
         <lastmod>2014-05-18T20:53:53+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://hujiaweibujidao.github.io/ML-DM-PR/</loc>
+        <lastmod>2014-05-18T20:54:41+08:00</lastmod>
     </url>
     <url>
         <loc>http://hujiaweibujidao.github.io/mobiledev/</loc>
