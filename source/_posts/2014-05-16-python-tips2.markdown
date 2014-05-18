@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Python Tips 2"
+title: "Python Advances"
 date: 2014-05-16 10:00
 comments: true
 categories: python
@@ -30,6 +30,8 @@ published: true
 6.[30 Python Language Features and Tricks You May Not Know About](http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html)
 
 [中文翻译版本：30个Python编程技巧](http://blog.jobbole.com/63320/)
+
+7.描述器，元类，上下文管理库的介绍参见[伯乐在线-python高级编程技巧](http://blog.jobbole.com/61171/)
 
 TO BE CONTINUED...
 
