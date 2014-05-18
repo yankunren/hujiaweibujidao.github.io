@@ -7,7 +7,10 @@ categories: algorithm
 published: true
 ---
 
-PageRank算法
+**<center>ML/DM/PR算法系列</center>**
+**<center>逸夫图书馆, 2014/5/17</center>**
+
+### <center>PageRank算法</center>
 
 PageRank算法是谷歌曾经独步天下的“倚天剑”，该算法由Larry Page和Sergey Brin在斯坦福大学读研时发明的，[论文点击下载: The PageRank Citation Ranking: Bringing Order to the Web](http://ilpubs.stanford.edu:8090/422/1/1999-66.pdf)。
 
