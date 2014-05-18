@@ -167,6 +167,8 @@ s,t=0,5
 print(dag_sp(W,s,t)) #7
 ```
 
+用图来表示计算过程就是下面所示：
+
 ![image](http://hujiaweibujidao.github.io/images/algos/dag_sp_iter.png)
 
 **2."从哪里来?"：我们逆向思维，目标是要到f，那从哪个点到f点会近呢?**
