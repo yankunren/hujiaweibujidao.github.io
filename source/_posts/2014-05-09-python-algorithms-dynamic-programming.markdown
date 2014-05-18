@@ -27,7 +27,7 @@ Chapter 8 Tangled Dependencies and Memoization
 
 举个简单的例子，斐波那契数列中的元素的计算，很简单，我们写下如下的代码：
 
-```
+```python
 def fib(i):
     if i<2: return 1
     return fib(i-1)+fib(i-2)
