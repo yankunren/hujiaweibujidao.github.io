@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-18T19:26:43+08:00</updated>
+  <updated>2014-05-18T19:37:56+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -18,7 +18,7 @@
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/18/love-you/"/>
     <updated>2014-05-18T00:07:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/18/love-you</id>
-    <content type="html"><![CDATA[<p>G.E.M 翻唱的《喜欢你》，真的太好听了！</p>
+    <content type="html"><![CDATA[<p>G.E.M 邓紫棋 翻唱的《喜欢你》，真的太好听了！</p>
 
 <audio width="300" height="32" style="margin: auto; top: 0; right: 0; bottom: 0; left: 0;" controls="controls" autoplay="autoplay" name="media" src="http://hujiaweibujidao.github.io/music/love-you.mp3">
 </audio>
@@ -311,7 +311,10 @@
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank/"/>
     <updated>2014-05-12T18:12:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank</id>
-    <content type="html"><![CDATA[<p>PageRank算法</p>
+    <content type="html"><![CDATA[<p><strong><center>ML/DM/PR算法系列</center></strong>
+<strong><center>逸夫图书馆, 2014/5/17</center></strong></p>
+
+<h3 id="centerpagerankcenter"><center>PageRank算法</center></h3>
 
 <p>PageRank算法是谷歌曾经独步天下的“倚天剑”，该算法由Larry Page和Sergey Brin在斯坦福大学读研时发明的，<a href="http://ilpubs.stanford.edu:8090/422/1/1999-66.pdf">论文点击下载: The PageRank Citation Ranking: Bringing Order to the Web</a>。</p>
 
@@ -1428,7 +1431,10 @@
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/12/Algorithms/"/>
     <updated>2014-05-12T11:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/12/Algorithms</id>
-    <content type="html"><![CDATA[<p>战线拉得有点长，囫囵吞枣地看了写书写了些代码，时间久了可能就会忘了当时怎么想的，所以，总结是很有必要的一个过程，重新捋一捋思路，重新写写代码，势必对自己的知识储备有很大的好处，不求一语惊人，只求若有所获，本人学识似五柳，不求甚解，但求一二，能够心中有数，胸有成竹地编码且举一反三即可。</p>
+    <content type="html"><![CDATA[<p><strong><center>ML/DM/PR算法系列</center></strong>
+<strong><center>逸夫图书馆, 2014/5/17</center></strong></p>
+
+<p>战线拉得有点长，囫囵吞枣地看了写书写了些代码，时间久了可能就会忘了当时怎么想的，所以，总结是很有必要的一个过程，重新捋一捋思路，重新写写代码，势必对自己的知识储备有很大的好处，不求一语惊人，只求若有所获，本人学识似五柳，不求甚解，但求一二，能够心中有数，胸有成竹地编码且举一反三即可。</p>
 
 <p>此系列因此而生，主要记录些在数据挖掘、机器学习、模式识别等领域的相关算法，算法不求全，但求质量佳，肯定会附上实现的源码，可能是Matlab版本的，也可能是Java或者Python版本的，如果我比较熟悉的算法会结合一个实际的案例进行分析。</p>
 
@@ -2076,7 +2082,12 @@
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/"/>
     <updated>2014-05-08T23:30:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming</id>
-    <content type="html"><![CDATA[<p>参考内容：</p>
+    <content type="html"><![CDATA[<p><strong><center>Python Algorithms Python算法系列</center></strong>
+<strong><center>逸夫图书馆, 2014/5/18</center></strong></p>
+
+<h3 id="centercenter"><center>动态规划</center></h3>
+
+<p>参考内容：</p>
 
 <p>1.<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms: Mastering Basic Algorithms in the Python Language</a></p>
 
@@ -2366,7 +2377,7 @@
 <p>我们需要确定一个递归式来将我们要求解的问题表示出来，下面摘自算法导论，介绍地非常详细
 <img src="http://hujiaweibujidao.github.io/images/algos/matrix2.png" alt="image" /></p>
 
-<p>最后给出的递归式如下，就是说<strong>我们要去确定任何从第i个矩阵到第j个矩阵组成的矩阵链$A<em>{i…j}$的最优解。如果i和j相等，那么就是一个矩阵，不需要运算；如果i小于j，那么肯定要从它们中间的某个位置分开来，那从哪里分开来呢? 这个我们可以尝试下所有可能的选择，也就是尝试在位置$i \le k &lt; j$进行分开，看看它需要的计算次数，然后我们从这些可能的k中选择使得计算次数最小的那个k进行分开，分开了之后我们的问题就变成了2个小问题，确定矩阵链从i到k即$A</em>{i…k}$和另一个矩阵链从k+1到j即$A_{(k+1)…j}$的最优解。如果我们一开始设置i=1(第一个矩阵)，j=n(最后一个矩阵)，那么，经过上面的递归即可得到我们需要的解。这就是递归的思想！</strong></p>
+<p>最后给出的递归式如下，就是说<strong>我们要去确定任何从第i个矩阵到第j个矩阵组成的矩阵链$A<em>{i…j}$的最优解。如果i和j相等，那么就是一个矩阵，不需要运算；如果i小于j，那么肯定要从它们中间的某个位置分开来，那从哪里分开来呢? 这个我们可以尝试下所有可能的选择，也就是尝试不同的位置k，k满足条件$i \le k &lt; j$，在位置k将矩阵链进行分开，看看它需要的计算次数，然后我们从这些可能的k中选择使得计算次数最小的那个k进行分开，分开了之后我们的问题就变成了2个小问题，确定矩阵链从i到k即$A</em>{i…k}$和另一个矩阵链从k+1到j即$A_{(k+1)…j}$的最优解。如果我们一开始设置i=1(第一个矩阵)，j=n(最后一个矩阵)，那么，经过上面的递归即可得到我们需要的解。这就是递归的思想！</strong></p>
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
 
@@ -2638,7 +2649,12 @@ m[i][j]= \left\{
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-greedy/"/>
     <updated>2014-05-08T23:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-greedy</id>
-    <content type="html"><![CDATA[<p>参考内容：</p>
+    <content type="html"><![CDATA[<p><strong><center>Python Algorithms Python算法系列</center></strong>
+<strong><center>逸夫图书馆, 2014/5/18</center></strong></p>
+
+<h3 id="centercenter"><center>贪心算法</center></h3>
+
+<p>参考内容：</p>
 
 <p>1.<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms: Mastering Basic Algorithms in the Python Language</a></p>
 
@@ -2655,7 +2671,12 @@ m[i][j]= \left\{
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Graphs/"/>
     <updated>2014-05-08T22:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Graphs</id>
-    <content type="html"><![CDATA[<p>参考内容：</p>
+    <content type="html"><![CDATA[<p><strong><center>Python Algorithms Python算法系列</center></strong>
+<strong><center>逸夫图书馆, 2014/5/18</center></strong></p>
+
+<h3 id="centercenter"><center>图算法</center></h3>
+
+<p>参考内容：</p>
 
 <p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a></p>
 
@@ -2693,7 +2714,12 @@ m[i][j]= \left\{
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees/"/>
     <updated>2014-05-08T20:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees</id>
-    <content type="html"><![CDATA[<p>参考内容：</p>
+    <content type="html"><![CDATA[<p><strong><center>Python Algorithms Python算法系列</center></strong>
+<strong><center>逸夫图书馆, 2014/5/8</center></strong></p>
+
+<h3 id="centercenter"><center>树</center></h3>
+
+<p>参考内容：</p>
 
 <p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a></p>
 
@@ -3632,7 +3658,12 @@ m[i][j]= \left\{
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/"/>
     <updated>2014-05-08T10:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures</id>
-    <content type="html"><![CDATA[<p>参考内容：</p>
+    <content type="html"><![CDATA[<p><strong><center>Python Algorithms Python算法系列</center></strong>
+<strong><center>逸夫图书馆, 2014/5/8</center></strong></p>
+
+<h3 id="centercenter"><center>数据结构</center></h3>
+
+<p>参考内容：</p>
 
 <p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a></p>
 
@@ -4266,7 +4297,12 @@ Chapter 6 Trees and Tree Algorithms   </p>
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/"/>
     <updated>2014-05-07T22:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort</id>
-    <content type="html"><![CDATA[<p>参考内容：</p>
+    <content type="html"><![CDATA[<p><strong><center>Python Algorithms Python算法系列</center></strong>
+<strong><center>逸夫图书馆, 2014/5/7</center></strong></p>
+
+<h3 id="centercenter"><center>排序</center></h3>
+
+<p>参考内容：</p>
 
 <p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a></p>
 
@@ -4870,7 +4906,12 @@ Chapter 6 Trees and Tree Algorithms   </p>
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/"/>
     <updated>2014-05-07T16:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search</id>
-    <content type="html"><![CDATA[<p>参考内容：</p>
+    <content type="html"><![CDATA[<p><strong><center>Python Algorithms Python算法系列</center></strong>
+<strong><center>逸夫图书馆, 2014/5/7</center></strong></p>
+
+<h3 id="centercenter"><center>搜索</center></h3>
+
+<p>参考内容：</p>
 
 <p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a>
 Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/searching.html#searching">online_link</a></p>

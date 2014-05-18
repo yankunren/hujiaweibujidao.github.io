@@ -9,7 +9,8 @@
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="参考内容： 1.Python Algorithms: Mastering Basic Algorithms in the Python Language Chapter 8 Tangled Dependencies and Memoization 2.算法导论 3.算法设计、分析与实现从入门到精通 &hellip;">
+  <meta name="description" content="Python Algorithms Python算法系列
+逸夫图书馆, 2014/5/18 动态规划 参考内容： 1.Python Algorithms: Mastering Basic Algorithms in the Python Language Chapter 8 Tangled &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -113,7 +114,12 @@
   </header>
 
 
-<div class="entry-content"><p>参考内容：</p>
+<div class="entry-content"><p><strong><center>Python Algorithms Python算法系列</center></strong>
+<strong><center>逸夫图书馆, 2014/5/18</center></strong></p>
+
+<h3 id="centercenter"><center>动态规划</center></h3>
+
+<p>参考内容：</p>
 
 <p>1.<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms: Mastering Basic Algorithms in the Python Language</a></p>
 
@@ -403,7 +409,7 @@
 <p>我们需要确定一个递归式来将我们要求解的问题表示出来，下面摘自算法导论，介绍地非常详细
 <img src="http://hujiaweibujidao.github.io/images/algos/matrix2.png" alt="image" /></p>
 
-<p>最后给出的递归式如下，就是说<strong>我们要去确定任何从第i个矩阵到第j个矩阵组成的矩阵链$A<em>{i…j}$的最优解。如果i和j相等，那么就是一个矩阵，不需要运算；如果i小于j，那么肯定要从它们中间的某个位置分开来，那从哪里分开来呢? 这个我们可以尝试下所有可能的选择，也就是尝试在位置$i \le k &lt; j$进行分开，看看它需要的计算次数，然后我们从这些可能的k中选择使得计算次数最小的那个k进行分开，分开了之后我们的问题就变成了2个小问题，确定矩阵链从i到k即$A</em>{i…k}$和另一个矩阵链从k+1到j即$A_{(k+1)…j}$的最优解。如果我们一开始设置i=1(第一个矩阵)，j=n(最后一个矩阵)，那么，经过上面的递归即可得到我们需要的解。这就是递归的思想！</strong></p>
+<p>最后给出的递归式如下，就是说<strong>我们要去确定任何从第i个矩阵到第j个矩阵组成的矩阵链$A<em>{i…j}$的最优解。如果i和j相等，那么就是一个矩阵，不需要运算；如果i小于j，那么肯定要从它们中间的某个位置分开来，那从哪里分开来呢? 这个我们可以尝试下所有可能的选择，也就是尝试不同的位置k，k满足条件$i \le k &lt; j$，在位置k将矩阵链进行分开，看看它需要的计算次数，然后我们从这些可能的k中选择使得计算次数最小的那个k进行分开，分开了之后我们的问题就变成了2个小问题，确定矩阵链从i到k即$A</em>{i…k}$和另一个矩阵链从k+1到j即$A_{(k+1)…j}$的最优解。如果我们一开始设置i=1(第一个矩阵)，j=n(最后一个矩阵)，那么，经过上面的递归即可得到我们需要的解。这就是递归的思想！</strong></p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 
