@@ -15,6 +15,8 @@ Chapter 8 Tangled Dependencies and Memoization
 
 2.[算法导论](http://en.wikipedia.org/wiki/Introduction_to_Algorithms)
 
+3.[算法设计、分析与实现从入门到精通](http://book.douban.com/subject/4875278/)
+
 大家都知道，动态规划算法一般都有两种实现方式：
 
 **1.直接自顶向下实现递归式，并将中间结果保存，这叫备忘录法；**
@@ -109,11 +111,87 @@ def cnk(n,k):
     return cnk(n-1,k)+cnk(n-1,k-1)
 ```
 
+它的迭代版本也比较简单，这里使用了`defaultdict`，略高级的数据结构，和dict不同的是，当查找的key不存在对应的value时，会返回一个默认的值，这个很有用，下面的代码可以看到。
 
+如果不了解`defaultdict`的话可以看下[这篇文章：Python中的高级数据结构](http://blog.jobbole.com/65218/)
 
+```
+from collections import defaultdict
 
+n,k=10,7
+C=defaultdict(int)
+for row in range(n+1):
+    C[row,0]=1
+    for col in range(1,k+1):
+        C[row,col]=C[row-1,col-1]+C[row-1,col]
 
+print(C[n,k]) #120
+```
 
+杨辉三角大家都熟悉，在国外这个叫`Pascal Triangle`，它和二项式系数特别相似，看下图，除了两边的数字之外，里面的任何一个数字都是由它上面相邻的两个元素相加得到，想想`C(n,k)=C(n-1,k-1)+C(n-1,k)`不也就是这儿含义吗?
 
+![image](http://hujiaweibujidao.github.io/images/algos/sanjiao.png)
 
+另外，还记得矩阵连乘问题最后的图示吗?和上面的三角有异曲同工之妙，不同的是选择哪两个去计算新的值！
 
+![image](http://hujiaweibujidao.github.io/images/algos/matrixmulti.png)
+
+所以说，顺序对于迭代版本的动态规划实现很重要，下面举个实例，用动态规划解决有向无环图的单源最短路径问题。假设有如下图所示的图，当然，我们看到的是这个有向无环图经过了拓扑排序之后的结果，从a到f的最短路径用灰色标明了。
+
+![image](http://hujiaweibujidao.github.io/images/algos/dag_sp.png)
+
+好，怎么实现呢? 
+
+**我们有两种思考方式：**
+
+**1."去哪里?"：我们顺向思维，首先假设从a点出发到所有其他点的距离都是无穷大，然后，按照拓扑排序的顺序，从a点出发，接着更新a点能够到达的其他的点的距离，那么就是b点和f点，b点的距离变成2，f点的距离变成9。因为这个有向无环图是经过了拓扑排序的，所以按照拓扑顺序访问一遍所有的点(到了目标点就可以停止了)就能够得到a点到所有已访问到的点的最短距离，也就是说，当到达哪个点的时候，我们就找到了从a点到该点的最短距离，拓扑排序保证了后面的点不会指向前面的点，所以访问到后面的点时不可能再更新它前面的点的最短距离！这种思维方式的代码实现就是迭代版本。**
+
+这里涉及到了拓扑排序，我的博客中还没有讲解，所以下面的代码已经将输入的点进行了拓扑排序，待我更新了图算法那篇文章再来更新这里的代码，谅解。
+
+```
+def topsort(W):
+    return W
+
+def dag_sp(W, s, t):
+    d = {u:float('inf') for u in W} #
+    d[s] = 0
+    for u in topsort(W):
+        if u == t: break
+        for v in W[u]:
+            d[v] = min(d[v], d[u] + W[u][v])
+    return d[t]
+
+#邻接表
+W={0:{1:2,5:9},1:{2:1,3:2,5:6},2:{3:7},3:{4:2,5:3},4:{5:4},5:{}}
+s,t=0,5
+print(dag_sp(W,s,t)) #7
+```
+
+![image](http://hujiaweibujidao.github.io/images/algos/dag_sp_iter.png)
+
+**2."从哪里来?"：我们逆向思维，目标是要到f，那从哪个点到f点会近呢?**
+
+```
+from functools import wraps
+def memo(func):
+    cache={}
+    @wraps(func)
+    def wrap(*args):
+        if args not in cache:
+            cache[args]=func(*args)
+            # print('cache {0} = {1}'.format(args[0],cache[args]))
+        return cache[args]
+    return wrap
+
+def rec_dag_sp(W, s, t):
+    @memo
+    def d(u):
+        if u == t: return 0
+        return min(W[u][v]+d(v) for v in W[u])
+    return d(s)
+
+#邻接表
+W={0:{1:2,5:9},1:{2:1,3:2,5:6},2:{3:7},3:{4:2,5:3},4:{5:4},5:{}}
+s,t=0,5
+print(rec_dag_sp(W,s,t)) #7
+```
