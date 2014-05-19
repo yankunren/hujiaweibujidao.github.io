@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-19T17:22:09+08:00</updated>
+  <updated>2014-05-19T17:31:15+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,221 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SS-Statistics Summary]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary/"/>
+    <updated>2014-05-19T18:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary</id>
+    <content type="html"><![CDATA[<p><strong><center>统计学那些事 Things of Statistics</center></strong>
+<strong><center>逸夫图书馆, 2014/5/19</center></strong></p>
+
+<hr />
+
+<!--[TOC]-->
+
+<h4 id="center-center"><center>**第零部分 碎碎念**</center></h4>
+<p>本文是对概率和数理统计中的重要内容的一个小总结，不会侧重很多众所周知的细节，所以有啥疑问还是需要Google或者Wikipedia。关于本文中出现的术语参照参考书籍中的定义，部分可能与大学教材中不同，请自行对应起来理解。小弟才疏学浅，若有错误请留言，欢迎指正。</p>
+
+<p>主要参考书籍：</p>
+
+<p>1.<a href="http://book.douban.com/subject/2985995/">《爱上统计学》</a></p>
+
+<p>2.<a href="http://book.douban.com/subject/7056708/">《深入浅出统计学》</a></p>
+
+<p>3.<a href="http://book.douban.com/subject/24381562/">《统计思维：程序员数学之概率统计》</a></p>
+
+<h4 id="center-center-1"><center>**第一部分 概率**</center></h4>
+<p>1.事件：对立事件(complementary event)，互斥事件(exclusive event)，相交事件(intersecting event)，相关事件(dependent event)，独立事件(independent event)，可以使用韦恩图(Venn Diagram)方便分析事件之间的关系。</p>
+
+<p>如果事件A和B会相互影响，那么它们是相关事件，否则是独立事件。
+事件A和B独立：$P(A|B)=P(A) \quad P(A \cap B)=P(A)P(B)$</p>
+
+<p>2.概率：条件概率(Conditional Probability)，全概率(Total Probability)，贝叶斯定理(Bayes’ Theorem)</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>条件概率：$P(A</td>
+      <td>B)=\frac{P(A \cap B)}{P(B)}$</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>全概率：$P(B)=P(B</td>
+      <td>A)P(A)+P(B</td>
+      <td>A’)P(A’)$</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>贝叶斯定理(将条件概率和全概率整合到一起)：$P(A</td>
+      <td>B)=\frac{P(A \cap B)}{P(B</td>
+      <td>A)P(A)+P(B</td>
+      <td>A’)P(A’)}$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>3.期望(Expectation)与方差(Variance)</p>
+
+<p>$E(x)=\Sigma xP(X=x) \quad Var(x)=E(x-\mu)^{2}=\Sigma (x-\mu)^2P(X=x)=E(x^{2})-(E(x))^{2}$</p>
+
+<p>线性变换之后的期望与方差：</p>
+
+<p>$E(ax+b)=aE(x)+b \quad Var(ax+b)=a^{2}Var(x)$
+$E(ax+by)=aE(x)+bE(y) \quad Var(ax+by)=a^{2}Var(x)+b^{2}Var(y)$</p>
+
+<p><strong>思考：为什么加上b方差并没有发生变化呢？因为在变量中增加常数b只是将概率分布移动了一下，分布的形状并没有发生改变，所以b并没有在方差中起到作用。</strong></p>
+
+<p>相互独立事件X和Y：</p>
+
+<p>$E(X+Y)=E(X)+E(Y) \quad Var(X+Y)=Var(X)+Var(Y)$
+$E(X-Y)=E(X)-E(Y) \quad Var(X-Y)=Var(X)+Var(Y)$</p>
+
+<p>**思考：为什么$Var(X-Y)=Var(X)+Var(Y)$？可以随便拿数据验证之。[TODO]
+记住，一个随机变量减去另一个随机变量得到的概率分布的方差是两个随机变量的方差之和，方差只会增加！下面两个图示演示了其结果
+**</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/varxplusy.png" alt="image" /></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/varxminusy.png" alt="image" /></p>
+
+<p>相互独立的随机变量与独立观测值之间的区别：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/independentobservation.png" alt="image" /></p>
+
+<h4 id="center-center-2"><center>**第二部分 分布**</center></h4>
+
+<p>1.概率质量函数PMF(Probability Mass Function)：数据集中数据值到它的概率的映射函数。直方图是各个值出现的频数，如果将频数除以样本总数，得到概率，归一化之后的直方图就是PMF。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/pmf.png" alt="image" /></p>
+
+<p>2.累积分布函数CDF(Cumulative Distribution Function)：数据集中数据值到它在分布中概率的累积值的映射函数。例如，
+CDF(0) = 0; CDF(1) = 0.2; CDF(2) = 0.6; CDF(3) = 0.8; CDF(4) = 0.8; CDF(5) = 1，它的CDF图为一个阶跃函数：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/cdf.png" alt="image" /></p>
+
+<p>3.指数分布(exponential distribution)：一种连续分布。举例来说，<strong>观察一系列事件之间的间隔时间，若事件在每个时间点发生的概率相同，那么间隔时间的分布就近似指数分布</strong>。指数分布的CDF如下：</p>
+
+<script type="math/tex; mode=display">
+CDF(x)=1-e^{-\lambda x}
+</script>
+
+<p>参数$\lambda$决定了指数分布的形状，通常，指数分布的均值是$\frac{1}{\lambda}$，中位数是$\frac{log(2)}{\lambda}$。下图为$\lambda=2$的指数分布图：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/edcdf.png" alt="image" /></p>
+
+<p>如果判断一个分布是否是指数分布呢？一种办法是画出取对数之后的互补累积分布函数(CCDF=Complementary CDF=1-CDF(x))，CCDF是一条斜率为$-\lambda$的直线，原因如下：</p>
+
+<script type="math/tex; mode=display">
+y=CCDF(x)=1-CDF(x)=e^{-\lambda x} \quad => \quad log(y)=-\lambda x
+</script>
+
+<p>4.正态分布(Normal Distribution)：又叫高斯分布，是最常用的分布。对于正态分布的CDF还没有一种准确的表达，最常用的一种形式是以误差函数(error function)来表示，它是一个特殊的函数，表示为erf(x)：</p>
+
+<script type="math/tex; mode=display">
+CDF(x)=\frac{1}{2}[1+erf(\frac{x-\mu}{\sigma \sqrt{2}})] \quad erf(x)=\frac{2}{\sqrt{\pi}}\int_{0}^{x}e^{-r^{2}}dt
+</script>
+
+<p>其中，参数$\mu$和$\sigma$分别决定了正态分布的均值和标准差。下图为$\mu=2.0$和$\sigma=0.5$的正态分布的CDF图：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/ndcdf.png" alt="image" /></p>
+
+<p>根据大数定理，当我们处理大样本数据集(超过30个数据)，并且重复地从总体中抽取样本时，得到的数值分布就接近正态分布曲线。正态分布以均值为中心完全对称。</p>
+
+<p>关于正态分布有一个重要的结论，对任何数值分布来说(不论它的均值和标准差)，只要数值是正态分布，那么几乎100%的数值都分布在均值的-3到3个标准差之间。下面是正态曲线下数值的分布情况：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/nd.png" alt="image" /></p>
+
+<p>从中可以看出，在均值与1个标准差之间大概有34%的数值分布，在1个标准差和2个标准差之间大概有13%的数值分布，在2个标准差和3个标准差之间大概有2.1%的数值分布。</p>
+
+<p><a href="http://wikipedia.org/wiki/Log-normal_distribution">对数正态分布</a>：如果一组数据取对数之后服从正态分布，那么我们就称其服从对数正态分布。对数正态分布的 CDF 跟正态分布一样, 只是用 logx 代替原来的 x:</p>
+
+<script type="math/tex; mode=display">
+CDF_{lognormal}(x) = CDF_{normal}(log x)
+</script>
+
+<p>对数正态分布的均值与标准差不再是是$\mu$和$\sigma$了。可以证明,成人体重的分布是近似对数正态的。</p>
+
+<h4 id="center-center-3"><center>**第三部分 描述性统计量**</center></h4>
+
+<p>1.描述数据的集中趋势：均值(mean)，中位数(median)，众数(mode)，加权平均数</p>
+
+<p>百分位点(percentile points)：中位数(Q2)就是50百分位点，Q1为25百分位点(lower quartile)，Q3为75百分位点(upper quartile)，经常使用Q3-Q1=IQR(interquartile range，四分差或四分位数)来检查分布是否对称。</p>
+
+<p>[如果要计算一组数中的某个百分位数，一般比较好的排序方法是选择排序；当然，如果是计算该组数的特殊的百分位数，例如中位数，有其他更好地方法能够在线性时间内得到，之后我对做一些相关问题的研究，暂且说明一下]</p>
+
+<p>2.描述数据的变异性：极差(range)，标准差(standard deviation,简称s或者SD)，方差(deviation)</p>
+
+<p>标准差的计算公式：
+$$
+s=\sqrt{\frac{\Sigma(X-\bar{X})^2}{n-1}}
+$$</p>
+
+<p><strong>s是总体标准差的无偏估计，如果根号内部分母改成了n则是有偏估计</strong>，详细证明参见：<a href="http://en.wikipedia.org/wiki/Bias_of_an_estimator">http://en.wikipedia.org/wiki/Bias_of_an_estimator</a></p>
+
+<p>标准差和方差的异同：<strong>它们都是用来反映数据集中数据的变异性或者离散度的度量，但是标准差以原有的计算单位存在，然而方差以平方单位存在，前者在实际中更加具有意义</strong>。例如，某高校的男生的平均身高是170cm，标准差是5cm，那么说明该校男生的身高与均值的差异大概就是5cm，换成方差来解释的话就不好陈述了。</p>
+
+<p>使用有偏估计其实也可，但是最好使用无偏估计，我记得Coursera Machine Learning课中Andrew Ng曾经提到过，实际编码中其实还是使用有偏估计，因为它们在样本数据很大的时候其实结果没多大影响。</p>
+
+<p>3.数据集的图形化显示：直方图，饼图，线图，柱形图，条形图，茎叶图等</p>
+
+<p>数据分布的差异性描述：平均值，变异性，峰度(kurtosis)，偏度(skewness)</p>
+
+<p>峰值可能有多个，比如双峰或者多峰等。偏度有一个计算公式，由Pearson发明的，他同时也是相关系数的发明者，偏度虽有正负之分，但是绝对值越大说明图形越偏。</p>
+
+<script type="math/tex; mode=display">
+SK=\frac{3(\bar{X}-M)}{s},\quad M=Median,\bar{X}=Mean,s=SD
+</script>
+
+<p>4.相关系数(correlation coefficient)是两个变量之间<strong>线性关系</strong>的数值型指标，取值范围是[-1,1]，大于0表示正相关，小于0表示负相关，可以用散点图来直接查看相关性。根据某些不成文的规则，一般高于0.6表示强相关，低于0.4表示弱相关，中间部分表示中度相关。</p>
+
+<p>[<strong>Pearson相关系数考察的变量的属性是连续的，例如年龄，体重等，如果是离散型变量那么应该使用点二列相关系数</strong>]</p>
+
+<p>注意两点：(1)<strong>相关系数反映的是只是线性关系！如果两个变量的相关系数为0，只能说明它们没有线性关系存在，但是可能存在其他的非线性关系！</strong>
+(2)<strong>相关性和因果关系无关！</strong>例如，冰淇淋的消费量和犯罪率是正相关的，但是两者不存在任何因果关系！</p>
+
+<p>相关系数的计算：</p>
+
+<script type="math/tex; mode=display">
+r_{XY}=\frac{n\Sigma{XY}-\Sigma{X}\Sigma{Y}}{\sqrt{[n\Sigma{X^2}-(\Sigma{X})^2][n\Sigma{Y^2}-(\Sigma{Y})^2]}}
+</script>
+
+<p>决定系数：相关系数的平方，它表述一个变量的方差可以被另一个变量的方差来解释的百分比。</p>
+
+<h4 id="center-center-4"><center>**第四部分 假设检验**</center></h4>
+
+<p>1.假设：一般假设就是一个“猜想”，它表述问题的一般陈述。假设检验是用于样本，然后才将结论一般化推广到总体中。</p>
+
+<p>2.零假设(null hypothesis=$H_{0}$，或叫原假设)：它一般表示“正在研究的两个变量无关或者没有差异”这样的命题。例如，三年级学生的记忆力考试成绩与四年级学生记忆力考试成绩之间没有差异。</p>
+
+<p><strong>(1)零假设是研究的起点，因为在没有信息的情况下，零假设就被看作是可以接受的真实状态。在这种假设下，我们认为观测到的效应是由偶然因素造成的。</strong>
+<strong>(2)零假设也是研究的基准，也就是说在零假设成立的情况下，计算统计量，然后进行假设检验。这就类似反证法的思想。</strong></p>
+
+<p>3.研究假设(research hypothesis=alternate hypothesis，或叫备择假设)：与零假设相对立的，认为变量之间有关系的假设。</p>
+
+<p>研究假设分为有方向和无方向两种研究假设。无方向研究假设命题例子：三年级学生的记忆力考试成绩与四年级学生记忆力考试成绩之间有差异。有方向研究假设命题例子：三年级学生的记忆力考试成绩低于四年级学生记忆力考试成绩。</p>
+
+<p>讨论有无方向的另一种形式是讨论单尾检验(one-tailed test)和双尾检验(two-tailed test)。</p>
+
+<p>零假设与研究假设的区别：
+(1)零假设表示两个变量没有差异或者没有关系，研究假设表示它们有关系或者有差异；
+(2)零假设对应的是总体，而研究假设对应的是样本。我们是从总体中取出一部分样本进行检验，将得到的结论推广到总体中。
+(3)因为总体不能直接检验(不现实，不经济或者不可能)，所以零假设只能间接检验，研究假设则可以直接检验。</p>
+
+<!-- footnots -->
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary/">http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Algorithms: Longest Common Subsequence]]></title>
@@ -5653,88 +5868,6 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LAS 1-Determinant]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1/"/>
-    <updated>2014-04-29T14:03:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1</id>
-    <content type="html"><![CDATA[<p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
-<strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
-
-<h4 id="center1center"><center>1.行列式</center></h4>
-
-<p><strong>什么是行列式？</strong></p>
-
-<p>这个问题一点都不简单！</p>
-
-<p>推荐阅读的博文<a href="http://spaces.ac.cn/index.php/archives/2208/">新理解矩阵5</a>以及<a href="http://www.matrix67.com/blog/archives/4294">我们需要怎样的数学教育？</a>，后者在网上比较火，简单的语言道出行列式以及矩阵的“天机”。</p>
-
-<blockquote>
-  <p>直到今天看到<a href="http://mathoverflow.net/questions/7584/what-are-the-most-misleading-alternate-definitions-in-taught-mathematics">这个网页</a>，才看见有人一语道破线性代数的真谛（这也是我终于决定写成此文的直接原因）。我终于找到了我那一个学期企图寻找的东西。就好像把 $x$ 变成 $2 x$ 一样，我们经常需要把 $(x, y)$ 变成 $(2 x + y, x – 3 y)$ 之类的东西，这就叫做线性变换。于是才想到定义矩阵乘法，用于表示一切线性变换。几何上看，把平面上的每个点 $(x, y)$ 都变到 $(2 x + y, x – 3 y)$ 的位置上去，效果就相当于对这个平面进行了一个“线性的拉扯”。
-矩阵的乘法，其实就是多个线性变换叠加的效果，它显然满足结合律，但不满足交换律。主对角线全是 1 的矩阵所对应的线性变换其实就是不变的意思，因此它叫做单位矩阵。矩阵 A 乘以矩阵 B 得单位矩阵，就是做完线性变换 A 后再做一次线性变换 B 就又变回去了的意思，难怪我们说矩阵 B 是矩阵 A的逆矩阵。课本上对行列式的定义千奇百怪，又是什么递归，又是什么逆序对，还编写口诀帮助大家记忆。其实，<strong>行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积</strong>。因此，单位矩阵的行列式当然就为 1，某行全为 0 的行列式显然为 0 （因为某一维度会被无视掉，线性变换会把整个平面压扁）， $|A·B|$ 显然等于 $|A|·|B|$ 。行列式为 0 ，对应的矩阵当然不可逆，因为这样的线性变换已经把平面压成一条线了，什么都不能把它变回去了。当然，更高阶的矩阵就对应了更高维的空间。一瞬间，所有东西都解释清楚了。</p>
-</blockquote>
-
-<!--![image][14]-->
-
-<p>我认为，上面的表达不完全正确，比如其核心[行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积]，但是，它真正让我们意识到要好好思考，到底，什么是行列式？</p>
-
-<p><strong><a href="http://zh.wikipedia.org/wiki/%E8%A1%8C%E5%88%97%E5%BC%8F">Wiki</a>的解释：行列式其实是一个函数，一个将方阵转换成一个标量的函数！[就是说，行列式本质上就相当于一个函数]</strong></p>
-
-<p><strong>行列式可以看做是有向面积或体积的概念在一般的欧几里得空间中的推广。或者说，在 n 维欧几里得空间中，行列式描述的是一个线性变换对“体积”所造成的影响。</strong></p>
-
-<p>首先要注意的是如果是指矩阵的行列式，那么矩阵中只有方阵才有行列式！对方阵求行列式得到一个值，这个值就是指这个$n \times n$方阵(因为矩阵都可以看做是一个线性变换，所以就是指一个线性变换)对n维空间中的“体积”所造成的影响。在二维空间中，这个“体积”实际上是平行四边形的面积，在三维空间中，“体积”就是指平行六面体的体积。更高维以此类推。</p>
-
-<p>先看下行列式在二维和三维空间的几何意义(wiki解释得非常详细！)</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi2.png" alt="image" /></p>
-
-<p>另一个解释(在矩阵条目中的解释)，<strong>一个方阵的行列式等于0当且仅当该方阵不可逆。系数是实数的时候，二维（三维）方阵A的行列式的绝对值表示单位面积（体积）的图形经过A对应的线性变换后得到的图形的面积（体积），而它的正负则代表了对应的线性变换是否改变空间的定向：行列式为正说明它保持空间定向，行列式为负则说明它逆转空间定向。</strong></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi13.png" alt="image" /></p>
-
-<p>下面看下什么是用行列式怎么理解线性变换，<strong>线性变换就是把一个向量线性地变为另一个向量</strong>，<strong>行列式表示的是线性变换前后平行六面体的体积的变化系数</strong>。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi3.png" alt="image" /></p>
-
-<p>面积或体积的定义是恒正的，而行列式是有正有负的，因此需要引入有向面积和有向体积的概念。如果行列式表示的是线性变换对体积的影响，那么行列式的正负就表示了空间的定向。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi4.png" alt="image" /></p>
-
-<p><strong>由二维及三维的例子，可以看到一般的行列式应该具有怎样的性质。在n维欧几里得空间中，作为“平行多面体”的“体积”的概念的推广，行列式继承了“体积”函数的性质。首先，行列式需要是线性的，这可以由面积的性质类比得到。这里的线性是对于每一个向量来说的，因为当一个向量变为原来的a倍时，“平行多面体”的“体积”也变为原来的a倍。其次，当一个向量在其它向量组成的“超平面”上时，n维“平行多面体”的“体积”是零（可以想像三维空间的例子）[在向量组中就是指它们线性相关了]。也就是说，当向量线性相关时，行列式为零。</strong></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi5.png" alt="image" /></p>
-
-<p>行列式的展开，代数余子式，拉普拉斯公式用于计算矩阵的行列式值</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi6.png" alt="image" /></p>
-
-<p>行列式的性质：
-<strong>若两个矩阵相似，那么它们的行列式相同。这是因为两个相似的矩阵之间只相差一个基底变换，而行列式描述的是矩阵对应的线性映射对体积的影响，而不是体积，所以基底变换并不会影响行列式的值。</strong></p>
-
-<p><strong>行列式是所有特征值（按代数重数计）的乘积。这可由矩阵必和其若尔当标准型相似推导出。特殊地，三角矩阵的行列式等于其对角线上所有元素的乘积</strong></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi8.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi9.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi10.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi11.png" alt="image" /></p>
-
-<p>行列式与线性方程组，矩阵以及多项式还有多重积分之间的关系。</p>
-
-<p>当线性方程组对应的行列式不为零时，由克莱姆法则，可以直接以行列式的形式写出方程组的解。但用克莱姆法则求解计算量巨大，因此并没有实际应用价值，一般用于理论上的推导。</p>
-
-<p>多项式$p(x) = det(xI - A)$称为方块矩阵A的特征值多项式。这是一个由行列式定义的多项式，它的解是矩阵所有的特征值。</p>
-
-<p>行列式与多重积分的关系主要就是<a href="http://zh.wikipedia.org/wiki/%E9%9B%85%E5%8F%AF%E6%AF%94%E7%9F%A9%E9%98%B5">雅可比行列式 on wiki</a>了。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi12.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi7.png" alt="image" /></p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
