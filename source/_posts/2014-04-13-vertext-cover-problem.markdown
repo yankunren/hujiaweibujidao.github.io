@@ -90,7 +90,7 @@ OJ系统的结果为：时间 156ms  空间 1.0MB
 
 本人对指针领悟能力有限，C++也是一知半解，OJ只能用C或者C++，所以下面的C++代码效率不高，仅供参考，:-)
 
-```
+```cpp
 #include <iostream>
 #include <vector>
 using namespace std;
