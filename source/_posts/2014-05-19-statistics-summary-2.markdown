@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "SS 2-Distribution"
+title: "SS 3-Distribution"
 date: 2014-05-19 20:00
 comments: true
 categories: math
@@ -12,7 +12,7 @@ published: true
 
 ----------
 
-####<center>第二部分 分布</center>
+####<center>第三部分 分布</center>
 
 1.概率质量函数PMF(Probability Mass Function)
 
