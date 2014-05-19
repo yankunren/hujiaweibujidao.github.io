@@ -4,7 +4,7 @@
   <title><![CDATA[Category: math | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-19T18:49:17+08:00</updated>
+  <updated>2014-05-19T18:56:29+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -14,7 +14,97 @@
 
   
   <entry>
-    <title type="html"><![CDATA[SS-Statistics Summary]]></title>
+    <title type="html"><![CDATA[SS 4-Hypothesis Testing]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-4/"/>
+    <updated>2014-05-19T23:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-4</id>
+    <content type="html"><![CDATA[<p><strong><center>统计学那些事 Things of Statistics</center></strong>
+<strong><center>逸夫图书馆, 2014/5/19</center></strong></p>
+
+<hr />
+
+<h4 id="center-center"><center>第四部分 假设检验</center></h4>
+
+<p>1.假设：一般假设就是一个“猜想”，它表述问题的一般陈述。假设检验是用于样本，然后才将结论一般化推广到总体中。</p>
+
+<p>2.零假设(null hypothesis=$H_{0}$，或叫原假设)：它一般表示“正在研究的两个变量无关或者没有差异”这样的命题。例如，三年级学生的记忆力考试成绩与四年级学生记忆力考试成绩之间没有差异。</p>
+
+<p><strong>(1)零假设是研究的起点，因为在没有信息的情况下，零假设就被看作是可以接受的真实状态。在这种假设下，我们认为观测到的效应是由偶然因素造成的。</strong>
+<strong>(2)零假设也是研究的基准，也就是说在零假设成立的情况下，计算统计量，然后进行假设检验。这就类似反证法的思想。</strong></p>
+
+<p>3.研究假设(research hypothesis=alternate hypothesis，或叫备择假设)：与零假设相对立的，认为变量之间有关系的假设。</p>
+
+<p>研究假设分为有方向和无方向两种研究假设。无方向研究假设命题例子：三年级学生的记忆力考试成绩与四年级学生记忆力考试成绩之间有差异。有方向研究假设命题例子：三年级学生的记忆力考试成绩低于四年级学生记忆力考试成绩。</p>
+
+<p>讨论有无方向的另一种形式是讨论单尾检验(one-tailed test)和双尾检验(two-tailed test)。</p>
+
+<p>零假设与研究假设的区别：
+(1)零假设表示两个变量没有差异或者没有关系，研究假设表示它们有关系或者有差异；
+(2)零假设对应的是总体，而研究假设对应的是样本。我们是从总体中取出一部分样本进行检验，将得到的结论推广到总体中。
+(3)因为总体不能直接检验(不现实，不经济或者不可能)，所以零假设只能间接检验，研究假设则可以直接检验。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SS 3-Descriptive Statistics]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/"/>
+    <updated>2014-05-19T21:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3</id>
+    <content type="html"><![CDATA[<p><strong><center>统计学那些事 Things of Statistics</center></strong>
+<strong><center>逸夫图书馆, 2014/5/19</center></strong></p>
+
+<hr />
+
+<h4 id="center-center"><center>第三部分 描述性统计量</center></h4>
+
+<p>1.描述数据的集中趋势：均值(mean)，中位数(median)，众数(mode)，加权平均数</p>
+
+<p>百分位点(percentile points)：中位数(Q2)就是50百分位点，Q1为25百分位点(lower quartile)，Q3为75百分位点(upper quartile)，经常使用Q3-Q1=IQR(interquartile range，四分差或四分位数)来检查分布是否对称。</p>
+
+<p>[如果要计算一组数中的某个百分位数，一般比较好的排序方法是选择排序；当然，如果是计算该组数的特殊的百分位数，例如中位数，有其他更好地方法能够在线性时间内得到，之后我对做一些相关问题的研究，暂且说明一下]</p>
+
+<p>2.描述数据的变异性：极差(range)，标准差(standard deviation,简称s或者SD)，方差(deviation)</p>
+
+<p>标准差的计算公式：
+$$
+s=\sqrt{\frac{\Sigma(X-\bar{X})^2}{n-1}}
+$$</p>
+
+<p><strong>s是总体标准差的无偏估计，如果根号内部分母改成了n则是有偏估计</strong>，详细证明参见：<a href="http://en.wikipedia.org/wiki/Bias_of_an_estimator">http://en.wikipedia.org/wiki/Bias_of_an_estimator</a></p>
+
+<p>标准差和方差的异同：<strong>它们都是用来反映数据集中数据的变异性或者离散度的度量，但是标准差以原有的计算单位存在，然而方差以平方单位存在，前者在实际中更加具有意义</strong>。例如，某高校的男生的平均身高是170cm，标准差是5cm，那么说明该校男生的身高与均值的差异大概就是5cm，换成方差来解释的话就不好陈述了。</p>
+
+<p>使用有偏估计其实也可，但是最好使用无偏估计，我记得Coursera Machine Learning课中Andrew Ng曾经提到过，实际编码中其实还是使用有偏估计，因为它们在样本数据很大的时候其实结果没多大影响。</p>
+
+<p>3.数据集的图形化显示：直方图，饼图，线图，柱形图，条形图，茎叶图等</p>
+
+<p>数据分布的差异性描述：平均值，变异性，峰度(kurtosis)，偏度(skewness)</p>
+
+<p>峰值可能有多个，比如双峰或者多峰等。偏度有一个计算公式，由Pearson发明的，他同时也是相关系数的发明者，偏度虽有正负之分，但是绝对值越大说明图形越偏。</p>
+
+<script type="math/tex; mode=display">
+SK=\frac{3(\bar{X}-M)}{s},\quad M=Median,\bar{X}=Mean,s=SD
+</script>
+
+<p>4.相关系数(correlation coefficient)是两个变量之间<strong>线性关系</strong>的数值型指标，取值范围是[-1,1]，大于0表示正相关，小于0表示负相关，可以用散点图来直接查看相关性。根据某些不成文的规则，一般高于0.6表示强相关，低于0.4表示弱相关，中间部分表示中度相关。</p>
+
+<p>[<strong>Pearson相关系数考察的变量的属性是连续的，例如年龄，体重等，如果是离散型变量那么应该使用点二列相关系数</strong>]</p>
+
+<p>注意两点：(1)<strong>相关系数反映的是只是线性关系！如果两个变量的相关系数为0，只能说明它们没有线性关系存在，但是可能存在其他的非线性关系！</strong>
+(2)<strong>相关性和因果关系无关！</strong>例如，冰淇淋的消费量和犯罪率是正相关的，但是两者不存在任何因果关系！</p>
+
+<p>相关系数的计算：</p>
+
+<script type="math/tex; mode=display">
+r_{XY}=\frac{n\Sigma{XY}-\Sigma{X}\Sigma{Y}}{\sqrt{[n\Sigma{X^2}-(\Sigma{X})^2][n\Sigma{Y^2}-(\Sigma{Y})^2]}}
+</script>
+
+<p>决定系数：相关系数的平方，它表述一个变量的方差可以被另一个变量的方差来解释的百分比。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SS 2-Distribution]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/"/>
     <updated>2014-05-19T20:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2</id>
@@ -160,242 +250,37 @@ $E(X-Y)=E(X)-E(Y) \quad Var(X-Y)=Var(X)+Var(Y)$</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[LAS 4-Similarity Matrix]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-4/"/>
-    <updated>2014-04-29T14:03:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-4</id>
-    <content type="html"><![CDATA[<p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
-<strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
+    <title type="html"><![CDATA[Statistics Summary]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary/"/>
+    <updated>2014-05-19T18:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary</id>
+    <content type="html"><![CDATA[<p><strong><center>统计学那些事 Things of Statistics</center></strong>
+<strong><center>逸夫图书馆, 2014/5/19</center></strong></p>
 
-<h3 id="centercenter"><center>相似矩阵</center></h3>
+<hr />
 
-<p>什么是相似矩阵？</p>
+<h4 id="center-center"><center>**第零部分 碎碎念**</center></h4>
+<p>本系列是对概率和数理统计中的重要内容的一个总结，不会侧重很多众所周知的细节，所以有啥疑问还是需要Google或者Wikipedia。关于本系列中出现的术语参照参考书籍中的定义，部分可能与大学教材中不同，请自行对应起来理解。小弟才疏学浅，若有错误请留言，欢迎批评指正。</p>
 
-<p><a href="http://zh.wikipedia.org/wiki/%E7%9B%B8%E4%BC%BC%E7%9F%A9%E9%99%A3">wiki</a>在线性代数中，相似矩阵是指存在相似关系的矩阵。相似关系是两个矩阵之间的一种等价关系。两个n×n矩阵A与B为相似矩阵当且仅当存在一个n×n的可逆矩阵P，使得下面的式子成立，P被称为矩阵A与B之间的相似变换矩阵。</p>
+<p>主要参考书籍：</p>
 
-<p>$ P^{-1} A P = B $ 或  $ A P =P B$</p>
+<p>1.<a href="http://book.douban.com/subject/2985995/">《爱上统计学》</a></p>
 
-<p>相似矩阵保留了矩阵的许多性质，因此许多对矩阵性质的研究可以通过研究更简单的相似矩阵而得到解决。</p>
+<p>2.<a href="http://book.douban.com/subject/7056708/">《深入浅出统计学》</a></p>
 
-<p>判断两个矩阵是否相似的辅助方法： 1.判断行列式是否相等； 2.判断迹是否相等；以上条件可以作为判断矩阵是否相似的必要条件，而非充分条件。</p>
+<p>3.<a href="http://book.douban.com/subject/24381562/">《统计思维：程序员数学之概率统计》</a></p>
 
-<p>那，到底相似矩阵是什么？</p>
+<hr />
 
-<p>同样还是先借用下<a href="(http://spaces.ac.cn/index.php/archives/1777/)">小苏的解释</a>供大家理解下，简而言之就是，<strong>相似矩阵其实是在不同的坐标系中对同一个线性变换的不同的表达而已</strong>！</p>
+<p>本总结总共4章节，分开来阅读较好</p>
 
-<blockquote>
-  <p>“矩阵是线性空间中的线性变换的一个描述。在一个线性空间中，只要我们选定一组基，那么对于任何一个线性变换，都能够用一个确定的矩阵来加以描述。”
-同样的，对于一个线性变换，只要你选定一组基，那么就可以找到一个矩阵来描述这个线性变换。换一组基，就得到一个不同的矩阵。所有这些矩阵都是这同一个线性变换的描述，但又都不是线性变换本身。所有这些同一个线性变换的描述的矩阵互为相似矩阵。</p>
-</blockquote>
+<p>1.[概率]</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/xiangsijuzhen.png" alt="image" /></p>
+<p>2.[分布]</p>
 
-<p>相似矩阵的性质，关键在于理解<strong>在给定了矩阵A后，只要能找到一个与之相似而又足够“简单”的“规范形式”B，那么对A的研究就可以转化为对更简单的矩阵B的研究。比如说A被称为可对角化的，如果它与一个对角矩阵相似。</strong>这是相似矩阵最重要的作用，因为相似矩阵和原矩阵有很多相似的地方(不变的量很多)，所以我们可以用简单的相似矩阵来研究很复杂的原矩阵。</p>
+<p>3.[描述性统计量]</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/xiangsijuzhen3.png" alt="image" /></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LAS 3-EigenVectors and Eigenvalues]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-3/"/>
-    <updated>2014-04-29T14:03:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-3</id>
-    <content type="html"><![CDATA[<p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
-<strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
-
-<h3 id="centercenter"><center>特征值和特征向量</center></h3>
-
-<p>好，我们知道了矩阵就是线性变换，那么矩阵的特征值和特征向量是什么？</p>
-
-<p><a href="http://zh.wikipedia.org/wiki/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F">wiki</a><strong>在线性代数中，对于一个给定的线性变换，它的特征向量（本征向量或称正规正交向量）v经过这个线性变换之后，得到的新向量仍然与原来的v 保持在同一条直线上，但其长度也许会改变。一个特征向量的长度在该线性变换下缩放的比例称为其特征值（本征值）。如果特征值为正，则表示v 在经过线性变换的作用后方向也不变；如果特征值为负，说明方向会反转；如果特征值为0，则是表示缩回零点。但无论怎样，仍在同一条直线上。</strong></p>
-
-<p>简而言之就是说，<strong>对于一个确定的矩阵，如果它的特征向量存在的话，那么就有，当这个矩阵(即这个线性变换)作用在这些特征向量上的时候，得到的向量和原来的特征向量在同一条直线上，只是长度发生了变化，长度的变化量的比例为该特征向量对应的特征值。从这里可以看出，这些特征向量是对这个矩阵的很好的描述！</strong></p>
-
-<p>用《蒙娜丽莎》来理解下：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/monalisa.png" alt="image" /></p>
-
-<p>wiki上对特征向量的定义，首先要明确的是<strong>这个线性变换(也就是这个矩阵)是向量空间E到自身的一个线性变换，它可以是旋转、反射、拉伸、压缩，或者这些变换的组合等等，本来呢，一个向量经过线性变换可以得到任何向量，但是，如果这个向量是这个线性变换的特征向量的话，经过线性变换得到的向量那就一定是和特征向量在同一条直线上！特征向量可能会有多个，特征值最大的特征向量称为主特征。所有具有相同的特征值$\lambda$的特征向量和零向量一起，组成了一个向量空间，称为线性变换的一个特征空间。</strong></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/eigenvectors.png" alt="image" /></p>
-
-<p>在一定条件下（如其矩阵形式为实对称矩阵的线性变换），一个变换可以由其特征值和特征向量完全表述。<strong>一个特征空间是具有相同特征值的特征向量与一个同维数的零向量的集合</strong>，可以证明该集合是一个线性子空间。</p>
-
-<p>一般来说，2×2的非奇异矩阵如果有两个相异的特征值，就有两个线性无关的特征向量。<strong>在这种情况下，对于特征向量，线性变换仅仅改变它们的长度，而不改变它们的方向（除了反转以外），而对于其它向量，长度和方向都可能被矩阵所改变。</strong>如果特征值的模大于1，特征向量的长度将被拉伸，而如果特征值的模小于1，特征向量的长度就将被压缩。如果特征值小于0，特征向量将会被翻转。</p>
-
-<p>重复了这么多次，我想你也已经认可了什么是特征向量了，下面看看例子。</p>
-
-<p>先看个恒等变换和对角矩阵，注意其中对特征向量和特征空间的分析。
-<img src="http://hujiaweibujidao.github.io/images/math/eigenvectors1.png" alt="image" /></p>
-
-<p>再看个实际的例子，错切变换，这里利用了矩阵行列式的知识来求解特征值。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/eigenvectors2.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/eigenvectors3.png" alt="image" /></p>
-
-<p>特征值的代数重数和几何重数(后者我没有看懂，若读者明白，请留言告知，谢谢！)</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/eigenvectors4.png" alt="image" /></p>
-
-<p>特征值的计算，简单的矩阵可以使用解特征多项式的方法，但是一般情况下都是采用数值计算的方法，其中基于迭代技术的幂法可以用来计算矩阵的主特征值，反幂法类似，不过计算的是模最小的特征值，实际中常用的是QR分解。
-<img src="http://hujiaweibujidao.github.io/images/math/eigenvectors5.png" alt="image" /></p>
-
-<p>到此，我觉得特征向量应该是清晰了，关于特征值和奇异值分解以及代码实现请参考我写的另一份总结<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">Numerical Methods Using Matlab 第三章 矩阵特征值和奇异值分解</a>。</p>
-
-<p>矩阵特征值的应用特别广，例如因子分析，特征脸，<a href="http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank/">PageRank</a>等等算法都是基于特征值分解，若有时间和精力，我后续会一一介绍(有链接的是已经完成的部分)。</p>
-
-<p>还想看看其他的介绍？</p>
-
-<p>这篇文章介绍的不错<a href="http://www.visiondummy.com/2014/03/eigenvalues-eigenvectors/">What are eigenvectors and eigenvalues?</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LAS 2-Matrix]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/"/>
-    <updated>2014-04-29T14:03:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2</id>
-    <content type="html"><![CDATA[<p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
-<strong><center>逸夫图书馆, 2014/4/28</center></strong></p>
-
-<h3 id="centercenter"><center>矩阵</center></h3>
-
-<p>1.什么是矩阵？</p>
-
-<p>这个问题很多人进行过探讨，在网上也比较火，比如<a href="http://blog.csdn.net/myan/article/details/647511">孟岩的三篇《理解矩阵》</a>，知乎上<a href="http://www.zhihu.com/question/21082351">如何直观理解矩阵和线代</a>，还有其他人对矩阵的理解，例如<a href="http://spaces.ac.cn/index.php/archives/1765/">新理解矩阵1</a>和<a href="http://spaces.ac.cn/index.php/archives/1768/">新理解矩阵2</a>等等。</p>
-
-<p>那，到底什么是矩阵呢？</p>
-
-<p><strong>总结起来，我觉得，矩阵就是线性变换，作用在一个点上就是将这个点移动到该空间的另一个点，作用在向量上就是对这个向量进行放缩或者旋转或者反射等一系列的线性变换，作用在矩阵上那就是对矩阵中的每一个列向量进行线性变换之后然后进行叠加结果(这就是为什么矩阵的乘法有些奇妙的原因)。因为运动是相对的，你可以理解为坐标系没有变，被作用对象发生了变化，也可以理解为被作用对象没有变，变的是坐标系(也就是空间的基)。</strong></p>
-
-<blockquote>
-  <p>这里借用下小苏的图和解释。
-矩阵<script type="math/tex">% &lt;![CDATA[
-A=\left[ \begin{array}{cc} a11 & a12 \\ a21 & a22 \end{array} \right] %]]&gt;</script>
-事实上是由两个向量$[a11,a21]^T$和$[a12,a22]^T$（这里的向量都是列向量）组成，它描述了一个平面（仿射）坐标系。换句话说，这两个向量其实是这个坐标系的两个基，而运算$y=Ax$则是告诉我们，在$A$这个坐标系下的$x$向量，在$I$坐标系下是怎样的。这里的$I$坐标系就是我们最常用的直角坐标系，也就是说，任何向量（包括矩阵里边的向量），只要它前面没有矩阵作用于它，那么它都是在直角坐标系下度量出来的。下图所用的矩阵<script type="math/tex">% &lt;![CDATA[
-A=\left[ \begin{array}{cc} 3 & 2 \\ 1 & 3 \end{array} \right] %]]&gt;</script>
-构成了一个仿射坐标系，在这个坐标系下，有一个向量$x=[2,2]^T$，它在直角坐标系下测得的坐标为$[10,8]^T$，现在我们不难发现，直接用矩阵乘法来计算，有
-$Ax=[3∗2+2∗2,1∗2+3∗2]^T=[10,8]^T$
-小苏对此展开讨论了<a href="http://spaces.ac.cn/index.php/archives/1768/">它和矩阵乘法之间的联系</a></p>
-</blockquote>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/xianxinbianhua.png" alt="image" /></p>
-
-<p><a href="http://zh.wikipedia.org/wiki/%E7%9F%A9%E9%98%B5">wiki</a>上关于矩阵和线性变换关系的解释，其中提到了从n维空间到m维空间的任何线性变换都对应于一个矩阵，其中也提到了相似矩阵其实是相同的线性变换在不同的坐标基下的不同表示而已。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/xianxingbianhuan.png" alt="image" /></p>
-
-<p>2.线性变换</p>
-
-<p>好吧，矩阵是线性变换，那什么是线性变换呢？</p>
-
-<p>wiki中对线性变换的解释，这些变换其实主要包括缩放、旋转、反射等。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/xianxinbianhua2.png" alt="image" /></p>
-
-<p>(1)反射变换</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-
-A=\left[ \begin{array}{cc} -1 & 0 \\ 0 & 1 \end{array} \right] \quad
-\rightarrow \left\{ \begin{array}{cc} x'=-x \\ y'=y \end{array} \right.
- %]]&gt;</script>
-
-<p>水平反射，x变成对应的相反数，y不变。</p>
-
-<p>什么是反射？<a href="http://zh.wikipedia.org/wiki/%E5%8F%8D%E5%B0%84_(%E6%95%B0%E5%AD%A6)">wiki</a>上的解释是：<strong>反射是把一个物体变换成它的镜像的映射。要反射一个平面图形，需要“镜子”是一条直线（反射轴），对于三维空间中的反射就要使用平面作为镜子。</strong></p>
-
-<p><strong>最常用的反射变换就是<a href="http://zh.wikipedia.org/wiki/%E8%B1%AA%E6%96%AF%E9%9C%8D%E5%B0%94%E5%BE%B7%E5%8F%98%E6%8D%A2">Householder变换</a>了，这一变换将一个向量变换为由一个超平面反射的镜像，是一种线性变换。Householder变换可以将向量的某些元素置零，同时保持该向量的范数不变。Householder变换在矩阵的QR分解中非常重要！</strong>关于Householder的内部原理以及代码实现请参考我写的另一份总结<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">《Numerical Methods Using Matlab》</a>第三章 矩阵特征值和奇异值分解</p>
-
-<p>下图为Householder变换的图示，向量x在矩阵H的作用下得到的向量Hx和原向量x刚好是镜像反射关系。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/HouseholderReflection.png" alt="image" /></p>
-
-<p>(2)放缩变换</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-
-A=\left[ \begin{array}{cc} \frac{3}{2} & 0 \\ 0 & \frac{3}{2} \end{array} \right] \quad
-\rightarrow \left\{ \begin{array}{c} x'=\frac{3}{2}x \\ y'=\frac{3}{2}y \end{array} \right.
- %]]&gt;</script>
-
-<p>放缩反射，x和y都变成原来的$\frac{3}{2}$倍。</p>
-
-<p>(3)旋转变换</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-
-A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\frac{\pi}{6}) & \cos(\frac{\pi}{6}) \end{array} \right] \quad
-\rightarrow \left\{ \begin{array}{c} x'=\frac{\sqrt{3}}{2}x-\frac{1}{2}y \\ y'=\frac{1}{2}x+\frac{\sqrt{3}}{2}y \end{array} \right.
- %]]&gt;</script>
-
-<p>旋转反射，<a href="http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan1.png">一般性的证明请看这张图</a>，<a href="http://zh.wikipedia.org/wiki/%E6%97%8B%E8%BD%AC">wiki</a>中对二维空间旋转的解释。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan2.png" alt="image" /></p>
-
-<p><strong>旋转矩阵是在乘以一个向量的时候有改变向量的方向但不改变大小的效果的矩阵。旋转矩阵不包括点反演，它可以把右手坐标系改变成左手坐标系或反之。所有旋转加上反演形成了正交矩阵的集合。旋转可分为主动旋转与被动旋转。主动旋转是指将向量逆时针围绕旋转轴所做出的旋转。被动旋转是对坐标轴本身进行的逆时针旋转，它相当于主动旋转的逆操作。</strong></p>
-
-<p>旋转矩阵的性质：
-<strong>一个矩阵是旋转矩阵，当且仅当它是正交矩阵并且它的行列式是单位一。正交矩阵的行列式是 ±1；如果行列式是 −1，则它包含了一个反射而不是真旋转矩阵。</strong></p>
-
-<p><strong>旋转矩阵是正交矩阵，如果它的列向量形成 ${R}^{n}$ 的一个正交基，就是说在任何两个列向量之间的标量积是零(正交性)而每个列向量的大小是单位一(单位向量)。</strong></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/xuanzhuanjuzhen.png" alt="image" /></p>
-
-<p>最常用的旋转矩阵就是<a href="http://zh.wikipedia.org/wiki/%E5%90%89%E6%96%87%E6%96%AF%E6%97%8B%E8%BD%AC">Givens旋转</a>。<strong>Givens 旋转在数值线性代数中主要的用途是在向量或矩阵中介入零。例如，这种效果可用于计算矩阵的 QR分解。超过Householder变换的一个好处是它们可以轻易的并行化，另一个好处是对于非常稀疏的矩阵计算量更小。</strong></p>
-
-<p>Given旋转矩阵的表达：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/givens.png" alt="image" /></p>
-
-<p>Given旋转矩阵的稳定计算：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/givens2.png" alt="image" /></p>
-
-<p>3.逆矩阵和伴随矩阵</p>
-
-<p>理解了矩阵就是线性变换之后，那么就很容易明白逆矩阵就是将被作用对象从变换后的位置变换回来！</p>
-
-<p>那，伴随矩阵又是什么呢？</p>
-
-<p><a href="http://zh.wikipedia.org/wiki/%E4%BC%B4%E9%9A%8F%E7%9F%A9%E9%98%B5">wiki</a>在线性代数中，一个方形矩阵的伴随矩阵A<em>是一个类似于逆矩阵$A^{-1}$的概念。如果矩阵可逆，那么它的逆矩阵和它的伴随矩阵之间只差一个系数($A^{-1}=\frac{A^{</em>}}{det(A)}$)。也就是说，<strong>伴随矩阵其实是变换回来之后还进行了一次放缩，放缩的大小与矩阵的行列式值有关</strong>。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/bansuijuzhen.png" alt="image" /></p>
-
-<p>举例说明伴随矩阵的计算，伴随矩阵其实就是原矩阵的代数余子式矩阵的转置！</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/bansuijuzhen2.png" alt="image" /></p>
-
-<p>伴随矩阵的性质</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/bansuijuzhen3.png" alt="image" /></p>
-
-<p>还需要注意的是，<strong>逆矩阵是对于方阵来说的，只有方阵还有逆矩阵的概念，那要不是方阵呢？那么就是广义的逆矩阵</strong>！广义逆矩阵在最小二乘法中有重要的应用。关于逆矩阵的求解以及代码实现请参考我写的另一份总结<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">《Numerical Methods Using Matlab》</a>第一章 线性方程组求解，最小二乘问题请参考第四章 曲线拟合和多项式插值。</p>
-
-<p>4.秩</p>
-
-<p>什么是矩阵的秩？</p>
-
-<p><a href="http://zh.wikipedia.org/wiki/%E7%A7%A9_(%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0)">wiki中的解释</a>在线性代数中，一个矩阵A的列秩是A的线性独立的纵列的极大数目。类似地，行秩是A的线性独立的横行的极大数目。矩阵的列秩和行秩总是相等的，因此它们可以简单地称作矩阵A的秩。通常表示为r(A)，rk(A)或rank A。m × n矩阵的秩最大为m和n中的较小者，表示为 min(m,n)。有尽可能大的秩的矩阵被称为有满秩；类似的，否则矩阵是秩不足（或称为“欠秩”）的。</p>
-
-<p><strong>矩阵的行秩与列秩相等，是线性代数基本定理的重要组成部分. 其基本证明思路是，矩阵可以看作线性映射的变换矩阵，列秩为像空间的维度，行秩为非零原像空间的维度，因此列秩与行秩相等，即像空间的维度与非零原像空间的维度相等（这里的非零原像空间是指约去了零空间后的商空间：原像空间）。这从矩阵的奇异值分解就可以看出来。</strong><a href="http://zh.wikipedia.org/wiki/%E7%A7%A9_(%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0)">证明可以参见wiki</a></p>
-
-<p>黄老师的总结中还给出了<strong>初等变换不改变矩阵的行秩和列秩</strong>的证明，此外还有，以下四个表述是等价的：</p>
-
-<p>• A 为满秩矩阵. 
-• A 为可逆矩阵. 
-• A 为非奇异矩阵.
-• |A| $\ne$ 0.</p>
-
-<p>说了这么多，那到底矩阵的秩对于矩阵表示的这个线性变换来说意味着什么？</p>
-
-<p><strong>我的理解是，矩阵的秩其实就是至少需要几个基本的基向量就能完全表示各种不同形式的该类线性变换。</strong></p>
-
-<!--
-矩阵的一个重要用途是解线性方程组。线性方程组中未知量的系数可以排成一个矩阵，加上常数项，则称为增广矩阵。另一个重要用途是表示线性变换，即是诸如f(x)  = 4x之类的线性函数的推广。设定基底后，某个向量v可以表示为m×1的矩阵,而线性变换f可以表示为行数为m的矩阵A，使得经过变换后得到的向量f(v)可以表示成Av的形式。矩阵的特征值和特征向量可以揭示线性变换的深层特性。
--->
+<p>4.[假设检验]</p>
 
 ]]></content>
   </entry>
