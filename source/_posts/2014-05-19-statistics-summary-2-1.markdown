@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "SS 3-Distribution"
+title: "SS 3-Continuous Distribution"
 date: 2014-05-19 20:30
 comments: true
 categories: math
@@ -13,8 +13,6 @@ published: true
 ----------
 
 ####<center>第三部分 分布之连续型随机变量分布</center>
-
-1.连续性随机变量及其概念密度
 
 连续型随机变量，概率密度及它的性质
 
