@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "SS 3-Descriptive Statistics"
+title: "SS 2-Descriptive Statistics"
 date: 2014-05-19 21:00
 comments: true
 categories: math
@@ -12,7 +12,7 @@ published: true
 
 ----------
 
-####<center>第三部分 描述性统计量</center>
+####<center>第二部分 描述性统计量</center>
 
 1.描述数据的集中趋势：均值(mean)，中位数(median)，众数(mode)，加权平均数
 
