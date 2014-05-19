@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "SS 3-Distribution"
+title: "SS 3-Discrete Distribution"
 date: 2014-05-19 20:00
 comments: true
 categories: math
