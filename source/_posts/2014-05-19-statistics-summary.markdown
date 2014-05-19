@@ -31,7 +31,11 @@ published: true
 
 2.[描述性统计量](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/)
 
-3.[分布](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/)
+3.随机变量的分布
+
+(1)[分布之离散型随机变量分布](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/)
+
+(2)[分布之连续型随机变量分布](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-1/)
 
 4.[假设检验](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-4/)
 
