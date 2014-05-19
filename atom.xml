@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-19T23:58:14+08:00</updated>
+  <updated>2014-05-20T00:02:32+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -53,7 +53,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[SS 3-Descriptive Statistics]]></title>
+    <title type="html"><![CDATA[SS 2-Descriptive Statistics]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/"/>
     <updated>2014-05-19T21:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3</id>
@@ -62,7 +62,7 @@
 
 <hr />
 
-<h4 id="center-center"><center>第三部分 描述性统计量</center></h4>
+<h4 id="center-center"><center>第二部分 描述性统计量</center></h4>
 
 <p>1.描述数据的集中趋势：均值(mean)，中位数(median)，众数(mode)，加权平均数</p>
 
@@ -127,7 +127,7 @@ r_{XY}=\frac{n\Sigma{XY}-\Sigma{X}\Sigma{Y}}{\sqrt{[n\Sigma{X^2}-(\Sigma{X})^2][
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[SS 2-Distribution]]></title>
+    <title type="html"><![CDATA[SS 3-Distribution]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/"/>
     <updated>2014-05-19T20:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2</id>
@@ -136,7 +136,7 @@ r_{XY}=\frac{n\Sigma{XY}-\Sigma{X}\Sigma{Y}}{\sqrt{[n\Sigma{X^2}-(\Sigma{X})^2][
 
 <hr />
 
-<h4 id="center-center"><center>第二部分 分布</center></h4>
+<h4 id="center-center"><center>第三部分 分布</center></h4>
 
 <p>1.概率质量函数PMF(Probability Mass Function)</p>
 
@@ -391,9 +391,9 @@ $E(X-Y)=E(X)-E(Y) \quad Var(X-Y)=Var(X)+Var(Y)$</p>
 
 <p>1.<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/">概率</a></p>
 
-<p>2.<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/">分布</a></p>
+<p>2.<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/">描述性统计量</a></p>
 
-<p>3.<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/">描述性统计量</a></p>
+<p>3.<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/">分布</a></p>
 
 <p>4.<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-4/">假设检验</a></p>
 
