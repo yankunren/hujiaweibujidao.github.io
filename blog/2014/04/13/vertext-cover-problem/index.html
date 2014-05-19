@@ -194,7 +194,7 @@
 
 <p>本人对指针领悟能力有限，C++也是一知半解，OJ只能用C或者C++，所以下面的C++代码效率不高，仅供参考，:-)</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -568,380 +568,381 @@
 <span class="line-number">372</span>
 <span class="line-number">373</span>
 <span class="line-number">374</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">#include &lt;iostream&gt;
-</span><span class="line">#include &lt;vector&gt;
-</span><span class="line">using namespace std;
-</span><span class="line">#define MAX_NODE 101
-</span><span class="line">#define INDEBUG 0
-</span><span class="line">int8_t graph[MAX_NODE][MAX_NODE];//int -&gt; int8_t
-</span><span class="line">//int edges[MAX_NODE];//0 is redudent
-</span><span class="line">//int nodes[MAX_NODE];//the order of node
-</span><span class="line">int t,m,n,k,a,b;
-</span><span class="line">class VCNode {//Vertex Cover Node
-</span><span class="line">public:
-</span><span class="line">    int p;//points can be used
-</span><span class="line">    int e;//edges to cover!!
-</span><span class="line">    int index[MAX_NODE];//the index of each node in array [node], index[k]=i!!
-</span><span class="line">    int edge[MAX_NODE];//MAX_NODE the edge number of each node, edge[i]=j!!
-</span><span class="line">    int node[MAX_NODE];//the order of the node
-</span><span class="line">    int state[MAX_NODE];//the state of each node ** 0 can be used / 1 used / -1 can not be used
-</span><span class="line">//    int graph[MAX_NODE][MAX_NODE];//the graph on the node//no need,just use the global graph
-</span><span class="line">    // node k is in index[k]=i position in array [node]
-</span><span class="line">    // node i has number of edge[i]=j edges
-</span><span class="line">};
-</span><span class="line">class Minheap {//Min Heap
-</span><span class="line">public:
-</span><span class="line">    vector&lt;VCNode&gt; nodes;
-</span><span class="line">    
-</span><span class="line">    void insert(VCNode node);
-</span><span class="line">    VCNode popmin();
-</span><span class="line">//  void print();
-</span><span class="line">};
-</span><span class="line">void Minheap::insert(VCNode node) {
-</span><span class="line">    nodes.push_back(node);
-</span><span class="line">    //  cout &lt;&lt; "size is " &lt;&lt; nodes.size() &lt;&lt; endl;//
-</span><span class="line">    int curpos = (int)nodes.size() - 1; // current position
-</span><span class="line">    int parent = (curpos - 1) / 2; //parent position
-</span><span class="line">    while (curpos != parent &amp;&amp; parent &gt;= 0) { //parent is still in heap
-</span><span class="line">        if (nodes[parent].e &gt; nodes[curpos].e) { //swap parent and child
-</span><span class="line">            VCNode temp = nodes[parent];
-</span><span class="line">            nodes[parent] = nodes[curpos];
-</span><span class="line">            nodes[curpos] = temp;
-</span><span class="line">        } else {
-</span><span class="line">            break; //no longer level up!!!
-</span><span class="line">        }
-</span><span class="line">        curpos = parent; //when curpos=parent=0, exit!!!
-</span><span class="line">        parent = (curpos - 1) / 2; //relocate the parent position
-</span><span class="line">    }
-</span><span class="line">}
-</span><span class="line">VCNode Minheap::popmin() {
-</span><span class="line">    VCNode node;
-</span><span class="line">    if (nodes.size() &gt; 0) { //have nodes left
-</span><span class="line">        node = nodes[0]; //get the first element
-</span><span class="line">        nodes.erase(nodes.begin()); //remove the first element
-</span><span class="line">        if (nodes.size() &gt; 0) { //at least have one element more
-</span><span class="line">            VCNode last = nodes[nodes.size() - 1]; //get the last element
-</span><span class="line">            nodes.pop_back(); //pop the last element
-</span><span class="line">            nodes.insert(nodes.begin(), last); //put it in the first place
-</span><span class="line">            int csize = (int)nodes.size(); //current size
-</span><span class="line">            int curpos = 0; //current position
-</span><span class="line">            
-</span><span class="line">            // rebuild the minheap
-</span><span class="line">            while (curpos &lt; (csize / 2)) { //reach to the last parent node!!
-</span><span class="line">                int left = 2 * curpos + 1; //left child
-</span><span class="line">                int right = 2 * curpos + 2; //right child
-</span><span class="line">                int min = left; //min store the min child
-</span><span class="line">                if (right &lt; csize) { //have left and right childs
-</span><span class="line">                    if (nodes[right].e &lt; nodes[left].e) {
-</span><span class="line">                        min = right;
-</span><span class="line">                    }
-</span><span class="line">                }
-</span><span class="line">                if (min &lt; csize) { //min child exist!!
-</span><span class="line">                    if (nodes[min].e &lt; nodes[curpos].e) { //need to swap current position with child
-</span><span class="line">                        VCNode temp = nodes[min];
-</span><span class="line">                        nodes[min] = nodes[curpos];
-</span><span class="line">                        nodes[curpos] = temp;
-</span><span class="line">                    }else { //min child no exits!! exit!!
-</span><span class="line">                        break; //can break now!!
-</span><span class="line">                    }
-</span><span class="line">                }
-</span><span class="line">                curpos = min;
-</span><span class="line">            }
-</span><span class="line">        }
-</span><span class="line">    }
-</span><span class="line">    return node;
-</span><span class="line">}
-</span><span class="line">//void Minheap::print() {
-</span><span class="line">//  cout &lt;&lt; "print heap" &lt;&lt; endl;
-</span><span class="line">//  for (int i = 0; i &lt; (int)nodes.size(); i++) {
-</span><span class="line">//      cout &lt;&lt; "edge: " &lt;&lt; nodes[i].e &lt;&lt; " node: " &lt;&lt; nodes[i].p &lt;&lt; endl;
-</span><span class="line">//  }
-</span><span class="line">//  cout &lt;&lt; "heap end" &lt;&lt; endl;
-</span><span class="line">//}
-</span><span class="line">// print array
-</span><span class="line">void printArray(int a[], int start, int end){
-</span><span class="line">    if (INDEBUG) {
-</span><span class="line">        cout &lt;&lt; "print array form " &lt;&lt; start &lt;&lt; " to " &lt;&lt; end &lt;&lt; endl;
-</span><span class="line">        for (int i=start; i&lt;=end; i++) {
-</span><span class="line">            cout &lt;&lt; a[i] &lt;&lt; " ";
-</span><span class="line">        }
-</span><span class="line">        cout &lt;&lt; endl &lt;&lt; "print array end" &lt;&lt; endl;
-</span><span class="line">    }
-</span><span class="line">}
-</span><span class="line">// print the graph
-</span><span class="line">void printGraph(int graph[][MAX_NODE]){
-</span><span class="line">    if (INDEBUG) {
-</span><span class="line">        for(int i=1;i&lt;=n;i++){//0 no need
-</span><span class="line">            for(int j=1;j&lt;=n;j++){
-</span><span class="line">                cout &lt;&lt; graph[i][j] &lt;&lt; " ";
-</span><span class="line">            }
-</span><span class="line">            cout &lt;&lt; endl;
-</span><span class="line">        }
-</span><span class="line">    }
-</span><span class="line">}
-</span><span class="line">// partition function for quick sort
-</span><span class="line">int partition2(int a[], int low, int high, int b[]){
-</span><span class="line">    int key = a[high];
-</span><span class="line">    int i=low-1;
-</span><span class="line">    for (int j=low; j&lt;high; j++) {
-</span><span class="line">        if (a[j]&gt;=key) {
-</span><span class="line">            i++;
-</span><span class="line">            swap(a[i], a[j]);
-</span><span class="line">            swap(b[i], b[j]);
-</span><span class="line">        }
-</span><span class="line">    }
-</span><span class="line">    swap(a[high], a[i+1]);
-</span><span class="line">    swap(b[high], b[i+1]);
-</span><span class="line">    return i+1;
-</span><span class="line">}
-</span><span class="line">// quick sort
-</span><span class="line">void quicksort2(int a[], int low, int high, int b[]) {
-</span><span class="line">    if (low &lt; high) {
-</span><span class="line">        int p = partition2(a,low,high, b);
-</span><span class="line">        quicksort2(a, low, p-1, b);
-</span><span class="line">        quicksort2(a, p+1, high, b);
-</span><span class="line">    }
-</span><span class="line">}
-</span><span class="line">// sum of the first k elements with state==0!!!
-</span><span class="line">int sumofkmax(int edges[], int p, int nodes[], int state[]){
-</span><span class="line">    quicksort2(edges, 1, n, nodes);
-</span><span class="line">    int sum=0,count=0;
-</span><span class="line">    // edges[i] corresponse to nodes[i], its state is state[nodes[i]]
-</span><span class="line">    for(int i=1;i&lt;=n;i++){//attention to i range!!
-</span><span class="line">        if (state[nodes[i]]==0) {
-</span><span class="line">            sum+=edges[i];
-</span><span class="line">            count++;
-</span><span class="line">            if (count == p) {//enough!
-</span><span class="line">                break;
-</span><span class="line">            }
-</span><span class="line">        }
-</span><span class="line">    }
-</span><span class="line">    return sum;
-</span><span class="line">}
-</span><span class="line">// verify the current node can be achievable
-</span><span class="line">bool verify(int edges[], int p, int e, int nodes[], int state[]){
-</span><span class="line">    //caculate the sum of the first p max elements in array edges!!
-</span><span class="line">    int sum = sumofkmax(edges, p, nodes, state);
-</span><span class="line">    // edge of nodes[i] is edges[i]!!!
-</span><span class="line">    if(sum &gt;= e){// may be this can be achieved
-</span><span class="line">        return true;
-</span><span class="line">    }
-</span><span class="line">    return false;
-</span><span class="line">}
-</span><span class="line">// build the index of node in array [index]
-</span><span class="line">void buildIndex(int node[],int index[]){
-</span><span class="line">    for (int i=1; i&lt;=n; i++) {
-</span><span class="line">        index[node[i]] = i;
-</span><span class="line">    }
-</span><span class="line">}
-</span><span class="line">// get the next node: state==0 &amp;&amp; order first!!!
-</span><span class="line">int nextNode(int state[], int nodes[]){
-</span><span class="line">    for (int i=1; i&lt;=n; i++) {
-</span><span class="line">        if (state[nodes[i]]==0) {
-</span><span class="line">            return nodes[i];
-</span><span class="line">        }
-</span><span class="line">    }
-</span><span class="line">    return -1;
-</span><span class="line">}
-</span><span class="line">// generate the left child
-</span><span class="line">VCNode genLeft(VCNode curnode, int label){
-</span><span class="line">    VCNode left;//choose node label!
-</span><span class="line">    left.p = curnode.p - 1;//remove one node
-</span><span class="line">    left.e = curnode.e;
-</span><span class="line">    for (int i=0; i&lt;=n; i++) {//first copy all infos
-</span><span class="line">        left.index[i]=curnode.index[i];
-</span><span class="line">        left.state[i]=curnode.state[i];//init node state
-</span><span class="line">        left.edge[i]=curnode.edge[i];//copy edge info
-</span><span class="line">        left.node[i]=curnode.node[i];//copy node info
-</span><span class="line">//        for (int j=0; j&lt;=n; j++) {
-</span><span class="line">//            left.graph[i][j] = curnode.graph[i][j];
-</span><span class="line">//        }
-</span><span class="line">    }
-</span><span class="line">    // following code will not use curnode anymore!!
-</span><span class="line">    
-</span><span class="line">    
-</span><span class="line">    ///
-</span><span class="line">    int sum=0;//removed edge
-</span><span class="line">    for (int j=1; j&lt;=n; j++) {
-</span><span class="line">        //new
-</span><span class="line">        if (label &lt; j &amp;&amp; left.state[j]!=1 &amp;&amp; graph[label][j]==1 ) {//row!
-</span><span class="line">            sum++;
-</span><span class="line">//            left.graph[label][j]=0;
-</span><span class="line">            left.edge[left.index[j]]--;//how to cut it down
-</span><span class="line">        }else if(label &gt; j &amp;&amp; left.state[j]!=1 &amp;&amp; graph[j][label]==1 ){ // col
-</span><span class="line">            sum++;
-</span><span class="line">//            left.graph[j][label]=0;
-</span><span class="line">            left.edge[left.index[j]]--;//how to cut it down
-</span><span class="line">        }
-</span><span class="line">    }
-</span><span class="line">    ///
-</span><span class="line">    
-</span><span class="line">    left.state[label] = 1;//use label directly!
-</span><span class="line">    left.edge[left.index[label]] = 0;//only use index!!
-</span><span class="line">//    cout &lt;&lt; "remove edge sum is " &lt;&lt; sum &lt;&lt; endl;
-</span><span class="line">    quicksort2(left.edge, 1, n, left.node);
-</span><span class="line">    left.e = left.e - sum;//remove some edges
-</span><span class="line">    buildIndex(left.node, left.index);
-</span><span class="line">    
-</span><span class="line">    if (INDEBUG) {
-</span><span class="line">        cout &lt;&lt; "======== " &lt;&lt; label &lt;&lt; " gen left begin===========" &lt;&lt; endl;
-</span><span class="line">        cout &lt;&lt; "edge is " &lt;&lt; left.e &lt;&lt; " node is " &lt;&lt; left.p &lt;&lt; endl;
-</span><span class="line">        cout &lt;&lt; "array edge:" &lt;&lt; endl;
-</span><span class="line">        printArray(left.edge,1,n);
-</span><span class="line">        cout &lt;&lt; "array node:" &lt;&lt; endl;
-</span><span class="line">        printArray(left.node, 1, n);
-</span><span class="line">        cout &lt;&lt; "array index:" &lt;&lt; endl;
-</span><span class="line">        printArray(left.index, 1, n);
-</span><span class="line">        cout &lt;&lt; "array state:" &lt;&lt; endl;
-</span><span class="line">        printArray(left.state, 1, n);
-</span><span class="line">//        printGraph(left.graph);
-</span><span class="line">        cout &lt;&lt; "======== " &lt;&lt; label &lt;&lt; " gen left end===========" &lt;&lt; endl;
-</span><span class="line">    }
-</span><span class="line">    
-</span><span class="line">    return left;
-</span><span class="line">}
-</span><span class="line">// generate the right child
-</span><span class="line">VCNode genRight(VCNode curnode, int label){
-</span><span class="line">    VCNode right;//choose node label!
-</span><span class="line">    right.p = curnode.p;//remain
-</span><span class="line">    right.e = curnode.e;
-</span><span class="line">    for (int i=0; i&lt;=n; i++) {//first copy all infos
-</span><span class="line">        right.index[i]=curnode.index[i];
-</span><span class="line">        right.state[i]=curnode.state[i];//init node state
-</span><span class="line">        right.edge[i]=curnode.edge[i];//copy edge info
-</span><span class="line">        right.node[i]=curnode.node[i];//copy node info
-</span><span class="line">//        for (int j=0; j&lt;=n; j++) {
-</span><span class="line">//            right.graph[i][j] = curnode.graph[i][j];
-</span><span class="line">//        }
-</span><span class="line">    }
-</span><span class="line">    // following code will not use curnode anymore!!
-</span><span class="line">    right.state[label] = -1;//use label directly!
-</span><span class="line">    
-</span><span class="line">    if (INDEBUG) {
-</span><span class="line">        cout &lt;&lt; "======== " &lt;&lt; label &lt;&lt; " gen right begin===========" &lt;&lt; endl;
-</span><span class="line">        cout &lt;&lt; "edge is " &lt;&lt; right.e &lt;&lt; " node is " &lt;&lt; right.p &lt;&lt; endl;
-</span><span class="line">//        cout &lt;&lt; "array edge:" &lt;&lt; endl;
-</span><span class="line">//        printArray(right.edge,1,n);
-</span><span class="line">//        cout &lt;&lt; "array node:" &lt;&lt; endl;
-</span><span class="line">//        printArray(right.node, 1, n);
-</span><span class="line">//        cout &lt;&lt; "array index:" &lt;&lt; endl;
-</span><span class="line">//        printArray(right.index, 1, n);
-</span><span class="line">//        cout &lt;&lt; "array state:" &lt;&lt; endl;
-</span><span class="line">//        printArray(right.state, 1, n);
-</span><span class="line">//        printGraph(right.graph);
-</span><span class="line">        cout &lt;&lt; "======== " &lt;&lt; label &lt;&lt; " gen right end===========" &lt;&lt; endl;
-</span><span class="line">    }
-</span><span class="line">    
-</span><span class="line">    return right;
-</span><span class="line">}
-</span><span class="line">// greedy find a way to solve VCP
-</span><span class="line">void greedyFind(int edges[], int nodes[]/*, int graph[][MAX_NODE]*/){
-</span><span class="line">    VCNode node;
-</span><span class="line">    node.e = m;
-</span><span class="line">    node.p = k;
-</span><span class="line">    
-</span><span class="line">    for (int i=0; i&lt;=n; i++) {
-</span><span class="line">        node.index[i]=0;
-</span><span class="line">        node.state[i]=0;//init node state
-</span><span class="line">        node.edge[i]=edges[i];//copy edge info
-</span><span class="line">        node.node[i]=nodes[i];//copy node info
-</span><span class="line">//        for (int j=0; j&lt;=n; j++) {
-</span><span class="line">//            node.graph[i][j] = graph[i][j];
-</span><span class="line">//        }
-</span><span class="line">    }
-</span><span class="line">    buildIndex(node.node, node.index);
-</span><span class="line">    
-</span><span class="line">    Minheap minheap;
-</span><span class="line">    minheap.insert(node);
-</span><span class="line">    
-</span><span class="line">    while (minheap.nodes.size() &gt; 0) {
-</span><span class="line">        // get the heap top node to extend
-</span><span class="line">        VCNode curnode = minheap.popmin();
-</span><span class="line">        
-</span><span class="line">//        if (INDEBUG) {
-</span><span class="line">//            cout &lt;&lt; "...current graph..." &lt;&lt; endl;
-</span><span class="line">//            printGraph(curnode.graph);
-</span><span class="line">//        }
-</span><span class="line">        
-</span><span class="line">        // validate the current node
-</span><span class="line">        if (curnode.e == 0) {
-</span><span class="line">            int points = k - curnode.e;
-</span><span class="line">            cout &lt;&lt; points &lt;&lt; endl;
-</span><span class="line">            int count = 1;
-</span><span class="line">            for (int i=1; i&lt;=n; i++) {
-</span><span class="line">                if (curnode.state[i]==1) {
-</span><span class="line">                    if(count == points){
-</span><span class="line">                        cout &lt;&lt; i;
-</span><span class="line">                    }else{
-</span><span class="line">                        cout &lt;&lt; i &lt;&lt; " ";
-</span><span class="line">                    }
-</span><span class="line">                    count++;
-</span><span class="line">                }
-</span><span class="line">            }
-</span><span class="line">            cout &lt;&lt; endl;
-</span><span class="line">            return;
-</span><span class="line">        }
-</span><span class="line">        
-</span><span class="line">        // generate child nodes
-</span><span class="line">        int label = nextNode(curnode.state, curnode.node);//the label of the node
-</span><span class="line">        if (label != -1) {
-</span><span class="line">            // node i is in index[k] position in array [node]
-</span><span class="line">            // node i has number of edge[i] edges
-</span><span class="line">            VCNode left = genLeft(curnode, label);
-</span><span class="line">            VCNode right = genRight(curnode, label);
-</span><span class="line">            if (verify(left.edge, left.p, left.e, left.node, left.state)) {
-</span><span class="line">//                cout &lt;&lt; "insert " &lt;&lt; label &lt;&lt; " left" &lt;&lt; endl;
-</span><span class="line">                minheap.insert(left);
-</span><span class="line">            }
-</span><span class="line">            if (verify(right.edge, right.p, right.e, right.node, right.state)) {
-</span><span class="line">//                cout &lt;&lt; "insert " &lt;&lt; label &lt;&lt; " right" &lt;&lt; endl;
-</span><span class="line">                minheap.insert(right);
-</span><span class="line">            }
-</span><span class="line">        }
-</span><span class="line">        
-</span><span class="line">    }
-</span><span class="line">    
-</span><span class="line">    // if not find, then return -1
-</span><span class="line">    cout &lt;&lt; -1 &lt;&lt; endl;
-</span><span class="line">    
-</span><span class="line">}
-</span><span class="line">int main() {
-</span><span class="line">//    freopen("/Volumes/hujiawei/Users/hujiawei/workspace/appleworkspace/algorithmworks/Exp1-2/Exp1-2/in3.txt", "rt", stdin);//
-</span><span class="line">    cin &gt;&gt; t;
-</span><span class="line">    while(t--&gt;0){
-</span><span class="line">        cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;
-</span><span class="line">//        int graph[n+1][MAX_NODE];
-</span><span class="line">        for (int i=0; i&lt;= n; i++) {
-</span><span class="line">            for (int j=0; j&lt;= n; j++) {
-</span><span class="line">                graph[i][j]=0;
-</span><span class="line">            }
-</span><span class="line">        }
-</span><span class="line">        int edges[n+1], nodes[n+1], state[n+1];
-</span><span class="line">        for (int i=0; i&lt;= n; i++) {
-</span><span class="line">            edges[i]=0;
-</span><span class="line">            state[i]=0;
-</span><span class="line">            nodes[i]=i;
-</span><span class="line">        }
-</span><span class="line">        int temp = m;
-</span><span class="line">        while(temp--&gt;0){
-</span><span class="line">            cin &gt;&gt; a &gt;&gt; b;
-</span><span class="line">            graph[min(a, b)][max(a,b)]=1;
-</span><span class="line">//          graph[a][b]=1;
-</span><span class="line">//          graph[b][a]=1;//just save half a&lt;=b
-</span><span class="line">            edges[a]++;
-</span><span class="line">            edges[b]++;
-</span><span class="line">        }
-</span><span class="line">        bool flag = verify(edges, k, m, nodes, state);
-</span><span class="line">        
-</span><span class="line">        if (!flag) {//must not be achieved!!!
-</span><span class="line">            cout &lt;&lt; -1 &lt;&lt; endl;
-</span><span class="line">        }else{
-</span><span class="line">            greedyFind(edges,nodes/*,graph*/);
-</span><span class="line">        }
-</span><span class="line">    }
-</span><span class="line">    
-</span><span class="line">    return 0;
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="cpp"><span class="line"><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class="line"><span class="cp">#include &lt;vector&gt;</span>
+</span><span class="line"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span><span class="line"><span class="cp">#define MAX_NODE 101</span>
+</span><span class="line"><span class="cp">#define INDEBUG 0</span>
+</span><span class="line"><span class="n">int8_t</span> <span class="n">graph</span><span class="p">[</span><span class="n">MAX_NODE</span><span class="p">][</span><span class="n">MAX_NODE</span><span class="p">];</span><span class="c1">//int -&gt; int8_t</span>
+</span><span class="line"><span class="c1">//int edges[MAX_NODE];//0 is redudent</span>
+</span><span class="line"><span class="c1">//int nodes[MAX_NODE];//the order of node</span>
+</span><span class="line"><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">;</span>
+</span><span class="line"><span class="k">class</span> <span class="nc">VCNode</span> <span class="p">{</span><span class="c1">//Vertex Cover Node</span>
+</span><span class="line"><span class="k">public</span><span class="o">:</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">p</span><span class="p">;</span><span class="c1">//points can be used</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">e</span><span class="p">;</span><span class="c1">//edges to cover!!</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">index</span><span class="p">[</span><span class="n">MAX_NODE</span><span class="p">];</span><span class="c1">//the index of each node in array [node], index[k]=i!!</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">edge</span><span class="p">[</span><span class="n">MAX_NODE</span><span class="p">];</span><span class="c1">//MAX_NODE the edge number of each node, edge[i]=j!!</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">node</span><span class="p">[</span><span class="n">MAX_NODE</span><span class="p">];</span><span class="c1">//the order of the node</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">state</span><span class="p">[</span><span class="n">MAX_NODE</span><span class="p">];</span><span class="c1">//the state of each node ** 0 can be used / 1 used / -1 can not be used</span>
+</span><span class="line"><span class="c1">//    int graph[MAX_NODE][MAX_NODE];//the graph on the node//no need,just use the global graph</span>
+</span><span class="line">    <span class="c1">// node k is in index[k]=i position in array [node]</span>
+</span><span class="line">    <span class="c1">// node i has number of edge[i]=j edges</span>
+</span><span class="line"><span class="p">};</span>
+</span><span class="line"><span class="k">class</span> <span class="nc">Minheap</span> <span class="p">{</span><span class="c1">//Min Heap</span>
+</span><span class="line"><span class="k">public</span><span class="o">:</span>
+</span><span class="line">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">VCNode</span><span class="o">&gt;</span> <span class="n">nodes</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line">    <span class="kt">void</span> <span class="n">insert</span><span class="p">(</span><span class="n">VCNode</span> <span class="n">node</span><span class="p">);</span>
+</span><span class="line">    <span class="n">VCNode</span> <span class="n">popmin</span><span class="p">();</span>
+</span><span class="line"><span class="c1">//  void print();</span>
+</span><span class="line"><span class="p">};</span>
+</span><span class="line"><span class="kt">void</span> <span class="n">Minheap</span><span class="o">::</span><span class="n">insert</span><span class="p">(</span><span class="n">VCNode</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="n">nodes</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span><span class="line">    <span class="c1">//  cout &lt;&lt; &quot;size is &quot; &lt;&lt; nodes.size() &lt;&lt; endl;//</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">curpos</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">nodes</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// current position</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">parent</span> <span class="o">=</span> <span class="p">(</span><span class="n">curpos</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">//parent position</span>
+</span><span class="line">    <span class="k">while</span> <span class="p">(</span><span class="n">curpos</span> <span class="o">!=</span> <span class="n">parent</span> <span class="o">&amp;&amp;</span> <span class="n">parent</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//parent is still in heap</span>
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">parent</span><span class="p">].</span><span class="n">e</span> <span class="o">&gt;</span> <span class="n">nodes</span><span class="p">[</span><span class="n">curpos</span><span class="p">].</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//swap parent and child</span>
+</span><span class="line">            <span class="n">VCNode</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">parent</span><span class="p">];</span>
+</span><span class="line">            <span class="n">nodes</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">curpos</span><span class="p">];</span>
+</span><span class="line">            <span class="n">nodes</span><span class="p">[</span><span class="n">curpos</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+</span><span class="line">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class="line">            <span class="k">break</span><span class="p">;</span> <span class="c1">//no longer level up!!!</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">        <span class="n">curpos</span> <span class="o">=</span> <span class="n">parent</span><span class="p">;</span> <span class="c1">//when curpos=parent=0, exit!!!</span>
+</span><span class="line">        <span class="n">parent</span> <span class="o">=</span> <span class="p">(</span><span class="n">curpos</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">//relocate the parent position</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="n">VCNode</span> <span class="n">Minheap</span><span class="o">::</span><span class="n">popmin</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">    <span class="n">VCNode</span> <span class="n">node</span><span class="p">;</span>
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="n">nodes</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//have nodes left</span>
+</span><span class="line">        <span class="n">node</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="c1">//get the first element</span>
+</span><span class="line">        <span class="n">nodes</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">nodes</span><span class="p">.</span><span class="n">begin</span><span class="p">());</span> <span class="c1">//remove the first element</span>
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="n">nodes</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//at least have one element more</span>
+</span><span class="line">            <span class="n">VCNode</span> <span class="n">last</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">nodes</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span> <span class="c1">//get the last element</span>
+</span><span class="line">            <span class="n">nodes</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span> <span class="c1">//pop the last element</span>
+</span><span class="line">            <span class="n">nodes</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">nodes</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">last</span><span class="p">);</span> <span class="c1">//put it in the first place</span>
+</span><span class="line">            <span class="kt">int</span> <span class="n">csize</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">nodes</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">//current size</span>
+</span><span class="line">            <span class="kt">int</span> <span class="n">curpos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//current position</span>
+</span><span class="line">
+</span><span class="line">            <span class="c1">// rebuild the minheap</span>
+</span><span class="line">            <span class="k">while</span> <span class="p">(</span><span class="n">curpos</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">csize</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span> <span class="p">{</span> <span class="c1">//reach to the last parent node!!</span>
+</span><span class="line">                <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">curpos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">//left child</span>
+</span><span class="line">                <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">curpos</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">//right child</span>
+</span><span class="line">                <span class="kt">int</span> <span class="n">min</span> <span class="o">=</span> <span class="n">left</span><span class="p">;</span> <span class="c1">//min store the min child</span>
+</span><span class="line">                <span class="k">if</span> <span class="p">(</span><span class="n">right</span> <span class="o">&lt;</span> <span class="n">csize</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//have left and right childs</span>
+</span><span class="line">                    <span class="k">if</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">right</span><span class="p">].</span><span class="n">e</span> <span class="o">&lt;</span> <span class="n">nodes</span><span class="p">[</span><span class="n">left</span><span class="p">].</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">                        <span class="n">min</span> <span class="o">=</span> <span class="n">right</span><span class="p">;</span>
+</span><span class="line">                    <span class="p">}</span>
+</span><span class="line">                <span class="p">}</span>
+</span><span class="line">                <span class="k">if</span> <span class="p">(</span><span class="n">min</span> <span class="o">&lt;</span> <span class="n">csize</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//min child exist!!</span>
+</span><span class="line">                    <span class="k">if</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">min</span><span class="p">].</span><span class="n">e</span> <span class="o">&lt;</span> <span class="n">nodes</span><span class="p">[</span><span class="n">curpos</span><span class="p">].</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//need to swap current position with child</span>
+</span><span class="line">                        <span class="n">VCNode</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">min</span><span class="p">];</span>
+</span><span class="line">                        <span class="n">nodes</span><span class="p">[</span><span class="n">min</span><span class="p">]</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">curpos</span><span class="p">];</span>
+</span><span class="line">                        <span class="n">nodes</span><span class="p">[</span><span class="n">curpos</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+</span><span class="line">                    <span class="p">}</span><span class="k">else</span> <span class="p">{</span> <span class="c1">//min child no exits!! exit!!</span>
+</span><span class="line">                        <span class="k">break</span><span class="p">;</span> <span class="c1">//can break now!!</span>
+</span><span class="line">                    <span class="p">}</span>
+</span><span class="line">                <span class="p">}</span>
+</span><span class="line">                <span class="n">curpos</span> <span class="o">=</span> <span class="n">min</span><span class="p">;</span>
+</span><span class="line">            <span class="p">}</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="c1">//void Minheap::print() {</span>
+</span><span class="line"><span class="c1">//  cout &lt;&lt; &quot;print heap&quot; &lt;&lt; endl;</span>
+</span><span class="line"><span class="c1">//  for (int i = 0; i &lt; (int)nodes.size(); i++) {</span>
+</span><span class="line"><span class="c1">//      cout &lt;&lt; &quot;edge: &quot; &lt;&lt; nodes[i].e &lt;&lt; &quot; node: &quot; &lt;&lt; nodes[i].p &lt;&lt; endl;</span>
+</span><span class="line"><span class="c1">//  }</span>
+</span><span class="line"><span class="c1">//  cout &lt;&lt; &quot;heap end&quot; &lt;&lt; endl;</span>
+</span><span class="line"><span class="c1">//}</span>
+</span><span class="line"><span class="c1">// print array</span>
+</span><span class="line"><span class="kt">void</span> <span class="n">printArray</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">){</span>
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="n">INDEBUG</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;print array form &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">start</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; to &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">end</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">start</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">end</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;print array end&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="c1">// print the graph</span>
+</span><span class="line"><span class="kt">void</span> <span class="n">printGraph</span><span class="p">(</span><span class="kt">int</span> <span class="n">graph</span><span class="p">[][</span><span class="n">MAX_NODE</span><span class="p">]){</span>
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="n">INDEBUG</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span><span class="c1">//0 no need</span>
+</span><span class="line">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+</span><span class="line">                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+</span><span class="line">            <span class="p">}</span>
+</span><span class="line">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="c1">// partition function for quick sort</span>
+</span><span class="line"><span class="kt">int</span> <span class="n">partition2</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">low</span><span class="p">,</span> <span class="kt">int</span> <span class="n">high</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">[]){</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">key</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">high</span><span class="p">];</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">low</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class="line">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">low</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">high</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&gt;=</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span><span class="line">            <span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+</span><span class="line">            <span class="n">swap</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">high</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
+</span><span class="line">    <span class="n">swap</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">high</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="c1">// quick sort</span>
+</span><span class="line"><span class="kt">void</span> <span class="n">quicksort2</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">low</span><span class="p">,</span> <span class="kt">int</span> <span class="n">high</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">[])</span> <span class="p">{</span>
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="n">low</span> <span class="o">&lt;</span> <span class="n">high</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">partition2</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">low</span><span class="p">,</span><span class="n">high</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+</span><span class="line">        <span class="n">quicksort2</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+</span><span class="line">        <span class="n">quicksort2</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="c1">// sum of the first k elements with state==0!!!</span>
+</span><span class="line"><span class="kt">int</span> <span class="n">sumofkmax</span><span class="p">(</span><span class="kt">int</span> <span class="n">edges</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">p</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nodes</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">state</span><span class="p">[]){</span>
+</span><span class="line">    <span class="n">quicksort2</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">nodes</span><span class="p">);</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">sum</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">count</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span><span class="line">    <span class="c1">// edges[i] corresponse to nodes[i], its state is state[nodes[i]]</span>
+</span><span class="line">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span><span class="c1">//attention to i range!!</span>
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            <span class="n">sum</span><span class="o">+=</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class="line">            <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+</span><span class="line">            <span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span><span class="c1">//enough!</span>
+</span><span class="line">                <span class="k">break</span><span class="p">;</span>
+</span><span class="line">            <span class="p">}</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="c1">// verify the current node can be achievable</span>
+</span><span class="line"><span class="kt">bool</span> <span class="n">verify</span><span class="p">(</span><span class="kt">int</span> <span class="n">edges</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">p</span><span class="p">,</span> <span class="kt">int</span> <span class="n">e</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nodes</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">state</span><span class="p">[]){</span>
+</span><span class="line">    <span class="c1">//caculate the sum of the first p max elements in array edges!!</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">sumofkmax</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">state</span><span class="p">);</span>
+</span><span class="line">    <span class="c1">// edge of nodes[i] is edges[i]!!!</span>
+</span><span class="line">    <span class="k">if</span><span class="p">(</span><span class="n">sum</span> <span class="o">&gt;=</span> <span class="n">e</span><span class="p">){</span><span class="c1">// may be this can be achieved</span>
+</span><span class="line">        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="c1">// build the index of node in array [index]</span>
+</span><span class="line"><span class="kt">void</span> <span class="n">buildIndex</span><span class="p">(</span><span class="kt">int</span> <span class="n">node</span><span class="p">[],</span><span class="kt">int</span> <span class="n">index</span><span class="p">[]){</span>
+</span><span class="line">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="n">index</span><span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="c1">// get the next node: state==0 &amp;&amp; order first!!!</span>
+</span><span class="line"><span class="kt">int</span> <span class="n">nextNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">state</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">nodes</span><span class="p">[]){</span>
+</span><span class="line">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            <span class="k">return</span> <span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="c1">// generate the left child</span>
+</span><span class="line"><span class="n">VCNode</span> <span class="n">genLeft</span><span class="p">(</span><span class="n">VCNode</span> <span class="n">curnode</span><span class="p">,</span> <span class="kt">int</span> <span class="n">label</span><span class="p">){</span>
+</span><span class="line">    <span class="n">VCNode</span> <span class="n">left</span><span class="p">;</span><span class="c1">//choose node label!</span>
+</span><span class="line">    <span class="n">left</span><span class="p">.</span><span class="n">p</span> <span class="o">=</span> <span class="n">curnode</span><span class="p">.</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span><span class="c1">//remove one node</span>
+</span><span class="line">    <span class="n">left</span><span class="p">.</span><span class="n">e</span> <span class="o">=</span> <span class="n">curnode</span><span class="p">.</span><span class="n">e</span><span class="p">;</span>
+</span><span class="line">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span><span class="c1">//first copy all infos</span>
+</span><span class="line">        <span class="n">left</span><span class="p">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">curnode</span><span class="p">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class="line">        <span class="n">left</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">curnode</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="c1">//init node state</span>
+</span><span class="line">        <span class="n">left</span><span class="p">.</span><span class="n">edge</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">curnode</span><span class="p">.</span><span class="n">edge</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="c1">//copy edge info</span>
+</span><span class="line">        <span class="n">left</span><span class="p">.</span><span class="n">node</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">curnode</span><span class="p">.</span><span class="n">node</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="c1">//copy node info</span>
+</span><span class="line"><span class="c1">//        for (int j=0; j&lt;=n; j++) {</span>
+</span><span class="line"><span class="c1">//            left.graph[i][j] = curnode.graph[i][j];</span>
+</span><span class="line"><span class="c1">//        }</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="c1">// following code will not use curnode anymore!!</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="c1">///</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">sum</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="c1">//removed edge</span>
+</span><span class="line">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="c1">//new</span>
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="n">label</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">left</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">!=</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">graph</span><span class="p">[</span><span class="n">label</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span> <span class="p">)</span> <span class="p">{</span><span class="c1">//row!</span>
+</span><span class="line">            <span class="n">sum</span><span class="o">++</span><span class="p">;</span>
+</span><span class="line"><span class="c1">//            left.graph[label][j]=0;</span>
+</span><span class="line">            <span class="n">left</span><span class="p">.</span><span class="n">edge</span><span class="p">[</span><span class="n">left</span><span class="p">.</span><span class="n">index</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">--</span><span class="p">;</span><span class="c1">//how to cut it down</span>
+</span><span class="line">        <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">label</span> <span class="o">&gt;</span> <span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">left</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">!=</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">graph</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">label</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span> <span class="p">){</span> <span class="c1">// col</span>
+</span><span class="line">            <span class="n">sum</span><span class="o">++</span><span class="p">;</span>
+</span><span class="line"><span class="c1">//            left.graph[j][label]=0;</span>
+</span><span class="line">            <span class="n">left</span><span class="p">.</span><span class="n">edge</span><span class="p">[</span><span class="n">left</span><span class="p">.</span><span class="n">index</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">--</span><span class="p">;</span><span class="c1">//how to cut it down</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="c1">///</span>
+</span><span class="line">
+</span><span class="line">    <span class="n">left</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="c1">//use label directly!</span>
+</span><span class="line">    <span class="n">left</span><span class="p">.</span><span class="n">edge</span><span class="p">[</span><span class="n">left</span><span class="p">.</span><span class="n">index</span><span class="p">[</span><span class="n">label</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//only use index!!</span>
+</span><span class="line"><span class="c1">//    cout &lt;&lt; &quot;remove edge sum is &quot; &lt;&lt; sum &lt;&lt; endl;</span>
+</span><span class="line">    <span class="n">quicksort2</span><span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="n">edge</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">left</span><span class="p">.</span><span class="n">node</span><span class="p">);</span>
+</span><span class="line">    <span class="n">left</span><span class="p">.</span><span class="n">e</span> <span class="o">=</span> <span class="n">left</span><span class="p">.</span><span class="n">e</span> <span class="o">-</span> <span class="n">sum</span><span class="p">;</span><span class="c1">//remove some edges</span>
+</span><span class="line">    <span class="n">buildIndex</span><span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="n">node</span><span class="p">,</span> <span class="n">left</span><span class="p">.</span><span class="n">index</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="n">INDEBUG</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;======== &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">label</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; gen left begin===========&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;edge is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">left</span><span class="p">.</span><span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; node is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">left</span><span class="p">.</span><span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;array edge:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">        <span class="n">printArray</span><span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="n">edge</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+</span><span class="line">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;array node:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">        <span class="n">printArray</span><span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="n">node</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+</span><span class="line">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;array index:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">        <span class="n">printArray</span><span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="n">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+</span><span class="line">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;array state:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">        <span class="n">printArray</span><span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="n">state</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+</span><span class="line"><span class="c1">//        printGraph(left.graph);</span>
+</span><span class="line">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;======== &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">label</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; gen left end===========&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">return</span> <span class="n">left</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="c1">// generate the right child</span>
+</span><span class="line"><span class="n">VCNode</span> <span class="n">genRight</span><span class="p">(</span><span class="n">VCNode</span> <span class="n">curnode</span><span class="p">,</span> <span class="kt">int</span> <span class="n">label</span><span class="p">){</span>
+</span><span class="line">    <span class="n">VCNode</span> <span class="n">right</span><span class="p">;</span><span class="c1">//choose node label!</span>
+</span><span class="line">    <span class="n">right</span><span class="p">.</span><span class="n">p</span> <span class="o">=</span> <span class="n">curnode</span><span class="p">.</span><span class="n">p</span><span class="p">;</span><span class="c1">//remain</span>
+</span><span class="line">    <span class="n">right</span><span class="p">.</span><span class="n">e</span> <span class="o">=</span> <span class="n">curnode</span><span class="p">.</span><span class="n">e</span><span class="p">;</span>
+</span><span class="line">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span><span class="c1">//first copy all infos</span>
+</span><span class="line">        <span class="n">right</span><span class="p">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">curnode</span><span class="p">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class="line">        <span class="n">right</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">curnode</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="c1">//init node state</span>
+</span><span class="line">        <span class="n">right</span><span class="p">.</span><span class="n">edge</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">curnode</span><span class="p">.</span><span class="n">edge</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="c1">//copy edge info</span>
+</span><span class="line">        <span class="n">right</span><span class="p">.</span><span class="n">node</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">curnode</span><span class="p">.</span><span class="n">node</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="c1">//copy node info</span>
+</span><span class="line"><span class="c1">//        for (int j=0; j&lt;=n; j++) {</span>
+</span><span class="line"><span class="c1">//            right.graph[i][j] = curnode.graph[i][j];</span>
+</span><span class="line"><span class="c1">//        }</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="c1">// following code will not use curnode anymore!!</span>
+</span><span class="line">    <span class="n">right</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="c1">//use label directly!</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="n">INDEBUG</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;======== &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">label</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; gen right begin===========&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;edge is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">right</span><span class="p">.</span><span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; node is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">right</span><span class="p">.</span><span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line"><span class="c1">//        cout &lt;&lt; &quot;array edge:&quot; &lt;&lt; endl;</span>
+</span><span class="line"><span class="c1">//        printArray(right.edge,1,n);</span>
+</span><span class="line"><span class="c1">//        cout &lt;&lt; &quot;array node:&quot; &lt;&lt; endl;</span>
+</span><span class="line"><span class="c1">//        printArray(right.node, 1, n);</span>
+</span><span class="line"><span class="c1">//        cout &lt;&lt; &quot;array index:&quot; &lt;&lt; endl;</span>
+</span><span class="line"><span class="c1">//        printArray(right.index, 1, n);</span>
+</span><span class="line"><span class="c1">//        cout &lt;&lt; &quot;array state:&quot; &lt;&lt; endl;</span>
+</span><span class="line"><span class="c1">//        printArray(right.state, 1, n);</span>
+</span><span class="line"><span class="c1">//        printGraph(right.graph);</span>
+</span><span class="line">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;======== &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">label</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; gen right end===========&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">return</span> <span class="n">right</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="c1">// greedy find a way to solve VCP</span>
+</span><span class="line"><span class="kt">void</span> <span class="n">greedyFind</span><span class="p">(</span><span class="kt">int</span> <span class="n">edges</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">nodes</span><span class="p">[]</span><span class="cm">/*, int graph[][MAX_NODE]*/</span><span class="p">){</span>
+</span><span class="line">    <span class="n">VCNode</span> <span class="n">node</span><span class="p">;</span>
+</span><span class="line">    <span class="n">node</span><span class="p">.</span><span class="n">e</span> <span class="o">=</span> <span class="n">m</span><span class="p">;</span>
+</span><span class="line">    <span class="n">node</span><span class="p">.</span><span class="n">p</span> <span class="o">=</span> <span class="n">k</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="n">node</span><span class="p">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span><span class="line">        <span class="n">node</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="c1">//init node state</span>
+</span><span class="line">        <span class="n">node</span><span class="p">.</span><span class="n">edge</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="c1">//copy edge info</span>
+</span><span class="line">        <span class="n">node</span><span class="p">.</span><span class="n">node</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="c1">//copy node info</span>
+</span><span class="line"><span class="c1">//        for (int j=0; j&lt;=n; j++) {</span>
+</span><span class="line"><span class="c1">//            node.graph[i][j] = graph[i][j];</span>
+</span><span class="line"><span class="c1">//        }</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="n">buildIndex</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">node</span><span class="p">,</span> <span class="n">node</span><span class="p">.</span><span class="n">index</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line">    <span class="n">Minheap</span> <span class="n">minheap</span><span class="p">;</span>
+</span><span class="line">    <span class="n">minheap</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">while</span> <span class="p">(</span><span class="n">minheap</span><span class="p">.</span><span class="n">nodes</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="c1">// get the heap top node to extend</span>
+</span><span class="line">        <span class="n">VCNode</span> <span class="n">curnode</span> <span class="o">=</span> <span class="n">minheap</span><span class="p">.</span><span class="n">popmin</span><span class="p">();</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">//        if (INDEBUG) {</span>
+</span><span class="line"><span class="c1">//            cout &lt;&lt; &quot;...current graph...&quot; &lt;&lt; endl;</span>
+</span><span class="line"><span class="c1">//            printGraph(curnode.graph);</span>
+</span><span class="line"><span class="c1">//        }</span>
+</span><span class="line">
+</span><span class="line">        <span class="c1">// validate the current node</span>
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="n">curnode</span><span class="p">.</span><span class="n">e</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            <span class="kt">int</span> <span class="n">points</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="n">curnode</span><span class="p">.</span><span class="n">e</span><span class="p">;</span>
+</span><span class="line">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">points</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">            <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class="line">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">                <span class="k">if</span> <span class="p">(</span><span class="n">curnode</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">                    <span class="k">if</span><span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="n">points</span><span class="p">){</span>
+</span><span class="line">                        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">;</span>
+</span><span class="line">                    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span><span class="line">                        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+</span><span class="line">                    <span class="p">}</span>
+</span><span class="line">                    <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+</span><span class="line">                <span class="p">}</span>
+</span><span class="line">            <span class="p">}</span>
+</span><span class="line">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">            <span class="k">return</span><span class="p">;</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">        <span class="c1">// generate child nodes</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">label</span> <span class="o">=</span> <span class="n">nextNode</span><span class="p">(</span><span class="n">curnode</span><span class="p">.</span><span class="n">state</span><span class="p">,</span> <span class="n">curnode</span><span class="p">.</span><span class="n">node</span><span class="p">);</span><span class="c1">//the label of the node</span>
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="n">label</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            <span class="c1">// node i is in index[k] position in array [node]</span>
+</span><span class="line">            <span class="c1">// node i has number of edge[i] edges</span>
+</span><span class="line">            <span class="n">VCNode</span> <span class="n">left</span> <span class="o">=</span> <span class="n">genLeft</span><span class="p">(</span><span class="n">curnode</span><span class="p">,</span> <span class="n">label</span><span class="p">);</span>
+</span><span class="line">            <span class="n">VCNode</span> <span class="n">right</span> <span class="o">=</span> <span class="n">genRight</span><span class="p">(</span><span class="n">curnode</span><span class="p">,</span> <span class="n">label</span><span class="p">);</span>
+</span><span class="line">            <span class="k">if</span> <span class="p">(</span><span class="n">verify</span><span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="n">edge</span><span class="p">,</span> <span class="n">left</span><span class="p">.</span><span class="n">p</span><span class="p">,</span> <span class="n">left</span><span class="p">.</span><span class="n">e</span><span class="p">,</span> <span class="n">left</span><span class="p">.</span><span class="n">node</span><span class="p">,</span> <span class="n">left</span><span class="p">.</span><span class="n">state</span><span class="p">))</span> <span class="p">{</span>
+</span><span class="line"><span class="c1">//                cout &lt;&lt; &quot;insert &quot; &lt;&lt; label &lt;&lt; &quot; left&quot; &lt;&lt; endl;</span>
+</span><span class="line">                <span class="n">minheap</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">left</span><span class="p">);</span>
+</span><span class="line">            <span class="p">}</span>
+</span><span class="line">            <span class="k">if</span> <span class="p">(</span><span class="n">verify</span><span class="p">(</span><span class="n">right</span><span class="p">.</span><span class="n">edge</span><span class="p">,</span> <span class="n">right</span><span class="p">.</span><span class="n">p</span><span class="p">,</span> <span class="n">right</span><span class="p">.</span><span class="n">e</span><span class="p">,</span> <span class="n">right</span><span class="p">.</span><span class="n">node</span><span class="p">,</span> <span class="n">right</span><span class="p">.</span><span class="n">state</span><span class="p">))</span> <span class="p">{</span>
+</span><span class="line"><span class="c1">//                cout &lt;&lt; &quot;insert &quot; &lt;&lt; label &lt;&lt; &quot; right&quot; &lt;&lt; endl;</span>
+</span><span class="line">                <span class="n">minheap</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">right</span><span class="p">);</span>
+</span><span class="line">            <span class="p">}</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="c1">// if not find, then return -1</span>
+</span><span class="line">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line"><span class="c1">//    freopen(&quot;/Volumes/hujiawei/Users/hujiawei/workspace/appleworkspace/algorithmworks/Exp1-2/Exp1-2/in3.txt&quot;, &quot;rt&quot;, stdin);//</span>
+</span><span class="line">    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">t</span><span class="p">;</span>
+</span><span class="line">    <span class="k">while</span><span class="p">(</span><span class="n">t</span><span class="o">--&gt;</span><span class="mi">0</span><span class="p">){</span>
+</span><span class="line">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">&gt;&gt;</span> <span class="n">k</span><span class="p">;</span>
+</span><span class="line"><span class="c1">//        int graph[n+1][MAX_NODE];</span>
+</span><span class="line">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">                <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span><span class="line">            <span class="p">}</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">edges</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">nodes</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+</span><span class="line">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span><span class="line">            <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span><span class="line">            <span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">m</span><span class="p">;</span>
+</span><span class="line">        <span class="k">while</span><span class="p">(</span><span class="n">temp</span><span class="o">--&gt;</span><span class="mi">0</span><span class="p">){</span>
+</span><span class="line">            <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">b</span><span class="p">;</span>
+</span><span class="line">            <span class="n">graph</span><span class="p">[</span><span class="n">min</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)][</span><span class="n">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</span><span class="line"><span class="c1">//          graph[a][b]=1;</span>
+</span><span class="line"><span class="c1">//          graph[b][a]=1;//just save half a&lt;=b</span>
+</span><span class="line">            <span class="n">edges</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span><span class="line">            <span class="n">edges</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">        <span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="n">verify</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">state</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">flag</span><span class="p">)</span> <span class="p">{</span><span class="c1">//must not be achieved!!!</span>
+</span><span class="line">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span><span class="line">            <span class="n">greedyFind</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span><span class="n">nodes</span><span class="cm">/*,graph*/</span><span class="p">);</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem/">http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 </div>
