@@ -14,14 +14,14 @@ published: true
 
 ####<center>第二部分 分布</center>
 
-1.概率质量函数PMF(Probability Mass Function)：数据集中数据值到它的概率的映射函数。直方图是各个值出现的频数，如果将频数除以样本总数，得到概率，归一化之后的直方图就是PMF。
+1.概率质量函数PMF(Probability Mass Function)：数据集的数据值到它的概率的映射函数。直方图是各个值出现的频数，如果将频数除以样本总数，得到概率，归一化之后的直方图就是PMF。
 
-![image](/images/math/pmf.png)
+![image](http://hujiaweibujidao.github.io/images/math/pmf.png)
 
-2.累积分布函数CDF(Cumulative Distribution Function)：数据集中数据值到它在分布中概率的累积值的映射函数。例如，
+2.累积分布函数CDF(Cumulative Distribution Function)：数据集的数据值到它在分布中概率的累积值的映射函数。例如，
 CDF(0) = 0; CDF(1) = 0.2; CDF(2) = 0.6; CDF(3) = 0.8; CDF(4) = 0.8; CDF(5) = 1，它的CDF图为一个阶跃函数：
 
-![image](/images/math/cdf.png)
+![image](http://hujiaweibujidao.github.io/images/math/cdf.png)
 
 3.指数分布(exponential distribution)：一种连续分布。举例来说，**观察一系列事件之间的间隔时间，若事件在每个时间点发生的概率相同，那么间隔时间的分布就近似指数分布**。指数分布的CDF如下：
 
@@ -31,9 +31,9 @@ $$
 
 参数$\lambda$决定了指数分布的形状，通常，指数分布的均值是$\frac{1}{\lambda}$，中位数是$\frac{log(2)}{\lambda}$。下图为$\lambda=2$的指数分布图：
 
-![image](/images/math/edcdf.png)
+![image](http://hujiaweibujidao.github.io/images/math/edcdf.png)
 
-如果判断一个分布是否是指数分布呢？一种办法是画出取对数之后的互补累积分布函数(CCDF=Complementary CDF=1-CDF(x))，CCDF是一条斜率为$-\lambda$的直线，原因如下：
+如何判断一个分布是否是指数分布呢？一种办法是画出取对数之后的互补累积分布函数(CCDF=Complementary CDF=1-CDF(x))，CCDF是一条斜率为$-\lambda$的直线，原因如下：
 
 $$
 y=CCDF(x)=1-CDF(x)=e^{-\lambda x} \quad => \quad log(y)=-\lambda x
@@ -47,15 +47,17 @@ $$
 
 其中，参数$\mu$和$\sigma$分别决定了正态分布的均值和标准差。下图为$\mu=2.0$和$\sigma=0.5$的正态分布的CDF图：
 
-![image](/images/math/ndcdf.png)
+![image](http://hujiaweibujidao.github.io/images/math/ndcdf.png)
 
 根据大数定理，当我们处理大样本数据集(超过30个数据)，并且重复地从总体中抽取样本时，得到的数值分布就接近正态分布曲线。正态分布以均值为中心完全对称。
 
 关于正态分布有一个重要的结论，对任何数值分布来说(不论它的均值和标准差)，只要数值是正态分布，那么几乎100%的数值都分布在均值的-3到3个标准差之间。下面是正态曲线下数值的分布情况：
 
-![image](/images/math/nd.png)
+![image](http://hujiaweibujidao.github.io/images/math/nd.png)
 
-从中可以看出，在均值与1个标准差之间大概有34%的数值分布，在1个标准差和2个标准差之间大概有13%的数值分布，在2个标准差和3个标准差之间大概有2.1%的数值分布。
+从中可以看出，**在距离均值1个标准差之间大概有34%的数值分布，在1个标准差和2个标准差之间大概有13%的数值分布，在2个标准差和3个标准差之间大概有2.1%的数值分布。**
+
+通过这个图我么可以得到一个经典的`68-95-99`法则，**在$(\mu - \sigma, \mu + \sigma)$之间大概有68.26%的数据分布，在$(\mu - 2\sigma, \mu + 2\sigma)$之间大概有95.44%的数据分布，在$(\mu - 3\sigma, \mu + 3\sigma)$之间大概有99.74%的数据分布。**
 
 [对数正态分布](http://wikipedia.org/wiki/Log-normal_distribution)：如果一组数据取对数之后服从正态分布，那么我们就称其服从对数正态分布。对数正态分布的 CDF 跟正态分布一样, 只是用 logx 代替原来的 x:
 
@@ -63,5 +65,5 @@ $$
 CDF_{lognormal}(x) = CDF_{normal}(log x)
 $$
 
-对数正态分布的均值与标准差不再是是$\mu$和$\sigma$了。可以证明,成人体重的分布是近似对数正态的。
+对数正态分布的均值与标准差不再是是$\mu$和$\sigma$了。可以证明，成人体重的分布是近似对数正态的。
 
