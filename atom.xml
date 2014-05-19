@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-20T00:02:32+08:00</updated>
+  <updated>2014-05-20T00:07:41+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -128,67 +128,17 @@ r_{XY}=\frac{n\Sigma{XY}-\Sigma{X}\Sigma{Y}}{\sqrt{[n\Sigma{X^2}-(\Sigma{X})^2][
   
   <entry>
     <title type="html"><![CDATA[SS 3-Distribution]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/"/>
-    <updated>2014-05-19T20:00:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2</id>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-1/"/>
+    <updated>2014-05-19T20:30:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-1</id>
     <content type="html"><![CDATA[<p><strong><center>统计学那些事 Things of Statistics</center></strong>
 <strong><center>逸夫图书馆, 2014/5/19</center></strong></p>
 
 <hr />
 
-<h4 id="center-center"><center>第三部分 分布</center></h4>
+<h4 id="center-center"><center>第三部分 分布之连续型随机变量分布</center></h4>
 
-<p>1.概率质量函数PMF(Probability Mass Function)</p>
-
-<p>数据集的数据值到它的概率的映射函数。直方图是各个值出现的频数，如果将频数除以样本总数，得到概率，归一化之后的直方图就是PMF。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/pmf.png" alt="image" /></p>
-
-<p>2.累积分布函数CDF(Cumulative Distribution Function)</p>
-
-<p>数据集的数据值到它在分布中概率的累积值的映射函数。PMF和CDF在国内的教材中并没有这样提过，但是在国外的很多统计书中都有，所以还是比较重要的，拿出来介绍下。</p>
-
-<p>例如，CDF(0) = 0; CDF(1) = 0.2; CDF(2) = 0.6; CDF(3) = 0.8; CDF(4) = 0.8; CDF(5) = 1，它的CDF图为一个阶跃函数：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/cdf.png" alt="image" /></p>
-
-<p>3.离散型随机变量及其分布律</p>
-
-<p>分布律：离散型随机变量以概率1和一定的规律分布在一些离散值上</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/disc0.png" alt="image" /></p>
-
-<p>(1)0-1分布</p>
-
-<p>随机变量X只有两个取值0和1样本空间只有两个取值也行)，所以叫做0-1分布，它的分布律为
-$P(X=0)=p, P(X=1)=q, (q=1-p)$</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/disc_01.png" alt="image" /></p>
-
-<p>(2)二项分布</p>
-
-<p>二项分布的分布律为 $P(X=k)= {n \choose k} p^{k}q^{1-k}$，因为 $P(X=k)$ 刚好是 $(p+q)^{n}$ 的二项式系数，所以这个分布就叫二项分布。二项分布是从n重伯努利试验中得到的分布，伯努利试验是指相互独立的试验，每次试验的结果要么成功要么失败(或者说某个事件要么发生要么不发生)。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/disc_binomial.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/disc_binomial2.png" alt="image" /></p>
-
-<p>(3)泊松分布</p>
-
-<p>泊松分布是一类很常用的分布，它的分布律有一个参数$\lambda$，参数$\lambda$的含义既是泊松分布的期望，又是它的方差，所以，只要参数$\lambda$或者期望或者方差确定了，泊松分布就确定了。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/disc_pos.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/disc_pos2.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/disc_pos3.png" alt="image" /></p>
-
-<p><strong>泊松定理说明当n很大，p很小的时候，以n，p为参数的二项分布可以用参数$\lambda = np $的泊松分布进行近似！</strong>记住这个定理其实也可以方便我们记住泊松分布的分布律。</p>
-
-<p>应用举例，记住后面的结论：</p>
-
-<p><strong>当$n \ge 20,p \le 0.05$时用泊松分布近似二项分布的概率值近似效果颇佳。</strong></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/disc_pos4.png" alt="image" /></p>
-
-<p>4.连续性随机变量及其概念密度</p>
+<p>1.连续性随机变量及其概念密度</p>
 
 <p>连续型随机变量，概率密度及它的性质</p>
 
@@ -281,6 +231,73 @@ CDF_{lognormal}(x) = CDF_{normal}(log x)
 </script>
 
 <p>对数正态分布的均值与标准差不再是是$\mu$和$\sigma$了。可以证明，成人体重的分布是近似对数正态的。</p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-1/">http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SS 3-Distribution]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/"/>
+    <updated>2014-05-19T20:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2</id>
+    <content type="html"><![CDATA[<p><strong><center>统计学那些事 Things of Statistics</center></strong>
+<strong><center>逸夫图书馆, 2014/5/19</center></strong></p>
+
+<hr />
+
+<h4 id="center-center"><center>第三部分 分布之离散型随机变量分布</center></h4>
+
+<p>1.概率质量函数PMF(Probability Mass Function)</p>
+
+<p>数据集的数据值到它的概率的映射函数。直方图是各个值出现的频数，如果将频数除以样本总数，得到概率，归一化之后的直方图就是PMF。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/pmf.png" alt="image" /></p>
+
+<p>2.累积分布函数CDF(Cumulative Distribution Function)</p>
+
+<p>数据集的数据值到它在分布中概率的累积值的映射函数。PMF和CDF在国内的教材中并没有这样提过，但是在国外的很多统计书中都有，所以还是比较重要的，拿出来介绍下。</p>
+
+<p>例如，CDF(0) = 0; CDF(1) = 0.2; CDF(2) = 0.6; CDF(3) = 0.8; CDF(4) = 0.8; CDF(5) = 1，它的CDF图为一个阶跃函数：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/cdf.png" alt="image" /></p>
+
+<p>3.离散型随机变量及其分布律</p>
+
+<p>分布律：离散型随机变量以概率1和一定的规律分布在一些离散值上</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/disc0.png" alt="image" /></p>
+
+<p>(1)0-1分布</p>
+
+<p>随机变量X只有两个取值0和1样本空间只有两个取值也行)，所以叫做0-1分布，它的分布律为
+$P(X=0)=p, P(X=1)=q, (q=1-p)$</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/disc_01.png" alt="image" /></p>
+
+<p>(2)二项分布</p>
+
+<p>二项分布的分布律为 $P(X=k)= {n \choose k} p^{k}q^{1-k}$，因为 $P(X=k)$ 刚好是 $(p+q)^{n}$ 的二项式系数，所以这个分布就叫二项分布。二项分布是从n重伯努利试验中得到的分布，伯努利试验是指相互独立的试验，每次试验的结果要么成功要么失败(或者说某个事件要么发生要么不发生)。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/disc_binomial.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/disc_binomial2.png" alt="image" /></p>
+
+<p>(3)泊松分布</p>
+
+<p>泊松分布是一类很常用的分布，它的分布律有一个参数$\lambda$，参数$\lambda$的含义既是泊松分布的期望，又是它的方差，所以，只要参数$\lambda$或者期望或者方差确定了，泊松分布就确定了。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/disc_pos.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/disc_pos2.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/disc_pos3.png" alt="image" /></p>
+
+<p><strong>泊松定理说明当n很大，p很小的时候，以n，p为参数的二项分布可以用参数$\lambda = np $的泊松分布进行近似！</strong>记住这个定理其实也可以方便我们记住泊松分布的分布律。</p>
+
+<p>应用举例，记住后面的结论：</p>
+
+<p><strong>当$n \ge 20,p \le 0.05$时用泊松分布近似二项分布的概率值近似效果颇佳。</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/disc_pos4.png" alt="image" /></p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/">http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
@@ -393,7 +410,11 @@ $E(X-Y)=E(X)-E(Y) \quad Var(X-Y)=Var(X)+Var(Y)$</p>
 
 <p>2.<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/">描述性统计量</a></p>
 
-<p>3.<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/">分布</a></p>
+<p>3.随机变量的分布</p>
+
+<p>(1)<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/">分布之离散型随机变量分布</a></p>
+
+<p>(2)<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-1/">分布之连续型随机变量分布</a></p>
 
 <p>4.<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-4/">假设检验</a></p>
 
@@ -5478,309 +5499,6 @@ Chapter 6 Trees and Tree Algorithms   </p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/">http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Python Algorithms - Search]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/"/>
-    <updated>2014-05-07T16:00:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search</id>
-    <content type="html"><![CDATA[<p><strong><center>Python Algorithms Python算法系列</center></strong>
-<strong><center>逸夫图书馆, 2014/5/7</center></strong></p>
-
-<h3 id="centercenter"><center>搜索</center></h3>
-
-<p>参考内容：</p>
-
-<p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a>
-Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/searching.html#searching">online_link</a></p>
-
-<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
-
-<h4 id="section">搜索总结</h4>
-
-<p>(1)顺序查找：O(n)</p>
-
-<p>(2)二分查找：O(lgn)</p>
-
-<p>(3)Hash查找：O(1)</p>
-
-<p>概念：hash，hash table，hash function <a href="http://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8#.E5.A4.84.E7.90.86.E7.A2.B0.E6.92.9E">哈希表_on_wiki</a></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/hashbasics.png" alt="image" />  </p>
-
-<p>常用的哈希函数：</p>
-
-<p>1.reminder method：取余数（size=11）</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/reminder.png" alt="image" /></p>
-
-<p>2.folding method</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/folding.png" alt="image" /></p>
-
-<p>3.mid-square method</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/mid-square.png" alt="image" /></p>
-
-<p>4.对于由字符的元素可以尝试使用<code>ord</code>函数来将字符串转换成一个有序的数值序列。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/stringord1.png" alt="image" /></p>
-
-<p>但是，对于通过回文构词法构成的字符串它们得到的值总是一样，为了解决这个问题，可以根据字符的位置添加一个权重。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/stringord2.png" alt="image" /></p>
-
-<p>From wiki</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/hashfun.png" alt="image" />   </p>
-
-<p>使用哈希查找，难免遇到冲突，该如何解决冲突(Collision Resolution)呢？</p>
-
-<p>常用的解决冲突的办法：</p>
-
-<p>1.open address(开放寻址)：线性探测(linear probing)下一个位置，缺点是容易造成聚集现象(cluster)，解决聚集现象的办法是跳跃式地查找下一个空槽。数值的顺序：(54, 26, 93, 17, 77, 31, 44, 55, 20).</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/linearprob.png" alt="image" /></p>
-
-<p>2.quadratic probing(平方探测)：一开始的hash值为h，如果不是空槽，那就尝试h+1，还不是空槽就尝试h+4，依次继续尝试h+9，h+16等等。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/quadraticprob.png" alt="image" /></p>
-
-<p>3.chain：利用链表链接起来</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/chain.png" alt="image" /></p>
-
-<p>From wiki</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/hashcollision.png" alt="image" />   </p>
-
-<p>分析hash查找的性能：一般使用平均查找长度来衡量，和装载因子有关</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/hashanalysis.png" alt="image" /></p>
-
-<p>From wiki</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/hashefficiency.png" alt="image" />   </p>
-
-<p>下面的代码包含了顺序查找，二分查找，哈希查找(size=11, plus 1, reminder method)</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-<span class="line-number">46</span>
-<span class="line-number">47</span>
-<span class="line-number">48</span>
-<span class="line-number">49</span>
-<span class="line-number">50</span>
-<span class="line-number">51</span>
-<span class="line-number">52</span>
-<span class="line-number">53</span>
-<span class="line-number">54</span>
-<span class="line-number">55</span>
-<span class="line-number">56</span>
-<span class="line-number">57</span>
-<span class="line-number">58</span>
-<span class="line-number">59</span>
-<span class="line-number">60</span>
-<span class="line-number">61</span>
-<span class="line-number">62</span>
-<span class="line-number">63</span>
-<span class="line-number">64</span>
-<span class="line-number">65</span>
-<span class="line-number">66</span>
-<span class="line-number">67</span>
-<span class="line-number">68</span>
-<span class="line-number">69</span>
-<span class="line-number">70</span>
-<span class="line-number">71</span>
-<span class="line-number">72</span>
-<span class="line-number">73</span>
-<span class="line-number">74</span>
-<span class="line-number">75</span>
-<span class="line-number">76</span>
-<span class="line-number">77</span>
-<span class="line-number">78</span>
-<span class="line-number">79</span>
-<span class="line-number">80</span>
-<span class="line-number">81</span>
-<span class="line-number">82</span>
-<span class="line-number">83</span>
-<span class="line-number">84</span>
-<span class="line-number">85</span>
-<span class="line-number">86</span>
-<span class="line-number">87</span>
-<span class="line-number">88</span>
-<span class="line-number">89</span>
-<span class="line-number">90</span>
-<span class="line-number">91</span>
-<span class="line-number">92</span>
-<span class="line-number">93</span>
-<span class="line-number">94</span>
-<span class="line-number">95</span>
-<span class="line-number">96</span>
-<span class="line-number">97</span>
-<span class="line-number">98</span>
-<span class="line-number">99</span>
-<span class="line-number">100</span>
-<span class="line-number">101</span>
-<span class="line-number">102</span>
-<span class="line-number">103</span>
-<span class="line-number">104</span>
-<span class="line-number">105</span>
-<span class="line-number">106</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">sequential_search</span><span class="p">(</span><span class="n">a_list</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-</span><span class="line">    <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span class="line">    <span class="n">found</span> <span class="o">=</span> <span class="bp">False</span>
-</span><span class="line">    <span class="k">while</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
-</span><span class="line">        <span class="k">if</span> <span class="n">a_list</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">==</span> <span class="n">item</span><span class="p">:</span>
-</span><span class="line">            <span class="n">found</span> <span class="o">=</span> <span class="bp">True</span>
-</span><span class="line">        <span class="k">else</span><span class="p">:</span>
-</span><span class="line">            <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span><span class="o">+</span><span class="mi">1</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">found</span>
-</span><span class="line">
-</span><span class="line"><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">sequential_search</span><span class="p">(</span><span class="n">test_list</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">sequential_search</span><span class="p">(</span><span class="n">test_list</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>
-</span><span class="line">
-</span><span class="line">
-</span><span class="line"><span class="k">def</span> <span class="nf">binary_search</span><span class="p">(</span><span class="n">a_list</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-</span><span class="line">    <span class="n">first</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span class="line">    <span class="n">last</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-</span><span class="line">    <span class="n">found</span> <span class="o">=</span> <span class="bp">False</span>
-</span><span class="line">    <span class="k">while</span> <span class="n">first</span> <span class="o">&lt;=</span> <span class="n">last</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
-</span><span class="line">        <span class="n">midpoint</span> <span class="o">=</span> <span class="p">(</span><span class="n">first</span> <span class="o">+</span> <span class="n">last</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-</span><span class="line">        <span class="k">if</span> <span class="n">a_list</span><span class="p">[</span><span class="n">midpoint</span><span class="p">]</span> <span class="o">==</span> <span class="n">item</span><span class="p">:</span>
-</span><span class="line">            <span class="n">found</span> <span class="o">=</span> <span class="bp">True</span>
-</span><span class="line">        <span class="k">else</span><span class="p">:</span>
-</span><span class="line">            <span class="k">if</span> <span class="n">item</span> <span class="o">&lt;</span> <span class="n">a_list</span><span class="p">[</span><span class="n">midpoint</span><span class="p">]:</span>
-</span><span class="line">                <span class="n">last</span> <span class="o">=</span> <span class="n">midpoint</span> <span class="o">-</span> <span class="mi">1</span>
-</span><span class="line">            <span class="k">else</span><span class="p">:</span>
-</span><span class="line">                <span class="n">first</span> <span class="o">=</span> <span class="n">midpoint</span> <span class="o">+</span> <span class="mi">1</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">found</span>
-</span><span class="line">
-</span><span class="line"><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">42</span><span class="p">,]</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">binary_search</span><span class="p">(</span><span class="n">test_list</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">binary_search</span><span class="p">(</span><span class="n">test_list</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>
-</span><span class="line">
-</span><span class="line"><span class="k">class</span> <span class="nc">HashTable</span><span class="p">:</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">11</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">slots</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
-</span><span class="line">
-</span><span class="line">    <span class="c">#put data in slot</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">put_data_in_slot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">slot</span><span class="p">):</span>
-</span><span class="line">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span> <span class="c"># &#39;==None&#39; ? or  &#39;is None&#39; ?</span>
-</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
-</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
-</span><span class="line">            <span class="k">return</span> <span class="bp">True</span>
-</span><span class="line">        <span class="k">else</span><span class="p">:</span>
-</span><span class="line">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span> <span class="c"># not None</span>
-</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span> <span class="c">#replace</span>
-</span><span class="line">                <span class="k">return</span> <span class="bp">True</span>
-</span><span class="line">            <span class="k">else</span><span class="p">:</span>
-</span><span class="line">                <span class="k">return</span> <span class="bp">False</span>
-</span><span class="line">
-</span><span class="line">    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-</span><span class="line">        <span class="n">slot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_function</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">);</span>
-</span><span class="line">        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">put_data_in_slot</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">slot</span><span class="p">);</span>
-</span><span class="line">        <span class="k">while</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
-</span><span class="line">            <span class="n">slot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rehash</span><span class="p">(</span><span class="n">slot</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">);</span>
-</span><span class="line">            <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">put_data_in_slot</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">slot</span><span class="p">);</span>
-</span><span class="line">
-</span><span class="line">    <span class="c">#reminder method</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">hash_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
-</span><span class="line">        <span class="k">return</span> <span class="n">key</span> <span class="o">%</span> <span class="n">size</span>
-</span><span class="line">
-</span><span class="line">    <span class="c">#plus 1</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">rehash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old_hash</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
-</span><span class="line">        <span class="k">return</span> <span class="p">(</span><span class="n">old_hash</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">size</span>
-</span><span class="line">
-</span><span class="line">    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-</span><span class="line">        <span class="n">start_slot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_function</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">))</span>
-</span><span class="line">        <span class="n">data</span> <span class="o">=</span> <span class="bp">None</span>
-</span><span class="line">        <span class="n">stop</span> <span class="o">=</span> <span class="bp">False</span>
-</span><span class="line">        <span class="n">found</span> <span class="o">=</span> <span class="bp">False</span>
-</span><span class="line">        <span class="n">position</span> <span class="o">=</span> <span class="n">start_slot</span>
-</span><span class="line">        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">found</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">stop</span><span class="p">:</span>
-</span><span class="line">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
-</span><span class="line">                <span class="n">found</span> <span class="o">=</span> <span class="bp">True</span>
-</span><span class="line">                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
-</span><span class="line">            <span class="k">else</span><span class="p">:</span>
-</span><span class="line">                <span class="n">position</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rehash</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">))</span>
-</span><span class="line">                <span class="k">if</span> <span class="n">position</span> <span class="o">==</span> <span class="n">start_slot</span><span class="p">:</span>
-</span><span class="line">                    <span class="n">stop</span> <span class="o">=</span> <span class="bp">True</span>
-</span><span class="line">        <span class="k">return</span> <span class="n">data</span>
-</span><span class="line">
-</span><span class="line">    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line">    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line">
-</span><span class="line"><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
-</span><span class="line">    <span class="n">table</span><span class="o">=</span><span class="n">HashTable</span><span class="p">();</span>
-</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">54</span><span class="p">]</span><span class="o">=</span><span class="s">&#39;cat&#39;</span><span class="p">;</span>
-</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">26</span><span class="p">]</span><span class="o">=</span><span class="s">&#39;dog&#39;</span><span class="p">;</span>
-</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">93</span><span class="p">]</span><span class="o">=</span><span class="s">&#39;lion&#39;</span><span class="p">;</span>
-</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;tiger&quot;</span><span class="p">;</span>
-</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">77</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;bird&quot;</span><span class="p">;</span>
-</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">44</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;goat&quot;</span><span class="p">;</span>
-</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">55</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;pig&quot;</span><span class="p">;</span>
-</span><span class="line">    <span class="n">table</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;chicken&quot;</span><span class="p">;</span>
-</span><span class="line">    <span class="k">print</span> <span class="n">table</span><span class="o">.</span><span class="n">slots</span><span class="p">;</span>
-</span><span class="line">    <span class="k">print</span> <span class="n">table</span><span class="o">.</span><span class="n">data</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># [77, 44, 55, None, 26, 93, 17, None, None, 20, 54]</span>
-</span><span class="line"><span class="c"># [&#39;bird&#39;, &#39;goat&#39;, &#39;pig&#39;, None, &#39;dog&#39;, &#39;lion&#39;, &#39;tiger&#39;, None, None, &#39;chicken&#39;, &#39;cat&#39;]</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/">http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   

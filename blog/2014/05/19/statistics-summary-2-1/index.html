@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>CS 3-Differential Mean Value Theorems - Hujiawei Bujidao</title>
+  <title>SS 3-Distribution - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="微积分总结 Summary of Calculus
-逸夫图书馆, 2014/4/26 第三部分 微分中值定理与导数的应用 第一节 微分中值定理
-罗尔中值定理，拉格朗日中值定理，泰勒中值定理，柯西中值定理 罗尔中值定理就是说对于在区间上的连续可导函数f(x)，若左右端点的函数值相等， &hellip;">
+  <meta name="description" content="统计学那些事 Things of Statistics
+逸夫图书馆, 2014/5/19 第三部分 分布之连续型随机变量分布 1.连续性随机变量及其概念密度 连续型随机变量，概率密度及它的性质 函数f(x)是概率密度函数，函数F(x)是分布函数，两者都是连续函数。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-3">
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-1">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
@@ -93,7 +92,7 @@
 		
   <header>
     
-      <h1 class="entry-title">CS 3-Differential Mean Value Theorems</h1>
+      <h1 class="entry-title">SS 3-Distribution</h1>
     
     
       <p class="meta">
@@ -109,58 +108,116 @@
   
 
 
-<time datetime="2014-04-27T14:29:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+<time datetime="2014-05-19T20:30:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><strong><center>微积分总结 Summary of Calculus</center></strong>
-<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
+<div class="entry-content"><p><strong><center>统计学那些事 Things of Statistics</center></strong>
+<strong><center>逸夫图书馆, 2014/5/19</center></strong></p>
 
-<h3 id="center--center"><center>第三部分 微分中值定理与导数的应用 </center></h3>
+<hr />
 
-<h4 id="section">第一节 微分中值定理</h4>
-<p>罗尔中值定理，拉格朗日中值定理，泰勒中值定理，柯西中值定理</p>
+<h4 id="center-center"><center>第三部分 分布之连续型随机变量分布</center></h4>
 
-<p>罗尔中值定理就是说对于在区间<script type="math/tex">(a,b)</script>上的连续可导函数f(x)，若左右端点的函数值相等，那么区间内至少有一个点满足它的导数为0，即<script type="math/tex">f'(\varepsilon)=0, \varepsilon \in (a,b)</script>；</p>
+<p>1.连续性随机变量及其概念密度</p>
 
-<p>拉格朗日中值定理就是说对于在区间<script type="math/tex">(a,b)</script>上的连续可导函数f(x)，区间内至少有一个点满足<script type="math/tex">f'(\varepsilon)=\frac{f(a)-f(b)}{a-b}, \varepsilon \in (a,b)</script>，该定理就没有罗尔中值定理的条件那么严格了，所以后者是前者的一个特殊情况。拉格朗日中值定理的几何意义如下，曲线在C点处的切线平行于弦AB；</p>
+<p>连续型随机变量，概率密度及它的性质</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/langrant.png" alt="image" /></p>
+<p>函数f(x)是概率密度函数，函数F(x)是分布函数，两者都是连续函数。</p>
 
-<p>柯西中值定理就扩展到区间<script type="math/tex">(a,b)</script>上的两个连续可导函数f(x)和F(x)，区间内至少有一个点满足<script type="math/tex">\frac{f'(\varepsilon)}{F'(\varepsilon)}=\frac{f(a)-f(b)}{F(a)-F(b)}, \varepsilon \in (a,b)</script>。</p>
+<p><img src="http://hujiaweibujidao.github.io/images/math/cont0.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/cont1.png" alt="image" /></p>
 
-<p>当<script type="math/tex">F(x)=x</script>时，<script type="math/tex">F(a)=a,F(b)=b</script>，即有<script type="math/tex">f(a)-f(b)=f'(\varepsilon)(a-b), \varepsilon \in (a,b)</script>，这个式子是不是就是拉格朗日中值定理的内容？</p>
+<p>关于连续型随机变量X对于任意一个指定实数值k的概率都是0，即$p(X=k)=0$的解释</p>
 
-<p>泰勒中值定理略过，和后面泰勒展开式差不多。</p>
+<p><img src="http://hujiaweibujidao.github.io/images/math/cont2.png" alt="image" /></p>
 
-<h4 id="section-1">第二节 洛必达法则</h4>
-<p>0/0型未定式，∞/∞型未定式，其他类型未定式</p>
+<p>(1)均匀分布(uniform distribution)</p>
 
-<p>洛必达法则很重要，因为很多时候我们总是会遇到各种不同特殊形式的未定式，它们的极限可以试试使用洛必达法则来求。</p>
+<p>连续型随机变量X在区间(a,b)均匀分布</p>
 
-<p>条件略过，简言之就是<script type="math/tex">\lim_{x \to x_{0}} \frac{f(x)}{g(x)}=\lim_{x \to x_{0}} \frac{f'(x)}{g'(x)}</script>，也就是说我们可以先对分子分母求导然后求极限。</p>
+<p><img src="http://hujiaweibujidao.github.io/images/math/cont_uniform.png" alt="image" /></p>
 
-<h4 id="section-2">第三节 函数单调增减性及曲线的凸凹性</h4>
-<p>函数的单调性，曲线的凹凸性及拐点</p>
+<p>(2)指数分布(exponential distribution)</p>
 
-<p>驻点：函数f(x)一阶导数为0的点，根据它的正负可以判断函数的单调性，大于0为单调递增；
-拐点：函数f(x)二阶导数为0的点，根据它的正负可以判断函数的凹凸性，大于0为凹的；</p>
+<p>指数分布有一个参数$\theta$，它的期望就是$\theta$，方差是$\theta^{2}$，而且它具有<strong>无记忆性</strong>。</p>
 
-<h4 id="section-3">第四节 函数的极值与最大值、最小值</h4>
-<p>极值的定义，极值存在的条件，最大值、最小值</p>
+<p><img src="http://hujiaweibujidao.github.io/images/math/cont_exp1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/cont_exp2.png" alt="image" /></p>
 
-<p>极值存在的条件就是判断该点和该点两边的一阶导数的正负情况。</p>
+<p>《统计思维》对指数分布的解释：举例来说，<strong>观察一系列事件之间的间隔时间，若事件在每个时间点发生的概率相同，那么间隔时间的分布就近似指数分布</strong>(也就是前面的无记忆性)。</p>
 
-<h4 id="section-4">第五节 函数图形的描绘</h4>
-<p>要根据函数的极值和最值以及渐近线来近似绘图</p>
+<p>指数分布的CDF如下，此时$\lambda=\frac{1}{\theta}$</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/fun_figure.png" alt="image" /></p>
+<script type="math/tex; mode=display">
+CDF(x)=1-e^{-\lambda x}
+</script>
+
+<p>参数$\lambda$决定了指数分布的形状，通常，指数分布的均值是$\frac{1}{\lambda}$，中位数是$\frac{log(2)}{\lambda}$。下图为$\lambda=2$的指数分布图：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/edcdf.png" alt="image" /></p>
+
+<p>如何判断一个分布是否是指数分布呢？一种办法是画出取对数之后的互补累积分布函数(CCDF=Complementary CDF=1-CDF(x))，CCDF是一条斜率为$-\lambda$的直线，原因如下：</p>
+
+<script type="math/tex; mode=display">
+y=CCDF(x)=1-CDF(x)=e^{-\lambda x} \quad => \quad log(y)=-\lambda x
+</script>
+
+<p>(3)正态分布(normal distribution)</p>
+
+<p>正态分布，又叫高斯分布，是最常用的分布。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/cont_normal1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/cont_normal2.png" alt="image" /></p>
+
+<p>关于标准正态分布，即参数为$\mu=0, \sigma=1$的正态分布，它的分布函数值已经制作成表格，可以方便进行查看，其他非标准正态分布可以通过一个线性变换转换成标准正态分布。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/cont_normal4.png" alt="image" /></p>
+
+<p>在证明其概率密度总和为1时利用了一个重要的积分$\int_{-\infty}^{\infty} e^{\frac{t^{2}}{2}} dt = \sqrt{2 \pi}$，它的证明可以转换成二重积分然后通过极坐标计算出来。完整详细的证明可以参考下面：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/inte1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/inte2.png" alt="image" /></p>
+
+<p>《统计思维》对正态分布的解释：对于正态分布的CDF还没有一种准确的表达，最常用的一种形式是以误差函数(error function)来表示，它是一个特殊的函数，表示为erf(x)，在Matlab中内置了函数<code>erf</code>，对它的说明为erf函数是对参数为$\mu=0, \sigma=\frac{1}{2}$的正态分布的二重积分，有兴趣可以去计算一下，得到的结果如下：</p>
+
+<script type="math/tex; mode=display">
+CDF(x)=\frac{1}{2}[1+erf(\frac{x-\mu}{\sigma \sqrt{2}})] \quad erf(x)=\frac{2}{\sqrt{\pi}}\int_{0}^{x}e^{-t^{2}}dt
+</script>
+
+<p>其中，参数$\mu$和$\sigma$分别决定了正态分布的均值和标准差。下图为$\mu=2.0$和$\sigma=0.5$的正态分布的CDF图：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/ndcdf.png" alt="image" /></p>
+
+<p>根据大数定理，当我们处理大样本数据集(超过30个数据)，并且重复地从总体中抽取样本时，得到的数值分布就接近正态分布曲线。正态分布以均值为中心完全对称。</p>
+
+<p>关于正态分布有一个重要的结论，对任何数值分布来说(不论它的均值和标准差)，只要数值是正态分布，那么几乎100%的数值都分布在均值的-3到3个标准差之间。下面是正态曲线下数值的分布情况：</p>
+
+<!--
+![image](http://hujiaweibujidao.github.io/images/math/nd.png)
+-->
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/cont_normal3.png" alt="image" /></p>
+
+<p>从中可以看出，<strong>在距离均值1个标准差之间大概有34%的数值分布，在1个标准差和2个标准差之间大概有13%的数值分布，在2个标准差和3个标准差之间大概有2.1%的数值分布。</strong></p>
+
+<p>通过这个图我么可以得到一个经典的<strong>3$\sigma$法则</strong>，又叫<strong>68-95-99法则</strong></p>
+
+<p><strong>在$(\mu - \sigma, \mu + \sigma)$之间大概有68.26%的数据分布，在$(\mu - 2\sigma, \mu + 2\sigma)$之间大概有95.44%的数据分布，在$(\mu - 3\sigma, \mu + 3\sigma)$之间大概有99.74%的数据分布。</strong></p>
+
+<p><a href="http://wikipedia.org/wiki/Log-normal_distribution">对数正态分布 on wiki</a>：如果一组数据取对数之后服从正态分布，那么我们就称其服从对数正态分布。对数正态分布的 CDF 跟正态分布一样, 只是用 logx 代替原来的 x:</p>
+
+<script type="math/tex; mode=display">
+CDF_{lognormal}(x) = CDF_{normal}(log x)
+</script>
+
+<p>对数正态分布的均值与标准差不再是是$\mu$和$\sigma$了。可以证明，成人体重的分布是近似对数正态的。</p>
 
 <p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-3/">http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-3/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-1/">http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 </div>
 
 
@@ -183,7 +240,7 @@
   
 
 
-<time datetime="2014-04-27T14:29:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+<time datetime="2014-05-19T20:30:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2014</time>
 				
 
 <span class="categories">
@@ -204,10 +261,10 @@
 			
 			<p class="meta">
 				
-				<a class="basic-alignment left" href="/blog/2014/04/27/calculus-summary-chapter-2/" title="Previous Post: CS 2-Derivative and Differential">&laquo; CS 2-Derivative and Differential</a>
+				<a class="basic-alignment left" href="/blog/2014/05/19/statistics-summary-2/" title="Previous Post: SS 3-Distribution">&laquo; SS 3-Distribution</a>
 				
 				
-				<a class="basic-alignment right" href="/blog/2014/04/27/calculus-summary-chapter-4/" title="Next Post: CS 4-Indefinite Integral">CS 4-Indefinite Integral &raquo;</a>
+				<a class="basic-alignment right" href="/blog/2014/05/19/statistics-summary-3/" title="Next Post: SS 2-Descriptive Statistics">SS 2-Descriptive Statistics &raquo;</a>
 				
 			</p>
 		</footer>
