@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-19T23:43:33+08:00</updated>
+  <updated>2014-05-19T23:45:10+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -317,9 +317,9 @@ CDF_{lognormal}(x) = CDF_{normal}(log x)
 <table>
   <tbody>
     <tr>
-      <td>全概率：$P(B)=P(B</td>
+      <td>全概率：$P(B)={P(B</td>
       <td>A)P(A)+P(B</td>
-      <td>A’)P(A’)$</td>
+      <td>A’)P(A’)}$</td>
     </tr>
   </tbody>
 </table>
