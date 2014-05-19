@@ -57,3 +57,5 @@ r_{XY}=\frac{n\Sigma{XY}-\Sigma{X}\Sigma{Y}}{\sqrt{[n\Sigma{X^2}-(\Sigma{X})^2][
 $$
 
 决定系数：相关系数的平方，它表述一个变量的方差可以被另一个变量的方差来解释的百分比。
+
+
