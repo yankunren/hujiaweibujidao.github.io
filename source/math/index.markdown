@@ -19,7 +19,7 @@ footer: true
 
 第二篇 [线性代数总结](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary/)  [New!]
 
-第三篇 [概率与数理统计总结]() [暂未写完]
+第三篇 [概率与数理统计总结](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary/) [New!]
 
 
 ### 第二部分 数值算法与应用
