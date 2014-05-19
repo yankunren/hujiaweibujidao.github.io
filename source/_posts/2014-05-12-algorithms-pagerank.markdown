@@ -235,7 +235,7 @@ This is NO.32 iteration
 
 也就是将矩阵$A$进行分解，并不需要显示求出矩阵$A$，然后便是求解一个线性方程组即可。
 
-```
+```matlab
 function x = pagerank1(G)
 % PAGERANK1  Google's PageRank modified version 1 - hujiawei
 
