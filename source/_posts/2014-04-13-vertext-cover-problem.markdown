@@ -6,6 +6,8 @@ comments: true
 categories: algorithm
 ---
 
+#### <center>Algorithms: Vertext Cover Problem</center>
+
 #### 1.问题描述
 
 给定一个N个点M条边的无向图G（点的编号从1至N），问是否存在一个不超过K个点的集合S，使得G中的每条边都至少有一个点在集合S中。
