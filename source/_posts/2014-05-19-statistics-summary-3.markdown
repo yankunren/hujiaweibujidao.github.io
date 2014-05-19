@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "SS 2-Descriptive Statistics"
-date: 2014-05-19 21:00
+date: 2014-05-19 19:30
 comments: true
 categories: math
 published: true
