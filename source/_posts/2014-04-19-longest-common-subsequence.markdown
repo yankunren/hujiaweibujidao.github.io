@@ -45,7 +45,7 @@ $$
 
 LCS的五种实现：分别为0：直接递归；1：带备忘录的递归；2：使用二维数组保存结果的迭代；3：使用2个一维数组保存结果的迭代；4：使用1个一维数组和额外的O(1)空间保存结果的迭代。
 
-```
+```python
 def lcs0(i,j):
     #string starts at index 0, not 1
     if i<0 or j<0: return 0 #attention to this!!!
