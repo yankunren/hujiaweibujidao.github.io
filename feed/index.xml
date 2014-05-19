@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-19T17:09:54+08:00</updated>
+  <updated>2014-05-19T17:16:20+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,229 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Algorithms: Longest Common Subsequence]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/"/>
+    <updated>2014-05-19T16:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence</id>
+    <content type="html"><![CDATA[<h4 id="centeralgorithms-longest-common-subsequencecenter"><center>Algorithms: Longest Common Subsequence</center></h4>
+
+<p>最长公共子序列是典型的动态规划问题，如果不理解动态规划请移步先看<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/">这篇动态规划的总结</a>，否则本篇文章中的代码实现会不理解的哟！</p>
+
+<p>参考内容：</p>
+
+<p>1.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
+
+<p>2.<a href="http://book.douban.com/subject/4875278/">算法设计、分析与实现从入门到精通</a></p>
+
+<hr />
+
+<p>1.问题描述</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/lcs1.png" alt="image" /></p>
+
+<p>2.最优子结构和子问题重叠</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/lcs1.png" alt="image" /></p>
+
+<p>3.5种实现方式</p>
+
+<p>根据LCS的递推公式</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+c[i][j]=  \left\{ 
+  \begin{array}{l l}
+    0 & \quad \text{i=0 或者 j=0}\\
+    c[i-1][j-1]+1 & \quad \text{i,j>0,且$x_{i}=y_{j}$}\\
+    max({c[i][j-1],c[i-1][j]}) & \quad \text{i,j>0,且$x_{i} \ne y_{j}$}
+  \end{array} \right.
+ %]]&gt;</script>
+
+<p>(1)从中可以看出计算c[i][j]时只需要2行即可，前一行(i-1)和当前行(i)，每行的长度是min{m,n}，首先初始化前一行都为0，然后计算当前行的值，当要计算下一行之前将当前行的值复制到前一行中即可。</p>
+
+<p>(2)从递推公式中还可以看出计算当前行i的话，其实只需要一行再加上O(1)的额外空间就行了。因为计算c[i][j]只需要前一行中c[i-1]<a href="k&gt;=j-1">k</a>的数据，对于k&lt;j-1的数据都是没有用的，而当前行c[i]<a href="l&lt;=j-1">l</a>的数据都是有用的，要用来计算下一行的值，所以，可以在计算当前行的时候，将当前行的前面计算好的部分复制到前一行中对应位置上，但是c[i][j-1]除外，因为c[i-1][j-1]也是需要的，所以需要额外的O(1)的空间保存c[i][j-1]。</p>
+
+<p>LCS的五种实现：分别为0：直接递归；1：带备忘录的递归；2：使用二维数组保存结果的迭代；3：使用2个一维数组保存结果的迭代；4：使用1个一维数组和额外的O(1)空间保存结果的迭代。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span>
+<span class="line-number">81</span>
+<span class="line-number">82</span>
+<span class="line-number">83</span>
+<span class="line-number">84</span>
+<span class="line-number">85</span>
+<span class="line-number">86</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">def lcs0(i,j):
+</span><span class="line">    #string starts at index 0, not 1
+</span><span class="line">    if i&lt;0 or j&lt;0: return 0 #attention to this!!!
+</span><span class="line">    if x[i]==y[j]:  return lcs0(i-1,j-1)+1
+</span><span class="line">    return max(lcs0(i-1,j),lcs0(i,j-1))
+</span><span class="line">
+</span><span class="line">x,y='abcde','oaob'
+</span><span class="line">lenx,leny=len(x),len(y)
+</span><span class="line">print(lcs0(lenx-1,leny-1)) #2
+</span><span class="line">
+</span><span class="line">from functools import wraps
+</span><span class="line">
+</span><span class="line">def memo(func):
+</span><span class="line">    cache={}
+</span><span class="line">    @wraps(func)
+</span><span class="line">    def wrap(*args):
+</span><span class="line">        if args not in cache:
+</span><span class="line">            cache[args]=func(*args)
+</span><span class="line">        return cache[args]
+</span><span class="line">    return wrap
+</span><span class="line">
+</span><span class="line">@memo
+</span><span class="line">def lcs1(i,j):
+</span><span class="line">    #string starts at index 0, not 1
+</span><span class="line">    if i&lt;0 or j&lt;0: return 0 #attention to this!!!
+</span><span class="line">    if x[i]==y[j]:  return lcs1(i-1,j-1)+1
+</span><span class="line">    return max(lcs1(i-1,j),lcs1(i,j-1))
+</span><span class="line">
+</span><span class="line">x,y='abcde','oaob'
+</span><span class="line">lenx,leny=len(x),len(y)
+</span><span class="line">print(lcs1(lenx-1,leny-1)) #2
+</span><span class="line">
+</span><span class="line">def lcs2(x,y):
+</span><span class="line">    lenx,leny=len(x),len(y)
+</span><span class="line">    minlen,maxlen=0,0
+</span><span class="line">    if lenx&lt;leny: minlen,maxlen=lenx,leny; x,y=y,x
+</span><span class="line">    else: minlen,maxlen=leny,lenx;
+</span><span class="line">    #s is maxlen * minlen
+</span><span class="line">    s=[[0 for j in range(minlen)] for i in range(maxlen)]
+</span><span class="line">    for i in range(maxlen): #so, let x be the longer string!!!
+</span><span class="line">        for j in range(minlen):
+</span><span class="line">            if x[i]==y[j]: s[i][j]=s[i-1][j-1]+1
+</span><span class="line">            else: s[i][j]=max(s[i-1][j],s[i][j-1])
+</span><span class="line">    return s
+</span><span class="line">
+</span><span class="line">x,y='abcde','oaob'
+</span><span class="line">s=lcs2(x,y)
+</span><span class="line">print(s) #[[0, 1, 1, 1], [0, 1, 1, 2], [0, 1, 1, 2], [0, 1, 1, 2], [0, 1, 1, 2]]
+</span><span class="line">
+</span><span class="line">def lcs3(x,y):
+</span><span class="line">    lenx,leny=len(x),len(y)
+</span><span class="line">    minlen,maxlen=0,0
+</span><span class="line">    if lenx&lt;leny: minlen,maxlen=lenx,leny; x,y=y,x
+</span><span class="line">    else: minlen,maxlen=leny,lenx;
+</span><span class="line">    #s is maxlen * minlen
+</span><span class="line">    pre=[0 for j in range(minlen)]
+</span><span class="line">    cur=[0 for j in range(minlen)]
+</span><span class="line">    for i in range(maxlen): #so, let x be the longer string!!!
+</span><span class="line">        for j in range(minlen):
+</span><span class="line">            if x[i]==y[j]: cur[j]=pre[j-1]+1
+</span><span class="line">            else: cur[j]=max(pre[j],cur[j-1])
+</span><span class="line">        pre[:]=cur[:]
+</span><span class="line">    return cur
+</span><span class="line">
+</span><span class="line">x,y='abcde','oaob'
+</span><span class="line">s=lcs3(x,y)
+</span><span class="line">print(s) #[2, 2, 2, 2]
+</span><span class="line">
+</span><span class="line">def lcs4(x,y):
+</span><span class="line">    lenx,leny=len(x),len(y)
+</span><span class="line">    minlen,maxlen=0,0
+</span><span class="line">    if lenx&lt;leny: minlen,maxlen=lenx,leny; x,y=y,x
+</span><span class="line">    else: minlen,maxlen=leny,lenx;
+</span><span class="line">    #s is maxlen * minlen
+</span><span class="line">    s=[0 for j in range(minlen)]
+</span><span class="line">    t=0
+</span><span class="line">    for i in range(maxlen): #so, let x be the longer string!!!
+</span><span class="line">        for j in range(minlen):
+</span><span class="line">            if x[i]==y[j]: s[j]=t+1
+</span><span class="line">            else: s[j]=max(s[j],s[j-1])
+</span><span class="line">            t=s[j]
+</span><span class="line">    return s
+</span><span class="line">
+</span><span class="line">x,y='abcde','oaobce'
+</span><span class="line">s=lcs4(x,y)
+</span><span class="line">print(s) #[3, 3, 3, 3, 4]</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/">http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Love you]]></title>
@@ -5509,45 +5732,6 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Linear Algebra Summary]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary/"/>
-    <updated>2014-04-29T14:03:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary</id>
-    <content type="html"><![CDATA[<p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
-<strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
-
-<h4 id="center0center"><center>0.碎碎念</center></h4>
-
-<p>到了研究阶段才意识到本科的数学原来作用这么大，不论是在数据挖掘，还是机器学习，亦或是模式识别，数学都是基础中的基础。于是乎，我在逸夫图书馆泡了几天看了些微积分、线代和数理统计的书籍，写下三份总结，记录下重要的知识，以备后忘。本人才疏学浅，若有错误之处还请指出，让我“增长”，若有不足也请指出，使我“完备”，谢谢！:-)</p>
-
-<p><strong>[注：这些总结不会详细地讲解所有概念，只是挑选一些我个人感觉比较有用的知识点进行总结，很多时候可能只是列举知识点，并无解释，忘记了的可以自行Wiki或者翻书，另外，为了节省写作时间，对于一些定理我并没有给出详细的表达，忽略了些前提条件，请不要较真，我希望的是给自己一个感性的理解就行，具体理性的分析需要的时候再查，还有就是我还剪切粘贴了很多图片，再有就是，本文采用的是’非线性方式’进行总结的…首篇意识流作品…嗯，就是这样…强迫症者慎入…]</strong></p>
-
-<p>PS：本总结根据下面提到的武汉大学黄正华老师写的线性代数复习总结的顺序来的，因为黄老师的总结已经写得很好了，我只会提到一些我在其他地方看到或者听到的比较有用的心得分享。</p>
-
-<p>参考书籍：</p>
-
-<p>1.[线性代数 Using Matlab]</p>
-
-<p>它山之石：</p>
-
-<p>1.<a href="http://aff.whu.edu.cn/huangzh/">武汉大学 黄正华老师</a>写的线性代数复习总结<a href="http://hujiaweibujidao.github.io/files/linear_algebra_huangzhenghua.pdf">book</a></p>
-
-<p>全部内容：</p>
-
-<p>1.<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1/">行列式！</a></p>
-
-<p>2.<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/">矩阵！</a></p>
-
-<p>3.<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-3/">特征值和特征向量！</a></p>
-
-<p>4.<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-4/">相似矩阵！</a></p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   

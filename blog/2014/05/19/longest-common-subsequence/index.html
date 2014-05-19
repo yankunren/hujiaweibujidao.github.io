@@ -5,29 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>aboutme - Hujiawei Bujidao</title>
+  <title>Algorithms: Longest Common Subsequence - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="Aboutme Nov 17th, 2013 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-#! /bin/sh
-gender=&#39;male&#39;
-name=&#39;Hujiawei&#39;
-category=&#39;coder&#39; &hellip;">
+  <meta name="description" content="Algorithms: Longest Common Subsequence 最长公共子序列是典型的动态规划问题，如果不理解动态规划请移步先看这篇动态规划的总结，否则本篇文章中的代码实现会不理解的哟！ 参考内容： 1.算法导论 2.算法设计、分析与实现从入门到精通 1.问题描述 2. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -36,7 +18,7 @@ category=&#39;coder&#39; &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hujiaweibujidao.github.io/aboutme">
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
@@ -105,13 +87,15 @@ category=&#39;coder&#39; &hellip;">
 		<div id="content">
 			<div>
 
-	<article role="article">
+<article class="hentry" role="article">
 		
-		<header>
-			<h1 class="entry-title">Aboutme</h1>
-			
-			<p class="meta">
-				
+  <header>
+    
+      <h1 class="entry-title">Algorithms: Longest Common Subsequence</h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -123,12 +107,54 @@ category=&#39;coder&#39; &hellip;">
   
 
 
-<time datetime="2013-11-17T18:24:00+08:00" pubdate data-updated="true">Nov 17<span>th</span>, 2013</time>
-			</p>
-			
-		</header>
-		
-		<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<time datetime="2014-05-19T16:00:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h4 id="centeralgorithms-longest-common-subsequencecenter"><center>Algorithms: Longest Common Subsequence</center></h4>
+
+<p>最长公共子序列是典型的动态规划问题，如果不理解动态规划请移步先看<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/">这篇动态规划的总结</a>，否则本篇文章中的代码实现会不理解的哟！</p>
+
+<p>参考内容：</p>
+
+<p>1.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
+
+<p>2.<a href="http://book.douban.com/subject/4875278/">算法设计、分析与实现从入门到精通</a></p>
+
+<hr />
+
+<p>1.问题描述</p>
+
+<p><img src="/images/algos/lcs1.png" alt="image" /></p>
+
+<p>2.最优子结构和子问题重叠</p>
+
+<p><img src="/images/algos/lcs1.png" alt="image" /></p>
+
+<p>3.5种实现方式</p>
+
+<p>根据LCS的递推公式</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+c[i][j]=  \left\{ 
+  \begin{array}{l l}
+    0 & \quad \text{i=0 或者 j=0}\\
+    c[i-1][j-1]+1 & \quad \text{i,j>0,且$x_{i}=y_{j}$}\\
+    max({c[i][j-1],c[i-1][j]}) & \quad \text{i,j>0,且$x_{i} \ne y_{j}$}
+  \end{array} \right.
+ %]]></script>
+
+<p>(1)从中可以看出计算c[i][j]时只需要2行即可，前一行(i-1)和当前行(i)，每行的长度是min{m,n}，首先初始化前一行都为0，然后计算当前行的值，当要计算下一行之前将当前行的值复制到前一行中即可。</p>
+
+<p>(2)从递推公式中还可以看出计算当前行i的话，其实只需要一行再加上O(1)的额外空间就行了。因为计算c[i][j]只需要前一行中c[i-1]<a href="k&gt;=j-1">k</a>的数据，对于k&lt;j-1的数据都是没有用的，而当前行c[i]<a href="l&lt;=j-1">l</a>的数据都是有用的，要用来计算下一行的值，所以，可以在计算当前行的时候，将当前行的前面计算好的部分复制到前一行中对应位置上，但是c[i][j-1]除外，因为c[i-1][j-1]也是需要的，所以需要额外的O(1)的空间保存c[i][j-1]。</p>
+
+<p>LCS的五种实现：分别为0：直接递归；1：带备忘录的递归；2：使用二维数组保存结果的迭代；3：使用2个一维数组保存结果的迭代；4：使用1个一维数组和额外的O(1)空间保存结果的迭代。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -143,124 +169,176 @@ category=&#39;coder&#39; &hellip;">
 <span class="line-number">13</span>
 <span class="line-number">14</span>
 <span class="line-number">15</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c">#! /bin/sh</span>
-</span><span class="line"><span class="n">gender</span><span class="o">=</span><span class="s">&#39;male&#39;</span>
-</span><span class="line"><span class="n">name</span><span class="o">=</span><span class="s">&#39;Hujiawei&#39;</span>
-</span><span class="line"><span class="n">category</span><span class="o">=</span><span class="s">&#39;coder&#39;</span>
-</span><span class="line"><span class="n">birthday</span><span class="o">=</span><span class="s">&#39;1991/01/12&#39;</span>
-</span><span class="line"><span class="n">location</span><span class="o">=</span><span class="s">&#39;Beijing, P.R.China&#39;</span>
-</span><span class="line"><span class="n">university</span><span class="o">=</span><span class="s">&#39;Tsinghua University&#39;</span>
-</span><span class="line"><span class="n">technologies</span><span class="o">=</span><span class="s">&#39;Java/Shell/Android/iOS&#39;</span>
-</span><span class="line"><span class="n">emailaddress</span><span class="o">=</span><span class="s">&#39;hujiawei090807@gmail.com&#39;</span>
-</span><span class="line"><span class="n">favorites</span><span class="o">=</span><span class="s">&#39;coding, travelling, music and Conan&#39;</span>
-</span><span class="line"><span class="n">echo</span> <span class="s">&quot;Hello,all. My name is $name, a $gender $category.&quot;</span>
-</span><span class="line"><span class="n">echo</span> <span class="s">&quot;I was born in $birthday, and now studys in $university, $location.&quot;</span>
-</span><span class="line"><span class="n">echo</span> <span class="s">&quot;My favorites are $favorites, and I am also fond of $technologies.&quot;</span>
-</span><span class="line"><span class="n">echo</span> <span class="s">&quot;My email address is $emailaddress. Email me if you are interested in $name.&quot;</span>
-</span><span class="line"><span class="n">echo</span> <span class="s">&quot;Hope you enjoy my bolg site here! Have fun! :-) &quot;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span>
+<span class="line-number">81</span>
+<span class="line-number">82</span>
+<span class="line-number">83</span>
+<span class="line-number">84</span>
+<span class="line-number">85</span>
+<span class="line-number">86</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">def lcs0(i,j):
+</span><span class="line">    #string starts at index 0, not 1
+</span><span class="line">    if i&lt;0 or j&lt;0: return 0 #attention to this!!!
+</span><span class="line">    if x[i]==y[j]:  return lcs0(i-1,j-1)+1
+</span><span class="line">    return max(lcs0(i-1,j),lcs0(i,j-1))
+</span><span class="line">
+</span><span class="line">x,y='abcde','oaob'
+</span><span class="line">lenx,leny=len(x),len(y)
+</span><span class="line">print(lcs0(lenx-1,leny-1)) #2
+</span><span class="line">
+</span><span class="line">from functools import wraps
+</span><span class="line">
+</span><span class="line">def memo(func):
+</span><span class="line">    cache={}
+</span><span class="line">    @wraps(func)
+</span><span class="line">    def wrap(*args):
+</span><span class="line">        if args not in cache:
+</span><span class="line">            cache[args]=func(*args)
+</span><span class="line">        return cache[args]
+</span><span class="line">    return wrap
+</span><span class="line">
+</span><span class="line">@memo
+</span><span class="line">def lcs1(i,j):
+</span><span class="line">    #string starts at index 0, not 1
+</span><span class="line">    if i&lt;0 or j&lt;0: return 0 #attention to this!!!
+</span><span class="line">    if x[i]==y[j]:  return lcs1(i-1,j-1)+1
+</span><span class="line">    return max(lcs1(i-1,j),lcs1(i,j-1))
+</span><span class="line">
+</span><span class="line">x,y='abcde','oaob'
+</span><span class="line">lenx,leny=len(x),len(y)
+</span><span class="line">print(lcs1(lenx-1,leny-1)) #2
+</span><span class="line">
+</span><span class="line">def lcs2(x,y):
+</span><span class="line">    lenx,leny=len(x),len(y)
+</span><span class="line">    minlen,maxlen=0,0
+</span><span class="line">    if lenx&lt;leny: minlen,maxlen=lenx,leny; x,y=y,x
+</span><span class="line">    else: minlen,maxlen=leny,lenx;
+</span><span class="line">    #s is maxlen * minlen
+</span><span class="line">    s=[[0 for j in range(minlen)] for i in range(maxlen)]
+</span><span class="line">    for i in range(maxlen): #so, let x be the longer string!!!
+</span><span class="line">        for j in range(minlen):
+</span><span class="line">            if x[i]==y[j]: s[i][j]=s[i-1][j-1]+1
+</span><span class="line">            else: s[i][j]=max(s[i-1][j],s[i][j-1])
+</span><span class="line">    return s
+</span><span class="line">
+</span><span class="line">x,y='abcde','oaob'
+</span><span class="line">s=lcs2(x,y)
+</span><span class="line">print(s) #[[0, 1, 1, 1], [0, 1, 1, 2], [0, 1, 1, 2], [0, 1, 1, 2], [0, 1, 1, 2]]
+</span><span class="line">
+</span><span class="line">def lcs3(x,y):
+</span><span class="line">    lenx,leny=len(x),len(y)
+</span><span class="line">    minlen,maxlen=0,0
+</span><span class="line">    if lenx&lt;leny: minlen,maxlen=lenx,leny; x,y=y,x
+</span><span class="line">    else: minlen,maxlen=leny,lenx;
+</span><span class="line">    #s is maxlen * minlen
+</span><span class="line">    pre=[0 for j in range(minlen)]
+</span><span class="line">    cur=[0 for j in range(minlen)]
+</span><span class="line">    for i in range(maxlen): #so, let x be the longer string!!!
+</span><span class="line">        for j in range(minlen):
+</span><span class="line">            if x[i]==y[j]: cur[j]=pre[j-1]+1
+</span><span class="line">            else: cur[j]=max(pre[j],cur[j-1])
+</span><span class="line">        pre[:]=cur[:]
+</span><span class="line">    return cur
+</span><span class="line">
+</span><span class="line">x,y='abcde','oaob'
+</span><span class="line">s=lcs3(x,y)
+</span><span class="line">print(s) #[2, 2, 2, 2]
+</span><span class="line">
+</span><span class="line">def lcs4(x,y):
+</span><span class="line">    lenx,leny=len(x),len(y)
+</span><span class="line">    minlen,maxlen=0,0
+</span><span class="line">    if lenx&lt;leny: minlen,maxlen=lenx,leny; x,y=y,x
+</span><span class="line">    else: minlen,maxlen=leny,lenx;
+</span><span class="line">    #s is maxlen * minlen
+</span><span class="line">    s=[0 for j in range(minlen)]
+</span><span class="line">    t=0
+</span><span class="line">    for i in range(maxlen): #so, let x be the longer string!!!
+</span><span class="line">        for j in range(minlen):
+</span><span class="line">            if x[i]==y[j]: s[j]=t+1
+</span><span class="line">            else: s[j]=max(s[j],s[j-1])
+</span><span class="line">            t=s[j]
+</span><span class="line">    return s
+</span><span class="line">
+</span><span class="line">x,y='abcde','oaobce'
+</span><span class="line">s=lcs4(x,y)
+</span><span class="line">print(s) #[3, 3, 3, 3, 4]</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h4 id="section">请不要因为上面的那段代码就把浏览器关了哈，亲！</h4>
-
-<p>大家好，我叫Hujiawei，<a href="http://www.tsinghua.edu.cn/publish/th/index.html">五道口男子职业技术与艺术学院</a>计算机系2013届研究生，本科就读于伟大的<a href="http://www.csu.edu.cn/">左家垅男子职业技术学院</a>，热爱编程，喜欢Java/C/Linux/Android/iOS/Python/RaspberryPi等等，在湖南永景股份有限公司/三星中国研究院实习过，开发过大型(商业)网站(<a href="http://www.cnblogs.com/yinger/category/305399.html">ASP.NET</a>和J2EE SSH架构)，也开发过(商用)桌面软件（<a href="http://www.cnblogs.com/yinger/category/339483.html">RCP</a>和<a href="http://www.cnblogs.com/yinger/category/372015.html">JavaFx</a>），同样也做过Android应用（<a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/project_weiweibo">微微博TinyWeibo</a>，爱学习iStudy和Gaze移植等）和小游戏（8Puzzle等），iOS无实际开发经验。我对移动互联网和数据挖掘/机器学习比较感兴趣，如果你有相同兴趣欢迎联系我，交个朋友。</p>
-
-<p>我的邮箱地址：<a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#104;&#117;&#106;&#105;&#097;&#119;&#101;&#105;&#048;&#057;&#048;&#056;&#048;&#055;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;">&#104;&#117;&#106;&#105;&#097;&#119;&#101;&#105;&#048;&#057;&#048;&#056;&#048;&#055;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;</a></p>
-
-<p>我的GitHub主页： <a href="https://github.com/hujiaweibujidao">https://github.com/hujiaweibujidao</a></p>
-
-<p>中南大学计科0902班毕业纪念网址：<a href="http://hujiaweibujidao.github.io/csucs0902/">http://hujiaweibujidao.github.io/csucs0902/</a></p>
-
-<p>PS：以后都会呆在北京，如果有不错的实习机会请和我联系，最好是和移动开发或者数据挖掘有关，谢谢！</p>
-
-<h4 id="section-1">原博客地址：</h4>
-
-<p><a href="http://hujiaweiyinger.diandian.com">点点博客</a>  [大四及研究生入学前的技术总结]  <a href="http://www.cnblogs.com/yinger">博客园</a>  [大二大三的技术总结]  <a href="http://hujiawei.tumblr.com">Tumblr</a>  [英文博客]</p>
-
-<h4 id="section-2">推荐系列</h4>
-
-<ol>
-  <li>
-    <p><a href="http://hujiaweiyinger.diandian.com/post/2013-06-04/ios6_list" target="_blank">iOS 6 Programming Cookbook读书笔记</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.cnblogs.com/yinger/category/317241.html" target="_blank">框架学习之Spring</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.cnblogs.com/yinger/category/315885.html" target="_blank">框架学习之Hibernate</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.cnblogs.com/yinger/category/311933.html" target="_blank">框架学习之Struts2</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.cnblogs.com/yinger/category/312985.html" target="_blank">JavaWeb学习</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.cnblogs.com/yinger/category/372015.html" target="_blank">JavaFx系列博文</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.cnblogs.com/yinger/category/339483.html" target="_blank">RCP版本病人信息管理系统开发</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.cnblogs.com/yinger/category/305399.html" target="_blank">ASP.NET版本新闻发布系统开发总结</a></p>
-  </li>
-</ol>
-
-<h4 id="section-3">推荐博文</h4>
-
-<ol>
-  <li><a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/project_weiweibo" target="_blank">微微博项目展示</a></li>
-</ol>
-
-<p>注：该项目不再更新，请不要邮件咨询，谢谢</p>
-
-<ol>
-  <li><a href="http://hujiaweiyinger.diandian.com/post/2013-05-24/project_wechat4j" target="_blank">Wechat4j项目</a></li>
-</ol>
-
-<p>注：该项目不再更新，请不要邮件咨询，谢谢</p>
-
-<ol>
-  <li><a href="http://hujiaweiyinger.diandian.com/post/2013-07-16/edx_build_edx_platform" target="_blank">Edx平台在MacOSX上的搭建</a>    <a href="http://hujiaweiyinger.diandian.com/post/2013-07-27/install_edx-platform_on_ubuntu12.04" target="_blank">在Ubuntu12.04LTS上的搭建</a>    <a href="http://hujiawei.tumblr.com/post/56574509577/the-instructions-to-install-edx-platform-on-ubuntu12-04" target="_blank">Tumblr上的英文版本</a></li>
-</ol>
-
-<p>注：我不再关注Edx平台开发，请不要邮件咨询，谢谢</p>
-
-<ol>
-  <li>
-    <p><a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/project_rcp_mail_client" target="_blank">RCP版本的邮件客户端</a></p>
-  </li>
-  <li>
-    <p><a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/build_ucore_lab_evironment" target="_blank">ucore lab0 开发环境搭建</a></p>
-  </li>
-  <li>
-    <p><a href="http://hujiaweiyinger.diandian.com/post/2013-05-31/axis2_first_try" target="_blank">Axis2初探</a></p>
-  </li>
-  <li>
-    <p><a href="http://hujiaweiyinger.diandian.com/post/2013-05-19/flexpager_search" target="_blank">FlexPager探秘</a></p>
-  </li>
-  <li>
-    <p><a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/mupdf_first_try" target="_blank">MuPDF初探</a></p>
-  </li>
-  <li>
-    <p><a href="http://hujiaweiyinger.diandian.com/post/2013-05-19/apktool_apk" target="_blank">使用apktools反编译apk得到资源文件</a></p>
-  </li>
-  <li>
-    <p><a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/project_rcp_digital_image_process" target="_blank">RCP版本的数字图像处理软件</a></p>
-  </li>
-  <li>
-    <p><a href="http://hujiaweiyinger.diandian.com/post/2013-09-09/memcached" target="_blank">memcached安装与使用</a></p>
-  </li>
-  <li>
-    <p><a href="http://hujiaweiyinger.diandian.com/post/2013-09-03/raspberrypi_start" target="_blank">Raspberry Pi扬帆起航</a></p>
-  </li>
-</ol>
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/">http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+</div>
 
 
-		
 		<footer>
-			
 			<p class="meta">
 				
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hujiawei</span></span>
+
 				
 
 
@@ -273,8 +351,16 @@ category=&#39;coder&#39; &hellip;">
   
 
 
-<time datetime="2013-11-17T18:24:00+08:00" pubdate data-updated="true">Nov 17<span>th</span>, 2013</time>
+<time datetime="2014-05-19T16:00:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2014</time>
 				
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
+  
+</span>
+
+
 			</p>
 			
 			<div class="sharing">
@@ -284,12 +370,16 @@ category=&#39;coder&#39; &hellip;">
 </div>
 
 			
+			<p class="meta">
+				
+				<a class="basic-alignment left" href="/blog/2014/05/18/love-you/" title="Previous Post: Love you">&laquo; Love you</a>
+				
+				
+			</p>
 		</footer>
-		
 	</article>
 	
 
-	
 	
 	<section>
 		<h1>Comments</h1>
@@ -312,12 +402,9 @@ category=&#39;coder&#39; &hellip;">
 		</div>
 	</section>
 	
-
-
 </div>
 
 <aside class="sidebar">
-  
   
 	<section>
 	<h1>关于博主</h1><br/>
@@ -436,8 +523,7 @@ src="http://hujiaweibujidao.github.io/music/Wouldnt-It-Be-Nice.mp3">
 	</ul>
 </section>
 	
-	
-  </aside>
+</aside>
 
 
 		</div>
