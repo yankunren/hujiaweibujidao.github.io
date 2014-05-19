@@ -16,13 +16,13 @@ published: true
 1.事件：对立事件(complementary event)，互斥事件(exclusive event)，相交事件(intersecting event)，相关事件(dependent event)，独立事件(independent event)，可以使用韦恩图(Venn Diagram)方便分析事件之间的关系。
 
 如果事件A和B会相互影响，那么它们是相关事件，否则是独立事件。
-事件A和B独立：$P(A|B)=P(A) \quad P(A \cap B)=P(A)P(B)$
+事件A和B独立：$$P(A|B)=P(A) \quad P(A \cap B)=P(A)P(B)$$
 
 2.概率：条件概率(Conditional Probability)，全概率(Total Probability)，贝叶斯定理(Bayes' Theorem)
 
-条件概率：$P(A|B)=\frac{P(A \cap B)}{P(B)}$
+条件概率：$$P(A|B)=\frac{P(A \cap B)}{P(B)}$$
 
-全概率：$P(B)=P(B|A)P(A)+P(B|A)P(A)$
+全概率：$$P(B)=P(B|A)P(A)+P(B|A')P(A')$$
 
 贝叶斯定理(将条件概率和全概率整合到一起)：$P(A|B)=\frac{P(A \cap B)}{P(B|A)P(A)+P(B|A')P(A')}$
 
