@@ -28,14 +28,16 @@ published: true
 
 3.期望(Expectation)与方差(Variance)
 
-$E(x)=\Sigma xP(X=x) \quad Var(x)=E(x-\mu)^{2}=\Sigma (x-\mu)^2P(X=x)=E(x^{2})-(E(x))^{2}$
+$E(x)=\Sigma xP(X=x)=\mu \quad Var(x)=E(x-\mu)^{2}=\Sigma (x-\mu)^2P(X=x)=E(x^{2})-(E(x))^{2}$
 
 线性变换之后的期望与方差：
 
 $E(ax+b)=aE(x)+b \quad Var(ax+b)=a^{2}Var(x)$
 $E(ax+by)=aE(x)+bE(y) \quad Var(ax+by)=a^{2}Var(x)+b^{2}Var(y)$
 
-**思考：为什么加上b方差并没有发生变化呢？因为在变量中增加常数b只是将概率分布移动了一下，分布的形状并没有发生改变，所以b并没有在方差中起到作用。**
+**思考：为什么加上b，方差并没有发生变化呢？**
+
+**因为在变量中增加常数b只是将概率分布移动了一下，分布的形状并没有发生改变，所以b并没有在方差中起到作用。**
 
 相互独立事件X和Y：
 
@@ -43,15 +45,16 @@ $E(X+Y)=E(X)+E(Y) \quad Var(X+Y)=Var(X)+Var(Y)$
 $E(X-Y)=E(X)-E(Y) \quad Var(X-Y)=Var(X)+Var(Y)$
 
 **思考：为什么$Var(X-Y)=Var(X)+Var(Y)$？可以随便拿数据验证之。**
+
 **记住，一个随机变量减去另一个随机变量得到的概率分布的方差是两个随机变量的方差之和，方差只会增加！**
 
 下面两个图示演示了其结果
 
-![image](/images/math/varxplusy.png)
+![image](http://hujiaweibujidao.github.io/images/math/varxplusy.png)
 
-![image](/images/math/varxminusy.png)
+![image](http://hujiaweibujidao.github.io/images/math/varxminusy.png)
 
 相互独立的随机变量与独立观测值之间的区别：
 
-![image](/images/math/independentobservation.png)
+![image](http://hujiaweibujidao.github.io/images/math/independentobservation.png)
 
