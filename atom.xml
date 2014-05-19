@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-19T23:21:33+08:00</updated>
+  <updated>2014-05-19T23:43:33+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -146,8 +146,9 @@ r_{XY}=\frac{n\Sigma{XY}-\Sigma{X}\Sigma{Y}}{\sqrt{[n\Sigma{X^2}-(\Sigma{X})^2][
 
 <p>2.累积分布函数CDF(Cumulative Distribution Function)</p>
 
-<p>数据集的数据值到它在分布中概率的累积值的映射函数。例如，
-CDF(0) = 0; CDF(1) = 0.2; CDF(2) = 0.6; CDF(3) = 0.8; CDF(4) = 0.8; CDF(5) = 1，它的CDF图为一个阶跃函数：</p>
+<p>数据集的数据值到它在分布中概率的累积值的映射函数。PMF和CDF在国内的教材中并没有这样提过，但是在国外的很多统计书中都有，所以还是比较重要的，拿出来介绍下。</p>
+
+<p>例如，CDF(0) = 0; CDF(1) = 0.2; CDF(2) = 0.6; CDF(3) = 0.8; CDF(4) = 0.8; CDF(5) = 1，它的CDF图为一个阶跃函数：</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/cdf.png" alt="image" /></p>
 
@@ -159,20 +160,21 @@ CDF(0) = 0; CDF(1) = 0.2; CDF(2) = 0.6; CDF(3) = 0.8; CDF(4) = 0.8; CDF(5) = 1�
 
 <p>(1)0-1分布</p>
 
-<p>随机变量X只有两个取值0和1，所以叫做0-1分布，它的分布律为$P{X=k}=p^{k}q^{1-k}, k=0,1$。</p>
+<p>随机变量X只有两个取值0和1样本空间只有两个取值也行)，所以叫做0-1分布，它的分布律为
+$P{X=0}=p, P{X=1}=q, (q=1-p)$</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/disc_01.png" alt="image" /></p>
 
 <p>(2)二项分布</p>
 
-<p>二项分布的分布律为$P{X=k}=<script type="math/tex">n \choose k</script> p^{k}q^{1-k}$，因为$P{X=k}$刚好是$(p+q)^{n}$的二项式系数，所以这个分布就叫二项分布。</p>
+<p>二项分布的分布律为$P{X=k}=<script type="math/tex">n \choose k</script> p^{k}q^{1-k}$，因为$P{X=k}$刚好是$(p+q)^{n}$的二项式系数，所以这个分布就叫二项分布。二项分布是从n重伯努利试验中得到的分布，伯努利试验是指相互独立的试验，每次试验的结果要么成功要么失败(或者说某个事件要么发生要么不发生)。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/disc_binomial.png" alt="image" />
 <img src="http://hujiaweibujidao.github.io/images/math/disc_binomial2.png" alt="image" /></p>
 
 <p>(3)泊松分布</p>
 
-<p>泊松分布是一类很常用的分布，它的分布律有一个参数$\lambda$，它的含义就是泊松分布的期望，又是它的方差，所以，只要参数$\lambda$或者期望或者方差确定了，泊松分布就确定了。</p>
+<p>泊松分布是一类很常用的分布，它的分布律有一个参数$\lambda$，参数$\lambda$的含义既是泊松分布的期望，又是它的方差，所以，只要参数$\lambda$或者期望或者方差确定了，泊松分布就确定了。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/disc_pos.png" alt="image" />
 <img src="http://hujiaweibujidao.github.io/images/math/disc_pos2.png" alt="image" />
@@ -180,7 +182,9 @@ CDF(0) = 0; CDF(1) = 0.2; CDF(2) = 0.6; CDF(3) = 0.8; CDF(4) = 0.8; CDF(5) = 1�
 
 <p><strong>泊松定理说明当n很大，p很小的时候，以n，p为参数的二项分布可以用参数$\lambda = np $的泊松分布进行近似！</strong>记住这个定理其实也可以方便我们记住泊松分布的分布律。</p>
 
-<p>应用举例：[记住后面的结论]</p>
+<p>应用举例，记住后面的结论：</p>
+
+<p><strong>当$n \ge 20,p \le 0.05$时用泊松分布近似二项分布的概率值近似效果颇佳。</strong></p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/disc_pos4.png" alt="image" /></p>
 
@@ -188,30 +192,31 @@ CDF(0) = 0; CDF(1) = 0.2; CDF(2) = 0.6; CDF(3) = 0.8; CDF(4) = 0.8; CDF(5) = 1�
 
 <p>连续型随机变量，概率密度及它的性质</p>
 
+<p>函数f(x)是概率密度函数，函数F(x)是分布函数，两者都是连续函数。</p>
+
 <p><img src="http://hujiaweibujidao.github.io/images/math/cont0.png" alt="image" />
 <img src="http://hujiaweibujidao.github.io/images/math/cont1.png" alt="image" /></p>
 
-<p>关于连续型变量对于任意一个固定的k的概率都是0，即$p{X=k}=0$的解释</p>
+<p>关于连续型随机变量X对于任意一个指定实数值k的概率都是0，即$p{X=k}=0$的解释</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/cont2.png" alt="image" /></p>
 
-<p>(1)均匀分布</p>
+<p>(1)均匀分布(uniform distribution)</p>
+
+<p>连续型随机变量X在区间(a,b)均匀分布</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/cont_uniform.png" alt="image" /></p>
 
-<p>(2)指数分布</p>
+<p>(2)指数分布(exponential distribution)</p>
+
+<p>指数分布有一个参数$\theta$，它的期望就是$\theta$，方差是$\theta^{2}$，而且它具有<strong>无记忆性</strong>。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/cont_exp1.png" alt="image" />
 <img src="http://hujiaweibujidao.github.io/images/math/cont_exp2.png" alt="image" /></p>
 
-<p>(3)正态分布</p>
+<p>《统计思维》对指数分布的解释：举例来说，<strong>观察一系列事件之间的间隔时间，若事件在每个时间点发生的概率相同，那么间隔时间的分布就近似指数分布</strong>(也就是前面的无记忆性)。</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/cont_normal1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/cont_normal2.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/cont_normal3.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/cont_normal4.png" alt="image" /></p>
-
-<p>指数分布(exponential distribution)：一种连续分布。举例来说，<strong>观察一系列事件之间的间隔时间，若事件在每个时间点发生的概率相同，那么间隔时间的分布就近似指数分布</strong>。指数分布的CDF如下：</p>
+<p>指数分布的CDF如下，此时$\lambda=\frac{1}{\theta}$</p>
 
 <script type="math/tex; mode=display">
 CDF(x)=1-e^{-\lambda x}
@@ -227,10 +232,26 @@ CDF(x)=1-e^{-\lambda x}
 y=CCDF(x)=1-CDF(x)=e^{-\lambda x} \quad => \quad log(y)=-\lambda x
 </script>
 
-<p>4.正态分布(Normal Distribution)：又叫高斯分布，是最常用的分布。对于正态分布的CDF还没有一种准确的表达，最常用的一种形式是以误差函数(error function)来表示，它是一个特殊的函数，表示为erf(x)：</p>
+<p>(3)正态分布(normal distribution)</p>
+
+<p>正态分布，又叫高斯分布，是最常用的分布。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/cont_normal1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/cont_normal2.png" alt="image" /></p>
+
+<p>关于标准正态分布，即参数为$\mu=0, \sigma=1$的正态分布，它的分布函数值已经制作成表格，可以方便进行查看，其他非标准正态分布可以通过一个线性变换转换成标准正态分布。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/cont_normal4.png" alt="image" /></p>
+
+<p>在证明其概率密度总和为1时利用了一个重要的积分$\int_{-\infty}^{\infty} e^{\frac{t^{2}}{2}} dt = \sqrt{2 \pi}$，它的证明可以转换成二重积分然后通过极坐标计算出来。完整详细的证明可以参考下面：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/inte1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/inte2.png" alt="image" /></p>
+
+<p>《统计思维》对正态分布的解释：对于正态分布的CDF还没有一种准确的表达，最常用的一种形式是以误差函数(error function)来表示，它是一个特殊的函数，表示为erf(x)，在Matlab中内置了函数<code>erf</code>，对它的说明为erf函数是对参数为$\mu=0, \sigma=\frac{1}{2}$的正态分布的二重积分，有兴趣可以去计算一下，得到的结果如下：</p>
 
 <script type="math/tex; mode=display">
-CDF(x)=\frac{1}{2}[1+erf(\frac{x-\mu}{\sigma \sqrt{2}})] \quad erf(x)=\frac{2}{\sqrt{\pi}}\int_{0}^{x}e^{-r^{2}}dt
+CDF(x)=\frac{1}{2}[1+erf(\frac{x-\mu}{\sigma \sqrt{2}})] \quad erf(x)=\frac{2}{\sqrt{\pi}}\int_{0}^{x}e^{-t^{2}}dt
 </script>
 
 <p>其中，参数$\mu$和$\sigma$分别决定了正态分布的均值和标准差。下图为$\mu=2.0$和$\sigma=0.5$的正态分布的CDF图：</p>
@@ -241,11 +262,17 @@ CDF(x)=\frac{1}{2}[1+erf(\frac{x-\mu}{\sigma \sqrt{2}})] \quad erf(x)=\frac{2}{\
 
 <p>关于正态分布有一个重要的结论，对任何数值分布来说(不论它的均值和标准差)，只要数值是正态分布，那么几乎100%的数值都分布在均值的-3到3个标准差之间。下面是正态曲线下数值的分布情况：</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/nd.png" alt="image" /></p>
+<!--
+![image](http://hujiaweibujidao.github.io/images/math/nd.png)
+-->
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/cont_normal3.png" alt="image" /></p>
 
 <p>从中可以看出，<strong>在距离均值1个标准差之间大概有34%的数值分布，在1个标准差和2个标准差之间大概有13%的数值分布，在2个标准差和3个标准差之间大概有2.1%的数值分布。</strong></p>
 
-<p>通过这个图我么可以得到一个经典的<code>68-95-99</code>法则，<strong>在$(\mu - \sigma, \mu + \sigma)$之间大概有68.26%的数据分布，在$(\mu - 2\sigma, \mu + 2\sigma)$之间大概有95.44%的数据分布，在$(\mu - 3\sigma, \mu + 3\sigma)$之间大概有99.74%的数据分布。</strong></p>
+<p>通过这个图我么可以得到一个经典的<strong>3$\sigma$法则</strong>，又叫<strong>68-95-99法则</strong></p>
+
+<p><strong>在$(\mu - \sigma, \mu + \sigma)$之间大概有68.26%的数据分布，在$(\mu - 2\sigma, \mu + 2\sigma)$之间大概有95.44%的数据分布，在$(\mu - 3\sigma, \mu + 3\sigma)$之间大概有99.74%的数据分布。</strong></p>
 
 <p><a href="http://wikipedia.org/wiki/Log-normal_distribution">对数正态分布</a>：如果一组数据取对数之后服从正态分布，那么我们就称其服从对数正态分布。对数正态分布的 CDF 跟正态分布一样, 只是用 logx 代替原来的 x:</p>
 
