@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-19T17:19:44+08:00</updated>
+  <updated>2014-05-19T17:22:09+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -146,672 +146,6 @@ print(s) #[2, 2, 2, 2]</p>
 s=lcs4(x,y)
 print(s) #[3, 3, 3, 3, 4]
 ```</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Algorithms-PageRank]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank/"/>
-    <updated>2014-05-12T18:12:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank</id>
-    <content type="html"><![CDATA[<p><strong><center>ML/DM/PR算法系列</center></strong>
-<strong><center>逸夫图书馆, 2014/5/17</center></strong></p>
-
-<h3 id="centerpagerankcenter"><center>PageRank算法</center></h3>
-
-<p>PageRank算法是谷歌曾经独步天下的“倚天剑”，该算法由Larry Page和Sergey Brin在斯坦福大学读研时发明的，<a href="http://ilpubs.stanford.edu:8090/422/1/1999-66.pdf">论文点击下载: The PageRank Citation Ranking: Bringing Order to the Web</a>。</p>
-
-<p>本文首先通过一些参考文献引出问题，然后给出了PageRank的几种实现算法，最后将其推广至在MapReduce框架下如何实现PageRank算法。</p>
-
-<p>PageRank的核心思想有2点：</p>
-
-<p>1.如果一个网页被很多其他网页链接到的话说明这个网页比较重要，也就是pagerank值会相对较高；</p>
-
-<p>2.如果一个pagerank值很高的网页链接到一个其他的网页，那么被链接到的网页的pagerank值会相应地因此而提高。</p>
-
-<p>下面是一张来自<a href="http://en.wikipedia.org/wiki/PageRank">WikiPedia</a>的图，每个球代表一个网页，球的大小反应了网页的pagerank值的大小。指向网页B和网页E的链接很多，所以B和E的pagerank值较高，另外，虽然很少有网页指向C，但是最重要的网页B指向了C，所以C的pagerank值比E还要大。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/pagerank-fig.png" alt="image" /></p>
-
-<p>参考内容：</p>
-
-<p>1.<a href="http://en.wikipedia.org/wiki/PageRank">Wiki about PageRank</a></p>
-
-<p>2.<a href="http://www.itlearner.com/good/pagerank_cn.htm">Google 的秘密- PageRank 彻底解说 中文版</a></p>
-
-<p>3.<a href="http://book.douban.com/subject/7161824/">数值分析与算法</a> Page 161 应用实例：Google的PageRank算法</p>
-
-<p>4.<a href="http://www.mathworks.cn/moler/chapters.html">Numeric Methods with Matlab</a> 或者<a href="http://book.douban.com/subject/1836464/">中文翻译版本Matlab数值计算</a></p>
-
-<p>5.<a href="http://www.chenjunlu.com/2012/10/pagerank-on-mapreduce/">使用 MapReduce 思想计算 PageRank</a> Page 62 PageRank和马尔可夫链</p>
-
-<h3 id="section">1.问题背景</h3>
-
-<p>来自参考内容3</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/pk-1.png" alt="image" /></p>
-
-<h3 id="section-1">2.数学建模</h3>
-
-<p>来自参考内容3，理解网页连接矩阵$G$，马尔科夫过程(“网上冲浪”)，转移矩阵$A$，概率$p$为用户点击当前网页中的某个链接地址的概率(一般都为0.85)。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/pk-2.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/algos/pk-3.png" alt="image" /></p>
-
-<p>最后得到一个等式$Ax=x$，这实际上就是求矩阵$A$的特征值为1的特征向量！</p>
-
-<p>下面的内容使用圆盘定理解释了1是矩阵$A$的主特征值，所以我们可以使用幂法来求解。</p>
-
-<p>关于幂法的详细介绍参考另一篇文章<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">Numerical Methods Using Matlab: 第三章 矩阵特征值和奇异值求解</a></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/pk-4.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/algos/pk-5.png" alt="image" /></p>
-
-<!--
-![image](http://hujiaweibujidao.github.io/images/algos/pk-6.png)
--->
-
-<h3 id="pagerank">3.求解PageRank</h3>
-
-<p>假设有如上图右侧所示的网页链接模型。</p>
-
-<p>(1) 幂法</p>
-
-<p>wiki上有一个PageRank的简便算法，它不考虑转移概率，而是采用的是迭代的方式，每次都更新所有网页的pagerank值，更新的方式就是将每个网页的pagerank值平摊分给它指向的所有网页，每个网页累计所有指向它的网页平摊给它的值作为它该回合的pagerank值，直到全部网页的pagerank值收敛了或者满足一定的阈值条件就停止。</p>
-
-<p>后面的MapReduce框架下PageRank算法的实现就采用了这个思想。考虑转移概率的情况和这个算法类似，乘上一个转移概率再加上一个随机跳转的概率。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/pagerank-Simplified-algorithm.png" alt="image" /></p>
-
-<p>根据上面的思想，下面Matlab代码实现可以得到各个网页的PageRank值。</p>
-
-<p>```matlab
-n=6;
-i=[2 3 4 4 5 6 1 6 1];
-j=[1 2 2 3 3 3 4 5 6];
-G=sparse(i,j,1,n,n);</p>
-
-<p>% Power method
-for j = 1:n
-   L{j} = find(G(:,j));
-   c(j) = length(L{j});
-end</p>
-
-<p>p = .85;
-delta = (1-p)/n;
-x = ones(n,1)/n;
-z = zeros(n,1);
-cnt = 0;
-while max(abs(x-z)) &gt; .0001
-   z = x;
-   x = zeros(n,1);
-   for j = 1:n
-      if c(j) == 0
-         x = x + z(j)/n;%转移到任意一个网页
-      else
-         x(L{j}) = x(L{j}) + z(j)/c(j);%将上次的pagerank值平摊给所有指向的网页
-      end
-   end
-   x = p*x + delta;
-   cnt = cnt+1;
-end
-```
-得到的向量$x$保存了各个网页的pagerank值，虽然链接数目一样，但是网页①比网页④和网页⑤都高，而网页②的pagerank值第二高，因为网页①链接到了它上面，相当于沾了网页①的光。</p>
-
-<p><code>
-x =
-    0.2675
-    0.2524
-    0.1323
-    0.1698
-    0.0625
-    0.1156
-</code></p>
-
-<p><a href="http://www.chenjunlu.com/2012/09/pagerank-algorithm-implemented-in-python/">这篇文章给出该算法的一个Python版本实现</a>，该博主使用第三方模块<a href="https://code.google.com/p/python-graph/">python-graph</a>，python-graph模块实现了很多图算法，<a href="https://code.google.com/p/python-graph/wiki/Example">该模块的使用示例</a>，使用前需要先安装，代码如下：</p>
-
-<p><code>python
-easy_install python-graph-core
-easy_install python-graph-dot
-</code></p>
-
-<p>Python版本的算法实现：</p>
-
-<p>```
-# coding=utf-8</p>
-
-<h1 id="python-graph-httpscodegooglecomppython-graph">python-graph https://code.google.com/p/python-graph/</h1>
-
-<h1 id="import-graphviz">Import graphviz</h1>
-<p>import graphviz as gv</p>
-
-<h1 id="import-pygraph">Import pygraph</h1>
-<p>from pygraph.classes.digraph import digraph
-from pygraph.readwrite.dot import write</p>
-
-<h1 id="define-pagerank-function">Define pagerank function</h1>
-<p>def pagerank(graph, damping_factor=0.85, max_iterations=100, \
-             min_delta=0.00001):
-    “””
-    Compute and return the PageRank in an directed graph.</p>
-
-<pre><code>@type  graph: digraph
-@param graph: Digraph.
-
-@type  damping_factor: number
-@param damping_factor: PageRank dumping factor.
-
-@type  max_iterations: number
-@param max_iterations: Maximum number of iterations.
-
-@type  min_delta: number
-@param min_delta: Smallest variation required for a new iteration.
-
-@rtype:  Dict
-@return: Dict containing all the nodes PageRank.
-"""
-
-nodes = graph.nodes()
-graph_size = len(nodes)
-if graph_size == 0:
-    return {}
-# value for nodes without inbound links
-min_value = (1.0-damping_factor)/graph_size
-
-# itialize the page rank dict with 1/N for all nodes
-#pagerank = dict.fromkeys(nodes, 1.0/graph_size)
-pagerank = dict.fromkeys(nodes, 1.0)
-
-for i in range(max_iterations):
-    diff = 0 #total difference compared to last iteraction
-    # computes each node PageRank based on inbound links
-    for node in nodes:
-        rank = min_value
-        for referring_page in graph.incidents(node):
-            rank += damping_factor * pagerank[referring_page] / \
-                    len(graph.neighbors(referring_page))
-
-        diff += abs(pagerank[node] - rank)
-        pagerank[node] = rank
-
-    print 'This is NO.%s iteration' % (i+1)
-    print pagerank
-    print ''
-
-    #stop if PageRank has converged
-    if diff &lt; min_delta:
-        break
-
-return pagerank
-</code></pre>
-
-<h1 id="graph-creation">Graph creation</h1>
-<p>gr = digraph()</p>
-
-<h1 id="add-nodes-and-edges">Add nodes and edges</h1>
-<p>gr.add_nodes([“1”,”2”,”3”,”4”])</p>
-
-<p>gr.add_edge((“1”,”2”))
-gr.add_edge((“1”,”3”))
-gr.add_edge((“1”,”4”))
-gr.add_edge((“2”,”3”))
-gr.add_edge((“2”,”4”))
-gr.add_edge((“3”,”4”))
-gr.add_edge((“4”,”2”))</p>
-
-<h1 id="draw-as-png">Draw as PNG</h1>
-<p># dot = write(gr)
-# gvv = gv.readstring(dot)
-# gv.layout(gvv,’dot’)
-# gv.render(gvv,’png’,’Model.png’)</p>
-
-<p>pagerank(gr)
-```</p>
-
-<p>经过32次迭代之后得到的结果如下，和前面的结果一致：</p>
-
-<p><code>
-This is NO.32 iteration
-{'1': 0.2675338708706491, '3': 0.13227261904986046, '2': 0.2524037902400518, '5': 0.062477242064127136, '4': 0.1697488529161491, '6': 0.1155828978186352}
-</code></p>
-
-<p>(2) 利用马尔可夫矩阵的特殊结构</p>
-
-<p>来自参考内容4，其中$\delta=\frac{1-p}{n}$</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/pk-8.png" alt="image" /></p>
-
-<p>也就是将矩阵$A$进行分解，并不需要显示求出矩阵$A$，然后便是求解一个线性方程组即可。</p>
-
-<p>```
-function x = pagerank1(G)
-% PAGERANK1  Google’s PageRank modified version 1 - hujiawei</p>
-
-<p>%if nargin &lt; 3, p = .85; end
-p=0.85;</p>
-
-<p>% Eliminate any self-referential links</p>
-
-<p>G = G - diag(diag(G));</p>
-
-<p>% c = out-degree, r = in-degree</p>
-
-<p>[n,n] = size(G);
-c = sum(G,1);%each row’s sum
-r = sum(G,2);%each col’s sum</p>
-
-<p>% Scale column sums to be 1 (or 0 where there are no out links).</p>
-
-<p>k = find(c~=0);
-D = sparse(k,k,1./c(k),n,n);</p>
-
-<p>% Solve (I - p<em>G</em>D)*x = e</p>
-
-<p>e = ones(n,1);
-I = speye(n,n);
-x = (I - p<em>G</em>D)\e;</p>
-
-<p>% Normalize so that sum(x) == 1.</p>
-
-<p>x = x/sum(x);
-```</p>
-
-<p>(3) 巧妙解法：逆迭代算法</p>
-
-<p>巧妙利用Matlab中的精度误差导致原本是一个奇异矩阵的$I-A$变成一个非奇异矩阵，运行时只是会有些警告提示，但是运行结果和其他算法一样。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/pk-9.png" alt="image" /></p>
-
-<p>```
-function x = pagerank2(G)
-% PAGERANK1  Google’s PageRank modified version 2 - hujiawei
-% using inverse iteration method</p>
-
-<p>%if nargin &lt; 3, p = .85; end
-p=0.85;</p>
-
-<p>% Eliminate any self-referential links</p>
-
-<p>G = G - diag(diag(G));</p>
-
-<p>% c = out-degree, r = in-degree</p>
-
-<p>[n,n] = size(G);
-c = sum(G,1);%each row’s sum
-r = sum(G,2);%each col’s sum</p>
-
-<p>% Scale column sums to be 1 (or 0 where there are no out links).</p>
-
-<p>k = find(c~=0);
-D = sparse(k,k,1./c(k),n,n);</p>
-
-<p>% Solve (I - p<em>G</em>D)*x = e</p>
-
-<p>e = ones(n,1);
-I = speye(n,n);
-% x = (I - p<em>G</em>D)\e;
-delta=(1-p)/n;
-A=p<em>G</em>D+delta;
-x=(I-A)\e;</p>
-
-<p>% Normalize so that sum(x) == 1.</p>
-
-<p>x = x/sum(x);
-```</p>
-
-<p>最后，附上参考内容4中给出的一份好代码，用于模拟随机冲浪生成矩阵$G$的代码</p>
-
-<p>```
-function [U,G] = surfer(root,n)
-% SURFER  Create the adjacency graph of a portion of the Web.
-%    [U,G] = surfer(root,n) starts at the URL root and follows
-%    Web links until it forms an adjacency graph with n nodes.
-%    U = a cell array of n strings, the URLs of the nodes.
-%    G = an n-by-n sparse matrix with G(i,j)=1 if node j is linked to node i.
-%
-%    Example:  [U,G] = surfer(‘http://www.harvard.edu’,500);
-%    See also PAGERANK.
-%
-%    This function currently has two defects.  (1) The algorithm for
-%    finding links is naive.  We just look for the string ‘http:’.
-%    (2) An attempt to read from a URL that is accessible, but very slow,
-%    might take an unacceptably long time to complete.  In some cases,
-%    it may be necessary to have the operating system terminate MATLAB.
-%    Key words from such URLs can be added to the skip list in surfer.m.</p>
-
-<p>% Initialize</p>
-
-<p>clf
-shg
-set(gcf,’doublebuffer’,’on’)
-axis([0 n 0 n])
-axis square
-axis ij
-box on
-set(gca,’position’,[.12 .20 .78 .78])
-uicontrol(‘style’,’frame’,’units’,’normal’,’position’,[.01 .09 .98 .07]);
-uicontrol(‘style’,’frame’,’units’,’normal’,’position’,[.01 .01 .98 .07]);
-t1 = uicontrol(‘style’,’text’,’units’,’normal’,’position’,[.02 .10 .94 .04], …
-   ‘horiz’,’left’);
-t2 = uicontrol(‘style’,’text’,’units’,’normal’,’position’,[.02 .02 .94 .04], …
-   ‘horiz’,’left’);
-slow = uicontrol(‘style’,’toggle’,’units’,’normal’, …
-   ‘position’,[.01 .24 .07 .05],’string’,’slow’,’value’,0);
-quit = uicontrol(‘style’,’toggle’,’units’,’normal’, …
-   ‘position’,[.01 .17 .07 .05],’string’,’quit’,’value’,0);</p>
-
-<p>U = cell(n,1);
-hash = zeros(n,1);
-G = logical(sparse(n,n));
-m = 1;
-U{m} = root;
-hash(m) = hashfun(root);</p>
-
-<p>j = 1;
-while j &lt; n &amp; get(quit,’value’) == 0</p>
-
-<p>% Try to open a page.</p>
-
-<p>try
-      set(t1,’string’,sprintf(‘%5d %s’,j,U{j}))
-      set(t2,’string’,’’);
-      drawnow
-      page = urlread(U{j});
-   catch
-      set(t1,’string’,sprintf(‘fail: %5d %s’,j,U{j}))
-      drawnow
-      continue
-   end
-   if get(slow,’value’)
-      pause(.25)
-   end</p>
-
-<p>% Follow the links from the open page.</p>
-
-<p>for f = findstr(‘http:’,page);</p>
-
-<pre><code>  % A link starts with 'http:' and ends with the next quote.
-
-  e = min([findstr('"',page(f:end)) findstr('''',page(f:end))]);
-  if isempty(e), continue, end
-  url = deblank(page(f:f+e-2));
-  url(url&lt;' ') = '!';   % Nonprintable characters
-  if url(end) == '/', url(end) = []; end
-
-  % Look for links that should be skipped.
-
-  skips = {'.gif','.jpg','.pdf','.css','lmscadsi','cybernet', ...
-           'search.cgi','.ram','www.w3.org', ...
-           'scripts','netscape','shockwave','webex','fansonly'};
-  skip = any(url=='!') | any(url=='?');
-  k = 0;
-  while ~skip &amp; (k &lt; length(skips))
-     k = k+1;
-     skip = ~isempty(findstr(url,skips{k}));
-  end
-  if skip
-     if isempty(findstr(url,'.gif')) &amp; isempty(findstr(url,'.jpg'))
-        set(t2,'string',sprintf('skip: %s',url))
-        drawnow
-        if get(slow,'value')
-           pause(.25)
-        end
-     end
-     continue
-  end
-
-  % Check if page is already in url list.
-
-  i = 0;
-  for k = find(hash(1:m) == hashfun(url))';
-     if isequal(U{k},url)
-        i = k;
-        break
-     end
-  end
-
-  % Add a new url to the graph there if are fewer than n.
-
-  if (i == 0) &amp; (m &lt; n)
-     m = m+1;
-     U{m} = url;
-     hash(m) = hashfun(url);
-     i = m;
-  end
-
-  % Add a new link.
-
-  if i &gt; 0
-     G(i,j) = 1;
-     set(t2,'string',sprintf('%5d %s',i,url))
-     line(j,i,'marker','.','markersize',6)
-     drawnow
-     if get(slow,'value')
-        pause(.25)
-     end
-  end    end
-</code></pre>
-
-<p>j = j+1;
-end
-delete(t1)
-delete(t2)
-delete(slow)
-set(quit,’string’,’close’,’callback’,’close(gcf)’,’value’,0)</p>
-
-<p>%————————</p>
-
-<p>function h = hashfun(url)
-% Almost unique numeric hash code for pages already visited.
-h = length(url) + 1024*sum(url);
-```</p>
-
-<h3 id="mapreducepagerank">4.MapReduce框架下PageRank算法的实现</h3>
-
-<p>利用前面wiki上的迭代(或者幂法)的思想来实现MapReduce框架下PageRank算法很简单，可以先阅读下参考内容5。</p>
-
-<p>这篇文章<a href="http://michaelnielsen.org/blog/using-mapreduce-to-compute-pagerank/">using-mapreduce-to-compute-pagerank</a>更加详细，可以参考</p>
-
-<p>以下是我的大数据的一次作业，要求是参考wiki上的简便算法，实现MapReduce框架下的PageRank算法。给的数据集是Twitter的用户之间的关系，可以看做是网页之间的关系，但是助教没要求写代码以及运行这个数据集(有1G多)，所以下面只是一个Python版本的理想可行版本，并没有通过实际大数据集的验证，另外，博主暂时还不太会Python的mapreduce框架中的一些函数，所以实现的是一个简明的可以测试的PageRank算法。</p>
-
-<h4 id="section-2">1.输入输出格式</h4>
-
-<p><strong>map函数的输入是&lt;节点，从该节点引出的边列表&gt;，其中节点是一个类，包含了其当前的pagerank值，输出是&lt;节点，反向节点pagerank值/反向节点引出边的总数&gt;；</strong></p>
-
-<p><strong>reduce函数的输入是&lt;节点，反向节点pagerank值/反向节点引出边的总数&gt;，输出是&lt;节点，从该节点引出的边列表&gt;，其中节点包含了其更新后的pagerank值。</strong></p>
-
-<p>伪代码： [一时犯二写了个英文形式的 ]</p>
-
-<p>```
-process the data to the form of {node i:[its adjacent node list],…}
-while the sum of difference between the last two pagerank values &lt; threshold
-	map({node i:[its adjacent node list],…}):
-	    map_output={}
-	    for every node j in adjacent node list:
-	        put or sum up {j:(i, PageRank(i)/length(adjacent node list))} into map_output
-	    return map_output</p>
-
-<pre><code>reduce(map_output):
-    reduce_output={}
-    for every entry {j:(i, PageRank(i)/length(adjacent node list))} in map_output:
-        put or sum up all values pagerank values for node j with its adjacent node list into reduce_output
-    return reduce_output
-</code></pre>
-
-<p>```</p>
-
-<h4 id="section-3">2.示例演示</h4>
-
-<p>假设用户1，2，3，4是如下图所示的关系：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/others/pagerankdemo.png" alt="image" /></p>
-
-<p>假设有2个mapper(A和B)和1个reducer(C)，初始时4个节点的pagerank值都是0.25</p>
-
-<p>其中，关于用户1和2的数据被mapperA读取并处理，关于用户3和4的数据被mapperB读取并处理 [经验证，即使一个用户的数据是由不同的mapper来读取的，最终收敛到的结果差不多]</p>
-
-<p>map的输入输出结果如下：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/others/mapper.png" alt="image" /></p>
-
-<p>reduce的输入输出结果如下，输入是2个mapper的输出，输出的结果中更新了节点的pagerank值</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/others/reducer.png" alt="image" /></p>
-
-<p>reducer处理完了之后又将它的结果输入给mapper处理，直到迭代的次数超过了设定值或者两次迭代之后得到的所有节点的pagerank值之差的总和(也可以是取二范数)小于设定的阈值。</p>
-
-<h4 id="section-4">3.示例的实验结果</h4>
-
-<p>(1)首先是使用Matlab采用幂法的方式计算出在p=1.0的情况下示例得到的结果 [它的主要作用是验证后面python版本的正确性]</p>
-
-<p>matlab源码如下：</p>
-
-<p>```
-n=4;
-i=[2 3 4 3 4 4 1 2];
-j=[1 1 1 2 2 3 3 4];
-G=sparse(i,j,1,n,n);</p>
-
-<p>[n,n] = size(G);
-for j = 1:n
-   L{j} = find(G(:,j));
-   c(j) = length(L{j});
-end</p>
-
-<p>% Power method
-p=1.0;
-delta = (1-p)/n;
-x = ones(n,1)/n;
-z = zeros(n,1);
-cnt = 0;
-while max(abs(x-z)) &gt; .0001
-   z = x;
-   x = zeros(n,1);
-   for j = 1:n
-      if c(j) == 0
-         x = x + z(j)/n;
-      else
-         x(L{j}) = x(L{j}) + z(j)/c(j);
-      end
-   end
-   x = p*x + delta;
-   cnt = cnt+1;
-end
-sprintf(‘pagerank result:’)
-x
-```</p>
-
-<p>结果为：</p>
-
-<p><code>
-0.1072
-0.3571
-0.2143
-0.3214
-</code></p>
-
-<p>(2)matlab版本的page rank没有采用mapreduce的思想进行迭代，所以我另外写了一个python版本的利用mapreduce思想实现的pagerank算法(注：我并没有使用python的map和reduce函数去实现，而是使用更加容易明白的实现)，使用的阈值为0.0001，最多迭代的次数为100次。</p>
-
-<p>```
-# coding=utf-8</p>
-
-<p><strong>author</strong> = ‘hujiawei’
-<strong>doc</strong> = ‘pagerank mapreduce’</p>
-
-<p>class Node:
-    def <strong>init</strong>(self,id,pk):
-        self.id=id
-        self.pk=pk</p>
-
-<p>def pk_map(map_input):
-    map_output={}
-    for node,outlinks in map_input.items():
-        for link in outlinks:
-            size=len(outlinks)
-            if link in map_output:
-                map_output[link]+=(float)(node.pk)/size
-            else:
-                map_output[link]=(float)(node.pk)/size
-    return map_output</p>
-
-<p>def pk_reduce(reduce_input):
-    for result in reduce_input:
-        for node,value in result.items():
-            node.pk+=value</p>
-
-<p>def pk_clear(nodes):
-    for node in nodes:
-        node.pk=0</p>
-
-<p>def pk_last(nodes):
-    lastnodes=[]
-    for node in nodes:
-        lastnodes.append(Node(node.id,node.pk))
-    return lastnodes</p>
-
-<p>def pk_diff(nodes,lastnodes):
-    diff=0
-    for i in range(len(nodes)):
-        print(‘node pk %f, last node pk %f ‘ % (nodes[i].pk, lastnodes[i].pk))
-        diff+=abs(nodes[i].pk-lastnodes[i].pk)
-    return diff</p>
-
-<p>def pk_test1():
-    node1 = Node(1, 0.25)
-    node2 = Node(2, 0.25)
-    node3 = Node(3, 0.25)
-    node4 = Node(4, 0.25)
-    nodes = [node1, node2, node3, node4]
-    threshold = 0.0001
-    max_iters = 100</p>
-
-<pre><code>for iter_count in range(max_iters):
-    iter_count += 1
-    lastnodes=pk_last(nodes)
-    print('============ map count %d =================' % (iter_count))
-    in1 = {node1: [node2, node3, node4], node2: [node3, node4]}
-    in2 = {node3: [node1, node4], node4: [node2]}
-
-    mapout1 = pk_map(in1)
-    mapout2 = pk_map(in2)
-
-    for node, value in mapout1.items():
-        print str(node.id) + ' ' + str(value)
-
-    for node, value in mapout2.items():
-        print str(node.id) + ' ' + str(value)
-
-    print('============ reduce count %d =================' % (iter_count))
-
-    reducein = [mapout1, mapout2]
-    pk_clear(nodes)
-    pk_reduce(reducein)
-
-    for node in nodes:
-        print str(node.id) + ' ' + str(node.pk)
-
-    diff=pk_diff(nodes,lastnodes)
-    if diff &lt; threshold:
-        break
-</code></pre>
-
-<p>if <strong>name</strong> == ‘<strong>main</strong>’:
-    pk_test1()
-```</p>
-
-<p>得到的结果为如下，总共迭代了15次</p>
-
-<p><code>
-1 0.107138774577
-2 0.35712924859
-3 0.214296601128
-4 0.321435375705
-</code></p>
-
-<p>上面的结果和Matlab用幂法得到的pagerank值差别很小，可以认为是正确的，所以说明了使用这种mapreduce输入输出格式的正确性。</p>
-
-<p>OK，差不多了，希望对需要理解PageRank算法的人有帮助！ :-) </p>
 
 ]]></content>
   </entry>
@@ -1253,6 +587,558 @@ showmatrixchain(s,1,6) #( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )
 <p>5.最小生成树：Prim，Kruskal</p>
 
 <p>6.网络流：最大流，最小割，二分图等</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Python Algorithms - Trees]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees/"/>
+    <updated>2014-05-08T20:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees</id>
+    <content type="html"><![CDATA[<p><strong><center>Python Algorithms Python算法系列</center></strong>
+<strong><center>逸夫图书馆, 2014/5/8</center></strong></p>
+
+<h3 id="centercenter"><center>树</center></h3>
+
+<p>参考内容：</p>
+
+<p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a></p>
+
+<p>Chapter 6 Trees and Tree Algorithms   </p>
+
+<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
+
+<h4 id="section">树的总结</h4>
+
+<p>1.二叉搜索树 <a href="http://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9">on_wiki</a>：一种特殊的二叉树，它满足下面的性质：任何一个节点的key值都比它左子树上的节点的key值要大，但是比它右子树上的节点的key值要小。节点查找，插入，删除等操作的时间复杂度都是$O(n)$</p>
+
+<p>难点在于删除节点的操作(下面摘自wiki)：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_del_wiki.png" alt="image" /></p>
+
+<p><strong>引用开始</strong> [一份不错的讲解<a href="http://www.cnblogs.com/Anker/archive/2013/01/28/2880581.html">来自博客园</a>]</p>
+
+<hr />
+
+<p>1.在二叉查找树中找某个节点的前驱和后继节点</p>
+
+<p>给定一个二叉查找树中的结点，找出在中序遍历顺序下某个节点的前驱和后继。如果树中所有关键字都不相同，则某一结点x的前驱就是小于key[x]的所有关键字中最大的那个结点，后继即是大于key[x]中的所有关键字中最小的那个结点。根据二叉查找树的结构和性质，不用对关键字做任何比较，就可以找到某个结点的前驱和后继。</p>
+
+<p>查找前驱步骤：先判断x是否有左子树，如果有则在left[x]中查找关键字最大的结点，即是x的前驱。如果没有左子树，则从x继续向上执行此操作，直到遇到某个结点是其父节点的右孩子结点，<strong>此时该父节点就是前驱</strong>。例如下图查找结点7的前驱结点6过程：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_pre.png" alt="image" /></p>
+
+<p>伪代码</p>
+
+<p><code>cpp
+TREE_SUCCESSOR(x)
+    if right[x] != NULL
+        then return TREE_MINMUM(right(x))
+    y=parent[x]
+    while y!= NULL and x ==left[y]
+           do x = y
+              y=parent[y]
+    return y
+</code></p>
+
+<p>查找后继步骤：先判断x是否有右子树，如果有则在right[x]中查找关键字最小的结点，即使x的后继。如果没有右子树，则从x的父节点开始向上查找，直到遇到某个结点是其父结点的左儿子的结点时为止，<strong>此时该父节点就是后继</strong>。例如下图查找结点13的后继结点15的过程：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_later.png" alt="image" /></p>
+
+<p>伪代码</p>
+
+<p><code>cpp
+TREE_PROCESSOR(x)
+    if right[x] != NULL
+        then return TREE_MINMUM(right(x))
+    y=parent[x]
+    while y!= NULL and x ==right[y]
+           do x = y
+              y=parent[y]
+    return y
+</code></p>
+
+<p>2.删除节点操作</p>
+
+<p>(1)结点z没有左右子树，则修改其父节点p[z]，<strong>删除父节点对它的链接</strong>。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_del1.png" alt="image" /></p>
+
+<p>(2)如果结点z只有一个子树（左子树或者右子树），通过在其子结点与父节点建立一条链接来删除z。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_del2.png" alt="image" /></p>
+
+<p>(3)如果z有两个子女，则先删除z的后继y(y没有左孩子)，再用y的内容来替代z的内容。</p>
+
+<p><strong>[博主提示：这里找到z的后继就是利用上面的查找后继的方法，根据wiki也可以是用z的前驱来替换。另外，删除后继和替换内容的操作其实也可以反过来，保证数据不丢失就行了]</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_del3.png" alt="image" /></p>
+
+<hr />
+
+<p><strong>引用结束</strong></p>
+
+<p><a href="http://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9">wiki</a>上的python代码实现节点删除操作，比后面的python代码更加简洁易懂</p>
+
+<p>代码采用了递归的形式处理，相当于只需要考虑了要删除的节点就在当前位置该如何处理，然后，对于只有左孩子节点或者只有右孩子结点或者没有孩子节点的情况直接进行节点覆盖就行了，但是，对于复杂的第三种情况，在左右孩子节点都存在的情况下，只需从它的右孩子结点中找到最小的那个元素即为要删除节点的后继(同理，可以找到左孩子结点中找到最大的那个元素，即为要删除节点的前驱)，然后复制后继节点中的内容到要删除的节点，最后删除后继节点即可。</p>
+
+<p>```python
+def find_min(self):   # Gets minimum node (leftmost leaf) in a subtree
+    current_node = self
+    while current_node.left_child:
+        current_node = current_node.left_child
+    return current_node</p>
+
+<p>def replace_node_in_parent(self, new_value=None):
+    if self.parent:
+        if self == self.parent.left_child:
+            self.parent.left_child = new_value
+        else:
+            self.parent.right_child = new_value
+    if new_value:
+        new_value.parent = self.parent</p>
+
+<p>def binary_tree_delete(self, key):
+    if key &lt; self.key:
+        self.left_child.binary_tree_delete(key)
+    elif key &gt; self.key:
+        self.right_child.binary_tree_delete(key)
+    else: # delete the key here
+        if self.left_child and self.right_child: # if both children are present
+            successor = self.right_child.find_min()
+            self.key = successor.key
+            successor.binary_tree_delete(successor.key)
+        elif self.left_child:   # if the node has only a <em>left</em> child
+            self.replace_node_in_parent(self.left_child)
+        elif self.right_child:  # if the node has only a <em>right</em> child
+            self.replace_node_in_parent(self.right_child)
+        else: # this node has no children
+            self.replace_node_in_parent(None)
+```</p>
+
+<p>参考内容1中在第三种情况下使用的是wiki中的第二种方案，并且是使用直接后继来代替要删除的节点。</p>
+
+<p>二叉查找树的python完整实现见下面AVL树的完整实现(除去AVLTree即可)[参考内容1中的代码相当冗余，但是可读性蛮好，个人认为如果要实现删除节点操作的话建议参考wiki上python代码的实现，也可以查看参考内容1中对代码的详细解释加深理解]</p>
+
+<p>如果原始的列表是基本有序的，那么得到的二叉树会变成一个扭曲的二叉树，性能就相当于一个链表了。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_worst.png" alt="image" /></p>
+
+<p>8.平衡二叉查找树：为了避免得到前面提到的扭曲的二叉查找树，于是就有了平衡二叉查找树的概念。</p>
+
+<p>AVL树是最先发明的平衡二叉树，它得名于它的发明者G.M. Adelson-Velsky和E.M. Landis，他们在1962年的论文《An algorithm for the organization of information》中发表了它。</p>
+
+<p><a href="http://zh.wikipedia.org/wiki/AVL%E6%A0%91">on_wiki</a></p>
+
+<p>AVL树的基本操作的实现</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_operations.png" alt="image" /></p>
+
+<p>如何进行旋转</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_rotate.png" alt="image" /></p>
+
+<p>旋转的实现描述</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_rotatedetails.png" alt="image" /></p>
+
+<p><a href="http://zhuyanfeng.com/archives/743">这篇文章对AVL树的讲解很好，并使用C++语言进行实现</a>以及<a href="http://zhuyanfeng.com/archives/716">另一篇文章</a></p>
+
+<p><a href="http://interactivepython.org/courselib/static/pythonds/Trees/balanced.html">参考内容1关于AVL树的讲解</a> —&gt; <a href="http://hujiaweibujidao.github.io/files/avltree.pdf">如果访问较慢可以点击这里下载</a></p>
+
+<p>(1)平衡因子：左子树与右子树的高度之差</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_bf.png" alt="image" /></p>
+
+<p>(2)分析为什么AVL树能够对查找，插入，删除操作都达到$O(logn)$的效率</p>
+
+<p>推理当中关于斐波那契数列在N很大的时候后项与前项之商接近黄金分割比的内容可参见<a href="http://zh.wikipedia.org/wiki/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B8">斐波那契数列on_wiki</a></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/201405/avl2.png" alt="image" /></p>
+
+<p>(3)左旋，右旋以及左右旋和右左旋</p>
+
+<p>左旋：如果新的根节点有左孩子结点，那么左孩子结点就成为原来的根节点的右孩子结点</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_left.png" alt="image" /></p>
+
+<p>右旋：如果新的根节点有右孩子结点，那么右孩子结点就成为原来的根节点的左孩子结点</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_right.png" alt="image" /></p>
+
+<p>一种特殊的情况，单一的左旋和右旋都不行，不停地重复交替，所以需要左右旋(或者右左旋)</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_leftright.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/201405/avl_leftright2.png" alt="image" /></p>
+
+<p>(4)如何在不重新计算子树的高度情况下修改旋转前的根节点和旋转后的根节点的平衡因子值</p>
+
+<p>下面是左旋的例子</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_rebal1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/201405/avl_rebal2.png" alt="image" /></p>
+
+<p>python代码实现[参考内容1未给出完整代码，下面代码是我自己补充的，添加了测试，如果有误请回复我]</p>
+
+<p>```
+class TreeNode:
+    def <strong>init</strong>(self,key,val,left=None,right=None,parent=None,balanceFactor=0):
+        self.key = key
+        self.payload = val
+        self.leftChild = left
+        self.rightChild = right
+        self.parent = parent
+        self.balanceFactor=balanceFactor; #default new node balance factor is 0</p>
+
+<pre><code>def hasLeftChild(self):
+    return self.leftChild
+
+def hasRightChild(self):
+    return self.rightChild
+
+def isLeftChild(self):
+    return self.parent and self.parent.leftChild == self
+
+def isRightChild(self):
+    return self.parent and self.parent.rightChild == self
+
+def isRoot(self):
+    return not self.parent
+
+def isLeaf(self):
+    return not (self.rightChild or self.leftChild)
+
+def hasAnyChildren(self):
+    return self.rightChild or self.leftChild
+
+def hasBothChildren(self):
+    return self.rightChild and self.leftChild
+
+def replaceNodeData(self,key,value,lc,rc):
+    self.key = key
+    self.payload = value
+    self.leftChild = lc
+    self.rightChild = rc
+    if self.hasLeftChild():
+        self.leftChild.parent = self
+    if self.hasRightChild():
+        self.rightChild.parent = self
+</code></pre>
+
+<p>class BinarySearchTree:</p>
+
+<pre><code>def __init__(self):
+    self.root = None
+    self.size = 0
+
+def length(self):
+    return self.size
+
+def __len__(self):
+    return self.size
+
+def inorder(self,node):
+    if node.leftChild:
+        self.inorder(node.leftChild)
+    self.print_node(node)
+    if node.rightChild:
+        self.inorder(node.rightChild)
+
+def levelorder(self,node):
+    nodes = []
+    nodes.append(node)
+    while len(nodes)&gt;0:
+        current_node = nodes.pop(0)
+        self.print_node(current_node)
+        if current_node.leftChild:
+            nodes.append(current_node.leftChild)
+        if current_node.rightChild:
+            nodes.append(current_node.rightChild)
+
+def print_node(self,node):
+    if node.parent:
+        print([node.key,node.payload,node.parent.key])
+    else:
+        print([node.key,node.payload])
+
+def put(self,key,val):
+    if self.root:
+        self._put(key,val,self.root)
+    else:
+        self.root = TreeNode(key,val)
+    self.size = self.size + 1
+
+def _put(self,key,val,currentNode):
+    if key &lt; currentNode.key:
+        if currentNode.hasLeftChild():
+            self._put(key,val,currentNode.leftChild)
+        else:
+            currentNode.leftChild = TreeNode(key,val,parent=currentNode)
+    else:
+        if currentNode.hasRightChild():
+            self._put(key,val,currentNode.rightChild)
+        else:
+            currentNode.rightChild = TreeNode(key,val,parent=currentNode)
+
+def __setitem__(self,k,v):
+    self.put(k,v)
+
+def get(self,key):
+    if self.root:
+        res = self._get(key,self.root)
+        if res:
+            return res.payload
+        else:
+            return None
+    else:
+        return None
+
+def _get(self,key,currentNode):
+    if not currentNode:
+        return None
+    elif currentNode.key == key:
+        return currentNode
+    elif key &lt; currentNode.key:
+        return self._get(key,currentNode.leftChild)
+    else:
+        return self._get(key,currentNode.rightChild)
+
+def __getitem__(self,key):
+    return self.get(key)
+
+def __contains__(self,key):
+    if self._get(key,self.root):
+        return True
+    else:
+        return False
+
+def delete(self,key):
+    if self.size &gt; 1:
+        nodeToRemove = self._get(key,self.root)
+        if nodeToRemove:
+            self.remove(nodeToRemove)
+            self.size = self.size-1
+        else:
+            raise KeyError('Error, key not in tree')
+    elif self.size == 1 and self.root.key == key:
+        self.root = None
+        self.size = self.size - 1
+    else:
+        raise KeyError('Error, key not in tree')
+
+def __delitem__(self,key):
+    self.delete(key)
+
+def spliceOut(self):
+    if self.isLeaf():
+        if self.isLeftChild():
+            self.parent.leftChild = None
+        else:
+            self.parent.rightChild = None
+    elif self.hasAnyChildren():
+        if self.hasLeftChild():
+            if self.isLeftChild():
+                self.parent.leftChild = self.leftChild
+            else:
+                self.parent.rightChild = self.leftChild
+            self.leftChild.parent = self.parent
+        else:
+            if self.isLeftChild():
+                self.parent.leftChild = self.rightChild
+            else:
+                self.parent.rightChild = self.rightChild
+            self.rightChild.parent = self.parent
+
+def findSuccessor(self):
+    succ = None
+    if self.hasRightChild():
+        succ = self.rightChild.findMin()
+    else:
+        if self.parent:
+            if self.isLeftChild():
+                succ = self.parent
+            else:
+                self.parent.rightChild = None
+                succ = self.parent.findSuccessor()
+                self.parent.rightChild = self
+    return succ
+
+def findMin(self):
+    current = self
+    while current.hasLeftChild():
+        current = current.leftChild
+    return current
+
+def remove(self,currentNode):
+    if currentNode.isLeaf(): #leaf
+        if currentNode == currentNode.parent.leftChild:
+            currentNode.parent.leftChild = None
+        else:
+            currentNode.parent.rightChild = None
+    elif currentNode.hasBothChildren(): #interior
+        succ = currentNode.findSuccessor()
+        succ.spliceOut()
+        currentNode.key = succ.key
+        currentNode.payload = succ.payload
+    else: # this node has one child
+        if currentNode.hasLeftChild():
+            if currentNode.isLeftChild():
+                currentNode.leftChild.parent = currentNode.parent
+                currentNode.parent.leftChild = currentNode.leftChild
+            elif currentNode.isRightChild():
+                currentNode.leftChild.parent = currentNode.parent
+                currentNode.parent.rightChild = currentNode.leftChild
+            else:
+                currentNode.replaceNodeData(currentNode.leftChild.key,
+                                            currentNode.leftChild.payload,
+                                            currentNode.leftChild.leftChild,
+                                            currentNode.leftChild.rightChild)
+        else:
+            if currentNode.isLeftChild():
+                currentNode.rightChild.parent = currentNode.parent
+                currentNode.parent.leftChild = currentNode.rightChild
+            elif currentNode.isRightChild():
+                currentNode.rightChild.parent = currentNode.parent
+                currentNode.parent.rightChild = currentNode.rightChild
+            else:
+                currentNode.replaceNodeData(currentNode.rightChild.key,
+                                            currentNode.rightChild.payload,
+                                            currentNode.rightChild.leftChild,
+                                            currentNode.rightChild.rightChild)
+</code></pre>
+
+<p>class AVLTree(BinarySearchTree):</p>
+
+<pre><code># def put(self,key,val):
+#     if self.root:
+#         self._put(key,val,self.root)
+#     else:
+#         self.root = TreeNode(key,val)
+#         self.root.balanceFactor = 0
+#     self.size = self.size + 1
+
+def _put(self,key,val,currentNode):
+    if key &lt; currentNode.key:
+        if currentNode.hasLeftChild():
+            self._put(key,val,currentNode.leftChild)
+        else:
+            currentNode.leftChild = TreeNode(key,val,parent=currentNode)
+            self.updateBalance(currentNode.leftChild)
+    else:
+        if currentNode.hasRightChild():
+            self._put(key,val,currentNode.rightChild)
+        else:
+            currentNode.rightChild = TreeNode(key,val,parent=currentNode)
+            self.updateBalance(currentNode.rightChild)
+
+def updateBalance(self,node):
+    if node.balanceFactor &gt; 1 or node.balanceFactor &lt; -1:
+        self.rebalance(node)
+        return
+    if node.parent != None:
+        if node.isLeftChild():
+            node.parent.balanceFactor += 1
+        elif node.isRightChild():
+            node.parent.balanceFactor -= 1
+        if node.parent.balanceFactor != 0:
+            self.updateBalance(node.parent)
+
+def rotateLeft(self,rotRoot): #rotate left
+    newRoot = rotRoot.rightChild
+    rotRoot.rightChild = newRoot.leftChild
+    if newRoot.leftChild != None:
+        newRoot.leftChild.parent = rotRoot
+    newRoot.parent = rotRoot.parent
+    if rotRoot.isRoot():
+        self.root = newRoot
+    else:
+        if rotRoot.isLeftChild():
+            rotRoot.parent.leftChild = newRoot
+        else:
+            rotRoot.parent.rightChild = newRoot
+    newRoot.leftChild = rotRoot
+    rotRoot.parent = newRoot
+    rotRoot.balanceFactor = rotRoot.balanceFactor + 1 - min(newRoot.balanceFactor, 0)
+    newRoot.balanceFactor = newRoot.balanceFactor + 1 + max(rotRoot.balanceFactor, 0)
+
+def rotateRight(self,rotRoot): #rotate right
+    newRoot = rotRoot.leftChild
+    rotRoot.leftChild = newRoot.rightChild # deal child
+    if newRoot.rightChild != None:
+        newRoot.rightChild.parent = rotRoot #deal child parent
+    newRoot.parent = rotRoot.parent #deal root parent
+    if rotRoot.isRoot():
+        self.root = newRoot
+    else:
+        if rotRoot.isLeftChild():
+            rotRoot.parent.leftChild = newRoot
+        else:
+            rotRoot.parent.rightChild = newRoot
+    newRoot.rightChild = rotRoot #deal new root right child
+    rotRoot.parent = newRoot #deal old root parent
+    rotRoot.balanceFactor = rotRoot.balanceFactor - 1 - min(newRoot.balanceFactor, 0)
+    newRoot.balanceFactor = newRoot.balanceFactor - 1 + max(rotRoot.balanceFactor, 0)
+
+def rebalance(self,node):
+    if node.balanceFactor &lt; 0:
+        if node.rightChild.balanceFactor &gt; 0:
+            self.rotateRight(node.rightChild)
+            self.rotateLeft(node)
+        else:
+            self.rotateLeft(node)
+    elif node.balanceFactor &gt; 0:
+        if node.leftChild.balanceFactor &lt; 0:
+            self.rotateLeft(node.leftChild)
+            self.rotateRight(node)
+        else:
+            self.rotateRight(node)
+</code></pre>
+
+<h1 id="test-code">test code</h1>
+<p># test avl tree
+print(‘test avl’)
+mytree = AVLTree()
+mytree[3]=”red”
+mytree[4]=”blue”
+mytree[6]=”yellow”
+mytree[2]=”at”
+mytree[5]=’dog’
+mytree[1]=’cat’
+mytree.levelorder(mytree.root)</p>
+
+<h1 id="test-bst">test bst</h1>
+<p>print(‘test bst’)
+mytree = BinarySearchTree()
+mytree[3]=”red”
+mytree[4]=”blue”
+mytree[6]=”yellow”
+mytree[2]=”at”
+mytree[5]=’dog’
+mytree[1]=’cat’
+mytree.levelorder(mytree.root)</p>
+
+<h1 id="test-avl">test avl</h1>
+<p># [4, ‘blue’]
+# [2, ‘at’, 4]
+# [6, ‘yellow’, 4]
+# [1, ‘cat’, 2]
+# [3, ‘red’, 2]
+# [5, ‘dog’, 6]
+# test bst
+# [3, ‘red’]
+# [2, ‘at’, 3]
+# [4, ‘blue’, 3]
+# [1, ‘cat’, 2]
+# [6, ‘yellow’, 4]
+# [5, ‘dog’, 6]</p>
+
+<p>```</p>
+
+<p>对于我给定的测试数据，对应得到的二叉查找树和AVL树如下图所示，二叉查找树明显不平衡，AVL树中所有节点的平衡因子为0或者1，在构造的过程中，共发生了一次左旋和一次右旋。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_avl.png" alt="images" /></p>
 
 ]]></content>
   </entry>
