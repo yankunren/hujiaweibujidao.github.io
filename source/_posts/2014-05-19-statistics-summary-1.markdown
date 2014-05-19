@@ -22,7 +22,7 @@ published: true
 
 条件概率：$P(A|B)=\frac{P(A \cap B)}{P(B)}$
 
-全概率：$P(B)=P(B|A)P(A)+P(B|A')P(A')$
+全概率：$P(B)=P(B|A)P(A)+P(B|A)P(A)$
 
 贝叶斯定理(将条件概率和全概率整合到一起)：$P(A|B)=\frac{P(A \cap B)}{P(B|A)P(A)+P(B|A')P(A')}$
 
