@@ -27,12 +27,12 @@ published: true
 
 本总结总共4章节，分开来阅读较好
 
-1.[概率]
+1.[概率](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/)
 
-2.[分布]
+2.[分布](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/)
 
-3.[描述性统计量]
+3.[描述性统计量](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/)
 
-4.[假设检验]
+4.[假设检验](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-4/)
 
 
