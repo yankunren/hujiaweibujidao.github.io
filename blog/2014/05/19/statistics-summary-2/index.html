@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: music - Hujiawei Bujidao</title>
+  <title>SS-Statistics Summary - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="Category: music">
+  <meta name="description" content="统计学那些事 Things of Statistics
+逸夫图书馆, 2014/5/19 第二部分 分布 1.概率质量函数PMF(Probability Mass Function)：数据集中数据值到它的概率的映射函数。直方图是各个值出现的频数，如果将频数除以样本总数，得到概率， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hujiaweibujidao.github.ioblog/categories/music">
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
@@ -87,51 +88,126 @@
 		<div id="content">
 			<div>
 
-	<article role="article">
+<article class="hentry" role="article">
 		
-		<header>
-			<h1 class="entry-title">Category: Music</h1>
-			
-		</header>
-		
-		<div id="blog-archives" class="category">
+  <header>
+    
+      <h1 class="entry-title">SS-Statistics Summary</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
 
 
 
   
-  <h2>2014</h2>
-
-<article>
-  
-<h1><a href="/blog/2014/05/18/love-you/">Love you</a></h1>
-<time datetime="2014-05-18T00:07:00+08:00" pubdate><span class='month'>May</span> <span class='day'>18</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/music/'>music</a></span>
-</footer>
 
 
-</article>
+<time datetime="2014-05-19T20:00:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
 
 
+<div class="entry-content"><p><strong><center>统计学那些事 Things of Statistics</center></strong>
+<strong><center>逸夫图书馆, 2014/5/19</center></strong></p>
 
-<article>
-  
-<h1><a href="/blog/2014/04/30/wouldnt-it-be-nice/">Wouldn't it be nice</a></h1>
-<time datetime="2014-04-30T00:07:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>30</span> <span class='year'>2014</span></time>
+<hr />
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/music/'>music</a></span>
-</footer>
+<h4 id="center-center"><center>第二部分 分布</center></h4>
 
+<p>1.概率质量函数PMF(Probability Mass Function)：数据集中数据值到它的概率的映射函数。直方图是各个值出现的频数，如果将频数除以样本总数，得到概率，归一化之后的直方图就是PMF。</p>
 
-</article>
+<p><img src="/images/math/pmf.png" alt="image" /></p>
 
+<p>2.累积分布函数CDF(Cumulative Distribution Function)：数据集中数据值到它在分布中概率的累积值的映射函数。例如，
+CDF(0) = 0; CDF(1) = 0.2; CDF(2) = 0.6; CDF(3) = 0.8; CDF(4) = 0.8; CDF(5) = 1，它的CDF图为一个阶跃函数：</p>
+
+<p><img src="/images/math/cdf.png" alt="image" /></p>
+
+<p>3.指数分布(exponential distribution)：一种连续分布。举例来说，<strong>观察一系列事件之间的间隔时间，若事件在每个时间点发生的概率相同，那么间隔时间的分布就近似指数分布</strong>。指数分布的CDF如下：</p>
+
+<script type="math/tex; mode=display">
+CDF(x)=1-e^{-\lambda x}
+</script>
+
+<p>参数$\lambda$决定了指数分布的形状，通常，指数分布的均值是$\frac{1}{\lambda}$，中位数是$\frac{log(2)}{\lambda}$。下图为$\lambda=2$的指数分布图：</p>
+
+<p><img src="/images/math/edcdf.png" alt="image" /></p>
+
+<p>如果判断一个分布是否是指数分布呢？一种办法是画出取对数之后的互补累积分布函数(CCDF=Complementary CDF=1-CDF(x))，CCDF是一条斜率为$-\lambda$的直线，原因如下：</p>
+
+<script type="math/tex; mode=display">
+y=CCDF(x)=1-CDF(x)=e^{-\lambda x} \quad => \quad log(y)=-\lambda x
+</script>
+
+<p>4.正态分布(Normal Distribution)：又叫高斯分布，是最常用的分布。对于正态分布的CDF还没有一种准确的表达，最常用的一种形式是以误差函数(error function)来表示，它是一个特殊的函数，表示为erf(x)：</p>
+
+<script type="math/tex; mode=display">
+CDF(x)=\frac{1}{2}[1+erf(\frac{x-\mu}{\sigma \sqrt{2}})] \quad erf(x)=\frac{2}{\sqrt{\pi}}\int_{0}^{x}e^{-r^{2}}dt
+</script>
+
+<p>其中，参数$\mu$和$\sigma$分别决定了正态分布的均值和标准差。下图为$\mu=2.0$和$\sigma=0.5$的正态分布的CDF图：</p>
+
+<p><img src="/images/math/ndcdf.png" alt="image" /></p>
+
+<p>根据大数定理，当我们处理大样本数据集(超过30个数据)，并且重复地从总体中抽取样本时，得到的数值分布就接近正态分布曲线。正态分布以均值为中心完全对称。</p>
+
+<p>关于正态分布有一个重要的结论，对任何数值分布来说(不论它的均值和标准差)，只要数值是正态分布，那么几乎100%的数值都分布在均值的-3到3个标准差之间。下面是正态曲线下数值的分布情况：</p>
+
+<p><img src="/images/math/nd.png" alt="image" /></p>
+
+<p>从中可以看出，在均值与1个标准差之间大概有34%的数值分布，在1个标准差和2个标准差之间大概有13%的数值分布，在2个标准差和3个标准差之间大概有2.1%的数值分布。</p>
+
+<p><a href="http://wikipedia.org/wiki/Log-normal_distribution">对数正态分布</a>：如果一组数据取对数之后服从正态分布，那么我们就称其服从对数正态分布。对数正态分布的 CDF 跟正态分布一样, 只是用 logx 代替原来的 x:</p>
+
+<script type="math/tex; mode=display">
+CDF_{lognormal}(x) = CDF_{normal}(log x)
+</script>
+
+<p>对数正态分布的均值与标准差不再是是$\mu$和$\sigma$了。可以证明,成人体重的分布是近似对数正态的。</p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/">http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 </div>
 
-		
+
 		<footer>
-			
+			<p class="meta">
+				
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hujiawei</span></span>
+
+				
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-19T20:00:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2014</time>
+				
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/math/'>math</a>
+  
+</span>
+
+
+			</p>
 			
 			<div class="sharing">
   
@@ -140,19 +216,41 @@
 </div>
 
 			
+			<p class="meta">
+				
+				<a class="basic-alignment left" href="/blog/2014/05/19/statistics-summary-1/" title="Previous Post: SS 1-Probability">&laquo; SS 1-Probability</a>
+				
+				
+			</p>
 		</footer>
-		
 	</article>
 	
 
 	
+	<section>
+		<h1>Comments</h1>
+		<div id="comments" aria-live="polite">
+			<!-- Duoshuo Comment BEGIN   data-title=""-->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hujiaweibujidao"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+
+		</div>
+	</section>
 	
-
-
 </div>
 
 <aside class="sidebar">
-  
   
 	<section>
 	<h1>关于博主</h1><br/>
@@ -272,8 +370,7 @@ src="http://hujiaweibujidao.github.io/music/Wouldnt-It-Be-Nice.mp3">
 	</ul>
 </section>
 	
-	
-  </aside>
+</aside>
 
 
 		</div>

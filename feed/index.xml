@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-19T18:35:26+08:00</updated>
+  <updated>2014-05-19T18:49:17+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,156 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SS-Statistics Summary]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/"/>
+    <updated>2014-05-19T20:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2</id>
+    <content type="html"><![CDATA[<p><strong><center>统计学那些事 Things of Statistics</center></strong>
+<strong><center>逸夫图书馆, 2014/5/19</center></strong></p>
+
+<hr />
+
+<h4 id="center-center"><center>第二部分 分布</center></h4>
+
+<p>1.概率质量函数PMF(Probability Mass Function)：数据集中数据值到它的概率的映射函数。直方图是各个值出现的频数，如果将频数除以样本总数，得到概率，归一化之后的直方图就是PMF。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/pmf.png" alt="image" /></p>
+
+<p>2.累积分布函数CDF(Cumulative Distribution Function)：数据集中数据值到它在分布中概率的累积值的映射函数。例如，
+CDF(0) = 0; CDF(1) = 0.2; CDF(2) = 0.6; CDF(3) = 0.8; CDF(4) = 0.8; CDF(5) = 1，它的CDF图为一个阶跃函数：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/cdf.png" alt="image" /></p>
+
+<p>3.指数分布(exponential distribution)：一种连续分布。举例来说，<strong>观察一系列事件之间的间隔时间，若事件在每个时间点发生的概率相同，那么间隔时间的分布就近似指数分布</strong>。指数分布的CDF如下：</p>
+
+<script type="math/tex; mode=display">
+CDF(x)=1-e^{-\lambda x}
+</script>
+
+<p>参数$\lambda$决定了指数分布的形状，通常，指数分布的均值是$\frac{1}{\lambda}$，中位数是$\frac{log(2)}{\lambda}$。下图为$\lambda=2$的指数分布图：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/edcdf.png" alt="image" /></p>
+
+<p>如果判断一个分布是否是指数分布呢？一种办法是画出取对数之后的互补累积分布函数(CCDF=Complementary CDF=1-CDF(x))，CCDF是一条斜率为$-\lambda$的直线，原因如下：</p>
+
+<script type="math/tex; mode=display">
+y=CCDF(x)=1-CDF(x)=e^{-\lambda x} \quad => \quad log(y)=-\lambda x
+</script>
+
+<p>4.正态分布(Normal Distribution)：又叫高斯分布，是最常用的分布。对于正态分布的CDF还没有一种准确的表达，最常用的一种形式是以误差函数(error function)来表示，它是一个特殊的函数，表示为erf(x)：</p>
+
+<script type="math/tex; mode=display">
+CDF(x)=\frac{1}{2}[1+erf(\frac{x-\mu}{\sigma \sqrt{2}})] \quad erf(x)=\frac{2}{\sqrt{\pi}}\int_{0}^{x}e^{-r^{2}}dt
+</script>
+
+<p>其中，参数$\mu$和$\sigma$分别决定了正态分布的均值和标准差。下图为$\mu=2.0$和$\sigma=0.5$的正态分布的CDF图：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/ndcdf.png" alt="image" /></p>
+
+<p>根据大数定理，当我们处理大样本数据集(超过30个数据)，并且重复地从总体中抽取样本时，得到的数值分布就接近正态分布曲线。正态分布以均值为中心完全对称。</p>
+
+<p>关于正态分布有一个重要的结论，对任何数值分布来说(不论它的均值和标准差)，只要数值是正态分布，那么几乎100%的数值都分布在均值的-3到3个标准差之间。下面是正态曲线下数值的分布情况：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/nd.png" alt="image" /></p>
+
+<p>从中可以看出，在均值与1个标准差之间大概有34%的数值分布，在1个标准差和2个标准差之间大概有13%的数值分布，在2个标准差和3个标准差之间大概有2.1%的数值分布。</p>
+
+<p><a href="http://wikipedia.org/wiki/Log-normal_distribution">对数正态分布</a>：如果一组数据取对数之后服从正态分布，那么我们就称其服从对数正态分布。对数正态分布的 CDF 跟正态分布一样, 只是用 logx 代替原来的 x:</p>
+
+<script type="math/tex; mode=display">
+CDF_{lognormal}(x) = CDF_{normal}(log x)
+</script>
+
+<p>对数正态分布的均值与标准差不再是是$\mu$和$\sigma$了。可以证明,成人体重的分布是近似对数正态的。</p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/">http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SS 1-Probability]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/"/>
+    <updated>2014-05-19T19:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1</id>
+    <content type="html"><![CDATA[<p><strong><center>统计学那些事 Things of Statistics</center></strong>
+<strong><center>逸夫图书馆, 2014/5/19</center></strong></p>
+
+<hr />
+
+<h4 id="center-center"><center>第一部分 概率</center></h4>
+<p>1.事件：对立事件(complementary event)，互斥事件(exclusive event)，相交事件(intersecting event)，相关事件(dependent event)，独立事件(independent event)，可以使用韦恩图(Venn Diagram)方便分析事件之间的关系。</p>
+
+<p>如果事件A和B会相互影响，那么它们是相关事件，否则是独立事件。
+事件A和B独立：$P(A|B)=P(A) \quad P(A \cap B)=P(A)P(B)$</p>
+
+<p>2.概率：条件概率(Conditional Probability)，全概率(Total Probability)，贝叶斯定理(Bayes’ Theorem)</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>条件概率：$P(A</td>
+      <td>B)=\frac{P(A \cap B)}{P(B)}$</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>全概率：$P(B)=P(B</td>
+      <td>A)P(A)+P(B</td>
+      <td>A’)P(A’)$</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>贝叶斯定理(将条件概率和全概率整合到一起)：$P(A</td>
+      <td>B)=\frac{P(A \cap B)}{P(B</td>
+      <td>A)P(A)+P(B</td>
+      <td>A’)P(A’)}$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>3.期望(Expectation)与方差(Variance)</p>
+
+<p>$E(x)=\Sigma xP(X=x) \quad Var(x)=E(x-\mu)^{2}=\Sigma (x-\mu)^2P(X=x)=E(x^{2})-(E(x))^{2}$</p>
+
+<p>线性变换之后的期望与方差：</p>
+
+<p>$E(ax+b)=aE(x)+b \quad Var(ax+b)=a^{2}Var(x)$
+$E(ax+by)=aE(x)+bE(y) \quad Var(ax+by)=a^{2}Var(x)+b^{2}Var(y)$</p>
+
+<p><strong>思考：为什么加上b方差并没有发生变化呢？因为在变量中增加常数b只是将概率分布移动了一下，分布的形状并没有发生改变，所以b并没有在方差中起到作用。</strong></p>
+
+<p>相互独立事件X和Y：</p>
+
+<p>$E(X+Y)=E(X)+E(Y) \quad Var(X+Y)=Var(X)+Var(Y)$
+$E(X-Y)=E(X)-E(Y) \quad Var(X-Y)=Var(X)+Var(Y)$</p>
+
+<p><strong>思考：为什么$Var(X-Y)=Var(X)+Var(Y)$？可以随便拿数据验证之。</strong>
+<strong>记住，一个随机变量减去另一个随机变量得到的概率分布的方差是两个随机变量的方差之和，方差只会增加！</strong></p>
+
+<p>下面两个图示演示了其结果</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/varxplusy.png" alt="image" /></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/varxminusy.png" alt="image" /></p>
+
+<p>相互独立的随机变量与独立观测值之间的区别：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/independentobservation.png" alt="image" /></p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/">http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Algorithms: Longest Common Subsequence]]></title>
@@ -5503,238 +5653,6 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 
 <p>这篇文章介绍的不错<a href="http://www.visiondummy.com/2014/03/eigenvalues-eigenvectors/">What are eigenvectors and eigenvalues?</a>&lt;p class=&#8217;post-footer&#8217;&gt;
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-3/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-3/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a> Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)&lt;/p&gt;</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LAS 2-Matrix]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/"/>
-    <updated>2014-04-29T14:03:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2</id>
-    <content type="html"><![CDATA[<p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
-<strong><center>逸夫图书馆, 2014/4/28</center></strong></p>
-
-<h3 id="centercenter"><center>矩阵</center></h3>
-
-<p>1.什么是矩阵？</p>
-
-<p>这个问题很多人进行过探讨，在网上也比较火，比如<a href="http://blog.csdn.net/myan/article/details/647511">孟岩的三篇《理解矩阵》</a>，知乎上<a href="http://www.zhihu.com/question/21082351">如何直观理解矩阵和线代</a>，还有其他人对矩阵的理解，例如<a href="http://spaces.ac.cn/index.php/archives/1765/">新理解矩阵1</a>和<a href="http://spaces.ac.cn/index.php/archives/1768/">新理解矩阵2</a>等等。</p>
-
-<p>那，到底什么是矩阵呢？</p>
-
-<p><strong>总结起来，我觉得，矩阵就是线性变换，作用在一个点上就是将这个点移动到该空间的另一个点，作用在向量上就是对这个向量进行放缩或者旋转或者反射等一系列的线性变换，作用在矩阵上那就是对矩阵中的每一个列向量进行线性变换之后然后进行叠加结果(这就是为什么矩阵的乘法有些奇妙的原因)。因为运动是相对的，你可以理解为坐标系没有变，被作用对象发生了变化，也可以理解为被作用对象没有变，变的是坐标系(也就是空间的基)。</strong></p>
-
-<blockquote>
-  <p>这里借用下小苏的图和解释。
-矩阵<script type="math/tex">% &lt;![CDATA[
-A=\left[ \begin{array}{cc} a11 & a12 \\ a21 & a22 \end{array} \right] %]]&gt;</script>
-事实上是由两个向量$[a11,a21]^T$和$[a12,a22]^T$（这里的向量都是列向量）组成，它描述了一个平面（仿射）坐标系。换句话说，这两个向量其实是这个坐标系的两个基，而运算$y=Ax$则是告诉我们，在$A$这个坐标系下的$x$向量，在$I$坐标系下是怎样的。这里的$I$坐标系就是我们最常用的直角坐标系，也就是说，任何向量（包括矩阵里边的向量），只要它前面没有矩阵作用于它，那么它都是在直角坐标系下度量出来的。下图所用的矩阵<script type="math/tex">% &lt;![CDATA[
-A=\left[ \begin{array}{cc} 3 & 2 \\ 1 & 3 \end{array} \right] %]]&gt;</script>
-构成了一个仿射坐标系，在这个坐标系下，有一个向量$x=[2,2]^T$，它在直角坐标系下测得的坐标为$[10,8]^T$，现在我们不难发现，直接用矩阵乘法来计算，有
-$Ax=[3∗2+2∗2,1∗2+3∗2]^T=[10,8]^T$
-小苏对此展开讨论了<a href="http://spaces.ac.cn/index.php/archives/1768/">它和矩阵乘法之间的联系</a></p>
-</blockquote>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/xianxinbianhua.png" alt="image" /></p>
-
-<p><a href="http://zh.wikipedia.org/wiki/%E7%9F%A9%E9%98%B5">wiki</a>上关于矩阵和线性变换关系的解释，其中提到了从n维空间到m维空间的任何线性变换都对应于一个矩阵，其中也提到了相似矩阵其实是相同的线性变换在不同的坐标基下的不同表示而已。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/xianxingbianhuan.png" alt="image" /></p>
-
-<p>2.线性变换</p>
-
-<p>好吧，矩阵是线性变换，那什么是线性变换呢？</p>
-
-<p>wiki中对线性变换的解释，这些变换其实主要包括缩放、旋转、反射等。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/xianxinbianhua2.png" alt="image" /></p>
-
-<p>(1)反射变换</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-
-A=\left[ \begin{array}{cc} -1 & 0 \\ 0 & 1 \end{array} \right] \quad
-\rightarrow \left\{ \begin{array}{cc} x'=-x \\ y'=y \end{array} \right.
- %]]&gt;</script>
-
-<p>水平反射，x变成对应的相反数，y不变。</p>
-
-<p>什么是反射？<a href="http://zh.wikipedia.org/wiki/%E5%8F%8D%E5%B0%84_(%E6%95%B0%E5%AD%A6)">wiki</a>上的解释是：<strong>反射是把一个物体变换成它的镜像的映射。要反射一个平面图形，需要“镜子”是一条直线（反射轴），对于三维空间中的反射就要使用平面作为镜子。</strong></p>
-
-<p><strong>最常用的反射变换就是<a href="http://zh.wikipedia.org/wiki/%E8%B1%AA%E6%96%AF%E9%9C%8D%E5%B0%94%E5%BE%B7%E5%8F%98%E6%8D%A2">Householder变换</a>了，这一变换将一个向量变换为由一个超平面反射的镜像，是一种线性变换。Householder变换可以将向量的某些元素置零，同时保持该向量的范数不变。Householder变换在矩阵的QR分解中非常重要！</strong>关于Householder的内部原理以及代码实现请参考我写的另一份总结<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">《Numerical Methods Using Matlab》</a>第三章 矩阵特征值和奇异值分解</p>
-
-<p>下图为Householder变换的图示，向量x在矩阵H的作用下得到的向量Hx和原向量x刚好是镜像反射关系。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/HouseholderReflection.png" alt="image" /></p>
-
-<p>(2)放缩变换</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-
-A=\left[ \begin{array}{cc} \frac{3}{2} & 0 \\ 0 & \frac{3}{2} \end{array} \right] \quad
-\rightarrow \left\{ \begin{array}{c} x'=\frac{3}{2}x \\ y'=\frac{3}{2}y \end{array} \right.
- %]]&gt;</script>
-
-<p>放缩反射，x和y都变成原来的$\frac{3}{2}$倍。</p>
-
-<p>(3)旋转变换</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-
-A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\frac{\pi}{6}) & \cos(\frac{\pi}{6}) \end{array} \right] \quad
-\rightarrow \left\{ \begin{array}{c} x'=\frac{\sqrt{3}}{2}x-\frac{1}{2}y \\ y'=\frac{1}{2}x+\frac{\sqrt{3}}{2}y \end{array} \right.
- %]]&gt;</script>
-
-<p>旋转反射，<a href="http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan1.png">一般性的证明请看这张图</a>，<a href="http://zh.wikipedia.org/wiki/%E6%97%8B%E8%BD%AC">wiki</a>中对二维空间旋转的解释。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan2.png" alt="image" /></p>
-
-<p><strong>旋转矩阵是在乘以一个向量的时候有改变向量的方向但不改变大小的效果的矩阵。旋转矩阵不包括点反演，它可以把右手坐标系改变成左手坐标系或反之。所有旋转加上反演形成了正交矩阵的集合。旋转可分为主动旋转与被动旋转。主动旋转是指将向量逆时针围绕旋转轴所做出的旋转。被动旋转是对坐标轴本身进行的逆时针旋转，它相当于主动旋转的逆操作。</strong></p>
-
-<p>旋转矩阵的性质：
-<strong>一个矩阵是旋转矩阵，当且仅当它是正交矩阵并且它的行列式是单位一。正交矩阵的行列式是 ±1；如果行列式是 −1，则它包含了一个反射而不是真旋转矩阵。</strong></p>
-
-<p><strong>旋转矩阵是正交矩阵，如果它的列向量形成 ${R}^{n}$ 的一个正交基，就是说在任何两个列向量之间的标量积是零(正交性)而每个列向量的大小是单位一(单位向量)。</strong></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/xuanzhuanjuzhen.png" alt="image" /></p>
-
-<p>最常用的旋转矩阵就是<a href="http://zh.wikipedia.org/wiki/%E5%90%89%E6%96%87%E6%96%AF%E6%97%8B%E8%BD%AC">Givens旋转</a>。<strong>Givens 旋转在数值线性代数中主要的用途是在向量或矩阵中介入零。例如，这种效果可用于计算矩阵的 QR分解。超过Householder变换的一个好处是它们可以轻易的并行化，另一个好处是对于非常稀疏的矩阵计算量更小。</strong></p>
-
-<p>Given旋转矩阵的表达：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/givens.png" alt="image" /></p>
-
-<p>Given旋转矩阵的稳定计算：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/givens2.png" alt="image" /></p>
-
-<p>3.逆矩阵和伴随矩阵</p>
-
-<p>理解了矩阵就是线性变换之后，那么就很容易明白逆矩阵就是将被作用对象从变换后的位置变换回来！</p>
-
-<p>那，伴随矩阵又是什么呢？</p>
-
-<p><a href="http://zh.wikipedia.org/wiki/%E4%BC%B4%E9%9A%8F%E7%9F%A9%E9%98%B5">wiki</a>在线性代数中，一个方形矩阵的伴随矩阵A<em>是一个类似于逆矩阵$A^{-1}$的概念。如果矩阵可逆，那么它的逆矩阵和它的伴随矩阵之间只差一个系数($A^{-1}=\frac{A^{</em>}}{det(A)}$)。也就是说，<strong>伴随矩阵其实是变换回来之后还进行了一次放缩，放缩的大小与矩阵的行列式值有关</strong>。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/bansuijuzhen.png" alt="image" /></p>
-
-<p>举例说明伴随矩阵的计算，伴随矩阵其实就是原矩阵的代数余子式矩阵的转置！</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/bansuijuzhen2.png" alt="image" /></p>
-
-<p>伴随矩阵的性质</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/bansuijuzhen3.png" alt="image" /></p>
-
-<p>还需要注意的是，<strong>逆矩阵是对于方阵来说的，只有方阵还有逆矩阵的概念，那要不是方阵呢？那么就是广义的逆矩阵</strong>！广义逆矩阵在最小二乘法中有重要的应用。关于逆矩阵的求解以及代码实现请参考我写的另一份总结<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">《Numerical Methods Using Matlab》</a>第一章 线性方程组求解，最小二乘问题请参考第四章 曲线拟合和多项式插值。</p>
-
-<p>4.秩</p>
-
-<p>什么是矩阵的秩？</p>
-
-<p><a href="http://zh.wikipedia.org/wiki/%E7%A7%A9_(%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0)">wiki中的解释</a>在线性代数中，一个矩阵A的列秩是A的线性独立的纵列的极大数目。类似地，行秩是A的线性独立的横行的极大数目。矩阵的列秩和行秩总是相等的，因此它们可以简单地称作矩阵A的秩。通常表示为r(A)，rk(A)或rank A。m × n矩阵的秩最大为m和n中的较小者，表示为 min(m,n)。有尽可能大的秩的矩阵被称为有满秩；类似的，否则矩阵是秩不足（或称为“欠秩”）的。</p>
-
-<p><strong>矩阵的行秩与列秩相等，是线性代数基本定理的重要组成部分. 其基本证明思路是，矩阵可以看作线性映射的变换矩阵，列秩为像空间的维度，行秩为非零原像空间的维度，因此列秩与行秩相等，即像空间的维度与非零原像空间的维度相等（这里的非零原像空间是指约去了零空间后的商空间：原像空间）。这从矩阵的奇异值分解就可以看出来。</strong><a href="http://zh.wikipedia.org/wiki/%E7%A7%A9_(%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0)">证明可以参见wiki</a></p>
-
-<p>黄老师的总结中还给出了<strong>初等变换不改变矩阵的行秩和列秩</strong>的证明，此外还有，以下四个表述是等价的：</p>
-
-<p>• A 为满秩矩阵. 
-• A 为可逆矩阵. 
-• A 为非奇异矩阵.
-• |A| $\ne$ 0.</p>
-
-<p>说了这么多，那到底矩阵的秩对于矩阵表示的这个线性变换来说意味着什么？</p>
-
-<p><strong>我的理解是，矩阵的秩其实就是至少需要几个基本的基向量就能完全表示各种不同形式的该类线性变换。</strong></p>
-
-<!--
-矩阵的一个重要用途是解线性方程组。线性方程组中未知量的系数可以排成一个矩阵，加上常数项，则称为增广矩阵。另一个重要用途是表示线性变换，即是诸如f(x)  = 4x之类的线性函数的推广。设定基底后，某个向量v可以表示为m×1的矩阵,而线性变换f可以表示为行数为m的矩阵A，使得经过变换后得到的向量f(v)可以表示成Av的形式。矩阵的特征值和特征向量可以揭示线性变换的深层特性。
--->
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LAS 1-Determinant]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1/"/>
-    <updated>2014-04-29T14:03:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1</id>
-    <content type="html"><![CDATA[<p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
-<strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
-
-<h4 id="center1center"><center>1.行列式</center></h4>
-
-<p><strong>什么是行列式？</strong></p>
-
-<p>这个问题一点都不简单！</p>
-
-<p>推荐阅读的博文<a href="http://spaces.ac.cn/index.php/archives/2208/">新理解矩阵5</a>以及<a href="http://www.matrix67.com/blog/archives/4294">我们需要怎样的数学教育？</a>，后者在网上比较火，简单的语言道出行列式以及矩阵的“天机”。</p>
-
-<blockquote>
-  <p>直到今天看到<a href="http://mathoverflow.net/questions/7584/what-are-the-most-misleading-alternate-definitions-in-taught-mathematics">这个网页</a>，才看见有人一语道破线性代数的真谛（这也是我终于决定写成此文的直接原因）。我终于找到了我那一个学期企图寻找的东西。就好像把 $x$ 变成 $2 x$ 一样，我们经常需要把 $(x, y)$ 变成 $(2 x + y, x – 3 y)$ 之类的东西，这就叫做线性变换。于是才想到定义矩阵乘法，用于表示一切线性变换。几何上看，把平面上的每个点 $(x, y)$ 都变到 $(2 x + y, x – 3 y)$ 的位置上去，效果就相当于对这个平面进行了一个“线性的拉扯”。
-矩阵的乘法，其实就是多个线性变换叠加的效果，它显然满足结合律，但不满足交换律。主对角线全是 1 的矩阵所对应的线性变换其实就是不变的意思，因此它叫做单位矩阵。矩阵 A 乘以矩阵 B 得单位矩阵，就是做完线性变换 A 后再做一次线性变换 B 就又变回去了的意思，难怪我们说矩阵 B 是矩阵 A的逆矩阵。课本上对行列式的定义千奇百怪，又是什么递归，又是什么逆序对，还编写口诀帮助大家记忆。其实，<strong>行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积</strong>。因此，单位矩阵的行列式当然就为 1，某行全为 0 的行列式显然为 0 （因为某一维度会被无视掉，线性变换会把整个平面压扁）， $|A·B|$ 显然等于 $|A|·|B|$ 。行列式为 0 ，对应的矩阵当然不可逆，因为这样的线性变换已经把平面压成一条线了，什么都不能把它变回去了。当然，更高阶的矩阵就对应了更高维的空间。一瞬间，所有东西都解释清楚了。</p>
-</blockquote>
-
-<!--![image][14]-->
-
-<p>我认为，上面的表达不完全正确，比如其核心[行列式的真正定义就一句话：每个单位正方形在线性变换之后的面积]，但是，它真正让我们意识到要好好思考，到底，什么是行列式？</p>
-
-<p><strong><a href="http://zh.wikipedia.org/wiki/%E8%A1%8C%E5%88%97%E5%BC%8F">Wiki</a>的解释：行列式其实是一个函数，一个将方阵转换成一个标量的函数！[就是说，行列式本质上就相当于一个函数]</strong></p>
-
-<p><strong>行列式可以看做是有向面积或体积的概念在一般的欧几里得空间中的推广。或者说，在 n 维欧几里得空间中，行列式描述的是一个线性变换对“体积”所造成的影响。</strong></p>
-
-<p>首先要注意的是如果是指矩阵的行列式，那么矩阵中只有方阵才有行列式！对方阵求行列式得到一个值，这个值就是指这个$n \times n$方阵(因为矩阵都可以看做是一个线性变换，所以就是指一个线性变换)对n维空间中的“体积”所造成的影响。在二维空间中，这个“体积”实际上是平行四边形的面积，在三维空间中，“体积”就是指平行六面体的体积。更高维以此类推。</p>
-
-<p>先看下行列式在二维和三维空间的几何意义(wiki解释得非常详细！)</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi2.png" alt="image" /></p>
-
-<p>另一个解释(在矩阵条目中的解释)，<strong>一个方阵的行列式等于0当且仅当该方阵不可逆。系数是实数的时候，二维（三维）方阵A的行列式的绝对值表示单位面积（体积）的图形经过A对应的线性变换后得到的图形的面积（体积），而它的正负则代表了对应的线性变换是否改变空间的定向：行列式为正说明它保持空间定向，行列式为负则说明它逆转空间定向。</strong></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi13.png" alt="image" /></p>
-
-<p>下面看下什么是用行列式怎么理解线性变换，<strong>线性变换就是把一个向量线性地变为另一个向量</strong>，<strong>行列式表示的是线性变换前后平行六面体的体积的变化系数</strong>。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi3.png" alt="image" /></p>
-
-<p>面积或体积的定义是恒正的，而行列式是有正有负的，因此需要引入有向面积和有向体积的概念。如果行列式表示的是线性变换对体积的影响，那么行列式的正负就表示了空间的定向。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi4.png" alt="image" /></p>
-
-<p><strong>由二维及三维的例子，可以看到一般的行列式应该具有怎样的性质。在n维欧几里得空间中，作为“平行多面体”的“体积”的概念的推广，行列式继承了“体积”函数的性质。首先，行列式需要是线性的，这可以由面积的性质类比得到。这里的线性是对于每一个向量来说的，因为当一个向量变为原来的a倍时，“平行多面体”的“体积”也变为原来的a倍。其次，当一个向量在其它向量组成的“超平面”上时，n维“平行多面体”的“体积”是零（可以想像三维空间的例子）[在向量组中就是指它们线性相关了]。也就是说，当向量线性相关时，行列式为零。</strong></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi5.png" alt="image" /></p>
-
-<p>行列式的展开，代数余子式，拉普拉斯公式用于计算矩阵的行列式值</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi6.png" alt="image" /></p>
-
-<p>行列式的性质：
-<strong>若两个矩阵相似，那么它们的行列式相同。这是因为两个相似的矩阵之间只相差一个基底变换，而行列式描述的是矩阵对应的线性映射对体积的影响，而不是体积，所以基底变换并不会影响行列式的值。</strong></p>
-
-<p><strong>行列式是所有特征值（按代数重数计）的乘积。这可由矩阵必和其若尔当标准型相似推导出。特殊地，三角矩阵的行列式等于其对角线上所有元素的乘积</strong></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi8.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi9.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi10.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi11.png" alt="image" /></p>
-
-<p>行列式与线性方程组，矩阵以及多项式还有多重积分之间的关系。</p>
-
-<p>当线性方程组对应的行列式不为零时，由克莱姆法则，可以直接以行列式的形式写出方程组的解。但用克莱姆法则求解计算量巨大，因此并没有实际应用价值，一般用于理论上的推导。</p>
-
-<p>多项式$p(x) = det(xI - A)$称为方块矩阵A的特征值多项式。这是一个由行列式定义的多项式，它的解是矩阵所有的特征值。</p>
-
-<p>行列式与多重积分的关系主要就是<a href="http://zh.wikipedia.org/wiki/%E9%9B%85%E5%8F%AF%E6%AF%94%E7%9F%A9%E9%98%B5">雅可比行列式 on wiki</a>了。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/hanglieshi12.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/hanglieshi7.png" alt="image" /></p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
