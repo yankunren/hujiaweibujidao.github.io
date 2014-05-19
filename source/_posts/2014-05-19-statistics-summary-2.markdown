@@ -44,7 +44,7 @@ $P(X=0)=p, P(X=1)=q, (q=1-p)$
 
 (2)二项分布
 
-二项分布的分布律为 $P(X=k)= {{n} \choose {k}} p^{k}q^{1-k}$，因为 $P(X=k)$ 刚好是 $(p+q)^{n}$ 的二项式系数，所以这个分布就叫二项分布。二项分布是从n重伯努利试验中得到的分布，伯努利试验是指相互独立的试验，每次试验的结果要么成功要么失败(或者说某个事件要么发生要么不发生)。
+二项分布的分布律为 $P(X=k)= {n \choose k} p^{k}q^{1-k}$，因为 $P(X=k)$ 刚好是 $(p+q)^{n}$ 的二项式系数，所以这个分布就叫二项分布。二项分布是从n重伯努利试验中得到的分布，伯努利试验是指相互独立的试验，每次试验的结果要么成功要么失败(或者说某个事件要么发生要么不发生)。
 
 ![image](http://hujiaweibujidao.github.io/images/math/disc_binomial.png)
 ![image](http://hujiaweibujidao.github.io/images/math/disc_binomial2.png)
