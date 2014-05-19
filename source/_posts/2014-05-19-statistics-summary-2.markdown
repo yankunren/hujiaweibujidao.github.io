@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "SS-Statistics Summary"
+title: "SS 2-Distribution"
 date: 2014-05-19 20:00
 comments: true
 categories: math
