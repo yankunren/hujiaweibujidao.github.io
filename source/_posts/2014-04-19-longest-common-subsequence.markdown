@@ -16,6 +16,8 @@ categories: algorithm
 
 2.[算法设计、分析与实现从入门到精通](http://book.douban.com/subject/4875278/)
 
+----------
+
 1.问题描述
 
 ![image](/images/algos/lcs1.png)
