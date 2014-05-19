@@ -29,9 +29,9 @@ published: true
 
 1.[概率](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/)
 
-2.[分布](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/)
+2.[描述性统计量](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/)
 
-3.[描述性统计量](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/)
+3.[分布](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/)
 
 4.[假设检验](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-4/)
 
