@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "SS-Statistics Summary"
+title: "SS 3-Descriptive Statistics"
 date: 2014-05-19 21:00
 comments: true
 categories: math
