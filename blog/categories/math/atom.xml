@@ -4,7 +4,7 @@
   <title><![CDATA[Category: math | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-20T00:07:41+08:00</updated>
+  <updated>2014-05-20T00:20:24+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -123,7 +123,7 @@ r_{XY}=\frac{n\Sigma{XY}-\Sigma{X}\Sigma{Y}}{\sqrt{[n\Sigma{X^2}-(\Sigma{X})^2][
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[SS 3-Distribution]]></title>
+    <title type="html"><![CDATA[SS 3-Continuous Distribution]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-1/"/>
     <updated>2014-05-19T20:30:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-1</id>
@@ -133,8 +133,6 @@ r_{XY}=\frac{n\Sigma{XY}-\Sigma{X}\Sigma{Y}}{\sqrt{[n\Sigma{X^2}-(\Sigma{X})^2][
 <hr />
 
 <h4 id="center-center"><center>第三部分 分布之连续型随机变量分布</center></h4>
-
-<p>1.连续性随机变量及其概念密度</p>
 
 <p>连续型随机变量，概率密度及它的性质</p>
 
@@ -232,7 +230,7 @@ CDF_{lognormal}(x) = CDF_{normal}(log x)
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[SS 3-Distribution]]></title>
+    <title type="html"><![CDATA[SS 3-Discrete Distribution]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/"/>
     <updated>2014-05-19T20:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2</id>
