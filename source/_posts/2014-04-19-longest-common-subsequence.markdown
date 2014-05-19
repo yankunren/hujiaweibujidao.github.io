@@ -24,7 +24,7 @@ categories: algorithm
 
 2.最优子结构和子问题重叠
 
-![image](/images/algos/lcs1.png)
+![image](/images/algos/lcs2.png)
 
 3.5种实现方式
 
