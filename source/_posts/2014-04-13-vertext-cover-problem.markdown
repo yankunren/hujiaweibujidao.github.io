@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Vertext Cover Problem"
+title: "Algorithms: Vertext Cover Problem"
 date: 2014-04-13 23:57
 comments: true
 categories: algorithm
