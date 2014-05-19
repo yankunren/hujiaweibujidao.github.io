@@ -45,20 +45,6 @@ categories: algorithm
 
 首先，界的选择。在一个确定的无向图G中，每个顶点的边即确定了，那么对于该无向图中k个顶点能够覆盖的最多的边数e也就可以确定了！只要对顶点按照边的数目降序排列，然后选择前k个顶点，将它们的边数相加即能得到一个边数上界！因为这k个顶点相互之间可能有边存在也可能没有，所以这是个上界，而且有可能达到。以图G为例，各个顶点的边数统计，并采用降序排列的结果如下：
 
-<!--顶点 | 2 | 3 | 1| 5 | 6| 4| 7 
---| --| --|--|--|--|--|--
-边数 | 3 | 3 | 2| 2| 2| 1| 1-->
-<!--
-顶点 | 边数
-----| ---- 
-2 | 3 
-3 | 3
-1 | 2 
-5 | 2
-6 | 2
-4 | 1
-7 | 1-->
-
 ![image](/images/201404/exp1-f3.png)
 
 假设取k=3个点，那么有Up(e)=(3+3+2)=8 > 7 条边（7为图G的总边数），也就是说，如果从图G中取3个点，要覆盖8条边是有可能的。但是，如果取k=2个点，那么有Up(e)=(3+3)=6 < 7 条边，说明从图G中取2个点，是不可能覆盖G中的全部7条边的！基于这个上界，可以在分支树中扩展出来的节点进行验证，已知它还可以选择的顶点数目以及还需要覆盖的边的条数，加上顶点的状态（下面会分析说明）即可判断当前节点是否存在解！如果不存在即可进行剪枝了。
@@ -96,3 +82,381 @@ categories: algorithm
 
 OJ系统的结果为：时间 156ms  空间 1.0MB
 
+本人对指针领悟能力有限，C++也是一知半解，OJ只能用C或者C++，所以下面的C++代码效率不高，仅供参考，:-)
+
+```
+#include <iostream>
+#include <vector>
+using namespace std;
+#define MAX_NODE 101
+#define INDEBUG 0
+int8_t graph[MAX_NODE][MAX_NODE];//int -> int8_t
+//int edges[MAX_NODE];//0 is redudent
+//int nodes[MAX_NODE];//the order of node
+int t,m,n,k,a,b;
+class VCNode {//Vertex Cover Node
+public:
+    int p;//points can be used
+    int e;//edges to cover!!
+    int index[MAX_NODE];//the index of each node in array [node], index[k]=i!!
+    int edge[MAX_NODE];//MAX_NODE the edge number of each node, edge[i]=j!!
+    int node[MAX_NODE];//the order of the node
+    int state[MAX_NODE];//the state of each node ** 0 can be used / 1 used / -1 can not be used
+//    int graph[MAX_NODE][MAX_NODE];//the graph on the node//no need,just use the global graph
+    // node k is in index[k]=i position in array [node]
+    // node i has number of edge[i]=j edges
+};
+class Minheap {//Min Heap
+public:
+    vector<VCNode> nodes;
+    
+    void insert(VCNode node);
+    VCNode popmin();
+//  void print();
+};
+void Minheap::insert(VCNode node) {
+    nodes.push_back(node);
+    //  cout << "size is " << nodes.size() << endl;//
+    int curpos = (int)nodes.size() - 1; // current position
+    int parent = (curpos - 1) / 2; //parent position
+    while (curpos != parent && parent >= 0) { //parent is still in heap
+        if (nodes[parent].e > nodes[curpos].e) { //swap parent and child
+            VCNode temp = nodes[parent];
+            nodes[parent] = nodes[curpos];
+            nodes[curpos] = temp;
+        } else {
+            break; //no longer level up!!!
+        }
+        curpos = parent; //when curpos=parent=0, exit!!!
+        parent = (curpos - 1) / 2; //relocate the parent position
+    }
+}
+VCNode Minheap::popmin() {
+    VCNode node;
+    if (nodes.size() > 0) { //have nodes left
+        node = nodes[0]; //get the first element
+        nodes.erase(nodes.begin()); //remove the first element
+        if (nodes.size() > 0) { //at least have one element more
+            VCNode last = nodes[nodes.size() - 1]; //get the last element
+            nodes.pop_back(); //pop the last element
+            nodes.insert(nodes.begin(), last); //put it in the first place
+            int csize = (int)nodes.size(); //current size
+            int curpos = 0; //current position
+            
+            // rebuild the minheap
+            while (curpos < (csize / 2)) { //reach to the last parent node!!
+                int left = 2 * curpos + 1; //left child
+                int right = 2 * curpos + 2; //right child
+                int min = left; //min store the min child
+                if (right < csize) { //have left and right childs
+                    if (nodes[right].e < nodes[left].e) {
+                        min = right;
+                    }
+                }
+                if (min < csize) { //min child exist!!
+                    if (nodes[min].e < nodes[curpos].e) { //need to swap current position with child
+                        VCNode temp = nodes[min];
+                        nodes[min] = nodes[curpos];
+                        nodes[curpos] = temp;
+                    }else { //min child no exits!! exit!!
+                        break; //can break now!!
+                    }
+                }
+                curpos = min;
+            }
+        }
+    }
+    return node;
+}
+//void Minheap::print() {
+//  cout << "print heap" << endl;
+//  for (int i = 0; i < (int)nodes.size(); i++) {
+//      cout << "edge: " << nodes[i].e << " node: " << nodes[i].p << endl;
+//  }
+//  cout << "heap end" << endl;
+//}
+// print array
+void printArray(int a[], int start, int end){
+    if (INDEBUG) {
+        cout << "print array form " << start << " to " << end << endl;
+        for (int i=start; i<=end; i++) {
+            cout << a[i] << " ";
+        }
+        cout << endl << "print array end" << endl;
+    }
+}
+// print the graph
+void printGraph(int graph[][MAX_NODE]){
+    if (INDEBUG) {
+        for(int i=1;i<=n;i++){//0 no need
+            for(int j=1;j<=n;j++){
+                cout << graph[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+}
+// partition function for quick sort
+int partition2(int a[], int low, int high, int b[]){
+    int key = a[high];
+    int i=low-1;
+    for (int j=low; j<high; j++) {
+        if (a[j]>=key) {
+            i++;
+            swap(a[i], a[j]);
+            swap(b[i], b[j]);
+        }
+    }
+    swap(a[high], a[i+1]);
+    swap(b[high], b[i+1]);
+    return i+1;
+}
+// quick sort
+void quicksort2(int a[], int low, int high, int b[]) {
+    if (low < high) {
+        int p = partition2(a,low,high, b);
+        quicksort2(a, low, p-1, b);
+        quicksort2(a, p+1, high, b);
+    }
+}
+// sum of the first k elements with state==0!!!
+int sumofkmax(int edges[], int p, int nodes[], int state[]){
+    quicksort2(edges, 1, n, nodes);
+    int sum=0,count=0;
+    // edges[i] corresponse to nodes[i], its state is state[nodes[i]]
+    for(int i=1;i<=n;i++){//attention to i range!!
+        if (state[nodes[i]]==0) {
+            sum+=edges[i];
+            count++;
+            if (count == p) {//enough!
+                break;
+            }
+        }
+    }
+    return sum;
+}
+// verify the current node can be achievable
+bool verify(int edges[], int p, int e, int nodes[], int state[]){
+    //caculate the sum of the first p max elements in array edges!!
+    int sum = sumofkmax(edges, p, nodes, state);
+    // edge of nodes[i] is edges[i]!!!
+    if(sum >= e){// may be this can be achieved
+        return true;
+    }
+    return false;
+}
+// build the index of node in array [index]
+void buildIndex(int node[],int index[]){
+    for (int i=1; i<=n; i++) {
+        index[node[i]] = i;
+    }
+}
+// get the next node: state==0 && order first!!!
+int nextNode(int state[], int nodes[]){
+    for (int i=1; i<=n; i++) {
+        if (state[nodes[i]]==0) {
+            return nodes[i];
+        }
+    }
+    return -1;
+}
+// generate the left child
+VCNode genLeft(VCNode curnode, int label){
+    VCNode left;//choose node label!
+    left.p = curnode.p - 1;//remove one node
+    left.e = curnode.e;
+    for (int i=0; i<=n; i++) {//first copy all infos
+        left.index[i]=curnode.index[i];
+        left.state[i]=curnode.state[i];//init node state
+        left.edge[i]=curnode.edge[i];//copy edge info
+        left.node[i]=curnode.node[i];//copy node info
+//        for (int j=0; j<=n; j++) {
+//            left.graph[i][j] = curnode.graph[i][j];
+//        }
+    }
+    // following code will not use curnode anymore!!
+    
+    
+    ///
+    int sum=0;//removed edge
+    for (int j=1; j<=n; j++) {
+        //new
+        if (label < j && left.state[j]!=1 && graph[label][j]==1 ) {//row!
+            sum++;
+//            left.graph[label][j]=0;
+            left.edge[left.index[j]]--;//how to cut it down
+        }else if(label > j && left.state[j]!=1 && graph[j][label]==1 ){ // col
+            sum++;
+//            left.graph[j][label]=0;
+            left.edge[left.index[j]]--;//how to cut it down
+        }
+    }
+    ///
+    
+    left.state[label] = 1;//use label directly!
+    left.edge[left.index[label]] = 0;//only use index!!
+//    cout << "remove edge sum is " << sum << endl;
+    quicksort2(left.edge, 1, n, left.node);
+    left.e = left.e - sum;//remove some edges
+    buildIndex(left.node, left.index);
+    
+    if (INDEBUG) {
+        cout << "======== " << label << " gen left begin===========" << endl;
+        cout << "edge is " << left.e << " node is " << left.p << endl;
+        cout << "array edge:" << endl;
+        printArray(left.edge,1,n);
+        cout << "array node:" << endl;
+        printArray(left.node, 1, n);
+        cout << "array index:" << endl;
+        printArray(left.index, 1, n);
+        cout << "array state:" << endl;
+        printArray(left.state, 1, n);
+//        printGraph(left.graph);
+        cout << "======== " << label << " gen left end===========" << endl;
+    }
+    
+    return left;
+}
+// generate the right child
+VCNode genRight(VCNode curnode, int label){
+    VCNode right;//choose node label!
+    right.p = curnode.p;//remain
+    right.e = curnode.e;
+    for (int i=0; i<=n; i++) {//first copy all infos
+        right.index[i]=curnode.index[i];
+        right.state[i]=curnode.state[i];//init node state
+        right.edge[i]=curnode.edge[i];//copy edge info
+        right.node[i]=curnode.node[i];//copy node info
+//        for (int j=0; j<=n; j++) {
+//            right.graph[i][j] = curnode.graph[i][j];
+//        }
+    }
+    // following code will not use curnode anymore!!
+    right.state[label] = -1;//use label directly!
+    
+    if (INDEBUG) {
+        cout << "======== " << label << " gen right begin===========" << endl;
+        cout << "edge is " << right.e << " node is " << right.p << endl;
+//        cout << "array edge:" << endl;
+//        printArray(right.edge,1,n);
+//        cout << "array node:" << endl;
+//        printArray(right.node, 1, n);
+//        cout << "array index:" << endl;
+//        printArray(right.index, 1, n);
+//        cout << "array state:" << endl;
+//        printArray(right.state, 1, n);
+//        printGraph(right.graph);
+        cout << "======== " << label << " gen right end===========" << endl;
+    }
+    
+    return right;
+}
+// greedy find a way to solve VCP
+void greedyFind(int edges[], int nodes[]/*, int graph[][MAX_NODE]*/){
+    VCNode node;
+    node.e = m;
+    node.p = k;
+    
+    for (int i=0; i<=n; i++) {
+        node.index[i]=0;
+        node.state[i]=0;//init node state
+        node.edge[i]=edges[i];//copy edge info
+        node.node[i]=nodes[i];//copy node info
+//        for (int j=0; j<=n; j++) {
+//            node.graph[i][j] = graph[i][j];
+//        }
+    }
+    buildIndex(node.node, node.index);
+    
+    Minheap minheap;
+    minheap.insert(node);
+    
+    while (minheap.nodes.size() > 0) {
+        // get the heap top node to extend
+        VCNode curnode = minheap.popmin();
+        
+//        if (INDEBUG) {
+//            cout << "...current graph..." << endl;
+//            printGraph(curnode.graph);
+//        }
+        
+        // validate the current node
+        if (curnode.e == 0) {
+            int points = k - curnode.e;
+            cout << points << endl;
+            int count = 1;
+            for (int i=1; i<=n; i++) {
+                if (curnode.state[i]==1) {
+                    if(count == points){
+                        cout << i;
+                    }else{
+                        cout << i << " ";
+                    }
+                    count++;
+                }
+            }
+            cout << endl;
+            return;
+        }
+        
+        // generate child nodes
+        int label = nextNode(curnode.state, curnode.node);//the label of the node
+        if (label != -1) {
+            // node i is in index[k] position in array [node]
+            // node i has number of edge[i] edges
+            VCNode left = genLeft(curnode, label);
+            VCNode right = genRight(curnode, label);
+            if (verify(left.edge, left.p, left.e, left.node, left.state)) {
+//                cout << "insert " << label << " left" << endl;
+                minheap.insert(left);
+            }
+            if (verify(right.edge, right.p, right.e, right.node, right.state)) {
+//                cout << "insert " << label << " right" << endl;
+                minheap.insert(right);
+            }
+        }
+        
+    }
+    
+    // if not find, then return -1
+    cout << -1 << endl;
+    
+}
+int main() {
+//    freopen("/Volumes/hujiawei/Users/hujiawei/workspace/appleworkspace/algorithmworks/Exp1-2/Exp1-2/in3.txt", "rt", stdin);//
+    cin >> t;
+    while(t-->0){
+        cin >> n >> m >> k;
+//        int graph[n+1][MAX_NODE];
+        for (int i=0; i<= n; i++) {
+            for (int j=0; j<= n; j++) {
+                graph[i][j]=0;
+            }
+        }
+        int edges[n+1], nodes[n+1], state[n+1];
+        for (int i=0; i<= n; i++) {
+            edges[i]=0;
+            state[i]=0;
+            nodes[i]=i;
+        }
+        int temp = m;
+        while(temp-->0){
+            cin >> a >> b;
+            graph[min(a, b)][max(a,b)]=1;
+//          graph[a][b]=1;
+//          graph[b][a]=1;//just save half a<=b
+            edges[a]++;
+            edges[b]++;
+        }
+        bool flag = verify(edges, k, m, nodes, state);
+        
+        if (!flag) {//must not be achieved!!!
+            cout << -1 << endl;
+        }else{
+            greedyFind(edges,nodes/*,graph*/);
+        }
+    }
+    
+    return 0;
+}
+```
