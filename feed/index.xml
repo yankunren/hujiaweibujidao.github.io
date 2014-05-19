@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-19T19:51:21+08:00</updated>
+  <updated>2014-05-19T20:02:58+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -227,22 +227,25 @@ CDF_{lognormal}(x) = CDF_{normal}(log x)
 
 <p>3.期望(Expectation)与方差(Variance)</p>
 
-<p>$E(x)=\Sigma xP(X=x) \quad Var(x)=E(x-\mu)^{2}=\Sigma (x-\mu)^2P(X=x)=E(x^{2})-(E(x))^{2}$</p>
+<p>$E(x)=\Sigma xP(X=x)=\mu \quad Var(x)=E(x-\mu)^{2}=\Sigma (x-\mu)^2P(X=x)=E(x^{2})-(E(x))^{2}$</p>
 
 <p>线性变换之后的期望与方差：</p>
 
 <p>$E(ax+b)=aE(x)+b \quad Var(ax+b)=a^{2}Var(x)$
 $E(ax+by)=aE(x)+bE(y) \quad Var(ax+by)=a^{2}Var(x)+b^{2}Var(y)$</p>
 
-<p><strong>思考：为什么加上b方差并没有发生变化呢？因为在变量中增加常数b只是将概率分布移动了一下，分布的形状并没有发生改变，所以b并没有在方差中起到作用。</strong></p>
+<p><strong>思考：为什么加上b，方差并没有发生变化呢？</strong></p>
+
+<p><strong>因为在变量中增加常数b只是将概率分布移动了一下，分布的形状并没有发生改变，所以b并没有在方差中起到作用。</strong></p>
 
 <p>相互独立事件X和Y：</p>
 
 <p>$E(X+Y)=E(X)+E(Y) \quad Var(X+Y)=Var(X)+Var(Y)$
 $E(X-Y)=E(X)-E(Y) \quad Var(X-Y)=Var(X)+Var(Y)$</p>
 
-<p><strong>思考：为什么$Var(X-Y)=Var(X)+Var(Y)$？可以随便拿数据验证之。</strong>
-<strong>记住，一个随机变量减去另一个随机变量得到的概率分布的方差是两个随机变量的方差之和，方差只会增加！</strong></p>
+<p><strong>思考：为什么$Var(X-Y)=Var(X)+Var(Y)$？可以随便拿数据验证之。</strong></p>
+
+<p><strong>记住，一个随机变量减去另一个随机变量得到的概率分布的方差是两个随机变量的方差之和，方差只会增加！</strong></p>
 
 <p>下面两个图示演示了其结果</p>
 
@@ -269,7 +272,7 @@ $E(X-Y)=E(X)-E(Y) \quad Var(X-Y)=Var(X)+Var(Y)$</p>
 
 <hr />
 
-<h4 id="center-center"><center>**第零部分 碎碎念**</center></h4>
+<h4 id="center-center"><center>第零部分 碎碎念</center></h4>
 <p>本系列是对概率和数理统计中的重要内容的一个总结，不会侧重很多众所周知的细节，所以有啥疑问还是需要Google或者Wikipedia。关于本系列中出现的术语参照参考书籍中的定义，部分可能与大学教材中不同，请自行对应起来理解。小弟才疏学浅，若有错误请留言，欢迎批评指正。</p>
 
 <p>主要参考书籍：</p>
@@ -284,13 +287,13 @@ $E(X-Y)=E(X)-E(Y) \quad Var(X-Y)=Var(X)+Var(Y)$</p>
 
 <p>本总结总共4章节，分开来阅读较好</p>
 
-<p>1.[概率]</p>
+<p>1.<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/">概率</a></p>
 
-<p>2.[分布]</p>
+<p>2.<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/">分布</a></p>
 
-<p>3.[描述性统计量]</p>
+<p>3.<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/">描述性统计量</a></p>
 
-<p>4.[假设检验]</p>
+<p>4.<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-4/">假设检验</a></p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary/">http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
