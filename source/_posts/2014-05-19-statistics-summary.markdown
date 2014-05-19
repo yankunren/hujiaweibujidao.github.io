@@ -4,7 +4,7 @@ title: "SS-Statistics Summary"
 date: 2014-05-19 18:00
 comments: true
 categories: math
-published: true
+published: false
 ---
 
 **<center>统计学那些事 Things of Statistics</center>**
@@ -23,9 +23,7 @@ published: true
 
 3.[《统计思维：程序员数学之概率统计》](http://book.douban.com/subject/24381562/)
 
-
-
-####<center>**第一部分 概率**</center>
+####<center>=第一部分 概率</center>
 1.事件：对立事件(complementary event)，互斥事件(exclusive event)，相交事件(intersecting event)，相关事件(dependent event)，独立事件(independent event)，可以使用韦恩图(Venn Diagram)方便分析事件之间的关系。
 
 如果事件A和B会相互影响，那么它们是相关事件，否则是独立事件。
