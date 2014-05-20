@@ -4,7 +4,7 @@
   <title><![CDATA[Category: math | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-20T20:45:53+08:00</updated>
+  <updated>2014-05-20T21:52:03+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -145,7 +145,7 @@
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/ind_2.png" alt="image" /></p>
 
-<p>如果从期望和方差的角度来看独立性的话，那么就有<script type="math/tex">E(XY)=E(X)E(Y), D(X+Y)=D(X)+D(Y)</script>，也就是随机变量XY的期望是X和Y的期望的乘积，随机变量(X+Y)的方差是X和Y的方差之和。</p>
+<p>如果从期望和方差的角度来看独立性的话，那么就有<script type="math/tex">E(XY)=E(X)E(Y), D(X+Y)=D(X)+D(Y)</script>，也就是随机变量XY的期望是X和Y的期望的乘积，随机变量(X+Y)的方差是X和Y的方差之和。如果X和Y是相互独立的，那么它们的协方差Cov(X,Y)=0。</p>
 
 <script type="math/tex; mode=display">E(XY)=\int_{-\infty}^{\infty}xyf(x)f(y)dxdy=\int_{-\infty}^{\infty}xyf_{X}(x)f_{Y}(y)dxdy=\int_{-\infty}^{\infty}xf_{X}(x)dx\int_{-\infty}^{\infty}yf_{Y}(y)dy=E(X)E(Y)</script>
 
@@ -437,7 +437,24 @@ SK=\frac{3(\bar{X}-M)}{s},\quad M=Median,\bar{X}=Mean,s=SD
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/skewness.png" alt="image" /></p>
 
-<p>4.相关系数(correlation coefficient)是两个变量之间<strong>线性关系</strong>的数值型指标，取值范围是[-1,1]，大于0表示正相关，小于0表示负相关，可以用散点图来直接查看相关性。<strong>根据某些不成文的规则，一般高于0.6表示强相关，低于0.4表示弱相关，中间部分表示中度相关。</strong></p>
+<p>4.协方差</p>
+
+<p>随机变量X和Y的协方差Cov(X,Y)=E[X-E(X)]E[Y-E(Y)]=E(XY)-E(X)E(Y)。</p>
+
+<p>协方差的性质：Cov(X,Y)=Cov(Y,X)， Cov(X,X)=D(X)，Cov(aX,bY)=abCov(X,Y)，<script type="math/tex">Cov(X_{1}+X_{2},Y)=Cov(X_{1},Y)+Cov(X_{2},Y)</script></p>
+
+<p>如果X和Y是相互独立的，那么Cov(X,Y)=0。</p>
+
+<p>为什么D(X+Y)=E(XY)-E(X)E(Y)?</p>
+
+<script type="math/tex; mode=display">
+D(X+Y)=E[(X+Y)^{2}]-[E(X+Y)]^{2}=E[X^{2}+Y^{2}-2XY]-[E(X)+E(Y)]^{2} \\ =E[X^{2}]-[E(X)]^{2}+E[Y^{2}]-[E(Y)]^{2}+2E(XY)-2E(X)E(Y) \\ =D(X)+D(Y)+2E(XY)-2E(X)E(Y)
+</script>
+
+<p>又因为 D(X+Y)=D(X)+D(Y)+2Cov(X,Y)
+所以 D(X+Y)=E(XY)-E(X)E(Y)</p>
+
+<p>5.相关系数(correlation coefficient)是两个变量之间<strong>线性关系</strong>的数值型指标，取值范围是[-1,1]，大于0表示正相关，小于0表示负相关，可以用散点图来直接查看相关性。<strong>根据某些不成文的规则，一般高于0.6表示强相关，低于0.4表示弱相关，中间部分表示中度相关。</strong></p>
 
 <p>[<strong>Pearson相关系数考察的变量的属性是连续的，例如年龄，体重等，如果是离散型变量那么应该使用点二列相关系数</strong>]</p>
 
