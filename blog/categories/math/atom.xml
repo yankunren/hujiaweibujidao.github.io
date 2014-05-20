@@ -4,7 +4,7 @@
   <title><![CDATA[Category: math | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-20T15:08:33+08:00</updated>
+  <updated>2014-05-20T15:53:06+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -46,6 +46,35 @@
 <p><strong>(2)零假设对应的是总体，而研究假设对应的是样本。我们是从总体中取出一部分样本进行检验，将得到的结论推广到总体中。</strong></p>
 
 <p><strong>(3)因为总体不能直接检验(不现实，不经济或者不可能)，所以零假设只能间接检验，研究假设则可以直接检验。</strong></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SS 3-Continuous Distribution]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-2/"/>
+    <updated>2014-05-19T20:40:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-2</id>
+    <content type="html"><![CDATA[<p><strong><center>统计学那些事 Things of Statistics</center></strong>
+<strong><center>逸夫图书馆, 2014/5/19</center></strong></p>
+
+<hr />
+
+<h4 id="center-center"><center>第三部分 分布之多维随机变量及其分布</center></h4>
+
+<p>很多情况下我们遇到的都是多维的随机变量，比如，对一个地区的儿童进行抽样统计，观察他们的身高H和体重W，样本空间S就是该地区的儿童，身高H和体重W都是定义在S上的随机变量，这里向量(H,W)就构成了二维随机向量(或者二维随机变量)，前面两节讨论的分布都是一维随机变量的分布。二维随机变量(X,Y)的性质不仅和X及Y的性质有关，还和它们的相关性有关，也就是前面提到的相关系数！</p>
+
+<p>1.二维随机变量(X,Y)的分布函数(或者叫联合分布函数)</p>
+
+<script type="math/tex; mode=display">F(x,y)=P(X \le x \cap Y \le y)=P(X \le x, Y \le y)</script>
+
+<p>如果将二维随机变量看作是平面上随机点的坐标的话，那么分布函数F(x,y)在点(x,y)处的函数值就是以点(x,y)为顶点而位于该点左下方的无穷矩形域内的概率。</p>
+
+<p>分布函数的性质：</p>
+
+<p>二维离散型随机变量(X,Y) [也就是只有有限对可取的值]的分布律(或者联合分布律)：</p>
+
+<p><script type="math/tex">P(X=x_{i},Y=y_{j})=p_{ij},i,j=1,2,...</script>且有<script type="math/tex">\Sigma_{i=0}^{\infty}\Sigma_{j=0}^{\infty}p_{ij}=1</script></p>
 
 ]]></content>
   </entry>
@@ -331,83 +360,6 @@ r_{XY}=\frac{n\Sigma{XY}-\Sigma{X}\Sigma{Y}}{\sqrt{[n\Sigma{X^2}-(\Sigma{X})^2][
 </script>
 
 <p>决定系数：相关系数的平方，它表述一个变量的方差可以被另一个变量的方差来解释的百分比。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SS 1-Probability]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/"/>
-    <updated>2014-05-19T19:00:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1</id>
-    <content type="html"><![CDATA[<p><strong><center>统计学那些事 Things of Statistics</center></strong>
-<strong><center>逸夫图书馆, 2014/5/19</center></strong></p>
-
-<hr />
-
-<h4 id="center-center"><center>第一部分 概率</center></h4>
-<p>1.事件：对立事件(complementary event)，互斥事件(exclusive event)，相交事件(intersecting event)，相关事件(dependent event)，独立事件(independent event)，可以使用韦恩图(Venn Diagram)方便分析事件之间的关系。</p>
-
-<p>如果事件A和B会相互影响，那么它们是相关事件，否则是独立事件。
-事件A和B独立：$P(A|B)=P(A) \quad P(A \cap B)=P(A)P(B)$</p>
-
-<p>2.概率：条件概率(Conditional Probability)，全概率(Total Probability)，贝叶斯定理(Bayes’ Theorem)</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>条件概率：$ P(A</td>
-      <td>B) = \frac{P(A \cap B)}{P(B)} $</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-      <td>全概率：$ P(B) = P(B</td>
-      <td>A) P(A)+P(B</td>
-      <td>A’) P(A’) $</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>贝叶斯定理(将条件概率和全概率整合到一起)：
-$P(A|B)=\frac{P(A \cap B)}{P(B|A)P(A)+P(B|A’)P(A’)}$</p>
-
-<p>3.期望(Expectation)与方差(Variance)</p>
-
-<p>$E(x)=\Sigma xP(X=x)=\mu \quad Var(x)=E(x-\mu)^{2}=\Sigma (x-\mu)^2P(X=x)=E(x^{2})-(E(x))^{2}$</p>
-
-<p>[注：上面的期望的等式是对于离散型随机变量x，如果是连续型随机变量x，那么$E=\int<em>{-\infty}^{\infty} xf(x)dx$，同理，方差就是$D=\int</em>{-\infty}^{\infty} (x-E)^{2}f(x)dx$，期望描述的是数据的集中趋势，方差描述的数据的偏移程度]</p>
-
-<p>线性变换之后的期望与方差：</p>
-
-<p>$E(ax+b)=aE(x)+b \quad Var(ax+b)=a^{2}Var(x)$
-$E(ax+by)=aE(x)+bE(y) \quad Var(ax+by)=a^{2}Var(x)+b^{2}Var(y)$</p>
-
-<p><strong>思考：为什么加上b，方差并没有发生变化呢？</strong></p>
-
-<p><strong>因为在变量中增加常数b只是将概率分布移动了一下，分布的形状并没有发生改变，所以b并没有在方差中起到作用。</strong></p>
-
-<p>相互独立事件X和Y：</p>
-
-<p>$E(X+Y)=E(X)+E(Y) \quad Var(X+Y)=Var(X)+Var(Y)$
-$E(X-Y)=E(X)-E(Y) \quad Var(X-Y)=Var(X)+Var(Y)$</p>
-
-<p><strong>思考：为什么$Var(X-Y)=Var(X)+Var(Y)$？可以随便拿数据验证之。</strong></p>
-
-<p><strong>记住，一个随机变量减去另一个随机变量得到的概率分布的方差是两个随机变量的方差之和，方差只会增加！</strong></p>
-
-<p>下面两个图示演示了其结果</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/varxplusy.png" alt="image" /></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/varxminusy.png" alt="image" /></p>
-
-<p>相互独立的随机变量与独立观测值之间的区别：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/independentobservation.png" alt="image" /></p>
 
 ]]></content>
   </entry>

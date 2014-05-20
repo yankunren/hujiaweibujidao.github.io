@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>CS 3-Differential Mean Value Theorems - Hujiawei Bujidao</title>
+  <title>SS 3-Continuous Distribution - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="微积分总结 Summary of Calculus
-逸夫图书馆, 2014/4/26 第三部分 微分中值定理与导数的应用 第一节 微分中值定理
-罗尔中值定理，拉格朗日中值定理，泰勒中值定理，柯西中值定理 罗尔中值定理就是说对于在区间上的连续可导函数f(x)，若左右端点的函数值相等， &hellip;">
+  <meta name="description" content="统计学那些事 Things of Statistics
+逸夫图书馆, 2014/5/19 第三部分 分布之多维随机变量及其分布 很多情况下我们遇到的都是多维的随机变量，比如，对一个地区的儿童进行抽样统计，观察他们的身高H和体重W，样本空间S就是该地区的儿童，身高H和体重W都是定义在S上的随机变量， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-3">
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-2">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
@@ -94,7 +93,7 @@
 		
   <header>
     
-      <h1 class="entry-title">CS 3-Differential Mean Value Theorems</h1>
+      <h1 class="entry-title">SS 3-Continuous Distribution</h1>
     
     
       <p class="meta">
@@ -110,58 +109,36 @@
   
 
 
-<time datetime="2014-04-27T14:29:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+<time datetime="2014-05-19T20:40:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><strong><center>微积分总结 Summary of Calculus</center></strong>
-<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
+<div class="entry-content"><p><strong><center>统计学那些事 Things of Statistics</center></strong>
+<strong><center>逸夫图书馆, 2014/5/19</center></strong></p>
 
-<h3 id="center--center"><center>第三部分 微分中值定理与导数的应用 </center></h3>
+<hr />
 
-<h4 id="section">第一节 微分中值定理</h4>
-<p>罗尔中值定理，拉格朗日中值定理，泰勒中值定理，柯西中值定理</p>
+<h4 id="center-center"><center>第三部分 分布之多维随机变量及其分布</center></h4>
 
-<p>罗尔中值定理就是说对于在区间<script type="math/tex">(a,b)</script>上的连续可导函数f(x)，若左右端点的函数值相等，那么区间内至少有一个点满足它的导数为0，即<script type="math/tex">f'(\varepsilon)=0, \varepsilon \in (a,b)</script>；</p>
+<p>很多情况下我们遇到的都是多维的随机变量，比如，对一个地区的儿童进行抽样统计，观察他们的身高H和体重W，样本空间S就是该地区的儿童，身高H和体重W都是定义在S上的随机变量，这里向量(H,W)就构成了二维随机向量(或者二维随机变量)，前面两节讨论的分布都是一维随机变量的分布。二维随机变量(X,Y)的性质不仅和X及Y的性质有关，还和它们的相关性有关，也就是前面提到的相关系数！</p>
 
-<p>拉格朗日中值定理就是说对于在区间<script type="math/tex">(a,b)</script>上的连续可导函数f(x)，区间内至少有一个点满足<script type="math/tex">f'(\varepsilon)=\frac{f(a)-f(b)}{a-b}, \varepsilon \in (a,b)</script>，该定理就没有罗尔中值定理的条件那么严格了，所以后者是前者的一个特殊情况。拉格朗日中值定理的几何意义如下，曲线在C点处的切线平行于弦AB；</p>
+<p>1.二维随机变量(X,Y)的分布函数(或者叫联合分布函数)</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/langrant.png" alt="image" /></p>
+<script type="math/tex; mode=display">F(x,y)=P(X \le x \cap Y \le y)=P(X \le x, Y \le y)</script>
 
-<p>柯西中值定理就扩展到区间<script type="math/tex">(a,b)</script>上的两个连续可导函数f(x)和F(x)，区间内至少有一个点满足<script type="math/tex">\frac{f'(\varepsilon)}{F'(\varepsilon)}=\frac{f(a)-f(b)}{F(a)-F(b)}, \varepsilon \in (a,b)</script>。</p>
+<p>如果将二维随机变量看作是平面上随机点的坐标的话，那么分布函数F(x,y)在点(x,y)处的函数值就是以点(x,y)为顶点而位于该点左下方的无穷矩形域内的概率。</p>
 
-<p>当<script type="math/tex">F(x)=x</script>时，<script type="math/tex">F(a)=a,F(b)=b</script>，即有<script type="math/tex">f(a)-f(b)=f'(\varepsilon)(a-b), \varepsilon \in (a,b)</script>，这个式子是不是就是拉格朗日中值定理的内容？</p>
+<p>分布函数的性质：</p>
 
-<p>泰勒中值定理略过，和后面泰勒展开式差不多。</p>
+<p>二维离散型随机变量(X,Y) [也就是只有有限对可取的值]的分布律(或者联合分布律)：</p>
 
-<h4 id="section-1">第二节 洛必达法则</h4>
-<p>0/0型未定式，∞/∞型未定式，其他类型未定式</p>
-
-<p>洛必达法则很重要，因为很多时候我们总是会遇到各种不同特殊形式的未定式，它们的极限可以试试使用洛必达法则来求。</p>
-
-<p>条件略过，简言之就是<script type="math/tex">\lim_{x \to x_{0}} \frac{f(x)}{g(x)}=\lim_{x \to x_{0}} \frac{f'(x)}{g'(x)}</script>，也就是说我们可以先对分子分母求导然后求极限。</p>
-
-<h4 id="section-2">第三节 函数单调增减性及曲线的凸凹性</h4>
-<p>函数的单调性，曲线的凹凸性及拐点</p>
-
-<p>驻点：函数f(x)一阶导数为0的点，根据它的正负可以判断函数的单调性，大于0为单调递增；
-拐点：函数f(x)二阶导数为0的点，根据它的正负可以判断函数的凹凸性，大于0为凹的；</p>
-
-<h4 id="section-3">第四节 函数的极值与最大值、最小值</h4>
-<p>极值的定义，极值存在的条件，最大值、最小值</p>
-
-<p>极值存在的条件就是判断该点和该点两边的一阶导数的正负情况。</p>
-
-<h4 id="section-4">第五节 函数图形的描绘</h4>
-<p>要根据函数的极值和最值以及渐近线来近似绘图</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/fun_figure.png" alt="image" /></p>
+<p><script type="math/tex">P(X=x_{i},Y=y_{j})=p_{ij},i,j=1,2,...</script>且有<script type="math/tex">\Sigma_{i=0}^{\infty}\Sigma_{j=0}^{\infty}p_{ij}=1</script></p>
 
 <p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-3/">http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-3/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-2/">http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-2/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 </div>
 
 
@@ -184,7 +161,7 @@
   
 
 
-<time datetime="2014-04-27T14:29:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+<time datetime="2014-05-19T20:40:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2014</time>
 				
 
 <span class="categories">
@@ -205,10 +182,10 @@
 			
 			<p class="meta">
 				
-				<a class="basic-alignment left" href="/blog/2014/04/27/calculus-summary-chapter-2/" title="Previous Post: CS 2-Derivative and Differential">&laquo; CS 2-Derivative and Differential</a>
+				<a class="basic-alignment left" href="/blog/2014/05/19/statistics-summary-2-1/" title="Previous Post: SS 3-Continuous Distribution">&laquo; SS 3-Continuous Distribution</a>
 				
 				
-				<a class="basic-alignment right" href="/blog/2014/04/27/calculus-summary-chapter-4/" title="Next Post: CS 4-Indefinite Integral">CS 4-Indefinite Integral &raquo;</a>
+				<a class="basic-alignment right" href="/blog/2014/05/19/statistics-summary-4/" title="Next Post: SS 4-Hypothesis Testing">SS 4-Hypothesis Testing &raquo;</a>
 				
 			</p>
 		</footer>
