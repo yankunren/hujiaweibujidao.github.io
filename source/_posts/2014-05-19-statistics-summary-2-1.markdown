@@ -68,7 +68,23 @@ $$
 
 (3)正态分布(normal distribution)
 
-正态分布，又叫高斯分布，是最常用的分布。
+正态分布，又叫高斯分布，是最常用的分布。其中$x=\mu$是函数f(x)的驻点，$x=\mu+\sigma,  x=\mu-\sigma$是函数f(x)的拐点，这个可能不太好计算，可用下面的Matlab代码进行验证。
+
+```matlab
+clear,clc;
+syms x;
+syms u;
+syms r;
+syms p;
+f=1 / (sqrt(2*p)*r) * exp(-1 * (x-u)^2 / (2*r^2) );
+pretty(f)
+f1=diff(f, 1) %一阶导数
+pretty(f1)
+f2=diff(f, 2) %二阶导数
+pretty(f2)
+solve(f1) %u
+solve(f2) %u+r u-r
+```
 
 ![image](http://hujiaweibujidao.github.io/images/math/cont_normal1.png)
 ![image](http://hujiaweibujidao.github.io/images/math/cont_normal2.png)
@@ -107,6 +123,10 @@ $$
 通过这个图我么可以得到一个经典的**3$\sigma$法则**，又叫**68-95-99法则**
 
 **在$(\mu - \sigma, \mu + \sigma)$之间大概有68.26%的数据分布，在$(\mu - 2\sigma, \mu + 2\sigma)$之间大概有95.44%的数据分布，在$(\mu - 3\sigma, \mu + 3\sigma)$之间大概有99.74%的数据分布。**
+
+$\alpha$分位点的概念：对于标准正态分布X~N(0,1)，满足$$P(X>Z_{\alpha})=\alpha$$的$Z_{\alpha}$称为$\alpha$分位点，且有$Z_{-1\alpha}=Z_{\alpha}$。
+
+![image](http://hujiaweibujidao.github.io/images/math/cont_normal5.png)
 
 [对数正态分布 on wiki](http://wikipedia.org/wiki/Log-normal_distribution)：如果一组数据取对数之后服从正态分布，那么我们就称其服从对数正态分布。对数正态分布的 CDF 跟正态分布一样, 只是用 logx 代替原来的 x:
 
