@@ -10,8 +10,7 @@
 
   
   <meta name="description" content="统计学那些事 Things of Statistics
-逸夫图书馆, 2014/5/19 第二部分 协方差和相关关系 1.协方差 随机变量X和Y的协方差Cov(X,Y)=E[X-E(X)]E[Y-E(Y)]=E(XY)-E(X)E(Y)。 为什么D(X+Y)=E(XY)-E(X)E(Y)? $
-D &hellip;">
+逸夫图书馆, 2014/5/19 第二部分 协方差和相关关系 1.协方差 随机变量X和Y的协方差Cov(X,Y)=E[X-E(X)]E[Y-E(Y)]=E(XY)-E(X)E(Y)。 为什么D(X+Y)=E(XY)-E(X)E(Y)? D(X &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -130,18 +129,16 @@ D &hellip;">
 
 <p>为什么D(X+Y)=E(XY)-E(X)E(Y)?</p>
 
-<p>$
-D(X+Y)=E[(X+Y)^{2}]-[E(X+Y)]^{2}=E[X^{2}+Y^{2}-2XY]-[E(X)+E(Y)]^{2} \ =E[X^{2}]-[E(X)]^{2}+E[Y^{2}]-[E(Y)]^{2}+2E(XY)-2E(X)E(Y) \ =D(X)+D(Y)+2E(XY)-2E(X)E(Y)
-$</p>
+<script type="math/tex; mode=display">
+D(X+Y)=E[(X+Y)^{2}]-[E(X+Y)]^{2}=E[X^{2}+Y^{2}-2XY]-[E(X)+E(Y)]^{2} \\ =E[X^{2}]-[E(X)]^{2}+E[Y^{2}]-[E(Y)]^{2}+2E(XY)-2E(X)E(Y) \\ =D(X)+D(Y)+2E(XY)-2E(X)E(Y)
+</script>
 
 <p>因为 <strong>(X+Y)=D(X)+D(Y)+2Cov(X,Y)</strong>
 所以 <strong>D(X+Y)=E(XY)-E(X)E(Y)</strong></p>
 
 <p>协方差的性质：(基本上根据上式都可以简单证明得到)</p>
 
-<p>Cov(X,Y)=Cov(Y,X)， Cov(X,X)=D(X)，Cov(aX,bY)=abCov(X,Y)</p>
-
-<script type="math/tex; mode=display">Cov(X_{1}+X_{2},Y)=Cov(X_{1},Y)+Cov(X_{2},Y)</script>
+<p>Cov(X,Y)=Cov(Y,X)， Cov(X,X)=D(X)，Cov(aX,bY)=abCov(X,Y)，<script type="math/tex">Cov(X_{1}+X_{2},Y)=Cov(X_{1},Y)+Cov(X_{2},Y)</script></p>
 
 <p>如果X和Y是相互独立的，那么Cov(X,Y)=0。</p>
 
