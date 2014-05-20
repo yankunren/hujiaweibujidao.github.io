@@ -4,7 +4,7 @@
   <title><![CDATA[Category: math | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-20T14:25:12+08:00</updated>
+  <updated>2014-05-20T14:56:53+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -116,7 +116,23 @@ y=CCDF(x)=1-CDF(x)=e^{-\lambda x} \quad => \quad log(y)=-\lambda x
 
 <p>(3)正态分布(normal distribution)</p>
 
-<p>正态分布，又叫高斯分布，是最常用的分布。</p>
+<p>正态分布，又叫高斯分布，是最常用的分布。其中$x=\mu$是函数f(x)的驻点，$x=\mu+\sigma,  x=\mu-\sigma$是函数f(x)的拐点，这个可能不太好计算，可用下面的Matlab代码进行验证。</p>
+
+<p><code>matlab
+clear,clc;
+syms x;
+syms u;
+syms r;
+syms p;
+f=1 / (sqrt(2*p)*r) * exp(-1 * (x-u)^2 / (2*r^2) );
+pretty(f)
+f1=diff(f, 1) %一阶导数
+pretty(f1)
+f2=diff(f, 2) %二阶导数
+pretty(f2)
+solve(f1) %u
+solve(f2) %u+r u-r
+</code></p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/cont_normal1.png" alt="image" />
 <img src="http://hujiaweibujidao.github.io/images/math/cont_normal2.png" alt="image" /></p>
@@ -155,6 +171,10 @@ CDF(x)=\frac{1}{2}[1+erf(\frac{x-\mu}{\sigma \sqrt{2}})] \quad erf(x)=\frac{2}{\
 <p>通过这个图我么可以得到一个经典的<strong>3$\sigma$法则</strong>，又叫<strong>68-95-99法则</strong></p>
 
 <p><strong>在$(\mu - \sigma, \mu + \sigma)$之间大概有68.26%的数据分布，在$(\mu - 2\sigma, \mu + 2\sigma)$之间大概有95.44%的数据分布，在$(\mu - 3\sigma, \mu + 3\sigma)$之间大概有99.74%的数据分布。</strong></p>
+
+<p>$\alpha$分位点的概念：对于标准正态分布X~N(0,1)，满足<script type="math/tex">P(X>Z_{\alpha})=\alpha</script>的$Z<em>{\alpha}$称为$\alpha$分位点，且有$Z</em>{-1\alpha}=Z_{\alpha}$。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/cont_normal5.png" alt="image" /></p>
 
 <p><a href="http://wikipedia.org/wiki/Log-normal_distribution">对数正态分布 on wiki</a>：如果一组数据取对数之后服从正态分布，那么我们就称其服从对数正态分布。对数正态分布的 CDF 跟正态分布一样, 只是用 logx 代替原来的 x:</p>
 
