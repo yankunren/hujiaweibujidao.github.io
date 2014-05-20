@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-20T19:22:09+08:00</updated>
+  <updated>2014-05-20T19:25:28+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -128,7 +128,7 @@
 
 <p><strong>边缘分布其实就是指，对于一个多维随机变量来说，它具有一个联合分布律或者联合概率密度，但是如果我们只考虑它其中的某一个随机变量的话，那么这个随机变量的分布律或者概率密度就是边缘分布律或者边缘概率密度了。</strong></p>
 
-<p>二维连续型随机变量(X,Y)对X的边缘概率密度实际上就是对y进行积分，同理，对Y的边缘概率密度实际上就是对x进行积分。</p>
+<p>二维连续型随机变量(X,Y)对X的边缘概率密度实际上就是对y进行积分<script type="math/tex">f_{X}(x)=\int_{-\infty}^{\infty}f(x,y)dy</script>，同理，对Y的边缘概率密度实际上就是对x进行积分<script type="math/tex">f_{Y}(y)=\int_{-\infty}^{\infty}f(x,y)dx</script>。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/cond_1.png" alt="image" />
 <img src="http://hujiaweibujidao.github.io/images/math/cond_2.png" alt="image" /></p>
@@ -152,28 +152,13 @@
 
 <p>二维离散型随机变量的条件分布律</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>$$ P(X=x_{i}</td>
-      <td>Y=y<em>{j}) = \frac{P(X=x</em>{i}</td>
-      <td>Y=y<em>{j})}{P(Y=y</em>{j})} $$</td>
-    </tr>
-  </tbody>
-</table>
+<script type="math/tex; mode=display"> P(X=x_{i} \| Y=y_{j}) = \frac{P(X=x_{i} \| Y=y_{j})}{P(Y=y_{j})} </script>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/cond_6.png" alt="image" /></p>
 
 <p>二维连续型随机变量的条件概率密度</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>$$ P(X=x_{i}</td>
-      <td>Y=y<em>{j}) = \int</em>{-\infty}^{x}\frac{f(x,y)}{f_{Y}(y))}dx $$</td>
-    </tr>
-  </tbody>
-</table>
+<script type="math/tex; mode=display"> P(X=x_{i} \| Y=y_{j}) = \int_{-\infty}^{x}\frac{f(x,y)}{f_{Y}(y))}dx </script>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/cond_8.png" alt="image" />
 <img src="http://hujiaweibujidao.github.io/images/math/cond_9.png" alt="image" /></p>
