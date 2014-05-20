@@ -4,7 +4,7 @@
   <title><![CDATA[Category: math | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-20T19:12:53+08:00</updated>
+  <updated>2014-05-20T19:15:55+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -123,9 +123,9 @@
 <table>
   <tbody>
     <tr>
-      <td>$$P(X=x_{i}</td>
-      <td>Y=y<em>{j})=\frac{P(X=x</em>{i}</td>
-      <td>Y=y<em>{j})}{P(Y=y</em>{j})}$$</td>
+      <td>$$ P(X=x_{i}</td>
+      <td>Y=y<em>{j}) = \frac{P(X=x</em>{i}</td>
+      <td>Y=y<em>{j})}{P(Y=y</em>{j})} $$</td>
     </tr>
   </tbody>
 </table>
@@ -137,8 +137,8 @@
 <table>
   <tbody>
     <tr>
-      <td>$$P(X=x_{i}</td>
-      <td>Y=y<em>{j})=\int</em>{-\infty}^{x}\frac{f(x,y)}{f_{Y}(y))}dx$$</td>
+      <td>$$ P(X=x_{i}</td>
+      <td>Y=y<em>{j}) = \int</em>{-\infty}^{x}\frac{f(x,y)}{f_{Y}(y))}dx $$</td>
     </tr>
   </tbody>
 </table>
