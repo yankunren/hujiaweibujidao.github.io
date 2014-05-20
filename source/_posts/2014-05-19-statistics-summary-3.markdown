@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "SS 2-Descriptive Statistics"
+title: "SS 2-Covariance and Correlation"
 date: 2014-05-19 19:30
 comments: true
 categories: math
@@ -12,68 +12,28 @@ published: true
 
 ----------
 
-####<center>第二部分 统计量</center>
+####<center>第二部分 协方差和相关关系</center>
 
-1.描述数据的集中趋势：均值(mean)，中位数(median)，众数(mode)，加权平均数
-
-百分位点(percentile points)：中位数(Q2)就是50百分位点，Q1为25百分位点(lower quartile)，Q3为75百分位点(upper quartile)，**经常使用Q3-Q1=IQR(interquartile range，四分差或四分位数)来检查分布是否对称。**
-
-<!--
-[如果要计算一组数中的某个百分位数，一般比较好的排序方法是选择排序；当然，如果是计算该组数的特殊的百分位数，例如中位数，有其他更好地方法能够在线性时间内得到，之后我对做一些相关问题的研究，暂且说明一下]
--->
-
-
-2.描述数据的变异性：极差(range)，标准差(standard deviation,简称s或者SD)，方差(deviation)
-
-标准差的计算公式：
-$$
-s=\sqrt{\frac{\Sigma(X-\bar{X})^2}{n-1}}
-$$
-
-**s是总体标准差的无偏估计，如果根号内部分母改成了n则是有偏估计，详细证明参见：[http://en.wikipedia.org/wiki/Bias_of_an_estimator](http://en.wikipedia.org/wiki/Bias_of_an_estimator)，《爱上统计学》作者对此的解释是统计学家们通常比较保守，保守的含义是，如果我们不得不出错，我们出错也是因为过高地估计了标准差(因为除以n-1使得标准差大于实际值)。**
-
-如果想了解更加细致的内容可以看下这篇文章[Why divide the sample variance by N-1?](http://www.visiondummy.com/2014/03/divide-variance-n-1/)
-
-标准差和方差的异同：**它们都是用来反映数据集的数据的变异性或者离散度的度量，但是标准差以原有的计算单位存在，然而方差以平方单位存在，前者在实际中更加具有意义**。例如，某高校的男生的平均身高是170cm，标准差是5cm，那么说明该校男生的身高与平均身高的差异大概就是上下5cm，换成方差来解释的话就不好陈述了。
-
-使用有偏估计其实也可以，但是最好使用无偏估计，我记得Coursera上Machine Learning课中Andrew Ng曾经提到过，实际编码中其实还是使用有偏估计，因为它们在样本数据很大的时候其实结果没多大影响。
-
-3.数据集的图形化显示：直方图，饼图，线图，柱形图，条形图，茎叶图等
-
-数据分布的差异性描述：平均值，变异性，峰度(kurtosis)，偏度(skewness)
-
-峰值可能有多个，比如双峰或者多峰等。偏度有一个计算公式，由Pearson发明的，他同时也是相关系数的发明者，偏度虽有正负之分，但是绝对值越大说明图形越偏。
-
-$$
-SK=\frac{3(\bar{X}-M)}{s},\quad M=Median,\bar{X}=Mean,s=SD
-$$
-
-峰度图：
-
-![image](http://hujiaweibujidao.github.io/images/math/kurtosis.png)
-
-偏度图：
-
-![image](http://hujiaweibujidao.github.io/images/math/skewness.png)
-
-4.协方差
+1.协方差
 
 随机变量X和Y的协方差Cov(X,Y)=E[X-E(X)]E[Y-E(Y)]=E(XY)-E(X)E(Y)。
 
-协方差的性质：Cov(X,Y)=Cov(Y,X)， Cov(X,X)=D(X)，Cov(aX,bY)=abCov(X,Y)，$$Cov(X_{1}+X_{2},Y)=Cov(X_{1},Y)+Cov(X_{2},Y)$$
+协方差的性质：Cov(X,Y)=Cov(Y,X)， Cov(X,X)=D(X)，Cov(aX,bY)=abCov(X,Y)
+
+$$Cov(X_{1}+X_{2},Y)=Cov(X_{1},Y)+Cov(X_{2},Y)$$
 
 如果X和Y是相互独立的，那么Cov(X,Y)=0。
 
 为什么D(X+Y)=E(XY)-E(X)E(Y)?
 
-$$
+$
 D(X+Y)=E[(X+Y)^{2}]-[E(X+Y)]^{2}=E[X^{2}+Y^{2}-2XY]-[E(X)+E(Y)]^{2} \\ =E[X^{2}]-[E(X)]^{2}+E[Y^{2}]-[E(Y)]^{2}+2E(XY)-2E(X)E(Y) \\ =D(X)+D(Y)+2E(XY)-2E(X)E(Y)
-$$
+$
 
-又因为 D(X+Y)=D(X)+D(Y)+2Cov(X,Y)
-所以 D(X+Y)=E(XY)-E(X)E(Y)
+又因为 **(X+Y)=D(X)+D(Y)+2Cov(X,Y)**
+所以 **D(X+Y)=E(XY)-E(X)E(Y)**
 
-5.相关系数(correlation coefficient)是两个变量之间**线性关系**的数值型指标，取值范围是[-1,1]，大于0表示正相关，小于0表示负相关，可以用散点图来直接查看相关性。**根据某些不成文的规则，一般高于0.6表示强相关，低于0.4表示弱相关，中间部分表示中度相关。**
+2.相关系数(correlation coefficient)是两个变量之间**线性关系**的数值型指标，取值范围是[-1,1]，大于0表示正相关，小于0表示负相关，可以用散点图来直接查看相关性。**根据某些不成文的规则，一般高于0.6表示强相关，低于0.4表示弱相关，中间部分表示中度相关。**
 
 [**Pearson相关系数考察的变量的属性是连续的，例如年龄，体重等，如果是离散型变量那么应该使用点二列相关系数**]
 
