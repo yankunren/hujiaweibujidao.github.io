@@ -42,11 +42,11 @@ $F(x)=\int_{-\infty}^{x}f(t)dt$
 
 证明它的期望是$\theta$，方差是$\theta^{2}$:
 
-$E(X)=\int_{-\infty}^{\infty}xf(x)dx = \int_{0}^{\infty}x \frac{1}{\theta} e^{- \frac{x}{\theta}}dx = \int_{0}^{\infty}xd(-e^{- \frac{x}{\theta}}) = [-x e^{- \frac{x}{\theta}}]_{0}^{\infty} +  \int_{0}^{\infty} e^{- \frac{x}{\theta}}dx = \theta$
+$$E(X)=\int_{-\infty}^{\infty}xf(x)dx = \int_{0}^{\infty}x \frac{1}{\theta} e^{- \frac{x}{\theta}}dx = \int_{0}^{\infty}xd(-e^{- \frac{x}{\theta}}) = [-x e^{- \frac{x}{\theta}}]_{0}^{\infty} +  \int_{0}^{\infty} e^{- \frac{x}{\theta}}dx = \theta$$
 
-$E(X^{2})=\int_{-\infty}^{\infty}x^{2}f(x)dx = \int_{0}^{\infty}x^{2} \frac{1}{\theta} e^{- \frac{x}{\theta}}dx = \int_{0}^{\infty}x^{2}d(-e^{- \frac{x}{\theta}}) = [-x^{2} e^{- \frac{x}{\theta}}]_{0}^{\infty} +  \int_{0}^{\infty} 2x e^{- \frac{x}{\theta}}dx = 2\theta^{2}$
+$$E(X^{2})=\int_{-\infty}^{\infty}x^{2}f(x)dx = \int_{0}^{\infty}x^{2} \frac{1}{\theta} e^{- \frac{x}{\theta}}dx = \int_{0}^{\infty}x^{2}d(-e^{- \frac{x}{\theta}}) = [-x^{2} e^{- \frac{x}{\theta}}]_{0}^{\infty} +  \int_{0}^{\infty} 2x e^{- \frac{x}{\theta}}dx = 2\theta^{2}$$
 
-$D(X)=E(X^{2})-[E(X)]^{2}=\theta^{2}$
+$$D(X)=E(X^{2})-[E(X)]^{2}=\theta^{2}$$
 
 《统计思维》对指数分布的解释：举例来说，**观察一系列事件之间的间隔时间，若事件在每个时间点发生的概率相同，那么间隔时间的分布就近似指数分布**(也就是前面的无记忆性)。
 
