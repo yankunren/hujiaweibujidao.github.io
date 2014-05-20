@@ -42,7 +42,7 @@ $$
 s=\sqrt{\frac{\Sigma(X-\bar{X})^2}{n-1}}
 $$
 
-**s是总体标准差的无偏估计，如果根号内部分母改成了n则是有偏估计，详细证明参见：[http://en.wikipedia.org/wiki/Bias_of_an_estimator](http://en.wikipedia.org/wiki/Bias_of_an_estimator)，《爱上统计学》作者对此的解释是统计学家们通常比较保守，保守的含义是，如果我们不得不出错，我们出错也是因为过高地估计了标准差(因为除以n-1使得标准差大于实际值)。**
+**s是总体标准差的无偏估计，如果根号内部分母改成了n则是有偏估计，详细证明参见：[Bias_of_an_estimator](http://en.wikipedia.org/wiki/Bias_of_an_estimator)，《爱上统计学》作者对此的解释是统计学家们通常比较保守，保守的含义是，如果我们不得不出错，我们出错也是因为过高地估计了标准差(因为除以n-1使得标准差大于实际值)。**
 
 如果想了解更加细致的内容可以看下这篇文章[Why divide the sample variance by N-1?](http://www.visiondummy.com/2014/03/divide-variance-n-1/)
 
@@ -91,7 +91,8 @@ $E(X-Y)=E(X)-E(Y) \quad Var(X-Y)=Var(X)+Var(Y)$
 
 **思考：为什么$Var(X-Y)=Var(X)+Var(Y)$？**
 
-$Var(X-Y)=E[(X-Y)^{2}]-[E(X-Y)]^{2}=E(X^{2})+E(Y^{2})-2E(X)E(Y)+[E(X)-E(Y)]^{2}=E(X^{2})-[E(X)]^{2}+E(Y^{2})-[E(Y)]^{2}-2E(X)E(Y)+2E(X)E(Y)=Var(X)+Var(Y)$
+$$Var(X-Y)=E[(X-Y)^{2}]-[E(X-Y)]^{2}=E(X^{2})+E(Y^{2})-2E(X)E(Y)+[E(X)-E(Y)]^{2}\\
+=E(X^{2})-[E(X)]^{2}+E(Y^{2})-[E(Y)]^{2}-2E(X)E(Y)+2E(X)E(Y)=Var(X)+Var(Y)$$
 
 **记住，一个随机变量减去另一个随机变量得到的概率分布的方差是两个随机变量的方差之和，方差只会增加！**
 
