@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-20T10:39:36+08:00</updated>
+  <updated>2014-05-20T10:42:44+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -534,7 +534,7 @@ print(rec_dag_sp(W,s,t)) #7
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/dp_summary.png" alt="image" /></p>
 
-<p>好，我们差不多搞清楚了动态规划的本质以及两种实现方式的优缺点，下面我们来实践下，举最常用的例子：<a href="(http://hujiaweibujidao.github.io/blog/2014/05/18/matrix-chain/)">矩阵链乘问题！</a>内容较多，所以请点击链接过去阅读完了之后回来看总结！</p>
+<p>好，我们差不多搞清楚了动态规划的本质以及两种实现方式的优缺点，下面我们来实践下，举最常用的例子：<a href="http://hujiaweibujidao.github.io/blog/2014/05/18/matrix-chain/">矩阵链乘问题</a>内容较多，所以请点击链接过去阅读完了之后回来看总结！</p>
 
 <p>OK，希望我把动态规划将清楚了，总结下：<strong>动态规划其实就是一个连续决策的过程，每次决策我们可能有多种选择(二项式系数和0-1背包问题中我们只有两个选择，DAG图的单源最短路径中我们的选择要看点的出边或者入边，矩阵链乘问题中就是矩阵链可以分开的位置总数…)，我们每次选择最好的那个作为我们的决策。动态规划有2中实现方式，一种是带备忘录的递归形式，这种方式直接从原问题出发，遇到子问题就去求解子问题并存储子问题的解，下次遇到的时候直接取出来，问题求解的过程看起来就像是先自顶向下地展开问题，然后自下而上的进行决策。另一个实现方式是迭代方式，这种方式需要考虑如何给定一个子问题的求解方式，使得后面求解规模较大的问题是需要求解的子问题都已经求解好了，它的缺点就是可能有些子问题不要算但是它还是算了，而递归实现方式只会计算它需要求解的子问题。</strong></p>
 
