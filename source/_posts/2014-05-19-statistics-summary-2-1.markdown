@@ -18,8 +18,10 @@ published: true
 
 函数f(x)是概率密度函数，函数F(x)是分布函数，两者都是连续函数。
 
-![image](http://hujiaweibujidao.github.io/images/math/cont0.png)
-![image](http://hujiaweibujidao.github.io/images/math/cont1.png)
+$F(x)=\int_{-\infty}^{x}f(t)dt$
+
+[查看定义1](http://hujiaweibujidao.github.io/images/math/cont0.png)
+[查看定义2](http://hujiaweibujidao.github.io/images/math/cont1.png)
 
 关于连续型随机变量X对于任意一个指定实数值k的概率都是0，即$p(X=k)=0$的解释
 
@@ -27,7 +29,7 @@ published: true
 
 (1)均匀分布(uniform distribution)
 
-连续型随机变量X在区间(a,b)均匀分布
+连续型随机变量X在区间(a,b)均匀分布，它的期望是$E=\frac{a+b}{2}$，也就是期望就是区间(a,b)的中点，它的方差是$D=\frac{(b-a)^{2}}{12}$，用$D=E(X^{2})-E^{2}$去证明方便些。
 
 ![image](http://hujiaweibujidao.github.io/images/math/cont_uniform.png)
 
@@ -37,6 +39,14 @@ published: true
 
 ![image](http://hujiaweibujidao.github.io/images/math/cont_exp1.png)
 ![image](http://hujiaweibujidao.github.io/images/math/cont_exp2.png)
+
+证明它的期望是$\theta$，方差是$\theta^{2}$:
+
+$E(X)=\int_{-\infty}^{\infty}xf(x)dx = \int_{0}^{\infty}x \frac{1}{\theta} e^{- \frac{x}{\theta}}dx = \int_{0}^{\infty}xd(-e^{- \frac{x}{\theta}}) = [-x e^{- \frac{x}{\theta}}]_{0}^{\infty} +  \int_{0}^{\infty} e^{- \frac{x}{\theta}}dx = \theta$
+
+$E(X^{2})=\int_{-\infty}^{\infty}x^{2}f(x)dx = \int_{0}^{\infty}x^{2} \frac{1}{\theta} e^{- \frac{x}{\theta}}dx = \int_{0}^{\infty}x^{2}d(-e^{- \frac{x}{\theta}}) = [-x^{2} e^{- \frac{x}{\theta}}]_{0}^{\infty} +  \int_{0}^{\infty} 2x e^{- \frac{x}{\theta}}dx = 2\theta^{2}$
+
+$D(X)=E(X^{2})-[E(X)]^{2}=\theta^{2}$
 
 《统计思维》对指数分布的解释：举例来说，**观察一系列事件之间的间隔时间，若事件在每个时间点发生的概率相同，那么间隔时间的分布就近似指数分布**(也就是前面的无记忆性)。
 
@@ -78,7 +88,7 @@ $$
 CDF(x)=\frac{1}{2}[1+erf(\frac{x-\mu}{\sigma \sqrt{2}})] \quad erf(x)=\frac{2}{\sqrt{\pi}}\int_{0}^{x}e^{-t^{2}}dt
 $$
 
-其中，参数$\mu$和$\sigma$分别决定了正态分布的均值和标准差。下图为$\mu=2.0$和$\sigma=0.5$的正态分布的CDF图：
+其中，参数$\mu$和$\sigma$分别决定了正态分布的均值和标准差。下图为$\mu=2.0$和$\sigma=0.5$的正态分布的CDF图：[呈现明显的S型]
 
 ![image](http://hujiaweibujidao.github.io/images/math/ndcdf.png)
 
