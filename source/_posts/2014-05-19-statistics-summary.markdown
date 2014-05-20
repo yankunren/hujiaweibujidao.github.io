@@ -27,15 +27,17 @@ published: true
 
 本总结总共4章节，分开来阅读较好
 
-1.[概率](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/)
+1.[概率和统计量](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/)
 
-2.[统计量](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/)
+2.[协方差和相关关系](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/)
 
 3.随机变量的分布
 
 (1)[分布之离散型随机变量分布](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/)
 
 (2)[分布之连续型随机变量分布](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-1/)
+
+(3)[分布之多维随机变量及其分布](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-2/)
 
 4.[假设检验](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-4/)
 
