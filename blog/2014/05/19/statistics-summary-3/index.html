@@ -139,6 +139,8 @@ $$</p>
 
 <p><strong>s是总体标准差的无偏估计，如果根号内部分母改成了n则是有偏估计，详细证明参见：<a href="http://en.wikipedia.org/wiki/Bias_of_an_estimator">http://en.wikipedia.org/wiki/Bias_of_an_estimator</a>，《爱上统计学》作者对此的解释是统计学家们通常比较保守，保守的含义是，如果我们不得不出错，我们出错也是因为过高地估计了标准差(因为除以n-1使得标准差大于实际值)。</strong></p>
 
+<p>如果想了解更加细致的内容可以看下这篇文章<a href="http://www.visiondummy.com/2014/03/divide-variance-n-1/">Why divide the sample variance by N-1?</a></p>
+
 <p>标准差和方差的异同：<strong>它们都是用来反映数据集的数据的变异性或者离散度的度量，但是标准差以原有的计算单位存在，然而方差以平方单位存在，前者在实际中更加具有意义</strong>。例如，某高校的男生的平均身高是170cm，标准差是5cm，那么说明该校男生的身高与平均身高的差异大概就是上下5cm，换成方差来解释的话就不好陈述了。</p>
 
 <p>使用有偏估计其实也可以，但是最好使用无偏估计，我记得Coursera上Machine Learning课中Andrew Ng曾经提到过，实际编码中其实还是使用有偏估计，因为它们在样本数据很大的时候其实结果没多大影响。</p>

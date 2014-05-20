@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-20T09:14:42+08:00</updated>
+  <updated>2014-05-20T09:55:51+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -221,31 +221,40 @@ CDF_{lognormal}(x) = CDF_{normal}(log x)
 
 <p>分布律：离散型随机变量以概率1和一定的规律分布在一些离散值上</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/disc0.png" alt="image" /></p>
+<p><a href="http://hujiaweibujidao.github.io/images/math/disc0.png">查看定义</a></p>
 
 <p>(1)0-1分布</p>
 
-<p>随机变量X只有两个取值0和1样本空间只有两个取值也行)，所以叫做0-1分布，它的分布律为
-$P(X=0)=p, P(X=1)=q, (q=1-p)$</p>
+<p>随机变量X只有两个取值0和1(样本空间只有两个取值也行)，所以叫做0-1分布，它的分布律为
+$P(X=0)=p, P(X=1)=q, (q=1-p)$，它的期望是$p$，方差是$p(1-p)$。</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/disc_01.png" alt="image" /></p>
+<p><a href="http://hujiaweibujidao.github.io/images/math/disc_01.png">查看定义</a></p>
 
 <p>(2)二项分布</p>
 
-<p>二项分布的分布律为 $P(X=k)= {n \choose k} p^{k}q^{1-k}$，因为 $P(X=k)$ 刚好是 $(p+q)^{n}$ 的二项式系数，所以这个分布就叫二项分布。二项分布是从n重伯努利试验中得到的分布，伯努利试验是指相互独立的试验，每次试验的结果要么成功要么失败(或者说某个事件要么发生要么不发生)。</p>
+<p>二项分布的分布律为 $P(X=k)= {n \choose k} p^{k}q^{1-k}$，因为 $P(X=k)$ 刚好是 $(p+q)^{n}$ 的二项式系数，所以这个分布就叫二项分布。二项分布是从n重伯努利试验中得到的分布，所谓的伯努利试验就是指相互独立的试验，每次试验的结果要么成功要么失败(或者说某个事件要么发生要么不发生)。</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/disc_binomial.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/disc_binomial2.png" alt="image" /></p>
+<p><a href="http://hujiaweibujidao.github.io/images/math/disc_binomial.png">查看定义1</a>
+<a href="http://hujiaweibujidao.github.io/images/math/disc_binomial2.png">查看定义2</a></p>
 
 <p>(3)泊松分布</p>
 
-<p>泊松分布是一类很常用的分布，它的分布律有一个参数$\lambda$，参数$\lambda$的含义既是泊松分布的期望，又是它的方差，所以，只要参数$\lambda$或者期望或者方差确定了，泊松分布就确定了。</p>
+<p>泊松分布是一类很常用的分布，它的分布律是$P(X=k)=\frac{\lambda^{k} e^{-\lambda}}{k!},(k=0,1,2,…)$，其中有一个参数$\lambda$，参数$\lambda$的含义既是泊松分布的期望，又是它的方差，所以，只要参数$\lambda$或者期望或者方差确定了，泊松分布就确定了。泊松分布中经常需要用到的式子[$e^{\lambda}=\Sigma_{k=0}^{\infty}\frac{x^{k}}{k!}$]</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/disc_pos.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/disc_pos2.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/disc_pos3.png" alt="image" /></p>
+<p><a href="http://hujiaweibujidao.github.io/images/math/disc_pos.png">查看定义</a></p>
+
+<p>证明它的期望是$\lambda$: </p>
+
+<p>$E=\Sigma<em>{k=0}^{\infty}k \frac{\lambda^{k} e^{-\lambda}}{k!}=\lambda e^{-\lambda} \Sigma</em>{k=1}^{\infty} \frac{\lambda^{k-1}}{(k-1)!}=\lambda e^{-\lambda} e^{\lambda}=\lambda$</p>
+
+<p>证明它的方差是$\lambda$:</p>
+
+<p>$D=E(X^{2})-E^{2}=E(X(X-1)-X)-E^{2}=\Sigma<em>{k=0}^{\infty}k(k-1) \frac{\lambda^{k} e^{-\lambda}}{k!}+\lambda-\lambda^{2}=\lambda e^{-\lambda} \Sigma</em>{k=1}^{\infty} \frac{\lambda^{k-1}}{(k-1)!}=\lambda^{2} e^{-\lambda} e^{\lambda}+\lambda-\lambda^{2}=\lambda$</p>
 
 <p><strong>泊松定理说明当n很大，p很小的时候，以n，p为参数的二项分布可以用参数$\lambda = np $的泊松分布进行近似！</strong>记住这个定理其实也可以方便我们记住泊松分布的分布律。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/disc_pos2.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/disc_pos3.png" alt="image" /></p>
 
 <p>应用举例，记住后面的结论：</p>
 
@@ -286,6 +295,8 @@ s=\sqrt{\frac{\Sigma(X-\bar{X})^2}{n-1}}
 $$</p>
 
 <p><strong>s是总体标准差的无偏估计，如果根号内部分母改成了n则是有偏估计，详细证明参见：<a href="http://en.wikipedia.org/wiki/Bias_of_an_estimator">http://en.wikipedia.org/wiki/Bias_of_an_estimator</a>，《爱上统计学》作者对此的解释是统计学家们通常比较保守，保守的含义是，如果我们不得不出错，我们出错也是因为过高地估计了标准差(因为除以n-1使得标准差大于实际值)。</strong></p>
+
+<p>如果想了解更加细致的内容可以看下这篇文章<a href="http://www.visiondummy.com/2014/03/divide-variance-n-1/">Why divide the sample variance by N-1?</a></p>
 
 <p>标准差和方差的异同：<strong>它们都是用来反映数据集的数据的变异性或者离散度的度量，但是标准差以原有的计算单位存在，然而方差以平方单位存在，前者在实际中更加具有意义</strong>。例如，某高校的男生的平均身高是170cm，标准差是5cm，那么说明该校男生的身高与平均身高的差异大概就是上下5cm，换成方差来解释的话就不好陈述了。</p>
 
