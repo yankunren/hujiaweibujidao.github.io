@@ -20,9 +20,9 @@ published: true
 
 为什么D(X+Y)=E(XY)-E(X)E(Y)?
 
-$
+$$
 D(X+Y)=E[(X+Y)^{2}]-[E(X+Y)]^{2}=E[X^{2}+Y^{2}-2XY]-[E(X)+E(Y)]^{2} \\ =E[X^{2}]-[E(X)]^{2}+E[Y^{2}]-[E(Y)]^{2}+2E(XY)-2E(X)E(Y) \\ =D(X)+D(Y)+2E(XY)-2E(X)E(Y)
-$
+$$
 
 因为 **(X+Y)=D(X)+D(Y)+2Cov(X,Y)**
 所以 **D(X+Y)=E(XY)-E(X)E(Y)**
