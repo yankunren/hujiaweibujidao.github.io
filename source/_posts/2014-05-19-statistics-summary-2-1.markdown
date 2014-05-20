@@ -18,7 +18,7 @@ published: true
 
 函数f(x)是概率密度函数，函数F(x)是分布函数，两者都是连续函数。
 
-$F(x)=\int_{-\infty}^{x}f(t)dt$
+$$F(x)=\int_{-\infty}^{x}f(t)dt$$
 
 [查看定义1](http://hujiaweibujidao.github.io/images/math/cont0.png)
 [查看定义2](http://hujiaweibujidao.github.io/images/math/cont1.png)
@@ -124,7 +124,7 @@ $$
 
 **在$(\mu - \sigma, \mu + \sigma)$之间大概有68.26%的数据分布，在$(\mu - 2\sigma, \mu + 2\sigma)$之间大概有95.44%的数据分布，在$(\mu - 3\sigma, \mu + 3\sigma)$之间大概有99.74%的数据分布。**
 
-$\alpha$分位点的概念：对于标准正态分布X~N(0,1)，满足$$P(X>Z_{\alpha})=\alpha$$的$Z_{\alpha}$称为$\alpha$分位点，且有$Z_{-1\alpha}=Z_{\alpha}$。
+$\alpha$分位点的概念：对于标准正态分布X~N(0,1)，满足$$P(X>Z_{\alpha})=\alpha$$的$$Z_{\alpha}$$称为$\alpha$分位点，且有$$Z_{-1\alpha}=Z_{\alpha}$$。
 
 ![image](http://hujiaweibujidao.github.io/images/math/cont_normal5.png)
 
