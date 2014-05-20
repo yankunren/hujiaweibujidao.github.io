@@ -4,7 +4,7 @@
   <title><![CDATA[Category: math | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-20T20:42:24+08:00</updated>
+  <updated>2014-05-20T20:45:53+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -134,6 +134,41 @@
 <p>举例说明连续型条件概率密度的计算</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/cond_10.png" alt="image" /></p>
+
+<p>4.相互独立的随机变量</p>
+
+<p>前面我们提到随机变量之间可能存在相关性，那自然也有不存在相关性的随机变量，即相互独立的随机变量。很显然，如果随机变量(X,Y)的联合分布等于边缘分布的乘积那么就说明随机变量X和Y是相互独立的。</p>
+
+<p>对于连续型随机变量(X,Y)来说，X和Y是相互独立的的条件是<script type="math/tex">f(x,y)=f_{X}(x)f_{Y}(y)</script>。</p>
+
+<p>对于离散型随机变量(X,Y)来说，X和Y是相互独立的的条件是对于所有可能的<script type="math/tex">(x_{i},y_{j})</script>对，都有<script type="math/tex">P(X=x_{i},Y=y_{j})=P(X=x_{i})P(Y=y_{j})</script>。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/ind_2.png" alt="image" /></p>
+
+<p>如果从期望和方差的角度来看独立性的话，那么就有<script type="math/tex">E(XY)=E(X)E(Y), D(X+Y)=D(X)+D(Y)</script>，也就是随机变量XY的期望是X和Y的期望的乘积，随机变量(X+Y)的方差是X和Y的方差之和。</p>
+
+<script type="math/tex; mode=display">E(XY)=\int_{-\infty}^{\infty}xyf(x)f(y)dxdy=\int_{-\infty}^{\infty}xyf_{X}(x)f_{Y}(y)dxdy=\int_{-\infty}^{\infty}xf_{X}(x)dx\int_{-\infty}^{\infty}yf_{Y}(y)dy=E(X)E(Y)</script>
+
+<script type="math/tex; mode=display">D(X+Y)=D(X)+D(Y)</script>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/ind_4.png" alt="image" /></p>
+
+<p>对于前面的二维正态随机变量，随机变量X和Y是相互独立的前提条件是它们的相关系数$\rho=0$。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/ind_3.png" alt="image" /></p>
+
+<p>二维随机变量中的独立性可以很容易地推广到n维随机变量上。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/ind_1.png" alt="image" /></p>
+
+<p>5.随机变量函数的分布</p>
+
+<p>有些时候我们需要处理的随机变量是几个随机变量形成的函数，这个时候它的分布是怎样的呢？
+这类函数比较多，比如求和，乘积，商，最大值或者最小值，这里只说明其中最重要的一个和函数的分布。</p>
+
+<p>从中我们得到一个结论：有限个相互独立的正态随机变量的线性组合仍然是服从正态分布。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/fun_1.png" alt="image" /></p>
 
 ]]></content>
   </entry>
@@ -359,7 +394,7 @@ $P(X=0)=p, P(X=1)=q, (q=1-p)$，它的期望是$p$，方差是$p(1-p)$。</p>
 
 <hr />
 
-<h4 id="center-center"><center>第二部分 描述性统计量</center></h4>
+<h4 id="center-center"><center>第二部分 统计量</center></h4>
 
 <p>1.描述数据的集中趋势：均值(mean)，中位数(median)，众数(mode)，加权平均数</p>
 
