@@ -97,6 +97,14 @@ $$ P(X=x_{i} \| Y=y_{j}) = \int_{-\infty}^{x}\frac{f(x,y)}{f_{Y}(y))}dx $$
 
 ![image](http://hujiaweibujidao.github.io/images/math/ind_2.png)
 
+如果从期望和方差的角度来看独立性的话，那么就有$$E(XY)=E(X)E(Y), D(X+Y)=D(X)+D(Y)$$，也就是随机变量XY的期望是X和Y的期望的乘积，随机变量(X+Y)的方差是X和Y的方差之和。
+
+$$E(XY)=\int_{-\infty}^{\infty}xyf(x)f(y)dxdy=\int_{-\infty}^{\infty}xyf_{X}(x)f_{Y}(y)dxdy=\int_{-\infty}^{\infty}xf_{X}(x)dx\int_{-\infty}^{\infty}yf_{Y}(y)dy=E(X)E(Y)$$
+
+$$D(X+Y)=D(X)+D(Y)$$
+
+![image](http://hujiaweibujidao.github.io/images/math/ind_4.png)
+
 对于前面的二维正态随机变量，随机变量X和Y是相互独立的前提条件是它们的相关系数$\rho=0$。
 
 ![image](http://hujiaweibujidao.github.io/images/math/ind_3.png)
