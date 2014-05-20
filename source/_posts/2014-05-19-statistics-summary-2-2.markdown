@@ -48,7 +48,7 @@ $$F(x,y)=\int_{-\infty}^{x_{i}}\int_{-\infty}^{y_{j}}f(u,v)dudv$$
 
 **边缘分布其实就是指，对于一个多维随机变量来说，它具有一个联合分布律或者联合概率密度，但是如果我们只考虑它其中的某一个随机变量的话，那么这个随机变量的分布律或者概率密度就是边缘分布律或者边缘概率密度了。**
 
-二维连续型随机变量(X,Y)对X的边缘概率密度实际上就是对y进行积分，同理，对Y的边缘概率密度实际上就是对x进行积分。
+二维连续型随机变量(X,Y)对X的边缘概率密度实际上就是对y进行积分$$f_{X}(x)=\int_{-\infty}^{\infty}f(x,y)dy$$，同理，对Y的边缘概率密度实际上就是对x进行积分$$f_{Y}(y)=\int_{-\infty}^{\infty}f(x,y)dx$$。
 
 ![image](http://hujiaweibujidao.github.io/images/math/cond_1.png)
 ![image](http://hujiaweibujidao.github.io/images/math/cond_2.png)
