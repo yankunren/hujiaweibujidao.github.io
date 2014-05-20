@@ -4,7 +4,7 @@
   <title><![CDATA[Category: math | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-20T18:49:35+08:00</updated>
+  <updated>2014-05-20T19:12:53+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -94,6 +94,8 @@
 
 <p>边缘分布函数，边缘分布律，边缘概率密度</p>
 
+<p><strong>边缘分布其实就是指，对于一个多维随机变量来说，它具有一个联合分布律或者联合概率密度，但是如果我们只考虑它其中的某一个随机变量的话，那么这个随机变量的分布律或者概率密度就是边缘分布律或者边缘概率密度了。</strong></p>
+
 <p>二维连续型随机变量(X,Y)对X的边缘概率密度实际上就是对y进行积分，同理，对Y的边缘概率密度实际上就是对x进行积分。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/cond_1.png" alt="image" />
@@ -103,12 +105,50 @@
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/cond_3.png" alt="image" /></p>
 
-<p>下面我们看下二维正态分布，从中得到一些重要的结论：<strong>二维正态分布的两个边缘分布都是一维正态分布，给以这两个一维正态分布不同的参数会得到不同的二维正态分布，所以，已知关于X和Y的边缘分布，并不能确定X和Y的联合分布。</strong></p>
+<p>下面我们看下二维正态分布，这是一个很重要的多维随机变量分布，我们从中可以得到一些重要的结论。</p>
+
+<p><strong>二维正态分布的两个边缘分布都是一维正态分布，给以这两个一维正态分布不同的参数会得到不同的二维正态分布，所以，已知关于X和Y的边缘分布，并不能确定X和Y的联合分布。</strong></p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/cond_4.png" alt="image" />
 <img src="http://hujiaweibujidao.github.io/images/math/cond_5.png" alt="image" /></p>
 
-<p>上面的参数$\rho$是随机变量X和Y的相关系数。</p>
+<p>上面的参数$\rho$是随机变量X和Y的相关系数，后面还会详细介绍。</p>
+
+<p>3.条件分布</p>
+
+<p><strong>因为是多维随机变量，那么自然可以假定其中某一个随机变量为某个固定的值，在这种情况下我们再去看其他随机变量的分布那就是条件分布了。</strong></p>
+
+<p>二维离散型随机变量的条件分布律</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$$P(X=x_{i}</td>
+      <td>Y=y<em>{j})=\frac{P(X=x</em>{i}</td>
+      <td>Y=y<em>{j})}{P(Y=y</em>{j})}$$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/cond_6.png" alt="image" /></p>
+
+<p>二维连续型随机变量的条件概率密度</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$$P(X=x_{i}</td>
+      <td>Y=y<em>{j})=\int</em>{-\infty}^{x}\frac{f(x,y)}{f_{Y}(y))}dx$$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/cond_8.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/cond_9.png" alt="image" /></p>
+
+<p>举例说明连续型条件概率密度的计算</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/cond_10.png" alt="image" /></p>
 
 ]]></content>
   </entry>
