@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-20T11:14:56+08:00</updated>
+  <updated>2014-05-20T11:18:10+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -709,7 +709,7 @@ c[i][j]=  \left\{
 
 <hr />
 
-<p>矩阵链乘问题的描述如下，就是说要确定一个完全加括号的形式使得需要进行的标量计算数目最少，矩阵$A(i)$的维数为$p(i-1) \times p(i)$，如果穷举所有可能形式的话，时间复杂度是指数级的！因为该问题满足最优子结构，并且子问题存在重叠，所以我们要借助动态规划来求解。</p>
+<p>矩阵链乘问题的描述如下，就是说要确定一个完全加括号的形式使得需要进行的标量计算数目最少，矩阵<script type="math/tex">A_{i}</script>的维数为<script type="math/tex">p_{i-1} \times p_{i}</script>，如果穷举所有可能形式的话，时间复杂度是指数级的！因为该问题满足最优子结构，并且子问题存在重叠，所以我们要借助动态规划来求解。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/matrix.png" alt="image" /></p>
 

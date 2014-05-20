@@ -9,7 +9,7 @@
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="Algorithms: Matrix Chain 矩阵链乘问题是最典型的动态规划问题，要理解下面的内容请先阅读这篇动态规划的总结，嘿嘿 矩阵链乘问题的描述如下，就是说要确定一个完全加括号的形式使得需要进行的标量计算数目最少，矩阵$A(i)$的维数为$p(i-1) \times p(i)$， &hellip;">
+  <meta name="description" content="Algorithms: Matrix Chain 矩阵链乘问题是最典型的动态规划问题，要理解下面的内容请先阅读这篇动态规划的总结，嘿嘿 矩阵链乘问题的描述如下，就是说要确定一个完全加括号的形式使得需要进行的标量计算数目最少，矩阵的维数为，如果穷举所有可能形式的话，时间复杂度是指数级的！ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -121,7 +121,7 @@
 
 <hr />
 
-<p>矩阵链乘问题的描述如下，就是说要确定一个完全加括号的形式使得需要进行的标量计算数目最少，矩阵$A(i)$的维数为$p(i-1) \times p(i)$，如果穷举所有可能形式的话，时间复杂度是指数级的！因为该问题满足最优子结构，并且子问题存在重叠，所以我们要借助动态规划来求解。</p>
+<p>矩阵链乘问题的描述如下，就是说要确定一个完全加括号的形式使得需要进行的标量计算数目最少，矩阵<script type="math/tex">A_{i}</script>的维数为<script type="math/tex">p_{i-1} \times p_{i}</script>，如果穷举所有可能形式的话，时间复杂度是指数级的！因为该问题满足最优子结构，并且子问题存在重叠，所以我们要借助动态规划来求解。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/matrix.png" alt="image" /></p>
 
