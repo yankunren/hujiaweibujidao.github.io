@@ -94,6 +94,30 @@ $$
 
 决定系数：相关系数的平方，它表述一个变量的方差可以被另一个变量的方差来解释的百分比。(参考《爱上统计学》)
 
+3.协方差矩阵
+
+协方差矩阵是非常重要的内容，经典算法PCA的基础就是协方差矩阵。引入它之前，先要看下原点矩和中心距的概念
+
+![image](http://hujiaweibujidao.github.io/images/math/corm_1.png)
+
+协方差矩阵其实就是n维随机变量的二阶混合中心距组成的矩阵
+
+![image](http://hujiaweibujidao.github.io/images/math/corm_2.png)
+
+还是回到我们最重要的那个二维正态随机变量，看下如何将它的概率密度转换成协方差矩阵的表示形式，继而将其推广至n维正态随机变量。
+
+![image](http://hujiaweibujidao.github.io/images/math/corm_5.png)
+![image](http://hujiaweibujidao.github.io/images/math/corm_4.png)
+
+n维正态随机变量的性质
+
+![image](http://hujiaweibujidao.github.io/images/math/corm_3.png)
+
+
+
+
+
+
 
 
 
