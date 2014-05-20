@@ -72,13 +72,13 @@ $$F(x,y)=\int_{-\infty}^{x_{i}}\int_{-\infty}^{y_{j}}f(u,v)dudv$$
 
 二维离散型随机变量的条件分布律
 
-$$ P(X=x_{i} | Y=y_{j}) = \frac{P(X=x_{i} | Y=y_{j})}{P(Y=y_{j})} $$
+$$ P(X=x_{i} \| Y=y_{j}) = \frac{P(X=x_{i} \| Y=y_{j})}{P(Y=y_{j})} $$
 
 ![image](http://hujiaweibujidao.github.io/images/math/cond_6.png)
 
 二维连续型随机变量的条件概率密度
 
-$$ P(X=x_{i} | Y=y_{j}) = \int_{-\infty}^{x}\frac{f(x,y)}{f_{Y}(y))}dx $$
+$$ P(X=x_{i} \| Y=y_{j}) = \int_{-\infty}^{x}\frac{f(x,y)}{f_{Y}(y))}dx $$
 
 ![image](http://hujiaweibujidao.github.io/images/math/cond_8.png)
 ![image](http://hujiaweibujidao.github.io/images/math/cond_9.png)
