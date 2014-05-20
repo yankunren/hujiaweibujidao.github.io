@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-20T09:55:51+08:00</updated>
+  <updated>2014-05-20T10:39:36+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -146,6 +146,183 @@ print(s) #[2, 2, 2, 2]</p>
 s=lcs4(x,y)
 print(s) #[3, 3, 3, 3, 4]
 ```</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Algorithms: Matrix Chain]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/18/matrix-chain/"/>
+    <updated>2014-05-18T16:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/18/matrix-chain</id>
+    <content type="html"><![CDATA[<h4 id="centeralgorithms-matrix-chaincenter"><center>Algorithms: Matrix Chain</center></h4>
+
+<p>矩阵链乘问题是最典型的动态规划问题，要理解下面的内容请先阅读<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/">这篇动态规划的总结</a>，嘿嘿</p>
+
+<hr />
+
+<p>矩阵链乘问题的描述如下，就是说要确定一个完全加括号的形式使得需要进行的标量计算数目最少，矩阵$A(i)$的维数为$p(i-1) \times p(i)$，如果穷举所有可能形式的话，时间复杂度是指数级的！因为该问题满足最优子结构，并且子问题存在重叠，所以我们要借助动态规划来求解。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/matrix.png" alt="image" /></p>
+
+<p>我们需要确定一个递归式来将我们要求解的问题表示出来，下面摘自算法导论，介绍地非常详细
+<img src="http://hujiaweibujidao.github.io/images/algos/matrix2.png" alt="image" /></p>
+
+<p>最后给出的递归式如下，就是说我们要如何确定从第i个矩阵到第j个矩阵组成的矩阵链的最优解。如果i和j相等，那么就是一个矩阵，不需要运算；如果i小于j，那么肯定要从它们中间的某个位置分开来，那从哪里分开来呢? 这个我们可以尝试下所有可能的选择，也就是尝试不同的位置k，k满足条件(i &lt;= k &lt; j)，在位置k将矩阵链进行分开，看看它需要的计算次数，然后我们从这些可能的k中选择使得计算次数最小的那个k进行分开，分开了之后我们的问题就变成了2个小问题，确定矩阵链从i到k
+和另一个矩阵链从k+1到j的最优解。如果我们一开始设置i=1(第一个矩阵)，j=n(最后一个矩阵)，那么，经过上面的递归即可得到我们需要的解。这就是递归的思想！</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+m[i][j]= \left\{ 
+  \begin{array}{l l}
+    0 & \quad \text{if i=j }\\
+    min_{i \le k < j}{m[i][k]+m[k+1][j]+p_{i-1}p_{k}p_{j}} & \quad \text{if i<j}
+  \end{array} \right.
+ %]]&gt;</script>
+
+<p>根据上面的思想我们很快就可以写出一个递归版本的矩阵链承法的实现代码，输出的结果也没有错，给出的加括号的方式是<code>( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )</code>。[问题的数据是算法导论中的问题的数据，值是<code>30,35,15,5,10,20,25</code>]。</p>
+
+<p>```python
+def matrixchain_rec(p,i,j):
+    if i==j:
+        return 0
+    for k in range(i,j):
+        q=matrixchain_rec(p,i,k)+matrixchain_rec(p,k+1,j)+p[i-1]<em>p[k]</em>p[j]
+        if q&lt;m[i][j]:
+            m[i][j]=q
+            s[i][j]=k
+    return m[i][j]</p>
+
+<p>def showmatrixchain(s,i,j):
+    if i==j:
+        print ‘A%d’%(i),
+    else:
+        print ‘(‘,
+        showmatrixchain(s,i,s[i][j])
+        showmatrixchain(s,s[i][j]+1,j)
+        print ‘)’,</p>
+
+<p>n=6
+p=[30,35,15,5,10,20,25]
+m=[[sys.maxint for i in range(n+1)] for j in range(n+1)]
+s=[[0 for i in range(n+1)] for j in range(n+1)]
+# pprint.pprint(m)
+result=matrixchain_rec(p,1,6)
+print(result) #15125
+showmatrixchain(s,1,6) #( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )
+```</p>
+
+<p>上面的代码运行没有问题，但是，它不够完美！为什么呢? 很明显，矩阵链乘问题子问题存在重叠，下面这张图很形象地显示了哪些子问题被重复计算了，所以我们需要改进，改进的方法就是使用带备忘录的递归形式！</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/matrix3.png" alt="image" /></p>
+
+<p>要改成带备忘录的很简单，我们实现过几次了，但是，这次我们不能直接使用原来的装饰器，因为Python中的dict不能对list对象进行hash，所以我们要简单地修改下我们key值的构建，也很简单，看下代码就明白了：</p>
+
+<p>```
+from functools import wraps</p>
+
+<p>def memo(func):
+    cache={}
+    @wraps(func)
+    def wrap(<em>args):
+        #build new key!!!
+        key=str(args[1])+str(args[2])
+        if key not in cache:
+            cache[key]=func(</em>args)
+        return cache[key]
+    return wrap</p>
+
+<p>@memo
+def matrixchain_rec(p,i,j):
+    if i==j:
+        return 0
+    for k in range(i,j):
+        q=matrixchain_rec(p,i,k)+matrixchain_rec(p,k+1,j)+p[i-1]<em>p[k]</em>p[j]
+        if q&lt;m[i][j]:
+            m[i][j]=q
+            s[i][j]=k
+    return m[i][j]</p>
+
+<p>def showmatrixchain(s,i,j):
+    if i==j:
+        print ‘A%d’%(i),
+    else:
+        print ‘(‘,
+        showmatrixchain(s,i,s[i][j])
+        showmatrixchain(s,s[i][j]+1,j)
+        print ‘)’,</p>
+
+<p>n=6
+p=[30,35,15,5,10,20,25]
+m=[[sys.maxint for i in range(n+1)] for j in range(n+1)]
+s=[[0 for i in range(n+1)] for j in range(n+1)]
+# pprint.pprint(m)
+result=matrixchain_rec(p,1,6)
+print(result) #15125
+showmatrixchain(s,1,6) #( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )
+```</p>
+
+<p><strong>接下来的一个问题是，我们怎么实现迭代版本呢? 迭代版本关键在于顺序！我们怎么保证我们在计算$A<em>{i…j}$的最优解时，所有可能的k的选择需要求解的子问题$A</em>{i…k}$以及$A_{(k+1)…j}$是已经求解出来了的呢? 一个简单但是有效的想法就是看矩阵链的长度，我们先计算矩阵链短的最优解，然后再计算矩阵链长的最优解，后者计算时所需要求解的子问题肯定已经求解完了，对不对? 于是就有了迭代版本的实现，需要注意的就是其中的i,j,k的取值范围。</strong></p>
+
+<p>```
+import sys
+def matrixchain_iter(p):
+    n=len(p)-1 #total n matrices 6
+    #to solve the problem below, so initialize to n+1!!!
+    m=[[0 for i in range(n+1)] for j in range(n+1)]
+    s=[[0 for i in range(n+1)] for j in range(n+1)]
+    # for i in range(n): #for matrix with len=1
+        # m[i][i]=0
+    # pprint.pprint(m)
+    for l in range(2,n+1): #iterate the length, max is n
+        for i in range(1,n-l+2): #i max is n-l+1
+            j=i+l-1 #j is always l away from i
+            m[i][j]=sys.maxint #initial to infinity
+            for k in range(i,j):
+                #attention to python array when index &lt; 0!!!
+                #solution is using more space with useless values
+                q=m[i][k]+m[k+1][j]+p[i-1]<em>p[k]</em>p[j]
+                if q&lt;m[i][j]:
+                    m[i][j]=q
+                    s[i][j]=k
+        # print(‘when len is %d ‘ % (l))
+        # pprint.pprint(m)
+    return m,s</p>
+
+<p>print(‘’)
+m,s=matrixchain_iter(p)
+print(m[1][6]) #15125
+showmatrixchain(s,1,6) #( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )
+```
+实现的时候需要注意一点，在Python中取list中的值时，如果索引是负值的话会从后面往前数返回对应的元素，而以前我们用其他语言的时候肯定是提示越界了，所以代码中用来存储结果的数数组是(n+1)x(n+1)，而不是nxn的，这样的话就能够保证返回的是0，而不是从后往前数得到的结果。</p>
+
+<p>得到的数组<code>m</code>如下，<code>m[1,6]</code>就是我们需要的解。</p>
+
+<p><code>
+[[0, 0, 0, 0, 0, 0, 0],
+ [0, 0, 15750, 7875, 9375, 11875, 15125],
+ [0, 0, 0, 2625, 4375, 7125, 10500],
+ [0, 0, 0, 0, 750, 2500, 5375],
+ [0, 0, 0, 0, 0, 1000, 3500],
+ [0, 0, 0, 0, 0, 0, 5000],
+ [0, 0, 0, 0, 0, 0, 0]]
+</code></p>
+
+<p>数组<code>s</code>如下：</p>
+
+<p><code>
+[[0, 0, 0, 0, 0, 0, 0],
+ [0, 0, 1, 1, 3, 3, 3],
+ [0, 0, 0, 2, 3, 3, 3],
+ [0, 0, 0, 0, 3, 3, 3],
+ [0, 0, 0, 0, 0, 4, 5],
+ [0, 0, 0, 0, 0, 0, 5],
+ [0, 0, 0, 0, 0, 0, 0]]
+</code></p>
+
+<p>将这个两个数组旋转下，并且只看上三角部分的数字，就可以得到算法导论中给出的那张三角图形了，非常类似杨辉三角</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/matrixmulti.png" alt="image" /></p>
 
 ]]></content>
   </entry>
@@ -357,174 +534,11 @@ print(rec_dag_sp(W,s,t)) #7
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/dp_summary.png" alt="image" /></p>
 
-<p>好，我们差不多搞清楚了动态规划的本质以及两种实现方式的优缺点，下面我们来实践下，举最常用的例子：矩阵链乘问题！</p>
-
-<p>矩阵链乘问题的描述如下，就是说要确定一个完全加括号的形式使得需要进行的标量计算数目最少，矩阵$A<em>{i}$的维数为$p</em>{i-1}p_{i}$，如果穷举所有可能形式的话，时间复杂度是指数级的！因为该问题满足最优子结构，并且子问题存在重叠，所以我们要借助动态规划来求解。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/matrix.png" alt="image" /></p>
-
-<p>我们需要确定一个递归式来将我们要求解的问题表示出来，下面摘自算法导论，介绍地非常详细
-<img src="http://hujiaweibujidao.github.io/images/algos/matrix2.png" alt="image" /></p>
-
-<p>最后给出的递归式如下，就是说我们要如何确定从第i个矩阵到第j个矩阵组成的矩阵链的最优解。如果i和j相等，那么就是一个矩阵，不需要运算；如果i小于j，那么肯定要从它们中间的某个位置分开来，那从哪里分开来呢? 这个我们可以尝试下所有可能的选择，也就是尝试不同的位置k，k满足条件(i &lt;= k &lt; j)，在位置k将矩阵链进行分开，看看它需要的计算次数，然后我们从这些可能的k中选择使得计算次数最小的那个k进行分开，分开了之后我们的问题就变成了2个小问题，确定矩阵链从i到k
-和另一个矩阵链从k+1到j的最优解。如果我们一开始设置i=1(第一个矩阵)，j=n(最后一个矩阵)，那么，经过上面的递归即可得到我们需要的解。这就是递归的思想！</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-
-m[i][j]= \left\{ 
-  \begin{array}{l l}
-    0 & \quad \text{if i=j }\\
-    min_{i \le k < j}{m[i][k]+m[k+1][j]+p_{i-1}p_{k}p_{j}} & \quad \text{if i<j}
-  \end{array} \right.
- %]]&gt;</script>
-
-<p>根据上面的思想我们很快就可以写出一个递归版本的矩阵链承法的实现代码，输出的结果也没有错，给出的加括号的方式是<code>( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )</code>。[问题的数据是算法导论中的问题的数据，值是<code>30,35,15,5,10,20,25</code>]。</p>
-
-<p>```
-def matrixchain_rec(p,i,j):
-    if i==j:
-        return 0
-    for k in range(i,j):
-        q=matrixchain_rec(p,i,k)+matrixchain_rec(p,k+1,j)+p[i-1]<em>p[k]</em>p[j]
-        if q&lt;m[i][j]:
-            m[i][j]=q
-            s[i][j]=k
-    return m[i][j]</p>
-
-<p>def showmatrixchain(s,i,j):
-    if i==j:
-        print ‘A%d’%(i),
-    else:
-        print ‘(‘,
-        showmatrixchain(s,i,s[i][j])
-        showmatrixchain(s,s[i][j]+1,j)
-        print ‘)’,</p>
-
-<p>n=6
-p=[30,35,15,5,10,20,25]
-m=[[sys.maxint for i in range(n+1)] for j in range(n+1)]
-s=[[0 for i in range(n+1)] for j in range(n+1)]
-# pprint.pprint(m)
-result=matrixchain_rec(p,1,6)
-print(result) #15125
-showmatrixchain(s,1,6) #( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )
-```</p>
-
-<p>上面的代码运行没有问题，但是，它不够完美！为什么呢? 很明显，矩阵链乘问题子问题存在重叠，下面这张图很形象地显示了哪些子问题被重复计算了，所以我们需要改进，改进的方法就是使用带备忘录的递归形式！</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/matrix3.png" alt="image" /></p>
-
-<p>要改成带备忘录的很简单，我们实现过几次了，但是，这次我们不能直接使用原来的装饰器，因为Python中的dict不能对list对象进行hash，所以我们要简单地修改下我们key值的构建，也很简单，看下代码就明白了：</p>
-
-<p>```
-from functools import wraps</p>
-
-<p>def memo(func):
-    cache={}
-    @wraps(func)
-    def wrap(<em>args):
-        #build new key!!!
-        key=str(args[1])+str(args[2])
-        if key not in cache:
-            cache[key]=func(</em>args)
-        return cache[key]
-    return wrap</p>
-
-<p>@memo
-def matrixchain_rec(p,i,j):
-    if i==j:
-        return 0
-    for k in range(i,j):
-        q=matrixchain_rec(p,i,k)+matrixchain_rec(p,k+1,j)+p[i-1]<em>p[k]</em>p[j]
-        if q&lt;m[i][j]:
-            m[i][j]=q
-            s[i][j]=k
-    return m[i][j]</p>
-
-<p>def showmatrixchain(s,i,j):
-    if i==j:
-        print ‘A%d’%(i),
-    else:
-        print ‘(‘,
-        showmatrixchain(s,i,s[i][j])
-        showmatrixchain(s,s[i][j]+1,j)
-        print ‘)’,</p>
-
-<p>n=6
-p=[30,35,15,5,10,20,25]
-m=[[sys.maxint for i in range(n+1)] for j in range(n+1)]
-s=[[0 for i in range(n+1)] for j in range(n+1)]
-# pprint.pprint(m)
-result=matrixchain_rec(p,1,6)
-print(result) #15125
-showmatrixchain(s,1,6) #( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )
-```</p>
-
-<p><strong>接下来的一个问题是，我们怎么实现迭代版本呢? 迭代版本关键在于顺序！我们怎么保证我们在计算$A<em>{i…j}$的最优解时，所有可能的k的选择需要求解的子问题$A</em>{i…k}$以及$A_{(k+1)…j}$是已经求解出来了的呢? 一个简单但是有效的想法就是看矩阵链的长度，我们先计算矩阵链短的最优解，然后再计算矩阵链长的最优解，后者计算时所需要求解的子问题肯定已经求解完了，对不对? 于是就有了迭代版本的实现，需要注意的就是其中的i,j,k的取值范围。</strong></p>
-
-<p>```
-import sys
-def matrixchain_iter(p):
-    n=len(p)-1 #total n matrices 6
-    #to solve the problem below, so initialize to n+1!!!
-    m=[[0 for i in range(n+1)] for j in range(n+1)]
-    s=[[0 for i in range(n+1)] for j in range(n+1)]
-    # for i in range(n): #for matrix with len=1
-        # m[i][i]=0
-    # pprint.pprint(m)
-    for l in range(2,n+1): #iterate the length, max is n
-        for i in range(1,n-l+2): #i max is n-l+1
-            j=i+l-1 #j is always l away from i
-            m[i][j]=sys.maxint #initial to infinity
-            for k in range(i,j):
-                #attention to python array when index &lt; 0!!!
-                #solution is using more space with useless values
-                q=m[i][k]+m[k+1][j]+p[i-1]<em>p[k]</em>p[j]
-                if q&lt;m[i][j]:
-                    m[i][j]=q
-                    s[i][j]=k
-        # print(‘when len is %d ‘ % (l))
-        # pprint.pprint(m)
-    return m,s</p>
-
-<p>print(‘’)
-m,s=matrixchain_iter(p)
-print(m[1][6]) #15125
-showmatrixchain(s,1,6) #( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )
-```
-实现的时候需要注意一点，在Python中取list中的值时，如果索引是负值的话会从后面往前数返回对应的元素，而以前我们用其他语言的时候肯定是提示越界了，所以代码中用来存储结果的数数组是(n+1)x(n+1)，而不是nxn的，这样的话就能够保证返回的是0，而不是从后往前数得到的结果。</p>
-
-<p>得到的数组<code>m</code>如下，<code>m[1,6]</code>就是我们需要的解。</p>
-
-<p><code>
-[[0, 0, 0, 0, 0, 0, 0],
- [0, 0, 15750, 7875, 9375, 11875, 15125],
- [0, 0, 0, 2625, 4375, 7125, 10500],
- [0, 0, 0, 0, 750, 2500, 5375],
- [0, 0, 0, 0, 0, 1000, 3500],
- [0, 0, 0, 0, 0, 0, 5000],
- [0, 0, 0, 0, 0, 0, 0]]
-</code></p>
-
-<p>数组<code>s</code>如下：</p>
-
-<p><code>
-[[0, 0, 0, 0, 0, 0, 0],
- [0, 0, 1, 1, 3, 3, 3],
- [0, 0, 0, 2, 3, 3, 3],
- [0, 0, 0, 0, 3, 3, 3],
- [0, 0, 0, 0, 0, 4, 5],
- [0, 0, 0, 0, 0, 0, 5],
- [0, 0, 0, 0, 0, 0, 0]]
-</code></p>
-
-<p>将这个两个数组旋转下，并且只看上三角部分的数字，就可以得到算法导论中给出的那张三角图形了，非常类似杨辉三角</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/matrixmulti.png" alt="image" /></p>
+<p>好，我们差不多搞清楚了动态规划的本质以及两种实现方式的优缺点，下面我们来实践下，举最常用的例子：<a href="(http://hujiaweibujidao.github.io/blog/2014/05/18/matrix-chain/)">矩阵链乘问题！</a>内容较多，所以请点击链接过去阅读完了之后回来看总结！</p>
 
 <p>OK，希望我把动态规划将清楚了，总结下：<strong>动态规划其实就是一个连续决策的过程，每次决策我们可能有多种选择(二项式系数和0-1背包问题中我们只有两个选择，DAG图的单源最短路径中我们的选择要看点的出边或者入边，矩阵链乘问题中就是矩阵链可以分开的位置总数…)，我们每次选择最好的那个作为我们的决策。动态规划有2中实现方式，一种是带备忘录的递归形式，这种方式直接从原问题出发，遇到子问题就去求解子问题并存储子问题的解，下次遇到的时候直接取出来，问题求解的过程看起来就像是先自顶向下地展开问题，然后自下而上的进行决策。另一个实现方式是迭代方式，这种方式需要考虑如何给定一个子问题的求解方式，使得后面求解规模较大的问题是需要求解的子问题都已经求解好了，它的缺点就是可能有些子问题不要算但是它还是算了，而递归实现方式只会计算它需要求解的子问题。</strong></p>
 
-<p>如果你感觉你有所顿悟，来试试写写最长公共子序列列吧，这篇文章中给出了Python版本的5种实现方式哟！</p>
+<p>如果你感觉你有所顿悟，来试试写写最长公共子序列吧，<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/">这篇文章中给出了Python版本的5种实现方式</a>哟！</p>
 
 ]]></content>
   </entry>
@@ -587,558 +601,6 @@ showmatrixchain(s,1,6) #( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )
 <p>5.最小生成树：Prim，Kruskal</p>
 
 <p>6.网络流：最大流，最小割，二分图等</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Python Algorithms - Trees]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees/"/>
-    <updated>2014-05-08T20:00:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees</id>
-    <content type="html"><![CDATA[<p><strong><center>Python Algorithms Python算法系列</center></strong>
-<strong><center>逸夫图书馆, 2014/5/8</center></strong></p>
-
-<h3 id="centercenter"><center>树</center></h3>
-
-<p>参考内容：</p>
-
-<p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a></p>
-
-<p>Chapter 6 Trees and Tree Algorithms   </p>
-
-<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
-
-<h4 id="section">树的总结</h4>
-
-<p>1.二叉搜索树 <a href="http://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9">on_wiki</a>：一种特殊的二叉树，它满足下面的性质：任何一个节点的key值都比它左子树上的节点的key值要大，但是比它右子树上的节点的key值要小。节点查找，插入，删除等操作的时间复杂度都是$O(n)$</p>
-
-<p>难点在于删除节点的操作(下面摘自wiki)：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_del_wiki.png" alt="image" /></p>
-
-<p><strong>引用开始</strong> [一份不错的讲解<a href="http://www.cnblogs.com/Anker/archive/2013/01/28/2880581.html">来自博客园</a>]</p>
-
-<hr />
-
-<p>1.在二叉查找树中找某个节点的前驱和后继节点</p>
-
-<p>给定一个二叉查找树中的结点，找出在中序遍历顺序下某个节点的前驱和后继。如果树中所有关键字都不相同，则某一结点x的前驱就是小于key[x]的所有关键字中最大的那个结点，后继即是大于key[x]中的所有关键字中最小的那个结点。根据二叉查找树的结构和性质，不用对关键字做任何比较，就可以找到某个结点的前驱和后继。</p>
-
-<p>查找前驱步骤：先判断x是否有左子树，如果有则在left[x]中查找关键字最大的结点，即是x的前驱。如果没有左子树，则从x继续向上执行此操作，直到遇到某个结点是其父节点的右孩子结点，<strong>此时该父节点就是前驱</strong>。例如下图查找结点7的前驱结点6过程：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_pre.png" alt="image" /></p>
-
-<p>伪代码</p>
-
-<p><code>cpp
-TREE_SUCCESSOR(x)
-    if right[x] != NULL
-        then return TREE_MINMUM(right(x))
-    y=parent[x]
-    while y!= NULL and x ==left[y]
-           do x = y
-              y=parent[y]
-    return y
-</code></p>
-
-<p>查找后继步骤：先判断x是否有右子树，如果有则在right[x]中查找关键字最小的结点，即使x的后继。如果没有右子树，则从x的父节点开始向上查找，直到遇到某个结点是其父结点的左儿子的结点时为止，<strong>此时该父节点就是后继</strong>。例如下图查找结点13的后继结点15的过程：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_later.png" alt="image" /></p>
-
-<p>伪代码</p>
-
-<p><code>cpp
-TREE_PROCESSOR(x)
-    if right[x] != NULL
-        then return TREE_MINMUM(right(x))
-    y=parent[x]
-    while y!= NULL and x ==right[y]
-           do x = y
-              y=parent[y]
-    return y
-</code></p>
-
-<p>2.删除节点操作</p>
-
-<p>(1)结点z没有左右子树，则修改其父节点p[z]，<strong>删除父节点对它的链接</strong>。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_del1.png" alt="image" /></p>
-
-<p>(2)如果结点z只有一个子树（左子树或者右子树），通过在其子结点与父节点建立一条链接来删除z。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_del2.png" alt="image" /></p>
-
-<p>(3)如果z有两个子女，则先删除z的后继y(y没有左孩子)，再用y的内容来替代z的内容。</p>
-
-<p><strong>[博主提示：这里找到z的后继就是利用上面的查找后继的方法，根据wiki也可以是用z的前驱来替换。另外，删除后继和替换内容的操作其实也可以反过来，保证数据不丢失就行了]</strong></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_del3.png" alt="image" /></p>
-
-<hr />
-
-<p><strong>引用结束</strong></p>
-
-<p><a href="http://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9">wiki</a>上的python代码实现节点删除操作，比后面的python代码更加简洁易懂</p>
-
-<p>代码采用了递归的形式处理，相当于只需要考虑了要删除的节点就在当前位置该如何处理，然后，对于只有左孩子节点或者只有右孩子结点或者没有孩子节点的情况直接进行节点覆盖就行了，但是，对于复杂的第三种情况，在左右孩子节点都存在的情况下，只需从它的右孩子结点中找到最小的那个元素即为要删除节点的后继(同理，可以找到左孩子结点中找到最大的那个元素，即为要删除节点的前驱)，然后复制后继节点中的内容到要删除的节点，最后删除后继节点即可。</p>
-
-<p>```python
-def find_min(self):   # Gets minimum node (leftmost leaf) in a subtree
-    current_node = self
-    while current_node.left_child:
-        current_node = current_node.left_child
-    return current_node</p>
-
-<p>def replace_node_in_parent(self, new_value=None):
-    if self.parent:
-        if self == self.parent.left_child:
-            self.parent.left_child = new_value
-        else:
-            self.parent.right_child = new_value
-    if new_value:
-        new_value.parent = self.parent</p>
-
-<p>def binary_tree_delete(self, key):
-    if key &lt; self.key:
-        self.left_child.binary_tree_delete(key)
-    elif key &gt; self.key:
-        self.right_child.binary_tree_delete(key)
-    else: # delete the key here
-        if self.left_child and self.right_child: # if both children are present
-            successor = self.right_child.find_min()
-            self.key = successor.key
-            successor.binary_tree_delete(successor.key)
-        elif self.left_child:   # if the node has only a <em>left</em> child
-            self.replace_node_in_parent(self.left_child)
-        elif self.right_child:  # if the node has only a <em>right</em> child
-            self.replace_node_in_parent(self.right_child)
-        else: # this node has no children
-            self.replace_node_in_parent(None)
-```</p>
-
-<p>参考内容1中在第三种情况下使用的是wiki中的第二种方案，并且是使用直接后继来代替要删除的节点。</p>
-
-<p>二叉查找树的python完整实现见下面AVL树的完整实现(除去AVLTree即可)[参考内容1中的代码相当冗余，但是可读性蛮好，个人认为如果要实现删除节点操作的话建议参考wiki上python代码的实现，也可以查看参考内容1中对代码的详细解释加深理解]</p>
-
-<p>如果原始的列表是基本有序的，那么得到的二叉树会变成一个扭曲的二叉树，性能就相当于一个链表了。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_worst.png" alt="image" /></p>
-
-<p>8.平衡二叉查找树：为了避免得到前面提到的扭曲的二叉查找树，于是就有了平衡二叉查找树的概念。</p>
-
-<p>AVL树是最先发明的平衡二叉树，它得名于它的发明者G.M. Adelson-Velsky和E.M. Landis，他们在1962年的论文《An algorithm for the organization of information》中发表了它。</p>
-
-<p><a href="http://zh.wikipedia.org/wiki/AVL%E6%A0%91">on_wiki</a></p>
-
-<p>AVL树的基本操作的实现</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_operations.png" alt="image" /></p>
-
-<p>如何进行旋转</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_rotate.png" alt="image" /></p>
-
-<p>旋转的实现描述</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_rotatedetails.png" alt="image" /></p>
-
-<p><a href="http://zhuyanfeng.com/archives/743">这篇文章对AVL树的讲解很好，并使用C++语言进行实现</a>以及<a href="http://zhuyanfeng.com/archives/716">另一篇文章</a></p>
-
-<p><a href="http://interactivepython.org/courselib/static/pythonds/Trees/balanced.html">参考内容1关于AVL树的讲解</a> —&gt; <a href="http://hujiaweibujidao.github.io/files/avltree.pdf">如果访问较慢可以点击这里下载</a></p>
-
-<p>(1)平衡因子：左子树与右子树的高度之差</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_bf.png" alt="image" /></p>
-
-<p>(2)分析为什么AVL树能够对查找，插入，删除操作都达到$O(logn)$的效率</p>
-
-<p>推理当中关于斐波那契数列在N很大的时候后项与前项之商接近黄金分割比的内容可参见<a href="http://zh.wikipedia.org/wiki/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B8">斐波那契数列on_wiki</a></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/201405/avl2.png" alt="image" /></p>
-
-<p>(3)左旋，右旋以及左右旋和右左旋</p>
-
-<p>左旋：如果新的根节点有左孩子结点，那么左孩子结点就成为原来的根节点的右孩子结点</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_left.png" alt="image" /></p>
-
-<p>右旋：如果新的根节点有右孩子结点，那么右孩子结点就成为原来的根节点的左孩子结点</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_right.png" alt="image" /></p>
-
-<p>一种特殊的情况，单一的左旋和右旋都不行，不停地重复交替，所以需要左右旋(或者右左旋)</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_leftright.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/201405/avl_leftright2.png" alt="image" /></p>
-
-<p>(4)如何在不重新计算子树的高度情况下修改旋转前的根节点和旋转后的根节点的平衡因子值</p>
-
-<p>下面是左旋的例子</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/avl_rebal1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/201405/avl_rebal2.png" alt="image" /></p>
-
-<p>python代码实现[参考内容1未给出完整代码，下面代码是我自己补充的，添加了测试，如果有误请回复我]</p>
-
-<p>```
-class TreeNode:
-    def <strong>init</strong>(self,key,val,left=None,right=None,parent=None,balanceFactor=0):
-        self.key = key
-        self.payload = val
-        self.leftChild = left
-        self.rightChild = right
-        self.parent = parent
-        self.balanceFactor=balanceFactor; #default new node balance factor is 0</p>
-
-<pre><code>def hasLeftChild(self):
-    return self.leftChild
-
-def hasRightChild(self):
-    return self.rightChild
-
-def isLeftChild(self):
-    return self.parent and self.parent.leftChild == self
-
-def isRightChild(self):
-    return self.parent and self.parent.rightChild == self
-
-def isRoot(self):
-    return not self.parent
-
-def isLeaf(self):
-    return not (self.rightChild or self.leftChild)
-
-def hasAnyChildren(self):
-    return self.rightChild or self.leftChild
-
-def hasBothChildren(self):
-    return self.rightChild and self.leftChild
-
-def replaceNodeData(self,key,value,lc,rc):
-    self.key = key
-    self.payload = value
-    self.leftChild = lc
-    self.rightChild = rc
-    if self.hasLeftChild():
-        self.leftChild.parent = self
-    if self.hasRightChild():
-        self.rightChild.parent = self
-</code></pre>
-
-<p>class BinarySearchTree:</p>
-
-<pre><code>def __init__(self):
-    self.root = None
-    self.size = 0
-
-def length(self):
-    return self.size
-
-def __len__(self):
-    return self.size
-
-def inorder(self,node):
-    if node.leftChild:
-        self.inorder(node.leftChild)
-    self.print_node(node)
-    if node.rightChild:
-        self.inorder(node.rightChild)
-
-def levelorder(self,node):
-    nodes = []
-    nodes.append(node)
-    while len(nodes)&gt;0:
-        current_node = nodes.pop(0)
-        self.print_node(current_node)
-        if current_node.leftChild:
-            nodes.append(current_node.leftChild)
-        if current_node.rightChild:
-            nodes.append(current_node.rightChild)
-
-def print_node(self,node):
-    if node.parent:
-        print([node.key,node.payload,node.parent.key])
-    else:
-        print([node.key,node.payload])
-
-def put(self,key,val):
-    if self.root:
-        self._put(key,val,self.root)
-    else:
-        self.root = TreeNode(key,val)
-    self.size = self.size + 1
-
-def _put(self,key,val,currentNode):
-    if key &lt; currentNode.key:
-        if currentNode.hasLeftChild():
-            self._put(key,val,currentNode.leftChild)
-        else:
-            currentNode.leftChild = TreeNode(key,val,parent=currentNode)
-    else:
-        if currentNode.hasRightChild():
-            self._put(key,val,currentNode.rightChild)
-        else:
-            currentNode.rightChild = TreeNode(key,val,parent=currentNode)
-
-def __setitem__(self,k,v):
-    self.put(k,v)
-
-def get(self,key):
-    if self.root:
-        res = self._get(key,self.root)
-        if res:
-            return res.payload
-        else:
-            return None
-    else:
-        return None
-
-def _get(self,key,currentNode):
-    if not currentNode:
-        return None
-    elif currentNode.key == key:
-        return currentNode
-    elif key &lt; currentNode.key:
-        return self._get(key,currentNode.leftChild)
-    else:
-        return self._get(key,currentNode.rightChild)
-
-def __getitem__(self,key):
-    return self.get(key)
-
-def __contains__(self,key):
-    if self._get(key,self.root):
-        return True
-    else:
-        return False
-
-def delete(self,key):
-    if self.size &gt; 1:
-        nodeToRemove = self._get(key,self.root)
-        if nodeToRemove:
-            self.remove(nodeToRemove)
-            self.size = self.size-1
-        else:
-            raise KeyError('Error, key not in tree')
-    elif self.size == 1 and self.root.key == key:
-        self.root = None
-        self.size = self.size - 1
-    else:
-        raise KeyError('Error, key not in tree')
-
-def __delitem__(self,key):
-    self.delete(key)
-
-def spliceOut(self):
-    if self.isLeaf():
-        if self.isLeftChild():
-            self.parent.leftChild = None
-        else:
-            self.parent.rightChild = None
-    elif self.hasAnyChildren():
-        if self.hasLeftChild():
-            if self.isLeftChild():
-                self.parent.leftChild = self.leftChild
-            else:
-                self.parent.rightChild = self.leftChild
-            self.leftChild.parent = self.parent
-        else:
-            if self.isLeftChild():
-                self.parent.leftChild = self.rightChild
-            else:
-                self.parent.rightChild = self.rightChild
-            self.rightChild.parent = self.parent
-
-def findSuccessor(self):
-    succ = None
-    if self.hasRightChild():
-        succ = self.rightChild.findMin()
-    else:
-        if self.parent:
-            if self.isLeftChild():
-                succ = self.parent
-            else:
-                self.parent.rightChild = None
-                succ = self.parent.findSuccessor()
-                self.parent.rightChild = self
-    return succ
-
-def findMin(self):
-    current = self
-    while current.hasLeftChild():
-        current = current.leftChild
-    return current
-
-def remove(self,currentNode):
-    if currentNode.isLeaf(): #leaf
-        if currentNode == currentNode.parent.leftChild:
-            currentNode.parent.leftChild = None
-        else:
-            currentNode.parent.rightChild = None
-    elif currentNode.hasBothChildren(): #interior
-        succ = currentNode.findSuccessor()
-        succ.spliceOut()
-        currentNode.key = succ.key
-        currentNode.payload = succ.payload
-    else: # this node has one child
-        if currentNode.hasLeftChild():
-            if currentNode.isLeftChild():
-                currentNode.leftChild.parent = currentNode.parent
-                currentNode.parent.leftChild = currentNode.leftChild
-            elif currentNode.isRightChild():
-                currentNode.leftChild.parent = currentNode.parent
-                currentNode.parent.rightChild = currentNode.leftChild
-            else:
-                currentNode.replaceNodeData(currentNode.leftChild.key,
-                                            currentNode.leftChild.payload,
-                                            currentNode.leftChild.leftChild,
-                                            currentNode.leftChild.rightChild)
-        else:
-            if currentNode.isLeftChild():
-                currentNode.rightChild.parent = currentNode.parent
-                currentNode.parent.leftChild = currentNode.rightChild
-            elif currentNode.isRightChild():
-                currentNode.rightChild.parent = currentNode.parent
-                currentNode.parent.rightChild = currentNode.rightChild
-            else:
-                currentNode.replaceNodeData(currentNode.rightChild.key,
-                                            currentNode.rightChild.payload,
-                                            currentNode.rightChild.leftChild,
-                                            currentNode.rightChild.rightChild)
-</code></pre>
-
-<p>class AVLTree(BinarySearchTree):</p>
-
-<pre><code># def put(self,key,val):
-#     if self.root:
-#         self._put(key,val,self.root)
-#     else:
-#         self.root = TreeNode(key,val)
-#         self.root.balanceFactor = 0
-#     self.size = self.size + 1
-
-def _put(self,key,val,currentNode):
-    if key &lt; currentNode.key:
-        if currentNode.hasLeftChild():
-            self._put(key,val,currentNode.leftChild)
-        else:
-            currentNode.leftChild = TreeNode(key,val,parent=currentNode)
-            self.updateBalance(currentNode.leftChild)
-    else:
-        if currentNode.hasRightChild():
-            self._put(key,val,currentNode.rightChild)
-        else:
-            currentNode.rightChild = TreeNode(key,val,parent=currentNode)
-            self.updateBalance(currentNode.rightChild)
-
-def updateBalance(self,node):
-    if node.balanceFactor &gt; 1 or node.balanceFactor &lt; -1:
-        self.rebalance(node)
-        return
-    if node.parent != None:
-        if node.isLeftChild():
-            node.parent.balanceFactor += 1
-        elif node.isRightChild():
-            node.parent.balanceFactor -= 1
-        if node.parent.balanceFactor != 0:
-            self.updateBalance(node.parent)
-
-def rotateLeft(self,rotRoot): #rotate left
-    newRoot = rotRoot.rightChild
-    rotRoot.rightChild = newRoot.leftChild
-    if newRoot.leftChild != None:
-        newRoot.leftChild.parent = rotRoot
-    newRoot.parent = rotRoot.parent
-    if rotRoot.isRoot():
-        self.root = newRoot
-    else:
-        if rotRoot.isLeftChild():
-            rotRoot.parent.leftChild = newRoot
-        else:
-            rotRoot.parent.rightChild = newRoot
-    newRoot.leftChild = rotRoot
-    rotRoot.parent = newRoot
-    rotRoot.balanceFactor = rotRoot.balanceFactor + 1 - min(newRoot.balanceFactor, 0)
-    newRoot.balanceFactor = newRoot.balanceFactor + 1 + max(rotRoot.balanceFactor, 0)
-
-def rotateRight(self,rotRoot): #rotate right
-    newRoot = rotRoot.leftChild
-    rotRoot.leftChild = newRoot.rightChild # deal child
-    if newRoot.rightChild != None:
-        newRoot.rightChild.parent = rotRoot #deal child parent
-    newRoot.parent = rotRoot.parent #deal root parent
-    if rotRoot.isRoot():
-        self.root = newRoot
-    else:
-        if rotRoot.isLeftChild():
-            rotRoot.parent.leftChild = newRoot
-        else:
-            rotRoot.parent.rightChild = newRoot
-    newRoot.rightChild = rotRoot #deal new root right child
-    rotRoot.parent = newRoot #deal old root parent
-    rotRoot.balanceFactor = rotRoot.balanceFactor - 1 - min(newRoot.balanceFactor, 0)
-    newRoot.balanceFactor = newRoot.balanceFactor - 1 + max(rotRoot.balanceFactor, 0)
-
-def rebalance(self,node):
-    if node.balanceFactor &lt; 0:
-        if node.rightChild.balanceFactor &gt; 0:
-            self.rotateRight(node.rightChild)
-            self.rotateLeft(node)
-        else:
-            self.rotateLeft(node)
-    elif node.balanceFactor &gt; 0:
-        if node.leftChild.balanceFactor &lt; 0:
-            self.rotateLeft(node.leftChild)
-            self.rotateRight(node)
-        else:
-            self.rotateRight(node)
-</code></pre>
-
-<h1 id="test-code">test code</h1>
-<p># test avl tree
-print(‘test avl’)
-mytree = AVLTree()
-mytree[3]=”red”
-mytree[4]=”blue”
-mytree[6]=”yellow”
-mytree[2]=”at”
-mytree[5]=’dog’
-mytree[1]=’cat’
-mytree.levelorder(mytree.root)</p>
-
-<h1 id="test-bst">test bst</h1>
-<p>print(‘test bst’)
-mytree = BinarySearchTree()
-mytree[3]=”red”
-mytree[4]=”blue”
-mytree[6]=”yellow”
-mytree[2]=”at”
-mytree[5]=’dog’
-mytree[1]=’cat’
-mytree.levelorder(mytree.root)</p>
-
-<h1 id="test-avl">test avl</h1>
-<p># [4, ‘blue’]
-# [2, ‘at’, 4]
-# [6, ‘yellow’, 4]
-# [1, ‘cat’, 2]
-# [3, ‘red’, 2]
-# [5, ‘dog’, 6]
-# test bst
-# [3, ‘red’]
-# [2, ‘at’, 3]
-# [4, ‘blue’, 3]
-# [1, ‘cat’, 2]
-# [6, ‘yellow’, 4]
-# [5, ‘dog’, 6]</p>
-
-<p>```</p>
-
-<p>对于我给定的测试数据，对应得到的二叉查找树和AVL树如下图所示，二叉查找树明显不平衡，AVL树中所有节点的平衡因子为0或者1，在构造的过程中，共发生了一次左旋和一次右旋。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/bst_avl.png" alt="images" /></p>
 
 ]]></content>
   </entry>

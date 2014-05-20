@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-20T09:55:51+08:00</updated>
+  <updated>2014-05-20T10:39:36+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -387,6 +387,8 @@ $P(A|B)=\frac{P(A \cap B)}{P(B|A)P(A)+P(B|A’)P(A’)}$</p>
 
 <p>$E(x)=\Sigma xP(X=x)=\mu \quad Var(x)=E(x-\mu)^{2}=\Sigma (x-\mu)^2P(X=x)=E(x^{2})-(E(x))^{2}$</p>
 
+<p>[注：上面的期望的等式是对于离散型随机变量x，如果是连续型随机变量x，那么$E=\int<em>{-\infty}^{\infty} xf(x)dx$，同理，方差就是$D=\int</em>{-\infty}^{\infty} (x-E)^{2}f(x)dx$，期望描述的是数据的集中趋势，方差描述的数据的偏移程度]</p>
+
 <p>线性变换之后的期望与方差：</p>
 
 <p>$E(ax+b)=aE(x)+b \quad Var(ax+b)=a^{2}Var(x)$
@@ -683,6 +685,290 @@ c[i][j]=  \left\{
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/">http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Algorithms: Matrix Chain]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/18/matrix-chain/"/>
+    <updated>2014-05-18T16:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/18/matrix-chain</id>
+    <content type="html"><![CDATA[<h4 id="centeralgorithms-matrix-chaincenter"><center>Algorithms: Matrix Chain</center></h4>
+
+<p>矩阵链乘问题是最典型的动态规划问题，要理解下面的内容请先阅读<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/">这篇动态规划的总结</a>，嘿嘿</p>
+
+<hr />
+
+<p>矩阵链乘问题的描述如下，就是说要确定一个完全加括号的形式使得需要进行的标量计算数目最少，矩阵$A(i)$的维数为$p(i-1) \times p(i)$，如果穷举所有可能形式的话，时间复杂度是指数级的！因为该问题满足最优子结构，并且子问题存在重叠，所以我们要借助动态规划来求解。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/matrix.png" alt="image" /></p>
+
+<p>我们需要确定一个递归式来将我们要求解的问题表示出来，下面摘自算法导论，介绍地非常详细
+<img src="http://hujiaweibujidao.github.io/images/algos/matrix2.png" alt="image" /></p>
+
+<p>最后给出的递归式如下，就是说我们要如何确定从第i个矩阵到第j个矩阵组成的矩阵链的最优解。如果i和j相等，那么就是一个矩阵，不需要运算；如果i小于j，那么肯定要从它们中间的某个位置分开来，那从哪里分开来呢? 这个我们可以尝试下所有可能的选择，也就是尝试不同的位置k，k满足条件(i &lt;= k &lt; j)，在位置k将矩阵链进行分开，看看它需要的计算次数，然后我们从这些可能的k中选择使得计算次数最小的那个k进行分开，分开了之后我们的问题就变成了2个小问题，确定矩阵链从i到k
+和另一个矩阵链从k+1到j的最优解。如果我们一开始设置i=1(第一个矩阵)，j=n(最后一个矩阵)，那么，经过上面的递归即可得到我们需要的解。这就是递归的思想！</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+m[i][j]= \left\{ 
+  \begin{array}{l l}
+    0 & \quad \text{if i=j }\\
+    min_{i \le k < j}{m[i][k]+m[k+1][j]+p_{i-1}p_{k}p_{j}} & \quad \text{if i<j}
+  \end{array} \right.
+ %]]&gt;</script>
+
+<p>根据上面的思想我们很快就可以写出一个递归版本的矩阵链承法的实现代码，输出的结果也没有错，给出的加括号的方式是<code>( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )</code>。[问题的数据是算法导论中的问题的数据，值是<code>30,35,15,5,10,20,25</code>]。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">matrixchain_rec</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="n">j</span><span class="p">:</span>
+</span><span class="line">        <span class="k">return</span> <span class="mi">0</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+</span><span class="line">        <span class="n">q</span><span class="o">=</span><span class="n">matrixchain_rec</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">+</span><span class="n">matrixchain_rec</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">q</span><span class="o">&lt;</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
+</span><span class="line">            <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">q</span>
+</span><span class="line">            <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">k</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="n">j</span><span class="p">:</span>
+</span><span class="line">        <span class="k">print</span> <span class="s">&#39;A</span><span class="si">%d</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+</span><span class="line">    <span class="k">else</span><span class="p">:</span>
+</span><span class="line">        <span class="k">print</span> <span class="s">&#39;(&#39;</span><span class="p">,</span>
+</span><span class="line">        <span class="n">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+</span><span class="line">        <span class="n">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+</span><span class="line">        <span class="k">print</span> <span class="s">&#39;)&#39;</span><span class="p">,</span>
+</span><span class="line">
+</span><span class="line"><span class="n">n</span><span class="o">=</span><span class="mi">6</span>
+</span><span class="line"><span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">25</span><span class="p">]</span>
+</span><span class="line"><span class="n">m</span><span class="o">=</span><span class="p">[[</span><span class="n">sys</span><span class="o">.</span><span class="n">maxint</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+</span><span class="line"><span class="n">s</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+</span><span class="line"><span class="c"># pprint.pprint(m)</span>
+</span><span class="line"><span class="n">result</span><span class="o">=</span><span class="n">matrixchain_rec</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="c">#15125</span>
+</span><span class="line"><span class="n">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="c">#( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>上面的代码运行没有问题，但是，它不够完美！为什么呢? 很明显，矩阵链乘问题子问题存在重叠，下面这张图很形象地显示了哪些子问题被重复计算了，所以我们需要改进，改进的方法就是使用带备忘录的递归形式！</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/matrix3.png" alt="image" /></p>
+
+<p>要改成带备忘录的很简单，我们实现过几次了，但是，这次我们不能直接使用原来的装饰器，因为Python中的dict不能对list对象进行hash，所以我们要简单地修改下我们key值的构建，也很简单，看下代码就明白了：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">memo</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+</span><span class="line">    <span class="n">cache</span><span class="o">=</span><span class="p">{}</span>
+</span><span class="line">    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+</span><span class="line">        <span class="c">#build new key!!!</span>
+</span><span class="line">        <span class="n">key</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
+</span><span class="line">            <span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">=</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">wrap</span>
+</span><span class="line">
+</span><span class="line"><span class="nd">@memo</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">matrixchain_rec</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="n">j</span><span class="p">:</span>
+</span><span class="line">        <span class="k">return</span> <span class="mi">0</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+</span><span class="line">        <span class="n">q</span><span class="o">=</span><span class="n">matrixchain_rec</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">+</span><span class="n">matrixchain_rec</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">q</span><span class="o">&lt;</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
+</span><span class="line">            <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">q</span>
+</span><span class="line">            <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">k</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="n">j</span><span class="p">:</span>
+</span><span class="line">        <span class="k">print</span> <span class="s">&#39;A</span><span class="si">%d</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+</span><span class="line">    <span class="k">else</span><span class="p">:</span>
+</span><span class="line">        <span class="k">print</span> <span class="s">&#39;(&#39;</span><span class="p">,</span>
+</span><span class="line">        <span class="n">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+</span><span class="line">        <span class="n">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+</span><span class="line">        <span class="k">print</span> <span class="s">&#39;)&#39;</span><span class="p">,</span>
+</span><span class="line">
+</span><span class="line"><span class="n">n</span><span class="o">=</span><span class="mi">6</span>
+</span><span class="line"><span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">25</span><span class="p">]</span>
+</span><span class="line"><span class="n">m</span><span class="o">=</span><span class="p">[[</span><span class="n">sys</span><span class="o">.</span><span class="n">maxint</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+</span><span class="line"><span class="n">s</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+</span><span class="line"><span class="c"># pprint.pprint(m)</span>
+</span><span class="line"><span class="n">result</span><span class="o">=</span><span class="n">matrixchain_rec</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="c">#15125</span>
+</span><span class="line"><span class="n">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="c">#( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>接下来的一个问题是，我们怎么实现迭代版本呢? 迭代版本关键在于顺序！我们怎么保证我们在计算$A<em>{i…j}$的最优解时，所有可能的k的选择需要求解的子问题$A</em>{i…k}$以及$A_{(k+1)…j}$是已经求解出来了的呢? 一个简单但是有效的想法就是看矩阵链的长度，我们先计算矩阵链短的最优解，然后再计算矩阵链长的最优解，后者计算时所需要求解的子问题肯定已经求解完了，对不对? 于是就有了迭代版本的实现，需要注意的就是其中的i,j,k的取值范围。</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">import</span> <span class="nn">sys</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">matrixchain_iter</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+</span><span class="line">    <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="c">#total n matrices 6</span>
+</span><span class="line">    <span class="c">#to solve the problem below, so initialize to n+1!!!</span>
+</span><span class="line">    <span class="n">m</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+</span><span class="line">    <span class="n">s</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+</span><span class="line">    <span class="c"># for i in range(n): #for matrix with len=1</span>
+</span><span class="line">        <span class="c"># m[i][i]=0</span>
+</span><span class="line">    <span class="c"># pprint.pprint(m)</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="c">#iterate the length, max is n</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="n">l</span><span class="o">+</span><span class="mi">2</span><span class="p">):</span> <span class="c">#i max is n-l+1</span>
+</span><span class="line">            <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span> <span class="c">#j is always l away from i</span>
+</span><span class="line">            <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">maxint</span> <span class="c">#initial to infinity</span>
+</span><span class="line">            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+</span><span class="line">                <span class="c">#attention to python array when index &lt; 0!!!</span>
+</span><span class="line">                <span class="c">#solution is using more space with useless values</span>
+</span><span class="line">                <span class="n">q</span><span class="o">=</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">+</span><span class="n">m</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+</span><span class="line">                <span class="k">if</span> <span class="n">q</span><span class="o">&lt;</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
+</span><span class="line">                    <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">q</span>
+</span><span class="line">                    <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">k</span>
+</span><span class="line">        <span class="c"># print(&#39;when len is %d &#39; % (l))</span>
+</span><span class="line">        <span class="c"># pprint.pprint(m)</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">m</span><span class="p">,</span><span class="n">s</span>
+</span><span class="line">
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="n">m</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="n">matrixchain_iter</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">6</span><span class="p">])</span> <span class="c">#15125</span>
+</span><span class="line"><span class="n">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="c">#( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>实现的时候需要注意一点，在Python中取list中的值时，如果索引是负值的话会从后面往前数返回对应的元素，而以前我们用其他语言的时候肯定是提示越界了，所以代码中用来存储结果的数数组是(n+1)x(n+1)，而不是nxn的，这样的话就能够保证返回的是0，而不是从后往前数得到的结果。</p>
+
+<p>得到的数组<code>m</code>如下，<code>m[1,6]</code>就是我们需要的解。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15750</span><span class="p">,</span> <span class="mi">7875</span><span class="p">,</span> <span class="mi">9375</span><span class="p">,</span> <span class="mi">11875</span><span class="p">,</span> <span class="mi">15125</span><span class="p">],</span>
+</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2625</span><span class="p">,</span> <span class="mi">4375</span><span class="p">,</span> <span class="mi">7125</span><span class="p">,</span> <span class="mi">10500</span><span class="p">],</span>
+</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">5375</span><span class="p">],</span>
+</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">3500</span><span class="p">],</span>
+</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5000</span><span class="p">],</span>
+</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>数组<code>s</code>如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>将这个两个数组旋转下，并且只看上三角部分的数字，就可以得到算法导论中给出的那张三角图形了，非常类似杨辉三角</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/matrixmulti.png" alt="image" /></p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/18/matrix-chain/">http://hujiaweibujidao.github.io/blog/2014/05/18/matrix-chain/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
@@ -3004,279 +3290,11 @@ c[i][j]=  \left\{
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/dp_summary.png" alt="image" /></p>
 
-<p>好，我们差不多搞清楚了动态规划的本质以及两种实现方式的优缺点，下面我们来实践下，举最常用的例子：矩阵链乘问题！</p>
-
-<p>矩阵链乘问题的描述如下，就是说要确定一个完全加括号的形式使得需要进行的标量计算数目最少，矩阵$A<em>{i}$的维数为$p</em>{i-1}p_{i}$，如果穷举所有可能形式的话，时间复杂度是指数级的！因为该问题满足最优子结构，并且子问题存在重叠，所以我们要借助动态规划来求解。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/matrix.png" alt="image" /></p>
-
-<p>我们需要确定一个递归式来将我们要求解的问题表示出来，下面摘自算法导论，介绍地非常详细
-<img src="http://hujiaweibujidao.github.io/images/algos/matrix2.png" alt="image" /></p>
-
-<p>最后给出的递归式如下，就是说我们要如何确定从第i个矩阵到第j个矩阵组成的矩阵链的最优解。如果i和j相等，那么就是一个矩阵，不需要运算；如果i小于j，那么肯定要从它们中间的某个位置分开来，那从哪里分开来呢? 这个我们可以尝试下所有可能的选择，也就是尝试不同的位置k，k满足条件(i &lt;= k &lt; j)，在位置k将矩阵链进行分开，看看它需要的计算次数，然后我们从这些可能的k中选择使得计算次数最小的那个k进行分开，分开了之后我们的问题就变成了2个小问题，确定矩阵链从i到k
-和另一个矩阵链从k+1到j的最优解。如果我们一开始设置i=1(第一个矩阵)，j=n(最后一个矩阵)，那么，经过上面的递归即可得到我们需要的解。这就是递归的思想！</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-
-m[i][j]= \left\{ 
-  \begin{array}{l l}
-    0 & \quad \text{if i=j }\\
-    min_{i \le k < j}{m[i][k]+m[k+1][j]+p_{i-1}p_{k}p_{j}} & \quad \text{if i<j}
-  \end{array} \right.
- %]]&gt;</script>
-
-<p>根据上面的思想我们很快就可以写出一个递归版本的矩阵链承法的实现代码，输出的结果也没有错，给出的加括号的方式是<code>( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )</code>。[问题的数据是算法导论中的问题的数据，值是<code>30,35,15,5,10,20,25</code>]。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">matrixchain_rec</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="n">j</span><span class="p">:</span>
-</span><span class="line">        <span class="k">return</span> <span class="mi">0</span>
-</span><span class="line">    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
-</span><span class="line">        <span class="n">q</span><span class="o">=</span><span class="n">matrixchain_rec</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">+</span><span class="n">matrixchain_rec</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-</span><span class="line">        <span class="k">if</span> <span class="n">q</span><span class="o">&lt;</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
-</span><span class="line">            <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">q</span>
-</span><span class="line">            <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">k</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
-</span><span class="line">
-</span><span class="line"><span class="k">def</span> <span class="nf">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="n">j</span><span class="p">:</span>
-</span><span class="line">        <span class="k">print</span> <span class="s">&#39;A</span><span class="si">%d</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
-</span><span class="line">    <span class="k">else</span><span class="p">:</span>
-</span><span class="line">        <span class="k">print</span> <span class="s">&#39;(&#39;</span><span class="p">,</span>
-</span><span class="line">        <span class="n">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
-</span><span class="line">        <span class="n">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
-</span><span class="line">        <span class="k">print</span> <span class="s">&#39;)&#39;</span><span class="p">,</span>
-</span><span class="line">
-</span><span class="line"><span class="n">n</span><span class="o">=</span><span class="mi">6</span>
-</span><span class="line"><span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">25</span><span class="p">]</span>
-</span><span class="line"><span class="n">m</span><span class="o">=</span><span class="p">[[</span><span class="n">sys</span><span class="o">.</span><span class="n">maxint</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
-</span><span class="line"><span class="n">s</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
-</span><span class="line"><span class="c"># pprint.pprint(m)</span>
-</span><span class="line"><span class="n">result</span><span class="o">=</span><span class="n">matrixchain_rec</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="c">#15125</span>
-</span><span class="line"><span class="n">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="c">#( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>上面的代码运行没有问题，但是，它不够完美！为什么呢? 很明显，矩阵链乘问题子问题存在重叠，下面这张图很形象地显示了哪些子问题被重复计算了，所以我们需要改进，改进的方法就是使用带备忘录的递归形式！</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/matrix3.png" alt="image" /></p>
-
-<p>要改成带备忘录的很简单，我们实现过几次了，但是，这次我们不能直接使用原来的装饰器，因为Python中的dict不能对list对象进行hash，所以我们要简单地修改下我们key值的构建，也很简单，看下代码就明白了：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
-</span><span class="line">
-</span><span class="line"><span class="k">def</span> <span class="nf">memo</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-</span><span class="line">    <span class="n">cache</span><span class="o">=</span><span class="p">{}</span>
-</span><span class="line">    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-</span><span class="line">        <span class="c">#build new key!!!</span>
-</span><span class="line">        <span class="n">key</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-</span><span class="line">        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
-</span><span class="line">            <span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">=</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-</span><span class="line">        <span class="k">return</span> <span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">wrap</span>
-</span><span class="line">
-</span><span class="line"><span class="nd">@memo</span>
-</span><span class="line"><span class="k">def</span> <span class="nf">matrixchain_rec</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="n">j</span><span class="p">:</span>
-</span><span class="line">        <span class="k">return</span> <span class="mi">0</span>
-</span><span class="line">    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
-</span><span class="line">        <span class="n">q</span><span class="o">=</span><span class="n">matrixchain_rec</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">+</span><span class="n">matrixchain_rec</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-</span><span class="line">        <span class="k">if</span> <span class="n">q</span><span class="o">&lt;</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
-</span><span class="line">            <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">q</span>
-</span><span class="line">            <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">k</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
-</span><span class="line">
-</span><span class="line"><span class="k">def</span> <span class="nf">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="n">j</span><span class="p">:</span>
-</span><span class="line">        <span class="k">print</span> <span class="s">&#39;A</span><span class="si">%d</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
-</span><span class="line">    <span class="k">else</span><span class="p">:</span>
-</span><span class="line">        <span class="k">print</span> <span class="s">&#39;(&#39;</span><span class="p">,</span>
-</span><span class="line">        <span class="n">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
-</span><span class="line">        <span class="n">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
-</span><span class="line">        <span class="k">print</span> <span class="s">&#39;)&#39;</span><span class="p">,</span>
-</span><span class="line">
-</span><span class="line"><span class="n">n</span><span class="o">=</span><span class="mi">6</span>
-</span><span class="line"><span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">25</span><span class="p">]</span>
-</span><span class="line"><span class="n">m</span><span class="o">=</span><span class="p">[[</span><span class="n">sys</span><span class="o">.</span><span class="n">maxint</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
-</span><span class="line"><span class="n">s</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
-</span><span class="line"><span class="c"># pprint.pprint(m)</span>
-</span><span class="line"><span class="n">result</span><span class="o">=</span><span class="n">matrixchain_rec</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="c">#15125</span>
-</span><span class="line"><span class="n">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="c">#( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><strong>接下来的一个问题是，我们怎么实现迭代版本呢? 迭代版本关键在于顺序！我们怎么保证我们在计算$A<em>{i…j}$的最优解时，所有可能的k的选择需要求解的子问题$A</em>{i…k}$以及$A_{(k+1)…j}$是已经求解出来了的呢? 一个简单但是有效的想法就是看矩阵链的长度，我们先计算矩阵链短的最优解，然后再计算矩阵链长的最优解，后者计算时所需要求解的子问题肯定已经求解完了，对不对? 于是就有了迭代版本的实现，需要注意的就是其中的i,j,k的取值范围。</strong></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">import</span> <span class="nn">sys</span>
-</span><span class="line"><span class="k">def</span> <span class="nf">matrixchain_iter</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-</span><span class="line">    <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="c">#total n matrices 6</span>
-</span><span class="line">    <span class="c">#to solve the problem below, so initialize to n+1!!!</span>
-</span><span class="line">    <span class="n">m</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
-</span><span class="line">    <span class="n">s</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
-</span><span class="line">    <span class="c"># for i in range(n): #for matrix with len=1</span>
-</span><span class="line">        <span class="c"># m[i][i]=0</span>
-</span><span class="line">    <span class="c"># pprint.pprint(m)</span>
-</span><span class="line">    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="c">#iterate the length, max is n</span>
-</span><span class="line">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="n">l</span><span class="o">+</span><span class="mi">2</span><span class="p">):</span> <span class="c">#i max is n-l+1</span>
-</span><span class="line">            <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span> <span class="c">#j is always l away from i</span>
-</span><span class="line">            <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">maxint</span> <span class="c">#initial to infinity</span>
-</span><span class="line">            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
-</span><span class="line">                <span class="c">#attention to python array when index &lt; 0!!!</span>
-</span><span class="line">                <span class="c">#solution is using more space with useless values</span>
-</span><span class="line">                <span class="n">q</span><span class="o">=</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">+</span><span class="n">m</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-</span><span class="line">                <span class="k">if</span> <span class="n">q</span><span class="o">&lt;</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
-</span><span class="line">                    <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">q</span>
-</span><span class="line">                    <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">k</span>
-</span><span class="line">        <span class="c"># print(&#39;when len is %d &#39; % (l))</span>
-</span><span class="line">        <span class="c"># pprint.pprint(m)</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">m</span><span class="p">,</span><span class="n">s</span>
-</span><span class="line">
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">)</span>
-</span><span class="line"><span class="n">m</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="n">matrixchain_iter</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">6</span><span class="p">])</span> <span class="c">#15125</span>
-</span><span class="line"><span class="n">showmatrixchain</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="c">#( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p>实现的时候需要注意一点，在Python中取list中的值时，如果索引是负值的话会从后面往前数返回对应的元素，而以前我们用其他语言的时候肯定是提示越界了，所以代码中用来存储结果的数数组是(n+1)x(n+1)，而不是nxn的，这样的话就能够保证返回的是0，而不是从后往前数得到的结果。</p>
-
-<p>得到的数组<code>m</code>如下，<code>m[1,6]</code>就是我们需要的解。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15750</span><span class="p">,</span> <span class="mi">7875</span><span class="p">,</span> <span class="mi">9375</span><span class="p">,</span> <span class="mi">11875</span><span class="p">,</span> <span class="mi">15125</span><span class="p">],</span>
-</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2625</span><span class="p">,</span> <span class="mi">4375</span><span class="p">,</span> <span class="mi">7125</span><span class="p">,</span> <span class="mi">10500</span><span class="p">],</span>
-</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">5375</span><span class="p">],</span>
-</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">3500</span><span class="p">],</span>
-</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5000</span><span class="p">],</span>
-</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>数组<code>s</code>如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
-</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
-</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
-</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
-</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
-</span><span class="line"> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>将这个两个数组旋转下，并且只看上三角部分的数字，就可以得到算法导论中给出的那张三角图形了，非常类似杨辉三角</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/matrixmulti.png" alt="image" /></p>
+<p>好，我们差不多搞清楚了动态规划的本质以及两种实现方式的优缺点，下面我们来实践下，举最常用的例子：<a href="(http://hujiaweibujidao.github.io/blog/2014/05/18/matrix-chain/)">矩阵链乘问题！</a>内容较多，所以请点击链接过去阅读完了之后回来看总结！</p>
 
 <p>OK，希望我把动态规划将清楚了，总结下：<strong>动态规划其实就是一个连续决策的过程，每次决策我们可能有多种选择(二项式系数和0-1背包问题中我们只有两个选择，DAG图的单源最短路径中我们的选择要看点的出边或者入边，矩阵链乘问题中就是矩阵链可以分开的位置总数…)，我们每次选择最好的那个作为我们的决策。动态规划有2中实现方式，一种是带备忘录的递归形式，这种方式直接从原问题出发，遇到子问题就去求解子问题并存储子问题的解，下次遇到的时候直接取出来，问题求解的过程看起来就像是先自顶向下地展开问题，然后自下而上的进行决策。另一个实现方式是迭代方式，这种方式需要考虑如何给定一个子问题的求解方式，使得后面求解规模较大的问题是需要求解的子问题都已经求解好了，它的缺点就是可能有些子问题不要算但是它还是算了，而递归实现方式只会计算它需要求解的子问题。</strong></p>
 
-<p>如果你感觉你有所顿悟，来试试写写最长公共子序列列吧，这篇文章中给出了Python版本的5种实现方式哟！</p>
+<p>如果你感觉你有所顿悟，来试试写写最长公共子序列吧，<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/">这篇文章中给出了Python版本的5种实现方式</a>哟！</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/">http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
@@ -4290,645 +4308,6 @@ m[i][j]= \left\{
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees/">http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Python Algorithms - Data Structures]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/"/>
-    <updated>2014-05-08T10:00:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures</id>
-    <content type="html"><![CDATA[<p><strong><center>Python Algorithms Python算法系列</center></strong>
-<strong><center>逸夫图书馆, 2014/5/8</center></strong></p>
-
-<h3 id="centercenter"><center>数据结构</center></h3>
-
-<p>参考内容：</p>
-
-<p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a></p>
-
-<p>Chapter 2 Algorithm Analysis <br />
-Chapter 3 Basic Data Structures <br />
-Chapter 6 Trees and Tree Algorithms   </p>
-
-<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
-
-<h4 id="section">数据结构总结</h4>
-
-<p>1.Python内置数据结构的性能分析</p>
-
-<p>(1)List</p>
-
-<p>List的各个操作的时间复杂度</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/listoptime.png" alt="image" /></p>
-
-<p>同样是执行1000次创建一个包含1-1000的列表，四种方式使用的时间差距很大！使用append比逐次增加要快很多，另外，使用python的列表产生式比append要快，而第四种方式更加快！</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">test1</span><span class="p">():</span>
-</span><span class="line">   <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span class="line">   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
-</span><span class="line">      <span class="n">l</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span class="line"><span class="k">def</span> <span class="nf">test2</span><span class="p">():</span>
-</span><span class="line">   <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span class="line">   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
-</span><span class="line">      <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-</span><span class="line"><span class="k">def</span> <span class="nf">test3</span><span class="p">():</span>
-</span><span class="line">   <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
-</span><span class="line"><span class="k">def</span> <span class="nf">test4</span><span class="p">():</span>
-</span><span class="line">   <span class="n">l</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># Import the timeit module -&gt; import timeit</span>
-</span><span class="line"><span class="c"># Import the Timer class defined in the module</span>
-</span><span class="line"><span class="kn">from</span> <span class="nn">timeit</span> <span class="kn">import</span> <span class="n">Timer</span>
-</span><span class="line"><span class="c"># If the above line is excluded, you need to replace Timer with</span>
-</span><span class="line"><span class="c"># timeit.Timer when defining a Timer object</span>
-</span><span class="line"><span class="n">t1</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="s">&quot;test1()&quot;</span><span class="p">,</span> <span class="s">&quot;from __main__ import test1&quot;</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&quot;concat &quot;</span><span class="p">,</span><span class="n">t1</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> <span class="s">&quot;milliseconds&quot;</span><span class="p">)</span>
-</span><span class="line"><span class="n">t2</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="s">&quot;test2()&quot;</span><span class="p">,</span> <span class="s">&quot;from __main__ import test2&quot;</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&quot;append &quot;</span><span class="p">,</span><span class="n">t2</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> <span class="s">&quot;milliseconds&quot;</span><span class="p">)</span>
-</span><span class="line"><span class="n">t3</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="s">&quot;test3()&quot;</span><span class="p">,</span> <span class="s">&quot;from __main__ import test3&quot;</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&quot;comprehension &quot;</span><span class="p">,</span><span class="n">t3</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> <span class="s">&quot;milliseconds&quot;</span><span class="p">)</span>
-</span><span class="line"><span class="n">t4</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="s">&quot;test4()&quot;</span><span class="p">,</span> <span class="s">&quot;from __main__ import test4&quot;</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&quot;list range &quot;</span><span class="p">,</span><span class="n">t4</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> <span class="s">&quot;milliseconds&quot;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># (&#39;concat &#39;, 1.7890608310699463, &#39;milliseconds&#39;)</span>
-</span><span class="line"><span class="c"># (&#39;append &#39;, 0.13796091079711914, &#39;milliseconds&#39;)</span>
-</span><span class="line"><span class="c"># (&#39;comprehension &#39;, 0.05671119689941406, &#39;milliseconds&#39;)</span>
-</span><span class="line"><span class="c"># (&#39;list range &#39;, 0.014147043228149414, &#39;milliseconds&#39;)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><code>timeit</code>模块的解释：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/timeit.png" alt="image" /></p>
-
-<p>测试pop操作：从结果可以看出，pop最后一个元素的效率远远高于pop第一个元素</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2000000</span><span class="p">))</span>
-</span><span class="line"><span class="n">pop_zero</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="s">&quot;x.pop(0)&quot;</span><span class="p">,</span><span class="s">&quot;from __main__ import x&quot;</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&quot;pop_zero &quot;</span><span class="p">,</span><span class="n">pop_zero</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> <span class="s">&quot;milliseconds&quot;</span><span class="p">)</span>
-</span><span class="line"><span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2000000</span><span class="p">))</span>
-</span><span class="line"><span class="n">pop_end</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="s">&quot;x.pop()&quot;</span><span class="p">,</span><span class="s">&quot;from __main__ import x&quot;</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&quot;pop_end &quot;</span><span class="p">,</span><span class="n">pop_end</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> <span class="s">&quot;milliseconds&quot;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># (&#39;pop_zero &#39;, 1.9101738929748535, &#39;milliseconds&#39;)</span>
-</span><span class="line"><span class="c"># (&#39;pop_end &#39;, 0.00023603439331054688, &#39;milliseconds&#39;)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>(2)Dictionary</p>
-
-<p>Dictionary的各个操作的性能</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/dictionary.png" alt="image" /></p>
-
-<p>Dictionary和List的性能比较：list基本上随着其元素的数目呈线性增长，而dictionary一直维持在很短很短的时间内(我的机子测试的结果都是<code>0.001ms</code>)。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">import</span> <span class="nn">timeit</span>
-</span><span class="line"><span class="kn">import</span> <span class="nn">random</span>
-</span><span class="line">
-</span><span class="line"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span><span class="mi">1000001</span><span class="p">,</span><span class="mi">20000</span><span class="p">):</span>
-</span><span class="line">    <span class="n">t</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="s">&quot;random.randrange(</span><span class="si">%d</span><span class="s">) in x&quot;</span><span class="o">%</span><span class="n">i</span><span class="p">,</span><span class="s">&quot;from __main__ import random,x&quot;</span><span class="p">)</span>
-</span><span class="line">    <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-</span><span class="line">    <span class="n">lst_time</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-</span><span class="line">    <span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="n">j</span><span class="p">:</span><span class="bp">None</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">)}</span>
-</span><span class="line">    <span class="n">d_time</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%d</span><span class="s">,</span><span class="si">%10.3f</span><span class="s">,</span><span class="si">%10.3f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">lst_time</span><span class="p">,</span> <span class="n">d_time</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>结果图</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/compare.png" alt="image" /></p>
-
-<p>2.栈：LIFO结构，后进先出</p>
-
-<p>栈能解决的问题很多，比如逆波兰表达式求值，得到一个十进制数的二进制表达，检查括号匹配问题以及图的深度搜索等等，都很简单，可查看参考内容1学习。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/stack.png" alt="image" /></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># Completed implementation of a stack ADT</span>
-</span><span class="line"><span class="k">class</span> <span class="nc">Stack</span><span class="p">:</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">       <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">==</span> <span class="p">[]</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-</span><span class="line">       <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">peek</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">       <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="n">s</span> <span class="o">=</span> <span class="n">Stack</span><span class="p">()</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">is_empty</span><span class="p">())</span>
-</span><span class="line"><span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-</span><span class="line"><span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="s">&#39;dog&#39;</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">peek</span><span class="p">())</span>
-</span><span class="line"><span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">is_empty</span><span class="p">())</span>
-</span><span class="line"><span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="mf">8.4</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>3.队列：FIFO结构，先进先出</p>
-
-<p>队列一般用于解决需要优先队列的问题或者进行广度优先搜索的问题，也很简单。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/queue.png" alt="image" /></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># Completed implementation of a queue ADT</span>
-</span><span class="line"><span class="k">class</span> <span class="nc">Queue</span><span class="p">:</span>
-</span><span class="line">   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">      <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span class="line">   <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">==</span> <span class="p">[]</span>
-</span><span class="line">   <span class="k">def</span> <span class="nf">enqueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-</span><span class="line">      <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">item</span><span class="p">)</span>
-</span><span class="line">   <span class="k">def</span> <span class="nf">dequeue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-</span><span class="line">   <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">      <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="n">q</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
-</span><span class="line"><span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="s">&#39;hello&#39;</span><span class="p">)</span>
-</span><span class="line"><span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="s">&#39;dog&#39;</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
-</span><span class="line"><span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</span><span class="line"><span class="n">q</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>4.双向队列：左右两边都可以插入和删除的队列</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/deque.png" alt="image" /></p>
-
-<p>下面的实现是以右端为front，左端为rear</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># Completed implementation of a deque ADT</span>
-</span><span class="line"><span class="k">class</span> <span class="nc">Deque</span><span class="p">:</span>
-</span><span class="line">   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">      <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span class="line">   <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">==</span> <span class="p">[]</span>
-</span><span class="line">   <span class="k">def</span> <span class="nf">add_front</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-</span><span class="line">       <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-</span><span class="line">   <span class="k">def</span> <span class="nf">add_rear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-</span><span class="line">      <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">item</span><span class="p">)</span>
-</span><span class="line">   <span class="k">def</span> <span class="nf">remove_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-</span><span class="line">   <span class="k">def</span> <span class="nf">remove_rear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</span><span class="line">   <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">      <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="n">dq</span><span class="o">=</span><span class="n">Deque</span><span class="p">();</span>
-</span><span class="line"><span class="n">dq</span><span class="o">.</span><span class="n">add_front</span><span class="p">(</span><span class="s">&#39;dog&#39;</span><span class="p">);</span>
-</span><span class="line"><span class="n">dq</span><span class="o">.</span><span class="n">add_rear</span><span class="p">(</span><span class="s">&#39;cat&#39;</span><span class="p">);</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">dq</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
-</span><span class="line"><span class="n">dq</span><span class="o">.</span><span class="n">remove_front</span><span class="p">();</span>
-</span><span class="line"><span class="n">dq</span><span class="o">.</span><span class="n">add_front</span><span class="p">(</span><span class="s">&#39;pig&#39;</span><span class="p">);</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">dq</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>5.二叉树：一个节点最多有两个孩子节点的树。如果是从0索引开始存储，那么对应于节点p的孩子节点是2p+1和2p+2两个节点，相反，节点p的父亲节点是(p-1)/2位置上的点</p>
-
-<p>二叉树的应用很多，比如对算术表达式建立一颗二叉树可以清楚看出表达式是如何计算的(详情请见参考内容1)，二叉树的变种可以得到其他的有一定特性的数据结构，例如后面的二叉堆。二叉树的三种遍历方法(前序，中序，后序)同样有很多的应用，比较简单，略过。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/bt2.png" alt="image" /></p>
-
-<p>第一种，直接使用list来实现二叉树，可读性差</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">binary_tree</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
-</span><span class="line">    <span class="k">return</span> <span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[]]</span>
-</span><span class="line"><span class="k">def</span> <span class="nf">insert_left</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">new_branch</span><span class="p">):</span>
-</span><span class="line">    <span class="n">t</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span class="line">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-</span><span class="line">        <span class="c">#new_branch becomes the left node of root, and original left</span>
-</span><span class="line">        <span class="c">#node t becomes left node of new_branch, right node is none</span>
-</span><span class="line">        <span class="n">root</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">new_branch</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="p">[]])</span>
-</span><span class="line">    <span class="k">else</span><span class="p">:</span>
-</span><span class="line">        <span class="n">root</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">new_branch</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[]])</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">root</span>
-</span><span class="line"><span class="k">def</span> <span class="nf">insert_right</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">new_branch</span><span class="p">):</span>
-</span><span class="line">    <span class="n">t</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</span><span class="line">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-</span><span class="line">        <span class="n">root</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="n">new_branch</span><span class="p">,</span> <span class="p">[],</span> <span class="n">t</span><span class="p">])</span>
-</span><span class="line">    <span class="k">else</span><span class="p">:</span>
-</span><span class="line">        <span class="n">root</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="n">new_branch</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[]])</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">root</span>
-</span><span class="line"><span class="k">def</span> <span class="nf">get_root_val</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span class="line"><span class="k">def</span> <span class="nf">set_root_val</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">new_val</span><span class="p">):</span>
-</span><span class="line">    <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_val</span>
-</span><span class="line"><span class="k">def</span> <span class="nf">get_left_child</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</span><span class="line"><span class="k">def</span> <span class="nf">get_right_child</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">root</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-</span><span class="line">
-</span><span class="line"><span class="n">r</span> <span class="o">=</span> <span class="n">binary_tree</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</span><span class="line"><span class="n">insert_left</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-</span><span class="line"><span class="n">insert_left</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-</span><span class="line"><span class="n">insert_right</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-</span><span class="line"><span class="n">insert_right</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-</span><span class="line"><span class="n">l</span> <span class="o">=</span> <span class="n">get_left_child</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-</span><span class="line"><span class="n">set_root_val</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-</span><span class="line"><span class="n">insert_left</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">get_right_child</span><span class="p">(</span><span class="n">get_right_child</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>第二种，使用类的形式定义二叉树，可读性更好</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/btclass.png" alt="image" /></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">class</span> <span class="nc">BinaryTree</span><span class="p">:</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">root</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span> <span class="o">=</span> <span class="bp">None</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span> <span class="o">=</span> <span class="bp">None</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">insert_left</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_node</span><span class="p">):</span>
-</span><span class="line">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
-</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="n">new_node</span><span class="p">)</span>
-</span><span class="line">        <span class="k">else</span><span class="p">:</span>
-</span><span class="line">            <span class="n">t</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="n">new_node</span><span class="p">)</span>
-</span><span class="line">            <span class="n">t</span><span class="o">.</span><span class="n">left_child</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span>
-</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span> <span class="o">=</span> <span class="n">t</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">insert_right</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_node</span><span class="p">):</span>
-</span><span class="line">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
-</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="n">new_node</span><span class="p">)</span>
-</span><span class="line">        <span class="k">else</span><span class="p">:</span>
-</span><span class="line">            <span class="n">t</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="n">new_node</span><span class="p">)</span>
-</span><span class="line">            <span class="n">t</span><span class="o">.</span><span class="n">right_child</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span>
-</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span> <span class="o">=</span> <span class="n">t</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">get_right_child</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">get_left_child</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">set_root_val</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">obj</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">get_root_val</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span>
-</span><span class="line">
-</span><span class="line"><span class="n">r</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">get_root_val</span><span class="p">())</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">get_left_child</span><span class="p">())</span>
-</span><span class="line"><span class="n">r</span><span class="o">.</span><span class="n">insert_left</span><span class="p">(</span><span class="s">&#39;b&#39;</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">get_left_child</span><span class="p">())</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">get_left_child</span><span class="p">()</span><span class="o">.</span><span class="n">get_root_val</span><span class="p">())</span>
-</span><span class="line"><span class="n">r</span><span class="o">.</span><span class="n">insert_right</span><span class="p">(</span><span class="s">&#39;c&#39;</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">get_right_child</span><span class="p">())</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">get_right_child</span><span class="p">()</span><span class="o">.</span><span class="n">get_root_val</span><span class="p">())</span>
-</span><span class="line"><span class="n">r</span><span class="o">.</span><span class="n">get_right_child</span><span class="p">()</span><span class="o">.</span><span class="n">set_root_val</span><span class="p">(</span><span class="s">&#39;hello&#39;</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">get_right_child</span><span class="p">()</span><span class="o">.</span><span class="n">get_root_val</span><span class="p">())</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>6.二叉堆：根据堆的性质又可以分为最小堆和最大堆，是一种非常好的优先队列。在最小堆中孩子节点一定大于等于其父亲节点，最大堆反之。二叉堆实际上一棵完全二叉树，并且满足堆的性质。对于插入和查找操作的时间复杂度度都是$O(nlogn)$。</p>
-
-<p>它的插入操作图示：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/heapinsert.png" alt="image" /></p>
-
-<p>去除根节点的操作图示：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/heapdel.png" alt="image" /></p>
-
-<p>注意，下面的实现中默认在初始的堆列表中插入了一个元素0，这样做可以保证堆的真实有效的元素个数和current_size值对应，而且最后一个元素的索引就对应了current_size。</p>
-
-<p>此外，从list中建堆的过程需要从最后一个非叶子节点开始到第一个非叶子节点(根节点)进行。这篇文章<a href="http://www.cnblogs.com/Anker/archive/2013/01/23/2873422.html">来自博客园</a>解释了这个问题。建堆的过程如下：[下图摘自原博客，版权归原作者，谢谢]</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201405/heapbuild.png" alt="image" /></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-<span class="line-number">46</span>
-<span class="line-number">47</span>
-<span class="line-number">48</span>
-<span class="line-number">49</span>
-<span class="line-number">50</span>
-<span class="line-number">51</span>
-<span class="line-number">52</span>
-<span class="line-number">53</span>
-<span class="line-number">54</span>
-<span class="line-number">55</span>
-<span class="line-number">56</span>
-<span class="line-number">57</span>
-<span class="line-number">58</span>
-<span class="line-number">59</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">class</span> <span class="nc">BinHeap</span><span class="p">:</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">current_size</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">perc_up</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-</span><span class="line">        <span class="k">while</span> <span class="n">i</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># &gt;0 means this node is still available</span>
-</span><span class="line">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]:</span>
-</span><span class="line">                <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span>
-</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
-</span><span class="line">            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">//</span> <span class="mi">2</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">current_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_size</span> <span class="o">+</span> <span class="mi">1</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">perc_up</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_size</span><span class="p">)</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">perc_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-</span><span class="line">        <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_size</span><span class="p">:</span>
-</span><span class="line">            <span class="n">mc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_child</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-</span><span class="line">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">mc</span><span class="p">]:</span>
-</span><span class="line">                <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">mc</span><span class="p">]</span>
-</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">mc</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
-</span><span class="line">            <span class="n">i</span> <span class="o">=</span> <span class="n">mc</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">min_child</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-</span><span class="line">        <span class="k">if</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_size</span><span class="p">:</span>
-</span><span class="line">            <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span>
-</span><span class="line">        <span class="k">else</span><span class="p">:</span>
-</span><span class="line">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
-</span><span class="line">                <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span>
-</span><span class="line">            <span class="k">else</span><span class="p">:</span>
-</span><span class="line">                <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">del_min</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class="line">        <span class="n">ret_val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">current_size</span><span class="p">]</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">current_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_size</span> <span class="o">-</span> <span class="mi">1</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">perc_down</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span class="line">        <span class="k">return</span> <span class="n">ret_val</span>
-</span><span class="line">
-</span><span class="line">    <span class="k">def</span> <span class="nf">build_heap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a_list</span><span class="p">):</span>
-</span><span class="line">        <span class="n">i</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">current_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">heap_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">a_list</span><span class="p">[:]</span> <span class="c">#append original list</span>
-</span><span class="line">        <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
-</span><span class="line">            <span class="c">#build the heap we only need to deal the first part!</span>
-</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">perc_down</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-</span><span class="line">            <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span>
-</span><span class="line">
-</span><span class="line"><span class="n">a_list</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
-</span><span class="line"><span class="n">bh</span><span class="o">=</span><span class="n">BinHeap</span><span class="p">();</span>
-</span><span class="line"><span class="n">bh</span><span class="o">.</span><span class="n">build_heap</span><span class="p">(</span><span class="n">a_list</span><span class="p">);</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">bh</span><span class="o">.</span><span class="n">heap_list</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">bh</span><span class="o">.</span><span class="n">current_size</span><span class="p">)</span>
-</span><span class="line"><span class="n">bh</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</span><span class="line"><span class="n">bh</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">bh</span><span class="o">.</span><span class="n">heap_list</span><span class="p">)</span>
-</span><span class="line"><span class="n">bh</span><span class="o">.</span><span class="n">del_min</span><span class="p">();</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">bh</span><span class="o">.</span><span class="n">heap_list</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">bh</span><span class="o">.</span><span class="n">current_size</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>关于二叉查找树等内容请见<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees/">树的总结</a>。</p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/">http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
