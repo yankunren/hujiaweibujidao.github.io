@@ -29,7 +29,7 @@ published: true
 
 1.[概率](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/)
 
-2.[描述性统计量](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/)
+2.[统计量](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/)
 
 3.随机变量的分布
 
