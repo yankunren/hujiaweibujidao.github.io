@@ -56,11 +56,11 @@ $P(X=0)=p, P(X=1)=q, (q=1-p)$，它的期望是$p$，方差是$p(1-p)$。
 
 证明它的期望是$\lambda$: 
 
-$E=\Sigma_{k=0}^{\infty}k \frac{\lambda^{k} e^{-\lambda}}{k!}=\lambda e^{-\lambda} \Sigma_{k=1}^{\infty} \frac{\lambda^{k-1}}{(k-1)!}=\lambda e^{-\lambda} e^{\lambda}=\lambda$
+$$E=\Sigma_{k=0}^{\infty}k \frac{\lambda^{k} e^{-\lambda}}{k!}=\lambda e^{-\lambda} \Sigma_{k=1}^{\infty} \frac{\lambda^{k-1}}{(k-1)!}=\lambda e^{-\lambda} e^{\lambda}=\lambda$$
 
 证明它的方差是$\lambda$:
 
-$D=E(X^{2})-E^{2}=E(X(X-1)-X)-E^{2}=\Sigma_{k=0}^{\infty}k(k-1) \frac{\lambda^{k} e^{-\lambda}}{k!}+\lambda-\lambda^{2}=\lambda e^{-\lambda} \Sigma_{k=1}^{\infty} \frac{\lambda^{k-1}}{(k-1)!}=\lambda^{2} e^{-\lambda} e^{\lambda}+\lambda-\lambda^{2}=\lambda$
+$$D=E(X^{2})-E^{2}=E(X(X-1)-X)-E^{2}=\Sigma_{k=0}^{\infty}k(k-1) \frac{\lambda^{k} e^{-\lambda}}{k!}+\lambda-\lambda^{2}=\lambda e^{-\lambda} \Sigma_{k=1}^{\infty} \frac{\lambda^{k-1}}{(k-1)!}=\lambda^{2} e^{-\lambda} e^{\lambda}+\lambda-\lambda^{2}=\lambda$$
 
 **泊松定理说明当n很大，p很小的时候，以n，p为参数的二项分布可以用参数$\lambda = np $的泊松分布进行近似！**记住这个定理其实也可以方便我们记住泊松分布的分布律。
 
