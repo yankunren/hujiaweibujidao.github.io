@@ -29,9 +29,7 @@ $$
 
 协方差的性质：(基本上根据上式都可以简单证明得到)
 
-Cov(X,Y)=Cov(Y,X)， Cov(X,X)=D(X)，Cov(aX,bY)=abCov(X,Y)
-
-$$Cov(X_{1}+X_{2},Y)=Cov(X_{1},Y)+Cov(X_{2},Y)$$
+Cov(X,Y)=Cov(Y,X)， Cov(X,X)=D(X)，Cov(aX,bY)=abCov(X,Y)，$$Cov(X_{1}+X_{2},Y)=Cov(X_{1},Y)+Cov(X_{2},Y)$$
 
 如果X和Y是相互独立的，那么Cov(X,Y)=0。
 
