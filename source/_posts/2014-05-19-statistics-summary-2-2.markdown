@@ -87,6 +87,32 @@ $$ P(X=x_{i} \| Y=y_{j}) = \int_{-\infty}^{x}\frac{f(x,y)}{f_{Y}(y))}dx $$
 
 ![image](http://hujiaweibujidao.github.io/images/math/cond_10.png)
 
+4.相互独立的随机变量
+
+前面我们提到随机变量之间可能存在相关性，那自然也有不存在相关性的随机变量，即相互独立的随机变量。很显然，如果随机变量(X,Y)的联合分布等于边缘分布的乘积那么就说明随机变量X和Y是相互独立的。
+
+对于连续型随机变量(X,Y)来说，X和Y是相互独立的的条件是$$f(x,y)=f_{X}(x)f_{Y}(y)$$。
+
+对于离散型随机变量(X,Y)来说，X和Y是相互独立的的条件是对于所有可能的$$(x_{i},y_{j})$$对，都有$$P(X=x_{i},Y=y_{j})=P(X=x_{i})P(Y=y_{j})$$。
+
+![image](http://hujiaweibujidao.github.io/images/math/ind_2.png)
+
+对于前面的二维正态随机变量，随机变量X和Y是相互独立的前提条件是它们的相关系数$\rho=0$。
+
+![image](http://hujiaweibujidao.github.io/images/math/ind_3.png)
+
+二维随机变量中的独立性可以很容易地推广到n维随机变量上。
+
+![image](http://hujiaweibujidao.github.io/images/math/ind_1.png)
+
+5.随机变量函数的分布
+
+有些时候我们需要处理的随机变量是几个随机变量形成的函数，这个时候它的分布是怎样的呢？
+这类函数比较多，比如求和，乘积，商，最大值或者最小值，这里只说明其中最重要的一个和函数的分布。
+
+从中我们得到一个结论：有限个相互独立的正态随机变量的线性组合仍然是服从正态分布。
+
+![image](http://hujiaweibujidao.github.io/images/math/fun_1.png)
 
 
 
