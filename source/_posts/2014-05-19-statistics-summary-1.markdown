@@ -31,6 +31,8 @@ $P(A|B)=\frac{P(A \cap B)}{P(B|A)P(A)+P(B|A')P(A')}$
 
 $E(x)=\Sigma xP(X=x)=\mu \quad Var(x)=E(x-\mu)^{2}=\Sigma (x-\mu)^2P(X=x)=E(x^{2})-(E(x))^{2}$
 
+[注：上面的期望的等式是对于离散型随机变量x，如果是连续型随机变量x，那么$E=\int_{-\infty}^{\infty} xf(x)dx$，同理，方差就是$D=\int_{-\infty}^{\infty} (x-E)^{2}f(x)dx$，期望描述的是数据的集中趋势，方差描述的数据的偏移程度]
+
 线性变换之后的期望与方差：
 
 $E(ax+b)=aE(x)+b \quad Var(ax+b)=a^{2}Var(x)$
