@@ -101,11 +101,11 @@ $$ P(X=x_{i} \| Y=y_{j}) = \int_{-\infty}^{x}\frac{f(x,y)}{f_{Y}(y))}dx $$
 
 $$E(XY)=\int_{-\infty}^{\infty}xyf(x)f(y)dxdy=\int_{-\infty}^{\infty}xyf_{X}(x)f_{Y}(y)dxdy=\int_{-\infty}^{\infty}xf_{X}(x)dx\int_{-\infty}^{\infty}yf_{Y}(y)dy=E(X)E(Y)$$
 
-$$D(X+Y)=D(X)+D(Y)$$
+一般情况下，$D(X+Y)=D(X)+D(Y)+2Cov(X,Y)$，如果X和Y相互独立的话，Cov(X,Y)=0，则有$D(X+Y)=D(X)+D(Y)$。
 
 ![image](http://hujiaweibujidao.github.io/images/math/ind_4.png)
 
-对于前面的二维正态随机变量，随机变量X和Y是相互独立的前提条件是它们的相关系数$\rho=0$。
+对于前面的二维正态随机变量，随机变量X和Y是相互独立的前提条件是它们的相关系数$\rho=0$(前面还证明过这个相关系数和X与Y的协方差相同，这就说明对于二维正态随机变量来说，它们的相关性和独立性是等价的，推广到n维正态随机变量也是如此)
 
 ![image](http://hujiaweibujidao.github.io/images/math/ind_3.png)
 
