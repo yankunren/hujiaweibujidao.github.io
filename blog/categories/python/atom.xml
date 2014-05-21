@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-21T08:37:06+08:00</updated>
+  <updated>2014-05-21T09:16:00+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -360,6 +360,62 @@ def fib(i):
     return fib(i-1)+fib(i-2)</p>
 
 <p>print(fib(100))
+```</p>
+
+<p>7.Python中的值传递和引用传递</p>
+
+<p><a href="http://www.pythoneye.com.cn/article/pythonpeixun45.html">参考阅读资料</a></p>
+
+<p><strong>python函数传递的是对象的引用值，非传值或传引用。但是如果对象是不可变的，感觉和c语言中传值差不多。如果对象是可变的，感觉和c语言中传引用差不多。</strong></p>
+
+<p>运行下面的代码就清楚了</p>
+
+<p>```
+def foo(a):
+    print “传来是对象的引用对象地址为{0}”.format(id(a))
+    a = 3 #形式参数a是局部变量，a重新绑定到3这个对象。
+    print “变量a新引用对象地址为{0}”.format(id(a))
+    # print a</p>
+
+<p>x = 5
+print “全局变量x引用的对象地址为{0}”.format(id(x))
+foo(x)
+print “变量x新引用对象地址为{0}”.format(id(x))
+print x
+#由于函数内部a绑定到新的对象，也就修改不了全局变量x引用的对象5
+# 全局变量x引用的对象地址为140462615725816
+# 传来是对象的引用对象地址为140462615725816
+# 变量a新引用对象地址为140462615725864
+# 变量x新引用对象地址为140462615725816
+# 5</p>
+
+<p>def foo(a):
+    “"”在函数内部直接修改了同一个引用指向的对象。
+    也就修改了实际参数传来的引用值指向的对象。
+    “””
+    a.append(“can change object”)
+    return a</p>
+
+<p>lst = [1,2,3]
+print foo(lst)
+print lst
+#[1, 2, 3, ‘can change object’]
+#[1, 2, 3, ‘can change object’]</p>
+
+<p>def foo(a):
+    “"”实际参数传来一个对象[1,2,3]的引用，当时形式参数
+    （局部变量a重新引用到新的对象，也就是说保存了新的对象）
+    当然不能修改原来的对象了。
+    “””
+    a = [“python”,”java”]
+    return a</p>
+
+<p>lst = [1,2,3]
+for item in foo(lst):
+    print item
+print lst
+# python
+# java
 ```</p>
 
 ]]></content>
