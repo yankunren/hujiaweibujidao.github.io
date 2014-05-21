@@ -186,7 +186,7 @@ OpenCV Library中提供了两种摄像头，一种是Java摄像头-`org.OpenCV.A
 
 ③使用OpenCV的摄像头：JavaCamera或者NativeCamera都行，好处是它进行了很多的封装，可以直接将预览图像的Mat结构传递给Native层，这种传递是使用Mat的内存地址(long型)，Native层只要根据这个地址将其封装成Mat就可以进行处理了，另外，它的回调函数的返回值也是Mat，非常方便！这种方式速度较快。详细过程可以查看OpenCV-Android sdk的samples项目中的Tutorial2-MixedProcessing。 
 
-- 关于摄像头预览界面倒置的问题：很多时候(一般是将应用设置为`portrait`模式之后)在调用了OpenCV的Camera之后，出现预览内容倒置了90度的现象，原因是OpenCV的Camera默认情况下是以`landscape`模式运行的，一个可行但是不是很好的解决方案是修改OpenCV库中的`org.opencv.camera.CameraBridgeViewBase`类中的`deliverandDraw`方法，[问题参考链接](http://stackoverflow.com/questions/19190921/always-open-in-landscape-mode-orientation-for-front-camera-in-opencv-javacv)
+- 关于摄像头预览界面倒置的问题：很多时候(一般是将应用设置为`portrait`模式之后)在调用了OpenCV的Camera之后，出现预览内容倒置了90度的现象，原因是OpenCV的Camera默认情况下是以`landscape`模式运行的，一个可行但是不是很好的解决方案是修改OpenCV库中的`org.opencv.android.CameraBridgeViewBase`类中的`deliverAndDrawFrame`方法，[问题参考链接](http://stackoverflow.com/questions/19190921/always-open-in-landscape-mode-orientation-for-front-camera-in-opencv-javacv)
 
 ```
 protected void deliverAndDrawFrame(CvCameraViewFrame frame) {
