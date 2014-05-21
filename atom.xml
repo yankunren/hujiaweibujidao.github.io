@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-21T08:18:42+08:00</updated>
+  <updated>2014-05-21T08:25:48+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -128,7 +128,7 @@
 
 <p>边缘分布函数，边缘分布律，边缘概率密度</p>
 
-<p><strong>边缘分布其实就是指，对于一个多维随机变量来说，它具有一个联合分布律或者联合概率密度，但是如果我们只考虑它其中的某一个随机变量的话，那么这个随机变量的分布律或者概率密度就是边缘分布律或者边缘概率密度了。</strong></p>
+<p><strong>边缘分布其实就是指，对于一个多维随机变量来说，它具有一个联合分布律(或者联合概率密度)，但是如果我们只考虑它其中的某一个随机变量的话，那么这个随机变量的分布律(或者概率密度)就是边缘分布律(或者边缘概率密度)了。</strong></p>
 
 <p>二维连续型随机变量(X,Y)对X的边缘概率密度实际上就是对y进行积分<script type="math/tex">f_{X}(x)=\int_{-\infty}^{\infty}f(x,y)dy</script>，同理，对Y的边缘概率密度实际上就是对x进行积分<script type="math/tex">f_{Y}(y)=\int_{-\infty}^{\infty}f(x,y)dx</script>。</p>
 
@@ -154,7 +154,7 @@
 
 <p>二维离散型随机变量的条件分布律</p>
 
-<script type="math/tex; mode=display"> P(X=x_{i} \| Y=y_{j}) = \frac{P(X=x_{i} \| Y=y_{j})}{P(Y=y_{j})} </script>
+<script type="math/tex; mode=display"> P(X=x_{i} \| Y=y_{j}) = \frac{P(X=x_{i},Y=y_{j})}{P(Y=y_{j})} </script>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/cond_6.png" alt="image" /></p>
 
@@ -183,11 +183,11 @@
 
 <script type="math/tex; mode=display">E(XY)=\int_{-\infty}^{\infty}xyf(x)f(y)dxdy=\int_{-\infty}^{\infty}xyf_{X}(x)f_{Y}(y)dxdy=\int_{-\infty}^{\infty}xf_{X}(x)dx\int_{-\infty}^{\infty}yf_{Y}(y)dy=E(X)E(Y)</script>
 
-<script type="math/tex; mode=display">D(X+Y)=D(X)+D(Y)</script>
+<p>一般情况下，$D(X+Y)=D(X)+D(Y)+2Cov(X,Y)$，如果X和Y相互独立的话，Cov(X,Y)=0，则有$D(X+Y)=D(X)+D(Y)$。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/ind_4.png" alt="image" /></p>
 
-<p>对于前面的二维正态随机变量，随机变量X和Y是相互独立的前提条件是它们的相关系数$\rho=0$。</p>
+<p>对于前面的二维正态随机变量，随机变量X和Y是相互独立的前提条件是它们的相关系数$\rho=0$(前面还证明过这个相关系数和X与Y的协方差相同，这就说明对于二维正态随机变量来说，它们的相关性和独立性是等价的，推广到n维正态随机变量也是如此)</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/ind_3.png" alt="image" /></p>
 
