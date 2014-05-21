@@ -139,20 +139,21 @@
   <li>[1]打开jni下的Android.mk文件，修改OpenCV的那一部分，将<code>off</code>设置为<code>on</code>，并设置<code>OpenCV_LIB_TYPE</code>为<code>SHARED</code>，结果如下：  </li>
 </ul>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">OpenCV_CAMERA_MODULES:=on
-</span><span class="line">OpenCV_INSTALL_MODULES:=on
-</span><span class="line">OpenCV_LIB_TYPE:=SHARED
-</span><span class="line">include ${OpenCVROOT}/sdk/native/jni/OpenCV.mk</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="nl">OpenCV_CAMERA_MODULES:</span><span class="o">=</span><span class="n">on</span>
+</span><span class="line"><span class="nl">OpenCV_INSTALL_MODULES:</span><span class="o">=</span><span class="n">on</span>
+</span><span class="line"><span class="nl">OpenCV_LIB_TYPE:</span><span class="o">=</span><span class="n">SHARED</span>
+</span><span class="line"><span class="n">include</span> <span class="n">$</span><span class="o">{</span><span class="n">OpenCVROOT</span><span class="o">}/</span><span class="n">sdk</span><span class="o">/</span><span class="kd">native</span><span class="o">/</span><span class="n">jni</span><span class="o">/</span><span class="n">OpenCV</span><span class="o">.</span><span class="na">mk</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li>[2]打开FdActivity.java文件，在其中添加一个静态初始化块代码，它是用来加载<code>OpenCV_java</code>库的，由于FaceDetection中还用了另一个库detection_based_tracker(用于人脸跟踪)，所以要在<code>else</code>子句中加载进来：</li>
 </ul>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -160,35 +161,37 @@
 <span class="line-number">6</span>
 <span class="line-number">7</span>
 <span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">static {
-</span><span class="line">	Log.i(TAG, "OpenCV library load!");
-</span><span class="line">	if (!OpenCVLoader.initDebug()) {
-</span><span class="line">		Log.i(TAG, "OpenCV load not successfully");
-</span><span class="line">	} else {
-</span><span class="line">		System.loadLibrary("detection_based_tracker");// load other libraries
-</span><span class="line">	}
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kd">static</span> <span class="o">{</span>
+</span><span class="line">	<span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&quot;OpenCV library load!&quot;</span><span class="o">);</span>
+</span><span class="line">	<span class="k">if</span> <span class="o">(!</span><span class="n">OpenCVLoader</span><span class="o">.</span><span class="na">initDebug</span><span class="o">())</span> <span class="o">{</span>
+</span><span class="line">		<span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&quot;OpenCV load not successfully&quot;</span><span class="o">);</span>
+</span><span class="line">	<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class="line">		<span class="n">System</span><span class="o">.</span><span class="na">loadLibrary</span><span class="o">(</span><span class="s">&quot;detection_based_tracker&quot;</span><span class="o">);</span><span class="c1">// load other libraries</span>
+</span><span class="line">	<span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li>[3]删除FdActivity.java的OnResume()方法的最后那句，不让它去访问OpenCV Manager。</li>
 </ul>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">@Override
-</span><span class="line">public void onResume() {
-</span><span class="line">	super.onResume();
-</span><span class="line">//OpenCVLoader.initAsync(OpenCVLoader.OpenCV_VERSION_2_4_3, this, mLoaderCallback);//
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="nd">@Override</span>
+</span><span class="line"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onResume</span><span class="o">()</span> <span class="o">{</span>
+</span><span class="line">	<span class="kd">super</span><span class="o">.</span><span class="na">onResume</span><span class="o">();</span>
+</span><span class="line"><span class="c1">//OpenCVLoader.initAsync(OpenCVLoader.OpenCV_VERSION_2_4_3, this, mLoaderCallback);//</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li>[4]修改FdActivity.java的OnCreate()方法，从上面的<code>private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this)</code>代码块中拷贝<code>try-catch</code>块放到OnCreate的<code>setContentView()</code>之后，然后拷贝<code>mOpenCVCameraView.enableView();</code>放到<code>mOpenCVCameraView = (CameraBridgeViewBase) findViewById(R.id.fd_activity_surface_view);</code>之后，修改后的OnCreate()方法如下：</li>
 </ul>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -233,51 +236,52 @@
 <span class="line-number">43</span>
 <span class="line-number">44</span>
 <span class="line-number">45</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">public void onCreate(Bundle savedInstanceState) {
-</span><span class="line">	Log.i(TAG, "called onCreate");
-</span><span class="line">	super.onCreate(savedInstanceState);
-</span><span class="line">	getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">	<span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&quot;called onCreate&quot;</span><span class="o">);</span>
+</span><span class="line">	<span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+</span><span class="line">	<span class="n">getWindow</span><span class="o">().</span><span class="na">addFlags</span><span class="o">(</span><span class="n">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_KEEP_SCREEN_ON</span><span class="o">);</span>
 </span><span class="line">
-</span><span class="line">	setContentView(R.layout.face_detect_surface_view);
+</span><span class="line">	<span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">face_detect_surface_view</span><span class="o">);</span>
 </span><span class="line">
-</span><span class="line">	//
-</span><span class="line">	try {
-</span><span class="line">		// load cascade file from application resources
-</span><span class="line">		InputStream is = getResources().openRawResource(R.raw.lbpcascade_frontalface);
-</span><span class="line">		File cascadeDir = getDir("cascade", Context.MODE_PRIVATE);
-</span><span class="line">		mCascadeFile = new File(cascadeDir, "lbpcascade_frontalface.xml");
-</span><span class="line">		FileOutputStream os = new FileOutputStream(mCascadeFile);
+</span><span class="line">	<span class="c1">//</span>
+</span><span class="line">	<span class="k">try</span> <span class="o">{</span>
+</span><span class="line">		<span class="c1">// load cascade file from application resources</span>
+</span><span class="line">		<span class="n">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="n">getResources</span><span class="o">().</span><span class="na">openRawResource</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">raw</span><span class="o">.</span><span class="na">lbpcascade_frontalface</span><span class="o">);</span>
+</span><span class="line">		<span class="n">File</span> <span class="n">cascadeDir</span> <span class="o">=</span> <span class="n">getDir</span><span class="o">(</span><span class="s">&quot;cascade&quot;</span><span class="o">,</span> <span class="n">Context</span><span class="o">.</span><span class="na">MODE_PRIVATE</span><span class="o">);</span>
+</span><span class="line">		<span class="n">mCascadeFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">cascadeDir</span><span class="o">,</span> <span class="s">&quot;lbpcascade_frontalface.xml&quot;</span><span class="o">);</span>
+</span><span class="line">		<span class="n">FileOutputStream</span> <span class="n">os</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">mCascadeFile</span><span class="o">);</span>
 </span><span class="line">
-</span><span class="line">		byte[] buffer = new byte[4096];
-</span><span class="line">		int bytesRead;
-</span><span class="line">		while ((bytesRead = is.read(buffer)) != -1) {
-</span><span class="line">			os.write(buffer, 0, bytesRead);
-</span><span class="line">		}
-</span><span class="line">		is.close();
-</span><span class="line">		os.close();
+</span><span class="line">		<span class="kt">byte</span><span class="o">[]</span> <span class="n">buffer</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">4096</span><span class="o">];</span>
+</span><span class="line">		<span class="kt">int</span> <span class="n">bytesRead</span><span class="o">;</span>
+</span><span class="line">		<span class="k">while</span> <span class="o">((</span><span class="n">bytesRead</span> <span class="o">=</span> <span class="n">is</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buffer</span><span class="o">))</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">			<span class="n">os</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">buffer</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">bytesRead</span><span class="o">);</span>
+</span><span class="line">		<span class="o">}</span>
+</span><span class="line">		<span class="n">is</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class="line">		<span class="n">os</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 </span><span class="line">
-</span><span class="line">		mJavaDetector = new CascadeClassifier(mCascadeFile.getAbsolutePath());
-</span><span class="line">		if (mJavaDetector.empty()) {
-</span><span class="line">			Log.e(TAG, "Failed to load cascade classifier");
-</span><span class="line">			mJavaDetector = null;
-</span><span class="line">		} else
-</span><span class="line">			Log.i(TAG, "Loaded cascade classifier from " + mCascadeFile.getAbsolutePath());
+</span><span class="line">		<span class="n">mJavaDetector</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CascadeClassifier</span><span class="o">(</span><span class="n">mCascadeFile</span><span class="o">.</span><span class="na">getAbsolutePath</span><span class="o">());</span>
+</span><span class="line">		<span class="k">if</span> <span class="o">(</span><span class="n">mJavaDetector</span><span class="o">.</span><span class="na">empty</span><span class="o">())</span> <span class="o">{</span>
+</span><span class="line">			<span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&quot;Failed to load cascade classifier&quot;</span><span class="o">);</span>
+</span><span class="line">			<span class="n">mJavaDetector</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class="line">		<span class="o">}</span> <span class="k">else</span>
+</span><span class="line">			<span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&quot;Loaded cascade classifier from &quot;</span> <span class="o">+</span> <span class="n">mCascadeFile</span><span class="o">.</span><span class="na">getAbsolutePath</span><span class="o">());</span>
 </span><span class="line">
-</span><span class="line">		mNativeDetector = new DetectionBasedTracker(mCascadeFile.getAbsolutePath(), 0);// hujiawei
+</span><span class="line">		<span class="n">mNativeDetector</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DetectionBasedTracker</span><span class="o">(</span><span class="n">mCascadeFile</span><span class="o">.</span><span class="na">getAbsolutePath</span><span class="o">(),</span> <span class="mi">0</span><span class="o">);</span><span class="c1">// hujiawei</span>
 </span><span class="line">
-</span><span class="line">		cascadeDir.delete();
+</span><span class="line">		<span class="n">cascadeDir</span><span class="o">.</span><span class="na">delete</span><span class="o">();</span>
 </span><span class="line">
-</span><span class="line">	} catch (IOException e) {
-</span><span class="line">		e.printStackTrace();
-</span><span class="line">		Log.e(TAG, "Failed to load cascade. Exception thrown: " + e);
-</span><span class="line">	}
+</span><span class="line">	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">		<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class="line">		<span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&quot;Failed to load cascade. Exception thrown: &quot;</span> <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
+</span><span class="line">	<span class="o">}</span>
 </span><span class="line">
-</span><span class="line">	//
+</span><span class="line">	<span class="c1">//</span>
 </span><span class="line">
-</span><span class="line">	mOpenCVCameraView = (CameraBridgeViewBase) findViewById(R.id.fd_activity_surface_view);
-</span><span class="line">	mOpenCVCameraView.enableView();//
-</span><span class="line">	mOpenCVCameraView.setCvCameraViewListener(this);
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line">	<span class="n">mOpenCVCameraView</span> <span class="o">=</span> <span class="o">(</span><span class="n">CameraBridgeViewBase</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">fd_activity_surface_view</span><span class="o">);</span>
+</span><span class="line">	<span class="n">mOpenCVCameraView</span><span class="o">.</span><span class="na">enableView</span><span class="o">();</span><span class="c1">//</span>
+</span><span class="line">	<span class="n">mOpenCVCameraView</span><span class="o">.</span><span class="na">setCvCameraViewListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li>[5]OK，卸载安装好的OpenCV Manager，然后重新调试运行FaceDetection试试，它已经可以自行运行了！  </li>
@@ -396,7 +400,7 @@ OpenCV Library中提供了两种摄像头，一种是Java摄像头-<code>org.Ope
   <li>关于摄像头预览界面倒置的问题：很多时候(一般是将应用设置为<code>portrait</code>模式之后)在调用了OpenCV的Camera之后，出现预览内容倒置了90度的现象，原因是OpenCV的Camera默认情况下是以<code>landscape</code>模式运行的，一个可行但是不是很好的解决方案是修改OpenCV库中的<code>org.opencv.android.CameraBridgeViewBase</code>类中的<code>deliverAndDrawFrame</code>方法，<a href="http://stackoverflow.com/questions/19190921/always-open-in-landscape-mode-orientation-for-front-camera-in-opencv-javacv">问题参考链接</a></li>
 </ul>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -463,73 +467,74 @@ OpenCV Library中提供了两种摄像头，一种是Java摄像头-<code>org.Ope
 <span class="line-number">65</span>
 <span class="line-number">66</span>
 <span class="line-number">67</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">protected void deliverAndDrawFrame(CvCameraViewFrame frame) {
-</span><span class="line">        Mat modified;
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">deliverAndDrawFrame</span><span class="o">(</span><span class="n">CvCameraViewFrame</span> <span class="n">frame</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">Mat</span> <span class="n">modified</span><span class="o">;</span>
 </span><span class="line">
-</span><span class="line">        if (mListener != null) {
-</span><span class="line">            modified = mListener.onCameraFrame(frame);
-</span><span class="line">        } else {
-</span><span class="line">            modified = frame.rgba();
-</span><span class="line">        }
+</span><span class="line">        <span class="k">if</span> <span class="o">(</span><span class="n">mListener</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">modified</span> <span class="o">=</span> <span class="n">mListener</span><span class="o">.</span><span class="na">onCameraFrame</span><span class="o">(</span><span class="n">frame</span><span class="o">);</span>
+</span><span class="line">        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">modified</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="na">rgba</span><span class="o">();</span>
+</span><span class="line">        <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">        boolean bmpValid = true;
-</span><span class="line">        if (modified != null) {
-</span><span class="line">            try {
-</span><span class="line">                Utils.matToBitmap(modified, mCacheBitmap);
-</span><span class="line">            } catch(Exception e) {
-</span><span class="line">                Log.e(TAG, "Mat type: " + modified);
-</span><span class="line">                Log.e(TAG, "Bitmap type: " + mCacheBitmap.getWidth() + "*" + mCacheBitmap.getHeight());
-</span><span class="line">                Log.e(TAG, "Utils.matToBitmap() throws an exception: " + e.getMessage());
-</span><span class="line">                bmpValid = false;
-</span><span class="line">            }
-</span><span class="line">        }
+</span><span class="line">        <span class="kt">boolean</span> <span class="n">bmpValid</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class="line">        <span class="k">if</span> <span class="o">(</span><span class="n">modified</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="k">try</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">Utils</span><span class="o">.</span><span class="na">matToBitmap</span><span class="o">(</span><span class="n">modified</span><span class="o">,</span> <span class="n">mCacheBitmap</span><span class="o">);</span>
+</span><span class="line">            <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&quot;Mat type: &quot;</span> <span class="o">+</span> <span class="n">modified</span><span class="o">);</span>
+</span><span class="line">                <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&quot;Bitmap type: &quot;</span> <span class="o">+</span> <span class="n">mCacheBitmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;*&quot;</span> <span class="o">+</span> <span class="n">mCacheBitmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">());</span>
+</span><span class="line">                <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&quot;Utils.matToBitmap() throws an exception: &quot;</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+</span><span class="line">                <span class="n">bmpValid</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">        <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">        if (bmpValid &amp;&amp; mCacheBitmap != null) {
-</span><span class="line">            Canvas canvas = getHolder().lockCanvas();
-</span><span class="line">            if (canvas != null) {
-</span><span class="line">//                canvas.drawColor(0, android.graphics.PorterDuff.Mode.CLEAR);
-</span><span class="line">//                Log.d(TAG, "mStretch value: " + mScale);
-</span><span class="line">//
-</span><span class="line">//                if (mScale != 0) {
-</span><span class="line">//                    canvas.drawBitmap(mCacheBitmap, new Rect(0,0,mCacheBitmap.getWidth(), mCacheBitmap.getHeight()),
-</span><span class="line">//                         new Rect((int)((canvas.getWidth() - mScale*mCacheBitmap.getWidth()) / 2),
-</span><span class="line">//                         (int)((canvas.getHeight() - mScale*mCacheBitmap.getHeight()) / 2),
-</span><span class="line">//                         (int)((canvas.getWidth() - mScale*mCacheBitmap.getWidth()) / 2 + mScale*mCacheBitmap.getWidth()),
-</span><span class="line">//                         (int)((canvas.getHeight() - mScale*mCacheBitmap.getHeight()) / 2 + mScale*mCacheBitmap.getHeight())), null);
-</span><span class="line">//                } else {
-</span><span class="line">//                     canvas.drawBitmap(mCacheBitmap, new Rect(0,0,mCacheBitmap.getWidth(), mCacheBitmap.getHeight()),
-</span><span class="line">//                         new Rect((canvas.getWidth() - mCacheBitmap.getWidth()) / 2,
-</span><span class="line">//                         (canvas.getHeight() - mCacheBitmap.getHeight()) / 2,
-</span><span class="line">//                         (canvas.getWidth() - mCacheBitmap.getWidth()) / 2 + mCacheBitmap.getWidth(),
-</span><span class="line">//                         (canvas.getHeight() - mCacheBitmap.getHeight()) / 2 + mCacheBitmap.getHeight()), null);
-</span><span class="line">//                }
+</span><span class="line">        <span class="k">if</span> <span class="o">(</span><span class="n">bmpValid</span> <span class="o">&amp;&amp;</span> <span class="n">mCacheBitmap</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">Canvas</span> <span class="n">canvas</span> <span class="o">=</span> <span class="n">getHolder</span><span class="o">().</span><span class="na">lockCanvas</span><span class="o">();</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">canvas</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line"><span class="c1">//                canvas.drawColor(0, android.graphics.PorterDuff.Mode.CLEAR);</span>
+</span><span class="line"><span class="c1">//                Log.d(TAG, &quot;mStretch value: &quot; + mScale);</span>
+</span><span class="line"><span class="c1">//</span>
+</span><span class="line"><span class="c1">//                if (mScale != 0) {</span>
+</span><span class="line"><span class="c1">//                    canvas.drawBitmap(mCacheBitmap, new Rect(0,0,mCacheBitmap.getWidth(), mCacheBitmap.getHeight()),</span>
+</span><span class="line"><span class="c1">//                         new Rect((int)((canvas.getWidth() - mScale*mCacheBitmap.getWidth()) / 2),</span>
+</span><span class="line"><span class="c1">//                         (int)((canvas.getHeight() - mScale*mCacheBitmap.getHeight()) / 2),</span>
+</span><span class="line"><span class="c1">//                         (int)((canvas.getWidth() - mScale*mCacheBitmap.getWidth()) / 2 + mScale*mCacheBitmap.getWidth()),</span>
+</span><span class="line"><span class="c1">//                         (int)((canvas.getHeight() - mScale*mCacheBitmap.getHeight()) / 2 + mScale*mCacheBitmap.getHeight())), null);</span>
+</span><span class="line"><span class="c1">//                } else {</span>
+</span><span class="line"><span class="c1">//                     canvas.drawBitmap(mCacheBitmap, new Rect(0,0,mCacheBitmap.getWidth(), mCacheBitmap.getHeight()),</span>
+</span><span class="line"><span class="c1">//                         new Rect((canvas.getWidth() - mCacheBitmap.getWidth()) / 2,</span>
+</span><span class="line"><span class="c1">//                         (canvas.getHeight() - mCacheBitmap.getHeight()) / 2,</span>
+</span><span class="line"><span class="c1">//                         (canvas.getWidth() - mCacheBitmap.getWidth()) / 2 + mCacheBitmap.getWidth(),</span>
+</span><span class="line"><span class="c1">//                         (canvas.getHeight() - mCacheBitmap.getHeight()) / 2 + mCacheBitmap.getHeight()), null);</span>
+</span><span class="line"><span class="c1">//                }</span>
 </span><span class="line">
-</span><span class="line">                //ABC : Fixed for image rotation
-</span><span class="line">                //TODO Why portrait is not opening in fulls creen
-</span><span class="line">                Matrix matrix = new Matrix();
-</span><span class="line">                int height_Canvas = canvas.getHeight();
-</span><span class="line">                int width_Canvas = canvas.getWidth();
+</span><span class="line">                <span class="c1">//ABC : Fixed for image rotation</span>
+</span><span class="line">                <span class="c1">//TODO Why portrait is not opening in fulls creen</span>
+</span><span class="line">                <span class="n">Matrix</span> <span class="n">matrix</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Matrix</span><span class="o">();</span>
+</span><span class="line">                <span class="kt">int</span> <span class="n">height_Canvas</span> <span class="o">=</span> <span class="n">canvas</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span>
+</span><span class="line">                <span class="kt">int</span> <span class="n">width_Canvas</span> <span class="o">=</span> <span class="n">canvas</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span>
 </span><span class="line">
-</span><span class="line">                int width = mCacheBitmap.getWidth();
-</span><span class="line">                int height = mCacheBitmap.getHeight();
+</span><span class="line">                <span class="kt">int</span> <span class="n">width</span> <span class="o">=</span> <span class="n">mCacheBitmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span>
+</span><span class="line">                <span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="n">mCacheBitmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span>
 </span><span class="line">
-</span><span class="line">                float f1 = (width_Canvas - width) / 2;
-</span><span class="line">                float f2 = (height_Canvas - height) / 2;
-</span><span class="line">                matrix.preTranslate(f1, f2);
-</span><span class="line">                if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
-</span><span class="line">                matrix.postRotate(270f,(width_Canvas) / 2,(height_Canvas) / 2);
-</span><span class="line">                canvas.drawBitmap(mCacheBitmap, matrix, new Paint());
+</span><span class="line">                <span class="kt">float</span> <span class="n">f1</span> <span class="o">=</span> <span class="o">(</span><span class="n">width_Canvas</span> <span class="o">-</span> <span class="n">width</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+</span><span class="line">                <span class="kt">float</span> <span class="n">f2</span> <span class="o">=</span> <span class="o">(</span><span class="n">height_Canvas</span> <span class="o">-</span> <span class="n">height</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+</span><span class="line">                <span class="n">matrix</span><span class="o">.</span><span class="na">preTranslate</span><span class="o">(</span><span class="n">f1</span><span class="o">,</span> <span class="n">f2</span><span class="o">);</span>
+</span><span class="line">                <span class="k">if</span><span class="o">(</span><span class="n">getResources</span><span class="o">().</span><span class="na">getConfiguration</span><span class="o">().</span><span class="na">orientation</span> <span class="o">==</span> <span class="n">Configuration</span><span class="o">.</span><span class="na">ORIENTATION_PORTRAIT</span><span class="o">)</span>
+</span><span class="line">                <span class="n">matrix</span><span class="o">.</span><span class="na">postRotate</span><span class="o">(</span><span class="mi">270</span><span class="n">f</span><span class="o">,(</span><span class="n">width_Canvas</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,(</span><span class="n">height_Canvas</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">);</span>
+</span><span class="line">                <span class="n">canvas</span><span class="o">.</span><span class="na">drawBitmap</span><span class="o">(</span><span class="n">mCacheBitmap</span><span class="o">,</span> <span class="n">matrix</span><span class="o">,</span> <span class="k">new</span> <span class="n">Paint</span><span class="o">());</span>
 </span><span class="line">
 </span><span class="line">
 </span><span class="line">
-</span><span class="line">                if (mFpsMeter != null) {
-</span><span class="line">                    mFpsMeter.measure();
-</span><span class="line">                    mFpsMeter.draw(canvas, 20, 30);
-</span><span class="line">                }
-</span><span class="line">                getHolder().unlockCanvasAndPost(canvas);
-</span><span class="line">            }
-</span><span class="line">        }
-</span><span class="line">    }</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">mFpsMeter</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">mFpsMeter</span><span class="o">.</span><span class="na">measure</span><span class="o">();</span>
+</span><span class="line">                    <span class="n">mFpsMeter</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">canvas</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">30</span><span class="o">);</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">                <span class="n">getHolder</span><span class="o">().</span><span class="na">unlockCanvasAndPost</span><span class="o">(</span><span class="n">canvas</span><span class="o">);</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h4 id="opencv--opencv-ndk-">3.OpenCV 和 OpenCV NDK 整合开发的一般途径</h4>
 
