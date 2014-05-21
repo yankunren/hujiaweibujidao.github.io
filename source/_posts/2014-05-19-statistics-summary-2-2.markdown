@@ -72,7 +72,7 @@ $$F(x,y)=\int_{-\infty}^{x_{i}}\int_{-\infty}^{y_{j}}f(u,v)dudv$$
 
 二维离散型随机变量的条件分布律
 
-$$ P(X=x_{i} \| Y=y_{j}) = \frac{P(X=x_{i} \| Y=y_{j})}{P(Y=y_{j})} $$
+$$ P(X=x_{i} \| Y=y_{j}) = \frac{P(X=x_{i},Y=y_{j})}{P(Y=y_{j})} $$
 
 ![image](http://hujiaweibujidao.github.io/images/math/cond_6.png)
 
