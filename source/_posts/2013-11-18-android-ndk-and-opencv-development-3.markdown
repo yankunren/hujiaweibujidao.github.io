@@ -24,7 +24,7 @@ categories: android opencv mobiledev
 
 - [1]打开jni下的Android.mk文件，修改OpenCV的那一部分，将`off`设置为`on`，并设置`OpenCV_LIB_TYPE`为`SHARED`，结果如下：  
 
-```
+```java
 OpenCV_CAMERA_MODULES:=on
 OpenCV_INSTALL_MODULES:=on
 OpenCV_LIB_TYPE:=SHARED
