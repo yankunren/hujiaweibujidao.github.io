@@ -37,7 +37,7 @@ Cov(X,Y)=Cov(Y,X)， Cov(X,X)=D(X)，Cov(aX,bY)=abCov(X,Y)，$$Cov(X_{1}+X_{2},Y
 
 [**一般说的相关系数是Pearson相关系数，它考察的变量的属性是连续的，例如年龄，体重等，如果是离散型变量那么应该使用点二列相关系数**]
 
-相关系数的计算：
+相关系数的计算，我们经常可以看到下面两种表示方式：
 
 一种表示方式是：[这是从协方差和方差的角度来看的]
 
@@ -53,7 +53,7 @@ $$
 
 其实，很容易看出两者是等价的，因为$E(X)=\frac{\Sigma X}{n}, D(X)=\frac{\Sigma X^{2}}{n} - \frac{\Sigma X}{n^{2}}$，然后将第二个等式右边上下除以$n^{2}$即可得到第一个等式的右边。
 
-计算的例子：
+举个计算的例子：
 
 ![image](http://hujiaweibujidao.github.io/images/math/cor_1.png)
 
@@ -65,15 +65,15 @@ $$
 
 为什么说相关系数反映的只是随机变量之间的线性关系呢？
 
-我们总是用关于X的线性函数a+bX去近似Y，也就是拟合，如何判断拟合的好坏呢？一般都是用均方误差，也就是误差值的平方的均值！然后用均方误差对a和b分别求导即可得到使得均方误差达到最小的拟合参数a和b。很有意思的一个结论就是，均值点(E(X),E(Y))一定在拟合直线a+bX上。
+我们总是用关于X的线性函数a+bX去近似Y，也就是用直线a+bX去拟合Y，如何判断拟合的好坏呢？一般都是用均方误差，也就是误差值的平方的均值，然后用均方误差对a和b分别求导即可得到使得均方误差达到最小的拟合参数a和b。很有意思的一个结论就是，**均值点(E(X),E(Y))一定在拟合直线a+bX上**。
 
 ![image](http://hujiaweibujidao.github.io/images/math/cor_2.png)
 
-最后得到的结果是:$$min E[[Y-(a+bX)]^{2}]=(1-\rho_{XY}^{2})D(Y)$$，从中可以得到很多性质：
+最后得到的结果是:$$min E[(Y-(a+bX))^{2}]=(1-\rho_{XY}^{2})D(Y)$$，从中可以得到很多性质：
 
 ![image](http://hujiaweibujidao.github.io/images/math/cor_3.png)
 
-均方误差e和相关系数$\rho$之间的关系：
+均方误差e和相关系数$\rho$之间的关系，e是$$|\rho_{XY}|$$的严格单调递减函数。
 
 ![image](http://hujiaweibujidao.github.io/images/math/cor_4.png)
 
@@ -83,7 +83,7 @@ $$
 
 ![image](http://hujiaweibujidao.github.io/images/math/cor_5.png)
 
-但是，有时候相关性和独立性是等价的，比如下面的二维正态分布，这是很重要的多维随机变量分布(不明白可以看下节对多维随机变量分布的介绍)，随机变量X和Y相互独立的条件是$\rho=0$，而$\rho$正好等于$$\rho_{XY}$$，且随机变量X和Y不相关的条件就是$$\rho_{XY}=0$$，所以此时相关性和独立性是等价的。[之后我会写一篇文章介绍相关系数到底是如何影响二维正态分布的数据的分布的]
+但是，有时候相关性和独立性是等价的，比如下面的二维正态分布，这是很重要的多维随机变量分布，随机变量X和Y相互独立的条件是$\rho=0$(不明白可以看下节对多维随机变量分布的介绍)，而$\rho$正好等于$$\rho_{XY}$$，且随机变量X和Y不相关的条件就是$$\rho_{XY}=0$$，所以此时相关性和独立性是等价的。[之后我会写一篇文章并通过作图的方式介绍相关系数到底是如何影响二维正态分布的数据的分布的]
 
 ![image](http://hujiaweibujidao.github.io/images/math/cor_6.png)
 ![image](http://hujiaweibujidao.github.io/images/math/cor_7.png)
@@ -98,7 +98,7 @@ $$
 
 ![image](http://hujiaweibujidao.github.io/images/math/corm_1.png)
 
-协方差矩阵其实就是n维随机变量的二阶混合中心距组成的矩阵
+协方差矩阵其实就是由n维随机变量之间两两的二阶混合中心距组成的矩阵
 
 ![image](http://hujiaweibujidao.github.io/images/math/corm_2.png)
 
@@ -107,9 +107,11 @@ $$
 ![image](http://hujiaweibujidao.github.io/images/math/corm_5.png)
 ![image](http://hujiaweibujidao.github.io/images/math/corm_4.png)
 
-n维正态随机变量的性质
+上面最后得到的n维正态随机变量的概率密度公式是在模式识别里面非常重要的，n维正态随机变量的性质如下：
 
 ![image](http://hujiaweibujidao.github.io/images/math/corm_3.png)
+
+
 
 
 
