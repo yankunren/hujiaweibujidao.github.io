@@ -63,11 +63,7 @@ $$
 
 什么是反射？[反射 on wiki](http://zh.wikipedia.org/wiki/%E5%8F%8D%E5%B0%84_(%E6%95%B0%E5%AD%A6))上的解释是：**反射是把一个物体变换成它的镜像的映射。对于二维空间中的反射，需要使用一条直线（反射轴）作为“镜子”，对于三维空间中的反射就要使用平面作为镜子。**
 
-**最常用的反射变换就是[Householder变换 on wiki](http://zh.wikipedia.org/wiki/%E8%B1%AA%E6%96%AF%E9%9C%8D%E5%B0%94%E5%BE%B7%E5%8F%98%E6%8D%A2)了，这一变换将一个向量变换为由一个超平面反射的镜像，是一种线性变换。Householder变换可以将向量的某些元素置零，同时保持该向量的范数不变。Householder变换在矩阵的QR分解中非常重要！**关于Householder的内部原理以及代码实现请参考我写的另一份总结[《Numerical Methods Using Matlab》第三章 矩阵特征值和奇异值分解](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)
-
-下图为Householder变换的图示，向量x在矩阵H的作用下得到的向量Hx和原向量x刚好是镜像反射关系。
-
-![image](http://hujiaweibujidao.github.io/images/math/HouseholderReflection.png)
+**最常用的反射变换就是[Householder变换 on wiki](http://zh.wikipedia.org/wiki/%E8%B1%AA%E6%96%AF%E9%9C%8D%E5%B0%94%E5%BE%B7%E5%8F%98%E6%8D%A2)了，这一变换将一个向量变换为由一个超平面反射的镜像，是一种线性变换。Householder变换可以将向量的某些元素置零，同时保持该向量的范数不变。**关于Householder的内部原理以及代码实现请请参考后面的[矩阵分解总结](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/)部分，或者参考我写的另一份总结[《Numerical Methods Using Matlab》第三章 矩阵特征值和奇异值分解](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)
 
 (3)旋转变换
 
