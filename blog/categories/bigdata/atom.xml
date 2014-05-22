@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: bigdata | Hujiawei Bujidao]]></title>
+  <link href="http://hujiaweibujidao.github.io/blog/categories/bigdata/atom.xml" rel="self"/>
+  <link href="http://hujiaweibujidao.github.io/"/>
+  <updated>2014-05-22T23:44:45+08:00</updated>
+  <id>http://hujiaweibujidao.github.io/</id>
+  <author>
+    <name><![CDATA[hujiawei]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Share with Big Data]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/11/share-with-big-data/"/>
+    <updated>2014-05-11T15:22:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/11/share-with-big-data</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+</feed>
