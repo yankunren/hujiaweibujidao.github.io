@@ -65,12 +65,12 @@ $\begin{bmatrix}
 $\begin{bmatrix}
 \cos \theta & -\sin \theta \\
 \sin \theta & \cos \theta \\
-\end{bmatrix}$旋转  $\begin{bmatrix}
+\end{bmatrix}$旋转(这其实就是一个Givens旋转)  $\begin{bmatrix}
 \cos \theta & \sin \theta \\
 \sin \theta & -\cos \theta \\
 \end{bmatrix}$ 反射
 
-还有一个有意思的就是**反射矩阵、反射矩阵的逆矩阵以及它的转置矩阵三者相同！**
+我们思考一下，反射的逆矩阵是什么？反射的逆过程其实就是它自己对不对？也就是说反射的逆矩阵等于反射本身！所以就有了**反射矩阵、反射矩阵的逆矩阵以及它的转置矩阵三者相同！**
 
 高维度下的正交矩阵比较复杂，但是可以通过基本模块例如置换、反射和旋转来构建高维的正交矩阵，例如下面要介绍的Householder变换和Givens旋转。
 
@@ -80,10 +80,140 @@ $\begin{bmatrix}
 
 2.Givens旋转
 
+Givens旋转又称为平面旋转变换，它能够消去给定向量的某一个分量（使其为0），这点不同于Householder变换消去向量中的多个分量，在处理有很多零元素的稀疏向量或者稀疏矩阵的时候Givens旋转就更加有效。
 
+喻文健老师的《数值分析与算法》对此介绍地很详细，内容如下：
 
+先看下2x2的Givens旋转的推导过程：
 
-3.Householder变换
+![image](http://hujiaweibujidao.github.io/images/math/givens1.png)
+
+将其推广到n维向量的情况：
+
+![image](http://hujiaweibujidao.github.io/images/math/givens_2.png)
+![image](http://hujiaweibujidao.github.io/images/math/givens3.png)
+
+举例说明Givens旋转的处理过程：
+
+![image](http://hujiaweibujidao.github.io/images/math/givens4.png)
+
+3.Householder反射
+
+Householder变换是一个初等反射变换，用Householder矩阵左乘一个向量或者矩阵，即实现Householder变换。
+
+一个nxn的Householder矩阵$H$具有如下的形式：
+
+$$
+H=I-\frac{2}{v^{T}v} vv^{T}
+$$
+
+其中，矩阵$I$是一个(nxn)单位阵(对角线元素都是1)，而$v$是一个包含n个元素的列向量
+
+$$v=c+||c||_{2}e$$
+
+向量$c$和$e$是是包含n个元素的列向量，分别对应要变换的矩阵的某一列和单位阵的某一列，$||c||_{2}$是向量$c$的二范数 
+
+$$||c||_{2}=\sqrt{c_{1}^2+c_{2}^2+c_{3}^2+\cdots+c_{n}^2}$$
+
+矩阵$H$是正交对称阵，所以$H=H^{T}=H^{-1}$。**Househoulder变换实现向量在线性空间中的“镜面反射”，即$Hx$是向量$x$相对于法向量为$v$的超平面的镜像，也就是$Hx$和$x$关于平面$S$镜像对称。采用Householder变换可以将向量$x$中除某一个分量之外的其他分量变成0，这是一种消元操作。**注意一类小技巧，不需要显式构造$H$便可以计算$Hx$，如下所示，只需计算向量$x$和$v^{T}$的内积，不用计算矩阵和向量的乘法，下面等式最右边的$\frac{v^{T}x}{v^{T}v}$实际上是一个标量！
+
+$$
+Hx=(I-\frac{2}{v^{T}v} vv^{T})x=x-2\frac{v^{T}x}{v^{T}v} v
+$$
+
+将(nxn)矩阵$A$分解为正交阵$Q$和上三角阵$R$的过程需要$n-1$步。下面看下详细的处理流程：[下面的步骤其实就是QR分解的核心，QR分解的内容请看下节]
+
+(1)向量$c$是矩阵$A$的第一列，向量$e$是长度为n的列向量，如果$c$的第一个元素是正数的话$e$的第一个元素是1，否则是-1(**这么做其实是为了防止大数吃小数现象，也就是减小误差**)。得到$c$和$e$之后，便可以计算出$v$，然后得到矩阵$H_{1}$，如下所示：
+
+$$
+c=
+\left[
+\begin{array}{c}
+a_{11}\\
+a_{12}\\
+\cdots\\
+a_{nn}  
+\end{array}
+\right]\quad
+e=
+\left[
+\begin{array}{c}
+\pm 1\\
+0\\
+\cdots\\
+0  
+\end{array}
+\right]
+$$
+
+将$H_{1}$作用于$A$，此时$Q_{1}=H_{1},R_{1}=H_{1}A$。其中$Q_{1}$是正交阵，$R_{1}$的第一列第一个元素以下的元素都是0。$R_{1}$大致如下所示：
+
+$$
+\left(
+\begin{array}{cccc}
+R_{11}^{(1)}  & R_{12}^{(1)}   & \cdots & R_{1n}^{(1)}   \\
+0  & R_{22}^{(1)}   & \cdots & R_{2n}^{(1)}   \\
+0  & R_{32}^{(1)}   & \cdots & R_{3n}^{(1)}   \\
+0  & R_{42}^{(1)}   & \cdots & R_{4n}^{(1)}   \\
+\end{array}
+\right)
+$$
+
+(2)这步中向量$c$是矩阵$R_{1}$的第二列，并且第一个元素设置为0，向量$e$是长度为n的列向量，不过第二个元素是$\pm 1$，如果$c$的第二个元素是正数的话$e$的第二个元素是1，否则是-1。得到$c$和$e$之后，便可以得到矩阵$H_{2}$，如下所示：
+
+$$
+c=
+\left[
+\begin{array}{c}
+0\\
+R_{12}^{(1)}\\
+\cdots\\
+R_{n2}^{(1)}  
+\end{array}
+\right]\quad
+e=
+\left[
+\begin{array}{c}
+0\\
+\pm 1\\
+\cdots\\
+0  
+\end{array}
+\right]
+$$
+
+将$H_{2}$作用于$R_{1}$，此时$Q_{2}=Q_{1}H_{2},R_{2}=H_{2}R_{1}$。其中$Q_{2}$是正交阵，$R_{2}$的第二列第二个元素以下的元素都是0。$R_{2}$大致如下所示：
+
+$$
+\left(
+\begin{array}{cccc}
+R_{11}^{(2)}  & R_{12}^{(2)}   & \cdots & R_{1n}^{(2)}   \\
+0  & R_{22}^{(2)}   & \cdots & R_{2n}^{(2)}   \\
+0  & 0   & \cdots & R_{3n}^{(2)}   \\
+0  & 0   & \cdots & R_{4n}^{(2)}   \\
+\end{array}
+\right)
+$$
+
+(3)重复与上面类似的过程，直到第(n-1)步，得到$Q_{n-1}=Q_{n-2}H_{n-1}=H_{1}H_{2}\cdots H_{n}$，同时$R_{n-1}=H_{n-1}R_{n-2}=H_{n-1}H_{n-2}\cdots H_{2}H_{1}$，此时$R_{n-1}$是一个上三角阵，$Q_{n-1}$是一个正交阵，得到矩阵$A$的QR分解式为$A=Q_{n-1}R_{n-1}$。
+
+喻文健老师的《数值分析与算法》对Householder反射的介绍也很详细，重要内容如下：
+
+Householder反射正确性的证明：[注意其中的$$\omega= \frac{v}{||v||_{2}}$$]
+
+![image](http://hujiaweibujidao.github.io/images/math/householder1.png)
+![image](http://hujiaweibujidao.github.io/images/math/householder2.png)
+
+下面有两个关于Householder的定理，其实也很重要，便于理解镜面的法向量
+
+![image](http://hujiaweibujidao.github.io/images/math/householder3.png)
+
+最后给出一个Householder反射变换的例子：
+
+![image](http://hujiaweibujidao.github.io/images/math/householder4.png)
+
+OK！至此正交矩阵就介绍完了，下节介绍矩阵的常用分解，也是非常重要的内容。
+
 
 
 
