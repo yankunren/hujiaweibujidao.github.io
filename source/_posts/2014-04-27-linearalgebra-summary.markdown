@@ -38,7 +38,7 @@ published: true
 
 5.[正交矩阵](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-5/) 理解正交矩阵对应的正交变换，介绍Givens旋转和Householder反射
 
-6.[矩阵分解](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/) 理解矩阵的各种分解：LU分解，Cholesky分解，QR分解，SVD分解
+6.[矩阵分解](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/) 理解并实现矩阵的各种分解：LU分解，Cholesky分解，QR分解，SVD
 
 [book]: http://hujiaweibujidao.github.io/files/linear_algebra_huangzhenghua.pdf
 
