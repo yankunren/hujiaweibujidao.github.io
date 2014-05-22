@@ -37,11 +37,22 @@ $Ax=[3∗2+2∗2,1∗2+3∗2]^T=[10,8]^T$
 
 好吧，矩阵是线性变换，那什么是线性变换呢？
 
-wiki中对线性变换的解释，这些变换其实主要包括缩放、旋转、反射等。
+wiki中对线性变换的解释，这些变换其实主要包括缩放、旋转、反射等，注意不包括平移，线性变换需要满足下面两个条件：
+
+$$f(\alpha v)=\alpha v \quad f(u+v)=f(u)+f(v)$$
 
 ![image](http://hujiaweibujidao.github.io/images/math/xianxinbianhua2.png)
 
-(1)反射变换
+(1)放缩变换
+
+$$
+A=\left[ \begin{array}{cc} \frac{3}{2} & 0 \\ 0 & \frac{3}{2} \end{array} \right] \quad
+\rightarrow \left\{ \begin{array}{c} x'=\frac{3}{2}x \\ y'=\frac{3}{2}y \end{array} \right.
+$$
+
+放缩反射，x和y都变成原来的$\frac{3}{2}$倍。
+
+(2)反射变换
 
 $$
 A=\left[ \begin{array}{cc} -1 & 0 \\ 0 & 1 \end{array} \right] \quad
@@ -50,22 +61,13 @@ $$
 
 水平反射，x变成对应的相反数，y不变。
 
-什么是反射？[反射 on wiki](http://zh.wikipedia.org/wiki/%E5%8F%8D%E5%B0%84_(%E6%95%B0%E5%AD%A6))上的解释是：**反射是把一个物体变换成它的镜像的映射。对于二维空间中的反射，血药使用一条直线（反射轴）作为“镜子”，对于三维空间中的反射就要使用平面作为镜子。**
+什么是反射？[反射 on wiki](http://zh.wikipedia.org/wiki/%E5%8F%8D%E5%B0%84_(%E6%95%B0%E5%AD%A6))上的解释是：**反射是把一个物体变换成它的镜像的映射。对于二维空间中的反射，需要使用一条直线（反射轴）作为“镜子”，对于三维空间中的反射就要使用平面作为镜子。**
 
 **最常用的反射变换就是[Householder变换 on wiki](http://zh.wikipedia.org/wiki/%E8%B1%AA%E6%96%AF%E9%9C%8D%E5%B0%94%E5%BE%B7%E5%8F%98%E6%8D%A2)了，这一变换将一个向量变换为由一个超平面反射的镜像，是一种线性变换。Householder变换可以将向量的某些元素置零，同时保持该向量的范数不变。Householder变换在矩阵的QR分解中非常重要！**关于Householder的内部原理以及代码实现请参考我写的另一份总结[《Numerical Methods Using Matlab》第三章 矩阵特征值和奇异值分解](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)
 
 下图为Householder变换的图示，向量x在矩阵H的作用下得到的向量Hx和原向量x刚好是镜像反射关系。
 
 ![image](http://hujiaweibujidao.github.io/images/math/HouseholderReflection.png)
-
-(2)放缩变换
-
-$$
-A=\left[ \begin{array}{cc} \frac{3}{2} & 0 \\ 0 & \frac{3}{2} \end{array} \right] \quad
-\rightarrow \left\{ \begin{array}{c} x'=\frac{3}{2}x \\ y'=\frac{3}{2}y \end{array} \right.
-$$
-
-放缩反射，x和y都变成原来的$\frac{3}{2}$倍。
 
 (3)旋转变换
 
@@ -75,6 +77,8 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
 $$
 
 旋转变换，[一般性的证明请看这张图](http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan.png)，[wiki](http://zh.wikipedia.org/wiki/%E6%97%8B%E8%BD%AC)中对二维空间旋转的解释。
+
+最常用的旋转矩阵就是[Givens旋转](http://zh.wikipedia.org/wiki/%E5%90%89%E6%96%87%E6%96%AF%E6%97%8B%E8%BD%AC)。**Givens 旋转在数值线性代数中主要的用途是在向量或矩阵中介入零。例如，这种效果可用于计算矩阵的 QR分解。超过Householder变换的一个好处是它们可以轻易的并行化，另一个好处是对于非常稀疏的矩阵计算量更小。**
 
 ![image](http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan2.png)
 
@@ -145,7 +149,11 @@ Given旋转矩阵的稳定计算：
 矩阵的一个重要用途是解线性方程组。线性方程组中未知量的系数可以排成一个矩阵，加上常数项，则称为增广矩阵。另一个重要用途是表示线性变换，即是诸如f(x)  = 4x之类的线性函数的推广。设定基底后，某个向量v可以表示为m×1的矩阵,而线性变换f可以表示为行数为m的矩阵A，使得经过变换后得到的向量f(v)可以表示成Av的形式。矩阵的特征值和特征向量可以揭示线性变换的深层特性。
 -->
 
+好吧，其实还有转置矩阵对不对？转置是从m × n矩阵的向量空间到所有n × m矩阵的向量空间的线性映射。这个我还不太理解，读者若明白了请留言告知，谢谢！
+
 OK，矩阵的理解就到这里吧，下节介绍矩阵的特征值和特征向量，也可以直接看看后面关于其他矩阵的理解，例如相似矩阵和正交矩阵等等。
+
+
 
 
 
