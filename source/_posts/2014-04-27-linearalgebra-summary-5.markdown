@@ -101,7 +101,9 @@ Givens旋转又称为平面旋转变换，它能够消去给定向量的某一�
 
 3.Householder反射
 
-Householder变换是一个初等反射变换，用Householder矩阵左乘一个向量或者矩阵，即实现Householder变换。
+Householder变换是一个初等反射变换，用Householder矩阵左乘一个向量或者矩阵，即实现Householder变换。下图为Householder变换的图示，向量x在矩阵H的作用下得到的向量Hx和原向量x刚好是镜像反射关系。
+
+![image](http://hujiaweibujidao.github.io/images/math/HouseholderReflection.png)
 
 一个nxn的Householder矩阵$H$具有如下的形式：
 
