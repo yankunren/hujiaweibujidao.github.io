@@ -26,7 +26,7 @@ published: true
 
 ![image](http://hujiaweibujidao.github.io/images/math/eigenvectors.png)
 
-**在一定条件下（例如实对称矩阵形式的线性变换），一个变换可以由其特征值和特征向量完全表述。一个特征空间是具有相同特征值的特征向量与一个同维数的零向量的集合，可以证明该集合是一个线性子空间。** [TODO：特征空间我还不太理解，若读者明白，请留言告知，谢谢！]
+**在一定条件下（例如实对称矩阵形式的线性变换），一个变换可以由其特征值和特征向量完全表述。一个特征空间是具有相同特征值的特征向量与一个同维数的零向量的集合，可以证明该集合是一个线性子空间。** [TODO：特征空间我还不太理解，若读者明白，请留言告知，谢谢]
 
 一般来说，2×2的非奇异矩阵如果有两个相异的特征值，就有两个线性无关的特征向量。**在这种情况下，对于特征向量，线性变换仅仅改变它们的长度，而不改变它们的方向（除了反转以外），而对于其它向量，长度和方向都可能被矩阵所改变。**如果特征值的模大于1，特征向量的长度将被拉伸，而如果特征值的模小于1，特征向量的长度就将被压缩。如果特征值小于0，特征向量将会被翻转。
 
@@ -41,15 +41,15 @@ published: true
 ![image](http://hujiaweibujidao.github.io/images/math/eigenvectors2.png)
 ![image](http://hujiaweibujidao.github.io/images/math/eigenvectors3.png)
 
-特征值的代数重数和几何重数(TODO：后者我没有看懂，若读者明白，请留言告知，谢谢！)
+特征值的代数重数和几何重数(TODO：后者我没有看懂，若读者明白，请留言告知，谢谢)
 
 ![image](http://hujiaweibujidao.github.io/images/math/eigenvectors4.png)
 
-特征值的计算，简单的矩阵可以使用解特征方程的方法，但是一般情况下都是采用数值计算的方法，其中基于迭代技术的幂法可以用来计算矩阵的主特征值，反幂法类似，不过计算的是模最小的特征值，实际中常用的是QR分解。
+特征值的计算，简单的矩阵可以使用解特征方程的方法，但是一般情况下都是采用数值计算的方法，其中基于迭代技术的幂法可以用来计算矩阵的主特征值，反幂法类似，不过计算的是模最小的特征值，实际中常用的是QR分解。详情请参考请后面的[矩阵分解](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/)部分。
 
 ![image](http://hujiaweibujidao.github.io/images/math/eigenvectors5.png)
 
-到此，我觉得特征向量应该是清晰了，关于特征值和奇异值分解以及代码实现请参考我写的另一份总结[Numerical Methods Using Matlab 第三章 矩阵特征值和奇异值分解](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)。
+到此，我觉得特征向量应该是清晰了，关于特征值和奇异值分解以及代码实现请参考后面的[矩阵分解](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/)部分，也可以直接看我写的另一份总结[Numerical Methods Using Matlab 第三章 矩阵特征值和奇异值分解](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)。
 
 矩阵特征值的应用特别广，例如因子分析，特征脸，[PageRank](http://hujiaweibujidao.github.io/blog/2014/05/12/algorithms-pagerank/)等等算法都是基于特征值分解，若有时间和精力，我后续会一一介绍(有链接的是已经完成的部分)。
 
