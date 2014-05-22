@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>CS 4-Indefinite Integral - Hujiawei Bujidao</title>
+  <title>LAS 5-Orthogonal Matrix - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="微积分总结 Summary of Calculus
-逸夫图书馆, 2014/4/26 第四部分 不定积分 第一节 不定积分的概念与性质
-原函数与不定积分的概念，基本积分表，不定积分的性质 连续函数一定有原函数，而且原函数肯定是无穷多个的，它们组成了一个原函数族，这就是不定积分的概念，函数f(x) &hellip;">
+  <meta name="description" content="线性代数那些事 Things of Linear Algebra
+逸夫图书馆, 2014/5/22 正交矩阵 1.正交矩阵 什么是正交？ 两个向量的内积如果是零，那么就说这两个向量是正交的，在三维空间中，正交的两个向量相互垂直。如果相互正交的向量长度均为 1，那么他们又叫做标准正交基。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-4">
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-5">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
@@ -97,7 +96,7 @@
 		
   <header>
     
-      <h1 class="entry-title">CS 4-Indefinite Integral</h1>
+      <h1 class="entry-title">LAS 5-Orthogonal Matrix</h1>
     
     
       <p class="meta">
@@ -113,60 +112,218 @@
   
 
 
-<time datetime="2014-04-27T14:29:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+<time datetime="2014-04-29T15:03:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><strong><center>微积分总结 Summary of Calculus</center></strong>
-<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
+<div class="entry-content"><p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
+<strong><center>逸夫图书馆, 2014/5/22</center></strong></p>
 
-<h3 id="center-center"><center>第四部分 不定积分</center></h3>
+<h3 id="centercenter"><center>正交矩阵</center></h3>
 
-<h4 id="section">第一节 不定积分的概念与性质</h4>
-<p>原函数与不定积分的概念，基本积分表，不定积分的性质</p>
+<p>1.正交矩阵</p>
 
-<p>连续函数一定有原函数，而且原函数肯定是无穷多个的，它们组成了一个原函数族，这就是不定积分的概念，函数f(x)的不定积分<script type="math/tex">\int f(x)dx</script>在几何上就表示<script type="math/tex">f(x)</script>积分曲线族。</p>
+<p>什么是正交？</p>
 
-<p>积分基本上就是微分的逆运算，所以积分表只要参照常用函数的微分表即可。</p>
+<p>两个向量的内积如果是零，那么就说这两个向量是正交的，在三维空间中，正交的两个向量相互垂直。如果相互正交的向量长度均为 1，那么他们又叫做标准正交基。</p>
 
-<h4 id="section-1">第二节 换元积分法</h4>
-<p>第一类换元积分法（凑微分法），第二类积分换元法，分部积分法</p>
+<p>那什么是正交矩阵呢？</p>
 
-<p>很多时候被积函数不都是常见的初等函数，遇到复杂的情况我们需要使用其他的方法来计算积分。假设我们要求不定积分<script type="math/tex">\int g(x)dx</script></p>
+<p><a href="http://zh.wikipedia.org/wiki/%E6%AD%A3%E4%BA%A4%E7%9F%A9%E9%98%B5">正交矩阵 on wiki</a>的介绍是：在矩阵论中，实数正交矩阵是方块矩阵Q，它的转置矩阵是它的逆矩阵：$Q^T Q = Q Q^T = I$</p>
 
-<p>(1)如果我们有一个函数关系<script type="math/tex">u=h(x), g=f(u)</script>，也就是说，被积函数g(x)是关于u的函数，而u又是关于x的函数，为什么要这么复杂呢？因为g(x)直接积分比较难，但是可以将它看成<script type="math/tex">g(x)=f(u)\cdot u'=f[h(x)] \cdot h'(x)</script>，那么就有</p>
+<p>注意上面提到的<code>实数</code>二字，正交矩阵中的元素都是实数，包含复数并且同样满足正交性质的矩阵是酉矩阵，也就是推广到复数域之后的“正交矩阵”。</p>
 
-<script type="math/tex; mode=display">\int g(x)dx= \int f[h(x)] \cdot h'(x)dx= \int f[h(x)]d(h(x))= [\int f(u)du]_{u=h(x)}=F(u)+C</script>
+<p>简单地理解就是指列向量相互正交的矩阵，但是还需要满足列向量是正交规范化的。</p>
 
-<p>这样我们就将对g(x)求积分变成了对<script type="math/tex">u=h(x)</script>求积分，这就是第一类换元积分法。例如，求<script type="math/tex">\int \frac{1}{1+2x}dx</script>，令<script type="math/tex">u=1+2x</script>即可。</p>
+<p><strong>实数方块矩阵是正交的，当且仅当它的列形成了带有普通欧几里得点积的欧几里得空间$R^{n}$的</strong>正交规范基<strong>，它为真当且仅当它的行形成$R^{n}$的正交基。假设带有正交（非正交规范）列的矩阵M叫正交矩阵可能是诱人的，但是这种矩阵没有特殊价值而没有特殊名字；它们只是$M^{T}M$ = D，D是对角矩阵。</strong></p>
 
-<p>(2)如果我们有一个函数关系<script type="math/tex">x=h(t)</script>，也就是说，第一类换元积分是找一个函数<script type="math/tex">u=h(x)</script>，利用du和dx的关系将dx替换掉，而第二类是直接找到x关于t的函数，这样<script type="math/tex">dx=h'(t)dt</script>就可以将dx替换掉了，那么<script type="math/tex">\int g(x)dx = [\int g[h(t)]h'(t)dt]_{t=h^{-1}(x)} </script>，这种换元积分法就是第二类换元积分法。例如，求<script type="math/tex">\int \frac{xdx}{\sqrt{x-3}}</script>，令<script type="math/tex">t=\sqrt{x-3}</script>，即<script type="math/tex">x=t^{2}+3</script>即可。</p>
+<p><strong>正交矩阵最重要的性质之一是它的变换可以保证一个向量的长度不变，包括 Euclidean lenght ，matrix norm 和 Frobenius norm。</strong>[最后一个是矩阵的F范数]</p>
 
-<p>分部积分法，如果函数u=u(x)和函数v=v(x)具有连续导数，则有<script type="math/tex">\int uv'dx = uv - \int u'vdx</script>，通常还简写为<script type="math/tex">\int udv = uv - \int vdu</script>，这种方法自然常用求两个函数乘积的积分，例如，求<script type="math/tex">\int xcosxdx</script>。</p>
+<p>下面考虑一个向量v，v的长度的平方是$v^{T}v$。如果作用在向量v上的线性变换Q保持了向量长度，即</p>
 
-<h4 id="section-2">第四节 有理函数的积分</h4>
-<p>有理函数的积分，可化为有理函数的积分举例</p>
+<script type="math/tex; mode=display">{ v}^T{ v} = (Q{ v})^T(Q{ v}) = { v}^T Q^T Q { v}</script>
 
-<p>有理函数是指两个多项式的商，即形如<script type="math/tex">\frac {P(x)}{Q(x)}= \frac {a_{0}x^{n}+a_{1}x^{n-1}+a_{2}x^{n-2}+\dots+a_{n}}{b_{0}x^{m}+b_{1}x^{m-1}+b_{2}x^{m-2}+\dots+b_{m}}</script>，若有<script type="math/tex">m>n</script>则为真分式，否则为假分式。利用多项式的除法，总可以将一个假分式分解成一个多项式和一个真分式的和的形式。任何一个有理真分式都可以分解为以下四类最简分式之和：</p>
+<p>能够做到保持向量长度不变的线性变换也就是旋转、反射和它们的组合，所以<strong>旋转、反射和它们的组合都产生正交矩阵。反过来，正交矩阵也蕴涵了正交变换(旋转变换或者反射变换)。</strong>但是，<strong>线性代数包括了在既不是有限维的也不是同样维度的空间之间的正交变换，它们没有等价的正交矩阵。</strong></p>
+
+<p>一些小正交矩阵的例子和可能的解释。<a href="http://zh.wikipedia.org/wiki/%E6%AD%A3%E4%BA%A4%E7%9F%A9%E9%98%B5#.E4.BE.8B.E5.AD.90">来源自wiki</a></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/zhengjiao3.png" alt="image" /></p>
+
+<p>低维度下的正交阵。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/zhengjiao1.png" alt="image" /></p>
+
+<p>对一个二维向量v，让它旋转$\theta$角度其实也可以看做是让它以$\frac{1}{2}\theta$角度进行反射。</p>
+
+<p>我们思考一下，反射的逆矩阵是什么？反射的逆过程其实就是它自己对不对？也就是说反射的逆矩阵等于反射本身！所以就有了<strong>反射矩阵、反射矩阵的逆矩阵以及它的转置矩阵三者相同！</strong></p>
+
+<p>高维度下的正交矩阵比较复杂，但是可以通过基本模块例如置换、反射和旋转来构建高维的正交矩阵，例如下面要介绍的Householder变换和Givens旋转。</p>
+
+<p>(置换矩阵就是单位矩阵的某些行和列交换后得到的矩阵)</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/zhengjiao2.png" alt="image" /></p>
+
+<p>既然正交矩阵这么有用，有时候我们就会想要把一个矩阵正交化，那怎么正交化呢？线代书中介绍了典型的<a href="http://zh.wikipedia.org/wiki/Gram-Schmidt%E6%AD%A3%E4%BA%A4%E5%8C%96">Gram-Schmidt正交化 on wiki</a>，但是实际应用中这种方法会因为误差的累积使得最后的正交性很差，所以经常使用的是下面的Givens旋转和Householder变换。</p>
+
+<p>2.Givens旋转</p>
+
+<p>Givens旋转又称为平面旋转变换，它能够消去给定向量的某一个分量（使其为0），这点不同于Householder变换消去向量中的多个分量，在处理有很多零元素的稀疏向量或者稀疏矩阵的时候Givens旋转就更加有效。</p>
+
+<p>喻文健老师的《数值分析与算法》对此介绍地很详细，内容如下：</p>
+
+<p>先看下2x2的Givens旋转的推导过程：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/givens1.png" alt="image" /></p>
+
+<p>将其推广到n维向量的情况：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/givens_2.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/givens3.png" alt="image" /></p>
+
+<p>举例说明Givens旋转的处理过程：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/givens4.png" alt="image" /></p>
+
+<p><strong>Givens 旋转在数值线性代数中主要的用途是在向量或矩阵中介入零。例如，这种效果可用于计算矩阵的 QR分解。超过Householder变换的一个好处是它们可以轻易的并行化，另一个好处是对于非常稀疏的矩阵计算量更小。</strong></p>
+
+<p>关于旋转矩阵的内容：</p>
+
+<p><strong>wiki: 旋转矩阵是在乘以一个向量的时候有改变向量的方向但不改变大小的效果的矩阵。旋转矩阵不包括点反演，它可以把右手坐标系改变成左手坐标系或反之。所有旋转加上反演形成了正交矩阵的集合。旋转可分为主动旋转与被动旋转。主动旋转是指将向量逆时针围绕旋转轴所做出的旋转。被动旋转是对坐标轴本身进行的逆时针旋转，它相当于主动旋转的逆操作。</strong></p>
+
+<p><strong>一个矩阵是旋转矩阵，当且仅当它是正交矩阵并且它的行列式是单位一。正交矩阵的行列式是 ±1(根据$U U^{T}=E$，且$det(U)=det(U^{T})$易得)，如果行列式是 −1，则它包含了一个反射而不是真旋转矩阵。</strong></p>
+
+<p>[<code>正交矩阵的行列式如果是−1，则它包含了一个反射！如果是1，则它包含了一个旋转！</code>不知道正确与否，若读者明白请留言告知，谢谢]</p>
+
+<p><strong>旋转矩阵是正交矩阵，如果它的列向量形成 ${R}^{n}$ 的一个正交基，就是说在任何两个列向量之间的标量积是零(正交性)而每个列向量的大小是单位一(单位向量)。一定要记住旋转矩阵一定是正交矩阵，所以也就有它的转置矩阵等于它的逆矩阵，并且它的行列式为1！</strong></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/xuanzhuanjuzhen.png" alt="image" /></p>
+
+<p>3.Householder反射</p>
+
+<p>Householder变换是一个初等反射变换，用Householder矩阵左乘一个向量或者矩阵，即实现Householder变换。下图为Householder变换的图示，向量x在矩阵H的作用下得到的向量Hx和原向量x刚好是镜像反射关系。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/HouseholderReflection.png" alt="image" /></p>
+
+<p>一个nxn的Householder矩阵$H$具有如下的形式：</p>
+
+<script type="math/tex; mode=display">
+H=I-\frac{2}{v^{T}v} vv^{T}
+</script>
+
+<p>其中，矩阵$I$是一个(nxn)单位阵(对角线元素都是1)，而$v$是一个包含n个元素的列向量</p>
+
+<script type="math/tex; mode=display"> v=c+\|c\|_{2}e </script>
+
+<p>向量$c$和$e$是是包含n个元素的列向量，分别对应要变换的矩阵的某一列和单位阵的某一列，<script type="math/tex">\|c\|_{2}</script>是向量$c$的二范数 </p>
+
+<script type="math/tex; mode=display"> \|c\|_{2}= \sqrt{c_{1}^2+c_{2}^2+c_{3}^2+ \cdots +c_{n}^2} </script>
+
+<p>矩阵$H$是正交对称阵，所以$H=H^{T}=H^{-1}$。<strong>Househoulder变换实现向量在线性空间中的“镜面反射”，即$Hx$是向量$x$相对于法向量为$v$的超平面的镜像，也就是$Hx$和$x$关于平面$S$镜像对称。采用Householder变换可以将向量$x$中除某一个分量之外的其他分量变成0，这是一种消元操作。</strong>注意一类小技巧，不需要显式构造$H$便可以计算$Hx$，如下所示，只需计算向量$x$和$v^{T}$的内积，不用计算矩阵和向量的乘法，下面等式最右边的$\frac{v^{T}x}{v^{T}v}$实际上是一个标量！</p>
+
+<script type="math/tex; mode=display">
+Hx=(I-\frac{2}{v^{T}v} vv^{T})x=x-2\frac{v^{T}x}{v^{T}v} v
+</script>
+
+<p>将(nxn)矩阵$A$分解为正交阵$Q$和上三角阵$R$的过程需要$n-1$步。下面看下详细的处理流程：[下面的步骤其实就是QR分解的核心，QR分解的内容请看下节]</p>
+
+<p>(1)向量$c$是矩阵$A$的第一列，向量$e$是长度为n的列向量，如果$c$的第一个元素是正数的话$e$的第一个元素是1，否则是-1(<strong>这么做其实是为了防止大数吃小数现象，也就是减小误差</strong>)。得到$c$和$e$之后，便可以计算出$v$，然后得到矩阵<script type="math/tex">H_{1}</script>，如下所示：</p>
+
+<script type="math/tex; mode=display">
+c=
+\left[
+\begin{array}{c}
+a_{11}\\
+a_{12}\\
+\cdots\\
+a_{nn}  
+\end{array}
+\right]\quad
+e=
+\left[
+\begin{array}{c}
+\pm 1\\
+0\\
+\cdots\\
+0  
+\end{array}
+\right]
+</script>
+
+<p>将<script type="math/tex">H_{1}</script>作用于$A$，此时<script type="math/tex">Q_{1}=H_{1},R_{1}=H_{1}A</script>。其中<script type="math/tex">Q_{1}</script>是正交阵，<script type="math/tex">R_{1}</script>的第一列第一个元素以下的元素都是0。<script type="math/tex">R_{1}</script>大致如下所示：</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
-\frac{A}{x-a}, \frac{A}{(x-a)^n}, \frac{Ax+B}{x^2+px+q}, \frac{Ax+B}{(x^2+px+q)^n} \quad (n \ge 2, p^2-4q < 0) %]]></script>
 
-<p>若有理真分式的分母中含有因式<script type="math/tex">(x-a)^n</script>，那么分式中含有：</p>
+\left(
+\begin{array}{cccc}
+R_{11}^{(1)}  & R_{12}^{(1)}   & \cdots & R_{1n}^{(1)}   \\
+0  & R_{22}^{(1)}   & \cdots & R_{2n}^{(1)}   \\
+0  & R_{32}^{(1)}   & \cdots & R_{3n}^{(1)}   \\
+0  & R_{42}^{(1)}   & \cdots & R_{4n}^{(1)}   \\
+\end{array}
+\right)
+ %]]></script>
 
-<script type="math/tex; mode=display">\frac{A1}{x-a}+\frac{A2}{(x-a)^2}+\dots+\frac{An}{(x-a)^n}</script>
+<p>(2)这步中向量$c$是矩阵<script type="math/tex">R_{1}</script>的第二列，并且第一个元素设置为0，向量$e$是长度为n的列向量，不过第二个元素是<script type="math/tex">\pm 1</script>，如果$c$的第二个元素是正数的话$e$的第二个元素是1，否则是-1。得到$c$和$e$之后，便可以得到矩阵<script type="math/tex">H_{2}</script>，如下所示：</p>
 
-<p>若有理真分式的分母中含有因式<script type="math/tex">(x+px+q)^n</script>，那么分式中含有：</p>
+<script type="math/tex; mode=display">
+c=
+\left[
+\begin{array}{c}
+0\\
+R_{12}^{(1)}\\
+\cdots\\
+R_{n2}^{(1)}  
+\end{array}
+\right]\quad
+e=
+\left[
+\begin{array}{c}
+0\\
+\pm 1\\
+\cdots\\
+0  
+\end{array}
+\right]
+</script>
 
-<script type="math/tex; mode=display">\frac{A1}{x+px+q}+\frac{A2}{(x+px+q)^2}+\dots+\frac{An}{(x+px+q)^n}</script>
+<p>将<script type="math/tex">H_{2}</script>作用于<script type="math/tex">R_{1}</script>，此时<script type="math/tex">Q_{2}=Q_{1}H_{2},R_{2}=H_{2}R_{1}</script>。其中<script type="math/tex">Q_{2}</script>是正交阵，<script type="math/tex">R_{2}</script>的第二列第二个元素以下的元素都是0。<script type="math/tex">R_{2}</script>大致如下所示：</p>
 
-<p>对于系数，可以在确定了最简分式的组合之后利用待定系数就可求出来。</p>
+<script type="math/tex; mode=display">% <![CDATA[
+
+\left(
+\begin{array}{cccc}
+R_{11}^{(2)}  & R_{12}^{(2)}   & \cdots & R_{1n}^{(2)}   \\
+0  & R_{22}^{(2)}   & \cdots & R_{2n}^{(2)}   \\
+0  & 0   & \cdots & R_{3n}^{(2)}   \\
+0  & 0   & \cdots & R_{4n}^{(2)}   \\
+\end{array}
+\right)
+ %]]></script>
+
+<p>(3)重复与上面类似的过程，直到第(n-1)步，得到<script type="math/tex">Q_{n-1}=Q_{n-2}H_{n-1}=H_{1}H_{2}\cdots H_{n}</script>，同时<script type="math/tex">R_{n-1}=H_{n-1}R_{n-2}=H_{n-1}H_{n-2}\cdots H_{2}H_{1}</script>，此时<script type="math/tex">R_{n-1}</script>是一个上三角阵，<script type="math/tex">Q_{n-1}</script>是一个正交阵，得到矩阵$A$的QR分解式为<script type="math/tex">A=Q_{n-1}R_{n-1}</script>。</p>
+
+<p>喻文健老师的《数值分析与算法》对Householder反射的介绍也很详细，重要内容如下：</p>
+
+<p>Householder反射正确性的证明，注意其中的 <script type="math/tex"> \omega = \frac{v}{\|v\|_{2}} </script></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/householder1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/householder2.png" alt="image" /></p>
+
+<p>下面有两个关于Householder的定理，其实也很重要，便于理解镜面的法向量</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/householder3.png" alt="image" /></p>
+
+<p>最后给出一个Householder反射变换的例子：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/householder4.png" alt="image" /></p>
+
+<p>OK！至此正交矩阵就介绍完了，下节介绍矩阵的常用分解，也是非常重要的内容。</p>
 
 <p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-4/">http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-4/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-5/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-5/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 </div>
 
 
@@ -189,7 +346,7 @@
   
 
 
-<time datetime="2014-04-27T14:29:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+<time datetime="2014-04-29T15:03:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2014</time>
 				
 
 <span class="categories">
@@ -210,10 +367,10 @@
 			
 			<p class="meta">
 				
-				<a class="basic-alignment left" href="/blog/2014/04/27/calculus-summary-chapter-3/" title="Previous Post: CS 3-Differential Mean Value Theorems">&laquo; CS 3-Differential Mean Value Theorems</a>
+				<a class="basic-alignment left" href="/blog/2014/04/29/linearalgebra-summary-4/" title="Previous Post: LAS 4-Similarity Matrix">&laquo; LAS 4-Similarity Matrix</a>
 				
 				
-				<a class="basic-alignment right" href="/blog/2014/04/27/calculus-summary-chapter-5/" title="Next Post: CS 5-Definite Integral">CS 5-Definite Integral &raquo;</a>
+				<a class="basic-alignment right" href="/blog/2014/04/29/linearalgebra-summary-6/" title="Next Post: LAS 6-Matrix Decomposition">LAS 6-Matrix Decomposition &raquo;</a>
 				
 			</p>
 		</footer>
