@@ -4,7 +4,7 @@ title: "LAS 5-Orthogonal Matrix"
 date: 2014-04-29 15:03
 comments: true
 categories: math
-published: false
+published: true
 ---
 
 **<center>线性代数那些事 Things of Linear Algebra</center>**
