@@ -181,11 +181,7 @@ A=\left[ \begin{array}{cc} -1 & 0 \\ 0 & 1 \end{array} \right] \quad
 
 <p>什么是反射？<a href="http://zh.wikipedia.org/wiki/%E5%8F%8D%E5%B0%84_(%E6%95%B0%E5%AD%A6)">反射 on wiki</a>上的解释是：<strong>反射是把一个物体变换成它的镜像的映射。对于二维空间中的反射，需要使用一条直线（反射轴）作为“镜子”，对于三维空间中的反射就要使用平面作为镜子。</strong></p>
 
-<p><strong>最常用的反射变换就是<a href="http://zh.wikipedia.org/wiki/%E8%B1%AA%E6%96%AF%E9%9C%8D%E5%B0%94%E5%BE%B7%E5%8F%98%E6%8D%A2">Householder变换 on wiki</a>了，这一变换将一个向量变换为由一个超平面反射的镜像，是一种线性变换。Householder变换可以将向量的某些元素置零，同时保持该向量的范数不变。Householder变换在矩阵的QR分解中非常重要！</strong>关于Householder的内部原理以及代码实现请参考我写的另一份总结<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">《Numerical Methods Using Matlab》第三章 矩阵特征值和奇异值分解</a></p>
-
-<p>下图为Householder变换的图示，向量x在矩阵H的作用下得到的向量Hx和原向量x刚好是镜像反射关系。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/HouseholderReflection.png" alt="image" /></p>
+<p><strong>最常用的反射变换就是<a href="http://zh.wikipedia.org/wiki/%E8%B1%AA%E6%96%AF%E9%9C%8D%E5%B0%94%E5%BE%B7%E5%8F%98%E6%8D%A2">Householder变换 on wiki</a>了，这一变换将一个向量变换为由一个超平面反射的镜像，是一种线性变换。Householder变换可以将向量的某些元素置零，同时保持该向量的范数不变。</strong>关于Householder的内部原理以及代码实现请请参考后面的<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/">矩阵分解总结</a>部分，或者参考我写的另一份总结<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">《Numerical Methods Using Matlab》第三章 矩阵特征值和奇异值分解</a></p>
 
 <p>(3)旋转变换</p>
 
@@ -197,7 +193,7 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
 
 <p>旋转变换，<a href="http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan.png">一般性的证明请看这张图</a>，<a href="http://zh.wikipedia.org/wiki/%E6%97%8B%E8%BD%AC">wiki</a>中对二维空间旋转的解释。</p>
 
-<p>最常用的旋转矩阵就是<a href="http://zh.wikipedia.org/wiki/%E5%90%89%E6%96%87%E6%96%AF%E6%97%8B%E8%BD%AC">Givens旋转</a>。<strong>Givens 旋转在数值线性代数中主要的用途是在向量或矩阵中介入零。例如，这种效果可用于计算矩阵的 QR分解。超过Householder变换的一个好处是它们可以轻易的并行化，另一个好处是对于非常稀疏的矩阵计算量更小。</strong></p>
+<p>最常用的旋转矩阵就是<a href="http://zh.wikipedia.org/wiki/%E5%90%89%E6%96%87%E6%96%AF%E6%97%8B%E8%BD%AC">Givens旋转</a>。**关于Householder的内部原理以及代码实现请请参考后面的<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/">矩阵分解总结</a>部分。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan2.png" alt="image" /></p>
 
@@ -244,6 +240,8 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
 <p><img src="http://hujiaweibujidao.github.io/images/math/bansuijuzhen3.png" alt="image" /></p>
 
 <p>还需要注意的是，<strong>逆矩阵是对于方阵来说的，只有方阵还有逆矩阵的概念，那要不是方阵呢？那么就是广义的逆矩阵</strong>！广义逆矩阵在最小二乘法中有重要的应用。关于逆矩阵的求解以及代码实现请参考我写的另一份总结<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">《Numerical Methods Using Matlab》</a>第一章 线性方程组求解，最小二乘问题请参考第四章 曲线拟合和多项式插值。</p>
+
+<p>关于矩阵逆矩阵的求解可以看后面的<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/">矩阵分解</a>部分。</p>
 
 <p>4.秩</p>
 
@@ -399,7 +397,7 @@ src="http://hujiaweibujidao.github.io/music/Wouldnt-It-Be-Nice.mp3">
 <li class='category'><a href='/blog/categories/ios/'>ios (1)</a></li>
 <li class='category'><a href='/blog/categories/mac/'>mac (2)</a></li>
 <li class='category'><a href='/blog/categories/machinelearning/'>machinelearning (1)</a></li>
-<li class='category'><a href='/blog/categories/math/'>math (25)</a></li>
+<li class='category'><a href='/blog/categories/math/'>math (24)</a></li>
 <li class='category'><a href='/blog/categories/matlab/'>matlab (1)</a></li>
 <li class='category'><a href='/blog/categories/mobiledev/'>mobiledev (5)</a></li>
 <li class='category'><a href='/blog/categories/music/'>music (2)</a></li>
