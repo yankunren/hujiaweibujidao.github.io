@@ -4,7 +4,7 @@ title: "LAS 6-Matrix Decomposition"
 date: 2014-04-29 17:03
 comments: true
 categories: math
-published: false
+published: true
 ---
 
 **<center>线性代数那些事 Things of Linear Algebra</center>**
@@ -14,13 +14,17 @@ published: false
 
 [内容摘录自我去年写的[Numeric Methods with Matlab总结](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)的第一章 线性方程组求解和第三章 第三章 矩阵特征值和奇异值求解，点击上面的链接地址可以下载原始的PDF版本的内容，如果不想下载，那么也可以直接阅读下面的内容，源代码基本上都是使用或者修改自书籍[《Numerical Computing with Matlab》. Cleve B. Moler.](http://www.mathworks.cn/moler/)]
 
+总结矩阵分解：由于实际中遇到的矩阵可能规模很大而且很复杂，为了更好地处理矩阵于是就有了矩阵分解。分解一般是分解成规模更小的或者性质更好的矩阵(比如三角矩阵或者对角矩阵)，这个时候我们需要透过现象看本质，矩阵分解实际上是把这个线性变换转换成几个其他的线性变换的组合，一般是旋转变换(对应一个正交矩阵)或者放缩变换(对应一个对角矩阵)的组合。
+
 1.LU分解
 
 线性方程组的实际应用中经常遇到系数矩阵不变，只是右端项发生变化的情况(多右端项问题)，这个时候如果还是使用高斯消去法的话，对于每个右端项都要进行重复的消去和回代的过程，显然计算量很大。为了解决这类问题，于是就有了LU分解算法。
 
 关系式$LU=PA$即为矩阵$A$的LU分解(或者三角分解)，其中矩阵$P$为排列阵(单位阵经过行列交换得到的矩阵，有时候也叫置换阵)，矩阵$L$为单位下三角矩阵(对角线元素都为1)，矩阵$U$为上三角矩阵，这样的话，一般的线性方程组$Ax=b$可以等价为两个三角型线性方程组 $Ly=Pb,\,Ux=y$。
 
-首先对系数矩阵$A$进行LU分解，然后对于每个右端项只要先计算出$y$然后再计算$x$即可，两个都只是解很简单的三角型线性方程组。
+首先对系数矩阵$A$进行LU分解，然后对于每个右端项只要先计算出$y$然后再计算$x$即可，两个都只是解很简单的三角型线性方程组。计算过程如下，[图片来源](http://www.cnblogs.com/daniel-D/p/3204508.html)
+
+![image](http://hujiaweibujidao.github.io/images/math/lu2.jpg)
 
 LU分解有两种方法，一种是使用前面的高斯消去法，另一种是Crout方法(这里不介绍，详情请看参考《Numerical Methods: An introduction with Applications Using Matlab》. Amos Gilat. Vish Subramaniam,2010,10)。
 
@@ -61,6 +65,10 @@ end
 L = tril(A,-1) + eye(n,n);%下三角部分，但是对角线上都是1
 U = triu(A);%上三角部分
 ```
+
+wiki上关于LU分解的应用
+
+![image](http://hujiaweibujidao.github.io/images/math/lu.png)
 
 2.Cholsky分解
 
@@ -197,7 +205,7 @@ end
 
 3.QR分解
 
-**QR分解是求解中小规模矩阵所有特征值的有效方法，它的基本原理是相似变换(两个方阵相似的条件是存在可逆矩阵$C$,使得$A=C^{-1}BC$)不改变矩阵的特征值和对应的特征向量以及上三角矩阵的特征值就是它的对角线元素。**
+**QR分解是求解中小规模矩阵所有特征值的有效方法，它的基本原理是利用相似变换(两个方阵相似的条件是存在可逆矩阵$C$,使得$A=C^{-1}BC$)不改变矩阵的特征值和对应的特征向量以及上三角矩阵的特征值就是它的对角线元素的性质对矩阵进行分解。**QR分解的实际计算有很多方法，例如Givens旋转、Householder变换，以及Gram-Schmidt正交化等等。每一种方法都有其优点和不足。
 
 **实Schur型矩阵：矩阵$S$为上三角阵，且对角块为1阶或者2阶矩阵。这类矩阵可以进行正交分解：$S=Q^{T}AQ$，称为实Schur分解，其中$S$的1阶对角块就是$A$的实特征值，2阶对角块的特征值是$A$的共轭复特征值。等式$A=QSQ^{T}$称为矩阵$A$的实Schur分解。**
 
