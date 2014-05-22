@@ -105,6 +105,7 @@ $$
 
 $$ v=c+||c||_{2}e $$
 
+
 向量$c$和$e$是是包含n个元素的列向量，分别对应要变换的矩阵的某一列和单位阵的某一列，$$||c||_{2}$$是向量$c$的二范数 
 
 $$ ||c||_{2}=\sqrt{c_{1}^2+c_{2}^2+c_{3}^2+\cdots+c_{n}^2} $$
@@ -194,6 +195,7 @@ $$
 喻文健老师的《数值分析与算法》对Householder反射的介绍也很详细，重要内容如下：
 
 Householder反射正确性的证明：[注意其中的$$\omega= \frac{v}{||v||_{2}}$$]
+
 
 ![image](http://hujiaweibujidao.github.io/images/math/householder1.png)
 ![image](http://hujiaweibujidao.github.io/images/math/householder2.png)
