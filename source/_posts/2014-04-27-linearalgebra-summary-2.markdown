@@ -126,6 +126,8 @@ Given旋转矩阵的稳定计算：
 
 还需要注意的是，**逆矩阵是对于方阵来说的，只有方阵还有逆矩阵的概念，那要不是方阵呢？那么就是广义的逆矩阵**！广义逆矩阵在最小二乘法中有重要的应用。关于逆矩阵的求解以及代码实现请参考我写的另一份总结[《Numerical Methods Using Matlab》](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)第一章 线性方程组求解，最小二乘问题请参考第四章 曲线拟合和多项式插值。
 
+关于矩阵逆矩阵的求解可以看后面的[矩阵分解](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/)部分。
+
 4.秩
 
 什么是矩阵的秩？
