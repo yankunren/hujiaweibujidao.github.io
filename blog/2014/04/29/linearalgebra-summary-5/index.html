@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: android - Hujiawei Bujidao</title>
+  <title>LAS 5-Orthogonal Matrix - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="Category: android">
+  <meta name="description" content="线性代数那些事 Things of Linear Algebra
+逸夫图书馆, 2014/4/27 正交矩阵 1.正交矩阵 什么是正交？ 两个向量的内积如果是零，那么就说这两个向量是正交的，在三维空间中，正交的两个向量相互垂直。如果相互正交的向量长度均为 1，那么他们又叫做标准正交基。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hujiaweibujidao.github.ioblog/categories/android">
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-5">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
@@ -91,96 +92,143 @@
 		<div id="content">
 			<div>
 
-	<article role="article">
+<article class="hentry" role="article">
 		
-		<header>
-			<h1 class="entry-title">Category: Android</h1>
-			
-		</header>
-		
-		<div id="blog-archives" class="category">
+  <header>
+    
+      <h1 class="entry-title">LAS 5-Orthogonal Matrix</h1>
+    
+    
+      <p class="meta">
+        
 
 
 
-  
-  <h2>2014</h2>
-
-<article>
-  
-<h1><a href="/blog/2014/03/13/mobile-development-materials/">Material on Mobile Development</a></h1>
-<time datetime="2014-03-13T20:28:00+08:00" pubdate><span class='month'>Mar</span> <span class='day'>13</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/mobiledev/'>mobiledev</a></span>
-</footer>
 
 
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/02/21/android-ndk-and-opencv-development-4/">Android Ndk and Opencv Development 4</a></h1>
-<time datetime="2014-02-21T10:15:00+08:00" pubdate><span class='month'>Feb</span> <span class='day'>21</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/mobiledev/'>mobiledev</a>, <a class='category' href='/blog/categories/opencv/'>opencv</a></span>
-</footer>
-
-
-</article>
 
 
 
   
-  <h2>2013</h2>
-
-<article>
-  
-<h1><a href="/blog/2013/11/18/android-ndk-and-opencv-development-3/">Android Ndk and Opencv Development 3</a></h1>
-<time datetime="2013-11-18T21:35:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>18</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/mobiledev/'>mobiledev</a>, <a class='category' href='/blog/categories/opencv/'>opencv</a></span>
-</footer>
 
 
-</article>
+<time datetime="2014-04-29T15:03:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
 
 
+<div class="entry-content"><p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
+<strong><center>逸夫图书馆, 2014/4/27</center></strong></p>
 
-<article>
-  
-<h1><a href="/blog/2013/11/18/android-ndk-and-opencv-development-2/">Android Ndk and Opencv Development 2</a></h1>
-<time datetime="2013-11-18T15:59:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>18</span> <span class='year'>2013</span></time>
+<h3 id="centercenter"><center>正交矩阵</center></h3>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/mobiledev/'>mobiledev</a>, <a class='category' href='/blog/categories/opencv/'>opencv</a></span>
-</footer>
+<p>1.正交矩阵</p>
 
+<p>什么是正交？</p>
 
-</article>
+<p>两个向量的内积如果是零，那么就说这两个向量是正交的，在三维空间中，正交的两个向量相互垂直。如果相互正交的向量长度均为 1，那么他们又叫做标准正交基。</p>
 
+<p>那什么是正交矩阵呢？</p>
 
+<p><a href="http://zh.wikipedia.org/wiki/%E6%AD%A3%E4%BA%A4%E7%9F%A9%E9%98%B5">正交矩阵 on wiki</a>的介绍是：在矩阵论中，实数正交矩阵是方块矩阵Q，它的转置矩阵是它的逆矩阵：$Q^T Q = Q Q^T = I . \,!$</p>
 
-<article>
-  
-<h1><a href="/blog/2013/11/18/android-ndk-and-opencv-developement/">Android Ndk and Opencv Development</a></h1>
-<time datetime="2013-11-18T14:41:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>18</span> <span class='year'>2013</span></time>
+<p>注意上面提到的<code>实数</code>二字，正交矩阵中的元素都是实数，包含复数并且同样满足正交性质的矩阵是酉矩阵，也就是推广到复数域之后的“正交矩阵”。</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/mobiledev/'>mobiledev</a>, <a class='category' href='/blog/categories/opencv/'>opencv</a></span>
-</footer>
+<p>简单地理解就是指列向量相互正交的矩阵，但是还需要满足列向量是正交规范化的。</p>
 
+<p><strong>实数方块矩阵是正交的，当且仅当它的列形成了带有普通欧几里得点积的欧几里得空间$R^{n}$的</strong>正交规范基<strong>，它为真当且仅当它的行形成$R^{n}$的正交基。假设带有正交（非正交规范）列的矩阵M叫正交矩阵可能是诱人的，但是这种矩阵没有特殊价值而没有特殊名字；它们只是$M^{T}M$ = D，D是对角矩阵。</strong></p>
 
-</article>
+<p><strong>正交矩阵最重要的性质之一是它的变换可以保证一个向量的长度不变，包括 Euclidean lenght ，matrix norm 和 Frobenius norm。</strong>[最后一个是矩阵的F范数]</p>
 
+<p>下面考虑一个向量v，v的长度的平方是$v^{T}v$。如果作用在向量v上的线性变换Q保持了向量长度，即</p>
+
+<script type="math/tex; mode=display">{ v}^T{ v} = (Q{ v})^T(Q{ v}) = { v}^T Q^T Q { v}</script>
+
+<p>能够做到保持向量长度不变的线性变换也就是旋转、反射和它们的组合，所以<strong>旋转、反射和它们的组合都产生正交矩阵。反过来，正交矩阵也蕴涵了正交变换(旋转变换或者反射变换)。</strong>但是，<strong>线性代数包括了在既不是有限维的也不是同样维度的空间之间的正交变换，它们没有等价的正交矩阵。</strong></p>
+
+<p>一些小正交矩阵的例子和可能的解释。<a href="http://zh.wikipedia.org/wiki/%E6%AD%A3%E4%BA%A4%E7%9F%A9%E9%98%B5#.E4.BE.8B.E5.AD.90">来源自wiki</a></p>
+
+<p>$\begin{bmatrix}
+1 &amp; 0 <br />
+0 &amp; 1 <br />
+\end{bmatrix}$ 恒等变换。$\begin{bmatrix}
+0.96 &amp; -0.28 <br />
+0.28 &amp; \;\;\,0.96 <br />
+\end{bmatrix}$ 旋转16.26°。</p>
+
+<p>$\begin{bmatrix}
+1 &amp; 0 <br />
+0 &amp; -1 <br />
+\end{bmatrix}$ 针对x轴反射。$\begin{bmatrix}
+0 &amp; 0 &amp; 0 &amp; 1 <br />
+0 &amp; 0 &amp; 1 &amp; 0 <br />
+1 &amp; 0 &amp; 0 &amp; 0 <br />
+0 &amp; 1 &amp; 0 &amp; 0
+\end{bmatrix}$ 置换坐标轴。</p>
+
+<p>低维度下的正交阵。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/zhengjiao1.png" alt="image" /></p>
+
+<p>对一个二维向量v，让它旋转$\theta$角度其实也可以看做是让它以$\frac{1}{2}\theta$角度进行反射，下面是二维情况下的旋转和反射矩阵：</p>
+
+<p>$\begin{bmatrix}
+\cos \theta &amp; -\sin \theta <br />
+\sin \theta &amp; \cos \theta <br />
+\end{bmatrix}$旋转  $\begin{bmatrix}
+\cos \theta &amp; \sin \theta <br />
+\sin \theta &amp; -\cos \theta <br />
+\end{bmatrix}$ 反射</p>
+
+<p>还有一个有意思的就是<strong>反射矩阵、反射矩阵的逆矩阵以及它的转置矩阵三者相同！</strong></p>
+
+<p>高维度下的正交矩阵比较复杂，但是可以通过基本模块例如置换、反射和旋转来构建高维的正交矩阵，例如下面要介绍的Householder变换和Givens旋转。</p>
+
+<p>(置换矩阵就是单位矩阵的某些行和列交换后得到的矩阵)</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/zhengjiao2.png" alt="image" /></p>
+
+<p>2.Givens旋转</p>
+
+<p>3.Householder变换</p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-5/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-5/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 </div>
 
-		
+
 		<footer>
-			
+			<p class="meta">
+				
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hujiawei</span></span>
+
+				
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-29T15:03:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2014</time>
+				
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/math/'>math</a>
+  
+</span>
+
+
+			</p>
 			
 			<div class="sharing">
   
@@ -189,19 +237,43 @@
 </div>
 
 			
+			<p class="meta">
+				
+				<a class="basic-alignment left" href="/blog/2014/04/29/linearalgebra-summary-4/" title="Previous Post: LAS 4-Similarity Matrix">&laquo; LAS 4-Similarity Matrix</a>
+				
+				
+				<a class="basic-alignment right" href="/blog/2014/04/30/wouldnt-it-be-nice/" title="Next Post: Wouldn't it be nice">Wouldn't it be nice &raquo;</a>
+				
+			</p>
 		</footer>
-		
 	</article>
 	
 
 	
+	<section>
+		<h1>Comments</h1>
+		<div id="comments" aria-live="polite">
+			<!-- Duoshuo Comment BEGIN   data-title=""-->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hujiaweibujidao"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+
+		</div>
+	</section>
 	
-
-
 </div>
 
 <aside class="sidebar">
-  
   
 	<section>
 	<h1>关于博主</h1><br/>
@@ -329,8 +401,7 @@ src="http://hujiaweibujidao.github.io/music/Wouldnt-It-Be-Nice.mp3">
 	</ul>
 </section>
 	
-	
-  </aside>
+</aside>
 
 
 		</div>
