@@ -8,7 +8,7 @@ published: true
 ---
 
 **<center>线性代数那些事 Things of Linear Algebra</center>**
-**<center>逸夫图书馆, 2014/4/27</center>**
+**<center>逸夫图书馆, 2014/5/22</center>**
 
 ### <center>正交矩阵</center>
 
