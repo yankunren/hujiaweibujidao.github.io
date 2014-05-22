@@ -16,11 +16,11 @@ published: true
 
 **[注：这些总结不会详细地讲解所有概念，只是挑选一些我个人感觉比较有用的知识点进行总结，很多时候可能只是列举知识点，并无解释，忘记了的可以自行Wiki或者翻书，另外，为了节省写作时间，对于一些定理我并没有给出详细的表达，忽略了些前提条件，请不要较真，我希望的是给自己一个感性的理解就行，具体理性的分析需要的时候再查，还有就是我还剪切粘贴了很多图片，再有就是，本文采用的是'非线性方式'进行总结的...首篇意识流作品...嗯，就是这样...强迫症者慎入...]**
 
-PS：本总结根据下面提到的武汉大学黄正华老师写的线性代数复习总结的顺序来的，因为黄老师的总结已经写得很好了，我只会提到一些我在其他地方看到或者听到的比较有用的心得分享。
-
 参考书籍：
 
 1.[线性代数 Using Matlab]
+
+2.[数值分析与算法](http://book.douban.com/subject/7161824/)
 
 它山之石：
 
@@ -28,13 +28,15 @@ PS：本总结根据下面提到的武汉大学黄正华老师写的线性代数
 
 全部内容：
 
-1.[行列式！](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1/)
+1.[行列式](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1/) 理解行列式的几何意义
 
-2.[矩阵！](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/)
+2.[矩阵](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/) 理解矩阵是线性变换，线性变换有哪些，逆矩阵和伴随矩阵的意义
+ 
+3.[特征值和特征向量](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-3/) 理解特征值和特征向量对于线性变换的几何意义
 
-3.[特征值和特征向量！](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-3/)
+4.[相似矩阵](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-4/) 理解相似矩阵是同一个线性变换在不同坐标系下的不同表达
 
-4.[相似矩阵！](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-4/)
+5.[正交矩阵]() 理解正交矩阵对应的正交变换，介绍Givens旋转和Householder反射
 
 [book]: http://hujiaweibujidao.github.io/files/linear_algebra_huangzhenghua.pdf
 
