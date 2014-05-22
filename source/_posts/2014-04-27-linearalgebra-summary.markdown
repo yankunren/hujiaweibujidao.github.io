@@ -30,7 +30,7 @@ published: true
 
 1.[行列式](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-1/) 理解行列式的几何意义
 
-2.[矩阵](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/) 理解矩阵是线性变换，线性变换有哪些，逆矩阵和伴随矩阵的意义
+2.[矩阵](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/) 理解矩阵是线性变换，线性变换有哪些，逆矩阵和伴随矩阵以及矩阵的秩的意义
  
 3.[特征值和特征向量](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-3/) 理解特征值和特征向量对于线性变换的几何意义
 
