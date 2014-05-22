@@ -36,7 +36,7 @@ published: true
 
 4.[相似矩阵](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-4/) 理解相似矩阵是同一个线性变换在不同坐标系下的不同表达
 
-5.[正交矩阵]() 理解正交矩阵对应的正交变换，介绍Givens旋转和Householder反射
+5.[正交矩阵](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-5/) 理解正交矩阵对应的正交变换，介绍Givens旋转和Householder反射
 
 [book]: http://hujiaweibujidao.github.io/files/linear_algebra_huangzhenghua.pdf
 
