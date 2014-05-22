@@ -4,7 +4,7 @@ title: "LAS 5-Orthogonal Matrix"
 date: 2014-04-29 15:03
 comments: true
 categories: math
-published: true
+published: false
 ---
 
 **<center>线性代数那些事 Things of Linear Algebra</center>**
@@ -37,6 +37,8 @@ $${ v}^T{ v} = (Q{ v})^T(Q{ v}) = { v}^T Q^T Q { v}$$
 能够做到保持向量长度不变的线性变换也就是旋转、反射和它们的组合，所以**旋转、反射和它们的组合都产生正交矩阵。反过来，正交矩阵也蕴涵了正交变换(旋转变换或者反射变换)。**但是，**线性代数包括了在既不是有限维的也不是同样维度的空间之间的正交变换，它们没有等价的正交矩阵。**
 
 一些小正交矩阵的例子和可能的解释。[来源自wiki](http://zh.wikipedia.org/wiki/%E6%AD%A3%E4%BA%A4%E7%9F%A9%E9%98%B5#.E4.BE.8B.E5.AD.90)
+
+$$A=\left[ \begin{array}{cc} a11 & a12 \\ a21 & a22 \end{array} \right]$$
 
 $\begin{bmatrix}
 1 & 0 \\
