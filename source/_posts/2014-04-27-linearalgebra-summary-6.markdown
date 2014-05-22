@@ -4,7 +4,7 @@ title: "LAS 6-Matrix Decomposition"
 date: 2014-04-29 17:03
 comments: true
 categories: math
-published: true
+published: false
 ---
 
 **<center>线性代数那些事 Things of Linear Algebra</center>**
