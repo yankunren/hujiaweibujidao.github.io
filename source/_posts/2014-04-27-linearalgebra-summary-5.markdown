@@ -78,6 +78,8 @@ $\begin{bmatrix}
 
 ![image](http://hujiaweibujidao.github.io/images/math/zhengjiao2.png)
 
+既然正交矩阵这么有用，有时候我们就会想要把一个矩阵正交化，那怎么正交化呢？线代书中介绍了典型的[Gram-Schmidt正交化](http://zh.wikipedia.org/wiki/Gram-Schmidt%E6%AD%A3%E4%BA%A4%E5%8C%96)，但是实际应用中这种方法会因为误差的累积使得最后的正交性很差，所以经常使用的是下面的Givens旋转和Householder变换。
+
 2.Givens旋转
 
 Givens旋转又称为平面旋转变换，它能够消去给定向量的某一个分量（使其为0），这点不同于Householder变换消去向量中的多个分量，在处理有很多零元素的稀疏向量或者稀疏矩阵的时候Givens旋转就更加有效。
