@@ -109,7 +109,7 @@ $$
 $$
 a_{jj}=\sum_{k=1}^{n}{l_{ik}l_{jk}}=\sum_{k=1}^{j}{l_{ik}l_{jk}}=\sum_{k=1}^{j-1}{l_{ik}l_{jk}}+l_{ij}l_{jj}\quad
 =>\quad
-l_{ij}=({{a_{ij}-\sum_{k=1}^{j-1}{l_{ik}l_{jk}}}})/{l_{jj}}
+l_{ij}=({ {a_{ij}-\sum_{k=1}^{j-1}{l_{ik} l_{jk} } } } )/{l_{jj}}
 $$
 
 简易版本的cholesky分解算法代码，在Matlab中可以调用内置`chol`函数，示例：$[R,p] = chol(A)$
