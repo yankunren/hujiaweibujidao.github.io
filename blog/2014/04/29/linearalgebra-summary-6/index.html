@@ -1,0 +1,908 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>LAS 6-Matrix Decomposition - Hujiawei Bujidao</title>
+  <meta name="author" content="hujiawei">
+
+  
+  <meta name="description" content="线性代数那些事 Things of Linear Algebra
+逸夫图书馆, 2014/5/22 矩阵分解 [内容摘录自我去年写的Numeric Methods with Matlab总结的第一章 线性方程组求解和第三章 第三章 矩阵特征值和奇异值求解， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+
+  
+
+</head>
+
+<body   >
+
+	<header role="banner">
+		
+<hgroup style="text-align: center">
+	<h1><a href="/"><img src="/images/conan-paper-small.png"  />Hujiawei Bujidao<img src="/images/conan-hat-small.png"  /></a></h1>
+	
+	<h2>I will always be your savior! A secret makes a man man!</h2>
+	
+</hgroup>
+
+
+	</header>
+	<nav role="navigation">
+		<ul class="subscription" data-subscription="rss">
+  <!--<li><a href="https://github.com/hujiaweibujidao" rel="subscribe-rss" title="subscribe via RSS">View me on GitHub</a></li>-->
+  <!--
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+  --> 
+</ul>
+<!--
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hujiaweibujidao.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form> 
+  
+-->
+<ul class="main-navigation">
+  <li><a href="/blog/archives/">Blog</a></li>
+  <li><a href="/aboutme/">AboutMe</a></li>
+  <li><a href="/math/">Math</a></li>
+  <li><a href="/python/">Python</a></li>
+  <li><a href="/mobile/">Mobile</a></li>
+  <li><a href="/datamining/">ML-DM-PR</a></li>
+  <li><a href="/blog/categories/algorithm/">Algorithms</a></li>
+  <!--
+  <li><a href="/blog/categories/mobiledev/">MobileDev</a></li>
+  -->
+  <li><a href="/blog/categories/music/">Music</a></li>
+  <li><a href="/blog/categories/picture/">Picture</a></li>
+  <!--
+  <li><a href="/xjava/">XJava</a></li>
+  -->
+  <!-- <li><a href="/datamining/">Projects</a></li> -->
+</ul>
+
+
+	</nav>
+	<div id="main">
+		<div id="content">
+			<div>
+
+<article class="hentry" role="article">
+		
+  <header>
+    
+      <h1 class="entry-title">LAS 6-Matrix Decomposition</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-29T17:03:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
+<strong><center>逸夫图书馆, 2014/5/22</center></strong></p>
+
+<h3 id="centercenter"><center>矩阵分解</center></h3>
+
+<p>[内容摘录自我去年写的<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">Numeric Methods with Matlab总结</a>的第一章 线性方程组求解和第三章 第三章 矩阵特征值和奇异值求解，点击上面的链接地址可以下载原始的PDF版本的内容，如果不想下载，那么也可以直接阅读下面的内容，源代码基本上都是使用或者修改自书籍<a href="http://www.mathworks.cn/moler/">《Numerical Computing with Matlab》. Cleve B. Moler.</a>]</p>
+
+<p>1.LU分解</p>
+
+<p>线性方程组的实际应用中经常遇到系数矩阵不变，只是右端项发生变化的情况(多右端项问题)，这个时候如果还是使用高斯消去法的话，对于每个右端项都要进行重复的消去和回代的过程，显然计算量很大。为了解决这类问题，于是就有了LU分解算法。</p>
+
+<p>关系式$LU=PA$即为矩阵$A$的LU分解(或者三角分解)，其中矩阵$P$为排列阵(单位阵经过行列交换得到的矩阵，有时候也叫置换阵)，矩阵$L$为单位下三角矩阵(对角线元素都为1)，矩阵$U$为上三角矩阵，这样的话，一般的线性方程组$Ax=b$可以等价为两个三角型线性方程组 $Ly=Pb,\,Ux=y$。</p>
+
+<p>首先对系数矩阵$A$进行LU分解，然后对于每个右端项只要先计算出$y$然后再计算$x$即可，两个都只是解很简单的三角型线性方程组。</p>
+
+<p>LU分解有两种方法，一种是使用前面的高斯消去法，另一种是Crout方法(这里不介绍，详情请看参考《Numerical Methods: An introduction with Applications Using Matlab》. Amos Gilat. Vish Subramaniam,2010,10)。</p>
+
+<p>下面给出使用高斯消去法的LU分解算法源码[大部分内容和高斯消去法相同，只是它还要计算矩阵$L,U,P$]，它是LU分解常用的K-I-J版本。在Matlab中可以使用内置<code>lu</code>函数，调用示例：$[L,U,P] = lu(A)$</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+</pre></td><td class="code"><pre><code class="matlab"><span class="line"><span class="k">function</span><span class="w"> </span>[L,U,p] <span class="p">=</span><span class="w"> </span><span class="nf">lugs</span><span class="p">(</span>A<span class="p">)</span><span class="w"></span>
+</span><span class="line"><span class="c">% 使用高斯消去法的LU分解 [ k-i-j 版本 ]</span>
+</span><span class="line"><span class="c">% 系数矩阵，单位下三角矩阵，上三角矩阵，排列阵</span>
+</span><span class="line"><span class="c">% A=[4 -2 -3 6; -6 7 6.5 -6; 1 7.5 6.25 5.5; -12 22 15.5 -1];</span>
+</span><span class="line"><span class="c">% b=[12; -6.5; 16; 17];</span>
+</span><span class="line"><span class="c">% [L,U,P]=lugs(A)</span>
+</span><span class="line"><span class="c">% A(P,:) </span>
+</span><span class="line"><span class="c">% L*U</span>
+</span><span class="line">
+</span><span class="line"><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="p">=</span> <span class="nb">size</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+</span><span class="line"><span class="n">p</span> <span class="p">=</span> <span class="p">(</span>1<span class="p">:</span><span class="n">n</span><span class="p">)</span><span class="o">&#39;</span><span class="p">;</span>
+</span><span class="line"><span class="k">for</span> <span class="n">k</span> <span class="p">=</span> 1<span class="p">:</span><span class="n">n</span><span class="o">-</span>1
+</span><span class="line">    <span class="c">%查找主元列对角线以下的绝对值最大的元素和索引</span>
+</span><span class="line">    <span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">m</span><span class="p">]</span> <span class="p">=</span> <span class="n">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">)));</span>
+</span><span class="line">    <span class="n">m</span> <span class="p">=</span> <span class="n">m</span><span class="o">+</span><span class="n">k</span><span class="o">-</span>1<span class="p">;</span>
+</span><span class="line">    <span class="c">%如果对应元素是0则跳过消去过程</span>
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">k</span><span class="p">)</span> <span class="o">~=</span> 0<span class="p">)</span>
+</span><span class="line">        <span class="c">%满足条件的话就交换行</span>
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="n">m</span> <span class="o">~=</span> <span class="n">k</span><span class="p">)</span>
+</span><span class="line">            <span class="n">A</span><span class="p">([</span><span class="n">k</span> <span class="n">m</span><span class="p">],:)</span> <span class="p">=</span> <span class="n">A</span><span class="p">([</span><span class="n">m</span> <span class="n">k</span><span class="p">],:);</span>
+</span><span class="line">            <span class="n">p</span><span class="p">([</span><span class="n">k</span> <span class="n">m</span><span class="p">])</span> <span class="p">=</span> <span class="n">p</span><span class="p">([</span><span class="n">m</span> <span class="n">k</span><span class="p">]);</span><span class="c">%对应的排列阵也要跟着变化</span>
+</span><span class="line">        <span class="k">end</span>
+</span><span class="line">        <span class="c">%计算乘子</span>
+</span><span class="line">        <span class="nb">i</span> <span class="p">=</span> <span class="n">k</span><span class="o">+</span>1<span class="p">:</span><span class="n">n</span><span class="p">;</span>
+</span><span class="line">        <span class="n">A</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="n">A</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">/</span><span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
+</span><span class="line">        <span class="c">%更新矩阵的行</span>
+</span><span class="line">        <span class="nb">j</span> <span class="p">=</span> <span class="n">k</span><span class="o">+</span>1<span class="p">:</span><span class="n">n</span><span class="p">;</span>
+</span><span class="line">        <span class="n">A</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="p">=</span> <span class="n">A</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="o">-</span> <span class="n">A</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="nb">j</span><span class="p">);</span><span class="c">%就地存储！</span>
+</span><span class="line">    <span class="k">end</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line"><span class="c">%得到LU分解的结果</span>
+</span><span class="line"><span class="n">L</span> <span class="p">=</span> <span class="nb">tril</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="o">-</span>1<span class="p">)</span> <span class="o">+</span> <span class="nb">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="c">%下三角部分，但是对角线上都是1</span>
+</span><span class="line"><span class="n">U</span> <span class="p">=</span> <span class="nb">triu</span><span class="p">(</span><span class="n">A</span><span class="p">);</span><span class="c">%上三角部分</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>2.Cholsky分解</p>
+
+<p><strong>对于对称矩阵$A$，如果它的各阶顺序主子式$\neq0$，则它可以唯一分解为$A=LDL^{T}$，其中$D$是对角阵，$L$为单位下三角阵。若矩阵同时正定，那么存在实的非奇异的下三角矩阵$L$，满足$A=LL^{T}$，若限定L对角线元素$&gt;0$，那么此分解唯一。</strong></p>
+
+<p>考虑对称正定矩阵$A$，它的LU分解过程可以进一步简化，这也就是Cholesky分解！事实证明，<strong>对于对称正定矩阵，Cholesky分解是稳定的，不需要进行选主元操作。</strong>另外，它的计算量和存储量都只是LU分解的一半。考虑到它的对称性，LU分解的结果如下：(注意矩阵L不再是单位下三角矩阵了)</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+A=
+\left[
+\begin{array}{lllll}
+l_{11} & 0 & 0 & \ldots & 0 \\
+l_{21} & l_{22} & 0 & \ldots & 0\\
+l_{31} & l_{32} & l_{33} & \ldots & 0 \\
+\vdots & \vdots & \vdots & \ddots & 0 \\
+l_{n1} & l_{n2} & l_{n3} & \ldots & l_{nn}
+\end{array}
+\right]
+\left[
+\begin{array}{lllll}
+l_{11} & l_{12} & l_{13} & \ldots & l_{1n} \\
+0 & l_{22} & l_{23} & \ldots & l_{2n}\\
+0 & 0 & l_{33} & \ldots & l_{3n} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \ldots & l_{nn}
+\end{array}
+\right]
+ %]]></script>
+
+<p>一种就地存储的Cholesky分解算法的实现步骤(对$j=2,3\cdots,n$重复执行(3)(4)步即可)：</p>
+
+<p>(1)求$l<em>{11}$。 $l</em>{11}=\sqrt{a_{11}}$</p>
+
+<p>(2)求$l<em>{i1}$。 $l</em>{i1}=a<em>{i1}/l</em>{11}$</p>
+
+<p>(3)假设矩阵$L$的前$j-1$列都已经求出了，即$l<em>{ik} (k \leq j-1,i=1,\cdots,n)$都已知，考虑计算$a</em>{i,j}$。</p>
+
+<script type="math/tex; mode=display">
+a_{jj}=\sum_{k=1}^{j}{l_{ik}^2}\quad
+=>\quad
+l_{jj}=\sqrt{a_{jj}-\sum_{k=1}^{j-1}{l_{jk}}^2}
+</script>
+
+<p>(4)求矩阵$L$中第$j$列剩余元素，即$l<em>{ij}(i&gt;j)$，考虑计算$a</em>{ij}$。</p>
+
+<script type="math/tex; mode=display">
+a_{jj}=\sum_{k=1}^{n}{l_{ik}l_{jk}}=\sum_{k=1}^{j}{l_{ik}l_{jk}}=\sum_{k=1}^{j-1}{l_{ik}l_{jk}}+l_{ij}l_{jj}\quad
+=>\quad
+l_{ij}=( {a_{ij}-\sum_{k=1}^{j-1}{l_{ik} l_{jk} } } )/ l_{jj}
+</script>
+
+<p>简易版本的cholesky分解算法代码，在Matlab中可以调用内置<code>chol</code>函数，示例：$[R,p] = chol(A)$</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+</pre></td><td class="code"><pre><code class="matlab"><span class="line"><span class="k">function</span><span class="w"> </span>[L,U] <span class="p">=</span><span class="w"> </span><span class="nf">cholnm</span><span class="p">(</span>A<span class="p">)</span><span class="w"></span>
+</span><span class="line"><span class="c">% 简易版本的Cholesky分解，就地存储，使用下三角</span>
+</span><span class="line"><span class="c">% p=pascal(5)</span>
+</span><span class="line"><span class="c">% [l,u]=cholnm(p)</span>
+</span><span class="line"><span class="c">% l*u</span>
+</span><span class="line">
+</span><span class="line"><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="p">=</span> <span class="nb">size</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+</span><span class="line"><span class="k">for</span> <span class="nb">j</span><span class="p">=</span>1<span class="p">:</span><span class="n">n</span> <span class="c">%当前操作的列</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">k</span><span class="p">=</span>1<span class="p">:</span><span class="nb">j</span><span class="o">-</span>1
+</span><span class="line">        <span class="n">A</span><span class="p">(</span><span class="nb">j</span><span class="p">,</span><span class="nb">j</span><span class="p">)=</span><span class="n">A</span><span class="p">(</span><span class="nb">j</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="o">-</span><span class="n">A</span><span class="p">(</span><span class="nb">j</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>^2<span class="p">;</span>
+</span><span class="line">    <span class="k">end</span>
+</span><span class="line">    <span class="n">A</span><span class="p">(</span><span class="nb">j</span><span class="p">,</span><span class="nb">j</span><span class="p">)=</span><span class="nb">sqrt</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="nb">j</span><span class="p">,</span><span class="nb">j</span><span class="p">));</span><span class="c">%求出对角线元素</span>
+</span><span class="line">    <span class="k">for</span> <span class="nb">i</span><span class="p">=</span><span class="nb">j</span><span class="o">+</span>1<span class="p">:</span><span class="n">n</span> <span class="c">%求解对角线以下的元素</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">k</span><span class="p">=</span>1<span class="p">:</span><span class="nb">j</span><span class="o">-</span>1
+</span><span class="line">            <span class="n">A</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)=</span><span class="n">A</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="o">-</span><span class="n">A</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">A</span><span class="p">(</span><span class="nb">j</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
+</span><span class="line">        <span class="k">end</span>
+</span><span class="line">        <span class="n">A</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)=</span><span class="n">A</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="o">/</span><span class="n">A</span><span class="p">(</span><span class="nb">j</span><span class="p">,</span><span class="nb">j</span><span class="p">);</span><span class="c">%求出对角线以下的元素</span>
+</span><span class="line">    <span class="k">end</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line"><span class="c">%求出上三角和下三角</span>
+</span><span class="line"><span class="n">L</span><span class="p">=</span><span class="nb">tril</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+</span><span class="line"><span class="n">U</span><span class="p">=</span><span class="n">L</span><span class="o">&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>小总结：有了上面的LU分解和Cholesky分解，我们就可以写出一个简易版本的矩阵求逆算法。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+</pre></td><td class="code"><pre><code class="matlab"><span class="line"><span class="k">function</span><span class="w"> </span>x <span class="p">=</span><span class="w"> </span><span class="nf">bslashnm</span><span class="p">(</span>A,b<span class="p">)</span><span class="w"></span>
+</span><span class="line"><span class="c">% 解线性方程组</span>
+</span><span class="line"><span class="c">% A=[4 -2 -3 6; -6 7 6.5 -6; 1 7.5 6.25 5.5; -12 22 15.5 -1];</span>
+</span><span class="line"><span class="c">% b=[12; -6.5; 16; 17];</span>
+</span><span class="line"><span class="c">% A\b</span>
+</span><span class="line">
+</span><span class="line"><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="p">=</span> <span class="nb">size</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+</span><span class="line"><span class="k">if</span> <span class="nb">isequal</span><span class="p">(</span><span class="nb">triu</span><span class="p">(</span><span class="n">A</span><span class="p">,</span>1<span class="p">),</span><span class="nb">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">))</span>
+</span><span class="line">   <span class="c">%下三角直接前向回代即可</span>
+</span><span class="line">   <span class="n">x</span> <span class="p">=</span> <span class="n">forward</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+</span><span class="line">   <span class="k">return</span>
+</span><span class="line"><span class="k">elseif</span> <span class="nb">isequal</span><span class="p">(</span><span class="nb">tril</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="o">-</span>1<span class="p">),</span><span class="nb">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">))</span>
+</span><span class="line">   <span class="c">%上三角直接后向回代即可</span>
+</span><span class="line">   <span class="n">x</span> <span class="p">=</span> <span class="n">backsubs</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+</span><span class="line">   <span class="k">return</span>
+</span><span class="line"><span class="k">elseif</span> <span class="nb">isequal</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="o">&#39;</span><span class="p">)</span>
+</span><span class="line">   <span class="p">[</span><span class="n">R</span><span class="p">,</span><span class="n">fail</span><span class="p">]</span> <span class="p">=</span> <span class="n">chol</span><span class="p">(</span><span class="n">A</span><span class="p">);</span><span class="c">%进行Cholesky分解</span>
+</span><span class="line">   <span class="k">if</span> <span class="o">~</span><span class="n">fail</span>
+</span><span class="line">      <span class="c">%如果分解成功，求解两个三角型线性方程组即可</span>
+</span><span class="line">      <span class="n">y</span> <span class="p">=</span> <span class="n">forward</span><span class="p">(</span><span class="n">R</span><span class="o">&#39;</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+</span><span class="line">      <span class="n">x</span> <span class="p">=</span> <span class="n">backsubs</span><span class="p">(</span><span class="n">R</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+</span><span class="line">      <span class="k">return</span>
+</span><span class="line">   <span class="k">end</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line">
+</span><span class="line"><span class="c">%三角分解</span>
+</span><span class="line"><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">p</span><span class="p">]</span> <span class="p">=</span> <span class="n">lugs</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+</span><span class="line"><span class="c">%对右端项进行排列然后解下三角线性方程组</span>
+</span><span class="line"><span class="n">y</span> <span class="p">=</span> <span class="n">forward</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">b</span><span class="p">(</span><span class="n">p</span><span class="p">));</span>
+</span><span class="line"><span class="c">%解上三角线性方程组</span>
+</span><span class="line"><span class="n">x</span> <span class="p">=</span> <span class="n">backsubs</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line"><span class="c">% --------前向消去 解下三角型线性方程组--------</span>
+</span><span class="line"><span class="c">% For lower triangular L, x = forward(L,b) solves L*x = b.</span>
+</span><span class="line"><span class="k">function</span><span class="w"> </span>x <span class="p">=</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span>L,x<span class="p">)</span><span class="w"></span>
+</span><span class="line"><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="p">=</span> <span class="nb">size</span><span class="p">(</span><span class="n">L</span><span class="p">);</span>
+</span><span class="line"><span class="n">x</span><span class="p">(</span>1<span class="p">)</span> <span class="p">=</span> <span class="n">x</span><span class="p">(</span>1<span class="p">)</span><span class="o">/</span><span class="n">L</span><span class="p">(</span>1<span class="p">,</span>1<span class="p">);</span>
+</span><span class="line"><span class="k">for</span> <span class="n">k</span> <span class="p">=</span> 2<span class="p">:</span><span class="n">n</span>
+</span><span class="line">   <span class="nb">j</span> <span class="p">=</span> 1<span class="p">:</span><span class="n">k</span><span class="o">-</span>1<span class="p">;</span>
+</span><span class="line">   <span class="n">x</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">-</span> <span class="n">L</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">(</span><span class="nb">j</span><span class="p">))</span><span class="o">/</span><span class="n">L</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line">
+</span><span class="line"><span class="c">% --------回代 解上三角型线性方程组------------</span>
+</span><span class="line"><span class="c">% For upper triangular U, x = backsubs(U,b) solves U*x = b.</span>
+</span><span class="line"><span class="k">function</span><span class="w"> </span>x <span class="p">=</span><span class="w"> </span><span class="nf">backsubs</span><span class="p">(</span>U,x<span class="p">)</span><span class="w"></span>
+</span><span class="line"><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="p">=</span> <span class="nb">size</span><span class="p">(</span><span class="n">U</span><span class="p">);</span>
+</span><span class="line"><span class="n">x</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">=</span> <span class="n">x</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">U</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+</span><span class="line"><span class="k">for</span> <span class="n">k</span> <span class="p">=</span> <span class="n">n</span><span class="o">-</span>1<span class="p">:</span><span class="o">-</span>1<span class="p">:</span>1
+</span><span class="line">   <span class="nb">j</span> <span class="p">=</span> <span class="n">k</span><span class="o">+</span>1<span class="p">:</span><span class="n">n</span><span class="p">;</span>
+</span><span class="line">   <span class="n">x</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">-</span> <span class="n">U</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">(</span><span class="nb">j</span><span class="p">))</span><span class="o">/</span><span class="n">U</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
+</span><span class="line"><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>3.QR分解</p>
+
+<p><strong>QR分解是求解中小规模矩阵所有特征值的有效方法，它的基本原理是相似变换(两个方阵相似的条件是存在可逆矩阵$C$,使得$A=C^{-1}BC$)不改变矩阵的特征值和对应的特征向量以及上三角矩阵的特征值就是它的对角线元素。</strong></p>
+
+<p><strong>实Schur型矩阵：矩阵$S$为上三角阵，且对角块为1阶或者2阶矩阵。这类矩阵可以进行正交分解：$S=Q^{T}AQ$，称为实Schur分解，其中$S$的1阶对角块就是$A$的实特征值，2阶对角块的特征值是$A$的共轭复特征值。等式$A=QSQ^{T}$称为矩阵$A$的实Schur分解。</strong></p>
+
+<p>QR分解的目标是通过一系列正交相似变换将原矩阵转换成一个上三角型的相似矩阵(即实Schur型矩阵)，这样求解特征值就特别简单了。QR分解可以得到所有的特征值，但是不能得到特征向量。<strong>如果所有的特征值都是实数的话，QR分解得到的是一个正交阵和一个上三角阵。如果有的特征值是复数的话，那么得到的是一个正交阵和一个对角线某些位置为(2x2)块矩阵的上三角阵。</strong></p>
+
+<p>假设矩阵$A_{1}$是要求特征值的矩阵，QR分解的迭代过程如下：</p>
+
+<p>(1)对$A<em>{1}$进行QR分解得到$A</em>{1}=Q<em>{1}R</em>{1}$。其中$Q<em>{1}$是一个正交阵，$R</em>{1}$是一个上三角阵。</p>
+
+<p>(2)用$R<em>{1}$乘以$Q</em>{1}$得到$A<em>{2}$，即$A</em>{2}=R<em>{1}Q</em>{1}$。由于$R<em>{1}=Q</em>{1}^{-1}A<em>{1}$，则有$A</em>{2}=Q<em>{1}^{-1}A</em>{1}Q<em>{1}$，所以$A</em>{2}$和$A_{1}$是相似矩阵。</p>
+
+<p>(3)此时，对$A<em>{2}$进行QR分解得到$A</em>{2}=Q<em>{2}R</em>{2}$，再将得到的$Q<em>{2}$和$R</em>{2}$反过来相乘，得到$A<em>{3}$，然后再对$A</em>{3}$进行QR分解，不断重复上面的操作直到得到上三角矩阵，最终的上三角矩阵对角线元素便是矩阵特征值。</p>
+
+<p>上面的迭代过程中，每步都要进行一次QR分解，这是通过上节介绍的Householder变换实现的。</p>
+
+<p>简易版本的QR分解的实现，Matlab中可以使用内置函数<code>qr</code>进行QR分解。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+</pre></td><td class="code"><pre><code class="matlab"><span class="line"><span class="k">function</span><span class="w"> </span>[Q,R] <span class="p">=</span><span class="w"> </span><span class="nf">easyqrnm</span><span class="p">(</span>R<span class="p">)</span><span class="w"></span>
+</span><span class="line"><span class="c">% 简易版本的QR分解</span>
+</span><span class="line"><span class="c">% A=[45 30 -25; 30 -24 68; -25 68 80];</span>
+</span><span class="line"><span class="c">% for i=1:40</span>
+</span><span class="line"><span class="c">%     [q,r]=easyqrnm(A);</span>
+</span><span class="line"><span class="c">%     A=r*q;</span>
+</span><span class="line"><span class="c">% end</span>
+</span><span class="line"><span class="c">% e=diag(A)</span>
+</span><span class="line"><span class="c">% eig(A)</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line"><span class="n">n</span><span class="p">=</span><span class="nb">size</span><span class="p">(</span><span class="n">R</span><span class="p">);</span>
+</span><span class="line"><span class="n">I</span><span class="p">=</span><span class="nb">eye</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span><span class="line"><span class="n">Q</span><span class="p">=</span><span class="n">I</span><span class="p">;</span>
+</span><span class="line"><span class="k">for</span> <span class="nb">j</span><span class="p">=</span>1<span class="p">:</span><span class="n">n</span><span class="o">-</span>1
+</span><span class="line">    <span class="n">c</span><span class="p">=</span><span class="n">R</span><span class="p">(:,</span><span class="nb">j</span><span class="p">);</span>
+</span><span class="line">    <span class="n">c</span><span class="p">(</span>1<span class="p">:</span><span class="nb">j</span><span class="o">-</span>1<span class="p">)=</span>0<span class="p">;</span>
+</span><span class="line">    <span class="n">e</span><span class="p">(</span>1<span class="p">:</span><span class="n">n</span><span class="p">,</span>1<span class="p">)=</span>0<span class="p">;</span><span class="c">%</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">c</span><span class="p">(</span><span class="nb">j</span><span class="p">)</span> <span class="o">&gt;</span> 0
+</span><span class="line">        <span class="n">e</span><span class="p">(</span><span class="nb">j</span><span class="p">)=</span>1<span class="p">;</span>
+</span><span class="line">    <span class="k">else</span>
+</span><span class="line">        <span class="n">e</span><span class="p">(</span><span class="nb">j</span><span class="p">)=</span><span class="o">-</span>1<span class="p">;</span>
+</span><span class="line">    <span class="k">end</span>
+</span><span class="line">    <span class="n">clen</span><span class="p">=</span><span class="nb">sqrt</span><span class="p">(</span><span class="n">c</span><span class="o">&#39;*</span><span class="n">c</span><span class="p">);</span>
+</span><span class="line">    <span class="n">v</span><span class="p">=</span><span class="n">c</span><span class="o">+</span><span class="n">clen</span><span class="o">*</span><span class="n">e</span><span class="p">;</span>
+</span><span class="line">    <span class="n">H</span><span class="p">=</span><span class="n">I</span><span class="o">-</span>2<span class="o">/</span><span class="p">(</span><span class="n">v</span><span class="o">&#39;*</span><span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">v</span><span class="o">*</span><span class="n">v</span><span class="o">&#39;</span><span class="p">;</span><span class="c">%得到矩阵H</span>
+</span><span class="line">    <span class="n">Q</span><span class="p">=</span><span class="n">Q</span><span class="o">*</span><span class="n">H</span><span class="p">;</span><span class="c">%</span>
+</span><span class="line">    <span class="n">R</span><span class="p">=</span><span class="n">H</span><span class="o">*</span><span class="n">R</span><span class="p">;</span><span class="c">%</span>
+</span><span class="line"><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>实际使用的QR分解要比上面的简易版本的QR分解复杂很多，但是基本思路是一样的，那就是通过一系列的正交相似变换$B=Q^{T}AQ$将矩阵$A$化为上三角或者对角块阶数很小的分块上三角阵，然后求特征值。实用的技术主要有两个：(1)将矩阵化简为上Hessenberg矩阵；(2)带原点位移的QR算法。</p>
+
+<p>上Hessenberg矩阵和上三角矩阵的区别在于，其紧邻主对角线下方的副对角线上的元素不全为0。可以证明，<strong>对上Hessenberg矩阵$A<em>{k}$进行QR算法的一步迭代，得到的$A</em>{k+1}$仍为上Hessenberg矩阵。</strong>使用Householder变换可以将一般矩阵化为上Hessenberg矩阵，总共经过(n-2)步正交相似变换。<strong>若原始矩阵是实对称阵，那么得到的上Hessenberg矩阵是一个对称的三对角阵。</strong>对上Hessenberg矩阵进行QR分解时不需要使用Householder变换，只要使用一系列Givens旋转变换即可。Givens旋转变换是一类平面旋转变换，它能够消去给定向量的某一个分量(使其为0)，这不同于Householder变换消去向量中的多个分量。在处理稀疏向量或者稀疏矩阵时，Givens旋转更加高效。</p>
+
+<p>将原点位移技术与QR分解结合，通过原点位移技术可以改变做QR分解的矩阵，一方面它能够提高迭代收敛速度，另一方面也使QR分解对更一般的矩阵有效。</p>
+
+<p>该部分的内容比较难，此处不过多介绍，详细内容参考书籍《数值分析与算法》,喻文健,清华大学出版社,2012,1。</p>
+
+<p>4.SVD</p>
+
+<p><strong>若矩阵表示一个空间到另一个空间的变换，则奇异值很重要。</strong>求矩阵的奇异值可以利用求矩阵的特征值的方法，最简单的求矩阵$A$奇异值的方法是计算矩阵$A^{T}A$的特征值，非负特征值的平方根就是特征值(对称矩阵的一个性质)，但是这种方法的计算误差大。</p>
+
+<p>还有一种求矩阵奇异值的方法是先将矩阵$A$化简成双对角阵$B$，再对$B^{T}B$执行(隐式)QR迭代算法。$B<em>{k}^{T}B</em>{k}$在QR迭代过程中保持形状不变。[暂时没有查找相应的资料使用这种方法求解奇异值]</p>
+
+<p>这部分内容参考自<a href="http://en.wikibooks.org/w/index.php?title=Data_Mining_Algorithms_In_R&amp;stable=1">Data Mining Algorithms In R.</a>中章节Dimensionality Reduction中的<a href="http://en.wikibooks.org/wiki/Data_Mining_Algorithms_In_R/Dimensionality_Reduction/Singular_Value_Decomposition">Singular Value Decomposition</a>。在该网页中可以查看详细例子。</p>
+
+<p>对于(nxd)矩阵$X$的奇异值分解式是：$X=UAV^{T}$，其中(nxn)矩阵$U$和(dxd)矩阵$V$都是正交阵，而(nxd)矩阵$A$是对角阵，对角线上的元素是矩阵$A$的奇异值。矩阵$U$的列向量是矩阵$X$的左奇异向量，矩阵$V$的列向量是矩阵$X$的右奇异向量。矩阵$A$对角线上的奇异值自上到下是从大到小分布的，并且所有的奇异值都大于0。</p>
+
+<p>要计算矩阵$X$的奇异值分解式，就要计算$X^{T}X$和$XX^{T}$的特征值和特征向量。其中，<strong>矩阵$X^{T}X$的特征向量就是矩阵$V$的列，而矩阵$XX^{T}$的特征向量就是矩阵$U$的列，矩阵$X$的奇异值就是矩阵$X^{T}X$和$XX^{T}$的共同非负特征值的平方根。矩阵$X$的奇异值的个数是矩阵$X$的秩，也就是线性无关的行(或者列)的数目。</strong></p>
+
+<p>SVD分解的过程：
+(1)计算矩阵$X^{T}X$和矩阵$XX^{T}$的特征值和特征向量；
+(2)计算矩阵$X^{T}X$和矩阵$XX^{T}$的共同非负特征值的平方根得到奇异值；
+(3)通过计算的结果得到矩阵$U$，矩阵$V$和矩阵$A$。</p>
+
+<p>在Matlab中直接使用内置函数<code>svd</code>即可，示例：</p>
+
+<p>$[U,S,V] = svd(X)$ </p>
+
+<p>$[U,S,V] = svd(X,0)$ 简化版本</p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
+</div>
+
+
+		<footer>
+			<p class="meta">
+				
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hujiawei</span></span>
+
+				
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-29T17:03:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2014</time>
+				
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/math/'>math</a>
+  
+</span>
+
+
+			</p>
+			
+			<div class="sharing">
+  
+  
+  
+</div>
+
+			
+			<p class="meta">
+				
+				<a class="basic-alignment left" href="/blog/2014/04/29/linearalgebra-summary-5/" title="Previous Post: LAS 5-Orthogonal Matrix">&laquo; LAS 5-Orthogonal Matrix</a>
+				
+				
+				<a class="basic-alignment right" href="/blog/2014/04/30/wouldnt-it-be-nice/" title="Next Post: Wouldn't it be nice">Wouldn't it be nice &raquo;</a>
+				
+			</p>
+		</footer>
+	</article>
+	
+
+	
+	<section>
+		<h1>Comments</h1>
+		<div id="comments" aria-live="polite">
+			<!-- Duoshuo Comment BEGIN   data-title=""-->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hujiaweibujidao"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+
+		</div>
+	</section>
+	
+</div>
+
+<aside class="sidebar">
+  
+	<section>
+	<h1>关于博主</h1><br/>
+  <a href="/aboutme/"><img src="/images/me-small.png" width="250px" height="210px" alt="protrait"/></a><br/>
+  <p>Hi, I'm Hujiawei, from P.R.China. Now I'm a postgraduate student studying in <a href="http://www.tsinghua.edu.cn/publish/th/index.html">Tsinghua University</a>.
+  Wanna know me? <a href="/aboutme/">See here.</a> 
+  </p>
+  
+  <img src="/images/conan-mainperson.png" width="250px" height="210px" alt="conan"/>
+  
+  <br/>
+  
+    <a href="http://weibo.com/hujiaweiyinger"><img src="/images/sinaweibo.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://github.com/hujiaweibujidao"><img src="/images/github.png" width="40px" height="40px"/></a>&nbsp;
+  <a href="http://hujiawei.tumblr.com"><img src="/images/tumblr.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://twitter.com/hujiaweiyinger"><img src="/images/twitter.png" width="40px" height="40px"/></a>&nbsp;
+  <a href="http://www.douban.com/people/60272837/"><img src="/images/douban.png" width="40px" height="40px"/></a>
+ 
+ <br/>
+    
+    <!--autoplay="autoplay" -->
+    <!--
+<audio width="200" height="32" 
+style="margin: auto; top: 0; right: 0; bottom: 0; left: 0;" 
+controls="controls" 
+name="media" 
+src="http://hujiaweibujidao.github.io/music/Wouldnt-It-Be-Nice.mp3">
+</audio>
+-->
+  
+  
+  <!--baidu-->
+  <!--
+  <div class="bdsharebuttonbox"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>  
+-->
+
+</section>
+<section>
+ <h1>分类目录</h1>
+ <ul id="categories">
+	 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (11)</a></li>
+<li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
+<li class='category'><a href='/blog/categories/bigdata/'>bigdata (1)</a></li>
+<li class='category'><a href='/blog/categories/hadoop/'>hadoop (1)</a></li>
+<li class='category'><a href='/blog/categories/ios/'>ios (1)</a></li>
+<li class='category'><a href='/blog/categories/mac/'>mac (2)</a></li>
+<li class='category'><a href='/blog/categories/machinelearning/'>machinelearning (1)</a></li>
+<li class='category'><a href='/blog/categories/math/'>math (28)</a></li>
+<li class='category'><a href='/blog/categories/matlab/'>matlab (1)</a></li>
+<li class='category'><a href='/blog/categories/ml/'>ml (1)</a></li>
+<li class='category'><a href='/blog/categories/mobiledev/'>mobiledev (5)</a></li>
+<li class='category'><a href='/blog/categories/music/'>music (2)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (4)</a></li>
+<li class='category'><a href='/blog/categories/opencv/'>opencv (5)</a></li>
+<li class='category'><a href='/blog/categories/picture/'>picture (2)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (2)</a></li>
+
+ </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/05/20/csu-beautiful-scenery/">CSU Beautiful Scenery</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/19/statistics-summary-4/">SS 4-Hypothesis Testing</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/19/statistics-summary-2-2/">SS 3-Multiple Random Variables and Its Distribution</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/19/statistics-summary-2-1/">SS 3-Continuous Distribution</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/19/statistics-summary-2/">SS 3-Discrete Distribution</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+	<h1>好友博客</h1>
+	<ul>
+		<li>
+			<a href="http://doufunao.github.io/">豆腐脑的幻想乡</a>
+		</li>
+		<li>
+			<a href="http://c4fun.cn/">Code 4 Fun</a>
+		</li>
+		<li>
+			<a href="http://www.tanglei.name/">TangLei blog</a>
+		</li>
+		<li>
+			<a href="http://ontheroad.sinaapp.com/">Tian Jun-Find My Way</a>
+		</li>
+		
+		<li>
+			<a href="http://www.liaoxuefeng.com/">廖雪峰的官方网站</a>
+		</li>
+		<li>
+			<a href="http://beader.me/">Beader</a>
+		</li>
+		<li>
+			<a href="http://blog.csdn.net/v_JULY_v">结构之法，算法之道</a>
+		</li>
+				<li>
+			<a href="http://www.renfei.org/blog/">Renfei Song</a>
+		</li>
+		<li>
+			<a href="http://bluedavy.me">BlueDavy之技术blog</a>
+		</li>
+		<li>
+			<a href="http://blog.jobbole.com/category/python/">伯乐在线-Python</a>
+		</li>
+		<li>
+			<a href="http://www.douban.com/group/python/">豆瓣小组-Python</a>
+		</li>
+		<li>
+			<a href="#">这里会是你吗?</a>
+		</li>
+	</ul>
+</section>
+	
+</aside>
+
+
+		</div>
+	</div>
+	
+	<footer role="contentinfo">
+		<p>
+  	Copyright &copy; 2014 - hujiawei - <a href="http://hujiaweibujidao.github.io/happybirthday/">Happy birthday to MY QUEEN</a> - <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
+  	
+<!-- mathjax config similar to math.stackexchange  -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+<!-- the following line is incorrect! -->
+<!--
+<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+-->
+
+<!--baidu-->
+<!--
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"1","bdPos":"left","bdTop":"250"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+-->
+
+	<!-- CNZZ -->
+	&nbsp;&nbsp;
+	<script type="text/javascript">
+		var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+		document.write(unescape("%3Cspan id='cnzz_stat_icon_1000165127'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000165127%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	
+	<!--baidu share-->
+	<!--
+	<div class="bdsharebuttonbox" style="display: inline;"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+	-->
+	<!-- license -->
+	<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="http://i.creativecommons.org/l/by-nd/3.0/88x31.png" /></a>
+	本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh">知识共享署名-禁止演绎 3.0 未本地化版本许可协议</a>进行许可。
+
+</p>
+
+<!--hujiawei custom blockquote-->
+<!--for block quote
+<style>
+blockquote{
+	font:inherit;
+	font-size:60%;
+	font-style:normal;
+	line-height:1.0em;
+	color:rgba(0,0,0,0.5);
+}
+</style>-->
+
+<!-- gutter for code line-numbers!! -->
+<!--for block quote-->
+<!--
+<style>
+blockquote{
+	font:inherit;
+	font-size:60%;
+	font-style:normal;
+	line-height:1.0em;
+	color:rgba(0,0,0,0.5);
+}
+
+.gutter{
+	display: none;
+}
+
+.highlight, .gist-highlight {
+margin-bottom: 1.8em;
+background: #002b36;
+overflow-y: hidden;
+overflow-x: auto;
+}
+</style>
+-->
+
+<!--return to top-->
+<style>
+	.returnTop {
+		position: fixed;
+		_position: absolute;
+		right: 10px;
+		bottom: 200px;
+		_bottom: auto;
+		display: none;
+		width: 40px;
+		height: 40px;
+		border: 1px solid #61b72e;
+		border-radius: 4px;
+		background: #fff;
+		box-shadow: 0 0 5px #F5F5F5;
+		text-indent: -9999px;
+		cursor: pointer;
+	}
+	.returnTop .s {
+		position: absolute;
+		top: -2px;
+		_top: -20px;
+		left: 10px;
+		width: 0;
+		height: 0;
+		border-width: 10px;
+		border-color: transparent transparent #61b72e;
+		border-style: dashed dashed solid;
+	}
+	.returnTop .b {
+		position: absolute;
+		top: 18px;
+		left: 16px;
+		height: 12px;
+		width: 8px;
+		background: #61b72e;
+	}
+</style>
+<div class="returnTop" title="嗖的就上去了！">
+	<span class="s"></span>
+	<span class="b"></span>
+	返回顶部
+</div>
+<script type="text/javascript">
+$(function(){
+$(window).bind("scroll", function(){
+
+var scrollTopNum = $(document).scrollTop(),
+winHeight = $(window).height(),
+returnTop = $("div.returnTop");
+
+(scrollTopNum > 0) ? returnTop.fadeIn("fast") : returnTop.fadeOut("fast");
+
+if (!-[1,]&&!window.XMLHttpRequest) {
+returnTop.css("top", scrollTopNum + winHeight - 200);
+}
+
+});
+
+$("div.returnTop").click(function() {
+$("html, body").animate({ scrollTop: 0 }, 100);
+});
+
+});
+</script>
+
+	</footer>
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
