@@ -368,11 +368,13 @@ l_{ij}=( {a_{ij}-\sum_{k=1}^{j-1}{l_{ik} l_{jk} } } )/ l_{jj}
 <span class="line-number">49</span>
 <span class="line-number">50</span>
 <span class="line-number">51</span>
+<span class="line-number">52</span>
 </pre></td><td class="code"><pre><code class="matlab"><span class="line"><span class="k">function</span><span class="w"> </span>x <span class="p">=</span><span class="w"> </span><span class="nf">bslashnm</span><span class="p">(</span>A,b<span class="p">)</span><span class="w"></span>
 </span><span class="line"><span class="c">% 解线性方程组</span>
 </span><span class="line"><span class="c">% A=[4 -2 -3 6; -6 7 6.5 -6; 1 7.5 6.25 5.5; -12 22 15.5 -1];</span>
 </span><span class="line"><span class="c">% b=[12; -6.5; 16; 17];</span>
 </span><span class="line"><span class="c">% A\b</span>
+</span><span class="line"><span class="c">% x=bslashnm(A,b)</span>
 </span><span class="line">
 </span><span class="line"><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="p">=</span> <span class="nb">size</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
 </span><span class="line"><span class="k">if</span> <span class="nb">isequal</span><span class="p">(</span><span class="nb">triu</span><span class="p">(</span><span class="n">A</span><span class="p">,</span>1<span class="p">),</span><span class="nb">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">))</span>
@@ -423,13 +425,15 @@ l_{ij}=( {a_{ij}-\sum_{k=1}^{j-1}{l_{ik} l_{jk} } } )/ l_{jj}
 
 <p>3.QR分解</p>
 
-<p>QR分解是求解中小规模矩阵所有特征值的有效方法，它的基本原理是利用相似变换(两个方阵相似的条件是存在可逆矩阵$C$,使得$A=C^{-1}BC$)不改变矩阵的特征值和对应的特征向量以及上三角矩阵的特征值就是它的对角线元素的性质对矩阵进行分解。QR分解的实际计算有很多方法，例如Givens旋转、Householder变换，以及Gram-Schmidt正交化等等。每一种方法都有其优点和不足。</p>
+<p>QR分解是求解中小规模矩阵所有特征值的有效方法，它的基本原理是利用相似变换(两个方阵相似的条件是存在可逆矩阵$C$,使得$A=C^{-1}BC$)不改变矩阵的特征值以及上三角矩阵的特征值就是它的对角线元素的性质对矩阵进行分解。</p>
+
+<p>QR分解的实际计算有很多方法，例如Givens旋转、Householder变换，以及Gram-Schmidt正交化等等。每一种方法都有其优点和不足。</p>
 
 <p><strong>实Schur型矩阵：矩阵$S$为上三角阵，且对角块为1阶或者2阶矩阵。这类矩阵可以进行正交分解：$S=Q^{T}AQ$，称为实Schur分解，其中$S$的1阶对角块就是$A$的实特征值，2阶对角块的特征值是$A$的共轭复特征值。等式$A=QSQ^{T}$称为矩阵$A$的实Schur分解。</strong></p>
 
-<p>QR分解的目标是通过一系列正交相似变换将原矩阵转换成一个上三角型的相似矩阵(即实Schur型矩阵)，这样求解特征值就特别简单了。QR分解可以得到所有的特征值，但是不能得到特征向量。<strong>如果所有的特征值都是实数的话，QR分解得到的是一个正交阵和一个上三角阵。如果有的特征值是复数的话，那么得到的是一个正交阵和一个对角线某些位置为(2x2)块矩阵的上三角阵。</strong></p>
+<p>QR分解的目标是通过一系列<strong>正交相似变换</strong>(也就是说不单要求变换矩阵P可逆，还要求它是正交阵)将原矩阵转换成一个上三角型的相似矩阵(即实Schur型矩阵)，这样求解特征值就特别简单了。QR分解可以得到所有的特征值，但是不能得到特征向量。<strong>如果所有的特征值都是实数的话，QR分解得到的是一个正交阵和一个上三角阵。如果有的特征值是复数的话，那么得到的是一个正交阵和一个对角线某些位置为(2x2)块矩阵的上三角阵。</strong></p>
 
-<p>假设矩阵<script type="math/tex">A_{1}</script>是要求特征值的矩阵，QR分解的迭代过程如下：</p>
+<p>假设矩阵<script type="math/tex">A_{1}</script>是要求特征值的矩阵，QR分解求其特征值的迭代过程如下：</p>
 
 <p>(1)对<script type="math/tex">A_{1}</script>进行QR分解得到<script type="math/tex">A_{1}=Q_{1}R_{1}</script>。其中<script type="math/tex">Q_{1}</script>是一个正交阵，<script type="math/tex">R_{1}</script>是一个上三角阵。</p>
 
