@@ -12,7 +12,7 @@ published: true
 
 ### <center>矩阵分解</center>
 
-[内容摘录自我去年写的[Numeric Methods with Matlab总结](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)的第一章 线性方程组求解和第三章 第三章 矩阵特征值和奇异值求解，点击上面的链接地址可以下载原始的PDF版本的内容，如果不想下载，那么也可以直接阅读下面的内容，源代码基本上都是使用或者修改自书籍[《Numerical Computing with Matlab》](http://www.mathworks.cn/moler/)]
+[内容摘录自我去年写的[Numeric Methods with Matlab总结](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)的第一章 线性方程组求解和第三章 矩阵特征值和奇异值求解，点击上面的链接地址可以下载原始的PDF版本的内容，如果不想下载，那么也可以直接阅读下面的内容，源代码基本上都是使用或者修改自书籍[《Numerical Computing with Matlab》](http://www.mathworks.cn/moler/)]
 
 总结矩阵分解：由于实际中遇到的矩阵可能规模很大而且很复杂，为了更好地处理矩阵于是就有了矩阵分解。分解一般是分解成规模更小的或者性质更好的矩阵(比如三角矩阵或者对角矩阵)，这个时候我们需要透过现象看本质，矩阵分解实际上是把这个线性变换转换成几个其他的线性变换的组合，一般是旋转变换(对应一个正交矩阵)或者放缩变换(对应一个对角矩阵)的组合。
 
