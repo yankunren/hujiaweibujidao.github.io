@@ -18,13 +18,17 @@ published: true
 
 参考书籍：
 
-1.[线性代数 Using Matlab]
+1.[线性代数 Using Matlab] 台湾的线代书
 
-2.[数值分析与算法](http://book.douban.com/subject/7161824/)
+2.[数值分析与算法,喻文健,清华大学出版社,2012,1](http://book.douban.com/subject/7161824/)
 
-它山之石：
+3.[武汉大学 黄正华老师](http://aff.whu.edu.cn/huangzh/)写的线性代数复习总结[book]
 
-1.[武汉大学 黄正华老师](http://aff.whu.edu.cn/huangzh/)写的线性代数复习总结[book]
+4.[Numerical Computing with Matlab. Cleve B. Moler.](http://www.mathworks.cn/moler/) 大牛Cleve B. Moler作品，数值计算入门必备，需要点基础
+
+5.[Numerical Methods: An introduction with Applications Using Matlab. Amos Gilat. Vish Subramaniam,2010,10](http://as.wiley.com/WileyCDA/WileyTitle/productCd-EHEP001929.html) 大牛Amos Gilat作品，同样是数值计算入门必备，更加适合入门
+
+6.[Data Mining Algorithms In R.](http://en.wikibooks.org/w/index.php?title=Data_Mining_Algorithms_In_R&stable=1)  open wikibook
 
 全部内容：
 
@@ -38,7 +42,7 @@ published: true
 
 5.[正交矩阵](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-5/) 理解正交矩阵对应的正交变换，介绍Givens旋转和Householder反射
 
-6.[矩阵分解](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/) 理解并实现矩阵的各种分解：LU分解，Cholesky分解，QR分解，SVD
+6.[矩阵分解](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/) 理解并实现矩阵的各种分解：LU分解，Cholesky分解，QR分解，特征值分解和奇异值分解
 
 [book]: http://hujiaweibujidao.github.io/files/linear_algebra_huangzhenghua.pdf
 
