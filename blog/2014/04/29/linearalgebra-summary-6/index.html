@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="线性代数那些事 Things of Linear Algebra
-逸夫图书馆, 2014/5/22 矩阵分解 [内容摘录自我去年写的Numeric Methods with Matlab总结的第一章 线性方程组求解和第三章 第三章 矩阵特征值和奇异值求解， &hellip;">
+逸夫图书馆, 2014/5/22 矩阵分解 [内容摘录自我去年写的Numeric Methods with Matlab总结的第一章 线性方程组求解和第三章 矩阵特征值和奇异值求解，进入上面的链接地址可以下载原始的PDF版本的内容， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -124,9 +124,9 @@
 
 <h3 id="centercenter"><center>矩阵分解</center></h3>
 
-<p>[内容摘录自我去年写的<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">Numeric Methods with Matlab总结</a>的第一章 线性方程组求解和第三章 第三章 矩阵特征值和奇异值求解，点击上面的链接地址可以下载原始的PDF版本的内容，如果不想下载，那么也可以直接阅读下面的内容，源代码基本上都是使用或者修改自书籍<a href="http://www.mathworks.cn/moler/">《Numerical Computing with Matlab》</a>]</p>
+<p>[内容摘录自我去年写的<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">Numeric Methods with Matlab总结</a>的第一章 线性方程组求解和第三章 矩阵特征值和奇异值求解，进入上面的链接地址可以下载原始的PDF版本的内容，如果不想下载，那么也可以直接阅读下面的内容，源代码基本上都是使用或者修改自书籍<a href="http://www.mathworks.cn/moler/">《Numerical Computing with Matlab》</a>，如果下面有不熟悉的术语也请阅读这本书或者喻文健老师的翻译版本《Matlab数值计算》]</p>
 
-<p>总结矩阵分解：由于实际中遇到的矩阵可能规模很大而且很复杂，为了更好地处理矩阵于是就有了矩阵分解。分解一般是分解成规模更小的或者性质更好的矩阵(比如三角矩阵或者对角矩阵)，这个时候我们需要透过现象看本质，矩阵分解实际上是把这个线性变换转换成几个其他的线性变换的组合，一般是旋转变换(对应一个正交矩阵)或者放缩变换(对应一个对角矩阵)的组合。</p>
+<p>总结矩阵分解：由于实际中遇到的矩阵可能规模很大而且很复杂，为了更高效地处理矩阵于是就有了矩阵分解。分解一般是分解成规模更小的或者性质更好的矩阵(比如三角矩阵或者对角矩阵)，这个时候我们需要透过现象看本质，结合前面我们解释矩阵就是线性变换可知，矩阵分解实际上是把这个线性变换转换成几个其他的线性变换的组合，一般是旋转变换(对应一个正交矩阵)或者放缩变换(对应一个对角矩阵)的组合。</p>
 
 <p>1.LU分解</p>
 
@@ -214,11 +214,13 @@
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/lu.png" alt="image" /></p>
 
-<p>2.Cholsky分解</p>
+<p>2.Cholesky分解</p>
 
 <p><strong>对于对称矩阵$A$，如果它的各阶顺序主子式$\neq0$，则它可以唯一分解为$A=LDL^{T}$，其中$D$是对角阵，$L$为单位下三角阵。若矩阵同时正定，那么存在实的非奇异的下三角矩阵$L$，满足$A=LL^{T}$，若限定L对角线元素$&gt;0$，那么此分解唯一。</strong></p>
 
-<p>考虑对称正定矩阵$A$，它的LU分解过程可以进一步简化，这也就是Cholesky分解！事实证明，<strong>对于对称正定矩阵，Cholesky分解是稳定的，不需要进行选主元操作。</strong>另外，它的计算量和存储量都只是LU分解的一半。考虑到它的对称性，LU分解的结果如下：(注意矩阵L不再是单位下三角矩阵了)</p>
+<p>考虑对称正定矩阵$A$，它的LU分解过程可以进一步简化，这也就是Cholesky分解！</p>
+
+<p>事实证明，<strong>对于对称正定矩阵，Cholesky分解是稳定的，不需要进行选主元操作。</strong>另外，它的计算量和存储量都只是LU分解的一半。考虑到它的对称性，LU分解的结果如下：(注意矩阵L不再是单位下三角矩阵了)</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 

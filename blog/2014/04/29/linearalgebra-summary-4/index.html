@@ -153,9 +153,21 @@
 
 <p>相似矩阵的性质，关键在于理解<strong>在给定了矩阵A后，只要能找到一个与之相似而又足够“简单”的“规范形式”B，那么对A的研究就可以转化为对更简单的矩阵B的研究。比如如果A与一个对角矩阵相似，那么称A为可对角化的，因为对角矩阵有很多很好的性质(比如特征值就是主对角线上的元素)，这样对于A的分析就方便多了。</strong>注意，不是所有的矩阵都可以对角化，但是至少在复数域下，所有的矩阵都相似于一些被称为若尔当标准型的矩阵。</p>
 
-<p>相似矩阵最重要的作用就是简化对复杂矩阵的分析，因为相似矩阵和原矩阵有很多相似的地方(不变的量很多，下面不变的性质中都列举了)，所以我们可以用简单的相似矩阵来研究很复杂的原矩阵。</p>
+<p>相似矩阵最重要的作用就是简化对复杂矩阵的分析，因为相似矩阵和原矩阵有很多相似的地方(不变的量很多，下面不变的性质中都列举了)，所以我们可以用简单的相似矩阵来研究很复杂的原矩阵。后面矩阵分解总结中的QR分解就利用了相似变换不改变特征值的性质来计算矩阵的特征值。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/xiangsijuzhen3.png" alt="image" /></p>
+
+<p>某些性质不变的证明：</p>
+
+<p>1.行列式不变： <script type="math/tex">det(B)=det(P^{-1})det(A)det(P)=det(A)det(P^{-1}P)=det(A)</script></p>
+
+<p>2.特征值不变，但是相应的特征向量一般不同</p>
+
+<p>假设有$Bv=\lambda v$，代入$B=P^{-1}AP$得到：$P^{-1}AP v = \lambda v$</p>
+
+<p>左右两边同时左乘$P$得到：$AP v= P \lambda v$，即 $A(Pv)= \lambda (Pv)$</p>
+
+<p>也就是说，如果矩阵B有一个特征值为$\lambda$，对应的特征向量是$v$，那么它的相似矩阵A也对应有一个特征值$\lambda$，而对应的特征向量是$Pv$。进一步，我们还可以看出，如果$v$是可逆矩阵$P$的特征值为1对应的特征向量的时候，A和B的特征向量也是一样的。</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-4/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-4/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
