@@ -22,13 +22,19 @@ published: true
 
 2.[数值分析与算法,喻文健,清华大学出版社,2012,1](http://book.douban.com/subject/7161824/)
 
-3.[武汉大学 黄正华老师](http://aff.whu.edu.cn/huangzh/)写的线性代数复习总结[book]
+3.[武汉大学 黄正华老师](http://aff.whu.edu.cn/huangzh/)写的线性代数复习总结[book下载]
 
-4.[Numerical Computing with Matlab. Cleve B. Moler.](http://www.mathworks.cn/moler/) 大牛Cleve B. Moler作品，数值计算入门必备，需要点基础
+4.[Numerical Computing with Matlab. Cleve B. Moler.](http://www.mathworks.cn/moler/) 
 
-5.[Numerical Methods: An introduction with Applications Using Matlab. Amos Gilat. Vish Subramaniam,2010,10](http://as.wiley.com/WileyCDA/WileyTitle/productCd-EHEP001929.html) 大牛Amos Gilat作品，同样是数值计算入门必备，更加适合入门
+大牛Cleve B. Moler作品，数值计算入门必备，需要点基础
 
-6.[Data Mining Algorithms In R.](http://en.wikibooks.org/w/index.php?title=Data_Mining_Algorithms_In_R&stable=1)  open wikibook
+5.[Numerical Methods: An introduction with Applications Using Matlab. Amos Gilat. Vish Subramaniam,2010,10](http://as.wiley.com/WileyCDA/WileyTitle/productCd-EHEP001929.html) 
+
+大牛Amos Gilat作品，同样是数值计算入门必备，更加适合入门
+
+6.[Data Mining Algorithms In R.](http://en.wikibooks.org/w/index.php?title=Data_Mining_Algorithms_In_R&stable=1)
+
+open wikibook
 
 全部内容：
 
