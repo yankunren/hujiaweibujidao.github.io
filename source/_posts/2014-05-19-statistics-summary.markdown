@@ -25,8 +25,6 @@ published: true
 
 4.[《概率论与数理统计》](http://book.douban.com/subject/3165271/)
 
-----------
-
 全部内容：
 
 1.[概率和统计量](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/)
