@@ -24,11 +24,9 @@ PS：本总结的大纲是按照参考书籍[高等数学 中国环境出版社]
 
 2.[高等数学 中国环境出版社](http://product.dangdang.com/23311529.html)
 
-它山之石：
+3.[武汉大学 黄正华老师](http://aff.whu.edu.cn/huangzh/)写的微积分复习总结
 
-1.[武汉大学 黄正华老师](http://aff.whu.edu.cn/huangzh/)写的微积分复习总结 [上][book1]和[下][book2]
-
-本总结共十个部分，内容较多，分页查看，谢谢！
+全部内容：
 
 [第一部分 函数与极限 ](http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-1/)
 
