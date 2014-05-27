@@ -29,19 +29,19 @@ Python分类下的系列文章，不断更新中
 
 这些是在阅读了一定资料之后的总结，都是有代码实现的，每篇文章的内容都比较多，简单算法一般是大致介绍下思想及算法流程，复杂的算法会给出各种图示和代码实现详细介绍。
 
-(1)[搜索](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/)
+(1)[搜索](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/) 简述顺序查找和二分查找，详述Hash查找
 
-(2)[排序](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/)
+(2)[排序](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/)  简述各种排序算法的思想以及它的图示和实现
 
-(3)[数据结构](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)
+(3)[数据结构](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)  简述Python内置数据结构的性能分析和实现常用的数据结构：栈、队列和二叉堆
 
-(4)[树](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees/)
+(4)[树总结](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees/)  简述二叉树，详述二叉搜索树和AVL树的思想和实现
 
 (5)[贪心](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-greedy/) [还未完成]
 
-(6)[动态规划](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/)
+(6)[动态规划](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/)  详述动态规划的思想和两种实现方式及其对比
 
-(7)[图](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Graphs/) [还未完成]
+(7)[图总结](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Graphs/) [还未完成]
 
 
 
