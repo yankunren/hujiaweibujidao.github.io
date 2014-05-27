@@ -23,7 +23,7 @@ published: true
 
 3.[《统计思维：程序员数学之概率统计》](http://book.douban.com/subject/24381562/)
 
-4.[概率论与数理统计，高等教育出版社](http://book.douban.com/subject/3165271/)
+4.[《概率论与数理统计》，高等教育出版社](http://book.douban.com/subject/3165271/)
 
 ----------
 
