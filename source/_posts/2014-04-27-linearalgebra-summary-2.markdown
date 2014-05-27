@@ -74,7 +74,7 @@ $$
 
 旋转变换，[一般性的证明请看这张图](http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan.png)，[wiki](http://zh.wikipedia.org/wiki/%E6%97%8B%E8%BD%AC)中对二维空间旋转的解释。
 
-最常用的旋转矩阵就是[Givens旋转](http://zh.wikipedia.org/wiki/%E5%90%89%E6%96%87%E6%96%AF%E6%97%8B%E8%BD%AC)。**关于Givens旋转的内部原理以及代码实现请请参考后面的[矩阵分解总结](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/)部分。**
+最常用的旋转矩阵就是[Givens旋转](http://zh.wikipedia.org/wiki/%E5%90%89%E6%96%87%E6%96%AF%E6%97%8B%E8%BD%AC)。Givens 旋转在数值线性代数中主要的用途是在向量或矩阵中介入零。**关于Givens旋转的内部原理以及代码实现请请参考后面的[矩阵分解总结](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/)部分。**
 
 ![image](http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan2.png)
 
