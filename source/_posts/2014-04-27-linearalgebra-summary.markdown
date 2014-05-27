@@ -22,7 +22,7 @@ published: true
 
 2.[数值分析与算法,喻文健,清华大学出版社,2012,1](http://book.douban.com/subject/7161824/)
 
-3.[武汉大学 黄正华老师](http://aff.whu.edu.cn/huangzh/)写的线性代数复习总结[book下载]
+3.[武汉大学 黄正华老师](http://aff.whu.edu.cn/huangzh/)写的线性代数复习总结
 
 4.[Numerical Computing with Matlab. Cleve B. Moler.](http://www.mathworks.cn/moler/) 
 
