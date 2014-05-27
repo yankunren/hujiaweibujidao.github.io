@@ -268,7 +268,36 @@ end
 
 该部分的内容比较难，此处不过多介绍，详细内容参考书籍[数值分析与算法,喻文健,清华大学出版社,2012,1](http://book.douban.com/subject/7161824/)
 
-4.SVD
+4.特征值分解和奇异值分解 
+
+关于特征值和奇异值及其分解可以参考书籍[《Numerical Computing with Matlab》](http://www.mathworks.cn/moler/)，下面附上几张重要内容截图：
+
+特征值和奇异值
+
+![image](http://hujiaweibujidao.github.io/images/math/eigen1.png)
+
+特征值分解
+
+![image](http://hujiaweibujidao.github.io/images/math/eigen2.png)
+
+奇异值分解
+
+![image](http://hujiaweibujidao.github.io/images/math/eigen3.png)
+
+完全和简化的SVD
+
+![image](http://hujiaweibujidao.github.io/images/math/eigen4.png)
+
+对称矩阵的特征值和奇异值的关系
+
+![image](http://hujiaweibujidao.github.io/images/math/eigen5.png)
+
+特征值和奇异值的图示理解
+
+![image](http://hujiaweibujidao.github.io/images/math/eigen6.png)
+![image](http://hujiaweibujidao.github.io/images/math/eigen7.png)
+![image](http://hujiaweibujidao.github.io/images/math/eigen8.png)
+![image](http://hujiaweibujidao.github.io/images/math/eigen9.png)
 
 **若矩阵表示一个空间到另一个空间的变换，则奇异值很重要。**求矩阵的奇异值可以利用求矩阵的特征值的方法，最简单的求矩阵$A$奇异值的方法是计算矩阵$A^{T}A$的特征值，非负特征值的平方根就是特征值(对称矩阵的一个性质)，但是这种方法的计算误差大。
 
@@ -284,6 +313,8 @@ SVD分解的过程：
 (1)计算矩阵$X^{T}X$和矩阵$XX^{T}$的特征值和特征向量；
 (2)计算矩阵$X^{T}X$和矩阵$XX^{T}$的共同非负特征值的平方根得到奇异值；
 (3)通过计算的结果得到矩阵$U$，矩阵$V$和矩阵$A$。
+
+[注：]
 
 在Matlab中直接使用内置函数`svd`即可，示例：
 
