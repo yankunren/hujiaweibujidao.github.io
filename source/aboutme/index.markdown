@@ -41,11 +41,11 @@ PS：以后都会呆在北京，如果有不错的实习机会请和我联系，
 
 ####  推荐博文
 
-1. <a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/project_weiweibo" target="_blank">微微博项目展示</a>
+1. <a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/project_weiweibo" target="_blank">微微博项目展示</a> [项目源代码 on Github](https://github.com/hujiaweibujidao/TinyWeibo)
 
 注：该项目不再更新，请不要邮件咨询，谢谢
 
-2. <a href="http://hujiaweiyinger.diandian.com/post/2013-05-24/project_wechat4j" target="_blank">Wechat4j项目</a>
+2. <a href="http://hujiaweiyinger.diandian.com/post/2013-05-24/project_wechat4j" target="_blank">Wechat4j项目</a> [项目源代码 on Github](https://github.com/hujiaweibujidao/WeChat4j)
 
 注：该项目不再更新，请不要邮件咨询，谢谢
 
