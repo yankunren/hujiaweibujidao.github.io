@@ -21,11 +21,11 @@ footer: true
 
 第二篇 [线性代数总结](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary/)  [New!]
 
-第三篇 [概率与数理统计总结](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary/) [New!]
+第三篇 [概率论与数理统计总结](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary/) [New!]
 
 ### 第二部分 数值算法与应用
 
-一本关于数值算法与应用的总结小书，使用Matlab语言，详情猛戳[HERE](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/).
+数值算法与应用的总结小书，详情猛戳[HERE](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/).
 
 
 
