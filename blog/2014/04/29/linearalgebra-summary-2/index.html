@@ -193,33 +193,9 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
 
 <p>旋转变换，<a href="http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan.png">一般性的证明请看这张图</a>，<a href="http://zh.wikipedia.org/wiki/%E6%97%8B%E8%BD%AC">wiki</a>中对二维空间旋转的解释。</p>
 
-<p>最常用的旋转矩阵就是<a href="http://zh.wikipedia.org/wiki/%E5%90%89%E6%96%87%E6%96%AF%E6%97%8B%E8%BD%AC">Givens旋转</a>。**关于Householder的内部原理以及代码实现请请参考后面的<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/">矩阵分解总结</a>部分。</p>
+<p>最常用的旋转矩阵就是<a href="http://zh.wikipedia.org/wiki/%E5%90%89%E6%96%87%E6%96%AF%E6%97%8B%E8%BD%AC">Givens旋转</a>。Givens 旋转在数值线性代数中主要的用途是在向量或矩阵中介入零。<strong>关于Givens旋转的内部原理以及代码实现请请参考后面的<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/">矩阵分解总结</a>部分。</strong></p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan2.png" alt="image" /></p>
-
-<p><strong>旋转矩阵是在乘以一个向量的时候有改变向量的方向但不改变大小的效果的矩阵。旋转矩阵不包括点反演，它可以把右手坐标系改变成左手坐标系或反之。所有旋转加上反演形成了正交矩阵的集合。旋转可分为主动旋转与被动旋转。主动旋转是指将向量逆时针围绕旋转轴所做出的旋转。被动旋转是对坐标轴本身进行的逆时针旋转，它相当于主动旋转的逆操作。</strong></p>
-
-<p>旋转矩阵的性质：</p>
-
-<p><strong>一个矩阵是旋转矩阵，当且仅当它是正交矩阵并且它的行列式是单位一。正交矩阵的行列式是 ±1(根据$U U^{T}=E$，且$det(U)=det(U^{T})$易得)，如果行列式是 −1，则它包含了一个反射而不是真旋转矩阵。</strong></p>
-
-<p>[正交矩阵的行列式如果是−1，则它包含了一个反射！如果是1，则它包含了一个旋转！]</p>
-
-<p><strong>旋转矩阵是正交矩阵，如果它的列向量形成 ${R}^{n}$ 的一个正交基，就是说在任何两个列向量之间的标量积是零(正交性)而每个列向量的大小是单位一(单位向量)。</strong></p>
-
-<p><strong>一定要记住旋转矩阵一定是正交矩阵，所以也就有它的转置矩阵等于它的逆矩阵，并且它的行列式为1！</strong></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/xuanzhuanjuzhen.png" alt="image" /></p>
-
-<p>最常用的旋转矩阵就是<a href="http://zh.wikipedia.org/wiki/%E5%90%89%E6%96%87%E6%96%AF%E6%97%8B%E8%BD%AC">Givens旋转</a>。<strong>Givens 旋转在数值线性代数中主要的用途是在向量或矩阵中介入零。例如，这种效果可用于计算矩阵的 QR分解。超过Householder变换的一个好处是它们可以轻易的并行化，另一个好处是对于非常稀疏的矩阵计算量更小。</strong></p>
-
-<p>Given旋转矩阵的表达：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/givens.png" alt="image" /></p>
-
-<p>Given旋转矩阵的稳定计算：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/givens2.png" alt="image" /></p>
 
 <p>3.逆矩阵和伴随矩阵</p>
 

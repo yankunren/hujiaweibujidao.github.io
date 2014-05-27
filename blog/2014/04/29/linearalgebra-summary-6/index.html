@@ -513,7 +513,36 @@ l_{ij}=( {a_{ij}-\sum_{k=1}^{j-1}{l_{ik} l_{jk} } } )/ l_{jj}
 
 <p>该部分的内容比较难，此处不过多介绍，详细内容参考书籍<a href="http://book.douban.com/subject/7161824/">数值分析与算法,喻文健,清华大学出版社,2012,1</a></p>
 
-<p>4.SVD</p>
+<p>4.特征值分解和奇异值分解 </p>
+
+<p>关于特征值和奇异值及其分解可以参考书籍<a href="http://www.mathworks.cn/moler/">《Numerical Computing with Matlab》</a>，下面附上几张重要内容截图：</p>
+
+<p>特征值和奇异值</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/eigen1.png" alt="image" /></p>
+
+<p>特征值分解</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/eigen2.png" alt="image" /></p>
+
+<p>奇异值分解</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/eigen3.png" alt="image" /></p>
+
+<p>完全和简化的SVD</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/eigen4.png" alt="image" /></p>
+
+<p>对称矩阵的特征值和奇异值的关系</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/eigen5.png" alt="image" /></p>
+
+<p>特征值和奇异值的图示理解</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/math/eigen6.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/eigen7.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/eigen8.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/math/eigen9.png" alt="image" /></p>
 
 <p><strong>若矩阵表示一个空间到另一个空间的变换，则奇异值很重要。</strong>求矩阵的奇异值可以利用求矩阵的特征值的方法，最简单的求矩阵$A$奇异值的方法是计算矩阵$A^{T}A$的特征值，非负特征值的平方根就是特征值(对称矩阵的一个性质)，但是这种方法的计算误差大。</p>
 
@@ -529,6 +558,8 @@ l_{ij}=( {a_{ij}-\sum_{k=1}^{j-1}{l_{ik} l_{jk} } } )/ l_{jj}
 (1)计算矩阵$X^{T}X$和矩阵$XX^{T}$的特征值和特征向量；
 (2)计算矩阵$X^{T}X$和矩阵$XX^{T}$的共同非负特征值的平方根得到奇异值；
 (3)通过计算的结果得到矩阵$U$，矩阵$V$和矩阵$A$。</p>
+
+<p>[注：实际上不需要都进行上面的三个步骤，因为$X^{T}X$的特征值与特征向量和$XX^{T}$的特征值与特征向量是有联系的，容易证明，所以，其实只要计算两者中维度更小的那个即可，可以再查阅些资料学习]</p>
 
 <p>在Matlab中直接使用内置函数<code>svd</code>即可，示例：</p>
 
