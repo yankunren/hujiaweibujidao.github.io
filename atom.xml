@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-05-27T21:03:19+08:00</updated>
+  <updated>2014-05-27T21:11:21+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -679,7 +679,7 @@ $E(X-Y)=E(X)-E(Y) \quad Var(X-Y)=Var(X)+Var(Y)$</p>
 <h4 id="center-center"><center>第零部分 碎碎念</center></h4>
 <p>本系列是对概率和数理统计中的重要内容的一个总结，不会侧重很多众所周知的细节，所以有啥疑问还是需要Google或者Wikipedia。关于本系列中出现的术语参照参考书籍中的定义，部分可能与大学教材中不同，请自行对应起来理解。小弟才疏学浅，若有错误请留言，欢迎批评指正。</p>
 
-<p>主要参考书籍：</p>
+<p>参考书籍：</p>
 
 <p>1.<a href="http://book.douban.com/subject/2985995/">《爱上统计学》</a></p>
 
@@ -687,9 +687,11 @@ $E(X-Y)=E(X)-E(Y) \quad Var(X-Y)=Var(X)+Var(Y)$</p>
 
 <p>3.<a href="http://book.douban.com/subject/24381562/">《统计思维：程序员数学之概率统计》</a></p>
 
+<p>4.<a href="http://book.douban.com/subject/3165271/">《概率论与数理统计》</a></p>
+
 <hr />
 
-<p>本总结总共4章节，分开来阅读较好</p>
+<p>全部内容：</p>
 
 <p>1.<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/">概率和统计量</a></p>
 
