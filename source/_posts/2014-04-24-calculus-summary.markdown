@@ -48,9 +48,5 @@ PS：本总结的大纲是按照参考书籍[高等数学 中国环境出版社]
 
 [第十部分 微分方程](http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-10/)
 
-  [book1]: http://hujiaweibujidao.github.io/files/calculus1_huangzhenghua.pdf
-  [book2]: http://hujiaweibujidao.github.io/files/calculus2_huangzhenghua.pdf
-
-  
   
 
