@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ml | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/ml/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-06-09T22:47:45+08:00</updated>
+  <updated>2014-06-09T23:07:49+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -182,6 +182,16 @@
 <p>(2)实验过程中有效地结合使用两种性能测试方式缩短了实验时间(SVM和HOSVD算法使用一半训练另一半测试的方式)，但是在对算法的性能进行比较的时候没能详细地比较具体的运行时间；</p>
 
 <p>(3)实验过程中的分析还算是比较清晰，按照一定的逻辑不断调整策略，但是在一些阈值的选择(例如开集测试的距离阈值)、参数的选择(SVM算法的核函数的参数)方面感觉没有方向性，不能按照一定的思路朝着更好的结果进行。另外，由于缺乏数字图像处理的能力，没能对图像进行一些预处理操作，例如截取狗脸的核心区域不但可以减少特征数目，而且肯定能够提高算法的准确率。</p>
+
+<h4 id="section-9">参考资料：</h4>
+
+<p>1.Pattern Recognition. Sergios Theodoridis</p>
+
+<p>2.Introduction to Pattern Recognition: A Matlab Approach. Sergios Theodoridis</p>
+
+<p>3.Matrix Methods in Data Mining and Pattern Recognition. Lars Eldén</p>
+
+<p>4.Blog of Bytefish: <a href="http://bytefish.de/blog">http://bytefish.de/blog</a></p>
 
 ]]></content>
   </entry>
