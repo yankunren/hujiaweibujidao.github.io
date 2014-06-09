@@ -173,6 +173,16 @@ PCA算法虽然实现上比较简单,但是在不同的环境(例如光照条件
 
 (3)实验过程中的分析还算是比较清晰，按照一定的逻辑不断调整策略，但是在一些阈值的选择(例如开集测试的距离阈值)、参数的选择(SVM算法的核函数的参数)方面感觉没有方向性，不能按照一定的思路朝着更好的结果进行。另外，由于缺乏数字图像处理的能力，没能对图像进行一些预处理操作，例如截取狗脸的核心区域不但可以减少特征数目，而且肯定能够提高算法的准确率。
 
+#### 参考资料：
+
+1.Pattern Recognition. Sergios Theodoridis
+
+2.Introduction to Pattern Recognition: A Matlab Approach. Sergios Theodoridis
+
+3.Matrix Methods in Data Mining and Pattern Recognition. Lars Eldén
+
+4.Blog of Bytefish: <http://bytefish.de/blog>
+
 
 
 
