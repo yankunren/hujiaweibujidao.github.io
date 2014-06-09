@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-06-09T21:49:53+08:00</updated>
+  <updated>2014-06-09T22:47:45+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -174,6 +174,14 @@
 <p>本实验从特征的选择和提取开始，一步步经过特征值的分析以及对于性能评估方法和开集测试的阈值的选择，然后依次使用PCA识别、Fisher识别、SVM算法和HOSVD算法进行识别，分析算法的结果及其性能。通过对比各种算法的平均情况下的最好的结果，得到如下结果。从对比中可以看出，平均情况下表现最好的是SVM算法，而且是在HOG特征以及线性核函数的情况下表现最优；对于PCA识别，采用HOG特征最佳；对于Fisher识别，采用LBP特征最佳；而HOSVD算法需要的时间比SVM算法还多，但是性能并没有进一步提升，所以并不是该类问题的很好解决方案。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/ml/all.png" alt="image" /></p>
+
+<p><strong>实验评价</strong>：</p>
+
+<p>(1)本实验的最大亮点在于很好地对多个特征在多个不同算法上的结果进行分析和比较，而且大胆尝试了SVM算法和HOSVD算法，但是由于对这两个略微复杂的算法的理解能力不足，没能更好地解释得到的实验结果(例如多项式和径向基核函数会得到很低的准确率的原因)，也没能进一步通过调整参数使得这两个算法的性能进一步提升；</p>
+
+<p>(2)实验过程中有效地结合使用两种性能测试方式缩短了实验时间(SVM和HOSVD算法使用一半训练另一半测试的方式)，但是在对算法的性能进行比较的时候没能详细地比较具体的运行时间；</p>
+
+<p>(3)实验过程中的分析还算是比较清晰，按照一定的逻辑不断调整策略，但是在一些阈值的选择(例如开集测试的距离阈值)、参数的选择(SVM算法的核函数的参数)方面感觉没有方向性，不能按照一定的思路朝着更好的结果进行。另外，由于缺乏数字图像处理的能力，没能对图像进行一些预处理操作，例如截取狗脸的核心区域不但可以减少特征数目，而且肯定能够提高算法的准确率。</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/06/09/Dog-Face-Recognition/">http://hujiaweibujidao.github.io/blog/2014/06/09/Dog-Face-Recognition/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
