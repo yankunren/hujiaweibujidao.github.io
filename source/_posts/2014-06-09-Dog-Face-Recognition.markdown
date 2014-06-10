@@ -3,7 +3,7 @@ layout: post
 title: "Dog Face Recognition"
 date: 2014-06-09 21:30
 comments: true
-categories: ml
+categories: machinelearning
 ---
 
 ###<center>模式识别大作业-狗脸识别</center>
