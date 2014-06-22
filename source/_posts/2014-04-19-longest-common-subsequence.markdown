@@ -8,7 +8,9 @@ categories: algorithm
 
 #### <center>Algorithms: Longest Common Subsequence</center>
 
-最长公共子序列是典型的动态规划问题，如果不理解动态规划请移步先看[这篇动态规划的总结](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/)，否则本篇文章中的代码实现会不理解的哟！
+最长公共子序列(LCS)是典型的动态规划问题，如果不理解动态规划请移步先看[这篇动态规划的总结](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/)，否则本篇文章中的代码实现会不理解的哟！
+
+LCS问题的一个变种就是求最长单调递增子序列，它的求解就是先将原序列A进行排序得到序列B，然后求解序列A和序列B的最长公共子序列。
 
 参考内容：
 
