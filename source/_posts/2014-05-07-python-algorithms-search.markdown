@@ -15,11 +15,12 @@ published: true
 参考内容：
 
 1.[Problem Solving with Python](http://interactivepython.org/courselib/static/pythonds/index.html)
+
 Chapter5: Search and Sorting [online_link](http://interactivepython.org/courselib/static/pythonds/SortSearch/searching.html#searching)
 
 2.[算法导论](http://en.wikipedia.org/wiki/Introduction_to_Algorithms)
 
-#### 搜索总结
+#### 搜索(或查找)总结
 
 (1)顺序查找：O(n)
 
@@ -33,7 +34,7 @@ Chapter5: Search and Sorting [online_link](http://interactivepython.org/courseli
 
 常用的哈希函数：
 
-1.reminder method：取余数（size=11）
+1.reminder method：取余数（size=11，下图对11取余数，例如17取余数得到6）
 
 ![image](http://hujiaweibujidao.github.io/images/201405/reminder.png)
 
