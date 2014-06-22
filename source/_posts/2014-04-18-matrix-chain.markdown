@@ -12,9 +12,13 @@ categories: algorithm
 
 ----------
      
+1.问题描述
+
 矩阵链乘问题的描述如下，就是说要确定一个完全加括号的形式使得矩阵链乘需要进行的标量计算数目最少，矩阵$$A_{i}$$的维数为$$p_{i-1} \times p_{i}$$，如果穷举所有可能形式的话，时间复杂度是指数级的！因为该问题满足最优子结构，并且子问题存在重叠，所以我们可以借助动态规划来求解。
 
 ![image](http://hujiaweibujidao.github.io/images/algos/matrix.png)
+
+2.问题分析
 
 我们需要确定一个递归式来将我们要求解的问题表示出来，下面摘自算法导论，介绍地非常详细
 ![image](http://hujiaweibujidao.github.io/images/algos/matrix2.png)
@@ -29,6 +33,8 @@ m[i][j]= \left\{
     min_{i \le k < j}{m[i][k]+m[k+1][j]+p_{i-1}p_{k}p_{j}} & \quad \text{if i<j}
   \end{array} \right.
 $$
+
+3.代码实现
 
 根据上面的思想我们很快就可以写出一个递归版本的矩阵链承法的实现代码，输出的结果也没有错，给出的加括号的方式是`( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )`。[问题的数据是算法导论中的问题的数据，值是`30,35,15,5,10,20,25`]。
 
@@ -66,7 +72,7 @@ showmatrixchain(s,1,6) #( ( A1 ( A2 A3 ) ) ( ( A4 A5 ) A6 ) )
 
 ![image](http://hujiaweibujidao.github.io/images/algos/matrix3.png)
 
-要改成带备忘录的很简单，我们实现过几次了，但是，这次我们不能直接使用原来的装饰器，因为Python中的dict不能对list对象进行hash，所以我们要简单地修改下我们key值的构建，也很简单，看下代码就明白了：
+要改成带备忘录的很简单，但是，这次我们不能直接使用原来的装饰器，因为Python中的dict不能对list对象进行hash，所以我们要简单地修改下我们key值的构建，也很简单，看下代码就明白了：
 
 ```
 from functools import wraps
