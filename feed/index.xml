@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-06-22T11:24:34+08:00</updated>
+  <updated>2014-06-22T11:26:08+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -58,10 +58,9 @@
 </span><span class="line"><span class="c">&lt;!-- 添加下面的js --&gt;</span>
 </span><span class="line"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&#39;text/javascript&#39;</span> <span class="na">src=</span><span class="s">&#39;http://ajax.useso.com/ajax/libs/jquery/1.7.2/jquery.min.js?ver=3.4.2&#39;</span><span class="nt">&gt;&lt;/script&gt;</span>
 </span><span class="line"><span class="c">&lt;!-- 省略部分代码 --&gt;</span>
-</span><span class="line"><span class="c">&lt;!-- 我没有使用Google analytics，所以注释下面一行代码 --&gt;</span>
+</span><span class="line"><span class="c">&lt;!-- 我没有使用Google analytics，所以注释下面一行代码(略有删减) --&gt;</span>
 </span><span class="line"><span class="c">&lt;!--</span>
-</span><span class="line"><span class="c">
-</span>
+</span><span class="line"><span class="c">{ google_analytics.html }</span>
 </span><span class="line"><span class="c">--&gt;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
