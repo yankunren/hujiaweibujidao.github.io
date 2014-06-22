@@ -138,9 +138,7 @@ def binary_tree_delete(self, key):
 
 8.平衡二叉查找树：为了避免得到前面提到的扭曲的二叉查找树，于是就有了平衡二叉查找树的概念。
 
-AVL树是最先发明的平衡二叉树，它得名于它的发明者G.M. Adelson-Velsky和E.M. Landis，他们在1962年的论文《An algorithm for the organization of information》中发表了它。
-
-[on_wiki](http://zh.wikipedia.org/wiki/AVL%E6%A0%91)
+AVL树([on_wiki](http://zh.wikipedia.org/wiki/AVL%E6%A0%91))是最先发明的平衡二叉树，它得名于它的发明者G.M. Adelson-Velsky和E.M. Landis，他们在1962年的论文《An algorithm for the organization of information》中发表了它。
 
 AVL树的基本操作的实现
 
@@ -550,5 +548,7 @@ mytree.levelorder(mytree.root)
 对于我给定的测试数据，对应得到的二叉查找树和AVL树如下图所示，二叉查找树明显不平衡，AVL树中所有节点的平衡因子为0或者1，在构造的过程中，共发生了一次左旋和一次右旋。
 
 ![images](http://hujiaweibujidao.github.io/images/201405/bst_avl.png)
+
+[本人能力有限，因为使用的次数不多所以对于AVL树还未有深刻的理解，如果有深刻理解之后会对此处内容及代码进行更新]
 
 
