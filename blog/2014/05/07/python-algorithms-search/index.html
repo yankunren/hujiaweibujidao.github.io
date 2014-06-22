@@ -10,8 +10,7 @@
 
   
   <meta name="description" content="Python Algorithms Python算法系列
-逸夫图书馆, 2014/5/7 搜索 参考内容： 1.Problem Solving with Python
-Chapter5: Search and Sorting online_link 2.算法导论 搜索总结 (1)顺序查找：O(n &hellip;">
+逸夫图书馆, 2014/5/7 搜索 参考内容： 1.Problem Solving with Python Chapter5: Search and Sorting online_link 2.算法导论 搜索(或查找)总结 (1)顺序查找 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -134,12 +133,13 @@ Chapter5: Search and Sorting online_link 2.算法导论 搜索总结 (1)顺序�
 
 <p>参考内容：</p>
 
-<p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a>
-Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/searching.html#searching">online_link</a></p>
+<p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a></p>
+
+<p>Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/static/pythonds/SortSearch/searching.html#searching">online_link</a></p>
 
 <p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
 
-<h4 id="section">搜索总结</h4>
+<h4 id="section">搜索(或查找)总结</h4>
 
 <p>(1)顺序查找：O(n)</p>
 
@@ -153,19 +153,19 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 
 <p>常用的哈希函数：</p>
 
-<p>1.reminder method：取余数（size=11）</p>
+<p>1.reminder method：取余数（size=11，下图对11取余数，例如17取余数得到6）</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/reminder.png" alt="image" /></p>
 
-<p>2.folding method</p>
+<p>2.folding method: 分组求和再取余数</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/folding.png" alt="image" /></p>
 
-<p>3.mid-square method</p>
+<p>3.mid-square method：平方值的中间两位数取余数</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/mid-square.png" alt="image" /></p>
 
-<p>4.对于由字符的元素可以尝试使用<code>ord</code>函数来将字符串转换成一个有序的数值序列。</p>
+<p>4.对于由字符的元素可以尝试使用<code>ord</code>函数来将字符串转换成一个有序的数值序列。在Python中<code>ord</code>函数可以得到对应字符的ASCII码值。将所有字符的码值累加再取余数。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/stringord1.png" alt="image" /></p>
 
@@ -198,6 +198,18 @@ Chapter5: Search and Sorting <a href="http://interactivepython.org/courselib/sta
 <p><img src="http://hujiaweibujidao.github.io/images/201405/hashcollision.png" alt="image" />   </p>
 
 <p>分析hash查找的性能：一般使用平均查找长度来衡量，和装载因子有关</p>
+
+<blockquote>
+  <p>散列表的载荷因子定义为：$\alpha$ = 填入表中的元素个数 / 散列表的长度</p>
+</blockquote>
+
+<blockquote>
+  <p>$\alpha$是散列表装满程度的标志因子。由于表长是定值，$\alpha$与“填入表中的元素个数”成正比，所以，$\alpha$越大，表明填入表中的元素越多，产生冲突的可能性就越大；反之，$\alpha$越小，标明填入表中的元素越少，产生冲突的可能性就越小。实际上，散列表的平均查找长度是载荷因子$\alpha$的函数，只是不同处理冲突的方法有不同的函数。</p>
+</blockquote>
+
+<blockquote>
+  <p>对于开放定址法，荷载因子是特别重要因素，应严格限制在0.7-0.8以下。超过0.8，查表时的CPU缓存不命中（cache missing）按照指数曲线上升。因此，一些采用开放定址法的hash库，如Java的系统库限制了荷载因子为0.75，超过此值将resize散列表。</p>
+</blockquote>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/hashanalysis.png" alt="image" /></p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-06-22T22:29:39+08:00</updated>
+  <updated>2014-06-22T22:37:44+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -37,7 +37,7 @@
 
 <p>文件： <code>source/_includes</code>目录下的<code>header.html</code>，修改如下：</p>
 
-<p><code>
+<p><code>html
 &lt;!-- 注释掉下面的js --&gt;
 &lt;!--
 &lt;script src="http://hujiaweibujidao.github.io//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;
@@ -53,7 +53,7 @@ inlcude google_analytics.html
 
 <p>文件： <code>source/_includes/custom</code>目录下的<code>head.html</code>，修改如下：</p>
 
-<p><code>
+<p><code>html
 &lt;!-- 注释掉下面的css --&gt;
 &lt;!--Fonts from Google"s Web font directory at http://google.com/webfonts --&gt;
 &lt;!--
