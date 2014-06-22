@@ -133,7 +133,7 @@ for row in range(n+1):
 print(C[n,k]) #120
 ```
 
-杨辉三角大家都熟悉，在国外这个叫`Pascal Triangle`，它和二项式系数特别相似，看下图，除了两边的数字之外，里面的任何一个数字都是由它上面相邻的两个元素相加得到，想想`C(n,k)=C(n-1,k-1)+C(n-1,k)`不也就是这儿含义吗?
+杨辉三角大家都熟悉，在国外这个叫`Pascal Triangle`，它和二项式系数特别相似，看下图，除了两边的数字之外，里面的任何一个数字都是由它上面相邻的两个元素相加得到，想想`C(n,k)=C(n-1,k-1)+C(n-1,k)`不也就是这个含义吗?
 
 ![image](http://hujiaweibujidao.github.io/images/algos/sanjiao.png)
 
