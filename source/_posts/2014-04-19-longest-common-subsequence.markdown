@@ -12,12 +12,6 @@ categories: algorithm
 
 LCS问题的一个变种就是求最长单调递增子序列，它的求解就是先将原序列A进行排序得到序列B，然后求解序列A和序列B的最长公共子序列。
 
-参考内容：
-
-1.[算法导论](http://en.wikipedia.org/wiki/Introduction_to_Algorithms)
-
-2.[算法设计、分析与实现从入门到精通](http://book.douban.com/subject/4875278/)
-
 ----------
 
 1.问题描述
