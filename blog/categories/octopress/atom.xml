@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-06-22T10:31:01+08:00</updated>
+  <updated>2014-06-22T10:59:02+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Thanks to 360 CDN]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/06/22/thanks-to-360-cdn/"/>
+    <updated>2014-06-22T10:40:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/06/22/thanks-to-360-cdn</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Happy Mother's Day]]></title>
