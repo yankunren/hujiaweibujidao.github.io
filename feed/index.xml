@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-06-22T11:26:08+08:00</updated>
+  <updated>2014-06-22T11:27:08+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -60,7 +60,7 @@
 </span><span class="line"><span class="c">&lt;!-- 省略部分代码 --&gt;</span>
 </span><span class="line"><span class="c">&lt;!-- 我没有使用Google analytics，所以注释下面一行代码(略有删减) --&gt;</span>
 </span><span class="line"><span class="c">&lt;!--</span>
-</span><span class="line"><span class="c">{ google_analytics.html }</span>
+</span><span class="line"><span class="c">inlcude google_analytics.html</span>
 </span><span class="line"><span class="c">--&gt;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-06-22T11:26:08+08:00</updated>
+  <updated>2014-06-22T11:27:08+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -47,7 +47,7 @@
 &lt;!-- 省略部分代码 --&gt;
 &lt;!-- 我没有使用Google analytics，所以注释下面一行代码(略有删减) --&gt;
 &lt;!--
-{ google_analytics.html }
+inlcude google_analytics.html
 --&gt;
 </code></p>
 
