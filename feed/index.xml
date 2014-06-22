@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-06-22T11:20:17+08:00</updated>
+  <updated>2014-06-22T11:21:52+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -28,18 +28,19 @@
 
 <p>文件： <code>source/_includes</code>目录下的<code>head.html</code>，修改如下：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&lt;!--
-</span><span class="line">&lt;script src="http://hujiaweibujidao.github.io//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;
-</span><span class="line">--&gt;
-</span><span class="line">&lt;script type='text/javascript' src='http://ajax.useso.com/ajax/libs/jquery/1.7.2/jquery.min.js?ver=3.4.2'&gt;&lt;/script&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="c">&lt;!--</span>
+</span><span class="line"><span class="c">&lt;script src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;&gt;&lt;/script&gt;</span>
+</span><span class="line"><span class="c">--&gt;</span>
+</span><span class="line"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&#39;text/javascript&#39;</span> <span class="na">src=</span><span class="s">&#39;http://ajax.useso.com/ajax/libs/jquery/1.7.2/jquery.min.js?ver=3.4.2&#39;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>文件： <code>source/_includes</code>目录下的<code>header.html</code>，修改如下：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -50,22 +51,23 @@
 <span class="line-number">9</span>
 <span class="line-number">10</span>
 <span class="line-number">11</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&lt;!-- 注释掉下面的js --&gt;
-</span><span class="line">&lt;!--
-</span><span class="line">&lt;script src="http://hujiaweibujidao.github.io//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;
-</span><span class="line">--&gt;
-</span><span class="line">&lt;!-- 添加下面的js --&gt;
-</span><span class="line">&lt;script type='text/javascript' src='http://ajax.useso.com/ajax/libs/jquery/1.7.2/jquery.min.js?ver=3.4.2'&gt;&lt;/script&gt;
-</span><span class="line">&lt;!-- 省略部分代码 --&gt;
-</span><span class="line">&lt;!-- 我没有使用Google analytics，所以注释下面一行代码 --&gt;
-</span><span class="line">&lt;!--
-</span><span class="line">
-
-</span><span class="line">--&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="c">&lt;!-- 注释掉下面的js --&gt;</span>
+</span><span class="line"><span class="c">&lt;!--</span>
+</span><span class="line"><span class="c">&lt;script src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;&gt;&lt;/script&gt;</span>
+</span><span class="line"><span class="c">--&gt;</span>
+</span><span class="line"><span class="c">&lt;!-- 添加下面的js --&gt;</span>
+</span><span class="line"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&#39;text/javascript&#39;</span> <span class="na">src=</span><span class="s">&#39;http://ajax.useso.com/ajax/libs/jquery/1.7.2/jquery.min.js?ver=3.4.2&#39;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class="line"><span class="c">&lt;!-- 省略部分代码 --&gt;</span>
+</span><span class="line"><span class="c">&lt;!-- 我没有使用Google analytics，所以注释下面一行代码 --&gt;</span>
+</span><span class="line"><span class="c">&lt;!--</span>
+</span><span class="line"><span class="c">
+</span>
+</span><span class="line"><span class="c">--&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>文件： <code>source/_includes/custom</code>目录下的<code>head.html</code>，修改如下：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -74,15 +76,16 @@
 <span class="line-number">7</span>
 <span class="line-number">8</span>
 <span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&lt;!-- 注释掉下面的css --&gt;
-</span><span class="line">&lt;!--Fonts from Google"s Web font directory at http://google.com/webfonts --&gt;
-</span><span class="line">&lt;!--
-</span><span class="line">&lt;link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"&gt;
-</span><span class="line">&lt;link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"&gt;
-</span><span class="line">--&gt;
-</span><span class="line">&lt;!-- 添加下面的css --&gt;
-</span><span class="line">&lt;link href="http://fonts.useso.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"&gt;
-</span><span class="line">&lt;link href="http://fonts.useso.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="c">&lt;!-- 注释掉下面的css --&gt;</span>
+</span><span class="line"><span class="c">&lt;!--Fonts from Google&quot;s Web font directory at http://google.com/webfonts --&gt;</span>
+</span><span class="line"><span class="c">&lt;!--</span>
+</span><span class="line"><span class="c">&lt;link href=&quot;http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;</span>
+</span><span class="line"><span class="c">&lt;link href=&quot;http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;</span>
+</span><span class="line"><span class="c">--&gt;</span>
+</span><span class="line"><span class="c">&lt;!-- 添加下面的css --&gt;</span>
+</span><span class="line"><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;http://fonts.useso.com/css?family=PT+Serif:regular,italic,bold,bolditalic&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span><span class="nt">&gt;</span>
+</span><span class="line"><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;http://fonts.useso.com/css?family=PT+Sans:regular,italic,bold,bolditalic&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>OK，大功告成，更新文件，重新打开，你会瞬间感觉世界又重新美好了！</p>
 

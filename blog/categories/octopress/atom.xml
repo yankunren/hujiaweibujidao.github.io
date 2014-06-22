@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-06-22T11:20:17+08:00</updated>
+  <updated>2014-06-22T11:21:52+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -28,7 +28,7 @@
 
 <p>文件： <code>source/_includes</code>目录下的<code>head.html</code>，修改如下：</p>
 
-<p><code>
+<p><code>html
 &lt;!--
 &lt;script src="http://hujiaweibujidao.github.io//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;
 --&gt;
