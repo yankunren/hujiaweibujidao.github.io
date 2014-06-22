@@ -25,11 +25,8 @@ OK，不发牢骚了，因为Google被墙的厉害，而且博客中不少使用
 
 文件： `source/_includes`目录下的`header.html`，修改如下：
 
-<<<<<<< HEAD
-```
-=======
+
 ```html
->>>>>>> FETCH_HEAD
 <!-- 注释掉下面的js -->
 <!--
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -37,25 +34,16 @@ OK，不发牢骚了，因为Google被墙的厉害，而且博客中不少使用
 <!-- 添加下面的js -->
 <script type='text/javascript' src='http://ajax.useso.com/ajax/libs/jquery/1.7.2/jquery.min.js?ver=3.4.2'></script>
 <!-- 省略部分代码 -->
-<<<<<<< HEAD
 <!-- 我没有使用Google analytics，所以注释下面一行代码(略有删减) -->
 <!--
 inlcude google_analytics.html
-=======
-<!-- 我没有使用Google analytics，所以注释下面一行代码 -->
-<!--
-{% include google_analytics.html %}
->>>>>>> FETCH_HEAD
 -->
 ```
 
 文件： `source/_includes/custom`目录下的`head.html`，修改如下：
 
-<<<<<<< HEAD
-```
-=======
+
 ```html
->>>>>>> FETCH_HEAD
 <!-- 注释掉下面的css -->
 <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <!--
