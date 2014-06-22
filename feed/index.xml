@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-06-23T00:26:25+08:00</updated>
+  <updated>2014-06-23T00:45:28+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Dog Face Recognition]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/06/22/Forza-Azzurri/"/>
+    <updated>2014-06-22T22:30:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/06/22/Forza-Azzurri</id>
+    <content type="html"><![CDATA[<p>正值巴西世界杯之际，特此上三张图，保佑我大呆梨能够最终捧得大力神杯回家！</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/pics/italy.jpg" alt="image" /></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/pics/italy2.jpg" alt="image" /></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/pics/italy3.jpg" alt="image" /></p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/06/22/Forza-Azzurri/">http://hujiaweibujidao.github.io/blog/2014/06/22/Forza-Azzurri/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Thanks to 360 CDN]]></title>
@@ -3617,308 +3635,6 @@ m[i][j]= \left\{
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/">http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Python Algorithms - Dynamic Programming]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/"/>
-    <updated>2014-05-08T23:30:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming</id>
-    <content type="html"><![CDATA[<p><strong><center>Python Algorithms Python算法系列</center></strong>
-<strong><center>逸夫图书馆, 2014/5/18</center></strong></p>
-
-<h3 id="centercenter"><center>动态规划</center></h3>
-
-<p>参考内容：</p>
-
-<p>1.<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms: Mastering Basic Algorithms in the Python Language</a></p>
-
-<p>Chapter 8 Tangled Dependencies and Memoization</p>
-
-<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
-
-<p>3.<a href="http://book.douban.com/subject/4875278/">算法设计、分析与实现从入门到精通</a></p>
-
-<p>大家都知道，动态规划算法一般都有两种实现方式：</p>
-
-<p><strong>1.直接自顶向下实现递归式，并将中间结果保存，这叫备忘录法；</strong></p>
-
-<p><strong>2.将递归式翻转，自底向上地迭代，将结果保存在某个数据结构中。</strong></p>
-
-<p>编程有一个原则<code>DRY=Don’t Repeat Yourself</code>，就是说你的代码不要重复来重复去的，这个原则同样可以用于理解动态规划，动态规划除了满足最优子结构，它还存在子问题重叠的性质，我们不能重复地去解决这些子问题，所以我们将子问题的解保存起来，类似缓存机制，之后遇到这个子问题时直接取出子问题的解。</p>
-
-<p>举个简单的例子，斐波那契数列中的元素的计算，很简单，我们写下如下的代码：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">fib</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>好，来测试下，运行<code>fib(10)</code>得到结果69，不错，速度也还行，换个大的数字，试试100，这时你会发现，这个程序执行不出结果了，为什么？递归太深了！要计算的子问题太多了！</p>
-
-<p>所以，我们需要改进下，我们保存每次计算出来的子问题的解，用什么保存呢？用Python中的dict！那怎么实现保存子问题的解呢？用Python中的装饰器！</p>
-
-<p>如果不是很了解Python的装饰器，可以快速看下<a href="http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/">这篇总结中关于装饰器的解释：Python Basics</a></p>
-
-<p>修改刚才的程序，得到如下代码，定义一个函数<code>memo</code>返回我们需要的装饰器，这里用<code>cache</code>保存子问题的解，key是方法的参数，也就是数字<code>n</code>，值就是<code>fib(n)</code>返回的解。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
-</span><span class="line">
-</span><span class="line"><span class="k">def</span> <span class="nf">memo</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-</span><span class="line">    <span class="n">cache</span><span class="o">=</span><span class="p">{}</span>
-</span><span class="line">    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-</span><span class="line">        <span class="k">if</span> <span class="n">args</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
-</span><span class="line">            <span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span><span class="o">=</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-</span><span class="line">        <span class="k">return</span> <span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">wrap</span>
-</span><span class="line">
-</span><span class="line"><span class="nd">@memo</span>
-</span><span class="line"><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">fib</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p>重新运行下<code>fib(100)</code>，你会发现这次很快就得到了结果<code>573147844013817084101</code>，这就是动态规划的威力，上面使用的是第一种带备忘录的递归实现方式。</p>
-
-<p><strong>带备忘录的递归方式的优点就是易于理解，易于实现，代码简洁干净，运行速度也不错，直接从需要求解的问题出发，而且只计算需要求解的子问题，没有多余的计算。但是，它也有自己的缺点，因为是递归形式，所以有限的栈深度是它的硬伤，有些问题难免会出现栈溢出了。</strong></p>
-
-<p>于是，迭代版本的实现方式就诞生了！</p>
-
-<p><strong>迭代实现方式有2个好处：1.运行速度快，因为没有用栈去实现，也避免了栈溢出的情况；2.迭代实现的话可以不使用dict来进行缓存，而是使用其他的特殊cache结构，例如多维数组等更为高效的数据结构。</strong></p>
-
-<p>那怎么把递归版本转变成迭代版本呢？</p>
-
-<p><strong>这就是递归实现和迭代实现的重要区别：递归实现不需要去考虑计算顺序，只要给出问题，然后自顶向下去解就行；而迭代实现需要考虑计算顺序，并且顺序很重要，算法在运行的过程中要保证当前要计算的问题中的子问题的解已经是求解好了的。</strong></p>
-
-<p>斐波那契数列的迭代版本很简单，就是按顺序来计算就行了，不解释，关键是你可以看到我们就用了3个简单变量就求解出来了，没有使用任何高级的数据结构，节省了大量的空间。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">fib_iter</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">n</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>
-</span><span class="line">    <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span>
-</span><span class="line">    <span class="k">while</span> <span class="n">n</span><span class="o">&gt;=</span><span class="mi">2</span><span class="p">:</span>
-</span><span class="line">        <span class="n">c</span><span class="o">=</span><span class="n">a</span><span class="o">+</span><span class="n">b</span>
-</span><span class="line">        <span class="n">a</span><span class="o">=</span><span class="n">b</span>
-</span><span class="line">        <span class="n">b</span><span class="o">=</span><span class="n">c</span>
-</span><span class="line">        <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">c</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>斐波那契数列的变种经常出现在上楼梯的走法问题中，每次只能走一个台阶或者两个台阶，广义上思考的话，<strong>动态规划也就是一个连续决策问题，到底当前这一步是选择它(走一步)还是不选择它(走两步)呢?</strong></p>
-
-<p>其他问题也可以很快地变相思考发现它们其实是一样的，例如求二项式系数<code>C(n,k)</code>，杨辉三角(求从源点到目标点有多少种走法)等等问题。</p>
-
-<p>二项式系数<code>C(n,k)</code>表示从n个中选k个，假设我们现在n个中的第1个，考虑是否选择它。如果选择它的话，那么我们还需要从剩下的n-1个中选k-1个，即<code>C(n-1,k-1)</code>；如果不选择它的话，我们需要从剩下的n-1中选k个，即<code>C(n-1,k)</code>。所以，<code>C(n,k)=C(n-1,k-1)+C(n-1,k)</code>。</p>
-
-<p>结合前面的装饰器，我们很快便可以实现求二项式系数的递归实现代码，其中的<code>memo</code>函数完全没变，只是在函数<code>cnk</code>前面添加了<code>@memo</code>而已，就这么简单！</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
-</span><span class="line">
-</span><span class="line"><span class="k">def</span> <span class="nf">memo</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-</span><span class="line">    <span class="n">cache</span><span class="o">=</span><span class="p">{}</span>
-</span><span class="line">    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-</span><span class="line">        <span class="k">if</span> <span class="n">args</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
-</span><span class="line">            <span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span><span class="o">=</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-</span><span class="line">        <span class="k">return</span> <span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">wrap</span>
-</span><span class="line">
-</span><span class="line"><span class="nd">@memo</span>
-</span><span class="line"><span class="k">def</span> <span class="nf">cnk</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span> <span class="c">#the order of `if` should not change!!!</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">0</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">cnk</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">+</span><span class="n">cnk</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>它的迭代版本也比较简单，这里使用了<code>defaultdict</code>，略高级的数据结构，和dict不同的是，当查找的key不存在对应的value时，会返回一个默认的值，这个很有用，下面的代码可以看到。</p>
-
-<p>如果不了解<code>defaultdict</code>的话可以看下<a href="http://blog.jobbole.com/65218/">这篇文章：Python中的高级数据结构</a></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-</span><span class="line">
-</span><span class="line"><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span>
-</span><span class="line"><span class="n">C</span><span class="o">=</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-</span><span class="line"><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-</span><span class="line">    <span class="n">C</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
-</span><span class="line">    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-</span><span class="line">        <span class="n">C</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">]</span><span class="o">=</span><span class="n">C</span><span class="p">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">C</span><span class="p">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">col</span><span class="p">]</span>
-</span><span class="line">
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">])</span> <span class="c">#120</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>杨辉三角大家都熟悉，在国外这个叫<code>Pascal Triangle</code>，它和二项式系数特别相似，看下图，除了两边的数字之外，里面的任何一个数字都是由它上面相邻的两个元素相加得到，想想<code>C(n,k)=C(n-1,k-1)+C(n-1,k)</code>不也就是这个含义吗?</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/sanjiao.png" alt="image" /></p>
-
-<p>所以说，顺序对于迭代版本的动态规划实现很重要，下面举个实例，用动态规划解决有向无环图的单源最短路径问题。假设有如下图所示的图，当然，我们看到的是这个有向无环图经过了拓扑排序之后的结果，从a到f的最短路径用灰色标明了。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/dag_sp.png" alt="image" /></p>
-
-<p>好，怎么实现呢? </p>
-
-<p><strong>我们有两种思考方式：</strong></p>
-
-<p><strong>1.”去哪里?”：我们顺向思维，首先假设从a点出发到所有其他点的距离都是无穷大，然后，按照拓扑排序的顺序，从a点出发，接着更新a点能够到达的其他的点的距离，那么就是b点和f点，b点的距离变成2，f点的距离变成9。因为这个有向无环图是经过了拓扑排序的，所以按照拓扑顺序访问一遍所有的点(到了目标点就可以停止了)就能够得到a点到所有已访问到的点的最短距离，也就是说，当到达哪个点的时候，我们就找到了从a点到该点的最短距离，拓扑排序保证了后面的点不会指向前面的点，所以访问到后面的点时不可能再更新它前面的点的最短距离！这种思维方式的代码实现就是迭代版本。</strong></p>
-
-<p><strong>这里涉及到了拓扑排序，我的博客中还没有讲解，所以下面的代码已经将输入的点进行了拓扑排序，待我更新了图算法那篇文章再来更新这里的代码，谅解。</strong></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">topsort</span><span class="p">(</span><span class="n">W</span><span class="p">):</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">W</span>
-</span><span class="line">
-</span><span class="line"><span class="k">def</span> <span class="nf">dag_sp</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-</span><span class="line">    <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">u</span><span class="p">:</span><span class="nb">float</span><span class="p">(</span><span class="s">&#39;inf&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">W</span><span class="p">}</span> <span class="c">#</span>
-</span><span class="line">    <span class="n">d</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span class="line">    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">topsort</span><span class="p">(</span><span class="n">W</span><span class="p">):</span>
-</span><span class="line">        <span class="k">if</span> <span class="n">u</span> <span class="o">==</span> <span class="n">t</span><span class="p">:</span> <span class="k">break</span>
-</span><span class="line">        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">W</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
-</span><span class="line">            <span class="n">d</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">W</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">])</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
-</span><span class="line">
-</span><span class="line"><span class="c">#邻接表</span>
-</span><span class="line"><span class="n">W</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:{</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="mi">9</span><span class="p">},</span><span class="mi">1</span><span class="p">:{</span><span class="mi">2</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="mi">6</span><span class="p">},</span><span class="mi">2</span><span class="p">:{</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">},</span><span class="mi">3</span><span class="p">:{</span><span class="mi">4</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="mi">3</span><span class="p">},</span><span class="mi">4</span><span class="p">:{</span><span class="mi">5</span><span class="p">:</span><span class="mi">4</span><span class="p">},</span><span class="mi">5</span><span class="p">:{}}</span>
-</span><span class="line"><span class="n">s</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">dag_sp</span><span class="p">(</span><span class="n">W</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">t</span><span class="p">))</span> <span class="c">#7</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>用图来表示计算过程就是下面所示：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/dag_sp_iter.png" alt="image" /></p>
-
-<p><strong>2.”从哪里来?”：我们逆向思维，目标是要到f，那从a点经过哪个点到f点会近些呢?只能是求解从a点出发能够到达的那些点哪个距离f点更近，这里a点能够到达b点和f点，f点到f点距离是0，但是a到f点的距离是9，可能不是最近的路，所以还要看b点到f点有多近，看b点到f点有多近就是求解从b点出发能够到达的那些点哪个距离f点更近，所以又绕回来了，也就是递归下去，直到我们能够回答从a点经过哪个点到f点会更近。这种思维方式的代码实现就是递归版本。</strong></p>
-
-<p>这种情况下，不需要输入是经过了拓扑排序的，所以你可以任意修改输入<code>W</code>中节点的顺序，结果都是一样的，而上面采用迭代实现方式必须要是拓扑排序了的，从中你就可以看出迭代版本和递归版本的区别了。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
-</span><span class="line"><span class="k">def</span> <span class="nf">memo</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-</span><span class="line">    <span class="n">cache</span><span class="o">=</span><span class="p">{}</span>
-</span><span class="line">    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-</span><span class="line">        <span class="k">if</span> <span class="n">args</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
-</span><span class="line">            <span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span><span class="o">=</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-</span><span class="line">            <span class="c"># print(&#39;cache {0} = {1}&#39;.format(args[0],cache[args]))</span>
-</span><span class="line">        <span class="k">return</span> <span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">wrap</span>
-</span><span class="line">
-</span><span class="line"><span class="k">def</span> <span class="nf">rec_dag_sp</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-</span><span class="line">    <span class="nd">@memo</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">d</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
-</span><span class="line">        <span class="k">if</span> <span class="n">u</span> <span class="o">==</span> <span class="n">t</span><span class="p">:</span> <span class="k">return</span> <span class="mi">0</span>
-</span><span class="line">        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span><span class="o">+</span><span class="n">d</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">W</span><span class="p">[</span><span class="n">u</span><span class="p">])</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">d</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c">#邻接表</span>
-</span><span class="line"><span class="n">W</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:{</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="mi">9</span><span class="p">},</span><span class="mi">1</span><span class="p">:{</span><span class="mi">2</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="mi">6</span><span class="p">},</span><span class="mi">2</span><span class="p">:{</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">},</span><span class="mi">3</span><span class="p">:{</span><span class="mi">4</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="mi">3</span><span class="p">},</span><span class="mi">4</span><span class="p">:{</span><span class="mi">5</span><span class="p">:</span><span class="mi">4</span><span class="p">},</span><span class="mi">5</span><span class="p">:{}}</span>
-</span><span class="line"><span class="n">s</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">rec_dag_sp</span><span class="p">(</span><span class="n">W</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">t</span><span class="p">))</span> <span class="c">#7</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>用图来表示计算过程就是下面所示：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/dag_sp_rec.png" alt="image" /></p>
-
-<p>下面是参考内容1对DAG求单源最短路径的动态规划问题的总结，比较难理解，不知道我自己理解得对不对，可以忽视注释，:-)</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/dp_summary.png" alt="image" /></p>
-
-<p>好，我们差不多搞清楚了动态规划的本质以及两种实现方式的优缺点，下面我们来实践下，举最常用的例子：<a href="http://hujiaweibujidao.github.io/blog/2014/05/18/matrix-chain/">矩阵链乘问题，内容较多，所以请点击链接过去阅读完了之后回来看总结</a>！</p>
-
-<p>OK，希望我把动态规划将清楚了，总结下：<strong>动态规划其实就是一个连续决策的过程，每次决策我们可能有多种选择(二项式系数和0-1背包问题中我们只有两个选择，DAG图的单源最短路径中我们的选择要看点的出边或者入边，矩阵链乘问题中就是矩阵链可以分开的位置总数…)，我们每次选择最好的那个作为我们的决策。所以，动态规划的时间复杂度其实和这两者有关，也就是子问题的个数以及子问题的选择个数，一般情况下动态规划算法的时间复杂度就是两者的乘积。动态规划有两种实现方式：一种是带备忘录的递归形式，这种方式直接从原问题出发，遇到子问题就去求解子问题并存储子问题的解，下次遇到的时候直接取出来，问题求解的过程看起来就像是先自顶向下地展开问题，然后自下而上的进行决策；另一个实现方式是迭代方式，这种方式需要考虑如何给定一个子问题的求解方式，使得后面求解规模较大的问题是需要求解的子问题都已经求解好了，它的缺点就是可能有些子问题不要算但是它还是算了，而递归实现方式只会计算它需要求解的子问题。</strong></p>
-
-<p>如果你感觉你有所顿悟，来试试写写<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/">最长公共子序列吧，这篇文章中给出了Python版本的5种实现方式</a>哟！</p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/">http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
