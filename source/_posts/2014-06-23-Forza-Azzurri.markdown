@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Dog Face Recognition"
+title: "Forza Azzurri"
 date: 2014-06-22 22:30
 comments: true
 categories: picture
