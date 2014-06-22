@@ -9,7 +9,7 @@
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="Algorithms: Longest Common Subsequence 最长公共子序列是典型的动态规划问题，如果不理解动态规划请移步先看这篇动态规划的总结，否则本篇文章中的代码实现会不理解的哟！ 参考内容： 1.算法导论 2.算法设计、分析与实现从入门到精通 1.问题描述 2. &hellip;">
+  <meta name="description" content="Algorithms: Longest Common Subsequence 最长公共子序列(LCS)是典型的动态规划问题，如果不理解动态规划请移步先看这篇动态规划的总结，否则本篇文章中的代码实现会不理解的哟！ LCS问题的一个变种就是求最长单调递增子序列， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -129,7 +129,9 @@
 
 <div class="entry-content"><h4 id="centeralgorithms-longest-common-subsequencecenter"><center>Algorithms: Longest Common Subsequence</center></h4>
 
-<p>最长公共子序列是典型的动态规划问题，如果不理解动态规划请移步先看<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/">这篇动态规划的总结</a>，否则本篇文章中的代码实现会不理解的哟！</p>
+<p>最长公共子序列(LCS)是典型的动态规划问题，如果不理解动态规划请移步先看<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/">这篇动态规划的总结</a>，否则本篇文章中的代码实现会不理解的哟！</p>
+
+<p>LCS问题的一个变种就是求最长单调递增子序列，它的求解就是先将原序列A进行排序得到序列B，然后求解序列A和序列B的最长公共子序列。</p>
 
 <p>参考内容：</p>
 
