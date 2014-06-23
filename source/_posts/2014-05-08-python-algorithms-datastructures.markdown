@@ -98,7 +98,7 @@ Dictionary的各个操作的性能
 
 ![image](http://hujiaweibujidao.github.io/images/201405/dictionary.png)
 
-Dictionary和List的性能比较：list基本上随着其元素的数目呈线性增长，而dictionary一直维持在很短很短的时间内(我的机子测试的结果都是`0.001ms`)。
+Dictionary和List的性能比较：list基本上随着其元素的数目呈线性增长，而dictionary一直维持在很短很短的时间内(我的机子测试的结果都是`0.001ms`)。Dictionary类似Java中的`HashMap`，内部实现使用了前面提到的hash函数，所以查找和删除都是常数时间的。
 
 ```
 import timeit
