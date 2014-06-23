@@ -245,6 +245,10 @@ Chapter 6 Trees and Tree Algorithms   </p>
 </span><span class="line"><span class="c"># (&#39;pop_end &#39;, 0.00023603439331054688, &#39;milliseconds&#39;)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<p>还有一个有意思的对比是list的<code>append(value)</code>和<code>insert(0, value)</code>，即一个从后面插入(后插)，另一个从前面插入(前插)，前者的效率远远高于后者。</p>
+
+<p>需要记住的是Python的list的实现不是类似数据结构中的单链表，而是类似数组，也就是说list中的元素保存在一片连续的内存区域中，这样的话只有知道元素索引就能确定元素的内存位置，从而直接取出该位置上的值，但是它的缺点在于前插需要移动元素，而且随着list中元素的增多需要移动的元素也就越多，花费的时间也就自然多了。而单链表不同，单链表要得到某个位置上的元素必须要从头开始遍历，但是它的插入操作(前插或者后插)基本上都是恒定的时间，与链表中元素的多少没有关系，因为元素之间用“指针”维护着他们的关系。</p>
+
 <p>(2)Dictionary</p>
 
 <p>Dictionary的各个操作的性能</p>
@@ -281,7 +285,7 @@ Chapter 6 Trees and Tree Algorithms   </p>
 
 <p>2.栈：LIFO结构，后进先出</p>
 
-<p>栈能解决的问题很多，比如逆波兰表达式求值，得到一个十进制数的二进制表达，检查括号匹配问题以及图的深度搜索等等，都很简单，可查看参考内容1学习。</p>
+<p>栈能解决的问题很多，比如逆波兰表达式求值，求一个十进制数的二进制表达，检查括号匹配问题以及图的深度搜索等等，都很简单，可查看参考内容1学习。</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/201405/stack.png" alt="image" /></p>
 
