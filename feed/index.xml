@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-06-23T15:21:17+08:00</updated>
+  <updated>2014-06-23T15:24:55+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -3628,6 +3628,10 @@ m[i][j]= \left\{
 </span><span class="line"><span class="c"># python</span>
 </span><span class="line"><span class="c"># java</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>8.其他</p>
+
+<p>(1)Python中<code>{1,2,3,4,5}</code>是一个set，<code>{1:2,2:4,3:6,4:8,5:10}</code>是一个dict，但是空的<code>{}</code>是一个dict！</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/">http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>

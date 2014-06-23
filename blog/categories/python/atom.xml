@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-06-23T15:21:17+08:00</updated>
+  <updated>2014-06-23T15:24:55+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -417,6 +417,10 @@ print lst
 # python
 # java
 ```</p>
+
+<p>8.其他</p>
+
+<p>(1)Python中<code>{1,2,3,4,5}</code>是一个set，<code>{1:2,2:4,3:6,4:8,5:10}</code>是一个dict，但是空的<code>{}</code>是一个dict！</p>
 
 ]]></content>
   </entry>
