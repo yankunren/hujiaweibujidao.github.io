@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>CS 6-Infinite Series - Hujiawei Bujidao</title>
+  <title>Numerical Methods using Matlab - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="微积分总结 Summary of Calculus
-逸夫图书馆, 2014/4/26 第六部分 无穷级数 第一节 常数项级数的概念与基本性质
-常数项级数的概念，常数项级数的基本性质 无穷级数的思想来源于近似计算圆面积这个问题，考虑用内接正方形来近似计算。 数列{}的元素之和得到的表达式就叫做( &hellip;">
+  <meta name="description" content="一本关于数值算法与应用的总结小书 总共写了四个章节：[点击章节标题可以直接查看并下载 (^o^)/~] 第一章 线性方程组求解 内容包括：高斯消去法，LU分解，Cholesky分解，矩阵的逆矩阵求解 第二章 非线性方程求解 内容包括：二分法，牛顿法，割线法，IQI法，Zeroin算法 第三章 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-6">
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab.markdown">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
@@ -106,7 +104,7 @@
 		
   <header>
     
-      <h1 class="entry-title">CS 6-Infinite Series</h1>
+      <h1 class="entry-title">Numerical Methods Using Matlab</h1>
     
     
       <p class="meta">
@@ -122,77 +120,48 @@
   
 
 
-<time datetime="2014-04-27T14:29:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+<time datetime="2014-04-23T22:13:00+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><strong><center>微积分总结 Summary of Calculus</center></strong>
-<strong><center>逸夫图书馆, 2014/4/26</center></strong></p>
+<div class="entry-content"><p>一本关于数值算法与应用的总结小书</p>
 
-<h3 id="center-center"><center>第六部分 无穷级数</center></h3>
+<p>总共写了四个章节：[点击章节标题可以直接查看并下载 (^o^)/~]   </p>
 
-<h4 id="section">第一节 常数项级数的概念与基本性质</h4>
-<p>常数项级数的概念，常数项级数的基本性质</p>
+<ul>
+  <li><a href="/files/nm-chapter1.pdf">第一章 线性方程组求解</a></li>
+</ul>
 
-<p>无穷级数的思想来源于近似计算圆面积这个问题，考虑用内接正方形来近似计算。</p>
+<p>内容包括：高斯消去法，LU分解，Cholesky分解，矩阵的逆矩阵求解</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/infty_round.png" alt="image" /></p>
+<ul>
+  <li><a href="/files/nm-chapter2.pdf">第二章 非线性方程求解</a></li>
+</ul>
 
-<p>数列{<script type="math/tex">u_{n}</script>}的元素之和得到的表达式<script type="math/tex">u_{1}+u_{2}+\cdots+u_{n}+\cdots</script>就叫做(常数项)(无穷)级数，其前n项之和又可以组成一个新的数列{<script type="math/tex">s_{n}</script>}，即<script type="math/tex">s_{n}=\Sigma_{i=1}^{n}u_{i}</script>，一般项<script type="math/tex">s_{n}</script>称为部分和。</p>
+<p>内容包括：二分法，牛顿法，割线法，IQI法，Zeroin算法</p>
 
-<p>如果部分和数列{<script type="math/tex">s_{n}</script>}有极限，那么这个无穷级数<script type="math/tex">u_{n}=\Sigma_{i=1}^{n}u_{i}</script>就是收敛的，极限s就叫做这个无穷级数的和。</p>
+<ul>
+  <li><a href="/files/nm-chapter3.pdf">第三章 矩阵特征值和奇异值求解</a></li>
+</ul>
 
-<p>级数收敛的必要条件是它的一般项<script type="math/tex">u_{n}</script>趋近于0，但不是充分条件！比如，调和级数<script type="math/tex">1+\frac{1}{2}+\frac{1}{3}+\frac{1}{4}+\cdots+\frac{1}{n}+\cdots</script>的一般项<script type="math/tex">u_{n}=\frac{1}{n}</script>也是趋近于0的，但是调和级数是发散的，采用反证法即可证明得到，证明如下，<script type="math/tex">s_{2n}-s{n}>\frac{1}{2}</script>并不趋近于0，所以不收敛。</p>
+<p>内容包括：基本幂法，逆幂法和移位幂法，QR分解，Householder变换，实用QR分解技术，奇异值分解SVD</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/tiaohe_series.png" alt="image" /></p>
+<ul>
+  <li><a href="/files/nm-chapter4.pdf">第四章 曲线拟合和多项式插值</a></li>
+</ul>
 
-<h4 id="section-1">第二节 常数项级数敛散性的判别方法</h4>
-<p>正项级数及其敛散性的判别方法，交错级数及其敛散性的判别方法，绝对收敛与条件收敛</p>
+<p>内容包括：曲线拟合，拉格朗日插值多项式，牛顿插值多项式，分段线性插值，保形分段三次插值，三次样条插值</p>
 
-<p>正项级数<script type="math/tex">u_{n}=\Sigma_{i=1}^{n}u_{i}</script>收敛的充分必要条件是它的部分和数列{<script type="math/tex">s_{n}</script>}有界。</p>
-
-<p>比值审敛法，对于正项级数<script type="math/tex">u_{n}=\Sigma_{i=1}^{n}u_{i}</script>，若<script type="math/tex">\lim_{n\to \infty}\frac{u_{n+1}}{u_{n}}=\beta</script>，当<script type="math/tex">\beta>1</script>时级数发散，当<script type="math/tex">% <![CDATA[
-\beta<1 %]]></script>时级数收敛，当<script type="math/tex">\beta=1</script>时级数可能发散可能收敛。</p>
-
-<p>还有其他的一些判断级数收敛的方法，略过。</p>
-
-<h4 id="section-2">第三节 幂级数</h4>
-<p>函数项级数的基本概念，幂级数及其敛散性，幂级数的运算，函数展开成幂级数，幂级数在近似计算中的应用</p>
-
-<p>函数项级数就是定义在某个区间上的函数族之和，表达式类似<script type="math/tex">u_{1}(x)+u_{2}(x)+u_{3}(x)+\cdots+u_{n}(x)+\cdots</script>，对于某个确定的值<script type="math/tex">x=x_{0}</script>，函数项级数<script type="math/tex">u_{1}(x_{0})+u_{2}(x_{0})+u_{3}(x_{0})+\cdots+u_{n}(x_{0})+\cdots</script>就变成常数项级数，如果该常数项级数收敛的话，那么点<script type="math/tex">x_{0}</script>就是函数项级数在定义区间上的一个收敛点，所有收敛点就组成了收敛域。</p>
-
-<p>幂级数就是最常用的一类函数项级数，它的形式如下：</p>
-
-<script type="math/tex; mode=display">\Sigma_{n=0}^{\infty}a_{n}x^{n}=a_{0}x^{0}+a_{1}x^{1}+\cdots+a_{n}x^{n}+\cdots</script>
-
-<p>一种判断幂级数收敛的办法是阿贝尔定理，如果级数<script type="math/tex">\Sigma_{n=0}^{\infty}a_{n}x^{n}</script>当<script type="math/tex">x=x_{0}(x_{0} \ne 0)</script>时收敛，那么对于开区间<script type="math/tex">(-\|x_{0}\|,\|x_{0}\|)</script>内的任何x都有幂级数收敛，反之，如果当<script type="math/tex">x=x_{0}(x_{0} \ne 0)</script>时发散，那么对于闭区间<script type="math/tex">[-\|x_{0}\|,\|x_{0}\|]</script>外的任何x都有幂级数发散。其实就是对于幂级数的收敛半径R内部任意x都收敛，外部都发散！</p>
-
-<p>许多应用中，我们都希望知道如何将一个给定的函数f(x)展开成幂级数的形式，这样相当于对函数进行近似了，可以大大简化计算量，于是便有了泰勒级数！</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/tylor_serials.png" alt="image" /></p>
-
-<p>特别地，当<script type="math/tex">x_{0}=0</script>时泰勒级数又叫麦克劳林级数，展开式称为麦克劳林展开式</p>
-
-<script type="math/tex; mode=display">f(x)=\Sigma_{n=0}^{n}\frac{1}{n!}f^{n}(0)x^{n}</script>
-
-<p>将函数展开成幂级数的步骤：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/miseries1.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/miseries2.png" alt="image" /></p>
-
-<p>例如，对于函数<script type="math/tex">e^{x}</script>幂级数展开</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/ex.png" alt="image" /></p>
-
-<p>常用的幂级数：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/common_series.png" alt="image" /></p>
+<p><img src="/images/201311/nm-cover.png" width="600" height="600" title="" />
+<img src="/images/201311/nm-chapter.png" width="600" height="600" title="" />
+<img src="/images/201311/nm-math.png" width="600" height="600" title="" />
+<img src="/images/201311/nm-code.png" width="600" height="600" title="" /></p>
 
 <p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-6/">http://hujiaweibujidao.github.io/blog/2014/04/27/calculus-summary-chapter-6/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab.markdown/">http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab.markdown/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 </div>
 
 
@@ -215,7 +184,7 @@
   
 
 
-<time datetime="2014-04-27T14:29:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+<time datetime="2014-04-23T22:13:00+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2014</time>
 				
 
 <span class="categories">
@@ -236,10 +205,10 @@
 			
 			<p class="meta">
 				
-				<a class="basic-alignment left" href="/blog/2014/04/27/calculus-summary-chapter-5/" title="Previous Post: CS 5-Definite Integral">&laquo; CS 5-Definite Integral</a>
+				<a class="basic-alignment left" href="/blog/2014/04/23/numerical-methods-using-matlab/" title="Previous Post: Numerical Methods using Matlab">&laquo; Numerical Methods using Matlab</a>
 				
 				
-				<a class="basic-alignment right" href="/blog/2014/04/27/calculus-summary-chapter-7/" title="Next Post: CS 7-Vector Algebra">CS 7-Vector Algebra &raquo;</a>
+				<a class="basic-alignment right" href="/blog/2014/04/24/calculus-summary/" title="Next Post: Calculus Summary">Calculus Summary &raquo;</a>
 				
 			</p>
 		</footer>
