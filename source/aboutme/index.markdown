@@ -15,7 +15,7 @@ category='coder'
 birthday='1991/01/12'
 location='Beijing, P.R.China'
 university='Tsinghua University'
-technologies='Python/Java/Shell/Android/iOS'
+technologies='Python/Java/Matlab/Android/iOS'
 emailaddress='hujiawei090807@gmail.com'
 favorites='coding, travelling, music and Conan'
 echo "Hello,all. My name is $name, a $gender $category."
@@ -27,13 +27,14 @@ echo "Hope you enjoy my bolg site here! Have fun! :-) "
 
 大家好，我叫Hujiawei，[五道口男子职业技术与艺术学院](http://www.tsinghua.edu.cn/publish/th/index.html)计算机系2013届研究生，本科就读于伟大的[左家垅男子职业技术学院](http://www.csu.edu.cn/)，热爱编程，喜欢Java/C/Linux/Android/iOS/Python/RaspberryPi等等，在湖南永景股份有限公司/三星中国研究院实习过，开发过大型(商业)网站([ASP.NET](http://www.cnblogs.com/yinger/category/305399.html)和J2EE SSH架构)，也开发过(商用)桌面软件（[RCP](http://www.cnblogs.com/yinger/category/339483.html)和[JavaFx](http://www.cnblogs.com/yinger/category/372015.html)），同样也做过Android应用（[微微博TinyWeibo](http://hujiaweiyinger.diandian.com/post/2013-05-18/project_weiweibo)，爱学习iStudy和Gaze移植等）和小游戏（8Puzzle等），iOS无实际开发经验。我对移动互联网和数据挖掘/机器学习比较感兴趣，如果你有相同兴趣欢迎联系我，交个朋友。
 
-我的邮箱地址：[别逗了，你要想联系我肯定知道代码中哪行有我的邮箱的啦. :-)]
+我的邮箱地址：[别逗了，你要想联系我肯定知道代码中哪行有我的邮箱的啦. :-)] [个人简历](http://hujiaweibujidao.github.io/resume.html) [英文简历下载](http://hujiaweibujidao.github.io/hujiawei_2014.pdf)
 
 我的GitHub主页： <https://github.com/hujiaweibujidao>
 
 中南大学计科0902班毕业纪念网址：<http://hujiaweibujidao.github.io/csucs0902/>
 
 PS：以后都会呆在北京，如果有不错的实习机会请和我联系，最好是和移动开发或者数据挖掘有关，谢谢！
+
 
 ####原博客地址：
 

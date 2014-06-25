@@ -39,7 +39,7 @@ Python分类下的系列文章，不断更新中
 
 (5)[贪心](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-greedy/) [还未完成]
 
-(6)[动态规划](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/)  详述动态规划的思想和两种实现方式及其对比
+(6)[动态规划](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/)  详述动态规划的思想和两种实现方式及其对比，并结合矩阵链乘、DAG的单源最短路径以及最长公共子序列等问题进行介绍
 
 (7)[图总结](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Graphs/) [还未完成]
 
