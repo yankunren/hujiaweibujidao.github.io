@@ -19,7 +19,7 @@ footer: true
 
 ### 第一部分 高等数学总结
 
-第一篇 [微积分总结](http://hujiaweibujidao.github.io/blog/2014/04/24/calculus-summary/)  [New!]
+第一篇 [微积分总结](http://hujiaweibujidao.github.io/blog/2014/04/24/calculus-summary/)  [New!点击进入详情]
 
 内容预览：
 
@@ -45,7 +45,7 @@ footer: true
 
 ----------
 
-第二篇 [线性代数总结](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary/)  [New!]
+第二篇 [线性代数总结](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary/)  [New!点击进入详情]
 
 内容预览：
 
@@ -63,7 +63,7 @@ footer: true
 
 ----------
 
-第三篇 [概率论与数理统计总结](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary/) [New!]
+第三篇 [概率论与数理统计总结](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary/) [New!点击进入详情]
 
 1.[概率和统计量](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/)
 
@@ -77,7 +77,7 @@ footer: true
 
 (3)[分布之多维随机变量及其分布](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-2/)
 
-4.[假设检验](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-4/)
+4.[假设检验](http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-4/)  [未完成]
 
 To do list: 显著性检验，ANOVA......
 
@@ -104,6 +104,9 @@ To do list: 显著性检验，ANOVA......
 * [第四章 曲线拟合和多项式插值](/files/nm-chapter4.pdf)
 
 内容包括：曲线拟合，拉格朗日插值多项式，牛顿插值多项式，分段线性插值，保形分段三次插值，三次样条插值
+
+
+
 
 
 
