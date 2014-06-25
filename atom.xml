@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-06-25T10:54:58+08:00</updated>
+  <updated>2014-06-25T14:56:52+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -907,7 +907,7 @@ SK=\frac{3(\bar{X}-M)}{s},\quad M=Median,\bar{X}=Mean,s=SD
 
 <p>$E(x)=\Sigma xP(X=x)=\mu \quad Var(x)=E(x-\mu)^{2}=\Sigma (x-\mu)^2P(X=x)=E(x^{2})-(E(x))^{2}$</p>
 
-<p>[注：上面的期望的等式是对于离散型随机变量x，如果是连续型随机变量x，那么$E=\int<em>{-\infty}^{\infty} xf(x)dx$，同理，方差就是$D=\int</em>{-\infty}^{\infty} (x-E)^{2}f(x)dx$，期望描述的是数据的集中趋势，方差描述的数据的偏移程度]</p>
+<p>[注：上面的期望的等式是对于离散型随机变量x，如果是连续型随机变量x，那么<script type="math/tex">E=\int_{-\infty}^{\infty} xf(x)dx</script>，同理，方差就是<script type="math/tex">D=\int_{-\infty}^{\infty} (x-E)^{2}f(x)dx</script>，期望描述的是数据的集中趋势，方差描述的数据的偏移程度]</p>
 
 <p>线性变换之后的期望与方差：</p>
 
