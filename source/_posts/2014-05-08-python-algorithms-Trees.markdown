@@ -7,10 +7,10 @@ categories: algorithm
 published: true
 ---
 
-**<center>Python Algorithms Python算法系列</center>**
+**<center>Python数据结构篇(4)</center>**
 **<center>逸夫图书馆, 2014/5/8</center>**
 
-### <center>树</center>
+### <center>树总结</center>
 
 参考内容：
 
@@ -20,7 +20,7 @@ Chapter 6 Trees and Tree Algorithms
 
 2.[算法导论](http://en.wikipedia.org/wiki/Introduction_to_Algorithms)
 
-#### 树的总结 
+#### 树总结 
 
 1.二叉搜索树 [on_wiki](http://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9)：一种特殊的二叉树，它满足下面的性质：任何一个节点的key值都比它左子树上的节点的key值要大，但是比它右子树上的节点的key值要小。节点查找，插入，删除等操作的时间复杂度都是$O(n)$
 
