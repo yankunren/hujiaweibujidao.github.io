@@ -134,7 +134,7 @@ Python中很多地方都使用了hash策略，在前面的[Python数据结构篇
 
 ![image](http://hujiaweibujidao.github.io/images/algos/graphrep.png)
 
-邻接表 Adjacency Lists：因为历史原因，邻接表都是指链表list，但实际上也可以是其他的，例如在python中也可以是set或者dict，不同的表示方式有各自的优缺点，它们判断节点的连接关系和节点的度的方式甚至两个操作的性能都不太一样。
+邻接表 Adjacency Lists：因为历史原因，邻接表往往都是指链表list，但实际上也可以是其他的，例如在python中也可以是set或者dict，不同的表示方式有各自的优缺点，它们判断节点的连接关系和节点的度的方式甚至两个操作的性能都不太一样。
 
 ① adjacency lists 表示形式
 
@@ -342,17 +342,17 @@ This pattern isn’t useful only when building trees, of course. You could use i
 
 **[与图有关的python模块]**：
 
-• NetworkX: http://networkx.lanl.gov
+• NetworkX: <http://networkx.lanl.gov>
 
-• python-graph: http://code.google.com/p/python-graph
+• python-graph: <http://code.google.com/p/python-graph>
 
-• Graphine: http://gitorious.org/projects/graphine/pages/Home
+• Graphine: <http://gitorious.org/projects/graphine/pages/Home>
 
-• Pygr: a graph database  http://bioinfo.mbi.ucla.edu/pygr  
+• Pygr: a graph database  <http://bioinfo.mbi.ucla.edu/pygr>  
  
-• Gato: a graph animation toolbox http://gato.sourceforge.net   
+• Gato: a graph animation toolbox <http://gato.sourceforge.net>   
 
-• PADS: a collection of graph algorithms  http://www.ics.uci.edu/~eppstein/PADS
+• PADS: a collection of graph algorithms  <http://www.ics.uci.edu/~eppstein/PADS>
 
 ----------
 
