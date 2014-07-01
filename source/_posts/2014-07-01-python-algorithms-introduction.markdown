@@ -80,3 +80,11 @@ Chapter 7: Greed is Good? Prove It! Greedy algorithms are usually easy to constr
 
 Chapter 8: Tangled Dependencies and Memoization. This chapter is about the design method (or, historically, the problem) called, somewhat confusingly, dynamic programming. It is an advanced technique that can be hard to master but that also yields some of the most enduring insights and elegant solutions in the field.
 
+
+----------
+
+问题1-2：Find a way of checking whether two strings are anagrams of each other (such as "debit card" and "bad credit"). How well do you think your solution scales? Can you think of a naïve solution that will scale very poorly?
+
+A simple and quite scalable solution would be to sort the characters in each string and compare the results. (In theory, counting the character frequencies, possibly using collections.Counter, would scale even better.) A really poor solution would be to compare all possible orderings of one string with the other. I can’t overstate how poor this solution is; in fact, algorithms don’t get much worse than this. Feel free to code it up, and see how large anagrams you can check. I bet you won’t get far.
+
+
