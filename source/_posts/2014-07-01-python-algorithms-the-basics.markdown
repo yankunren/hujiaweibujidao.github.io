@@ -63,7 +63,7 @@ the notion of running time complexity (as described in the next section) is base
 
 (2)Tip 2: For timing things, use timeit.
 
-使用`timeit`模块对运行时间进行分析，在前面的[数据结构篇中第三部分数据结构](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)的list中已经介绍过了timeit模块，在使用的时候需要注意前面的运行不会影响后面的重复的运行(例如，测试排序算法运行时间，如果将前面已经排好序的序列传递给后面的重复运行是不可以的)
+使用`timeit`模块对运行时间进行分析，在前面的[数据结构篇中第三部分数据结构](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)的list中已经介绍过了timeit模块，在使用的时候需要注意前面的运行不会影响后面的重复的运行(例如，分析排序算法运行时间，如果将前面已经排好序的序列传递给后面的重复运行是不可以的)
 
 ```python
 #timeit模块简单使用实例
