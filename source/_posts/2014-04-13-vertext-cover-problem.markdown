@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Algorithms: Vertext Cover Problem"
+title: "Problem: Vertext Cover Problem"
 date: 2014-04-13 23:57
 comments: true
 categories: algorithm
 ---
 
-#### <center>Algorithms: Vertext Cover Problem</center>
+#### <center>Problem: Vertext Cover Problem</center>
 
 顶点覆盖问题可以用几种不同的算法来实现，本篇文章使用的是分支限界法来实现，或许以后会介绍其他的实现算法，嘿嘿。
 
@@ -86,7 +86,7 @@ categories: algorithm
 
 该算法优先队列使用的是最小堆实现的(O(nlgn))，对顶点按照边排序使用的是快速排序算法(O(nlgn))，解空间树的深度最多为顶点数目n，每层都要进行分支定界，所以每层的时间复杂度为O(nlgn)，所以算法总的时间复杂度为O(n^2 lgn)。但是，为了实现分支定界，每个节点保存的信息量较多，空间复杂度较大。(有木有分析错了，我不太会分析复杂度)
 
-OJ系统的结果为：时间 156ms  空间 1.0MB
+青橙OJ系统的结果为：时间 156ms  空间 1.0MB
 
 本人对指针领悟能力有限，C++也是一知半解，OJ只能用C或者C++，所以下面的C++代码效率不高，仅供参考，:-)
 
@@ -466,3 +466,4 @@ int main() {
     return 0;
 }
 ```
+
