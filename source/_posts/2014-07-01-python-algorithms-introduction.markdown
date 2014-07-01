@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Python Algorithms - Greedy"
-date: 2014-07-01 10:00
+date: 2014-07-01 10:10
 comments: true
 categories: algorithm
 published: true
