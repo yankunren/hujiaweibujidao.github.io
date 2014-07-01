@@ -19,7 +19,7 @@ Tracey: I don’t think they covered that in basic.
 
 本节主要介绍了算法渐近运行时间的表示法和Python中树和图的实现方式。
 
-1.计算模型
+#### 1.计算模型
 
 Alan Turing的图灵机模型： **A Turing machine is a simple (abstract) device that can read from, write to, and move along an infinitely long strip of paper. ** The actual behavior of the machines varies. Each is a so-called finite state machine: it has a finite set of states (some of which indicate that it has finished), and every symbol it reads potentially triggers reading and/or writing and switching to a different state. You can think of this machinery as a set of rules. (“If I am in state 4 and see an X, I move one step to the left, write a Y, and switch to state 9.”) 
 
@@ -41,9 +41,9 @@ RAM模型(random-access machine)：标准的单核计算机，它大致有下面
 
 the notion of running time complexity (as described in the next section) is based on knowing how big a problem instance is, and that size is simply the amount of memory needed to encode it.   [算法的运行时间是基于问题的大小，这个大小是指问题的输入占用的内存空间大小]
 
-2.算法渐近运行时间
+#### 2.算法渐近运行时间
 
-主要介绍了大O符号、大$\Omega$符号以及大$\Theta$符号，这内容网上很多，略过，可以参考[wikipedia](http://en.wikipedia.org/wiki/Big_O_notation)
+主要介绍了大O符号、大$\Omega$符号以及大$\Theta$符号，这部分内容网上很多资料，此处略过，可以参考[wikipedia_大O符号](http://en.wikipedia.org/wiki/Big_O_notation)
 
 算法导论介绍到，对于三个符号可以做如下理解：$O$ = $\le$，$\Omega$ = $\ge$， $\Theta$ = $=$
 
@@ -51,11 +51,9 @@ the notion of running time complexity (as described in the next section) is base
 
 几种常见的运行时间以及算法实例 [wiki中的时间复杂度](http://zh.wikipedia.org/zh-cn/时间复杂度)
 
+![image](http://hujiaweibujidao.github.io/images/algos/complexity.png)
 
+#### 3.算法性能评估的经验
 
-
-
-
-
-3.
+(1)
 
