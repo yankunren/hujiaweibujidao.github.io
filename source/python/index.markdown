@@ -43,11 +43,25 @@ Python分类下的系列文章，不断更新中
 
 算法设计篇主要是阅读[Python Algorithms: Mastering Basic Algorithms in the Python Language](http://link.springer.com/book/10.1007%2F978-1-4302-3238-4)时写下的阅读记录，原书大部分内容结合了经典书籍[算法导论](http://en.wikipedia.org/wiki/Introduction_to_Algorithms)，所以内容更多，更加细致，主要是介绍了各种常用的算法设计思想，以及如何使用Python实现这些算法，这里使用了大量的第三方与数据结构有关的模块，因为该篇的重点是算法的思想以及实现，所以并没有去重头实现每个数据结构，但是在介绍算法的同时会分析Python内置数据结构以及第三方数据结构模块的优缺点。每篇文章都有实现代码，内容都比较多，简单算法一般是大致介绍下思想及算法流程，复杂的算法会给出各种图示和代码实现详细介绍。
 
-(5)[贪心](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-greedy/) [还未完成]
+(1)[Python Algorithms - C1 Introduction](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-introduction/) [还未完成]
 
-(6)[动态规划](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/)  详述动态规划的思想和两种实现方式及其对比
+(2)[Python Algorithms - C2 The basics](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/) [还未完成]
 
-(7)[图总结](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Graphs/) [还未完成]
+(3)[Python Algorithms - C3 Counting 101](http://hujiaweibujidao.github.io//blog/2014/07/01/python-algorithms-counting-101/) [还未完成]
+
+(4)[Python Algorithms - C4 Induction and Recursion and Reduction](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-induction/) [还未完成]
+
+(5)[Python Algorithms - C5 Traversal](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-traversal/) [还未完成]
+
+(6)[Python Algorithms - C6 Divide and Combine and Conquer](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-divide-and-combine-and-conquer/) [还未完成]
+
+(7)[Python Algorithms - C7 Greedy](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-greedy/) [还未完成]
+
+(8)[Python Algorithms - C8 Dynamic Programming](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-dynamic-programming/) 详述动态规划的思想和两种实现方式及其对比
+
+(9)[Python Algorithms - C9 Graphs](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs/) [还未完成]
+
+
 
 
 
