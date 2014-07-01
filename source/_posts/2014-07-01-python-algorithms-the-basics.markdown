@@ -12,9 +12,9 @@ published: true
 
 ### <center>Chapter 2: The basics</center>
 
-> Tracey: I didn’t know you were out there.
-Zoe: Sort of the point. Stealth—you may have heard of it. 
-Tracey: I don’t think they covered that in basic.
+> Tracey: I didn’t know you were out there.    
+Zoe: Sort of the point. Stealth—you may have heard of it.      
+Tracey: I don’t think they covered that in basic.      
   —— From “The Message,” episode 14 of Firefly
 
 本节主要介绍了算法渐近运行时间的表示法和Python中树和图的实现方式。
@@ -55,5 +55,16 @@ the notion of running time complexity (as described in the next section) is base
 
 #### 3.算法性能评估的经验
 
-(1)
+(1)Tip 1: If possible, don’t worry about it.
 
+如果可以那就暴力求解吧
+
+(2)Tip 2: For timing things, use timeit.
+
+使用timeit模块对运行时间进行分析，在前面的[数据结构篇中第三部分数据结构](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)的list中已经介绍过了timeit模块，简单使用实例
+
+```python
+timeit.timeit("x = sum(range(10))")
+```
+
+(3)
