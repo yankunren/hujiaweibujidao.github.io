@@ -155,9 +155,8 @@ If you want to say something conclusively about the asymptotic behavior of an al
 
 4.在Python中实现树和图
 
-> **[Black Box: dict和set]**   
-Python中很多地方都使用了hash策略，在前面的[Python数据结构篇中的搜索部分](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/)已经介绍了hash的内容。Python提供了`hash`函数，例如`hash("Hello, world!")`得到`-943387004357456228` (结果不一定相同)。      
-Python中的dict和set都使用了hash机制，所以平均情况下它们获取元素都是常数时间的。
+**[Black Box: dict和set]**   
+Python中很多地方都使用了hash策略，在前面的[Python数据结构篇中的搜索部分](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/)已经介绍了hash的内容。Python提供了`hash`函数，例如`hash("Hello, world!")`得到`-943387004357456228` (结果不一定相同)。Python中的dict和set都使用了hash机制，所以平均情况下它们获取元素都是常数时间的。
 
 (1)图的表示：最常用的两种表示方式是邻接表和邻接矩阵 [假设要表示的图如下]
 
