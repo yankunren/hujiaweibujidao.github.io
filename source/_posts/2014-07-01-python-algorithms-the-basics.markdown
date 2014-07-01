@@ -59,7 +59,7 @@ the notion of running time complexity (as described in the next section) is base
 
 (1)Tip 1: If possible, don’t worry about it.
 
-如果可以那就暴力求解吧
+如果暴力求解也还行就算了吧，别去担心了
 
 (2)Tip 2: For timing things, use timeit.
 
@@ -92,35 +92,7 @@ cProfile.run('re.compile("foo|bar")')
         1    0.000    0.000    0.000    0.000 re.py:226(_compile)
         1    0.000    0.000    0.000    0.000 sre_compile.py:178(_compile_charset)
         1    0.000    0.000    0.000    0.000 sre_compile.py:207(_optimize_charset)
-        4    0.000    0.000    0.000    0.000 sre_compile.py:24(_identityfunction)
-      3/1    0.000    0.000    0.000    0.000 sre_compile.py:32(_compile)
-        1    0.000    0.000    0.000    0.000 sre_compile.py:359(_compile_info)
-        2    0.000    0.000    0.000    0.000 sre_compile.py:472(isstring)
-        1    0.000    0.000    0.000    0.000 sre_compile.py:478(_code)
-        1    0.000    0.000    0.000    0.000 sre_compile.py:493(compile)
-        5    0.000    0.000    0.000    0.000 sre_parse.py:126(__len__)
-       12    0.000    0.000    0.000    0.000 sre_parse.py:130(__getitem__)
-        7    0.000    0.000    0.000    0.000 sre_parse.py:138(append)
-      3/1    0.000    0.000    0.000    0.000 sre_parse.py:140(getwidth)
-        1    0.000    0.000    0.000    0.000 sre_parse.py:178(__init__)
-       10    0.000    0.000    0.000    0.000 sre_parse.py:182(__next)
-        2    0.000    0.000    0.000    0.000 sre_parse.py:195(match)
-        8    0.000    0.000    0.000    0.000 sre_parse.py:201(get)
-        1    0.000    0.000    0.000    0.000 sre_parse.py:301(_parse_sub)
-        2    0.000    0.000    0.000    0.000 sre_parse.py:379(_parse)
-        1    0.000    0.000    0.000    0.000 sre_parse.py:67(__init__)
-        1    0.000    0.000    0.000    0.000 sre_parse.py:675(parse)
-        3    0.000    0.000    0.000    0.000 sre_parse.py:90(__init__)
-        1    0.000    0.000    0.000    0.000 {_sre.compile}
-       15    0.000    0.000    0.000    0.000 {isinstance}
-    38/37    0.000    0.000    0.000    0.000 {len}
-        2    0.000    0.000    0.000    0.000 {max}
-       48    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
-        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
-        1    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
-        1    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
-        8    0.000    0.000    0.000    0.000 {min}
-        6    0.000    0.000    0.000    0.000 {ord}
+...
 ```
 
 (4)Tip 4: Plot your results.
