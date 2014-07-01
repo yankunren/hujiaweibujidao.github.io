@@ -20,9 +20,13 @@ published: true
 本节主要是对书籍中的内容做些简单介绍，从旅行商问题开始引入介绍了算法的重要性。
 
 
-1.算法导论是一本经典的大而全的算法书籍，而本书Python Algorithms不是来取代而是来补充算法导论的，因为算法导论提供的是简易的伪代码和详细的证明，而本书主要从作者的教学过程中从更高地层次来讲解算法，并使用Python代码来实现。
+#### 1.关于这本书的目的
 
-2.这本书关于什么？算法分析，算法设计的基本原则，如何使用Python实现基本的数据结构和算法
+算法导论是一本经典的大而全的算法书籍，而本书Python Algorithms不是来取代而是来补充算法导论的，因为算法导论提供的是简易的伪代码和详细的证明，而本书主要从作者的教学过程中从更高地层次来讲解算法，并使用Python代码来实现。
+
+#### 2.这本书关于什么？
+
+算法分析，算法设计的基本原则，如何使用Python实现基本的数据结构和算法
 
 What the book is about:
 • Algorithm analysis, with a focus on asymptotic running time
@@ -34,7 +38,9 @@ What the book covers only briefly or partially:
 • Algorithms that are directly available in Python, either as part of the language or via the standard library
 • Thorough and deep formalism (although the book has its share of proofs and proof-like explanations)
 
-3.为什么我们需要学习算法呢？学习了算法之后可以帮助我们更加高效地解决问题！
+#### 3.为什么我们需要学习算法呢？
+
+学习了算法之后可以帮助我们更加高效地解决问题！
 
 下面是一个简单的线性时间和平方时间的对比例子，后者的运行速度远远慢于后者，为什么？这与Python中内置的list的实现机制有关，在前面的数据结构篇中介绍过了，list是类似数组一样的动态链表，而不是标准的单链表，所以对于append操作是常数时间，而对于insert操作是线性时间的！感兴趣移步阅读[Python数据结构篇3-数据结构](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)
 
@@ -58,7 +64,7 @@ t2 = time() - t0
 print t2 #3.68582415581
 ```
 
-4.这本书完整的章节内容
+#### 4.这本书完整的章节内容
 
 Chapter 1: Introduction. You’ve already gotten through most of this. It gives an overview of the book.
 
@@ -79,7 +85,9 @@ Chapter 8: Tangled Dependencies and Memoization. This chapter is about the desig
 
 ----------
 
-问题1-2：(比较两个字符串是否满足回文构词法)Find a way of checking whether two strings are anagrams of each other (such as "debit card" and "bad credit"). How well do you think your solution scales? Can you think of a naïve solution that will scale very poorly?
+#### 问题1-2：(比较两个字符串是否满足回文构词法)
+
+Find a way of checking whether two strings are anagrams of each other (such as "debit card" and "bad credit"). How well do you think your solution scales? Can you think of a naïve solution that will scale very poorly?
 
 A simple and quite scalable solution would be to sort the characters in each string and compare the results. (In theory, counting the character frequencies, possibly using collections.Counter, would scale even better.) A really poor solution would be to compare all possible orderings of one string with the other. I can’t overstate how poor this solution is; in fact, algorithms don’t get much worse than this. Feel free to code it up, and see how large anagrams you can check. I bet you won’t get far.
 
