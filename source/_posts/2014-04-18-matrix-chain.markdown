@@ -1,14 +1,14 @@
 ---
 layout: post
-title: "Algorithms: Matrix Chain"
+title: "Problem: Matrix Chain Problem"
 date: 2014-05-18 16:00
 comments: true
 categories: algorithm
 ---
 
-#### <center>Algorithms: Matrix Chain</center>
+#### <center>Problem: Matrix Chain Problem</center>
 
-矩阵链乘问题是最典型的动态规划问题，要理解下面的内容请先阅读[这篇动态规划的总结](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/)，嘿嘿
+矩阵链乘问题是最典型的动态规划问题，要理解下面的内容请先阅读[这篇动态规划的总结](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-dynamic-programming/)
 
 ----------
      
