@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-01T09:54:12+08:00</updated>
+  <updated>2014-07-01T09:58:14+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python Algorithms - Greedy]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-introduction/"/>
+    <updated>2014-07-01T10:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-introduction</id>
+    <content type="html"><![CDATA[<p><strong><center>Python算法设计篇(1)</center></strong>
+<strong><center>逸夫图书馆, 2014/7/1</center></strong></p>
+
+<h3 id="centerchapter-1-introductioncenter"><center>Chapter 1: Introduction</center></h3>
+
+<p>参考内容：</p>
+
+<p>1.<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms: Mastering Basic Algorithms in the Python Language</a></p>
+
+<p>Chapter 1: Introduction</p>
+
+<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Algorithms: Longest Common Subsequence]]></title>
@@ -562,47 +583,6 @@ print(rec_dag_sp(W,s,t)) #7
 <p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
 
 <p>Todo</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Python Algorithms - Graphs]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Graphs/"/>
-    <updated>2014-05-08T22:00:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Graphs</id>
-    <content type="html"><![CDATA[<p><strong><center>Python Algorithms Python算法系列</center></strong>
-<strong><center>逸夫图书馆, 2014/5/18</center></strong></p>
-
-<h3 id="centercenter"><center>图算法</center></h3>
-
-<p>参考内容：</p>
-
-<p>1.<a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Python</a></p>
-
-<p>Chapter 7 Graphs</p>
-
-<p>2.<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms: Mastering Basic Algorithms in the Python Language</a></p>
-
-<p>Matchings, Cuts, and Flows</p>
-
-<p>3.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
-
-<h4 id="section">图的总结</h4>
-
-<p>Todo List</p>
-
-<p>1.邻接矩阵和邻接表</p>
-
-<p>2.DFS和BFS</p>
-
-<p>3.DFS的应用：拓扑排序和有向无环图的强连通分量</p>
-
-<p>4.最短路径：Dijkstra，Bellman-Ford，Floyd-Warshall等</p>
-
-<p>5.最小生成树：Prim，Kruskal</p>
-
-<p>6.网络流：最大流，最小割，二分图等</p>
 
 ]]></content>
   </entry>
