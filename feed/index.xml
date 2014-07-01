@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-01T16:18:04+08:00</updated>
+  <updated>2014-07-01T16:51:58+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -518,14 +518,290 @@ Tracey: I don’t think they covered that in basic.    <br />
 
 <p>(2)Tip 2: For timing things, use timeit.</p>
 
-<p>使用timeit模块对运行时间进行分析，在前面的<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/">数据结构篇中第三部分数据结构</a>的list中已经介绍过了timeit模块，简单使用实例</p>
+<p>使用<code>timeit</code>模块对运行时间进行分析，在前面的<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/">数据结构篇中第三部分数据结构</a>的list中已经介绍过了timeit模块，在使用的时候需要注意前面的运行不会影响后面的重复的运行(例如，测试排序算法运行时间，如果将前面已经排好序的序列传递给后面的重复运行是不可以的)</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s">&quot;x = sum(range(10))&quot;</span><span class="p">)</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c">#timeit模块简单使用实例</span>
+</span><span class="line"><span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s">&quot;x = sum(range(10))&quot;</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>(3)&lt;p class=&#8217;post-footer&#8217;&gt;
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a> Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)&lt;/p&gt;</p>
+<p>(3)Tip 3: To find bottlenecks, use a profiler.</p>
+
+<p>使用<code>cProfile</code>模块来获取更多的关于运行情况的内容，从而可以发现问题的瓶颈，如果系统没有<code>cProfile</code>模块，可以使用<code>profile</code>模块代替，更多内容可以查看<a href="https://docs.python.org/2/library/profile.html">Python standard library-Python Profilers</a></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c">#cProfile模块简单使用实例</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">cProfile</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">re</span>
+</span><span class="line"><span class="n">cProfile</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s">&#39;re.compile(&quot;foo|bar&quot;)&#39;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c">#运行结果：</span>
+</span><span class="line">
+</span><span class="line">         <span class="mi">194</span> <span class="n">function</span> <span class="n">calls</span> <span class="p">(</span><span class="mi">189</span> <span class="n">primitive</span> <span class="n">calls</span><span class="p">)</span> <span class="ow">in</span> <span class="mf">0.000</span> <span class="n">seconds</span>
+</span><span class="line">
+</span><span class="line">   <span class="n">Ordered</span> <span class="n">by</span><span class="p">:</span> <span class="n">standard</span> <span class="n">name</span>
+</span><span class="line">
+</span><span class="line">   <span class="n">ncalls</span>  <span class="n">tottime</span>  <span class="n">percall</span>  <span class="n">cumtime</span>  <span class="n">percall</span> <span class="n">filename</span><span class="p">:</span><span class="n">lineno</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">1</span><span class="p">(</span><span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">re</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">188</span><span class="p">(</span><span class="nb">compile</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">re</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">226</span><span class="p">(</span><span class="n">_compile</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">178</span><span class="p">(</span><span class="n">_compile_charset</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">207</span><span class="p">(</span><span class="n">_optimize_charset</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">4</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">24</span><span class="p">(</span><span class="n">_identityfunction</span><span class="p">)</span>
+</span><span class="line">      <span class="mi">3</span><span class="o">/</span><span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">32</span><span class="p">(</span><span class="n">_compile</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">359</span><span class="p">(</span><span class="n">_compile_info</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">2</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">472</span><span class="p">(</span><span class="n">isstring</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">478</span><span class="p">(</span><span class="n">_code</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">493</span><span class="p">(</span><span class="nb">compile</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">5</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">126</span><span class="p">(</span><span class="n">__len__</span><span class="p">)</span>
+</span><span class="line">       <span class="mi">12</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">130</span><span class="p">(</span><span class="n">__getitem__</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">7</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">138</span><span class="p">(</span><span class="n">append</span><span class="p">)</span>
+</span><span class="line">      <span class="mi">3</span><span class="o">/</span><span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">140</span><span class="p">(</span><span class="n">getwidth</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">178</span><span class="p">(</span><span class="n">__init__</span><span class="p">)</span>
+</span><span class="line">       <span class="mi">10</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">182</span><span class="p">(</span><span class="n">__next</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">2</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">195</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">8</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">201</span><span class="p">(</span><span class="n">get</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">301</span><span class="p">(</span><span class="n">_parse_sub</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">2</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">379</span><span class="p">(</span><span class="n">_parse</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">67</span><span class="p">(</span><span class="n">__init__</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">675</span><span class="p">(</span><span class="n">parse</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">3</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">90</span><span class="p">(</span><span class="n">__init__</span><span class="p">)</span>
+</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">_sre</span><span class="o">.</span><span class="n">compile</span><span class="p">}</span>
+</span><span class="line">       <span class="mi">15</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="nb">isinstance</span><span class="p">}</span>
+</span><span class="line">    <span class="mi">38</span><span class="o">/</span><span class="mi">37</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="nb">len</span><span class="p">}</span>
+</span><span class="line">        <span class="mi">2</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="nb">max</span><span class="p">}</span>
+</span><span class="line">       <span class="mi">48</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">method</span> <span class="s">&#39;append&#39;</span> <span class="n">of</span> <span class="s">&#39;list&#39;</span> <span class="n">objects</span><span class="p">}</span>
+</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">method</span> <span class="s">&#39;disable&#39;</span> <span class="n">of</span> <span class="s">&#39;_lsprof.Profiler&#39;</span> <span class="n">objects</span><span class="p">}</span>
+</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">method</span> <span class="s">&#39;get&#39;</span> <span class="n">of</span> <span class="s">&#39;dict&#39;</span> <span class="n">objects</span><span class="p">}</span>
+</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">method</span> <span class="s">&#39;items&#39;</span> <span class="n">of</span> <span class="s">&#39;dict&#39;</span> <span class="n">objects</span><span class="p">}</span>
+</span><span class="line">        <span class="mi">8</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="nb">min</span><span class="p">}</span>
+</span><span class="line">        <span class="mi">6</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="nb">ord</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(4)Tip 4: Plot your results.</p>
+
+<p>画出算法性能结果图，如下图所示，可以使用的模块有<code>matplotlib</code></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/plotresult.png" alt="image" /></p>
+
+<p>(5)Tip 5: Be careful when drawing conclusions based on timing comparisons.</p>
+
+<p>在对基于运行时间的比较而要下结论时需要小心</p>
+
+<p>First, any differences you observe may be because of random variations.</p>
+
+<p>首先，你观察到的差异可能是由于输入中的随机变化而引起的</p>
+
+<p>Second, there are issues when comparing averages. </p>
+
+<p>其次，比较算法的平均情况下的运行时间是存在问题的[这个我未理解，以下是作者的解释]</p>
+
+<p>At the very least, you should stick to comparing averages of actual timings. A common practice to get more meaningful numbers when performing timing experiments is to normalize the running time of each program, dividing it by the running time of some standard, simple algorithm. This can indeed be useful but can in some cases make your results less than meaningful. See the paper “How not to lie with statistics: The correct way to summarize benchmark results” by Fleming and Wallace for a few pointers. For some other perspectives, you could read Bast and Weber’s “Don’t compare averages,” or the more recent paper by Citron et al., “The harmonic or geometric mean: does it really matter?”</p>
+
+<p>Third, your conclusions may not generalize. </p>
+
+<p>最后，你下的结论不要太过于宽泛</p>
+
+<p>(6)Tip 6: Be careful when drawing conclusions about asymptotics from experiments.</p>
+
+<p>在对从实验中得到关于渐近时间的信息下结论时需要小心，实验只是对于理论的一个支撑，可以通过实验来推翻一个渐近时间结果的假设，但是反过来一般不行 [以下是作者的解释]</p>
+
+<p>If you want to say something conclusively about the asymptotic behavior of an algorithm, you need to analyze it, as described earlier in this chapter. Experiments can give you hints, but they are by their nature finite, and asymptotics deal with what happens for arbitrarily large data sizes. On the other hand, unless you’re working in theoretical computer science, the purpose of asymptotic analysis is to say something about the behavior of the algorithm when implemented and run on actual problem instances, meaning that experiments should be relevant.</p>
+
+<p>4.在Python中实现树和图</p>
+
+<blockquote>
+  <p><strong>[Black Box: dict和set]</strong> <br />
+Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/">Python数据结构篇中的搜索部分</a>已经介绍了hash的内容。Python提供了<code>hash</code>函数，例如<code>hash("Hello, world!")</code>得到<code>-943387004357456228</code> (结果不一定相同)。    <br />
+Python中的dict和set都使用了hash机制，所以平均情况下它们获取元素都是常数时间的。</p>
+</blockquote>
+
+<p>(1)图的表示：最常用的两种表示方式是邻接表和邻接矩阵 [假设要表示的图如下]</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/graphrep.png" alt="image" /></p>
+
+<p>邻接表 Adjacency Lists：因为历史原因，邻接表都是指链表list，但实际上也可以是其他的，例如在python中也可以是set或者dict，不同的表示方式有各自的优缺点，它们判断节点的连接关系和节点的度的方式甚至两个操作的性能都不太一样。</p>
+
+<p>① adjacency lists 表示形式</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># A Straightforward Adjacency List Representation</span>
+</span><span class="line"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</span><span class="line"><span class="n">N</span> <span class="o">=</span> <span class="p">[</span>
+</span><span class="line">    <span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">],</span>    <span class="c"># a</span>
+</span><span class="line">    <span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="n">e</span><span class="p">],</span>             <span class="c"># b</span>
+</span><span class="line">    <span class="p">[</span><span class="n">d</span><span class="p">],</span>                <span class="c"># c</span>
+</span><span class="line">    <span class="p">[</span><span class="n">e</span><span class="p">],</span>                <span class="c"># d</span>
+</span><span class="line">    <span class="p">[</span><span class="n">f</span><span class="p">],</span>                <span class="c"># e</span>
+</span><span class="line">    <span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">],</span>          <span class="c"># f</span>
+</span><span class="line">    <span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">h</span><span class="p">],</span>             <span class="c"># g</span>
+</span><span class="line">    <span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">]</span>              <span class="c"># h</span>
+</span><span class="line"><span class="p">]</span>
+</span><span class="line">
+</span><span class="line"><span class="n">b</span> <span class="ow">in</span> <span class="n">N</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="c"># Neighborhood membership -&gt; True</span>
+</span><span class="line"><span class="nb">len</span><span class="p">(</span><span class="n">N</span><span class="p">[</span><span class="n">f</span><span class="p">])</span> <span class="c"># Degree -&gt; 3</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>② adjacency sets 表示形式</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># A Straightforward Adjacency Set Representation</span>
+</span><span class="line"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</span><span class="line"><span class="n">N</span> <span class="o">=</span> <span class="p">[</span>
+</span><span class="line">    <span class="p">{</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">},</span>    <span class="c"># a</span>
+</span><span class="line">    <span class="p">{</span><span class="n">c</span><span class="p">,</span> <span class="n">e</span><span class="p">},</span>             <span class="c"># b</span>
+</span><span class="line">    <span class="p">{</span><span class="n">d</span><span class="p">},</span>                <span class="c"># c</span>
+</span><span class="line">    <span class="p">{</span><span class="n">e</span><span class="p">},</span>                <span class="c"># d</span>
+</span><span class="line">    <span class="p">{</span><span class="n">f</span><span class="p">},</span>                <span class="c"># e</span>
+</span><span class="line">    <span class="p">{</span><span class="n">c</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">},</span>          <span class="c"># f</span>
+</span><span class="line">    <span class="p">{</span><span class="n">f</span><span class="p">,</span> <span class="n">h</span><span class="p">},</span>             <span class="c"># g</span>
+</span><span class="line">    <span class="p">{</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">}</span>              <span class="c"># h</span>
+</span><span class="line"><span class="p">]</span>
+</span><span class="line">
+</span><span class="line"><span class="n">b</span> <span class="ow">in</span> <span class="n">N</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="c"># Neighborhood membership -&gt; True</span>
+</span><span class="line"><span class="nb">len</span><span class="p">(</span><span class="n">N</span><span class="p">[</span><span class="n">f</span><span class="p">])</span> <span class="c"># Degree -&gt; 3</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>基本上和adjacency lists表示形式一样对吧？但是，对于list，判断一个元素是否存在是线性时间$O(N(v))$，而在set中是常数时间$O(1)$，所以对于稠密图使用adjacency sets要更加高效。</p>
+
+<p>③ adjacency dicts 表示形式</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># A Straightforward Adjacency Dict Representation</span>
+</span><span class="line"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</span><span class="line"><span class="n">N</span> <span class="o">=</span> <span class="p">[</span>
+</span><span class="line">    <span class="p">{</span><span class="n">b</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span><span class="mi">4</span><span class="p">},</span>    <span class="c"># a</span>
+</span><span class="line">    <span class="p">{</span><span class="n">c</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span><span class="mi">3</span><span class="p">},</span>                   <span class="c"># b</span>
+</span><span class="line">    <span class="p">{</span><span class="n">d</span><span class="p">:</span><span class="mi">8</span><span class="p">},</span>                        <span class="c"># c</span>
+</span><span class="line">    <span class="p">{</span><span class="n">e</span><span class="p">:</span><span class="mi">7</span><span class="p">},</span>                        <span class="c"># d</span>
+</span><span class="line">    <span class="p">{</span><span class="n">f</span><span class="p">:</span><span class="mi">5</span><span class="p">},</span>                        <span class="c"># e</span>
+</span><span class="line">    <span class="p">{</span><span class="n">c</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span><span class="mi">2</span><span class="p">},</span>              <span class="c"># f</span>
+</span><span class="line">    <span class="p">{</span><span class="n">f</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span><span class="mi">6</span><span class="p">},</span>                   <span class="c"># g</span>
+</span><span class="line">    <span class="p">{</span><span class="n">f</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span><span class="mi">8</span><span class="p">}</span>                    <span class="c"># h</span>
+</span><span class="line"><span class="p">]</span>
+</span><span class="line">
+</span><span class="line"><span class="n">b</span> <span class="ow">in</span> <span class="n">N</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="c"># Neighborhood membership -&gt; True</span>
+</span><span class="line"><span class="nb">len</span><span class="p">(</span><span class="n">N</span><span class="p">[</span><span class="n">f</span><span class="p">])</span> <span class="c"># Degree -&gt; 3</span>
+</span><span class="line"><span class="n">N</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="c"># Edge weight for (a, b) -&gt; 2</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>这种情况下如果边是带权值的都没有问题！</p>
+
+<p>除了上面三种方式外，还可以改变外层数据结构，上面三个都是list，其实也可以使用dict，例如下面的代码，此时节点是用字母表示的。在实际应用中，要根据问题选择最合适的表示形式。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">N</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class="line">    <span class="s">&#39;a&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;bcdef&#39;</span><span class="p">),</span>
+</span><span class="line">    <span class="s">&#39;b&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;ce&#39;</span><span class="p">),</span>
+</span><span class="line">    <span class="s">&#39;c&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;d&#39;</span><span class="p">),</span>
+</span><span class="line">    <span class="s">&#39;d&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;e&#39;</span><span class="p">),</span>
+</span><span class="line">    <span class="s">&#39;e&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;f&#39;</span><span class="p">),</span>
+</span><span class="line">    <span class="s">&#39;f&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;cgh&#39;</span><span class="p">),</span>
+</span><span class="line">    <span class="s">&#39;g&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;fh&#39;</span><span class="p">),</span>
+</span><span class="line">    <span class="s">&#39;h&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;fg&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
@@ -554,25 +830,27 @@ Tracey: I don’t think they covered that in basic.    <br />
 
 <p>算法导论是一本经典的大而全的算法书籍，而本书Python Algorithms不是来取代而是来补充算法导论的，因为算法导论提供的是简易的伪代码和详细的证明，而本书主要从作者的教学过程中从更高地层次来讲解算法，并使用Python代码来实现。</p>
 
+<p>[实际阅读之后，我个人感觉这本书虽然貌似名声不大，但是绝对可以和算法导论平分秋色]</p>
+
 <h4 id="section-1">2.这本书关于什么？</h4>
 
 <p>算法分析，算法设计的基本原则，如何使用Python实现基本的数据结构和算法</p>
 
-<p>What the book is about:
-• Algorithm analysis, with a focus on asymptotic running time
-• Basic principles of algorithm design
-• How to represent well-known data structures in Python
-• How to implement well-known algorithms in Python</p>
+<p>What the book is about:  <br />
+• Algorithm analysis, with a focus on asymptotic running time <br />
+• Basic principles of algorithm design  <br />
+• How to represent well-known data structures in Python  <br />
+• How to implement well-known algorithms in Python   </p>
 
-<p>What the book covers only briefly or partially:
-• Algorithms that are directly available in Python, either as part of the language or via the standard library
-• Thorough and deep formalism (although the book has its share of proofs and proof-like explanations)</p>
+<p>What the book covers only briefly or partially:  <br />
+• Algorithms that are directly available in Python, either as part of the language or via the standard library  <br />
+• Thorough and deep formalism (although the book has its share of proofs and proof-like explanations)    </p>
 
 <h4 id="section-2">3.为什么我们需要学习算法呢？</h4>
 
 <p>学习了算法之后可以帮助我们更加高效地解决问题！</p>
 
-<p>下面是一个简单的线性时间和平方时间的对比例子，后者的运行速度远远慢于后者，为什么？这与Python中内置的list的实现机制有关，在前面的数据结构篇中介绍过了，list是类似数组一样的动态链表，而不是标准的单链表，所以对于append操作是常数时间，而对于insert操作是线性时间的！感兴趣移步阅读<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/">Python数据结构篇3-数据结构</a></p>
+<p>下面是一个简单的线性时间和平方时间的对比例子，后者的运行速度远远慢于后者，为什么呢？这与Python中内置的list的实现机制有关，在前面的数据结构篇中介绍过了，list是类似数组一样的动态链表，而不是标准的单链表，所以对于append操作是常数时间，而对于insert操作是线性时间的！感兴趣的话移步阅读<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/">Python数据结构篇3-数据结构</a></p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -611,6 +889,8 @@ Tracey: I don’t think they covered that in basic.    <br />
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h4 id="section-3">4.这本书完整的章节内容</h4>
+
+<p>除去平摊分析外，内容差不多和我本学期的算法课的内容差不多</p>
 
 <p>Chapter 1: Introduction. You’ve already gotten through most of this. It gives an overview of the book.</p>
 
