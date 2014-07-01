@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-01T10:42:48+08:00</updated>
+  <updated>2014-07-01T10:43:33+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python Algorithms - C9 Graphs]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs/"/>
+    <updated>2014-07-01T11:30:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs</id>
+    <content type="html"><![CDATA[<p><strong><center>Python算法设计篇(9)</center></strong>
+<strong><center>逸夫图书馆, 2014/7/1</center></strong></p>
+
+<h3 id="centerchapter-9-from-a-to-b-with-edsger-and-friendscenter"><center>Chapter 9: From A to B with Edsger and Friends</center></h3>
+
+<p>参考内容：</p>
+
+<p>1.<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms: Mastering Basic Algorithms in the Python Language</a></p>
+
+<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
+
+<h4 id="section">图的总结</h4>
+
+<p>Todo List</p>
+
+<p>1.邻接矩阵和邻接表</p>
+
+<p>2.DFS和BFS</p>
+
+<p>3.DFS的应用：拓扑排序和有向无环图的强连通分量</p>
+
+<p>4.最短路径：Dijkstra，Bellman-Ford，Floyd-Warshall等</p>
+
+<p>5.最小生成树：Prim，Kruskal</p>
+
+<p>6.网络流：最大流，最小割，二分图等</p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Python Algorithms - C8 Dynamic Programming]]></title>
@@ -1437,226 +1474,6 @@ $E(X-Y)=E(X)-E(Y) \quad Var(X-Y)=Var(X)+Var(Y)$</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary/">http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Algorithms: Longest Common Subsequence]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/"/>
-    <updated>2014-05-19T16:00:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence</id>
-    <content type="html"><![CDATA[<h4 id="centeralgorithms-longest-common-subsequencecenter"><center>Algorithms: Longest Common Subsequence</center></h4>
-
-<p>最长公共子序列(LCS)是典型的动态规划问题，如果不理解动态规划请移步先看<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/">这篇动态规划的总结</a>，否则本篇文章中的代码实现会不理解的哟！</p>
-
-<p>LCS问题的一个变种就是求最长单调递增子序列，它的求解就是先将原序列A进行排序得到序列B，然后求解序列A和序列B的最长公共子序列。</p>
-
-<hr />
-
-<p>1.问题描述</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/lcs1.png" alt="image" /></p>
-
-<p>2.最优子结构和子问题重叠</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/lcs2.png" alt="image" /></p>
-
-<p>3.5种实现方式</p>
-
-<p>根据LCS的递推公式</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-
-c[i][j]=  \left\{ 
-  \begin{array}{l l}
-    0 & \quad \text{i=0 或者 j=0}\\
-    c[i-1][j-1]+1 & \quad \text{i,j>0,且$x_{i}=y_{j}$}\\
-    max({c[i][j-1],c[i-1][j]}) & \quad \text{i,j>0,且$x_{i} \ne y_{j}$}
-  \end{array} \right.
- %]]&gt;</script>
-
-<p>(1)从中可以看出计算c[i][j]时只需要2行即可，前一行(i-1)和当前行(i)，每行的长度是min{m,n}，首先初始化前一行都为0，然后计算当前行的值，当要计算下一行之前将当前行的值复制到前一行中即可。</p>
-
-<p>(2)从递推公式中还可以看出计算当前行i的话，其实只需要一行再加上O(1)的额外空间就行了。因为计算c[i][j]只需要前一行中c[i-1]<a href="k&gt;=j-1">k</a>的数据，对于k&lt;j-1的数据都是没有用的，而当前行c[i]<a href="l&lt;=j-1">l</a>的数据都是有用的，要用来计算下一行的值，所以，可以在计算当前行的时候，将当前行的前面计算好的部分复制到前一行中对应位置上，但是c[i][j-1]除外，因为c[i-1][j-1]也是需要的，所以需要额外的O(1)的空间保存c[i][j-1]。</p>
-
-<p>LCS的五种实现：分别为0：直接递归；1：带备忘录的递归；2：使用二维数组保存结果的迭代；3：使用2个一维数组保存结果的迭代；4：使用1个一维数组和额外的O(1)空间保存结果的迭代。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-<span class="line-number">46</span>
-<span class="line-number">47</span>
-<span class="line-number">48</span>
-<span class="line-number">49</span>
-<span class="line-number">50</span>
-<span class="line-number">51</span>
-<span class="line-number">52</span>
-<span class="line-number">53</span>
-<span class="line-number">54</span>
-<span class="line-number">55</span>
-<span class="line-number">56</span>
-<span class="line-number">57</span>
-<span class="line-number">58</span>
-<span class="line-number">59</span>
-<span class="line-number">60</span>
-<span class="line-number">61</span>
-<span class="line-number">62</span>
-<span class="line-number">63</span>
-<span class="line-number">64</span>
-<span class="line-number">65</span>
-<span class="line-number">66</span>
-<span class="line-number">67</span>
-<span class="line-number">68</span>
-<span class="line-number">69</span>
-<span class="line-number">70</span>
-<span class="line-number">71</span>
-<span class="line-number">72</span>
-<span class="line-number">73</span>
-<span class="line-number">74</span>
-<span class="line-number">75</span>
-<span class="line-number">76</span>
-<span class="line-number">77</span>
-<span class="line-number">78</span>
-<span class="line-number">79</span>
-<span class="line-number">80</span>
-<span class="line-number">81</span>
-<span class="line-number">82</span>
-<span class="line-number">83</span>
-<span class="line-number">84</span>
-<span class="line-number">85</span>
-<span class="line-number">86</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">lcs0</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
-</span><span class="line">    <span class="c">#string starts at index 0, not 1</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">j</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">0</span> <span class="c">#attention to this!!!</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>  <span class="k">return</span> <span class="n">lcs0</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
-</span><span class="line">    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">lcs0</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">),</span><span class="n">lcs0</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-</span><span class="line">
-</span><span class="line"><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s">&#39;abcde&#39;</span><span class="p">,</span><span class="s">&#39;oaob&#39;</span>
-</span><span class="line"><span class="n">lenx</span><span class="p">,</span><span class="n">leny</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">lcs0</span><span class="p">(</span><span class="n">lenx</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">leny</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="c">#2</span>
-</span><span class="line">
-</span><span class="line"><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
-</span><span class="line">
-</span><span class="line"><span class="k">def</span> <span class="nf">memo</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-</span><span class="line">    <span class="n">cache</span><span class="o">=</span><span class="p">{}</span>
-</span><span class="line">    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-</span><span class="line">        <span class="k">if</span> <span class="n">args</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
-</span><span class="line">            <span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span><span class="o">=</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-</span><span class="line">        <span class="k">return</span> <span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">wrap</span>
-</span><span class="line">
-</span><span class="line"><span class="nd">@memo</span>
-</span><span class="line"><span class="k">def</span> <span class="nf">lcs1</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
-</span><span class="line">    <span class="c">#string starts at index 0, not 1</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">j</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">0</span> <span class="c">#attention to this!!!</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>  <span class="k">return</span> <span class="n">lcs1</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
-</span><span class="line">    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">lcs1</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">),</span><span class="n">lcs1</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-</span><span class="line">
-</span><span class="line"><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s">&#39;abcde&#39;</span><span class="p">,</span><span class="s">&#39;oaob&#39;</span>
-</span><span class="line"><span class="n">lenx</span><span class="p">,</span><span class="n">leny</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">lcs1</span><span class="p">(</span><span class="n">lenx</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">leny</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="c">#2</span>
-</span><span class="line">
-</span><span class="line"><span class="k">def</span> <span class="nf">lcs2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
-</span><span class="line">    <span class="n">lenx</span><span class="p">,</span><span class="n">leny</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-</span><span class="line">    <span class="n">minlen</span><span class="p">,</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">lenx</span><span class="o">&lt;</span><span class="n">leny</span><span class="p">:</span> <span class="n">minlen</span><span class="p">,</span><span class="n">maxlen</span><span class="o">=</span><span class="n">lenx</span><span class="p">,</span><span class="n">leny</span><span class="p">;</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span><span class="n">x</span>
-</span><span class="line">    <span class="k">else</span><span class="p">:</span> <span class="n">minlen</span><span class="p">,</span><span class="n">maxlen</span><span class="o">=</span><span class="n">leny</span><span class="p">,</span><span class="n">lenx</span><span class="p">;</span>
-</span><span class="line">    <span class="c">#s is maxlen * minlen</span>
-</span><span class="line">    <span class="n">s</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">minlen</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxlen</span><span class="p">)]</span>
-</span><span class="line">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxlen</span><span class="p">):</span> <span class="c">#so, let x be the longer string!!!</span>
-</span><span class="line">        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">minlen</span><span class="p">):</span>
-</span><span class="line">            <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span>
-</span><span class="line">            <span class="k">else</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">s</span>
-</span><span class="line">
-</span><span class="line"><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s">&#39;abcde&#39;</span><span class="p">,</span><span class="s">&#39;oaob&#39;</span>
-</span><span class="line"><span class="n">s</span><span class="o">=</span><span class="n">lcs2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c">#[[0, 1, 1, 1], [0, 1, 1, 2], [0, 1, 1, 2], [0, 1, 1, 2], [0, 1, 1, 2]]</span>
-</span><span class="line">
-</span><span class="line"><span class="k">def</span> <span class="nf">lcs3</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
-</span><span class="line">    <span class="n">lenx</span><span class="p">,</span><span class="n">leny</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-</span><span class="line">    <span class="n">minlen</span><span class="p">,</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">lenx</span><span class="o">&lt;</span><span class="n">leny</span><span class="p">:</span> <span class="n">minlen</span><span class="p">,</span><span class="n">maxlen</span><span class="o">=</span><span class="n">lenx</span><span class="p">,</span><span class="n">leny</span><span class="p">;</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span><span class="n">x</span>
-</span><span class="line">    <span class="k">else</span><span class="p">:</span> <span class="n">minlen</span><span class="p">,</span><span class="n">maxlen</span><span class="o">=</span><span class="n">leny</span><span class="p">,</span><span class="n">lenx</span><span class="p">;</span>
-</span><span class="line">    <span class="c">#s is maxlen * minlen</span>
-</span><span class="line">    <span class="n">pre</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">minlen</span><span class="p">)]</span>
-</span><span class="line">    <span class="n">cur</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">minlen</span><span class="p">)]</span>
-</span><span class="line">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxlen</span><span class="p">):</span> <span class="c">#so, let x be the longer string!!!</span>
-</span><span class="line">        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">minlen</span><span class="p">):</span>
-</span><span class="line">            <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span> <span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">pre</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span>
-</span><span class="line">            <span class="k">else</span><span class="p">:</span> <span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">pre</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-</span><span class="line">        <span class="n">pre</span><span class="p">[:]</span><span class="o">=</span><span class="n">cur</span><span class="p">[:]</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">cur</span>
-</span><span class="line">
-</span><span class="line"><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s">&#39;abcde&#39;</span><span class="p">,</span><span class="s">&#39;oaob&#39;</span>
-</span><span class="line"><span class="n">s</span><span class="o">=</span><span class="n">lcs3</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c">#[2, 2, 2, 2]</span>
-</span><span class="line">
-</span><span class="line"><span class="k">def</span> <span class="nf">lcs4</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
-</span><span class="line">    <span class="n">lenx</span><span class="p">,</span><span class="n">leny</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-</span><span class="line">    <span class="n">minlen</span><span class="p">,</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">lenx</span><span class="o">&lt;</span><span class="n">leny</span><span class="p">:</span> <span class="n">minlen</span><span class="p">,</span><span class="n">maxlen</span><span class="o">=</span><span class="n">lenx</span><span class="p">,</span><span class="n">leny</span><span class="p">;</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span><span class="n">x</span>
-</span><span class="line">    <span class="k">else</span><span class="p">:</span> <span class="n">minlen</span><span class="p">,</span><span class="n">maxlen</span><span class="o">=</span><span class="n">leny</span><span class="p">,</span><span class="n">lenx</span><span class="p">;</span>
-</span><span class="line">    <span class="c">#s is maxlen * minlen</span>
-</span><span class="line">    <span class="n">s</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">minlen</span><span class="p">)]</span>
-</span><span class="line">    <span class="n">t</span><span class="o">=</span><span class="mi">0</span>
-</span><span class="line">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxlen</span><span class="p">):</span> <span class="c">#so, let x be the longer string!!!</span>
-</span><span class="line">        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">minlen</span><span class="p">):</span>
-</span><span class="line">            <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span>
-</span><span class="line">            <span class="k">else</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-</span><span class="line">            <span class="n">t</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-</span><span class="line">    <span class="k">return</span> <span class="n">s</span>
-</span><span class="line">
-</span><span class="line"><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s">&#39;abcde&#39;</span><span class="p">,</span><span class="s">&#39;oaobce&#39;</span>
-</span><span class="line"><span class="n">s</span><span class="o">=</span><span class="n">lcs4</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c">#[3, 3, 3, 3, 4]</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/">http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
