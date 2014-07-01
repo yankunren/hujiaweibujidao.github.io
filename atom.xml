@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-01T13:08:34+08:00</updated>
+  <updated>2014-07-01T15:01:00+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -483,10 +483,6 @@
     <id>http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-introduction</id>
     <content type="html"><![CDATA[<p><strong><center>Python算法设计篇(1)</center></strong>
 <strong><center>逸夫图书馆, 2014/7/1</center></strong></p>
-
-<p>1.<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms: Mastering Basic Algorithms in the Python Language</a></p>
-
-<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
 
 <h3 id="centerchapter-1-introductioncenter"><center>Chapter 1: Introduction</center></h3>
 
