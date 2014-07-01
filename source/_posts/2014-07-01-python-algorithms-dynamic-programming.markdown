@@ -12,13 +12,12 @@ published: true
 
 ### <center>Chapter 8 Tangled Dependencies and Memoization</center>
 
-参考内容：
+> Twice, adv. Once too often.     
+  —— Ambrose Bierce, The Devil’s Dictionary
 
-1.[Python Algorithms: Mastering Basic Algorithms in the Python Language](http://link.springer.com/book/10.1007%2F978-1-4302-3238-4)
+本节主要结合一些经典的动规问题介绍动态规划的备忘录法和迭代法这两种实现方式，并对这两种方式进行对比
 
-2.[算法导论](http://en.wikipedia.org/wiki/Introduction_to_Algorithms)
-
-3.[算法设计、分析与实现从入门到精通](http://book.douban.com/subject/4875278/)
+----------
 
 大家都知道，动态规划算法一般都有两种实现方式：
 
