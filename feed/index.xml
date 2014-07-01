@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-01T15:19:15+08:00</updated>
+  <updated>2014-07-01T15:24:54+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -474,7 +474,7 @@ Tracey: I don’t think they covered that in basic.
 
 <p>本节主要介绍了算法渐近运行时间的表示法和Python中树和图的实现方式。</p>
 
-<p>1.计算模型</p>
+<h4 id="section">1.计算模型</h4>
 
 <p>Alan Turing的图灵机模型： **A Turing machine is a simple (abstract) device that can read from, write to, and move along an infinitely long strip of paper. ** The actual behavior of the machines varies. Each is a so-called finite state machine: it has a finite set of states (some of which indicate that it has finished), and every symbol it reads potentially triggers reading and/or writing and switching to a different state. You can think of this machinery as a set of rules. (“If I am in state 4 and see an X, I move one step to the left, write a Y, and switch to state 9.”) </p>
 
@@ -496,9 +496,9 @@ Tracey: I don’t think they covered that in basic.
 
 <p>the notion of running time complexity (as described in the next section) is based on knowing how big a problem instance is, and that size is simply the amount of memory needed to encode it.   [算法的运行时间是基于问题的大小，这个大小是指问题的输入占用的内存空间大小]</p>
 
-<p>2.算法渐近运行时间</p>
+<h4 id="section-1">2.算法渐近运行时间</h4>
 
-<p>主要介绍了大O符号、大$\Omega$符号以及大$\Theta$符号，这内容网上很多，略过，可以参考<a href="http://en.wikipedia.org/wiki/Big_O_notation">wikipedia</a></p>
+<p>主要介绍了大O符号、大$\Omega$符号以及大$\Theta$符号，这部分内容网上很多资料，此处略过，可以参考<a href="http://en.wikipedia.org/wiki/Big_O_notation">wikipedia_大O符号</a></p>
 
 <p>算法导论介绍到，对于三个符号可以做如下理解：$O$ = $\le$，$\Omega$ = $\ge$， $\Theta$ = $=$</p>
 
@@ -506,7 +506,11 @@ Tracey: I don’t think they covered that in basic.
 
 <p>几种常见的运行时间以及算法实例 <a href="http://zh.wikipedia.org/zh-cn/时间复杂度">wiki中的时间复杂度</a></p>
 
-<p>3.</p>
+<p><img src="http://hujiaweibujidao.github.io/images/algos/complexity.png" alt="image" /></p>
+
+<h4 id="section-2">3.算法性能评估的经验</h4>
+
+<p>(1)</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
@@ -534,9 +538,13 @@ Tracey: I don’t think they covered that in basic.
 
 <p>本节主要是对书籍中的内容做些简单介绍，从旅行商问题开始引入介绍了算法的重要性。</p>
 
-<p>1.算法导论是一本经典的大而全的算法书籍，而本书Python Algorithms不是来取代而是来补充算法导论的，因为算法导论提供的是简易的伪代码和详细的证明，而本书主要从作者的教学过程中从更高地层次来讲解算法，并使用Python代码来实现。</p>
+<h4 id="section">1.关于这本书的目的</h4>
 
-<p>2.这本书关于什么？算法分析，算法设计的基本原则，如何使用Python实现基本的数据结构和算法</p>
+<p>算法导论是一本经典的大而全的算法书籍，而本书Python Algorithms不是来取代而是来补充算法导论的，因为算法导论提供的是简易的伪代码和详细的证明，而本书主要从作者的教学过程中从更高地层次来讲解算法，并使用Python代码来实现。</p>
+
+<h4 id="section-1">2.这本书关于什么？</h4>
+
+<p>算法分析，算法设计的基本原则，如何使用Python实现基本的数据结构和算法</p>
 
 <p>What the book is about:
 • Algorithm analysis, with a focus on asymptotic running time
@@ -548,7 +556,9 @@ Tracey: I don’t think they covered that in basic.
 • Algorithms that are directly available in Python, either as part of the language or via the standard library
 • Thorough and deep formalism (although the book has its share of proofs and proof-like explanations)</p>
 
-<p>3.为什么我们需要学习算法呢？学习了算法之后可以帮助我们更加高效地解决问题！</p>
+<h4 id="section-2">3.为什么我们需要学习算法呢？</h4>
+
+<p>学习了算法之后可以帮助我们更加高效地解决问题！</p>
 
 <p>下面是一个简单的线性时间和平方时间的对比例子，后者的运行速度远远慢于后者，为什么？这与Python中内置的list的实现机制有关，在前面的数据结构篇中介绍过了，list是类似数组一样的动态链表，而不是标准的单链表，所以对于append操作是常数时间，而对于insert操作是线性时间的！感兴趣移步阅读<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/">Python数据结构篇3-数据结构</a></p>
 
@@ -588,7 +598,7 @@ Tracey: I don’t think they covered that in basic.
 </span><span class="line"><span class="k">print</span> <span class="n">t2</span> <span class="c">#3.68582415581</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>4.这本书完整的章节内容</p>
+<h4 id="section-3">4.这本书完整的章节内容</h4>
 
 <p>Chapter 1: Introduction. You’ve already gotten through most of this. It gives an overview of the book.</p>
 
@@ -608,7 +618,9 @@ Tracey: I don’t think they covered that in basic.
 
 <hr />
 
-<p>问题1-2：(比较两个字符串是否满足回文构词法)Find a way of checking whether two strings are anagrams of each other (such as “debit card” and “bad credit”). How well do you think your solution scales? Can you think of a naïve solution that will scale very poorly?</p>
+<h4 id="section-4">问题1-2：(比较两个字符串是否满足回文构词法)</h4>
+
+<p>Find a way of checking whether two strings are anagrams of each other (such as “debit card” and “bad credit”). How well do you think your solution scales? Can you think of a naïve solution that will scale very poorly?</p>
 
 <p>A simple and quite scalable solution would be to sort the characters in each string and compare the results. (In theory, counting the character frequencies, possibly using collections.Counter, would scale even better.) A really poor solution would be to compare all possible orderings of one string with the other. I can’t overstate how poor this solution is; in fact, algorithms don’t get much worse than this. Feel free to code it up, and see how large anagrams you can check. I bet you won’t get far.</p>
 

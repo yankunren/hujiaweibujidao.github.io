@@ -143,7 +143,7 @@ Tracey: I don’t think they covered that in basic.
 
 <p>本节主要介绍了算法渐近运行时间的表示法和Python中树和图的实现方式。</p>
 
-<p>1.计算模型</p>
+<h4 id="section">1.计算模型</h4>
 
 <p>Alan Turing的图灵机模型： **A Turing machine is a simple (abstract) device that can read from, write to, and move along an infinitely long strip of paper. ** The actual behavior of the machines varies. Each is a so-called finite state machine: it has a finite set of states (some of which indicate that it has finished), and every symbol it reads potentially triggers reading and/or writing and switching to a different state. You can think of this machinery as a set of rules. (“If I am in state 4 and see an X, I move one step to the left, write a Y, and switch to state 9.”) </p>
 
@@ -165,9 +165,9 @@ Tracey: I don’t think they covered that in basic.
 
 <p>the notion of running time complexity (as described in the next section) is based on knowing how big a problem instance is, and that size is simply the amount of memory needed to encode it.   [算法的运行时间是基于问题的大小，这个大小是指问题的输入占用的内存空间大小]</p>
 
-<p>2.算法渐近运行时间</p>
+<h4 id="section-1">2.算法渐近运行时间</h4>
 
-<p>主要介绍了大O符号、大$\Omega$符号以及大$\Theta$符号，这内容网上很多，略过，可以参考<a href="http://en.wikipedia.org/wiki/Big_O_notation">wikipedia</a></p>
+<p>主要介绍了大O符号、大$\Omega$符号以及大$\Theta$符号，这部分内容网上很多资料，此处略过，可以参考<a href="http://en.wikipedia.org/wiki/Big_O_notation">wikipedia_大O符号</a></p>
 
 <p>算法导论介绍到，对于三个符号可以做如下理解：$O$ = $\le$，$\Omega$ = $\ge$， $\Theta$ = $=$</p>
 
@@ -175,7 +175,11 @@ Tracey: I don’t think they covered that in basic.
 
 <p>几种常见的运行时间以及算法实例 <a href="http://zh.wikipedia.org/zh-cn/时间复杂度">wiki中的时间复杂度</a></p>
 
-<p>3.</p>
+<p><img src="http://hujiaweibujidao.github.io/images/algos/complexity.png" alt="image" /></p>
+
+<h4 id="section-2">3.算法性能评估的经验</h4>
+
+<p>(1)</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
