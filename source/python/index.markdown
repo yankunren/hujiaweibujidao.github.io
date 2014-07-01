@@ -63,7 +63,9 @@ Python分类下的系列文章，不断更新中
 
 (7)[Python Algorithms - C7 Greedy](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-greedy/) [还未完成]
 
-(8)[Python Algorithms - C8 Dynamic Programming](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-dynamic-programming/) 详述动态规划的思想和两种实现方式及其对比
+(8)[Python Algorithms - C8 Dynamic Programming](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-dynamic-programming/) 
+
+本节主要结合一些经典的动规问题介绍动态规划的备忘录法和迭代法这两种实现方式，并对这两种方式进行对比
 
 (9)[Python Algorithms - C9 Graphs](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs/) [还未完成]
 
