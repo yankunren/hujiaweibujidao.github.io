@@ -39,7 +39,9 @@ RAM模型(random-access machine)：标准的单核计算机，它大致有下面
 
 算法的本质： **An algorithm is a procedure, consisting of a finite set of steps (possibly including loops and conditionals) that solves a given problem in finite time. **
 
-the notion of running time complexity (as described in the next section) is based on knowing how big a problem instance is, and that size is simply the amount of memory needed to encode it.   [算法的运行时间是基于问题的大小，这个大小是指问题的输入占用的内存空间大小]
+the notion of running time complexity (as described in the next section) is based on knowing how big a problem instance is, and that size is simply the amount of memory needed to encode it.  
+
+[算法的运行时间是基于问题的大小，这个大小是指问题的输入占用的内存空间大小]
 
 #### 2.算法渐近运行时间
 
