@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Python Algorithms - Trees"
+title: "Python Data Structures - C4 Trees"
 date: 2014-05-08 20:00
 comments: true
 categories: algorithm
