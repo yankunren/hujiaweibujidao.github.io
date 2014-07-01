@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-01T22:28:20+08:00</updated>
+  <updated>2014-07-01T22:37:11+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -60,19 +60,22 @@
 
 <h3 id="centerchapter-8-tangled-dependencies-and-memoizationcenter"><center>Chapter 8 Tangled Dependencies and Memoization</center></h3>
 
-<p>参考内容：</p>
+<blockquote>
+  <p>Twice, adv. Once too often.   <br />
+  —— Ambrose Bierce, The Devil’s Dictionary</p>
+</blockquote>
 
-<p>1.<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms: Mastering Basic Algorithms in the Python Language</a></p>
+<p>本节主要结合一些经典的动规问题介绍动态规划的备忘录法和迭代法这两种实现方式，并对这两种方式进行对比</p>
 
-<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
+<p>[这篇文章还会更新]</p>
 
-<p>3.<a href="http://book.douban.com/subject/4875278/">算法设计、分析与实现从入门到精通</a></p>
+<hr />
 
 <p>大家都知道，动态规划算法一般都有两种实现方式：</p>
 
 <p><strong>1.直接自顶向下实现递归式，并将中间结果保存，这叫备忘录法；</strong></p>
 
-<p><strong>2.将递归式翻转，自底向上地迭代，将结果保存在某个数据结构中。</strong></p>
+<p><strong>2.按照递归式自底向上地迭代，将结果保存在某个数据结构中求解。</strong></p>
 
 <p>编程有一个原则<code>DRY=Don’t Repeat Yourself</code>，就是说你的代码不要重复来重复去的，这个原则同样可以用于理解动态规划，动态规划除了满足最优子结构，它还存在子问题重叠的性质，我们不能重复地去解决这些子问题，所以我们将子问题的解保存起来，类似缓存机制，之后遇到这个子问题时直接取出子问题的解。</p>
 
@@ -343,7 +346,9 @@
 
 <p>OK，希望我把动态规划将清楚了，总结下：<strong>动态规划其实就是一个连续决策的过程，每次决策我们可能有多种选择(二项式系数和0-1背包问题中我们只有两个选择，DAG图的单源最短路径中我们的选择要看点的出边或者入边，矩阵链乘问题中就是矩阵链可以分开的位置总数…)，我们每次选择最好的那个作为我们的决策。所以，动态规划的时间复杂度其实和这两者有关，也就是子问题的个数以及子问题的选择个数，一般情况下动态规划算法的时间复杂度就是两者的乘积。动态规划有两种实现方式：一种是带备忘录的递归形式，这种方式直接从原问题出发，遇到子问题就去求解子问题并存储子问题的解，下次遇到的时候直接取出来，问题求解的过程看起来就像是先自顶向下地展开问题，然后自下而上的进行决策；另一个实现方式是迭代方式，这种方式需要考虑如何给定一个子问题的求解方式，使得后面求解规模较大的问题是需要求解的子问题都已经求解好了，它的缺点就是可能有些子问题不要算但是它还是算了，而递归实现方式只会计算它需要求解的子问题。</strong></p>
 
-<p>如果你感觉你有所顿悟，来试试写写<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/">最长公共子序列吧，这篇文章中给出了Python版本的5种实现方式</a>哟！</p>
+<hr />
+
+<p>练习：来试试写写最长公共子序列吧，<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/">这篇文章中给出了Python版本的5种实现方式</a>哟！</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-dynamic-programming/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-dynamic-programming/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
