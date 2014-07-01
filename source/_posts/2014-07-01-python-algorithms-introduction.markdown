@@ -24,25 +24,27 @@ published: true
 
 算法导论是一本经典的大而全的算法书籍，而本书Python Algorithms不是来取代而是来补充算法导论的，因为算法导论提供的是简易的伪代码和详细的证明，而本书主要从作者的教学过程中从更高地层次来讲解算法，并使用Python代码来实现。
 
+[实际阅读之后，我个人感觉这本书虽然貌似名声不大，但是绝对可以和算法导论平分秋色]
+
 #### 2.这本书关于什么？
 
 算法分析，算法设计的基本原则，如何使用Python实现基本的数据结构和算法
 
-What the book is about:
-• Algorithm analysis, with a focus on asymptotic running time
-• Basic principles of algorithm design
-• How to represent well-known data structures in Python
-• How to implement well-known algorithms in Python
+What the book is about:    
+• Algorithm analysis, with a focus on asymptotic running time   
+• Basic principles of algorithm design    
+• How to represent well-known data structures in Python    
+• How to implement well-known algorithms in Python   
 
-What the book covers only briefly or partially:
-• Algorithms that are directly available in Python, either as part of the language or via the standard library
-• Thorough and deep formalism (although the book has its share of proofs and proof-like explanations)
+What the book covers only briefly or partially:    
+• Algorithms that are directly available in Python, either as part of the language or via the standard library    
+• Thorough and deep formalism (although the book has its share of proofs and proof-like explanations)    
 
 #### 3.为什么我们需要学习算法呢？
 
 学习了算法之后可以帮助我们更加高效地解决问题！
 
-下面是一个简单的线性时间和平方时间的对比例子，后者的运行速度远远慢于后者，为什么？这与Python中内置的list的实现机制有关，在前面的数据结构篇中介绍过了，list是类似数组一样的动态链表，而不是标准的单链表，所以对于append操作是常数时间，而对于insert操作是线性时间的！感兴趣移步阅读[Python数据结构篇3-数据结构](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)
+下面是一个简单的线性时间和平方时间的对比例子，后者的运行速度远远慢于后者，为什么呢？这与Python中内置的list的实现机制有关，在前面的数据结构篇中介绍过了，list是类似数组一样的动态链表，而不是标准的单链表，所以对于append操作是常数时间，而对于insert操作是线性时间的！感兴趣的话移步阅读[Python数据结构篇3-数据结构](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)
 
 ```python
 from time import *
@@ -65,6 +67,8 @@ print t2 #3.68582415581
 ```
 
 #### 4.这本书完整的章节内容
+
+除去平摊分析外，内容差不多和我本学期的算法课的内容差不多
 
 Chapter 1: Introduction. You’ve already gotten through most of this. It gives an overview of the book.
 
