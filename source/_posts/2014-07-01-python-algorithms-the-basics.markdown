@@ -17,11 +17,11 @@ Zoe: Sort of the point. Stealth—you may have heard of it.
 Tracey: I don’t think they covered that in basic.      
   —— From “The Message,” episode 14 of Firefly
 
-本节主要介绍了算法渐近运行时间的表示法和Python中树和图的实现方式。
+本节主要介绍了三个内容：算法渐近运行时间的表示方法、六条算法性能评估的经验以及Python中树和图的实现方式。
 
 #### 1.计算模型
 
-Alan Turing的图灵机模型： **A Turing machine is a simple (abstract) device that can read from, write to, and move along an infinitely long strip of paper. ** The actual behavior of the machines varies. Each is a so-called finite state machine: it has a finite set of states (some of which indicate that it has finished), and every symbol it reads potentially triggers reading and/or writing and switching to a different state. You can think of this machinery as a set of rules. (“If I am in state 4 and see an X, I move one step to the left, write a Y, and switch to state 9.”) 
+图灵机模型(Turing machine)： **A Turing machine is a simple (abstract) device that can read from, write to, and move along an infinitely long strip of paper.**  The actual behavior of the machines varies. Each is a so-called finite state machine: it has a finite set of states (some of which indicate that it has finished), and every symbol it reads potentially triggers reading and/or writing and switching to a different state. You can think of this machinery as a set of rules. (“If I am in state 4 and see an X, I move one step to the left, write a Y, and switch to state 9.”) 
 
 RAM模型(random-access machine)：标准的单核计算机，它大致有下面三个性质
 
@@ -37,7 +37,7 @@ RAM模型(random-access machine)：标准的单核计算机，它大致有下面
 
 计算机的字长足够大以使得它能够访问所有的内存地址。
 
-算法的本质： **An algorithm is a procedure, consisting of a finite set of steps (possibly including loops and conditionals) that solves a given problem in finite time. **
+算法的本质： **An algorithm is a procedure, consisting of a finite set of steps (possibly including loops and conditionals) that solves a given problem in finite time.**
 
 the notion of running time complexity (as described in the next section) is based on knowing how big a problem instance is, and that size is simply the amount of memory needed to encode it.  
 
@@ -246,12 +246,11 @@ N = {
 
 邻接矩阵 Adjacency Matrix
 
+使用嵌套的list，用1和0表示点和点之间的连接关系，此时对于它们的连接性判断时间是常数，但是对于度的计算时间是线性的
+
 ```
 # An Adjacency Matrix, Implemented with Nested Lists
 a, b, c, d, e, f, g, h = range(8)
-
-#     a b c d e f g h
-
 N = [[0,1,1,1,1,1,0,0], # a
      [0,0,1,0,1,0,0,0], # b
      [0,0,0,1,0,0,0,0], # c
@@ -264,5 +263,169 @@ N = [[0,1,1,1,1,1,0,0], # a
 N[a][b] # Neighborhood membership -> 1
 sum(N[f]) # Degree -> 3
 ```
+
+如果边带有权值，也可以使用权值代替1，用inf代替0
+
+```
+a, b, c, d, e, f, g, h = range(8)
+_ = float('inf')
+
+W = [[0,2,1,3,9,4,_,_], # a
+     [_,0,4,_,3,_,_,_], # b
+     [_,_,0,8,_,_,_,_], # c
+     [_,_,_,0,7,_,_,_], # d
+     [_,_,_,_,0,5,_,_], # e
+     [_,_,2,_,_,0,2,2], # f
+     [_,_,_,_,_,1,0,6], # g
+     [_,_,_,_,_,9,8,0]] # h
+
+W[a][b] < inf # Neighborhood membership
+sum(1 for w in W[a] if w < inf) - 1  # Degree
+```
+
+**NumPy**：这里作者提到了一个最常用的数值计算模块NumPy，它包含了很多与多维数组计算有关的函数。我可能会在以后的机器学习中详细学习它的使用，到时候再写篇文章介绍它的使用
+
+(2)树的表示 [假设要表示下面的树]
+
+![image](http://hujiaweibujidao.github.io/images/algos/treerep.png)
+
+树是一种特殊的图，所以可以使用图的表示方法，但是因为树的特殊性，其实有其他更好的表示方法，最简单的就是直接用一个list即可，缺点也很明显，可读性太差了，相当不直观
+
+```
+T = [["a", "b"], ["c"], ["d", ["e", "f"]]]
+T[2][1][0]  # 'e'
+```
+
+很多时候我们都能够肯定树中节点的孩子节点个数最多有多少个，所以比较方便的实现方式就是使用类class
+
+```
+# A Binary Tree Class 二叉树实例
+class Tree:
+    def __init__(self, left, right):
+        self.left = left 
+        self.right = right
+
+t = Tree(Tree("a", "b"), Tree("c", "d"))
+t.right.left  # 'c'
+```
+
+上面的实现方式的子节点都是孩子节点，但是还有一种很常用的树的表示方式，那就是“左孩子，右兄弟”表示形式
+
+```
+# 左孩子，右兄弟 表示方式
+class Tree:
+    def __init__(self, kids, next=None):
+        self.kids = self.val = kids
+        self.next = next
+return Tree
+
+t = Tree(Tree("a", Tree("b", Tree("c", Tree("d")))))
+t.kids.next.next.val  # 'c'
+```
+
+----------
+
+**[Bunch Pattern]**：有意思的是，上面的实现方式使用了Python中一种常用的设计模式，叫做Bunch Pattern，原书介绍如下： 
+
+[因为这个不太好理解，还是原文比较有味，后期等我深刻理解了我可能会详细介绍它]
+
+When prototyping (or even finalizing) data structures such as trees, it can be useful to have a flexible class that will allow you to specify arbitrary attributes in the constructor. In these cases, the “Bunch” pattern (named by Alex Martelli in the Python Cookbook) can come in handy. There are many ways of implementing it, but the gist of it is the following:
+
+```
+class Bunch(dict):
+    def __init__(self, *args, **kwds):
+        super(Bunch, self).__init__(*args, **kwds)
+        self.__dict__ = self
+return Bunch
+```
+
+There are several useful aspects to this pattern. First, it lets you create and set arbitrary attributes by supplying them as command-line arguments:
+
+```
+>>> x = Bunch(name="Jayne Cobb", position="Public Relations") 
+>>> x.name
+'Jayne Cobb'
+```
+
+Second, by subclassing dict, you get lots of functionality for free, such as iterating over the keys/attributes or easily checking whether an attribute is present. Here’s an example:
+
+```
+>>> T = Bunch
+>>> t = T(left=T(left="a", right="b"), right=T(left="c")) 
+>>> t.left
+{'right': 'b', 'left': 'a'}
+>>> t.left.right
+'b'
+>>> t['left']['right']
+'b'
+>>> "left" in t.right
+True
+>>> "right" in t.right
+False
+```
+
+This pattern isn’t useful only when building trees, of course. You could use it for any situation where you’d want a flexible object whose attributes you could set in the constructor.
+
+----------
+
+**[与图有关的python模块]**：
+
+• NetworkX: http://networkx.lanl.gov
+
+• python-graph: http://code.google.com/p/python-graph
+
+• Graphine: http://gitorious.org/projects/graphine/pages/Home
+
+• Pygr: a graph database  http://bioinfo.mbi.ucla.edu/pygr  
+ 
+• Gato: a graph animation toolbox http://gato.sourceforge.net   
+
+• PADS: a collection of graph algorithms  http://www.ics.uci.edu/~eppstein/PADS
+
+----------
+
+5.Python编程中的一些细节
+
+In general, the more important your program, the more you should mistrust such black boxes and seek to find out what’s going on under the cover.
+
+作者在这里提到，你的程序越是重要的话，你就越是需要明白你所使用的数据结构的内部实现，甚至有些时候你要自己重新实现它。
+
+(1)Hidden Squares 隐藏的平方运行时间
+
+有些情况下我们可能没有注意到我们的操作是非常不高效的，例如下面的代码，如果是判断某个元素是否在list中运行时间是线性的，如果是使用set，判断某个元素是否存在只需要常数时间，所以如果我们需要进行判断很多元素是否存在的话，使用set的性能会更加高效。
+
+```
+from random import randrange
+L = [randrange(10000) for i in range(1000)]
+42 in L # False
+S = set(L)
+42 in S #False
+```
+
+(2)The Trouble with Floats 精度带来的烦恼
+
+现有的计算机系统都是不能精确表达小数的！[该部分内容可以阅读相关的计算机组成原理相关的书籍了解计算机的浮点数系统]在python中，浮点数可能带来很多的烦恼，例如，运行下面的实例，本应该是相等，但是却返回False。
+
+````
+sum(0.1 for i in range(10)) == 1.0 # False
+```
+
+首先，永远不要对小数比较来作为相等的判断依据！你最多只能判断两个浮点数渐近相等。
+
+```
+def almost_equal(x, y, places=7):
+    return round(abs(x-y), places) == 0
+
+almost_equal(sum(0.1 for i in range(10)), 1.0) # True
+```
+
+除此之外，可以使用一些有用的第三方模块，例如`decimal`，这对于需要处理金融数据的时候很有帮助
+
+```
+from decimal import *
+sum(Decimal("0.1") for i in range(10)) == Decimal("1.0")  # Ture
+```
+
+更多和Python中的浮点数有关的内容可以查看[Floating Point Arithmetic: Issues and Limitations](https://docs.python.org/2/tutorial/floatingpoint.html)
 
 
