@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Python Algorithms - Data Structures"
+title: "Python Data Structures - C3 Data Structures"
 date: 2014-05-08 10:00
 comments: true
 categories: algorithm
