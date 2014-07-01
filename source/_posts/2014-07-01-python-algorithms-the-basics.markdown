@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Python Algorithms - Greedy"
+title: "Python Algorithms - C2 The basics"
 date: 2014-07-01 10:20
 comments: true
 categories: algorithm
