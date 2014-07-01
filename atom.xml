@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-01T21:00:36+08:00</updated>
+  <updated>2014-07-01T21:21:47+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -514,11 +514,11 @@ Tracey: I don’t think they covered that in basic.    <br />
 
 <p>(1)Tip 1: If possible, don’t worry about it.</p>
 
-<p>如果可以那就暴力求解吧</p>
+<p>如果暴力求解也还行就算了吧，别去担心了</p>
 
 <p>(2)Tip 2: For timing things, use timeit.</p>
 
-<p>使用<code>timeit</code>模块对运行时间进行分析，在前面的<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/">数据结构篇中第三部分数据结构</a>的list中已经介绍过了timeit模块，在使用的时候需要注意前面的运行不会影响后面的重复的运行(例如，测试排序算法运行时间，如果将前面已经排好序的序列传递给后面的重复运行是不可以的)</p>
+<p>使用<code>timeit</code>模块对运行时间进行分析，在前面的<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/">数据结构篇中第三部分数据结构</a>的list中已经介绍过了timeit模块，在使用的时候需要注意前面的运行不会影响后面的重复的运行(例如，分析排序算法运行时间，如果将前面已经排好序的序列传递给后面的重复运行是不可以的)</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -548,34 +548,6 @@ Tracey: I don’t think they covered that in basic.    <br />
 <span class="line-number">16</span>
 <span class="line-number">17</span>
 <span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-<span class="line-number">46</span>
 </pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c">#cProfile模块简单使用实例</span>
 </span><span class="line"><span class="kn">import</span> <span class="nn">cProfile</span>
 </span><span class="line"><span class="kn">import</span> <span class="nn">re</span>
@@ -593,35 +565,7 @@ Tracey: I don’t think they covered that in basic.    <br />
 </span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">re</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">226</span><span class="p">(</span><span class="n">_compile</span><span class="p">)</span>
 </span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">178</span><span class="p">(</span><span class="n">_compile_charset</span><span class="p">)</span>
 </span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">207</span><span class="p">(</span><span class="n">_optimize_charset</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">4</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">24</span><span class="p">(</span><span class="n">_identityfunction</span><span class="p">)</span>
-</span><span class="line">      <span class="mi">3</span><span class="o">/</span><span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">32</span><span class="p">(</span><span class="n">_compile</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">359</span><span class="p">(</span><span class="n">_compile_info</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">2</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">472</span><span class="p">(</span><span class="n">isstring</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">478</span><span class="p">(</span><span class="n">_code</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">493</span><span class="p">(</span><span class="nb">compile</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">5</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">126</span><span class="p">(</span><span class="n">__len__</span><span class="p">)</span>
-</span><span class="line">       <span class="mi">12</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">130</span><span class="p">(</span><span class="n">__getitem__</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">7</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">138</span><span class="p">(</span><span class="n">append</span><span class="p">)</span>
-</span><span class="line">      <span class="mi">3</span><span class="o">/</span><span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">140</span><span class="p">(</span><span class="n">getwidth</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">178</span><span class="p">(</span><span class="n">__init__</span><span class="p">)</span>
-</span><span class="line">       <span class="mi">10</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">182</span><span class="p">(</span><span class="n">__next</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">2</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">195</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">8</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">201</span><span class="p">(</span><span class="n">get</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">301</span><span class="p">(</span><span class="n">_parse_sub</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">2</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">379</span><span class="p">(</span><span class="n">_parse</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">67</span><span class="p">(</span><span class="n">__init__</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">675</span><span class="p">(</span><span class="n">parse</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">3</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">90</span><span class="p">(</span><span class="n">__init__</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">_sre</span><span class="o">.</span><span class="n">compile</span><span class="p">}</span>
-</span><span class="line">       <span class="mi">15</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="nb">isinstance</span><span class="p">}</span>
-</span><span class="line">    <span class="mi">38</span><span class="o">/</span><span class="mi">37</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="nb">len</span><span class="p">}</span>
-</span><span class="line">        <span class="mi">2</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="nb">max</span><span class="p">}</span>
-</span><span class="line">       <span class="mi">48</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">method</span> <span class="s">&#39;append&#39;</span> <span class="n">of</span> <span class="s">&#39;list&#39;</span> <span class="n">objects</span><span class="p">}</span>
-</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">method</span> <span class="s">&#39;disable&#39;</span> <span class="n">of</span> <span class="s">&#39;_lsprof.Profiler&#39;</span> <span class="n">objects</span><span class="p">}</span>
-</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">method</span> <span class="s">&#39;get&#39;</span> <span class="n">of</span> <span class="s">&#39;dict&#39;</span> <span class="n">objects</span><span class="p">}</span>
-</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">method</span> <span class="s">&#39;items&#39;</span> <span class="n">of</span> <span class="s">&#39;dict&#39;</span> <span class="n">objects</span><span class="p">}</span>
-</span><span class="line">        <span class="mi">8</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="nb">min</span><span class="p">}</span>
-</span><span class="line">        <span class="mi">6</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="nb">ord</span><span class="p">}</span>
+</span><span class="line"><span class="o">...</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>(4)Tip 4: Plot your results.</p>
@@ -663,7 +607,7 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/graphrep.png" alt="image" /></p>
 
-<p>邻接表 Adjacency Lists：因为历史原因，邻接表都是指链表list，但实际上也可以是其他的，例如在python中也可以是set或者dict，不同的表示方式有各自的优缺点，它们判断节点的连接关系和节点的度的方式甚至两个操作的性能都不太一样。</p>
+<p>邻接表 Adjacency Lists：因为历史原因，邻接表往往都是指链表list，但实际上也可以是其他的，例如在python中也可以是set或者dict，不同的表示方式有各自的优缺点，它们判断节点的连接关系和节点的度的方式甚至两个操作的性能都不太一样。</p>
 
 <p>① adjacency lists 表示形式</p>
 
@@ -981,17 +925,17 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 
 <p><strong>[与图有关的python模块]</strong>：</p>
 
-<p>• NetworkX: http://networkx.lanl.gov</p>
+<p>• NetworkX: <a href="http://networkx.lanl.gov">http://networkx.lanl.gov</a></p>
 
-<p>• python-graph: http://code.google.com/p/python-graph</p>
+<p>• python-graph: <a href="http://code.google.com/p/python-graph">http://code.google.com/p/python-graph</a></p>
 
-<p>• Graphine: http://gitorious.org/projects/graphine/pages/Home</p>
+<p>• Graphine: <a href="http://gitorious.org/projects/graphine/pages/Home">http://gitorious.org/projects/graphine/pages/Home</a></p>
 
-<p>• Pygr: a graph database  http://bioinfo.mbi.ucla.edu/pygr  </p>
+<p>• Pygr: a graph database  <a href="http://bioinfo.mbi.ucla.edu/pygr">http://bioinfo.mbi.ucla.edu/pygr</a>  </p>
 
-<p>• Gato: a graph animation toolbox http://gato.sourceforge.net   </p>
+<p>• Gato: a graph animation toolbox <a href="http://gato.sourceforge.net">http://gato.sourceforge.net</a>   </p>
 
-<p>• PADS: a collection of graph algorithms  http://www.ics.uci.edu/~eppstein/PADS</p>
+<p>• PADS: a collection of graph algorithms  <a href="http://www.ics.uci.edu/~eppstein/PADS">http://www.ics.uci.edu/~eppstein/PADS</a></p>
 
 <hr />
 
@@ -1003,7 +947,7 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 
 <p>(1)Hidden Squares 隐藏的平方运行时间</p>
 
-<p>有些情况下我们可能没有注意到我们的操作是非常不高效的，例如下面的代码，如果是判断某个元素是否在list中运行时间是线性的，如果是使用set，判断某个元素是否存在只需要常数时间，所以如果我们需要进行判断很多元素是否存在的话，使用set的性能会更加高效。</p>
+<p>有些情况下我们可能没有注意到我们的操作是非常不高效的，例如下面的代码，如果是判断某个元素是否在list中运行时间是线性的，如果是使用set，判断某个元素是否存在只需要常数时间，所以如果我们需要判断很多元素是否存在的话，使用set的性能会更加高效。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -1019,13 +963,13 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 
 <p>(2)The Trouble with Floats 精度带来的烦恼</p>
 
-<p>现有的计算机系统都是不能精确表达小数的！[该部分内容可以阅读相关的计算机组成原理相关的书籍了解计算机的浮点数系统]在python中，浮点数可能带来很多的烦恼，例如，运行下面的实例，本应该是相等，但是却返回False。</p>
+<p>现有的计算机系统都是不能精确表达小数的！[该部分内容可以阅读与计算机组成原理相关的书籍了解计算机的浮点数系统]在python中，浮点数可能带来很多的烦恼，例如，运行下面的实例，本应该是相等，但是却返回False。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class="python"><span class="line"><span class="nb">sum</span><span class="p">(</span><span class="mf">0.1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mf">1.0</span> <span class="c"># False</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>首先，永远不要对小数比较来作为相等的判断依据！你最多只能判断两个浮点数渐近相等。</p>
+<p>永远不要使用小数比较结果来作为两者相等的判断依据！你最多只能判断两个浮点数在有限位数上是相等的。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -1043,6 +987,14 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 <span class="line-number">2</span>
 </pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="o">*</span>
 </span><span class="line"><span class="nb">sum</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s">&quot;0.1&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="n">Decimal</span><span class="p">(</span><span class="s">&quot;1.0&quot;</span><span class="p">)</span>  <span class="c"># Ture</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>还有一个有用的<code>Sage</code>模块，如下所示，它可以进行数学的符号运算得到准确值，如果需要也可以得到近似的浮点数解。<a href="http://sagemath.org">Sage的官方网址</a></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">sage</span><span class="p">:</span> <span class="mi">3</span><span class="o">/</span><span class="mi">5</span> <span class="o">*</span> <span class="mi">11</span><span class="o">/</span><span class="mi">7</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5239</span><span class="p">)</span>
+</span><span class="line"><span class="mi">13</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">31</span><span class="p">)</span> <span class="o">+</span> <span class="mi">33</span><span class="o">/</span><span class="mi">35</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>更多和Python中的浮点数有关的内容可以查看<a href="https://docs.python.org/2/tutorial/floatingpoint.html">Floating Point Arithmetic: Issues and Limitations</a></p>
