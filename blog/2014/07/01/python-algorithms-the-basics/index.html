@@ -324,11 +324,8 @@ Tracey: I don’t think they covered that in basic.    <br />
 
 <p>4.在Python中实现树和图</p>
 
-<blockquote>
-  <p><strong>[Black Box: dict和set]</strong> <br />
-Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/">Python数据结构篇中的搜索部分</a>已经介绍了hash的内容。Python提供了<code>hash</code>函数，例如<code>hash("Hello, world!")</code>得到<code>-943387004357456228</code> (结果不一定相同)。    <br />
-Python中的dict和set都使用了hash机制，所以平均情况下它们获取元素都是常数时间的。</p>
-</blockquote>
+<p><strong>[Black Box: dict和set]</strong> <br />
+Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/">Python数据结构篇中的搜索部分</a>已经介绍了hash的内容。Python提供了<code>hash</code>函数，例如<code>hash("Hello, world!")</code>得到<code>-943387004357456228</code> (结果不一定相同)。Python中的dict和set都使用了hash机制，所以平均情况下它们获取元素都是常数时间的。</p>
 
 <p>(1)图的表示：最常用的两种表示方式是邻接表和邻接矩阵 [假设要表示的图如下]</p>
 
@@ -466,6 +463,42 @@ Python中的dict和set都使用了hash机制，所以平均情况下它们获取
 </span><span class="line">    <span class="s">&#39;g&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;fh&#39;</span><span class="p">),</span>
 </span><span class="line">    <span class="s">&#39;h&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;fg&#39;</span><span class="p">)</span>
 </span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>邻接矩阵 Adjacency Matrix</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># An Adjacency Matrix, Implemented with Nested Lists</span>
+</span><span class="line"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c">#     a b c d e f g h</span>
+</span><span class="line">
+</span><span class="line"><span class="n">N</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># a</span>
+</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># b</span>
+</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># c</span>
+</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># d</span>
+</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># e</span>
+</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="c"># f</span>
+</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="c"># g</span>
+</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span> <span class="c"># h</span>
+</span><span class="line">
+</span><span class="line"><span class="n">N</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="c"># Neighborhood membership -&gt; 1</span>
+</span><span class="line"><span class="nb">sum</span><span class="p">(</span><span class="n">N</span><span class="p">[</span><span class="n">f</span><span class="p">])</span> <span class="c"># Degree -&gt; 3</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p class="post-footer">
