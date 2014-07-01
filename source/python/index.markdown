@@ -15,19 +15,21 @@ footer: true
 
 研究生之前我没学python是有原因的：首先，我怕蛇，很怕很怕，而这货的logo竟然就是蛇，我因故而避之；其次，我不喜欢脚本语言，我会shell，但是写的时候不是很爽，只是在处理些文件操作或者字符串操作的时候才会想起它，听说python脚本神马的，我便又避之。
 
-但是，上了研究生发现用Python的人很多，而且这货简直被神化了，无所不能，吊炸天的Edx的后台竟然就是用的Python，于是花了一个下午刷了本《Head First Python》，感觉没啥特别，只是写起来轻便，甚至还能开发Android，让我大吃一惊。后来，又接着看了些Python书，发现真的如此，很多时候用Java写了几十行的代码用Python几行就搞定了，而且它同样拥有大量的第三方模块，于是我就这么走进了Python的世界。Python要入门很简单，毕竟我搞Java这么多年了，这俩太多的相似点了，入门之后写写数据结构，写写算法，熟悉一些高级特性，使用一些第三方模块之后差不多就熟练了，现在，做任何事情，我首先想到的是用Python如何实现?！嘿嘿，"Life is short, go start Python"！
+但是，上了研究生发现用Python的人很多，而且这货简直被神化了，无所不能，吊炸天的Edx的后台竟然就是用的Python，于是花了一个下午刷了本《Head First Python》，感觉没啥特别，只是写起来轻便，甚至还能开发Android，让我大吃一惊。后来，又接着看了些Python书，发现真的如此，很多时候用Java写了几十行的代码用Python几行就搞定了，而且它同样拥有大量的第三方模块，于是我就这么走进了Python的世界。Python要入门很简单，毕竟我搞Java这么多年了，这俩太多的相似点了，入门之后写写数据结构，写写算法，熟悉一些高级特性，使用一些第三方模块之后差不多就入门了，现在，做任何事情，我首先想到的是用Python如何实现?！嘿嘿，"Life is short, go start Python"！
 
 Python分类下的系列文章，不断更新中
 
-1.Python知识记录
+**近期将会有重要变化，可以暂时不阅读该系列文章，待更新完毕再读应该会好些。**
+
+1.Python基础知识篇
 
 [Python Basics](http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/) 和 [Python Advances](http://hujiaweibujidao.github.io/blog/2014/05/16/python-tips2/)
 
-前者是Python基础的简单总结，后者实际上是罗列了些关于Python的好文章
+前者是Python基础的简单总结，后者实际上是罗列了些关于Python高级特性的好文章
 
-2.Python算法系列
+2.Python数据结构篇
 
-这些是在阅读了一定资料之后的总结，都是有代码实现的，每篇文章的内容都比较多，简单算法一般是大致介绍下思想及算法流程，复杂的算法会给出各种图示和代码实现详细介绍。
+数据结构篇主要是阅读[Problem Solving with Python](http://interactivepython.org/courselib/static/pythonds/index.html)时写下的阅读记录，当然，也结合了部分[算法导论](http://en.wikipedia.org/wiki/Introduction_to_Algorithms)中的内容，此外还有不少wikipedia上的内容，所以内容比较多，也有点杂乱，主要是介绍了如何使用Python实现常用的一些数据结构，例如堆栈、队列、二叉树等等，也有Python内置的数据结构性能的分析，同时还包括了搜索和排序(在算法设计篇中会有更加详细的介绍)的简单总结。每篇文章都有实现代码，内容都比较多，简单算法一般是大致介绍下思想及算法流程，复杂的算法会给出各种图示和代码实现详细介绍。
 
 (1)[搜索](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/) 简述顺序查找和二分查找，详述Hash查找
 
@@ -37,9 +39,13 @@ Python分类下的系列文章，不断更新中
 
 (4)[树总结](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees/)  简述二叉树，详述二叉搜索树和AVL树的思想和实现
 
+3.Python算法设计篇
+
+算法设计篇主要是阅读[Python Algorithms: Mastering Basic Algorithms in the Python Language](http://link.springer.com/book/10.1007%2F978-1-4302-3238-4)时写下的阅读记录，原书大部分内容结合了经典书籍[算法导论](http://en.wikipedia.org/wiki/Introduction_to_Algorithms)，所以内容更多，更加细致，主要是介绍了各种常用的算法设计思想，以及如何使用Python实现这些算法，这里使用了大量的第三方与数据结构有关的模块，因为该篇的重点是算法的思想以及实现，所以并没有去重头实现每个数据结构，但是在介绍算法的同时会分析Python内置数据结构以及第三方数据结构模块的优缺点。每篇文章都有实现代码，内容都比较多，简单算法一般是大致介绍下思想及算法流程，复杂的算法会给出各种图示和代码实现详细介绍。
+
 (5)[贪心](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-greedy/) [还未完成]
 
-(6)[动态规划](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/)  详述动态规划的思想和两种实现方式及其对比，并结合矩阵链乘、DAG的单源最短路径以及最长公共子序列等问题进行介绍
+(6)[动态规划](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-dynamic-programming/)  详述动态规划的思想和两种实现方式及其对比
 
 (7)[图总结](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Graphs/) [还未完成]
 
