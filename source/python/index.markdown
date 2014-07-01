@@ -47,7 +47,9 @@ Python分类下的系列文章，不断更新中
 
 本节主要是对书籍中的内容做些简单介绍，从旅行商问题开始引入介绍了算法的重要性。
 
-(2)[Python Algorithms - C2 The basics](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/) [还未完成]
+(2)[Python Algorithms - C2 The basics](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/) 
+
+本节主要介绍了三个内容：算法渐近运行时间的表示方法、六条算法性能评估的经验以及Python中树和图的实现方式。
 
 (3)[Python Algorithms - C3 Counting 101](http://hujiaweibujidao.github.io//blog/2014/07/01/python-algorithms-counting-101/) [还未完成]
 
