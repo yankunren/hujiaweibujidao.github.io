@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Python Algorithms - Sort"
+title: "Python Datastructs - C2 Sort"
 date: 2014-05-07 22:00
 comments: true
 categories: algorithm
