@@ -398,6 +398,13 @@ from decimal import *
 sum(Decimal("0.1") for i in range(10)) == Decimal("1.0")  # Ture
 ```
 
+还有一个有用的`Sage`模块，如下所示，它可以进行数学的符号运算得到准确值，如果需要也可以得到近似的浮点数解。[Sage的官方网址](http://sagemath.org)
+
+```
+sage: 3/5 * 11/7 + sqrt(5239) 
+13*sqrt(31) + 33/35
+```
+
 更多和Python中的浮点数有关的内容可以查看[Floating Point Arithmetic: Issues and Limitations](https://docs.python.org/2/tutorial/floatingpoint.html)
 
 
