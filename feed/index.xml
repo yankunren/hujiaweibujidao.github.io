@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-01T15:24:54+08:00</updated>
+  <updated>2014-07-01T15:31:15+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -466,9 +466,9 @@
 <h3 id="centerchapter-2-the-basicscenter"><center>Chapter 2: The basics</center></h3>
 
 <blockquote>
-  <p>Tracey: I didn’t know you were out there.
-Zoe: Sort of the point. Stealth—you may have heard of it. 
-Tracey: I don’t think they covered that in basic.
+  <p>Tracey: I didn’t know you were out there.  <br />
+Zoe: Sort of the point. Stealth—you may have heard of it.    <br />
+Tracey: I don’t think they covered that in basic.    <br />
   —— From “The Message,” episode 14 of Firefly</p>
 </blockquote>
 
@@ -494,7 +494,9 @@ Tracey: I don’t think they covered that in basic.
 
 <p>算法的本质： **An algorithm is a procedure, consisting of a finite set of steps (possibly including loops and conditionals) that solves a given problem in finite time. **</p>
 
-<p>the notion of running time complexity (as described in the next section) is based on knowing how big a problem instance is, and that size is simply the amount of memory needed to encode it.   [算法的运行时间是基于问题的大小，这个大小是指问题的输入占用的内存空间大小]</p>
+<p>the notion of running time complexity (as described in the next section) is based on knowing how big a problem instance is, and that size is simply the amount of memory needed to encode it.  </p>
+
+<p>[算法的运行时间是基于问题的大小，这个大小是指问题的输入占用的内存空间大小]</p>
 
 <h4 id="section-1">2.算法渐近运行时间</h4>
 
@@ -510,10 +512,20 @@ Tracey: I don’t think they covered that in basic.
 
 <h4 id="section-2">3.算法性能评估的经验</h4>
 
-<p>(1)</p>
+<p>(1)Tip 1: If possible, don’t worry about it.</p>
 
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
+<p>如果可以那就暴力求解吧</p>
+
+<p>(2)Tip 2: For timing things, use timeit.</p>
+
+<p>使用timeit模块对运行时间进行分析，在前面的<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/">数据结构篇中第三部分数据结构</a>的list中已经介绍过了timeit模块，简单使用实例</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s">&quot;x = sum(range(10))&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(3)&lt;p class=&#8217;post-footer&#8217;&gt;
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a> Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)&lt;/p&gt;</p>
 ]]></content>
   </entry>
   
