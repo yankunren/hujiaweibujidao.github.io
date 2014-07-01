@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>SS 4-Hypothesis Testing - Hujiawei Bujidao</title>
+  <title>Python Algorithms - Greedy - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="统计学那些事 Things of Statistics
-逸夫图书馆, 2014/5/19 第四部分 假设检验 1.假设：一般假设就是一个“猜想”，它表述问题的一般陈述。假设检验是用于样本，然后才将结论一般化推广到总体中。 2.零假设(null hypothesis=$H_{0}$，或叫原假设)： &hellip;">
+  <meta name="description" content="Python算法设计篇(2)
+逸夫图书馆, 2014/7/1 Chapter 2: The basics 参考内容： 1.Python Algorithms: Mastering Basic Algorithms in the Python Language 2.算法导论 Original &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-4">
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
@@ -105,7 +105,7 @@
 		
   <header>
     
-      <h1 class="entry-title">SS 4-Hypothesis Testing</h1>
+      <h1 class="entry-title">Python Algorithms - Greedy</h1>
     
     
       <p class="meta">
@@ -121,46 +121,26 @@
   
 
 
-<time datetime="2014-05-19T23:00:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2014</time>
+<time datetime="2014-07-01T10:20:00+08:00" pubdate data-updated="true">Jul 1<span>st</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><strong><center>统计学那些事 Things of Statistics</center></strong>
-<strong><center>逸夫图书馆, 2014/5/19</center></strong></p>
+<div class="entry-content"><p><strong><center>Python算法设计篇(2)</center></strong>
+<strong><center>逸夫图书馆, 2014/7/1</center></strong></p>
 
-<hr />
+<h3 id="centerchapter-2-the-basicscenter"><center>Chapter 2: The basics</center></h3>
 
-<h4 id="center-center"><center>第四部分 假设检验</center></h4>
+<p>参考内容：</p>
 
-<p>1.假设：一般假设就是一个“猜想”，它表述问题的一般陈述。假设检验是用于样本，然后才将结论一般化推广到总体中。</p>
+<p>1.<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms: Mastering Basic Algorithms in the Python Language</a></p>
 
-<p>2.零假设(null hypothesis=$H_{0}$，或叫原假设)：它一般表示“正在研究的两个变量无关或者没有差异”这样的命题。例如，三年级学生的记忆力考试成绩与四年级学生记忆力考试成绩之间没有差异。</p>
-
-<p><strong>(1)零假设是研究的起点，因为在没有信息的情况下，零假设就被看作是可以接受的真实状态。在这种假设下，我们认为观测到的效应是由偶然因素造成的。</strong></p>
-
-<p><strong>(2)零假设也是研究的基准，也就是说在零假设成立的情况下，计算统计量，然后进行假设检验。这就类似反证法的思想。</strong></p>
-
-<p>3.研究假设(research hypothesis=alternate hypothesis，或叫备择假设)：与零假设相对立的，认为变量之间有关系的假设。</p>
-
-<p>研究假设分为有方向和无方向两种研究假设。无方向研究假设命题例子：三年级学生的记忆力考试成绩与四年级学生记忆力考试成绩之间有差异。有方向研究假设命题例子：三年级学生的记忆力考试成绩低于四年级学生记忆力考试成绩。</p>
-
-<p>讨论有无方向的另一种形式是讨论单尾检验(one-tailed test)和双尾检验(two-tailed test)。</p>
-
-<p><strong>零假设与研究假设的区别：</strong></p>
-
-<p><strong>(1)零假设表示两个变量没有差异或者没有关系，研究假设表示它们有关系或者有差异；</strong></p>
-
-<p><strong>(2)零假设对应的是总体，而研究假设对应的是样本。我们是从总体中取出一部分样本进行检验，将得到的结论推广到总体中。</strong></p>
-
-<p><strong>(3)因为总体不能直接检验(不现实，不经济或者不可能)，所以零假设只能间接检验，研究假设则可以直接检验。</strong></p>
-
-<p>[To be Continued…]</p>
+<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
 
 <p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-4/">http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-4/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 </div>
 
 
@@ -183,12 +163,12 @@
   
 
 
-<time datetime="2014-05-19T23:00:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2014</time>
+<time datetime="2014-07-01T10:20:00+08:00" pubdate data-updated="true">Jul 1<span>st</span>, 2014</time>
 				
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/math/'>math</a>
+    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
   
 </span>
 
@@ -204,10 +184,8 @@
 			
 			<p class="meta">
 				
-				<a class="basic-alignment left" href="/blog/2014/05/19/statistics-summary-2-2/" title="Previous Post: SS 3-Multiple Random Variables and its Distribution">&laquo; SS 3-Multiple Random Variables and its Distribution</a>
+				<a class="basic-alignment left" href="/blog/2014/07/01/python-algorithms-introduction/" title="Previous Post: Python Algorithms - Greedy">&laquo; Python Algorithms - Greedy</a>
 				
-				
-				<a class="basic-alignment right" href="/blog/2014/05/20/csu-beautiful-scenery/" title="Next Post: CSU beautiful scenery">CSU beautiful scenery &raquo;</a>
 				
 			</p>
 		</footer>
