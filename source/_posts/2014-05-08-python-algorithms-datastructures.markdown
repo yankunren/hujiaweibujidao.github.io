@@ -7,7 +7,7 @@ categories: algorithm
 published: true
 ---
 
-**<center>Python Algorithms Python算法系列</center>**
+**<center>Python数据结构篇(3)</center>**
 **<center>逸夫图书馆, 2014/5/8</center>**
 
 ### <center>数据结构</center>
