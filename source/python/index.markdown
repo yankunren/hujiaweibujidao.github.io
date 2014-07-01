@@ -51,7 +51,9 @@ Python分类下的系列文章，不断更新中
 
 本节主要介绍了三个内容：算法渐近运行时间的表示方法、六条算法性能评估的经验以及Python中树和图的实现方式。
 
-(3)[Python Algorithms - C3 Counting 101](http://hujiaweibujidao.github.io//blog/2014/07/01/python-algorithms-counting-101/) [还未完成]
+(3)[Python Algorithms - C3 Counting 101](http://hujiaweibujidao.github.io//blog/2014/07/01/python-algorithms-counting-101/) 
+
+本节主要介绍了一些基础数学，例如排列组合以及递归循环等，重点介绍计算算法的运行时间的三种方法
 
 (4)[Python Algorithms - C4 Induction and Recursion and Reduction](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-induction/) [还未完成]
 
