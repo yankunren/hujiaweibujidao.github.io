@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-01T21:51:46+08:00</updated>
+  <updated>2014-07-01T21:58:19+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -444,11 +444,46 @@
 
 <h3 id="centerchapter-3-counting-101center"><center>Chapter 3: Counting 101</center></h3>
 
-<p>参考内容：</p>
+<blockquote>
+  <p>The greatest shortcoming of the human race is our inability to understand the exponential function.<br />
+  —— Dr. Albert A. Bartlett, World Population Balance Board of Advisors</p>
+</blockquote>
 
-<p>1.<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms: Mastering Basic Algorithms in the Python Language</a></p>
+<p>本节主要介绍了一些基础数学，例如排列组合以及递归循环等，重点介绍计算算法的运行时间的三种方法</p>
 
-<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
+<p>因为本节内容都很简单，所以我只是浏览了一下，重要的只有计算算法的运行时间的三种方法：1.代换法； 2.递归树法； 3.主定理法。</p>
+
+<p>1.代换法</p>
+
+<p>代换法一般是先猜测解的形式，然后用数学归纳法来证明它</p>
+
+<p>下面是算法导论中的一个求解例子</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/sub1.png" alt="image" /></p>
+
+<p>有意思的是，还有一类问题可以通过变量替换变成容易求解的形式</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/sub2.png" alt="image" /></p>
+
+<p>下面是常用的一些迭代式以及它们对应的结果还有实际算法实例</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/sub3.png" alt="image" /></p>
+
+<p>2.递归树法</p>
+
+<p>这种方法就是通过画递归树，然后对每层进行求和，最后将每层的结果相加得到对总的算法运行时间的估计</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/rectree.png" alt="image" /></p>
+
+<p>3.主定理法</p>
+
+<p>这种方法大家最喜欢，给出了一种就像是公式一样的结论，虽然它没有覆盖所有的情况，而且证明非常复杂，但是很多情况下都是可以直接使用的，还有，需要注意主定理的不同情况下的条件，尤其是多项式大于和多项式小于！</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/master.png" alt="image" /></p>
+
+<hr />
+
+<p>不喜欢本节的可以跳过，不留练习了这次，嘿嘿，想练习的话刷算法导论的题目吧</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-counting-101/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-counting-101/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
@@ -998,6 +1033,14 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>更多和Python中的浮点数有关的内容可以查看<a href="https://docs.python.org/2/tutorial/floatingpoint.html">Floating Point Arithmetic: Issues and Limitations</a></p>
+
+<hr />
+
+<p>问题2-12. (图的表示)</p>
+
+<p>Consider the following graph representation: you use a dictionary and let each key be a pair (tuple) of two nodes, with the corresponding value set to the edge weight. For example W[u, v] = 42. What would be the advantages and disadvantages of this representation? Could you supplement it to mitigate the downsides?</p>
+
+<p>The advantages and disadvantages depend on what you’re using it for. It works well for looking up edge weights efficiently but less well for iterating over the graph’s nodes or a node’s neighbors, for example. You could improve that part by using some extra structures (for example, a global list of nodes, if that’s what you need or a simple adjacency list structure, if that’s required).</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
