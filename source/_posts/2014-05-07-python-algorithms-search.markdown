@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Python Datastructs - C1 Search"
+title: "Python Data Structures - C1 Search"
 date: 2014-05-07 16:00
 comments: true
 categories: algorithm
