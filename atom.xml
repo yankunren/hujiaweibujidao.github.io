@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-01T15:01:00+08:00</updated>
+  <updated>2014-07-01T15:19:15+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -465,11 +465,48 @@
 
 <h3 id="centerchapter-2-the-basicscenter"><center>Chapter 2: The basics</center></h3>
 
-<p>参考内容：</p>
+<blockquote>
+  <p>Tracey: I didn’t know you were out there.
+Zoe: Sort of the point. Stealth—you may have heard of it. 
+Tracey: I don’t think they covered that in basic.
+  —— From “The Message,” episode 14 of Firefly</p>
+</blockquote>
 
-<p>1.<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms: Mastering Basic Algorithms in the Python Language</a></p>
+<p>本节主要介绍了算法渐近运行时间的表示法和Python中树和图的实现方式。</p>
 
-<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
+<p>1.计算模型</p>
+
+<p>Alan Turing的图灵机模型： **A Turing machine is a simple (abstract) device that can read from, write to, and move along an infinitely long strip of paper. ** The actual behavior of the machines varies. Each is a so-called finite state machine: it has a finite set of states (some of which indicate that it has finished), and every symbol it reads potentially triggers reading and/or writing and switching to a different state. You can think of this machinery as a set of rules. (“If I am in state 4 and see an X, I move one step to the left, write a Y, and switch to state 9.”) </p>
+
+<p>RAM模型(random-access machine)：标准的单核计算机，它大致有下面三个性质</p>
+
+<p>• We don’t have access to any form of concurrent execution; the machine simply executes one instruction after the other.</p>
+
+<p>计算机不能并发执行而只是按照指令顺序依次执行指令。</p>
+
+<p>• Standard, basic operations (such as arithmetic, comparisons, and memory access) all take constant (although possibly different) amounts of time. There are no more complicated basic operations (such as sorting).</p>
+
+<p>基本的操作都是常数时间完成的，没有其他的复杂操作。</p>
+
+<p>• One computer word (the size of a value that we can work with in constant time) is not unlimited but is big enough to address all the memory locations used to represent our problem, plus an extra percentage for our variables.</p>
+
+<p>计算机的字长足够大以使得它能够访问所有的内存地址。</p>
+
+<p>算法的本质： **An algorithm is a procedure, consisting of a finite set of steps (possibly including loops and conditionals) that solves a given problem in finite time. **</p>
+
+<p>the notion of running time complexity (as described in the next section) is based on knowing how big a problem instance is, and that size is simply the amount of memory needed to encode it.   [算法的运行时间是基于问题的大小，这个大小是指问题的输入占用的内存空间大小]</p>
+
+<p>2.算法渐近运行时间</p>
+
+<p>主要介绍了大O符号、大$\Omega$符号以及大$\Theta$符号，这内容网上很多，略过，可以参考<a href="http://en.wikipedia.org/wiki/Big_O_notation">wikipedia</a></p>
+
+<p>算法导论介绍到，对于三个符号可以做如下理解：$O$ = $\le$，$\Omega$ = $\ge$， $\Theta$ = $=$</p>
+
+<p>运行时间的三种特殊的情况：最优情况，最差情况，平均情况</p>
+
+<p>几种常见的运行时间以及算法实例 <a href="http://zh.wikipedia.org/zh-cn/时间复杂度">wiki中的时间复杂度</a></p>
+
+<p>3.</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
