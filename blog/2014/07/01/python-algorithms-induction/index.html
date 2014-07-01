@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Python Algorithms - Greedy - Hujiawei Bujidao</title>
+  <title>Python Algorithms - C4 Induction and Recursion and Reduction - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="Python Algorithms Python算法系列
-逸夫图书馆, 2014/5/18 贪心算法 参考内容： 1.Python Algorithms: Mastering Basic Algorithms in the Python Language 2.算法导论 Todo Original &hellip;">
+  <meta name="description" content="Python算法设计篇(4)
+逸夫图书馆, 2014/7/1 Chapter 4: Induction and Recursion and Reduction 参考内容： 1.Python Algorithms: Mastering Basic Algorithms in the Python &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-greedy">
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-induction">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
@@ -105,7 +105,7 @@
 		
   <header>
     
-      <h1 class="entry-title">Python Algorithms - Greedy</h1>
+      <h1 class="entry-title">Python Algorithms - C4 Induction and Recursion and Reduction</h1>
     
     
       <p class="meta">
@@ -121,17 +121,17 @@
   
 
 
-<time datetime="2014-05-08T23:00:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2014</time>
+<time datetime="2014-07-01T10:40:00+08:00" pubdate data-updated="true">Jul 1<span>st</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><strong><center>Python Algorithms Python算法系列</center></strong>
-<strong><center>逸夫图书馆, 2014/5/18</center></strong></p>
+<div class="entry-content"><p><strong><center>Python算法设计篇(4)</center></strong>
+<strong><center>逸夫图书馆, 2014/7/1</center></strong></p>
 
-<h3 id="centercenter"><center>贪心算法</center></h3>
+<h3 id="centerchapter-4-induction-and-recursion-and-reductioncenter"><center>Chapter 4: Induction and Recursion and Reduction</center></h3>
 
 <p>参考内容：</p>
 
@@ -139,10 +139,8 @@
 
 <p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
 
-<p>Todo</p>
-
 <p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-greedy/">http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-greedy/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-induction/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-induction/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 </div>
 
 
@@ -165,7 +163,7 @@
   
 
 
-<time datetime="2014-05-08T23:00:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2014</time>
+<time datetime="2014-07-01T10:40:00+08:00" pubdate data-updated="true">Jul 1<span>st</span>, 2014</time>
 				
 
 <span class="categories">
@@ -186,10 +184,10 @@
 			
 			<p class="meta">
 				
-				<a class="basic-alignment left" href="/blog/2014/05/08/python-algorithms-Graphs/" title="Previous Post: Python Algorithms - Graphs">&laquo; Python Algorithms - Graphs</a>
+				<a class="basic-alignment left" href="/blog/2014/07/01/python-algorithms-counting-101/" title="Previous Post: Python Algorithms - C3 Counting 101">&laquo; Python Algorithms - C3 Counting 101</a>
 				
 				
-				<a class="basic-alignment right" href="/blog/2014/05/08/python-algorithms-dynamic-programming/" title="Next Post: Python Algorithms - Dynamic Programming">Python Algorithms - Dynamic Programming &raquo;</a>
+				<a class="basic-alignment right" href="/blog/2014/07/01/python-algorithms-traversal/" title="Next Post: Python Algorithms - C5 Traversal">Python Algorithms - C5 Traversal &raquo;</a>
 				
 			</p>
 		</footer>
@@ -262,7 +260,7 @@ src="http://hujiaweibujidao.github.io/music/Wouldnt-It-Be-Nice.mp3">
 <section>
  <h1>分类目录</h1>
  <ul id="categories">
-	 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (13)</a></li>
+	 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (17)</a></li>
 <li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
 <li class='category'><a href='/blog/categories/hadoop/'>hadoop (1)</a></li>
 <li class='category'><a href='/blog/categories/ios/'>ios (1)</a></li>
@@ -284,23 +282,23 @@ src="http://hujiaweibujidao.github.io/music/Wouldnt-It-Be-Nice.mp3">
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/07/01/python-algorithms-the-basics/">Python Algorithms - C2 the Basics</a>
+        <a href="/blog/2014/07/01/python-algorithms-dynamic-programming/">Python Algorithms - C8 Dynamic Programming</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/07/01/python-algorithms-introduction/">Python Algorithms - C1 Introduction</a>
+        <a href="/blog/2014/07/01/python-algorithms-greedy/">Python Algorithms - C7 Greedy</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/06/22/Forza-Azzurri/">Forza Azzurri</a>
+        <a href="/blog/2014/07/01/python-algorithms-divide-and-combine-and-conquer/">Python Algorithms - C6 Divide and Combine and Conquer</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/06/22/thanks-to-360-cdn/">Thanks to 360 CDN</a>
+        <a href="/blog/2014/07/01/python-algorithms-traversal/">Python Algorithms - C5 Traversal</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/06/09/Dog-Face-Recognition/">Dog Face Recognition</a>
+        <a href="/blog/2014/07/01/python-algorithms-induction/">Python Algorithms - C4 Induction and Recursion and Reduction</a>
       </li>
     
   </ul>
@@ -358,26 +356,6 @@ src="http://hujiaweibujidao.github.io/music/Wouldnt-It-Be-Nice.mp3">
 		<p>
   	Copyright &copy; 2014 - hujiawei - <a href="http://hujiaweibujidao.github.io/happybirthday/">Happy birthday to MY QUEEN</a> - <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
   	
-<!-- mathjax config similar to math.stackexchange  -->
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  jax: ["input/TeX", "output/HTML-CSS"],
-  tex2jax: {
-    inlineMath: [ ['$', '$'] ],
-    displayMath: [ ['$$', '$$']],
-    processEscapes: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-  },
-  messageStyle: "none",
-  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-});
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
-
-<!-- the following line is incorrect! -->
-<!--
-<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
--->
 
 <!--baidu-->
 <!--
@@ -438,6 +416,29 @@ overflow-x: auto;
 }
 </style>
 -->
+
+<!-- mathjax config similar to math.stackexchange  -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+<!-- the following line is incorrect! -->
+<!--
+<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+-->
+
+
 
 <!--return to top-->
 <style>
