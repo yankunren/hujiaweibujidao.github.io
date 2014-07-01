@@ -168,7 +168,7 @@ Python中的dict和set都使用了hash机制，所以平均情况下它们获取
 ① adjacency lists 表示形式
 
 ```python
-# A Straightforward Adjacency Set Representation
+# A Straightforward Adjacency List Representation
 a, b, c, d, e, f, g, h = range(8)
 N = [
     [b, c, d, e, f],    # a
@@ -205,4 +205,44 @@ b in N[a] # Neighborhood membership -> True
 len(N[f]) # Degree -> 3
 ```
 
-基本上和adjacency lists表示形式一样对吧？但是，
+基本上和adjacency lists表示形式一样对吧？但是，对于list，判断一个元素是否存在是线性时间$O(N(v))$，而在set中是常数时间$O(1)$，所以对于稠密图使用adjacency sets要更加高效。
+
+③ adjacency dicts 表示形式
+
+```python
+# A Straightforward Adjacency Dict Representation
+a, b, c, d, e, f, g, h = range(8)
+N = [
+    {b:2, c:1, d:3, e:9, f:4},    # a
+    {c:4, e:3},                   # b
+    {d:8},                        # c
+    {e:7},                        # d
+    {f:5},                        # e
+    {c:2, g:2, h:2},              # f
+    {f:1, h:6},                   # g
+    {f:9, g:8}                    # h
+]
+
+b in N[a] # Neighborhood membership -> True
+len(N[f]) # Degree -> 3
+N[a][b] # Edge weight for (a, b) -> 2
+```
+
+这种情况下如果边是带权值的都没有问题！
+
+除了上面三种方式外，还可以改变外层数据结构，上面三个都是list，其实也可以使用dict，例如下面的代码，此时节点是用字母表示的。在实际应用中，要根据问题选择最合适的表示形式。
+
+```
+N = {
+    'a': set('bcdef'),
+    'b': set('ce'),
+    'c': set('d'),
+    'd': set('e'),
+    'e': set('f'),
+    'f': set('cgh'),
+    'g': set('fh'),
+    'h': set('fg')
+}
+```
+
+
