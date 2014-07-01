@@ -140,11 +140,11 @@ Tracey: I don’t think they covered that in basic.    <br />
   —— From “The Message,” episode 14 of Firefly</p>
 </blockquote>
 
-<p>本节主要介绍了算法渐近运行时间的表示法和Python中树和图的实现方式。</p>
+<p>本节主要介绍了三个内容：算法渐近运行时间的表示方法、六条算法性能评估的经验以及Python中树和图的实现方式。</p>
 
 <h4 id="section">1.计算模型</h4>
 
-<p>Alan Turing的图灵机模型： **A Turing machine is a simple (abstract) device that can read from, write to, and move along an infinitely long strip of paper. ** The actual behavior of the machines varies. Each is a so-called finite state machine: it has a finite set of states (some of which indicate that it has finished), and every symbol it reads potentially triggers reading and/or writing and switching to a different state. You can think of this machinery as a set of rules. (“If I am in state 4 and see an X, I move one step to the left, write a Y, and switch to state 9.”) </p>
+<p>图灵机模型(Turing machine)： <strong>A Turing machine is a simple (abstract) device that can read from, write to, and move along an infinitely long strip of paper.</strong>  The actual behavior of the machines varies. Each is a so-called finite state machine: it has a finite set of states (some of which indicate that it has finished), and every symbol it reads potentially triggers reading and/or writing and switching to a different state. You can think of this machinery as a set of rules. (“If I am in state 4 and see an X, I move one step to the left, write a Y, and switch to state 9.”) </p>
 
 <p>RAM模型(random-access machine)：标准的单核计算机，它大致有下面三个性质</p>
 
@@ -160,7 +160,7 @@ Tracey: I don’t think they covered that in basic.    <br />
 
 <p>计算机的字长足够大以使得它能够访问所有的内存地址。</p>
 
-<p>算法的本质： **An algorithm is a procedure, consisting of a finite set of steps (possibly including loops and conditionals) that solves a given problem in finite time. **</p>
+<p>算法的本质： <strong>An algorithm is a procedure, consisting of a finite set of steps (possibly including loops and conditionals) that solves a given problem in finite time.</strong></p>
 
 <p>the notion of running time complexity (as described in the next section) is based on knowing how big a problem instance is, and that size is simply the amount of memory needed to encode it.  </p>
 
@@ -467,6 +467,38 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 
 <p>邻接矩阵 Adjacency Matrix</p>
 
+<p>使用嵌套的list，用1和0表示点和点之间的连接关系，此时对于它们的连接性判断时间是常数，但是对于度的计算时间是线性的</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># An Adjacency Matrix, Implemented with Nested Lists</span>
+</span><span class="line"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</span><span class="line"><span class="n">N</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># a</span>
+</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># b</span>
+</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># c</span>
+</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># d</span>
+</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># e</span>
+</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="c"># f</span>
+</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="c"># g</span>
+</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span> <span class="c"># h</span>
+</span><span class="line">
+</span><span class="line"><span class="n">N</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="c"># Neighborhood membership -&gt; 1</span>
+</span><span class="line"><span class="nb">sum</span><span class="p">(</span><span class="n">N</span><span class="p">[</span><span class="n">f</span><span class="p">])</span> <span class="c"># Degree -&gt; 3</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>如果边带有权值，也可以使用权值代替1，用inf代替0</p>
+
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -481,25 +513,207 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 <span class="line-number">12</span>
 <span class="line-number">13</span>
 <span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># An Adjacency Matrix, Implemented with Nested Lists</span>
-</span><span class="line"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</span><span class="line"><span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s">&#39;inf&#39;</span><span class="p">)</span>
 </span><span class="line">
-</span><span class="line"><span class="c">#     a b c d e f g h</span>
+</span><span class="line"><span class="n">W</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">],</span> <span class="c"># a</span>
+</span><span class="line">     <span class="p">[</span><span class="n">_</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">],</span> <span class="c"># b</span>
+</span><span class="line">     <span class="p">[</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">],</span> <span class="c"># c</span>
+</span><span class="line">     <span class="p">[</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">],</span> <span class="c"># d</span>
+</span><span class="line">     <span class="p">[</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">],</span> <span class="c"># e</span>
+</span><span class="line">     <span class="p">[</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="c"># f</span>
+</span><span class="line">     <span class="p">[</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="c"># g</span>
+</span><span class="line">     <span class="p">[</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span> <span class="c"># h</span>
 </span><span class="line">
-</span><span class="line"><span class="n">N</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># a</span>
-</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># b</span>
-</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># c</span>
-</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># d</span>
-</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># e</span>
-</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="c"># f</span>
-</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="c"># g</span>
-</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span> <span class="c"># h</span>
-</span><span class="line">
-</span><span class="line"><span class="n">N</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="c"># Neighborhood membership -&gt; 1</span>
-</span><span class="line"><span class="nb">sum</span><span class="p">(</span><span class="n">N</span><span class="p">[</span><span class="n">f</span><span class="p">])</span> <span class="c"># Degree -&gt; 3</span>
+</span><span class="line"><span class="n">W</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">inf</span> <span class="c"># Neighborhood membership</span>
+</span><span class="line"><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">W</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="k">if</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">inf</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c"># Degree</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>NumPy</strong>：这里作者提到了一个最常用的数值计算模块NumPy，它包含了很多与多维数组计算有关的函数。我可能会在以后的机器学习中详细学习它的使用，到时候再写篇文章介绍它的使用</p>
+
+<p>(2)树的表示 [假设要表示下面的树]</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/treerep.png" alt="image" /></p>
+
+<p>树是一种特殊的图，所以可以使用图的表示方法，但是因为树的特殊性，其实有其他更好的表示方法，最简单的就是直接用一个list即可，缺点也很明显，可读性太差了，相当不直观</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">T</span> <span class="o">=</span> <span class="p">[[</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s">&quot;c&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s">&quot;d&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;e&quot;</span><span class="p">,</span> <span class="s">&quot;f&quot;</span><span class="p">]]]</span>
+</span><span class="line"><span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c"># &#39;e&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>很多时候我们都能够肯定树中节点的孩子节点个数最多有多少个，所以比较方便的实现方式就是使用类class</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># A Binary Tree Class 二叉树实例</span>
+</span><span class="line"><span class="k">class</span> <span class="nc">Tree</span><span class="p">:</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right</span>
+</span><span class="line">
+</span><span class="line"><span class="n">t</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">Tree</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">),</span> <span class="n">Tree</span><span class="p">(</span><span class="s">&quot;c&quot;</span><span class="p">,</span> <span class="s">&quot;d&quot;</span><span class="p">))</span>
+</span><span class="line"><span class="n">t</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">left</span>  <span class="c"># &#39;c&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>上面的实现方式的子节点都是孩子节点，但是还有一种很常用的树的表示方式，那就是“左孩子，右兄弟”表示形式</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># 左孩子，右兄弟 表示方式</span>
+</span><span class="line"><span class="k">class</span> <span class="nc">Tree</span><span class="p">:</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kids</span><span class="p">,</span> <span class="nb">next</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">kids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">kids</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="nb">next</span>
+</span><span class="line"><span class="k">return</span> <span class="n">Tree</span>
+</span><span class="line">
+</span><span class="line"><span class="n">t</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">Tree</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="n">Tree</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="n">Tree</span><span class="p">(</span><span class="s">&quot;c&quot;</span><span class="p">,</span> <span class="n">Tree</span><span class="p">(</span><span class="s">&quot;d&quot;</span><span class="p">)))))</span>
+</span><span class="line"><span class="n">t</span><span class="o">.</span><span class="n">kids</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">val</span>  <span class="c"># &#39;c&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<hr />
+
+<p><strong>[Bunch Pattern]</strong>：有意思的是，上面的实现方式使用了Python中一种常用的设计模式，叫做Bunch Pattern，原书介绍如下： </p>
+
+<p>[因为这个不太好理解，还是原文比较有味，后期等我深刻理解了我可能会详细介绍它]</p>
+
+<p>When prototyping (or even finalizing) data structures such as trees, it can be useful to have a flexible class that will allow you to specify arbitrary attributes in the constructor. In these cases, the “Bunch” pattern (named by Alex Martelli in the Python Cookbook) can come in handy. There are many ways of implementing it, but the gist of it is the following:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">class</span> <span class="nc">Bunch</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
+</span><span class="line">        <span class="nb">super</span><span class="p">(</span><span class="n">Bunch</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span> <span class="o">=</span> <span class="bp">self</span>
+</span><span class="line"><span class="k">return</span> <span class="n">Bunch</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>There are several useful aspects to this pattern. First, it lets you create and set arbitrary attributes by supplying them as command-line arguments:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">Bunch</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Jayne Cobb&quot;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="s">&quot;Public Relations&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span>
+</span><span class="line"><span class="s">&#39;Jayne Cobb&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Second, by subclassing dict, you get lots of functionality for free, such as iterating over the keys/attributes or easily checking whether an attribute is present. Here’s an example:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">T</span> <span class="o">=</span> <span class="n">Bunch</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="n">T</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="n">T</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="s">&quot;b&quot;</span><span class="p">),</span> <span class="n">right</span><span class="o">=</span><span class="n">T</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="s">&quot;c&quot;</span><span class="p">))</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">left</span>
+</span><span class="line"><span class="p">{</span><span class="s">&#39;right&#39;</span><span class="p">:</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;left&#39;</span><span class="p">:</span> <span class="s">&#39;a&#39;</span><span class="p">}</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">right</span>
+</span><span class="line"><span class="s">&#39;b&#39;</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="p">[</span><span class="s">&#39;left&#39;</span><span class="p">][</span><span class="s">&#39;right&#39;</span><span class="p">]</span>
+</span><span class="line"><span class="s">&#39;b&#39;</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="s">&quot;left&quot;</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">right</span>
+</span><span class="line"><span class="bp">True</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="s">&quot;right&quot;</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">right</span>
+</span><span class="line"><span class="bp">False</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>This pattern isn’t useful only when building trees, of course. You could use it for any situation where you’d want a flexible object whose attributes you could set in the constructor.</p>
+
+<hr />
+
+<p><strong>[与图有关的python模块]</strong>：</p>
+
+<p>• NetworkX: http://networkx.lanl.gov</p>
+
+<p>• python-graph: http://code.google.com/p/python-graph</p>
+
+<p>• Graphine: http://gitorious.org/projects/graphine/pages/Home</p>
+
+<p>• Pygr: a graph database  http://bioinfo.mbi.ucla.edu/pygr  </p>
+
+<p>• Gato: a graph animation toolbox http://gato.sourceforge.net   </p>
+
+<p>• PADS: a collection of graph algorithms  http://www.ics.uci.edu/~eppstein/PADS</p>
+
+<hr />
+
+<p>5.Python编程中的一些细节</p>
+
+<p>In general, the more important your program, the more you should mistrust such black boxes and seek to find out what’s going on under the cover.</p>
+
+<p>作者在这里提到，你的程序越是重要的话，你就越是需要明白你所使用的数据结构的内部实现，甚至有些时候你要自己重新实现它。</p>
+
+<p>(1)Hidden Squares 隐藏的平方运行时间</p>
+
+<p>有些情况下我们可能没有注意到我们的操作是非常不高效的，例如下面的代码，如果是判断某个元素是否在list中运行时间是线性的，如果是使用set，判断某个元素是否存在只需要常数时间，所以如果我们需要进行判断很多元素是否存在的话，使用set的性能会更加高效。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randrange</span>
+</span><span class="line"><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="n">randrange</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
+</span><span class="line"><span class="mi">42</span> <span class="ow">in</span> <span class="n">L</span> <span class="c"># False</span>
+</span><span class="line"><span class="n">S</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+</span><span class="line"><span class="mi">42</span> <span class="ow">in</span> <span class="n">S</span> <span class="c">#False</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(2)The Trouble with Floats 精度带来的烦恼</p>
+
+<p>现有的计算机系统都是不能精确表达小数的！[该部分内容可以阅读相关的计算机组成原理相关的书籍了解计算机的浮点数系统]在python中，浮点数可能带来很多的烦恼，例如，运行下面的实例，本应该是相等，但是却返回False。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="nb">sum</span><span class="p">(</span><span class="mf">0.1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mf">1.0</span> <span class="c"># False</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>首先，永远不要对小数比较来作为相等的判断依据！你最多只能判断两个浮点数渐近相等。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">almost_equal</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">places</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
+</span><span class="line">    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">),</span> <span class="n">places</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</span><span class="line">
+</span><span class="line"><span class="n">almost_equal</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="mf">0.1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="mf">1.0</span><span class="p">)</span> <span class="c"># True</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>除此之外，可以使用一些有用的第三方模块，例如<code>decimal</code>，这对于需要处理金融数据的时候很有帮助</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="o">*</span>
+</span><span class="line"><span class="nb">sum</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s">&quot;0.1&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="n">Decimal</span><span class="p">(</span><span class="s">&quot;1.0&quot;</span><span class="p">)</span>  <span class="c"># Ture</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>更多和Python中的浮点数有关的内容可以查看<a href="https://docs.python.org/2/tutorial/floatingpoint.html">Floating Point Arithmetic: Issues and Limitations</a></p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
