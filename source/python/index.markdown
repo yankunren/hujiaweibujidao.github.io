@@ -41,9 +41,9 @@ Python分类下的系列文章，不断更新中
 
 3.Python算法设计篇
 
-算法设计篇主要是阅读[Python Algorithms: Mastering Basic Algorithms in the Python Language](http://link.springer.com/book/10.1007%2F978-1-4302-3238-4)之后写下的读书总结，原书大部分内容结合了经典书籍[算法导论](http://en.wikipedia.org/wiki/Introduction_to_Algorithms)，所以内容更加细致，主要是介绍了各种常用的算法设计思想，以及如何使用Python实现这些算法，这里有别于前面的数据结构篇，部分算法例如排序就不会详细介绍它的实现细节，而是侧重于它内在的算法思想。这一篇章中使用了大量的第三方与数据结构有关的模块，因为这篇的重点是算法的思想以及实现，所以并没有去重头实现每个数据结构，但是在介绍算法的同时会分析Python内置数据结构以及第三方数据结构模块的优缺点，也就意味着该篇比前面都要难不少，但是里面有很多关于python开发的内容，精彩不容错过！
+算法设计篇主要是阅读[Python Algorithms: Mastering Basic Algorithms in the Python Language](http://link.springer.com/book/10.1007%2F978-1-4302-3238-4)之后写下的读书总结，原书大部分内容结合了经典书籍[算法导论](http://en.wikipedia.org/wiki/Introduction_to_Algorithms)，内容更加细致深入，主要是介绍了各种常用的算法设计思想，以及如何使用Python高效巧妙地实现这些算法，这里有别于前面的数据结构篇，部分算法例如排序就不会详细介绍它的实现细节，而是侧重于它内在的算法思想。这里中使用了一些与数据结构有关的第三方模块，因为这篇的重点是算法的思想以及实现，所以并没有去重新实现每个数据结构，但是在介绍算法的同时会分析Python内置数据结构以及第三方数据结构模块的优缺点，也就意味着该篇比前面都要难不少，除此之外，里面还有很多关于python开发的内容，精彩不容错过！
 
-这里每篇文章都有实现代码，内容都比较多，简单算法一般是大致介绍下思想及算法流程，复杂的算法会给出各种图示和代码实现详细介绍。本篇的顺序按照原书[Python Algorithms: Mastering Basic Algorithms in the Python Language](http://link.springer.com/book/10.1007%2F978-1-4302-3238-4)的设计安排的(章节部分相同部分不同哟)，为了节省时间以及保持原著的原滋原味，部分内容直接摘自原著英文内容。 [友情提示：重点内容从第4节开始哟]
+这里每篇文章都有实现代码，内容都比较多，但是并没有包括原书对应章节的所有内容，因为内容实在太多了，所以我只是选择经典的算法实例来介绍算法核心思想。本篇的顺序按照原书[Python Algorithms: Mastering Basic Algorithms in the Python Language](http://link.springer.com/book/10.1007%2F978-1-4302-3238-4)的章节来安排的(章节标题部分相同部分不同哟)，为了节省时间以及保持原著的原滋原味，部分内容直接摘自原著英文内容。 [友情提示：重点内容从第4节开始哟]
 
 (1)[Python Algorithms - C1 Introduction](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-introduction/) 
 
