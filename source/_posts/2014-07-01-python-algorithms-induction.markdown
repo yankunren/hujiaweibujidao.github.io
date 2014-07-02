@@ -242,5 +242,32 @@ def topsort(G):
 
 有意思的是，拓扑排序还和Python Method Resolution Order 有关，也就是用来确定某个方法是应该调用该实例的还是该实例的父类的还是继续往上调用祖先类的对应方法。对于单继承的语言这个很容易，顺着继承链一直往上找就行了，但是对于Python这类多重继承的语言则不简单，它需要更加复杂的策略，Python中使用了C3 Method Resolution Order，我不懂，[想要了解的可以查看 on python docs](https://www.python.org/download/releases/2.3/mro/)。
 
+本章后面作者提到了一些其他的内容
+
+1.Strong Assumptions
+
+主要对于Induction，为了更加准确方便地从n-1递推到n，常常需要对问题做很强的假设。
+
+2.Invariants and Correctness
+
+循环不变式，这在算法导论上有详细介绍，循环不变式是用来证明某个算法是正确的一种方式，主要有下面三个步骤[这里和算法导论上介绍的不太一样，道理类似]：
+
+(1). Use induction to show that it is, in fact, true after each iteration.   
+(2). Show that we’ll get the correct answer if the algorithm terminates.    
+(3). Show that the algorithm terminates.   
+
+3.Relaxation and Gradual Improvement
+
+松弛技术是指某个算法使得当前得到的解有进一步的提升，越来越接近最优解(准确解)，这个技术非常实用，每次松弛可以看作是向最终解前进了“一步”，我们的目标自然是希望松弛的次数越少越好，关键就是要确定松弛的顺序(好的松弛顺序可以让我们直接朝着最优解前进，缩短算法运行时间)，后面要介绍的图中的Bellman-Ford算法、Dijkstra算法以及DAG图上的最短路径问题都是如此。
+
+4.Reduction + Contraposition = Hardness Proof
+
+规约是用于证明一个问题是NP难问题的好方式，假设我们能够将问题A规约至问题B，如果问题B很简单，那么问题A肯定也很简单。逆反一下我们就得到，如果问题A很难，那么问题B就也很难。
+
+[这里作者并没有过多的提到问题A规约至问题B的复杂度，算法导论中有提到，作者可能隐藏了规约的复杂度不大的含义，比如说多项式时间内能够完成，也就是下面的fast readuction]
+
+“fast + fast = fast.” 的含义是：fast readuction + fast solution to B = fast solution to A
+
+
 
 
