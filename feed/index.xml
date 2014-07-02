@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-02T09:16:30+08:00</updated>
+  <updated>2014-07-02T09:50:59+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -428,11 +428,28 @@
 
 <h3 id="centerchapter-4-induction-and-recursion-and-reductioncenter"><center>Chapter 4: Induction and Recursion and Reduction</center></h3>
 
-<p>参考内容：</p>
+<blockquote>
+  <p>You must never think of the whole street at once, understand? You must only concentrate on the next step, the next breath, the next stroke of the broom, and the next, and the next. Nothing else.
+  ——Beppo Roadsweeper, in Momo by Michael Ende</p>
+</blockquote>
 
-<p>1.<a href="http://link.springer.com/book/10.1007%2F978-1-4302-3238-4">Python Algorithms: Mastering Basic Algorithms in the Python Language</a></p>
+<p><strong>注：本节中我给定下面三个重要词汇的中文翻译分别是是：Induction(推导)、Recursion(递归)和Reduction(规约)</strong></p>
 
-<p>2.<a href="http://en.wikipedia.org/wiki/Introduction_to_Algorithms">算法导论</a></p>
+<p>本节主要介绍算法设计的三个核心知识：Induction(推导)、Recursion(递归)和Reduction(规约)，这是原书的重点和难点部分</p>
+
+<p>正如标题所示，本节主要介绍下面的三部分内容：</p>
+
+<p>• Reduction means transforming one problem to another. We normally reduce an unknown problem to one we know how to solve. The reduction may involve transforming both the input (so it works with the new problem) and the output (so it’s valid for the original problem).</p>
+
+<p>Reduction(规约)意味着对问题进行转换，例如将一个未知的问题转换成我们能够解决的问题，转换的过程可能涉及到对问题的输入输出的转换。[问题规约在证明一个问题是否是NP完全问题时经常用到，如果我们能够将一个问题规约成一个我们已知的NP完全问题的话，那么这个问题就业是NP完全问题]</p>
+
+<p>• Induction (or, mathematical induction) is used to show that a statement is true for a large class of objects (often the natural numbers). We do this by first showing it to be true for a base case (such as the number 1) and then showing that it “carries over” from one object to the next (if it’s true for n –1, then it’s true for n).</p>
+
+<p>Induction(推导)是一个数学意义上的推导，类似数学归纳法，主要是用来证明某个命题是正确的。首先我们证明对于基础情况(例如数字1)是正确的，然后证明该命题会传递下去都是正确的(假设当n-1时是正确的，然后证明当n时也是正确的即可)</p>
+
+<p>• Recursion is what happens when a function calls itself. Here we need to make sure the function works correctly for a (nonrecursive) base case and that it combines results from the recursive calls into a valid solution.</p>
+
+<p>Recursion(递归)经常发生于一个函数调用自身的情况。递归函数说起来简单，但是实现不太容易，我们要确保对于基础情况(不递归的情况)能够正常工作，此外，对于递归情况需要将递归调用的结果组合起来得到一个有效的结果。</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-induction/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-induction/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
