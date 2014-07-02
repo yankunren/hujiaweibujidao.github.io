@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-02T19:22:12+08:00</updated>
+  <updated>2014-07-02T20:06:03+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -471,6 +471,8 @@
 
 <p>也许你还感觉很晕，慢慢地看了后面的例子你就明白了。在介绍例子之前呢，先看下递归和迭代的异同，这个很重要，在后面介绍动态规划算法时我们还会反复提到它们的异同。</p>
 
+<p>[Induction is what you use to show that recursion is correct, and recursion is a very direct way of implementing most inductive algorithm ideas. However, rewriting the algorithm to be iterative can avoid the overhead and limitations of recursive functions in most (nonfunctional) programming languages. ]</p>
+
 <p>有了Induction和Recursion，我们很容易就可以将一个inductive idea采用递归(recursion)的方式实现，根据我们的编程经验，任何一个递归方式的实现都可以改成非递归方式(即迭代方式)实现(反之亦然)，而且非递归方式要好些，为什么呢？因为迭代版本相对来讲运行速度更快，因为没有用栈去实现，也避免了栈溢出的情况，python中对栈深度是有限制的。</p>
 
 <p>举个例子，下面是一段遍历序列的代码，如果大小设置为100没有问题，如果设置为1000就会报<code>RuntimeError</code>的错误，提示超出了最大的递归深度。[当然，大家都不会像下面那样写代码对吧，这只是一个例子]</p>
@@ -762,6 +764,76 @@
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>有意思的是，拓扑排序还和Python Method Resolution Order 有关，也就是用来确定某个方法是应该调用该实例的还是该实例的父类的还是继续往上调用祖先类的对应方法。对于单继承的语言这个很容易，顺着继承链一直往上找就行了，但是对于Python这类多重继承的语言则不简单，它需要更加复杂的策略，Python中使用了C3 Method Resolution Order，我不懂，<a href="https://www.python.org/download/releases/2.3/mro/">想要了解的可以查看 on python docs</a>。</p>
+
+<p>本章后面作者提到了一些其他的内容</p>
+
+<p>1.Strong Assumptions</p>
+
+<p>主要对于Induction，为了更加准确方便地从n-1递推到n，常常需要对问题做很强的假设。</p>
+
+<p>2.Invariants and Correctness</p>
+
+<p>循环不变式，这在算法导论上有详细介绍，循环不变式是用来证明某个算法是正确的一种方式，主要有下面三个步骤[这里和算法导论上介绍的不太一样，道理类似]：</p>
+
+<p>(1). Use induction to show that it is, in fact, true after each iteration. <br />
+(2). Show that we’ll get the correct answer if the algorithm terminates.  <br />
+(3). Show that the algorithm terminates.   </p>
+
+<p>3.Relaxation and Gradual Improvement</p>
+
+<p>松弛技术是指某个算法使得当前得到的解有进一步的提升，越来越接近最优解(准确解)，这个技术非常实用，每次松弛可以看作是向最终解前进了“一步”，我们的目标自然是希望松弛的次数越少越好，关键就是要确定松弛的顺序(好的松弛顺序可以让我们直接朝着最优解前进，缩短算法运行时间)，后面要介绍的图中的Bellman-Ford算法、Dijkstra算法以及DAG图上的最短路径问题都是如此。</p>
+
+<p>4.Reduction + Contraposition = Hardness Proof</p>
+
+<p>规约是用于证明一个问题是否是一个很难的问题的好方式，假设我们能够将问题A规约至问题B，如果问题B很简单，那么问题A肯定也很简单。逆反一下我们就得到，如果问题A很难，那么问题B就也很难。比如，我们知道了哈密顿回路问题是NP完全问题，要证明哈密顿路径问题也是NP完全问题，就可以将哈密顿回路问题规约为哈密顿路径问题。</p>
+
+<p>[这里作者并没有过多的提到问题A规约至问题B的复杂度，算法导论中有提到，作者可能隐藏了规约的复杂度不大的含义，比如说多项式时间内能够完成，也就是下面的fast readuction]</p>
+
+<p>“fast + fast = fast.” 的含义是：fast readuction + fast solution to B = fast solution to A</p>
+
+<p>两条重要的规约经验：</p>
+
+<p>• If you can (easily) reduce A to B, then B is at least as hard as A.</p>
+
+<p>• If you want to show that X is hard and you know that Y is hard, reduce Y to X.</p>
+
+<p>5.Problem Solving Advice</p>
+
+<p>作者提供的解决一个问题的建议：</p>
+
+<p>(1)Make sure you really understand the problem. </p>
+
+<p>搞明白你要解决的问题</p>
+
+<p>What is the input? The output? What’s the precise relationship between the two? Try to represent the problem instances as familiar structures, such as sequences or graphs. A direct, brute-force solution can sometimes help clarify exactly what the problem is.</p>
+
+<p>(2)Look for a reduction.</p>
+
+<p>寻找一个规约方式</p>
+
+<p>Can you transform the input so it works as input for another problem that you can solve? Can you transform the resulting output so that you can use it? Can you reduce an instance if size n to an instance of size k &lt; n and extend the recursive solution (inductive hypothesis) back to n?</p>
+
+<p>(3)Are there extra assumptions you can exploit? </p>
+
+<p>还有其他的重要的假设条件吗，有时候我们如果只考虑该问题的特殊情况的话没准能够有所收获</p>
+
+<p>Integers in a fixed value range can be sorted more efficiently than arbitrary values. Finding the shortest path in a DAG is easier than in an arbitrary graph, and using only non-negative edge weights is often easier than arbitrary edge weights.</p>
+
+<hr />
+
+<p>问题4-18. 随机生成DAG图</p>
+
+<p>Write a function for generating random DAGs. Write an automatic test that checks that topsort gives a valid orderings, using your DAG generator.</p>
+
+<p>You could generate DAGs by, for example, randomly ordering the nodes, and add a random number of forward-pointing edges to each of them.</p>
+
+<p>问题4-19. 修改拓扑排序</p>
+
+<p>Redesign topsort so it selects the last node in each iteration, rather than the first.</p>
+
+<p>This is quite similar to the original. You now have to maintain the out-degrees of the remaining nodes, and insert each node before the ones you have already found. (Remember not to insert anything in the beginning of a list, though; rather, append, and then reverse it at the end, to avoid a quadratic running time.)</p>
+
+<p>[后面提到使用<code>append</code>然后<code>reverse</code>，而不要使用<code>insert</code>]</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-induction/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-induction/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
