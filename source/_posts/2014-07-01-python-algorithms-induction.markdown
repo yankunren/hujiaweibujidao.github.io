@@ -12,7 +12,7 @@ published: true
 
 ### <center>Chapter 4: Induction and Recursion and Reduction</center>
 
-> You must never think of the whole street at once, understand? You must only concentrate on the next step, the next breath, the next stroke of the broom, and the next, and the next. Nothing else.
+> You must never think of the whole street at once, understand? You must only concentrate on the next step, the next breath, the next stroke of the broom, and the next, and the next. Nothing else.       
   ——Beppo Roadsweeper, in Momo by Michael Ende
 
 **注：本节中我给定下面三个重要词汇的中文翻译分别是是：Induction(推导)、Recursion(递归)和Reduction(规约)**
@@ -32,5 +32,7 @@ Induction(推导)是一个数学意义上的推导，类似数学归纳法，主
 • Recursion is what happens when a function calls itself. Here we need to make sure the function works correctly for a (nonrecursive) base case and that it combines results from the recursive calls into a valid solution.
 
 Recursion(递归)经常发生于一个函数调用自身的情况。递归函数说起来简单，但是实现不太容易，我们要确保对于基础情况(不递归的情况)能够正常工作，此外，对于递归情况需要将递归调用的结果组合起来得到一个有效的结果。
+
+它们有很多相似点，比如它们都专注于得到目标解的某一步，我们只需要仔细思考这一步，剩下的就能够自动完成了。如果我们更加仔细地去理解它们，我们会发现，**Induction(推导)和Recursion(递归)其实彼此相互对应，也就是说一个Induction能够写出一个相应的Recursion，而一个Recursion也正好对应着一个Induction，此外，它们其实都正是某种Reduction，即Induction和Recursion的本质就是对问题进行规约！**也许你还感觉很晕，慢慢地通过后面的例子你就明白了。
 
 
