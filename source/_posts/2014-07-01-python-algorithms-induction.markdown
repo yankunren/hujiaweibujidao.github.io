@@ -131,4 +131,38 @@ seq2 = [randrange(1000) for i in range(100)]
 sel_sort(seq2)
 ```
 
+下面我们来看个例子，这是一个经典的“名人问题”，我们要从人群中找到那个名人，所有人都认识名人，而名人则任何人都不认识。
+
+[这个问题的一个变种就是从一系列有依赖关系的集合中找到那个依赖关系最开始的元素，比如多线程环境下的线程依赖问题，后面将要介绍的拓扑排序是解决这类问题更实际的解法。A more down-to-earth version of the same problem would be examining a set of dependencies and trying to find a place to start. For example, you might have threads in a multithreaded application waiting for each other, with even some cyclical dependencies (so-called deadlocks), and you’re looking for one thread that isn’t waiting for any of the others but that all of the others are dependent on. ]
+
+在进一步分析之前我们可以发现，很显然，我们可以暴力求解下，G[u][v]为True表示 u 认识 v。
+
+```
+def naive_celeb(G):
+    n = len(G)
+    for u in range(n):  # For every candidate...
+        for v in range(n):  # For everyone else...
+            if u == v: continue  # Same person? Skip.
+            if G[u][v]: break  # Candidate knows other
+            if not G[v][u]: break  # Other doesn't know candidate
+        else:
+            return u  # No breaks? Celebrity!
+    return None  # Couldn't find anyone
+```
+
+用下面代码进行测试，得到正确结果57
+
+```
+from random import *
+n = 100
+G = [[randrange(2) for i in range(n)] for i in range(n)]
+c = 57 # For testing
+for i in range(n):
+    G[i][c] = True
+    G[c][i] = False
+
+print naive_celeb(G) #57
+```
+
+对于名人问题我们怎么reduce呢？
 
