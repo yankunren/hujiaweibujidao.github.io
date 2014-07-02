@@ -53,6 +53,8 @@ These are two major variations of reductions: reducing to a different problem an
 
 也许你还感觉很晕，慢慢地看了后面的例子你就明白了。在介绍例子之前呢，先看下递归和迭代的异同，这个很重要，在后面介绍动态规划算法时我们还会反复提到它们的异同。
 
+[Induction is what you use to show that recursion is correct, and recursion is a very direct way of implementing most inductive algorithm ideas. However, rewriting the algorithm to be iterative can avoid the overhead and limitations of recursive functions in most (nonfunctional) programming languages. ]
+
 有了Induction和Recursion，我们很容易就可以将一个inductive idea采用递归(recursion)的方式实现，根据我们的编程经验，任何一个递归方式的实现都可以改成非递归方式(即迭代方式)实现(反之亦然)，而且非递归方式要好些，为什么呢？因为迭代版本相对来讲运行速度更快，因为没有用栈去实现，也避免了栈溢出的情况，python中对栈深度是有限制的。
 
 举个例子，下面是一段遍历序列的代码，如果大小设置为100没有问题，如果设置为1000就会报`RuntimeError`的错误，提示超出了最大的递归深度。[当然，大家都不会像下面那样写代码对吧，这只是一个例子]
@@ -262,12 +264,54 @@ def topsort(G):
 
 4.Reduction + Contraposition = Hardness Proof
 
-规约是用于证明一个问题是NP难问题的好方式，假设我们能够将问题A规约至问题B，如果问题B很简单，那么问题A肯定也很简单。逆反一下我们就得到，如果问题A很难，那么问题B就也很难。
+规约是用于证明一个问题是否是一个很难的问题的好方式，假设我们能够将问题A规约至问题B，如果问题B很简单，那么问题A肯定也很简单。逆反一下我们就得到，如果问题A很难，那么问题B就也很难。比如，我们知道了哈密顿回路问题是NP完全问题，要证明哈密顿路径问题也是NP完全问题，就可以将哈密顿回路问题规约为哈密顿路径问题。
 
 [这里作者并没有过多的提到问题A规约至问题B的复杂度，算法导论中有提到，作者可能隐藏了规约的复杂度不大的含义，比如说多项式时间内能够完成，也就是下面的fast readuction]
 
 “fast + fast = fast.” 的含义是：fast readuction + fast solution to B = fast solution to A
 
+两条重要的规约经验：
+
+• If you can (easily) reduce A to B, then B is at least as hard as A.
+
+• If you want to show that X is hard and you know that Y is hard, reduce Y to X.
+
+5.Problem Solving Advice
+
+作者提供的解决一个问题的建议：
+
+(1)Make sure you really understand the problem. 
+
+搞明白你要解决的问题
+
+What is the input? The output? What’s the precise relationship between the two? Try to represent the problem instances as familiar structures, such as sequences or graphs. A direct, brute-force solution can sometimes help clarify exactly what the problem is.
+
+(2)Look for a reduction.
+
+寻找一个规约方式
+
+Can you transform the input so it works as input for another problem that you can solve? Can you transform the resulting output so that you can use it? Can you reduce an instance if size n to an instance of size k < n and extend the recursive solution (inductive hypothesis) back to n?
+
+(3)Are there extra assumptions you can exploit? 
+
+还有其他的重要的假设条件吗，有时候我们如果只考虑该问题的特殊情况的话没准能够有所收获
+
+Integers in a fixed value range can be sorted more efficiently than arbitrary values. Finding the shortest path in a DAG is easier than in an arbitrary graph, and using only non-negative edge weights is often easier than arbitrary edge weights.
 
 
+----------
+
+问题4-18. 随机生成DAG图
+
+Write a function for generating random DAGs. Write an automatic test that checks that topsort gives a valid orderings, using your DAG generator.
+
+You could generate DAGs by, for example, randomly ordering the nodes, and add a random number of forward-pointing edges to each of them.
+
+问题4-19. 修改拓扑排序
+
+Redesign topsort so it selects the last node in each iteration, rather than the first.
+
+This is quite similar to the original. You now have to maintain the out-degrees of the remaining nodes, and insert each node before the ones you have already found. (Remember not to insert anything in the beginning of a list, though; rather, append, and then reverse it at the end, to avoid a quadratic running time.)
+
+[后面提到使用`append`然后`reverse`，而不要使用`insert`]
 
