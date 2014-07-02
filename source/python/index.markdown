@@ -55,7 +55,9 @@ Python分类下的系列文章，不断更新中
 
 原书主要介绍了一些基础数学，例如排列组合以及递归循环等，但是本节只重点介绍计算算法的运行时间的三种方法
 
-(4)[Python Algorithms - C4 Induction and Recursion and Reduction](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-induction/) [还未完成]
+(4)[Python Algorithms - C4 Induction and Recursion and Reduction](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-induction/) 
+
+本节主要介绍算法设计的三个核心知识：Induction(推导)、Recursion(递归)和Reduction(规约)，这是原书的重点和难点部分
 
 (5)[Python Algorithms - C5 Traversal](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-traversal/) [还未完成]
 
