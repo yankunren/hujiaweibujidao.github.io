@@ -379,11 +379,11 @@ seq = counting_sort(seq)
 ```
 
 基数排序：因为每位上的数字范围一般都是有限的，所以常配合使用计数排序对每位进行排序。
-
 ![image](http://hujiaweibujidao.github.io/images/201405/sortradix.png)
 
 桶排序：适用于元素是均匀分布的，在每个桶内采用插入排序。
 
 ![image](http://hujiaweibujidao.github.io/images/201405/sortbucket.png)
 
+本节只是对各种排序进行一个介绍然后用python实现而已，更加详细地解释各种排序的内部思想的内容可以参见后面的[Python算法设计篇之Induction&Recursion&Reduction](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-induction/)
 
