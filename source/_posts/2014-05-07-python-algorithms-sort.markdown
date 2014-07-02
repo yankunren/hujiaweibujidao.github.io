@@ -360,6 +360,24 @@ print(a_list)
 
 ![image](http://hujiaweibujidao.github.io/images/201405/sortcount.png)
 
+下面是计数排序的python实现，摘自[Python Algorithms: Mastering Basic Algorithms in the Python Language](http://link.springer.com/book/10.1007%2F978-1-4302-3238-4)
+
+
+```
+from collections import defaultdict
+
+def counting_sort(A, key=lambda x: x):
+    B, C = [], defaultdict(list)  # Output and "counts"
+    for x in A:
+        C[key(x)].append(x)  # "Count" key(x)
+    for k in range(min(C), max(C) + 1):  # For every key in the range
+        B.extend(C[k])  # Add values in sorted order
+    return B
+
+seq = [randrange(100) for i in range(10)]
+seq = counting_sort(seq)
+```
+
 基数排序：因为每位上的数字范围一般都是有限的，所以常配合使用计数排序对每位进行排序。
 
 ![image](http://hujiaweibujidao.github.io/images/201405/sortradix.png)
