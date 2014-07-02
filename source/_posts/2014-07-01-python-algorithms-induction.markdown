@@ -164,5 +164,83 @@ for i in range(n):
 print naive_celeb(G) #57
 ```
 
-对于名人问题我们怎么reduce呢？
+上面的暴力求解其实可以看做是一个reduce，每次reduce一个人，确定他是否是名人，显然这样做并不高效。那么，对于名人问题我们还可以怎么reduce呢？假设我们还是将规模为n的问题reduce成规模为n-1的问题，那么我们要找到一个非名人(u)，也就是找到一个人(u)，他要么认识其他某个人(v)，要么某个人(v)不认识他，也就是说，对于任何G[u][v]，如果G[u][v]为True，那么消去u；如果G[u][v]为False，那么消去v，这样就可以明显加快查找的速度！
+
+基于上面的想法就有了下面的python实现，第二个for循环是用来验证我们得到的结果是否正确(因为如果我们保证有一个名人的话那么结果肯定正确，但是如果不能保证的话，那么结果就要进行验证)
+
+```
+def celeb(G):
+    n = len(G)
+    u, v = 0, 1  # The first two
+    for c in range(2, n + 1):  # Others to check
+        if G[u][v]:
+            u = c  # u knows v? Replace u
+        else:
+            v = c  # Otherwise, replace v
+    if u == n:
+        c = v  # u was replaced last; use v
+    else:
+        c = u  # Otherwise, u is a candidate
+    for v in range(n):  # For everyone else...
+        if c == v: continue  # Same person? Skip.
+        if G[c][v]: break  # Candidate knows other
+        if not G[v][c]: break  # Other doesn't know candidate
+    else:
+        return c  # No breaks? Celebrity!
+    return None  # Couldn't find anyone
+```
+
+看起来还不错吧，我们将一个$O(n^2)$的暴力解法变成了一个$O(n)$的快速解法。
+
+[看书看到这里时，我想起了另一个看起来很相似的问题，从n个元素中找出最大值和最小值。如果我们单独地来查找最大值和最小值，共需要(2n-2)次比较，但是，如果我们成对来处理，首先比较第一个元素和第二个元素，较大的那个作为当前最大值，较小的那个作为当前最小值(如果n是奇数的话，为了方便可以直接令第一个元素既是最大值又是最小值)，然后向后移动，每次取两个元素出来比较，较小的那个去和当前最小值比较，较大的那个去和当前最大值比较，这样的策略至多需要 $3\lfloor \frac{n}{2} \rfloor$ 次比较。两个问题虽然完全没关系，但是解决方式总有那么点千丝万缕有木有？]
+
+接下来我们看另一个更加重要的例子，拓扑排序，这是图中很重要的一个算法，在后面介绍到图算法的时候我们还会提到拓扑排序的另一个解法，它的应用范围也非常广，除了前面的依赖关系例子外，还有一个最突出的例子就是类Linux系统中软件的安装，每当我们在终端安装一个软件或者库时，它会自动检测它所依赖的那些部件(components)是否安装了，如果没有那么就先安装那些依赖项。此外，后面[介绍到动态规划时有一个单源最短路径问题]((http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-dynamic-programming/))就利用了拓扑排序。
+
+下图是一个有向无环图(DAG)和它对应的拓扑排序结果
+
+![image](http://hujiaweibujidao.github.io/images/algos/topsort.png)
+
+拓扑排序这个问题怎么进行reduce呢？和前面一样，我们最直接的想法可能还是reduce one element，即去掉一个节点，然后解决剩下的(n-1)个问题，这个想法的实现非常类似前面的插入排序，插入的这个节点(也就是前面去掉的节点)的位置是在前面所有对它有依赖的节点之后。
+
+```
+def naive_topsort(G, S=None):
+    if S is None: S = set(G)  # Default: All nodes
+    if len(S) == 1: return list(S)  # Base case, single node
+    v = S.pop()  # Reduction: Remove a node
+    seq = naive_topsort(G, S)  # Recursion (assumption), n-1
+    min_i = 0
+    for i, u in enumerate(seq):
+        if v in G[u]: min_i = i + 1  # After all dependencies
+    seq.insert(min_i, v)
+    return seq
+    
+G = {'a': set('bf'), 'b': set('cdf'),'c': set('d'), 'd': set('ef'), 'e': set('f'), 'f': set()}
+print naive_topsort(G) # ['a', 'b', 'c', 'd', 'e', 'f']
+```
+
+上面这个算法是平方时间的，还有没有其他的reduction策略呢？前面的解法类似插入排序，既然又是reduce一个元素，很显然我们可以试试类似选择排序的策略，也就是说，我们找到一个节点，然后把它放在第一个位置，假设我们直接就是将这个节点去掉会怎样呢？如果剩下的图还是一个DAG的话我们就将原来的问题规约成了一个相似但是规模更小的问题对不对？但是问题是我们选择哪个节点会使得剩下的图还是一个DAG呢？很显然，如果一个节点的入度为0，也就是说没有任何其他的节点依赖于它，那么它肯定可以直接安全地删除掉对不对？！
+
+基于上面的思路就有了下面的解法
+
+```
+def topsort(G):
+    count = dict((u, 0) for u in G)  # The in-degree for each node
+    for u in G:
+        for v in G[u]:
+            count[v] += 1  # Count every in-edge
+    Q = [u for u in G if count[u] == 0]  # Valid initial nodes
+    S = []  # The result
+    while Q:  # While we have start nodes...
+        u = Q.pop()  # Pick one
+        S.append(u)  # Use it as first of the rest
+        for v in G[u]:
+            count[v] -= 1  # "Uncount" its out-edges
+            if count[v] == 0:  # New valid start nodes?
+                Q.append(v)  # Deal with them next
+    return S
+```
+
+
+
+
 
