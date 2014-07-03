@@ -119,7 +119,7 @@ class Tree:                                     # Simple wrapper
 
 如果我们想要在线性时间内找到一组序列中的前 k 大的元素怎么做呢？很显然，如果这组序列中的数字范围比较大，我们不能使用线性排序，而其他的基于比较的排序算法的最好的平均时间复杂度($O(n lg n)$)都超过了线性时间，怎么办呢？
 
-[在Python中如果泥需要求前 k 小或者前 k 大的元素，可以使用`heapq`模块中的`nsmallest`或者`nlargest`函数，如果 k 很小的话这种方式会好些，但是如果 k 很大的话，不如去调用`sort`函数]
+[扩展知识：在Python中如果泥需要求前 k 小或者前 k 大的元素，可以使用`heapq`模块中的`nsmallest`或者`nlargest`函数，如果 k 很小的话这种方式会好些，但是如果 k 很大的话，不如去调用`sort`函数]
 
 要想解决这个问题，我们还是要用分治法，采用类似快排中的`partition`将序列进行划分(divide)，也就是说找一个主元(pivot)，然后用主元作为基准将序列分成两部分，一部分小于主元，另一半大于主元，比较下主元最终位置值和 k，然后确定后面在哪个部分继续进行划分。如果这里不理解的话请移步阅读前面[数据结构篇之排序中的快速排序](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/)
 
@@ -165,7 +165,7 @@ While the algorithm is important to know about for theoretical reasons (because 
 
 3.二分排序
 
-前面我们介绍了二分查找，下面看看二分如何进行排序
+前面我们介绍了二分查找，下面看看二分如何进行排序，这里不再详细介绍这两个排序算法的思想了，如果不理解的话请移步阅读前面[数据结构篇之排序](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/)
 
 快排自然算是咯，利用前面的`partition`函数快排代码呼之欲出
 
@@ -198,3 +198,8 @@ def mergesort(seq):
     return (lft or rgt) + res                   # Also add the remainder
 ```
 
+[扩展知识：Python内置的排序算法TimSort]
+
+![image](http://hujiaweibujidao.github.io/images/algos/timsort.png)
+
+4.
