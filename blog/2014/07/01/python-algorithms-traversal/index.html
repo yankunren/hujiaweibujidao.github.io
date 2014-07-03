@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="Python算法设计篇(5)
-逸夫图书馆, 2014/7/1 Chapter 5: Traversal [编写中] Original link:http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-traversal/ &hellip;">
+逸夫图书馆, 2014/7/1 Chapter 5: Traversal You are in a narrow hallway. This continues for several metres and ends in a doorway. Halfway &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -132,6 +132,150 @@
 <strong><center>逸夫图书馆, 2014/7/1</center></strong></p>
 
 <h3 id="centerchapter-5-traversalcenter"><center>Chapter 5: Traversal</center></h3>
+
+<blockquote>
+  <p>You are in a narrow hallway. This continues for several metres and ends in a doorway. Halfway along the passage you can see an archway where some steps lead downwards. Will you go forwards to the door (turn to 5), or creep down the steps (turn to 344)?    <br />
+  ——Steve Jackson, Citadel of Chaos</p>
+</blockquote>
+
+<p>本节主要介绍图的遍历算法BFS和DFS，以及DFS衍生出的寻找图的(强)连通分量的算法</p>
+
+<p>Traversal就是遍历，主要是对图的遍历，也就是遍历图中的每个节点。对一个节点的遍历有两个阶段，首先是发现(discover)，然后是访问(visit)。遍历的重要性自然不必说，图中有几个算法和遍历没有关系？！</p>
+
+<p>[算法导论对于发现和访问区别的非常明显，对图的算法讲解地特别好，在遍历节点的时候给节点标注它的发现节点时间d[v]和结束访问时间f[v]，然后由这些时间的一些规律得到了不少实用的定理，感兴趣不妨阅读下]</p>
+
+<p>图的连通分量是图的一个最大子图，在这个子图中任何两个节点之间都是相互可达的。我们本节的重点就是想想怎么找到一个图的连通分量呢？</p>
+
+<p>一个很明显的想法是，我们从一个顶点出发，沿着边一直走，慢慢地扩大子图，直到子图不能再扩大了停止，我们就得到了一个连通分量对吧，我们怎么确定我们真的是找到了一个完整的连通分量呢？可以看下作者给出的解释，类似上节的Induction，我们思考从 i-1 到 i 的过程，只要我们保证增加了这个节点后子图仍然是连通的就对了。</p>
+
+<p>Let’s look at the following related problem. Show that you can order the nodes in a connected graph, V1, V2, … Vn, so that for any i = 1…n, the subgraph over V1, … , Vi is connected. If we can show this and we can figure out how to do the ordering, we can go through all the nodes in a connected component and know when they’re all used up.</p>
+
+<p>How do we do this? Thinking inductively, we need to get from i -1 to i. We know that the subgraph over the i -1 first nodes is connected. What next? Well, because there are paths between any pair of nodes, consider a node u in the first i -1 nodes and a node v in the remainder. On the path from u to v, consider the last node that is in the component we’ve built so far, as well as the first node outside it. Let’s call them x and y. Clearly there must be an edge between them, so adding y to the nodes of our growing component keeps it connected, and we’ve shown what we set out to show.</p>
+
+<p>经过上面的一番思考，我们就知道了如何找连通分量：从一个顶点开始，沿着它的边找到其他的节点(或者说站在这个节点上看，看能够发现哪些节点)，然后就是不断地向已有的连通分量中添加节点，使得连通分量内部依然满足连通性质。如果我们按照上面的思路一直做下去，我们就得到了一棵树，一棵遍历树，它也是我们遍历的分量的一棵生成树。这个算法的具体实现时，我们要记录“边缘节点”，也就是那些和已得到的连通分量中的节点相连的节点，这就像是一个待办事项(to-do list)一样，而前面加入的节点就是标记为已完成的(checked off)。</p>
+
+<p>这里作者举了一个很有意思的例子，一个角色扮演的游戏，如下图所示，我们可以将房间看作是节点，将房间的门看作是节点之间的边，走过的轨迹就是遍历树。这么看的话，房间就分成了三种：(1)我们已经经过的房间；(2)我们已经经过的房间附近的房间，也就是马上可以进入的房间；(3)“黑屋”，我们甚至都不知道它们是否存在，存在的话也不知道在哪里。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/dungeon.png" alt="image" /></p>
+
+<p>根据上面的分析可以写出下面的遍历函数<code>walk</code>，其中参数<code>S</code>暂时没有用，它在后面求强连通分量时需要，表示的是一个“禁区”(forbidden zone)，也就是不要去访问这些节点。</p>
+
+<p>注意下面的<code>difference</code>函数的使用，参数可以是多个，也就是说返回的集合中的元素在参数中都没有存在，此外，参数也不一定是set，也可以是dict或者list，只要是可迭代的(iterables)即可。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># Walking Through a Connected Component of a Graph Represented Using Adjacency Sets</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">walk</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="nb">set</span><span class="p">()):</span>                        <span class="c"># Walk the graph from node s</span>
+</span><span class="line">    <span class="n">P</span><span class="p">,</span> <span class="n">Q</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(),</span> <span class="nb">set</span><span class="p">()</span>                        <span class="c"># Predecessors + &quot;to do&quot; queue</span>
+</span><span class="line">    <span class="n">P</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>                                 <span class="c"># s has no predecessor</span>
+</span><span class="line">    <span class="n">Q</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>                                    <span class="c"># We plan on starting with s</span>
+</span><span class="line">    <span class="k">while</span> <span class="n">Q</span><span class="p">:</span>                                    <span class="c"># Still nodes to visit</span>
+</span><span class="line">        <span class="n">u</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>                             <span class="c"># Pick one, arbitrarily</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>         <span class="c"># New nodes?</span>
+</span><span class="line">            <span class="n">Q</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>                            <span class="c"># We plan to visit them!</span>
+</span><span class="line">            <span class="n">P</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>                            <span class="c"># Remember where we came from</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">P</span>                                    <span class="c"># The traversal tree</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>我们可以用下面代码来测试下，得到的结果没有问题</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">some_graph2</span><span class="p">():</span>
+</span><span class="line">    <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</span><span class="line">    <span class="n">N</span> <span class="o">=</span> <span class="p">[</span>
+</span><span class="line">        <span class="p">{</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">},</span>    <span class="c"># a</span>
+</span><span class="line">        <span class="p">{</span><span class="n">c</span><span class="p">,</span> <span class="n">e</span><span class="p">},</span>             <span class="c"># b</span>
+</span><span class="line">        <span class="p">{</span><span class="n">d</span><span class="p">},</span>                <span class="c"># c</span>
+</span><span class="line">        <span class="p">{</span><span class="n">e</span><span class="p">},</span>                <span class="c"># d</span>
+</span><span class="line">        <span class="p">{</span><span class="n">f</span><span class="p">},</span>                <span class="c"># e</span>
+</span><span class="line">        <span class="p">{</span><span class="n">c</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">},</span>          <span class="c"># f</span>
+</span><span class="line">        <span class="p">{</span><span class="n">f</span><span class="p">,</span> <span class="n">h</span><span class="p">},</span>             <span class="c"># g</span>
+</span><span class="line">        <span class="p">{</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">}</span>              <span class="c"># h</span>
+</span><span class="line">    <span class="p">]</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">N</span>
+</span><span class="line">
+</span><span class="line"><span class="n">G</span> <span class="o">=</span> <span class="n">some_graph2</span><span class="p">()</span>
+</span><span class="line"><span class="k">print</span> <span class="nb">list</span><span class="p">(</span><span class="n">walk</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="c">#[0, 1, 2, 3, 4, 5, 6, 7]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>上面的<code>walk</code>函数只适用于无向图，而且只能找到一个从参数<code>s</code>出发的连通分量，要想得到全部的连通分量需要修改下</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">components</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>                              <span class="c"># The connected components</span>
+</span><span class="line">    <span class="n">comp</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class="line">    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>                                <span class="c"># Nodes we&#39;ve already seen</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>                                 <span class="c"># Try every starting point</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span> <span class="k">continue</span>                  <span class="c"># Seen? Ignore it</span>
+</span><span class="line">        <span class="n">C</span> <span class="o">=</span> <span class="n">walk</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>                          <span class="c"># Traverse component</span>
+</span><span class="line">        <span class="n">seen</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>                          <span class="c"># Add keys of C to seen</span>
+</span><span class="line">        <span class="n">comp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>                          <span class="c"># Collect the components</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">comp</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>用下面的代码来测试下，得到的结果没有问题</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">G</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class="line">    <span class="mi">0</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span>
+</span><span class="line">    <span class="mi">1</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span>
+</span><span class="line">    <span class="mi">2</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+</span><span class="line">    <span class="mi">3</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]),</span>
+</span><span class="line">    <span class="mi">4</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]),</span>
+</span><span class="line">    <span class="mi">5</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">C</span><span class="p">))</span> <span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="n">components</span><span class="p">(</span><span class="n">G</span><span class="p">)]</span>  <span class="c">#[[0, 1, 2], [3, 4, 5]]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>至此我们就完成了一个时间复杂度为$\Theta(E+V)$的求无向图的连通分量的算法，因为每条边和每个顶点都要访问一次。[这个时间复杂度会经常看到，例如拓扑排序，强连通分量都是它]</p>
+
+<p>[中间部分作者介绍了欧拉回路和哈密顿回路：前者是经过图中的所有边一次，然后回到起点；后者是经过图中的所有顶点一次，然后回到起点。网上资料甚多，感兴趣自行了解]</p>
+
+<p>下面我们看下迷宫问题，如下图所示，原始问题是一个人在公园中走路，结果走不出来了，即使是按照“左手准则”(也就是但凡遇到交叉口一直向左转)走下去，如果走着走着回到了原来的起点，那么就会陷入无限的循环中！有意思的是，左边的迷宫可以通过“左手准则”转换成右边的图
+[<strong>注：具体的转换方式我还未明白</strong>]</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/maze.png" alt="image" /></p>
 
 <p>[编写中]</p>
 
