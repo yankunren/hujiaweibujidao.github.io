@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-03T14:47:06+08:00</updated>
+  <updated>2014-07-03T15:33:28+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -312,11 +312,11 @@ print(rec_dag_sp(W,s,t)) #7
   ——Steve Jackson, Citadel of Chaos</p>
 </blockquote>
 
-<p>本节主要介绍图的遍历算法BFS和DFS，以及DFS衍生出的寻找图的(强)连通分量的算法</p>
+<p>本节主要介绍图的遍历算法BFS和DFS，以及寻找图的(强)连通分量的算法</p>
 
 <p>Traversal就是遍历，主要是对图的遍历，也就是遍历图中的每个节点。对一个节点的遍历有两个阶段，首先是发现(discover)，然后是访问(visit)。遍历的重要性自然不必说，图中有几个算法和遍历没有关系？！</p>
 
-<p>[算法导论对于发现和访问区别的非常明显，对图的算法讲解地特别好，在遍历节点的时候给节点标注它的发现节点时间d[v]和结束访问时间f[v]，然后由这些时间的一些规律得到了不少实用的定理，感兴趣不妨阅读下]</p>
+<p>[算法导论对于发现和访问区别的非常明显，对图的算法讲解地特别好，在遍历节点的时候给节点标注它的发现节点时间d[v]和结束访问时间f[v]，然后由这些时间的一些规律得到了不少实用的定理，本节后面介绍了部分内容，感兴趣不妨阅读下算法导论原书]</p>
 
 <p>图的连通分量是图的一个最大子图，在这个子图中任何两个节点之间都是相互可达的。我们本节的重点就是想想怎么找到一个图的连通分量呢？</p>
 
@@ -326,7 +326,7 @@ print(rec_dag_sp(W,s,t)) #7
 
 <p>How do we do this? Thinking inductively, we need to get from i -1 to i. We know that the subgraph over the i -1 first nodes is connected. What next? Well, because there are paths between any pair of nodes, consider a node u in the first i -1 nodes and a node v in the remainder. On the path from u to v, consider the last node that is in the component we’ve built so far, as well as the first node outside it. Let’s call them x and y. Clearly there must be an edge between them, so adding y to the nodes of our growing component keeps it connected, and we’ve shown what we set out to show.</p>
 
-<p>经过上面的一番思考，我们就知道了如何找连通分量：从一个顶点开始，沿着它的边找到其他的节点(或者说站在这个节点上看，看能够发现哪些节点)，然后就是不断地向已有的连通分量中添加节点，使得连通分量内部依然满足连通性质。如果我们按照上面的思路一直做下去，我们就得到了一棵树，一棵遍历树，它也是我们遍历的分量的一棵生成树。这个算法的具体实现时，我们要记录“边缘节点”，也就是那些和已得到的连通分量中的节点相连的节点，这就像是一个待办事项(to-do list)一样，而前面加入的节点就是标记为已完成的(checked off)。</p>
+<p>经过上面的一番思考，我们就知道了如何找连通分量：从一个顶点开始，沿着它的边找到其他的节点(或者说站在这个节点上看，看能够发现哪些节点)，然后就是不断地向已有的连通分量中添加节点，使得连通分量内部依然满足连通性质。如果我们按照上面的思路一直做下去，我们就得到了一棵树，一棵遍历树，它也是我们遍历的分量的一棵生成树。在具体实现这个算法时，我们要记录“边缘节点”，也就是那些和已得到的连通分量中的节点相连的节点，它们就像是一个个待办事项(to-do list)一样，而前面加入的节点就是标记为已完成的(checked off)待办事项。</p>
 
 <p>这里作者举了一个很有意思的例子，一个角色扮演的游戏，如下图所示，我们可以将房间看作是节点，将房间的门看作是节点之间的边，走过的轨迹就是遍历树。这么看的话，房间就分成了三种：(1)我们已经经过的房间；(2)我们已经经过的房间附近的房间，也就是马上可以进入的房间；(3)“黑屋”，我们甚至都不知道它们是否存在，存在的话也不知道在哪里。</p>
 
@@ -334,7 +334,7 @@ print(rec_dag_sp(W,s,t)) #7
 
 <p>根据上面的分析可以写出下面的遍历函数<code>walk</code>，其中参数<code>S</code>暂时没有用，它在后面求强连通分量时需要，表示的是一个“禁区”(forbidden zone)，也就是不要去访问这些节点。</p>
 
-<p>注意下面的<code>difference</code>函数的使用，参数可以是多个，也就是说返回的集合中的元素在参数中都没有存在，此外，参数也不一定是set，也可以是dict或者list，只要是可迭代的(iterables)即可。</p>
+<p>注意下面的<code>difference</code>函数的使用，参数可以是多个，也就是说调用后返回的集合中的元素在各个参数中都不存在，此外，参数也不一定是set，也可以是dict或者list，只要是可迭代的(iterables)即可。<a href="https://docs.python.org/2/library/stdtypes.html#set.difference">可以看下python docs</a></p>
 
 <p><code>python
 # Walking Through a Connected Component of a Graph Represented Using Adjacency Sets
@@ -403,7 +403,7 @@ G = {
 
 <p>至此我们就完成了一个时间复杂度为$\Theta(E+V)$的求无向图的连通分量的算法，因为每条边和每个顶点都要访问一次。[这个时间复杂度会经常看到，例如拓扑排序，强连通分量都是它]</p>
 
-<p>[中间部分作者介绍了欧拉回路和哈密顿回路：前者是经过图中的所有边一次，然后回到起点；后者是经过图中的所有顶点一次，然后回到起点。网上资料甚多，感兴趣自行了解]</p>
+<p>[接下来作者作为扩展介绍了欧拉回路和哈密顿回路：前者是经过图中的所有边一次，然后回到起点；后者是经过图中的所有顶点一次，然后回到起点。网上资料甚多，感兴趣自行了解]</p>
 
 <p>下面我们看下迷宫问题，如下图所示，原始问题是一个人在公园中走路，结果走不出来了，即使是按照“左手准则”(也就是但凡遇到交叉口一直向左转)走下去，如果走着走着回到了原来的起点，那么就会陷入无限的循环中！有意思的是，左边的迷宫可以通过“左手准则”转换成右边的树型结构。</p>
 
@@ -431,7 +431,7 @@ for i in range(len(G)): G[i] = set(G[i])
 print list(rec_dfs(G, 0))   #[0, 1, 2, 3, 4, 5, 6, 7]
 ```</p>
 
-<p>很自然的我们想到要将递归版本改成迭代版本的</p>
+<p>很自然的我们想到要将递归版本改成迭代版本的，下面的代码中使用了Python中的<code>yield</code>关键字，具体的用法可以<a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/index.html">看下这里IBM Developer Works</a></p>
 
 <p>```
 def iter_dfs(G, s):
@@ -448,6 +448,133 @@ def iter_dfs(G, s):
 for i in range(len(G)): G[i] = set(G[i])
 print list(iter_dfs(G, 0))  #[0, 5, 7, 6, 2, 3, 4, 1]
 ```</p>
+
+<p>上面迭代版本经过一点点的修改可以得到更加通用的遍历函数</p>
+
+<p><code>
+def traverse(G, s, qtype=set):
+    S, Q = set(), qtype()
+    Q.add(s)
+    while Q:
+        u = Q.pop()
+        if u in S: continue
+        S.add(u)
+        for v in G[u]:
+            Q.add(v)
+        yield u
+</code></p>
+
+<p>函数<code>traverse</code>中的参数<code>qtype</code>表示队列类型，例如栈stack，下面的代码给出了如何自定义一个stack，以及测试<code>traverse</code>函数</p>
+
+<p>```
+class stack(list):
+    add = list.append</p>
+
+<p>G = some_graph()
+print list(traverse(G, 0, stack)) #[0, 5, 7, 6, 2, 3, 4, 1]
+```</p>
+
+<p>如果还不清楚的话可以看下算法导论中的这幅DFS示例图</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/dfsexample.png" alt="image" /></p>
+
+<p>上图在DFS时给节点加上了时间戳，这有什么作用呢？</p>
+
+<p>前面提到过，在遍历节点的时候如果给节点标注它的发现节点时间d[v]和结束访问时间f[v]的话，从这些时间我们就能够发现一些信息，比如下图，(a)是图的一个DFS遍历加上时间戳后的结果；(b)是如果给每个节点的d[v]到f[v]区间加上一个括号的话，可以看出在DFS遍历中(也就是后来的深度优先树/森林)中所有的节点 u 的后继节点 v 的区间都在节点 u 的区间内部，如果节点 v 不是节点 u 的后继，那么两个节点的区间不相交，这就是“括号定理”。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/dfstime.png" alt="image" /></p>
+
+<p>加上时间戳的DFS遍历还算比较好写对吧</p>
+
+<p><code>
+#Depth-First Search with Timestamps
+def dfs(G, s, d, f, S=None, t=0):
+    if S is None: S = set()                     # Initialize the history
+    d[s] = t; t += 1                            # Set discover time
+    S.add(s)                                    # We've visited s
+    for u in G[s]:                              # Explore neighbors
+        if u in S: continue                     # Already visited. Skip
+        t = dfs(G, u, d, f, S, t)               # Recurse; update timestamp
+    f[s] = t; t += 1                            # Set finish time
+    return t                                    # Return timestamp
+</code></p>
+
+<p>除了给节点加上时间戳之外，算法导论在介绍DFS的时候还给节点进行着色，在节点被发现之前是白色的，在发现之后先是灰色的，在结束访问之后才是黑色的，详细的流程可以参考上面给出的算法导论中的那幅DFS示例图。有了颜色有什么用呢？作用大着呢！根据节点的颜色，我们可以对边进行分类！大致可以分为下面四种：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/edgetype.png" alt="image" /></p>
+
+<p>使用DFS对图进行遍历时，对于每条边(u,v)，当该边第一次被发现时，根据到达节点 v 的颜色来对边进行分类(正向边和交叉边不做细分)：</p>
+
+<p>(1)白色表示该边是一条树边；</p>
+
+<p>(2)灰色表示该边是一条反向边；</p>
+
+<p>(3)黑色表示该边是一条正向边或者交叉边。</p>
+
+<p>下图显示了上面介绍括号定理用时的那个图的深度优先树中的所有边的类型</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/edgetypeexample.png" alt="image" /></p>
+
+<p>那对边进行分类有什么作用呢？作用多着呢！最常见的作用的是判断一个有向图是否存在环，如果对有向图进行DFS遍历发现了反向边，那么一定存在环，反之没有环。此外，对于无向图，如果对它进行DFS遍历，肯定不会出现正向边或者交叉边。</p>
+
+<p>那对节点标注时间戳有什么用呢？其实，除了可以发现上面提到的那些很重要的性质之外，时间戳对于接下来要介绍的拓扑排序的另一种解法和强连通分量很重要！</p>
+
+<p>我们先看下摘自算法导论的这幅拓扑排序示例图</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/topsortdfs.png" alt="image" /></p>
+
+<p>不难发现，最终得到的拓扑排序刚好是f[v]降序排列的！结合前面的括号定理以及依赖关系不难理解，如果我们按照节点f[v]降序排列，我们就得到了我们想要的拓扑排序了！这就是拓扑排序的另一个解法！[在算法导论中该解法是主要介绍的解法，而我们前面提到的那个解法是在算法导论的习题中出现的]</p>
+
+<p>基于上面的想法就能够得到下面的实现代码，函数<code>recurse</code>是一个内部函数，这样它就可以访问到<code>G</code>和<code>res</code>等变量</p>
+
+<p>```
+#Topological Sorting Based on Depth-First Search
+def dfs_topsort(G):
+    S, res = set(), []                          # History and result
+    def recurse(u):                             # Traversal subroutine
+        if u in S: return                       # Ignore visited nodes
+        S.add(u)                                # Otherwise: Add to history
+        for v in G[u]:
+            recurse(v)                          # Recurse through neighbors
+        res.append(u)                           # Finished with u: Append it
+    for u in G:
+        recurse(u)                              # Cover entire graph
+    res.reverse()                               # It’s all backward so far
+    return res</p>
+
+<p>G = {‘a’: set(‘bf’), ‘b’: set(‘cdf’), ‘c’: set(‘d’), ‘d’: set(‘ef’), ‘e’: set(‘f’), ‘f’: set()}
+print dfs_topsort(G)
+```</p>
+
+<p>[<strong>接下来作者介绍了一个Iterative Deepening Depth-First Search，没看懂，貌似和BFS类似</strong>]</p>
+
+<p>如果我们在遍历图时“一层一层”式地遍历，先发现的节点先访问，那么我们就得到了广度优先搜索(BFS)。下面是作者给出的一个有意思的区别BFS和DFS的例子，遍历过程就像我们上网一样，DFS是顺着网页上的链接一个个点下去，当访问完了这个网页时就点击<code>Back</code>回退到上一个网页继续访问。而BFS是先在后台打开当前网页上的所有链接，然后按照打开的顺序一个个访问，访问完了一个网页就把它的窗口关闭。</p>
+
+<p>One way of visualizing BFS and DFS is as browsing the Web. DFS is what you get if you keep following links and then use the Back button once you’re done with a page. The backtracking is a bit like an “undo.” BFS is more like opening every link in a new window (or tab) behind those you already have and then closing the windows as you finish with each page.</p>
+
+<p>BFS的代码很好实现，主要是使用队列</p>
+
+<p>```
+#Breadth-First Search
+from collections import deque</p>
+
+<p>def bfs(G, s):
+    P, Q = {s: None}, deque([s])                # Parents and FIFO queue
+    while Q:
+        u = Q.popleft()                         # Constant-time for deque
+        for v in G[u]:
+            if v in P: continue                 # Already has parent
+            P[v] = u                            # Reached from u: u is parent
+            Q.append(v)
+    return P</p>
+
+<p>G = some_graph()
+print bfs(G, 0)
+```</p>
+
+<p>Python的list可以很好地充当stack，但是充当queue则性能很差，函数<code>bfs</code>中使用的是<code>collections</code>模块中的<code>deque</code>，即双端队列(<code>double-ended queue</code>)，它一般是使用链表来实现的，这个类有<code>extend</code>、<code>append</code>和<code>pop</code>等方法都是作用于队列右端的，而方法<code>extendleft</code>、<code>appendleft</code>和<code>popleft</code>等方法都是作用于队列左端的，它的内部实现是非常高效的。</p>
+
+<p>Internally, the deque is implemented as a doubly linked list of blocks, each of which is an array of individual elements. Although asymptotically equivalent to using a linked list of individual elements, this reduces overhead and makes it more efficient in practice. For example, the expression d[k] would require traversing the first k elements of the deque d if it were a plain list. If each block contains b elements, you would only have to traverse k//b blocks.</p>
 
 <p>[编写中]</p>
 
