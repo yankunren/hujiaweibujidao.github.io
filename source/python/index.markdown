@@ -63,7 +63,9 @@ Python分类下的系列文章，不断更新中
 
 本节主要介绍算法设计的三个核心知识：Induction(推导)、Recursion(递归)和Reduction(规约)，这是原书的重点和难点部分
 
-(5)[Python Algorithms - C5 Traversal](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-traversal/) [还未完成]
+(5)[Python Algorithms - C5 Traversal](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-traversal/) 
+
+本节主要介绍图的遍历算法BFS和DFS，以及对拓扑排序的另一种解法和寻找图的(强)连通分量的算法
 
 (6)[Python Algorithms - C6 Divide and Combine and Conquer](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-divide-and-combine-and-conquer/) [还未完成]
 
