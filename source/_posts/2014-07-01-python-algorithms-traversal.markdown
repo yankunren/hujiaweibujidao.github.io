@@ -293,7 +293,17 @@ Internally, the deque is implemented as a doubly linked list of blocks, each of 
 
 最后再看看图(b)，该图是原图的转置，但是得到强连通分支是一样的(强连通分支图是会变的，刚好又是原来分支图的转置)，那为什么要将边反转呢？结合前面两个图的分析，既然强连通分支图是有向无环图，而且总是由完成时间晚的强连通分支指向完成时间早的强连通分支，如果我们将边反转，虽然我们得到的强连通分支不变，但是分支之间的指向变了，完成时间晚的就不再指向完成时间早的了！这样的话如果我们对它进行拓扑排序，即按照完成时间的降序再次进行DFS时，我们就能够得到一个个的强连通分支了对不对？因为每次得到的强连通分支都没有办法指向其他分支了，也就是确定了一个强连通分支之后就停止了。[试试画个图得到图(b)的强连通分支图的拓扑排序结果就明白了]
 
-经过上面略微复杂的分析之后我们就可以得到下面的强连通分支算法实现，其中的函数`parse_graph`是作者用来方便构造图的函数
+经过上面略微复杂的分析之后我们知道强连通分支算法的流程有下面四步：
+
+1.对原图G运行DFS，得到每个节点的完成时间f[v]；
+
+2.得到原图的转置图GT；
+
+3.对GT运行DFS，主循环按照节点的f[v]降序进行访问；
+
+4.输出深度优先森林中的每棵树，也就是一个强连通分支。
+
+根据上面的思路可以得到下面的强连通分支算法实现，其中的函数`parse_graph`是作者用来方便构造图的函数
 
 ```
 def tr(G):                                      # Transpose (rev. edges of) G
@@ -330,4 +340,9 @@ print list(map(list, scc(G)))
 
 [最后作者提到了一点如何进行更加高效的搜索，也就是通过分支限界来实现对搜索树的剪枝，具体使用可以看下这个问题[顶点覆盖问题Vertext Cover Problem](http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem/)]
 
+----------
+
+问题5.17 强连通分支
+
+In Kosaraju’s algorithm, we find starting nodes for the final traversal by descending finish times from an initial DFS, and we perform the traversal in the transposed graph (that is, with all edges reversed). Why couldn’t we just use ascending finish times in the original graph?
 
