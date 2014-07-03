@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-03T11:00:41+08:00</updated>
+  <updated>2014-07-03T11:37:56+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -470,21 +470,23 @@
 <span class="line-number">14</span>
 <span class="line-number">15</span>
 <span class="line-number">16</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">some_graph2</span><span class="p">():</span>
+<span class="line-number">17</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">some_graph</span><span class="p">():</span>
 </span><span class="line">    <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 </span><span class="line">    <span class="n">N</span> <span class="o">=</span> <span class="p">[</span>
-</span><span class="line">        <span class="p">{</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">},</span>    <span class="c"># a</span>
-</span><span class="line">        <span class="p">{</span><span class="n">c</span><span class="p">,</span> <span class="n">e</span><span class="p">},</span>             <span class="c"># b</span>
-</span><span class="line">        <span class="p">{</span><span class="n">d</span><span class="p">},</span>                <span class="c"># c</span>
-</span><span class="line">        <span class="p">{</span><span class="n">e</span><span class="p">},</span>                <span class="c"># d</span>
-</span><span class="line">        <span class="p">{</span><span class="n">f</span><span class="p">},</span>                <span class="c"># e</span>
-</span><span class="line">        <span class="p">{</span><span class="n">c</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">},</span>          <span class="c"># f</span>
-</span><span class="line">        <span class="p">{</span><span class="n">f</span><span class="p">,</span> <span class="n">h</span><span class="p">},</span>             <span class="c"># g</span>
-</span><span class="line">        <span class="p">{</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">}</span>              <span class="c"># h</span>
+</span><span class="line">        <span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">],</span>    <span class="c"># a</span>
+</span><span class="line">        <span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="n">e</span><span class="p">],</span>             <span class="c"># b</span>
+</span><span class="line">        <span class="p">[</span><span class="n">d</span><span class="p">],</span>                <span class="c"># c</span>
+</span><span class="line">        <span class="p">[</span><span class="n">e</span><span class="p">],</span>                <span class="c"># d</span>
+</span><span class="line">        <span class="p">[</span><span class="n">f</span><span class="p">],</span>                <span class="c"># e</span>
+</span><span class="line">        <span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">],</span>          <span class="c"># f</span>
+</span><span class="line">        <span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">h</span><span class="p">],</span>             <span class="c"># g</span>
+</span><span class="line">        <span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">]</span>              <span class="c"># h</span>
 </span><span class="line">    <span class="p">]</span>
 </span><span class="line">    <span class="k">return</span> <span class="n">N</span>
 </span><span class="line">
-</span><span class="line"><span class="n">G</span> <span class="o">=</span> <span class="n">some_graph2</span><span class="p">()</span>
+</span><span class="line"><span class="n">G</span> <span class="o">=</span> <span class="n">some_graph</span><span class="p">()</span>
+</span><span class="line"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)):</span> <span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 </span><span class="line"><span class="k">print</span> <span class="nb">list</span><span class="p">(</span><span class="n">walk</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="c">#[0, 1, 2, 3, 4, 5, 6, 7]</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
@@ -538,10 +540,71 @@
 
 <p>[中间部分作者介绍了欧拉回路和哈密顿回路：前者是经过图中的所有边一次，然后回到起点；后者是经过图中的所有顶点一次，然后回到起点。网上资料甚多，感兴趣自行了解]</p>
 
-<p>下面我们看下迷宫问题，如下图所示，原始问题是一个人在公园中走路，结果走不出来了，即使是按照“左手准则”(也就是但凡遇到交叉口一直向左转)走下去，如果走着走着回到了原来的起点，那么就会陷入无限的循环中！有意思的是，左边的迷宫可以通过“左手准则”转换成右边的图
-[<strong>注：具体的转换方式我还未明白</strong>]</p>
+<p>下面我们看下迷宫问题，如下图所示，原始问题是一个人在公园中走路，结果走不出来了，即使是按照“左手准则”(也就是但凡遇到交叉口一直向左转)走下去，如果走着走着回到了原来的起点，那么就会陷入无限的循环中！有意思的是，左边的迷宫可以通过“左手准则”转换成右边的树型结构。</p>
+
+<p>[<strong>注：具体的转换方式我还未明白，下面是作者给出的构造说明</strong>]</p>
+
+<p>Here the “keep one hand on the wall” strategy will work nicely. One way of seeing why it works is to observe that the maze really has only one inner wall (or, to put it another way, if you put wallpaper inside it, you could use one continuous strip). Look at the outer square. As long as you’re not allowed to create cycles, any obstacles you draw have to be connected to the it in exactly one place, and this doesn’t create any problems for the left-hand rule. Following this traversal strategy, you’ll discover all nodes and walk every passage twice (once in either direction).</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/maze.png" alt="image" /></p>
+
+<p>上面的迷宫实际上就是为了引出深度优先搜索(DFS)，每次到了一个交叉口的时候，可能我们可以向左走，也可以向右走，选择是有不少，但是我们要向一直走下去的话就只能选择其中的一个方向，如果我们发现这个方向走不出去的话，我们就回溯回来，选择一个刚才没选过的方向继续尝试下去。</p>
+
+<p>基于上面的想法可以写出下面递归版本的DFS</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">rec_dfs</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">S</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="n">S</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>                     <span class="c"># Initialize the history</span>
+</span><span class="line">    <span class="n">S</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>                                    <span class="c"># We&#39;ve visited s</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">G</span><span class="p">[</span><span class="n">s</span><span class="p">]:</span>                              <span class="c"># Explore neighbors</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span> <span class="k">continue</span>                     <span class="c"># Already visited: Skip</span>
+</span><span class="line">        <span class="n">rec_dfs</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>                        <span class="c"># New: Explore recursively</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">S</span> <span class="c"># For testing</span>
+</span><span class="line">
+</span><span class="line"><span class="n">G</span> <span class="o">=</span> <span class="n">some_graph</span><span class="p">()</span>
+</span><span class="line"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)):</span> <span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span class="line"><span class="k">print</span> <span class="nb">list</span><span class="p">(</span><span class="n">rec_dfs</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>   <span class="c">#[0, 1, 2, 3, 4, 5, 6, 7]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>很自然的我们想到要将递归版本改成迭代版本的</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">iter_dfs</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+</span><span class="line">    <span class="n">S</span><span class="p">,</span> <span class="n">Q</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(),</span> <span class="p">[]</span>                            <span class="c"># Visited-set and queue</span>
+</span><span class="line">    <span class="n">Q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>                                 <span class="c"># We plan on visiting s</span>
+</span><span class="line">    <span class="k">while</span> <span class="n">Q</span><span class="p">:</span>                                    <span class="c"># Planned nodes left?</span>
+</span><span class="line">        <span class="n">u</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>                             <span class="c"># Get one</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span> <span class="k">continue</span>                     <span class="c"># Already visited? Skip it</span>
+</span><span class="line">        <span class="n">S</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>                                <span class="c"># We&#39;ve visited it now</span>
+</span><span class="line">        <span class="n">Q</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">])</span>                          <span class="c"># Schedule all neighbors</span>
+</span><span class="line">        <span class="k">yield</span> <span class="n">u</span>                                 <span class="c"># Report u as visited</span>
+</span><span class="line">
+</span><span class="line"><span class="n">G</span> <span class="o">=</span> <span class="n">some_graph</span><span class="p">()</span>
+</span><span class="line"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)):</span> <span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span class="line"><span class="k">print</span> <span class="nb">list</span><span class="p">(</span><span class="n">iter_dfs</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>  <span class="c">#[0, 5, 7, 6, 2, 3, 4, 1]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>[编写中]</p>
 
