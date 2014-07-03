@@ -206,3 +206,15 @@ def mergesort(seq):
 
 [章节最后作者介绍了一些关于树平衡的内容，提到2-3树，我对树平衡不是特别感兴趣，也不是很明白，所以跳过不总结，感兴趣的不妨阅读下]
 
+
+----------
+
+问题6-2. 三分查找
+
+Binary search divides the sequence into two approximately equal parts in each recursive step. Consider ternary search, which divides the sequence into three parts. What would its asymptotic complexity be? What can you say about the number of comparisons in binary and ternary search?
+
+题目就是说让我们分析下三分查找的时间复杂度，和二分查找进行下对比
+
+The asymptotic running time would be the same. The number of comparison goes up, however. To see this, consider the recurrences B(n) = B(n/2) + 1 and T(n) = T(n/3) + 2 for binary and ternary search, respectively (with base cases B(1) = T(1) = 0 and B(2) = T(2) = 1). You can show (by induction) that
+B(n) < lg n + 1 < T(n).
+
