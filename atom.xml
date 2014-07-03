@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-03T15:33:28+08:00</updated>
+  <updated>2014-07-03T16:40:36+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -410,7 +410,7 @@
 
 <p>[算法导论对于发现和访问区别的非常明显，对图的算法讲解地特别好，在遍历节点的时候给节点标注它的发现节点时间d[v]和结束访问时间f[v]，然后由这些时间的一些规律得到了不少实用的定理，本节后面介绍了部分内容，感兴趣不妨阅读下算法导论原书]</p>
 
-<p>图的连通分量是图的一个最大子图，在这个子图中任何两个节点之间都是相互可达的。我们本节的重点就是想想怎么找到一个图的连通分量呢？</p>
+<p>图的连通分量是图的一个最大子图，在这个子图中任何两个节点之间都是相互可达的(忽略边的方向)。我们本节的重点就是想想怎么找到一个图的连通分量呢？</p>
 
 <p>一个很明显的想法是，我们从一个顶点出发，沿着边一直走，慢慢地扩大子图，直到子图不能再扩大了停止，我们就得到了一个连通分量对吧，我们怎么确定我们真的是找到了一个完整的连通分量呢？可以看下作者给出的解释，类似上节的Induction，我们思考从 i-1 到 i 的过程，只要我们保证增加了这个节点后子图仍然是连通的就对了。</p>
 
@@ -644,7 +644,7 @@
 </span><span class="line"><span class="k">print</span> <span class="nb">list</span><span class="p">(</span><span class="n">traverse</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">stack</span><span class="p">))</span> <span class="c">#[0, 5, 7, 6, 2, 3, 4, 1]</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>如果还不清楚的话可以看下算法导论中的这幅DFS示例图</p>
+<p>如果还不清楚的话可以看下算法导论中的这幅DFS示例图，节点的颜色后面有介绍</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/dfsexample.png" alt="image" /></p>
 
@@ -690,7 +690,7 @@
 
 <p>(3)黑色表示该边是一条正向边或者交叉边。</p>
 
-<p>下图显示了上面介绍括号定理用时的那个图的深度优先树中的所有边的类型</p>
+<p>下图显示了上面介绍括号定理用时的那个图的深度优先树中的所有边的类型，灰色标记的边是深度优先树的树边</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/edgetypeexample.png" alt="image" /></p>
 
@@ -698,11 +698,11 @@
 
 <p>那对节点标注时间戳有什么用呢？其实，除了可以发现上面提到的那些很重要的性质之外，时间戳对于接下来要介绍的拓扑排序的另一种解法和强连通分量很重要！</p>
 
-<p>我们先看下摘自算法导论的这幅拓扑排序示例图</p>
+<p>我们先看下摘自算法导论的这幅拓扑排序示例图，这是某个教授早上起来后要做的事情，嘿嘿</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/topsortdfs.png" alt="image" /></p>
 
-<p>不难发现，最终得到的拓扑排序刚好是f[v]降序排列的！结合前面的括号定理以及依赖关系不难理解，如果我们按照节点f[v]降序排列，我们就得到了我们想要的拓扑排序了！这就是拓扑排序的另一个解法！[在算法导论中该解法是主要介绍的解法，而我们前面提到的那个解法是在算法导论的习题中出现的]</p>
+<p>不难发现，最终得到的拓扑排序刚好是节点的完成时间f[v]降序排列的！结合前面的括号定理以及依赖关系不难理解，如果我们按照节点的f[v]降序排列，我们就得到了我们想要的拓扑排序了！这就是拓扑排序的另一个解法！[在算法导论中该解法是主要介绍的解法，而我们前面提到的那个解法是在算法导论的习题中出现的]</p>
 
 <p>基于上面的想法就能够得到下面的实现代码，函数<code>recurse</code>是一个内部函数，这样它就可以访问到<code>G</code>和<code>res</code>等变量</p>
 
@@ -784,7 +784,85 @@
 
 <p>Internally, the deque is implemented as a doubly linked list of blocks, each of which is an array of individual elements. Although asymptotically equivalent to using a linked list of individual elements, this reduces overhead and makes it more efficient in practice. For example, the expression d[k] would require traversing the first k elements of the deque d if it were a plain list. If each block contains b elements, you would only have to traverse k//b blocks.</p>
 
-<p>[编写中]</p>
+<p>最后我们看下强连通分量，前面的分量是不考虑边的方向的，如果我们考虑边的方向，而且得到的最大子图中，任何两个节点都能够沿着边可达，那么这就是一个强连通分量。</p>
+
+<p>下图是算法导论中的示例图，(a)是对图进行DFS遍历带时间戳的结果；(b)是上图的的转置，也就是将上图中所有边的指向反转过来得到的图；(c)是最终得到的强连通分支图，每个节点内部显示了该分支内的节点。</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/sccexample.png" alt="image" /></p>
+
+<p>上面的示例图自然不太好明白到底怎么得到的，我们慢慢来分析三幅图 [原书的分析太多了，我被绕晕了+_+，下面是我结合算法导论的分析过程]</p>
+
+<p>先看图(a)，每个灰色区域都是一个强连通分支，我们想想，如果强连通分支 X 内部有一条边指向另一个强连通分支 Y，那么强连通分支 Y 内部肯定不存在一条边指向另一个强连通分支 Y，否则它们能够整合在一起形成一个新的更大气的强连通分支！这也就是说强连通分支图肯定是一个有向无环图！我们从图(c)也可以看出来</p>
+
+<p>再看看图(c)，强连通分支之间的指向，如果我们定义每个分支内的任何顶点的最晚的完成时间为对应分支的完成时间的话，那么分支<code>abe</code>的完成时间是16，分支<code>cd</code>是10，分支<code>fg</code>是7，分支<code>h</code>是6，不难发现，分支之间边的指向都是从完成时间大的指向完成时间小的，换句话说，总是由完成时间晚的强连通分支指向完成时间早的强连通分支！</p>
+
+<p>最后再看看图(b)，该图是原图的转置，但是得到强连通分支是一样的(强连通分支图是会变的，刚好又是原来分支图的转置)，那为什么要将边反转呢？结合前面两个图的分析，既然强连通分支图是有向无环图，而且总是由完成时间晚的强连通分支指向完成时间早的强连通分支，如果我们将边反转，虽然我们得到的强连通分支不变，但是分支之间的指向变了，完成时间晚的就不再指向完成时间早的了！这样的话如果我们对它进行拓扑排序，即按照完成时间的降序再次进行DFS时，我们就能够得到一个个的强连通分支了对不对？因为每次得到的强连通分支都没有办法指向其他分支了，也就是确定了一个强连通分支之后就停止了。[试试画个图得到图(b)的强连通分支图的拓扑排序结果就明白了]</p>
+
+<p>经过上面略微复杂的分析之后我们就可以得到下面的强连通分支算法实现，其中的函数<code>parse_graph</code>是作者用来方便构造图的函数</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">tr</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>                                      <span class="c"># Transpose (rev. edges of) G</span>
+</span><span class="line">    <span class="n">GT</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span> <span class="n">GT</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>                   <span class="c"># Get all the nodes in there</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+</span><span class="line">            <span class="n">GT</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>                        <span class="c"># Add all reverse edges</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">GT</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">scc</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+</span><span class="line">    <span class="n">GT</span> <span class="o">=</span> <span class="n">tr</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>                                  <span class="c"># Get the transposed graph</span>
+</span><span class="line">    <span class="n">sccs</span><span class="p">,</span> <span class="n">seen</span> <span class="o">=</span> <span class="p">[],</span> <span class="nb">set</span><span class="p">()</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">dfs_topsort</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>                    <span class="c"># DFS starting points</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span> <span class="k">continue</span>                  <span class="c"># Ignore covered nodes</span>
+</span><span class="line">        <span class="n">C</span> <span class="o">=</span> <span class="n">walk</span><span class="p">(</span><span class="n">GT</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">seen</span><span class="p">)</span>                   <span class="c"># Don&#39;t go &quot;backward&quot; (seen)</span>
+</span><span class="line">        <span class="n">seen</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>                          <span class="c"># We&#39;ve now seen C</span>
+</span><span class="line">        <span class="n">sccs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>                          <span class="c"># Another SCC found</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">sccs</span>
+</span><span class="line">
+</span><span class="line"><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">ascii_lowercase</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">parse_graph</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+</span><span class="line">    <span class="c"># print zip(ascii_lowercase, s.split(&quot;/&quot;))</span>
+</span><span class="line">    <span class="c"># [(&#39;a&#39;, &#39;bc&#39;), (&#39;b&#39;, &#39;die&#39;), (&#39;c&#39;, &#39;d&#39;), (&#39;d&#39;, &#39;ah&#39;), (&#39;e&#39;, &#39;f&#39;), (&#39;f&#39;, &#39;g&#39;), (&#39;g&#39;, &#39;eh&#39;), (&#39;h&#39;, &#39;i&#39;), (&#39;i&#39;, &#39;h&#39;)]</span>
+</span><span class="line">    <span class="n">G</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ascii_lowercase</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)):</span>
+</span><span class="line">        <span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">G</span>
+</span><span class="line">
+</span><span class="line"><span class="n">G</span> <span class="o">=</span> <span class="n">parse_graph</span><span class="p">(</span><span class="s">&#39;bc/die/d/ah/f/g/eh/i/h&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">scc</span><span class="p">(</span><span class="n">G</span><span class="p">)))</span>
+</span><span class="line"><span class="c">#[[&#39;a&#39;, &#39;c&#39;, &#39;b&#39;, &#39;d&#39;], [&#39;e&#39;, &#39;g&#39;, &#39;f&#39;], [&#39;i&#39;, &#39;h&#39;]]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>[最后作者提到了一点如何进行更加高效的搜索，也就是通过分支限界来实现对搜索树的剪枝，具体使用可以看下这个问题<a href="http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem/">顶点覆盖问题Vertext Cover Problem</a>]</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-traversal/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-traversal/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
