@@ -328,3 +328,6 @@ print list(map(list, scc(G)))
 #[['a', 'c', 'b', 'd'], ['e', 'g', 'f'], ['i', 'h']]
 ```
 
+[最后作者提到了一点如何进行更加高效的搜索，也就是通过分支限界来实现对搜索树的剪枝，具体使用可以看下这个问题[顶点覆盖问题Vertext Cover Problem](http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem/)]
+
+
