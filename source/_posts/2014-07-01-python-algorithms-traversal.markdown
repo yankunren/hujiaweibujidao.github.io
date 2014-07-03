@@ -346,3 +346,7 @@ print list(map(list, scc(G)))
 
 In Kosaraju’s algorithm, we find starting nodes for the final traversal by descending finish times from an initial DFS, and we perform the traversal in the transposed graph (that is, with all edges reversed). Why couldn’t we just use ascending finish times in the original graph?
 
+问题就是说，我们干嘛要对转置图按照完成时间降序遍历一次呢？干嘛不直接在原图上按照完成时间升序遍历一次呢？
+
+Try finding a simple example where this would give the wrong answer. (You can do it with a really small graph.)
+
