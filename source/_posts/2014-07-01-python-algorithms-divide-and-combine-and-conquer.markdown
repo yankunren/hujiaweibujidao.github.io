@@ -19,11 +19,11 @@ published: true
 
 本节的标题写全了就是：**divide the problem instance, solve subproblems recursively, combine the results, and thereby conquer the problem**
 
-简言之就是将原问题划分成几个小问题，然后递归地解决这些小问题了，最后综合它们的解得到问题最后的解。分治法我想大家都已经很清楚了，所以就不过多地介绍它的概念了，下面摘录些原书中的重点内容。
+简言之就是将原问题划分成几个小问题，然后递归地解决这些小问题，最后综合它们的解得到问题的解。分治法的思想我想大家都已经很清楚了，所以我就不过多地介绍它了，下面摘录些原书中的重点内容。
 
 1.平衡性是树形问题的关键
 
-如果我们将子问题看做节点，将问题之间的依赖关系(dependencies or reductions)看做边，那么我们就得到了子问题图(subproblem graph )，最简单的子问题图就是树形结构问题，例如我们之前提到过的递归树的形式。也许子问题之间有依赖关系，但是对于每个子问题我们都是可以独立求解的，根据我们前面学的内容，只要我们能够找到合适的规约，我们就可以直接使用递归形式的算法将这个问题解决。[至于子问题间有重叠的话我们后面会详细介绍动态规划的方法来解决对应的问题，这里我们不考虑]
+如果我们将子问题看做节点，将问题之间的依赖关系(dependencies or reductions)看做边，那么我们就得到了子问题图(subproblem graph )，最简单的子问题图就是树形结构问题，例如我们之前提到过的递归树的形式。也许子问题之间有依赖关系，但是对于每个子问题我们都是可以独立求解的，根据我们前面学的内容，只要我们能够找到合适的规约，我们就可以直接使用递归形式的算法将这个问题解决。[至于子问题间有重叠的话我们后面会详细介绍动态规划的方法来解决这类问题，这里我们不考虑]
 
 前面我们学的内容已经完全足够我们理解分治法了，第3节的Divide-and-conquer recurrences，第4节的Strong induction，还有第5节的Recursive traversal
 
@@ -59,9 +59,9 @@ def divide_and_conquer(S, divide, combine):
 
 ![image](http://hujiaweibujidao.github.io/images/algos/dcc.png)
 
-二分查找是最常用的采用分治策略的算法，我们经常使用的版本控制系统(evision control systems=RCSs)查找代码中发生某个变化采用的正是二分查找策略。
+二分查找是最常用的采用分治策略的算法，我们经常使用的版本控制系统(evision control systems=RCSs)查找代码中发生某个变化是在哪个版本时采用的正是二分查找策略。
 
-Python中`bisect`模块也正是利用了二分查找策略，其中方法`bisect`的作用是返回要找到元素的位置，`bisect_left`是左边的那个位置，而`bisect_right`和`bisect`的作用是一样的，函数`insort`也是这样的。
+Python中`bisect`模块也正是利用了二分查找策略，其中方法`bisect`的作用是返回要找到元素的位置，`bisect_left`是其左边的那个位置，而`bisect_right`和`bisect`的作用是一样的，函数`insort`也是这样设计的。
 
 ```
 from bisect import bisect
@@ -72,7 +72,7 @@ print bisect_left(a, 5) #3
 print bisect_right(a, 5) #4
 ```
 
-二分查找策略很好，但是它有个前提，序列必须是有序的才可以这样做，为了高效地得到中间位置的元素，于是就有了二叉搜索树，这个我们在数据结构篇中已经详细介绍过了，下面给出一份完整的二叉搜索树的实现，不过多介绍了。
+二分查找策略很好，但是它有个前提，序列必须是有序的才可以这样做，为了高效地得到中间位置的元素，于是就有了二叉搜索树，这个我们在[数据结构篇中已经详细介绍过了](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees/)，下面给出一份完整的二叉搜索树的实现，不过多介绍了。
 
 ```
 class Node:
@@ -113,17 +113,17 @@ class Tree:                                     # Simple wrapper
 
 比较：二分法，二叉搜索树，字典
 
-三者都是用来提高搜索效率的，但是各有区别。二分法只能作用于有序数组(例如排序后的Python的list)，但是有序数组较难维护，因为插入需要线性时间；二叉搜索树有些复杂，动态变化着，但是插入和删除效率高了些；字典的效率相比而言就比较好了，插入删除操作的平均时间都是常数的。
+三者都是用来提高搜索效率的，但是各有区别。二分法只能作用于有序数组(例如排序后的Python的list)，但是有序数组较难维护，因为插入需要线性时间；二叉搜索树有些复杂，动态变化着，但是插入和删除效率高了些；字典的效率相比而言就比较好了，插入删除操作的平均时间都是常数的，只不过它还需要计算下hash值才能确定元素的位置。
 
 3.顺序统计量
 
-一组序列中的第 k 大的元素在算法导论中定义为顺序统计量
+在算法导论中一组序列中的第 k 大的元素定义为顺序统计量
 
-如果我们想要在线性时间内找到一组序列中的前 k 大的元素怎么做呢？很显然，如果这组序列中的数字范围比较大，我们不能使用线性排序，而其他的基于比较的排序算法的最好的平均时间复杂度($O(n lg n)$)都超过了线性时间，怎么办呢？
+如果我们想要在线性时间内找到一组序列中的前 k 大的元素怎么做呢？很显然，如果这组序列中的数字范围比较大的话，我们就不能使用线性排序算法，而其他的基于比较的排序算法的最好的平均时间复杂度($O(n lg n)$)都超过了线性时间，怎么办呢？
 
-[扩展知识：在Python中如果泥需要求前 k 小或者前 k 大的元素，可以使用`heapq`模块中的`nsmallest`或者`nlargest`函数，如果 k 很小的话这种方式会好些，但是如果 k 很大的话，不如去调用`sort`函数]
+[扩展知识：在Python中如果泥需要求前 k 小或者前 k 大的元素，可以使用`heapq`模块中的`nsmallest`或者`nlargest`函数，如果 k 很小的话这种方式会好些，但是如果 k 很大的话，不如直接去调用`sort`函数]
 
-要想解决这个问题，我们还是要用分治法，采用类似快排中的`partition`将序列进行划分(divide)，也就是说找一个主元(pivot)，然后用主元作为基准将序列分成两部分，一部分小于主元，另一半大于主元，比较下主元最终位置值和 k，然后确定后面在哪个部分继续进行划分。如果这里不理解的话请移步阅读前面[数据结构篇之排序中的快速排序](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/)
+要想解决这个问题，我们还是要用分治法，采用类似快排中的`partition`将序列进行划分(divide)，也就是说找一个主元(pivot)，然后用主元作为基准将序列分成两部分，一部分小于主元，另一半大于主元，比较下主元最终的位置值和 k的大小关系，然后确定后面在哪个部分继续进行划分。如果这里不理解的话请移步阅读前面[数据结构篇之排序中的快速排序](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/)
 
 基于上面的想法就有了下面的实现，需要注意的是下面的`partition`函数不是就地划分的哟
 
@@ -155,7 +155,7 @@ print ans == seq #True
 
 细读上面的代码发现主元默认就是第一个元素，你也许会想这么选科学吗？事实证明这种随机选择的期望运行时间的确是线性的，但是如果每次都选择的不好，导致划分的时候每次都特别不平衡将会导致运行时间变成平方时间，那有没有什么选主元的办法能够保证算法的运行时间是线性的？的确有！但是比较麻烦，实际使用的并不多，感兴趣可以看下面的内容
 
-[**我还未完全理解，算法导论上也有相应的介绍**]
+[**我还未完全理解，算法导论上也有相应的介绍，感兴趣不妨去阅读下**]
 
 It turns out guaranteeing that the pivot is even a small percentage into the sequence (that is, not at either end, or a constant number of steps from it) is enough for the running time to be linear. In 1973, a group of algorists (Blum, Floyd, Pratt, Rivest, and Tarjan) came up with a version of the algorithm that gives exactly this kind of guarantee.
 
@@ -167,9 +167,9 @@ While the algorithm is important to know about for theoretical reasons (because 
 
 3.二分排序
 
-前面我们介绍了二分查找，下面看看二分如何进行排序，这里不再详细介绍这两个排序算法的思想了，如果不理解的话请移步阅读前面[数据结构篇之排序](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/)
+前面我们介绍了二分查找，下面看看如何进行二分排序，这里不再详细介绍快排和合并排序的思想了，如果不理解的话请移步阅读前面[数据结构篇之排序](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/)
 
-快排自然算是咯，利用前面的`partition`函数快排代码呼之欲出
+利用前面的`partition`函数快排代码呼之欲出
 
 ```
 def quicksort(seq):
@@ -204,8 +204,7 @@ def mergesort(seq):
 
 ![image](http://hujiaweibujidao.github.io/images/algos/timsort.png)
 
-[章节最后作者介绍了一些关于树平衡的内容，提到2-3树，我对树平衡不是特别感兴趣，也不是很明白，所以跳过不总结，感兴趣的不妨阅读下]
-
+[**章节最后作者介绍了一些关于树平衡的内容，提到2-3树，我对树平衡不是特别感兴趣，也不是很明白，所以跳过不总结，感兴趣的不妨阅读下**]
 
 ----------
 
