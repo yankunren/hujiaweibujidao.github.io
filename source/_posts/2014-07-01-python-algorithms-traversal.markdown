@@ -56,21 +56,22 @@ def walk(G, s, S=set()):                        # Walk the graph from node s
 我们可以用下面代码来测试下，得到的结果没有问题
 
 ```
-def some_graph2():
+def some_graph():
     a, b, c, d, e, f, g, h = range(8)
     N = [
-        {b, c, d, e, f},    # a
-        {c, e},             # b
-        {d},                # c
-        {e},                # d
-        {f},                # e
-        {c, g, h},          # f
-        {f, h},             # g
-        {f, g}              # h
+        [b, c, d, e, f],    # a
+        [c, e],             # b
+        [d],                # c
+        [e],                # d
+        [f],                # e
+        [c, g, h],          # f
+        [f, h],             # g
+        [f, g]              # h
     ]
     return N
-    
-G = some_graph2()
+
+G = some_graph()
+for i in range(len(G)): G[i] = set(G[i])
 print list(walk(G,0)) #[0, 1, 2, 3, 4, 5, 6, 7]
 ```
 
@@ -107,10 +108,49 @@ print [list(sorted(C)) for C in components(G)]  #[[0, 1, 2], [3, 4, 5]]
 
 [中间部分作者介绍了欧拉回路和哈密顿回路：前者是经过图中的所有边一次，然后回到起点；后者是经过图中的所有顶点一次，然后回到起点。网上资料甚多，感兴趣自行了解]
 
-下面我们看下迷宫问题，如下图所示，原始问题是一个人在公园中走路，结果走不出来了，即使是按照“左手准则”(也就是但凡遇到交叉口一直向左转)走下去，如果走着走着回到了原来的起点，那么就会陷入无限的循环中！有意思的是，左边的迷宫可以通过“左手准则”转换成右边的图
-[**注：具体的转换方式我还未明白**]
+下面我们看下迷宫问题，如下图所示，原始问题是一个人在公园中走路，结果走不出来了，即使是按照“左手准则”(也就是但凡遇到交叉口一直向左转)走下去，如果走着走着回到了原来的起点，那么就会陷入无限的循环中！有意思的是，左边的迷宫可以通过“左手准则”转换成右边的树型结构。
+
+[**注：具体的转换方式我还未明白，下面是作者给出的构造说明**]
+
+Here the “keep one hand on the wall” strategy will work nicely. One way of seeing why it works is to observe that the maze really has only one inner wall (or, to put it another way, if you put wallpaper inside it, you could use one continuous strip). Look at the outer square. As long as you’re not allowed to create cycles, any obstacles you draw have to be connected to the it in exactly one place, and this doesn’t create any problems for the left-hand rule. Following this traversal strategy, you’ll discover all nodes and walk every passage twice (once in either direction).
 
 ![image](http://hujiaweibujidao.github.io/images/algos/maze.png)
+
+上面的迷宫实际上就是为了引出深度优先搜索(DFS)，每次到了一个交叉口的时候，可能我们可以向左走，也可以向右走，选择是有不少，但是我们要向一直走下去的话就只能选择其中的一个方向，如果我们发现这个方向走不出去的话，我们就回溯回来，选择一个刚才没选过的方向继续尝试下去。
+
+基于上面的想法可以写出下面递归版本的DFS
+
+```
+def rec_dfs(G, s, S=None):
+    if S is None: S = set()                     # Initialize the history
+    S.add(s)                                    # We've visited s
+    for u in G[s]:                              # Explore neighbors
+        if u in S: continue                     # Already visited: Skip
+        rec_dfs(G, u, S)                        # New: Explore recursively
+    return S # For testing
+
+G = some_graph()
+for i in range(len(G)): G[i] = set(G[i])
+print list(rec_dfs(G, 0))   #[0, 1, 2, 3, 4, 5, 6, 7]
+```
+
+很自然的我们想到要将递归版本改成迭代版本的
+
+```
+def iter_dfs(G, s):
+    S, Q = set(), []                            # Visited-set and queue
+    Q.append(s)                                 # We plan on visiting s
+    while Q:                                    # Planned nodes left?
+        u = Q.pop()                             # Get one
+        if u in S: continue                     # Already visited? Skip it
+        S.add(u)                                # We've visited it now
+        Q.extend(G[u])                          # Schedule all neighbors
+        yield u                                 # Report u as visited
+
+G = some_graph()
+for i in range(len(G)): G[i] = set(G[i])
+print list(iter_dfs(G, 0))  #[0, 5, 7, 6, 2, 3, 4, 1]
+```
 
 
 
