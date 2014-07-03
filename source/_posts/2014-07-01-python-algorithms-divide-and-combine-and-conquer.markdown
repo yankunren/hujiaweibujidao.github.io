@@ -15,9 +15,11 @@ published: true
 > Divide and rule, a sound motto; Unite and lead, a better one.        
   ——Johann Wolfgang von Goethe, Gedichte
 
-本节主要介绍分治法策略
+本节主要介绍分治法策略，提到了树形问题的平衡性以及基于分治策略的排序算法
 
 本节的标题写全了就是：**divide the problem instance, solve subproblems recursively, combine the results, and thereby conquer the problem**
+
+简言之就是将原问题划分成几个小问题，然后递归地解决这些小问题了，最后综合它们的解得到问题最后的解。分治法我想大家都已经很清楚了，所以就不过多地介绍它的概念了，下面摘录些原书中的重点内容。
 
 1.平衡性是树形问题的关键
 
@@ -198,8 +200,9 @@ def mergesort(seq):
     return (lft or rgt) + res                   # Also add the remainder
 ```
 
-[扩展知识：Python内置的排序算法TimSort]
+[扩展知识：Python内置的排序算法TimSort，看起来好复杂的样子啊，我果断只是略读了一下下]
 
 ![image](http://hujiaweibujidao.github.io/images/algos/timsort.png)
 
-4.
+[章节最后作者介绍了一些关于树平衡的内容，提到2-3树，我对树平衡不是特别感兴趣，也不是很明白，所以跳过不总结，感兴趣的不妨阅读下]
+
