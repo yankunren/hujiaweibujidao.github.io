@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-03T16:40:36+08:00</updated>
+  <updated>2014-07-03T17:04:37+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -798,7 +798,17 @@
 
 <p>最后再看看图(b)，该图是原图的转置，但是得到强连通分支是一样的(强连通分支图是会变的，刚好又是原来分支图的转置)，那为什么要将边反转呢？结合前面两个图的分析，既然强连通分支图是有向无环图，而且总是由完成时间晚的强连通分支指向完成时间早的强连通分支，如果我们将边反转，虽然我们得到的强连通分支不变，但是分支之间的指向变了，完成时间晚的就不再指向完成时间早的了！这样的话如果我们对它进行拓扑排序，即按照完成时间的降序再次进行DFS时，我们就能够得到一个个的强连通分支了对不对？因为每次得到的强连通分支都没有办法指向其他分支了，也就是确定了一个强连通分支之后就停止了。[试试画个图得到图(b)的强连通分支图的拓扑排序结果就明白了]</p>
 
-<p>经过上面略微复杂的分析之后我们就可以得到下面的强连通分支算法实现，其中的函数<code>parse_graph</code>是作者用来方便构造图的函数</p>
+<p>经过上面略微复杂的分析之后我们知道强连通分支算法的流程有下面四步：</p>
+
+<p>1.对原图G运行DFS，得到每个节点的完成时间f[v]；</p>
+
+<p>2.得到原图的转置图GT；</p>
+
+<p>3.对GT运行DFS，主循环按照节点的f[v]降序进行访问；</p>
+
+<p>4.输出深度优先森林中的每棵树，也就是一个强连通分支。</p>
+
+<p>根据上面的思路可以得到下面的强连通分支算法实现，其中的函数<code>parse_graph</code>是作者用来方便构造图的函数</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -863,6 +873,16 @@
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>[最后作者提到了一点如何进行更加高效的搜索，也就是通过分支限界来实现对搜索树的剪枝，具体使用可以看下这个问题<a href="http://hujiaweibujidao.github.io/blog/2014/04/13/vertext-cover-problem/">顶点覆盖问题Vertext Cover Problem</a>]</p>
+
+<hr />
+
+<p>问题5.17 强连通分支</p>
+
+<p>In Kosaraju’s algorithm, we find starting nodes for the final traversal by descending finish times from an initial DFS, and we perform the traversal in the transposed graph (that is, with all edges reversed). Why couldn’t we just use ascending finish times in the original graph?</p>
+
+<p>问题就是说，我们干嘛要对转置图按照完成时间降序遍历一次呢？干嘛不直接在原图上按照完成时间升序遍历一次呢？</p>
+
+<p>Try finding a simple example where this would give the wrong answer. (You can do it with a really small graph.)</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-traversal/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-traversal/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
