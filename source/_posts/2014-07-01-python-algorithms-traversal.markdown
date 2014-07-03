@@ -21,7 +21,7 @@ Traversal就是遍历，主要是对图的遍历，也就是遍历图中的每�
 
 [算法导论对于发现和访问区别的非常明显，对图的算法讲解地特别好，在遍历节点的时候给节点标注它的发现节点时间d[v]和结束访问时间f[v]，然后由这些时间的一些规律得到了不少实用的定理，本节后面介绍了部分内容，感兴趣不妨阅读下算法导论原书]
 
-图的连通分量是图的一个最大子图，在这个子图中任何两个节点之间都是相互可达的。我们本节的重点就是想想怎么找到一个图的连通分量呢？
+图的连通分量是图的一个最大子图，在这个子图中任何两个节点之间都是相互可达的(忽略边的方向)。我们本节的重点就是想想怎么找到一个图的连通分量呢？
 
 一个很明显的想法是，我们从一个顶点出发，沿着边一直走，慢慢地扩大子图，直到子图不能再扩大了停止，我们就得到了一个连通分量对吧，我们怎么确定我们真的是找到了一个完整的连通分量呢？可以看下作者给出的解释，类似上节的Induction，我们思考从 i-1 到 i 的过程，只要我们保证增加了这个节点后子图仍然是连通的就对了。
 
@@ -177,7 +177,7 @@ G = some_graph()
 print list(traverse(G, 0, stack)) #[0, 5, 7, 6, 2, 3, 4, 1]
 ```
 
-如果还不清楚的话可以看下算法导论中的这幅DFS示例图
+如果还不清楚的话可以看下算法导论中的这幅DFS示例图，节点的颜色后面有介绍
 
 ![image](http://hujiaweibujidao.github.io/images/algos/dfsexample.png)
 
@@ -214,7 +214,7 @@ def dfs(G, s, d, f, S=None, t=0):
 
 (3)黑色表示该边是一条正向边或者交叉边。
 
-下图显示了上面介绍括号定理用时的那个图的深度优先树中的所有边的类型
+下图显示了上面介绍括号定理用时的那个图的深度优先树中的所有边的类型，灰色标记的边是深度优先树的树边
 
 ![image](http://hujiaweibujidao.github.io/images/algos/edgetypeexample.png)
 
@@ -222,11 +222,11 @@ def dfs(G, s, d, f, S=None, t=0):
 
 那对节点标注时间戳有什么用呢？其实，除了可以发现上面提到的那些很重要的性质之外，时间戳对于接下来要介绍的拓扑排序的另一种解法和强连通分量很重要！
 
-我们先看下摘自算法导论的这幅拓扑排序示例图
+我们先看下摘自算法导论的这幅拓扑排序示例图，这是某个教授早上起来后要做的事情，嘿嘿
 
 ![image](http://hujiaweibujidao.github.io/images/algos/topsortdfs.png)
 
-不难发现，最终得到的拓扑排序刚好是f[v]降序排列的！结合前面的括号定理以及依赖关系不难理解，如果我们按照节点f[v]降序排列，我们就得到了我们想要的拓扑排序了！这就是拓扑排序的另一个解法！[在算法导论中该解法是主要介绍的解法，而我们前面提到的那个解法是在算法导论的习题中出现的]
+不难发现，最终得到的拓扑排序刚好是节点的完成时间f[v]降序排列的！结合前面的括号定理以及依赖关系不难理解，如果我们按照节点的f[v]降序排列，我们就得到了我们想要的拓扑排序了！这就是拓扑排序的另一个解法！[在算法导论中该解法是主要介绍的解法，而我们前面提到的那个解法是在算法导论的习题中出现的]
 
 基于上面的想法就能够得到下面的实现代码，函数`recurse`是一个内部函数，这样它就可以访问到`G`和`res`等变量
 
@@ -279,13 +279,52 @@ Python的list可以很好地充当stack，但是充当queue则性能很差，函
 
 Internally, the deque is implemented as a doubly linked list of blocks, each of which is an array of individual elements. Although asymptotically equivalent to using a linked list of individual elements, this reduces overhead and makes it more efficient in practice. For example, the expression d[k] would require traversing the first k elements of the deque d if it were a plain list. If each block contains b elements, you would only have to traverse k//b blocks.
 
+最后我们看下强连通分量，前面的分量是不考虑边的方向的，如果我们考虑边的方向，而且得到的最大子图中，任何两个节点都能够沿着边可达，那么这就是一个强连通分量。
 
+下图是算法导论中的示例图，(a)是对图进行DFS遍历带时间戳的结果；(b)是上图的的转置，也就是将上图中所有边的指向反转过来得到的图；(c)是最终得到的强连通分支图，每个节点内部显示了该分支内的节点。
 
-[编写中]
+![image](http://hujiaweibujidao.github.io/images/algos/sccexample.png)
 
+上面的示例图自然不太好明白到底怎么得到的，我们慢慢来分析三幅图 [原书的分析太多了，我被绕晕了+_+，下面是我结合算法导论的分析过程]
 
+先看图(a)，每个灰色区域都是一个强连通分支，我们想想，如果强连通分支 X 内部有一条边指向另一个强连通分支 Y，那么强连通分支 Y 内部肯定不存在一条边指向另一个强连通分支 Y，否则它们能够整合在一起形成一个新的更大气的强连通分支！这也就是说强连通分支图肯定是一个有向无环图！我们从图(c)也可以看出来
 
+再看看图(c)，强连通分支之间的指向，如果我们定义每个分支内的任何顶点的最晚的完成时间为对应分支的完成时间的话，那么分支`abe`的完成时间是16，分支`cd`是10，分支`fg`是7，分支`h`是6，不难发现，分支之间边的指向都是从完成时间大的指向完成时间小的，换句话说，总是由完成时间晚的强连通分支指向完成时间早的强连通分支！
 
+最后再看看图(b)，该图是原图的转置，但是得到强连通分支是一样的(强连通分支图是会变的，刚好又是原来分支图的转置)，那为什么要将边反转呢？结合前面两个图的分析，既然强连通分支图是有向无环图，而且总是由完成时间晚的强连通分支指向完成时间早的强连通分支，如果我们将边反转，虽然我们得到的强连通分支不变，但是分支之间的指向变了，完成时间晚的就不再指向完成时间早的了！这样的话如果我们对它进行拓扑排序，即按照完成时间的降序再次进行DFS时，我们就能够得到一个个的强连通分支了对不对？因为每次得到的强连通分支都没有办法指向其他分支了，也就是确定了一个强连通分支之后就停止了。[试试画个图得到图(b)的强连通分支图的拓扑排序结果就明白了]
 
+经过上面略微复杂的分析之后我们就可以得到下面的强连通分支算法实现，其中的函数`parse_graph`是作者用来方便构造图的函数
 
+```
+def tr(G):                                      # Transpose (rev. edges of) G
+    GT = {}
+    for u in G: GT[u] = set()                   # Get all the nodes in there
+    for u in G:
+        for v in G[u]:
+            GT[v].add(u)                        # Add all reverse edges
+    return GT
+
+def scc(G):
+    GT = tr(G)                                  # Get the transposed graph
+    sccs, seen = [], set()
+    for u in dfs_topsort(G):                    # DFS starting points
+        if u in seen: continue                  # Ignore covered nodes
+        C = walk(GT, u, seen)                   # Don't go "backward" (seen)
+        seen.update(C)                          # We've now seen C
+        sccs.append(C)                          # Another SCC found
+    return sccs
+
+from string import ascii_lowercase
+def parse_graph(s):
+    # print zip(ascii_lowercase, s.split("/"))
+    # [('a', 'bc'), ('b', 'die'), ('c', 'd'), ('d', 'ah'), ('e', 'f'), ('f', 'g'), ('g', 'eh'), ('h', 'i'), ('i', 'h')]
+    G = {}
+    for u, line in zip(ascii_lowercase, s.split("/")):
+        G[u] = set(line)
+    return G
+
+G = parse_graph('bc/die/d/ah/f/g/eh/i/h')
+print list(map(list, scc(G))) 
+#[['a', 'c', 'b', 'd'], ['e', 'g', 'f'], ['i', 'h']]
+```
 
