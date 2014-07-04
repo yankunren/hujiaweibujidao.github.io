@@ -289,10 +289,16 @@ This is a technique I used in showing the greedy choice property for Huffman’s
 
 This is where we started: to make sure a greedy algorithm is correct, we must make sure each greedy step along the way is safe. One way of doing this is the two-part approach of showing (1) the greedy choice property, that is, that a greedy choice is compatible with optimality, and (2) optimal substructure, that is, that the remaining subproblem is a smaller instance that must also be solved optimally. 
 
+[扩展知识：算法导论中还介绍了贪心算法的内在原理，也就是拟阵，贪心算法一般都是求这个拟阵的最大独立子集，方法就是从一个空的独立子集开始，从一个已经经过排序的序列中依次取出一个元素，尝试添加到独立子集中，如果新元素加入之后的集合仍然是一个独立子集的话那就加入进去，这样就形成了一个更大的独立子集，待遍历完整个序列时我们就得到最大的独立子集。拟阵的内容比较难，感兴趣不妨阅读下算法导论然后证明一两道练习题挑战下，嘻嘻]
 
+用Python代码来形容上面的过程就是
 
-
-
-
-
-
+```
+#贪心算法的框架 [拟阵的思想]
+def greedy(E, S, w):
+    T = []                                      # Emtpy, partial solution
+    for e in sorted(E, key=w):                  # Greedily consider elements
+        TT = T + [e]                            # Tentative solution
+        if TT in S: T = TT                      # Is it valid? Use it!
+    return T
+```
