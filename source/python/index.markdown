@@ -73,7 +73,8 @@ Python分类下的系列文章，不断更新中
 
 本节主要介绍分治法策略，提到了树形问题的平衡性以及基于分治策略的排序算法
 
-(7)[Python Algorithms - C7 Greedy](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-greedy/) [还未完成]
+(7)[Python Algorithms - C7 Greedy](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-greedy/) 
+本节主要通过几个例子来介绍贪心策略，主要包括背包问题、哈夫曼编码和最小生成树
 
 (8)[Python Algorithms - C8 Dynamic Programming](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-dynamic-programming/) 
 
