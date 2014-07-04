@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-04T21:33:37+08:00</updated>
+  <updated>2014-07-04T21:35:31+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -518,7 +518,19 @@
 
 <p>[如果对最小生成树问题的历史感兴趣的话作者推荐看这篇论文<code>“On the History of the Minimum Spanning Tree Problem,” by Graham and Hell</code>]</p>
 
-<p>连通无向图G的生成树是指包含它所有顶点但是部分边的子图，假设每条边都有一个权值，那么权值之和最小的生成树就是最小生成树，它不一定是唯一的。如果图G是非连通的，那么它就没有生成树。前面我们在介绍遍历的时候也得到过生成树，那里我们是一个顶点一个顶点进行遍历，下面我们通过每次添加一条边来得到最小生成树，而且每次我们贪心地选择剩下的边中权值最小的那条边，但是要保证不能形成环！</p>
+<p>不了解Kruskal或者Prim算法的童鞋可以参考算法导论的示例图理解下面的内容</p>
+
+<p>Kruskal算法</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/kruskal.png" alt="image" /></p>
+
+<p>Prim算法</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/prim.png" alt="image" /></p>
+
+<p>连通无向图G的生成树是指包含它所有顶点但是部分边的子图，假设每条边都有一个权值，那么权值之和最小的生成树就是最小生成树，它不一定是唯一的。如果图G是非连通的，那么它就没有生成树。</p>
+
+<p>前面我们在介绍遍历的时候也得到过生成树，那里我们是一个顶点一个顶点进行遍历，下面我们通过每次添加一条边来得到最小生成树，而且每次我们贪心地选择剩下的边中权值最小的那条边，但是要保证不能形成环！</p>
 
 <p>那怎么判断是否会出现环呢？</p>
 
