@@ -125,7 +125,7 @@ consider how each leaf contributes to the sum over all nodes: the leaf weight oc
 
 ![image](http://hujiaweibujidao.github.io/images/algos/treedemo.png)
 
-[哈夫曼树问题的一个扩展就是最优二叉搜索树问题，后者可以用动态规划算法来求解，下节将会介绍，感兴趣的话也可以参考算法导论]
+[哈夫曼树问题的一个扩展就是最优二叉搜索树问题，后者可以用动态规划算法来求解，感兴趣的话可以阅读算法导论中动态规划部分内容]
 
 4.最小生成树
 
