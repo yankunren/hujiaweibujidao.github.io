@@ -17,11 +17,9 @@ published: true
 
 本节主要结合一些经典的动规问题介绍动态规划的备忘录法和迭代法这两种实现方式，并对这两种方式进行对比
 
-[这篇文章还会更新]
+[**这篇文章实际写作时间在这个系列文章之前，所以写作风格可能略有不同，嘿嘿**]
 
-----------
-
-大家都知道，动态规划算法一般都有两种实现方式：
+大家都知道，动态规划算法一般都有下面两种实现方式，前者我称为递归版本，后者称为迭代版本，根据前面的知识可知，这两个版本是可以相互转换的
 
 **1.直接自顶向下实现递归式，并将中间结果保存，这叫备忘录法；**
 
@@ -92,7 +90,7 @@ def fib_iter(n):
 
 其他问题也可以很快地变相思考发现它们其实是一样的，例如求二项式系数`C(n,k)`，杨辉三角(求从源点到目标点有多少种走法)等等问题。
 
-二项式系数`C(n,k)`表示从n个中选k个，假设我们现在n个中的第1个，考虑是否选择它。如果选择它的话，那么我们还需要从剩下的n-1个中选k-1个，即`C(n-1,k-1)`；如果不选择它的话，我们需要从剩下的n-1中选k个，即`C(n-1,k)`。所以，`C(n,k)=C(n-1,k-1)+C(n-1,k)`。
+二项式系数`C(n,k)`表示从n个中选k个，假设我们现在处理n个中的第1个，考虑是否选择它。如果选择它的话，那么我们还需要从剩下的n-1个中选k-1个，即`C(n-1,k-1)`；如果不选择它的话，我们需要从剩下的n-1中选k个，即`C(n-1,k)`。所以，`C(n,k)=C(n-1,k-1)+C(n-1,k)`。
 
 结合前面的装饰器，我们很快便可以实现求二项式系数的递归实现代码，其中的`memo`函数完全没变，只是在函数`cnk`前面添加了`@memo`而已，就这么简单！
 
@@ -116,8 +114,7 @@ def cnk(n,k):
 ```
 
 它的迭代版本也比较简单，这里使用了`defaultdict`，略高级的数据结构，和dict不同的是，当查找的key不存在对应的value时，会返回一个默认的值，这个很有用，下面的代码可以看到。
-
-如果不了解`defaultdict`的话可以看下[这篇文章：Python中的高级数据结构](http://blog.jobbole.com/65218/)
+如果不了解`defaultdict`的话可以看下[Python中的高级数据结构](http://blog.jobbole.com/65218/)
 
 ```
 from collections import defaultdict
@@ -142,11 +139,11 @@ print(C[n,k]) #120
 
 好，怎么实现呢? 
 
-**我们有两种思考方式：**
+我们有两种思考方式：
 
 **1."去哪里?"：我们顺向思维，首先假设从a点出发到所有其他点的距离都是无穷大，然后，按照拓扑排序的顺序，从a点出发，接着更新a点能够到达的其他的点的距离，那么就是b点和f点，b点的距离变成2，f点的距离变成9。因为这个有向无环图是经过了拓扑排序的，所以按照拓扑顺序访问一遍所有的点(到了目标点就可以停止了)就能够得到a点到所有已访问到的点的最短距离，也就是说，当到达哪个点的时候，我们就找到了从a点到该点的最短距离，拓扑排序保证了后面的点不会指向前面的点，所以访问到后面的点时不可能再更新它前面的点的最短距离！这种思维方式的代码实现就是迭代版本。**
 
-**这里涉及到了拓扑排序，我的博客中还没有讲解，所以下面的代码已经将输入的点进行了拓扑排序，待我更新了图算法那篇文章再来更新这里的代码，谅解。**
+[**这里涉及到了拓扑排序，前面第5节Traversal中介绍过了，这里为了方便没看前面的童鞋理解，W直接使用的是经过拓扑排序之后的结果。**]
 
 ```
 def topsort(W):
@@ -200,13 +197,23 @@ s,t=0,5
 print(rec_dag_sp(W,s,t)) #7
 ```
 
-用图来表示计算过程就是下面所示：
+用图来表示计算过程就如下图所示：
 
 ![image](http://hujiaweibujidao.github.io/images/algos/dag_sp_rec.png)
 
-下面是参考内容1对DAG求单源最短路径的动态规划问题的总结，比较难理解，不知道我自己理解得对不对，可以忽视注释，:-)
+[扩展内容：对DAG求单源最短路径的动态规划问题的总结，比较难理解，附上原文]
 
+Although the basic algorithm is the same, there are many ways of finding the shortest path in a DAG, and, by extension, solving most DP problems. You could do it recursively, with memoization, or you could do it iteratively, with relaxation. For the recursion, you could start at the first node, try various “next steps,” and then recurse on the remainder, or (if you graph representation permits) you could look at the last node and try “previous steps” and recurse on the initial part. The former is usually much more natural, while the latter corresponds more closely to what happens in the iterative version.
+
+Now, if you use the iterative version, you also have two choices: you can relax the edges out of each node (in topologically sorted order), or you can relax all edges into each node. The latter more obviously yields a correct result but requires access to nodes by following edges backward. This isn’t as far-fetched as it seems when you’re working with an implicit DAG in some nongraph problem. (For example, in the longest increasing subsequence problem, discussed later in this chapter, looking at all backward “edges” can be a useful perspective.)
+
+Outward relaxation, called reaching, is exactly equivalent when you relax all edges. As explained, once you get to a node, all its in-edges will have been relaxed anyway. However, with reaching, you can do something that’s hard in the recursive version (or relaxing in-edges): pruning. If, for example, you’re only interested in finding all nodes that are within a distance r, you can skip any node that has distance estimate greater than r. You will still need to visit every node, but you can potentially ignore lots of edges during the relaxation. This won’t affect the asymptotic running time, though (Exercise 8-6).
+
+Note that finding the shortest paths in a DAG is surprisingly similar to, for example, finding the longest path, or even counting the number of paths between two nodes in a DAG. The latter problem is exactly what we did with Pascal’s triangle earlier; the exact same approach would work for an arbitrary graph. These things aren’t quite as easy for general graphs, though. Finding shortest paths in a general graph is a bit harder (in fact, Chapter 9 is devoted to this topic), while finding the longest path is an unsolved problem (see Chapter 11 for more on this).
+
+<!--
 ![image](http://hujiaweibujidao.github.io/images/algos/dp_summary.png)
+-->
 
 好，我们差不多搞清楚了动态规划的本质以及两种实现方式的优缺点，下面我们来实践下，举最常用的例子：[矩阵链乘问题，内容较多，所以请点击链接过去阅读完了之后回来看总结](http://hujiaweibujidao.github.io/blog/2014/05/18/matrix-chain/)！
 
