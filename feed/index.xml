@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-04T17:11:54+08:00</updated>
+  <updated>2014-07-04T17:21:48+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -588,7 +588,7 @@
 </span><span class="line"><span class="k">print</span> <span class="nb">list</span><span class="p">(</span><span class="n">naive_kruskal</span><span class="p">(</span><span class="n">G</span><span class="p">))</span> <span class="c">#[(0, 1), (2, 3), (0, 2)]</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>上面的分析我们可以看到，通过指向链的方式找到“代表”所花的时间是线性的，这里还可以做些改进。首先，在合并(union)的时候我们让小分支指向大分支，这样更加平衡，平均查找时间肯定有所下降；其次，在查找(find)的时候我们一边查找一边修正经过的点的指向，让它直接指向“代表”，这个怎么做到呢？使用递归就行了，这叫做path compression技术，是这个算法常用的一个技巧。</p>
+<p>上面的分析我们可以看到，通过指向链的方式找到“代表”所花的时间是线性的，这里还可以做些改进。首先，在合并(union)的时候我们让“小”分支指向“大”分支，这样平衡了之后平均查找时间肯定有所下降，那么怎么确定分支的“大小”呢？这个可以用平衡树的方式来思考，假设我们给每个节点都设置一个权重(rank or weight)，其实重要的还是“代表”的权重，如果两个分支的“代表”的相等的话，在将“小”分支指向“大”分支之后，还要将“大”分支的权重加1；其次，在查找(find)的时候我们一边查找一边修正经过的点的指向，让它直接指向“代表”，这个怎么做到呢？使用递归就行了，这叫做path compression技术，是这个算法常用的一个技巧。</p>
 
 <p>基于上面的改进就有了下面优化的Kruskal算法</p>
 
