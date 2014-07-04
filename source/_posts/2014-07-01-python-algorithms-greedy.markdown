@@ -15,7 +15,7 @@ published: true
 > It’s not a question of enough, pal.    
   ——Gordon Gekko, Wall Street
 
-本节主要通过几个例子来介绍贪心策略，不涉及其核心拟阵
+本节主要通过几个例子来介绍贪心策略，主要包括背包问题、哈夫曼编码和最小生成树
 
 贪心算法顾名思义就是每次都贪心地选择当前最好的那个(局部最优解)，不去考虑以后的情况，而且选择了就不能够“反悔”了，如果原问题满足贪心选择性质和最优子结构，那么最后得到的解就是最优解。贪心算法和其他的算法比较有明显的区别，动态规划每次都是综合所有子问题的解得到当前的最优解(全局最优解)，而不是贪心地选择；回溯法是尝试选择一条路，如果选择错了的话可以“反悔”，也就是回过头来重新选择其他的试试。
 
@@ -255,9 +255,7 @@ G = {
 print prim(G, 0) # {0: None, 1: 0, 2: 0, 3: 2}
 ```
 
-
 ----------
-
 
 [扩展知识，另一个角度来看最小生成树 **A SLIGHTLY DIFFERENT PERSPECTIVE**]
 
@@ -271,9 +269,30 @@ Algorithm 3: For every fragment, add the shortest edge that joins it to another 
 
 For algorithm 2, the root is chosen arbitrarily at the beginning. For algorithm 3, it is assumed that all edge weights are different to ensure that no cycles can occur. As you can see, all three algorithms are based on the same fundamental fact—that the shortest edge over a cut is safe. Also, in order to implement them efficiently, you need to be able to find shortest edges, detect whether two nodes belong to the same fragment, and so forth (as explained for algorithms 1 and 2 in the main text). Still, these brief explanations can be useful as a memory aid or to get the bird’s-eye perspective on what’s going on.
 
-
 ----------
 
 5.Greed Works. But When?
+
+还是老话题，贪心算法真的很好，有时候也比较容易想到，但是它什么时候是正确的呢？
+
+针对这个问题，作者提出了些建议和方法[都比较难翻译和理解，感兴趣还是阅读原文较好]
+
+(1)Keeping Up with the Best
+
+This is what Kleinberg and Tardos (in Algorithm Design) call staying ahead. The idea is to show that as you build your solution, one step at a time, the greedy algorithm will always have gotten at least as far as a hypothetical optimal algorithm would have. Once you reach the finish line, you’ve shown that greed is optimal. 
+
+(2)No Worse Than Perfect
+
+This is a technique I used in showing the greedy choice property for Huffman’s algorithm. It involves showing that you can transform a hypothetical optimal solution to the greedy one, without reducing the quality. Kleinberg and Tardos call this an exchange argument. 
+
+(3)Staying Safe
+
+This is where we started: to make sure a greedy algorithm is correct, we must make sure each greedy step along the way is safe. One way of doing this is the two-part approach of showing (1) the greedy choice property, that is, that a greedy choice is compatible with optimality, and (2) optimal substructure, that is, that the remaining subproblem is a smaller instance that must also be solved optimally. 
+
+
+
+
+
+
 
 
