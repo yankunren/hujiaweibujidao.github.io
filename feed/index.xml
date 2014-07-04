@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-04T19:48:30+08:00</updated>
+  <updated>2014-07-04T21:22:41+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -370,7 +370,7 @@
   ——Gordon Gekko, Wall Street</p>
 </blockquote>
 
-<p>本节主要通过几个例子来介绍贪心策略，不涉及其核心拟阵</p>
+<p>本节主要通过几个例子来介绍贪心策略，主要包括背包问题、哈夫曼编码和最小生成树</p>
 
 <p>贪心算法顾名思义就是每次都贪心地选择当前最好的那个(局部最优解)，不去考虑以后的情况，而且选择了就不能够“反悔”了，如果原问题满足贪心选择性质和最优子结构，那么最后得到的解就是最优解。贪心算法和其他的算法比较有明显的区别，动态规划每次都是综合所有子问题的解得到当前的最优解(全局最优解)，而不是贪心地选择；回溯法是尝试选择一条路，如果选择错了的话可以“反悔”，也就是回过头来重新选择其他的试试。</p>
 
@@ -662,6 +662,113 @@
 </span><span class="line"><span class="k">print</span> <span class="nb">list</span><span class="p">(</span><span class="n">kruskal</span><span class="p">(</span><span class="n">G</span><span class="p">))</span> <span class="c">#[(0, 1), (2, 3), (0, 2)]</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<p>接下来就是Prim算法了，它其实就是我们前面介绍的traversal算法中的一种，不同点是它对待办事项(to-do list，即前面提到的“边缘节点”，也就是我们已经包含的这些节点能够直接到达的那些节点)进行了一定的排序，我们在实现BFS时使用的是双端队列<code>deque</code>，此时我们只要把它改成一个优先队列(priority queue)就行了，这里选用<code>heapq</code>模块中的堆<code>heap</code>。</p>
+
+<p>Prim算法不断地添加新的边(也可以说是一个新的顶点)，一旦我们加入了一条新的边，可能会导致某些原来的边缘节点到生成树的距离更加近了，所以我们要更新一下它们的距离值，然后重新调整下排序，那怎么修改距离值呢？我们可以先找到原来的那个节点，然后再修改它的距离值接着重新调整堆，但是这么做实在是太麻烦了！这里有一个巧妙的技巧就是直接向堆中插入新的距离值的节点！为什么可以呢？因为插入的新节点B的距离值比原来的节点A的距离值小，那么Prim算法添加顶点的时候肯定是先弹出堆中的节点B，后面如果弹出节点A的话，因为这个节点已经添加进入了，直接忽略就行了，也就是说我们这么做不仅很简单，而且并没有把原来的问题搞砸了。下面是作者给出的详细解释，总共三点，第三点是重复的添加不会影响算法的渐近时间复杂度</p>
+
+<p>• We’re using a priority queue, so if a node has been added multiple times, by the time we remove one of its entries, it will be the one with the lowest weight (at that time), which is the one we want.</p>
+
+<p>• We make sure we don’t add the same node to our traversal tree more than once. This can be ensured by a constant-time membership check. Therefore, all but one of the queue entries for any given node will be discarded.</p>
+
+<p>• The multiple additions won’t affect asymptotic running time</p>
+
+<p>[重新添加一次权值减小了的节点就相当于是松弛(或者说是隐含了松弛操作在里面)，Re-adding a node with a lower weight is equivalent to a relaxation，这两种方式是可以相互交换的，后面图算法中作者在实现Dijkstra算法时使用的是relax，那其实我们还可以实现带relex的Prim和不带relax的Dijkstra]</p>
+
+<p>根据上面的分析就有了下面的Prim算法实现</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="n">heappop</span><span class="p">,</span> <span class="n">heappush</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">prim</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+</span><span class="line">    <span class="n">P</span><span class="p">,</span> <span class="n">Q</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">s</span><span class="p">)]</span>
+</span><span class="line">    <span class="k">while</span> <span class="n">Q</span><span class="p">:</span>
+</span><span class="line">        <span class="n">_</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">P</span><span class="p">:</span> <span class="k">continue</span>
+</span><span class="line">        <span class="n">P</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span class="line">            <span class="n">heappush</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span> <span class="c">#weight, predecessor node, node</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">P</span>
+</span><span class="line">
+</span><span class="line"><span class="n">G</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class="line">    <span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">},</span>
+</span><span class="line">    <span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">},</span>
+</span><span class="line">    <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">2</span><span class="p">},</span>
+</span><span class="line">    <span class="mi">3</span><span class="p">:</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="k">print</span> <span class="n">prim</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c"># {0: None, 1: 0, 2: 0, 3: 2}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<hr />
+
+<p>[扩展知识，另一个角度来看最小生成树 <strong>A SLIGHTLY DIFFERENT PERSPECTIVE</strong>]</p>
+
+<p>In their historical overview of minimum spanning tree algorithms, Ronald L. Graham and Pavol Hell outline three algorithms that they consider especially important and that have played a central role in the history of the problem. The first two are the algorithms that are commonly attributed to Kruskal and Prim (although the second one was originally formulated by Vojtěch Jarník in 1930), while the third is the one initially described by Borůvka. Graham and Hell succinctly explain the algorithms as follows. A partial solution is a spanning forest, consisting of a set of fragments (components, trees). Initially, each node is a fragment. In each iteration, edges are added, joining fragments, until we have a spanning tree.</p>
+
+<p>Algorithm 1: Add a shortest edge that joins two different fragments.</p>
+
+<p>Algorithm 2: Add a shortest edge that joins the fragment containing the root to another fragment. </p>
+
+<p>Algorithm 3: For every fragment, add the shortest edge that joins it to another fragment.</p>
+
+<p>For algorithm 2, the root is chosen arbitrarily at the beginning. For algorithm 3, it is assumed that all edge weights are different to ensure that no cycles can occur. As you can see, all three algorithms are based on the same fundamental fact—that the shortest edge over a cut is safe. Also, in order to implement them efficiently, you need to be able to find shortest edges, detect whether two nodes belong to the same fragment, and so forth (as explained for algorithms 1 and 2 in the main text). Still, these brief explanations can be useful as a memory aid or to get the bird’s-eye perspective on what’s going on.</p>
+
+<hr />
+
+<p>5.Greed Works. But When?</p>
+
+<p>还是老话题，贪心算法真的很好，有时候也比较容易想到，但是它什么时候是正确的呢？</p>
+
+<p>针对这个问题，作者提出了些建议和方法[都比较难翻译和理解，感兴趣还是阅读原文较好]</p>
+
+<p>(1)Keeping Up with the Best</p>
+
+<p>This is what Kleinberg and Tardos (in Algorithm Design) call staying ahead. The idea is to show that as you build your solution, one step at a time, the greedy algorithm will always have gotten at least as far as a hypothetical optimal algorithm would have. Once you reach the finish line, you’ve shown that greed is optimal. </p>
+
+<p>(2)No Worse Than Perfect</p>
+
+<p>This is a technique I used in showing the greedy choice property for Huffman’s algorithm. It involves showing that you can transform a hypothetical optimal solution to the greedy one, without reducing the quality. Kleinberg and Tardos call this an exchange argument. </p>
+
+<p>(3)Staying Safe</p>
+
+<p>This is where we started: to make sure a greedy algorithm is correct, we must make sure each greedy step along the way is safe. One way of doing this is the two-part approach of showing (1) the greedy choice property, that is, that a greedy choice is compatible with optimality, and (2) optimal substructure, that is, that the remaining subproblem is a smaller instance that must also be solved optimally. </p>
+
+<p>[扩展知识：算法导论中还介绍了贪心算法的内在原理，也就是拟阵，贪心算法一般都是求这个拟阵的最大独立子集，方法就是从一个空的独立子集开始，从一个已经经过排序的序列中依次取出一个元素，尝试添加到独立子集中，如果新元素加入之后的集合仍然是一个独立子集的话那就加入进去，这样就形成了一个更大的独立子集，待遍历完整个序列时我们就得到最大的独立子集。拟阵的内容比较难，感兴趣不妨阅读下算法导论然后证明一两道练习题挑战下，嘻嘻]</p>
+
+<p>用Python代码来形容上面的过程就是</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c">#贪心算法的框架 [拟阵的思想]</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">greedy</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+</span><span class="line">    <span class="n">T</span> <span class="o">=</span> <span class="p">[]</span>                                      <span class="c"># Emtpy, partial solution</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">w</span><span class="p">):</span>                  <span class="c"># Greedily consider elements</span>
+</span><span class="line">        <span class="n">TT</span> <span class="o">=</span> <span class="n">T</span> <span class="o">+</span> <span class="p">[</span><span class="n">e</span><span class="p">]</span>                            <span class="c"># Tentative solution</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">TT</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span> <span class="n">T</span> <span class="o">=</span> <span class="n">TT</span>                      <span class="c"># Is it valid? Use it!</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">T</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-greedy/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-greedy/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
