@@ -314,3 +314,4 @@ def greedy(E, S, w):
         if TT in S: T = TT                      # Is it valid? Use it!
     return T
 ```
+
