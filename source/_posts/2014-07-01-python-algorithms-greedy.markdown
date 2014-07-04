@@ -219,10 +219,61 @@ G = {
 print list(kruskal(G)) #[(0, 1), (2, 3), (0, 2)]
 ```
 
+接下来就是Prim算法了，它其实就是我们前面介绍的traversal算法中的一种，不同点是它对待办事项(to-do list，即前面提到的“边缘节点”，也就是我们已经包含的这些节点能够直接到达的那些节点)进行了一定的排序，我们在实现BFS时使用的是双端队列`deque`，此时我们只要把它改成一个优先队列(priority queue)就行了，这里选用`heapq`模块中的堆`heap`。
+
+Prim算法不断地添加新的边(也可以说是一个新的顶点)，一旦我们加入了一条新的边，可能会导致某些原来的边缘节点到生成树的距离更加近了，所以我们要更新一下它们的距离值，然后重新调整下排序，那怎么修改距离值呢？我们可以先找到原来的那个节点，然后再修改它的距离值接着重新调整堆，但是这么做实在是太麻烦了！这里有一个巧妙的技巧就是直接向堆中插入新的距离值的节点！为什么可以呢？因为插入的新节点B的距离值比原来的节点A的距离值小，那么Prim算法添加顶点的时候肯定是先弹出堆中的节点B，后面如果弹出节点A的话，因为这个节点已经添加进入了，直接忽略就行了，也就是说我们这么做不仅很简单，而且并没有把原来的问题搞砸了。下面是作者给出的详细解释，总共三点，第三点是重复的添加不会影响算法的渐近时间复杂度
+
+• We’re using a priority queue, so if a node has been added multiple times, by the time we remove one of its entries, it will be the one with the lowest weight (at that time), which is the one we want.
+
+• We make sure we don’t add the same node to our traversal tree more than once. This can be ensured by a constant-time membership check. Therefore, all but one of the queue entries for any given node will be discarded.
+
+• The multiple additions won’t affect asymptotic running time
+
+[重新添加一次权值减小了的节点就相当于是松弛(或者说是隐含了松弛操作在里面)，Re-adding a node with a lower weight is equivalent to a relaxation，这两种方式是可以相互交换的，后面图算法中作者在实现Dijkstra算法时使用的是relax，那其实我们还可以实现带relex的Prim和不带relax的Dijkstra]
+
+根据上面的分析就有了下面的Prim算法实现
+
+```
+from heapq import heappop, heappush
+
+def prim(G, s):
+    P, Q = {}, [(0, None, s)]
+    while Q:
+        _, p, u = heappop(Q)
+        if u in P: continue
+        P[u] = p
+        for v, w in G[u].items():
+            heappush(Q, (w, u, v)) #weight, predecessor node, node
+    return P
+
+G = {
+    0: {1:1, 2:3, 3:4},
+    1: {0:1, 2:5},
+    2: {0:3, 1:5, 3:2},
+    3: {2:2, 0:4}
+    }
+print prim(G, 0) # {0: None, 1: 0, 2: 0, 3: 2}
+```
 
 
+----------
 
 
+[扩展知识，另一个角度来看最小生成树 **A SLIGHTLY DIFFERENT PERSPECTIVE**]
 
+In their historical overview of minimum spanning tree algorithms, Ronald L. Graham and Pavol Hell outline three algorithms that they consider especially important and that have played a central role in the history of the problem. The first two are the algorithms that are commonly attributed to Kruskal and Prim (although the second one was originally formulated by Vojtěch Jarník in 1930), while the third is the one initially described by Borůvka. Graham and Hell succinctly explain the algorithms as follows. A partial solution is a spanning forest, consisting of a set of fragments (components, trees). Initially, each node is a fragment. In each iteration, edges are added, joining fragments, until we have a spanning tree.
+
+Algorithm 1: Add a shortest edge that joins two different fragments.
+
+Algorithm 2: Add a shortest edge that joins the fragment containing the root to another fragment. 
+
+Algorithm 3: For every fragment, add the shortest edge that joins it to another fragment.
+
+For algorithm 2, the root is chosen arbitrarily at the beginning. For algorithm 3, it is assumed that all edge weights are different to ensure that no cycles can occur. As you can see, all three algorithms are based on the same fundamental fact—that the shortest edge over a cut is safe. Also, in order to implement them efficiently, you need to be able to find shortest edges, detect whether two nodes belong to the same fragment, and so forth (as explained for algorithms 1 and 2 in the main text). Still, these brief explanations can be useful as a memory aid or to get the bird’s-eye perspective on what’s going on.
+
+
+----------
+
+5.Greed Works. But When?
 
 
