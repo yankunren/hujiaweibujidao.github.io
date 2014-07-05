@@ -132,6 +132,8 @@ print bellman_ford(W, s)
 
 接下来我们看下Dijkstra算法，它看起来非常像Prim算法，同样是基于贪心策略，每次贪心地选择松弛距离最近的“边缘节点”所在的那条边(另一个节点在已经包含的节点集合中)，那为什么这种方式也能奏效呢？因为算法导论给出了完整的证明，不信你去看看！呵呵，开玩笑的啦，如果光说有证明就用不着我来写文章咯，其实是因为Dijkstra算法隐藏了一个DAG最短路径算法，而DAG的最短路径问题我们上面已经介绍过了，仔细看也不难发现，它们的区别就是松弛的顺序不同，DAG最短路径算法是先进行拓扑排序然后松弛，而Dijkstra算法是每次直接贪心地选择一条边来松弛。那为什么Dijkstra算法隐藏了一个DAG？
 
+----------
+
 [**这里我想了好久怎么解释，但是还是觉得原文实在太精彩，我水平也实在有限难以说明白，故这里附上原文，前面部分作者解释了为什么DAG最短路径算法中边松弛的顺序和拓扑排序有关，然后作者继续解释(Dijkstra算法中)下一个要加入(到已包含的节点集合)的节点必须有正确的距离估计值，最后作者解释了这个节点肯定是那个具有最小距离估计值的节点！一切顺风顺水，但是有一个重点，那就是边不能有负权值，这是Dijkstra算法的重要前提条件**]
 
 作者下面的解释中提到的图9-1
@@ -158,4 +160,34 @@ There is only one node that could possibly be the next one, of course:3 the one 
 
 [上图的解释：The execution of Dijkstra's algorithm. The source s is the leftmost vertex. The shortest-path estimates are shown within the vertices, and shaded edges indicate predecessor values. Black vertices are in the set S, and white vertices are in the min-priority queue Q = V - S. (a) The situation just before the first iteration of the while loop of lines 4-8. The shaded vertex has the minimum d value and is chosen as vertex u in line 5. (b)-(f) The situation after each successive iteration of the while loop. The shaded vertex in each part is chosen as vertex u in line 5 of the next iteration. The d and π values shown in part (f) are the final values.]
 
+下面是Dijkstra算法的实现
 
+```
+#Dijkstra算法
+from heapq import heappush, heappop
+
+def dijkstra(G, s):
+    D, P, Q, S = {s:0}, {}, [(0,s)], set()      # Est., tree, queue, visited
+    while Q:                                    # Still unprocessed nodes?
+        _, u = heappop(Q)                       # Node with lowest estimate
+        if u in S: continue                     # Already visited? Skip it
+        S.add(u)                                # We've visited it now
+        for v in G[u]:                          # Go through all its neighbors
+            relax(G, u, v, D, P)                # Relax the out-edge
+            heappush(Q, (D[v], v))              # Add to queue, w/est. as pri
+    return D, P                                 # Final D and P returned
+
+#测试代码
+s, t, x, y, z = range(5)
+W = {
+    s: {t:10, y:5},
+    t: {x:1, y:2},
+    x: {z:4},
+    y: {t:3, x:9, z:2},
+    z: {x:6, s:7}
+    }
+D, P = dijkstra(W, s)
+print [D[v] for v in [s, t, x, y, z]] # [0, 8, 9, 5, 7]
+print s not in P # True
+print [P[v] for v in [t, x, y, z]] == [y, t, s, y] # True
+```
