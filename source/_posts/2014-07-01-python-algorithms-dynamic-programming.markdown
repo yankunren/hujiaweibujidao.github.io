@@ -224,5 +224,26 @@ OK，希望我把动态规划讲清楚了，总结下：**动态规划其实就�
 
 ----------
       
-练习：来试试写写最长公共子序列吧，[这篇文章中给出了Python版本的5种实现方式](http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/)哟！
+练习1：来试试写写最长公共子序列吧，[这篇文章中给出了Python版本的5种实现方式](http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/)哟！
+
+练习2：算法导论问题 15-4: Planning a company party 计划一个公司聚会
+
+Start example
+Professor Stewart is consulting for the president of a corporation that is planning a company party. The company has a hierarchical structure; that is, the supervisor relation forms a tree rooted at the president. The personnel office has ranked each employee with a conviviality rating, which is a real number. In order to make the party fun for all attendees, the president does not want both an employee and his or her immediate supervisor to attend.
+
+Professor Stewart is given the tree that describes the structure of the corporation, using the left-child, right-sibling representation described in Section 10.4. Each node of the tree holds, in addition to the pointers, the name of an employee and that employee's conviviality ranking. Describe an algorithm to make up a guest list that maximizes the sum of the conviviality ratings of the guests. Analyze the running time of your algorithm.
+
+原问题可以转换成：假设有一棵树，用左孩子右兄弟的表示方式表示，树的每个结点有个值，选了某个结点，就不能选择它的父结点，求整棵树选的节点值最大是多少。
+
+假设如下：
+dp[i][0]表示不选i结点时，i子树的最大价值
+dp[i][1]表示选i结点时，i子树的最大价值
+
+列出状态方程
+dp[i][0] = sum(max(dp[u][0], dp[u][1])) $\quad$   (如果不选i结点，u为结点i的儿子)
+dp[i][1] = sum(dp[u][0]) + val[i]   $\quad$  (如果选i结点，val[i]表示i结点的价值)
+ 
+最后就是求max(dp[root][0], dp[root][1])
+
+
 
