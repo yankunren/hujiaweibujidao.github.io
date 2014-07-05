@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-06T00:32:33+08:00</updated>
+  <updated>2014-07-06T00:35:44+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -1003,13 +1003,17 @@ Professor Stewart is consulting for the president of a corporation that is plann
 
 <p>原问题可以转换成：假设有一棵树，用左孩子右兄弟的表示方式表示，树的每个结点有个值，选了某个结点，就不能选择它的父结点，求整棵树选的节点值最大是多少。</p>
 
-<p>假设如下：
-dp[i][0]表示不选i结点时，i子树的最大价值
-dp[i][1]表示选i结点时，i子树的最大价值</p>
+<p>假设如下：</p>
 
-<p>列出状态方程
-dp[i][0] = sum(max(dp[u][0], dp[u][1])) $\quad$   (如果不选i结点，u为结点i的儿子)
-dp[i][1] = sum(dp[u][0]) + val[i]   $\quad$  (如果选i结点，val[i]表示i结点的价值)</p>
+<p>dp[i][0]表示不选i结点时，i子树的最大价值</p>
+
+<p>dp[i][1]表示选i结点时，i子树的最大价值</p>
+
+<p>列出状态方程</p>
+
+<p>dp[i][0] = sum(max(dp[u][0], dp[u][1])) $\quad$   (如果不选i结点，u为结点i的儿子)</p>
+
+<p>dp[i][1] = sum(dp[u][0]) + val[i]   $\quad$  (如果选i结点，val[i]表示i结点的价值)</p>
 
 <p>最后就是求max(dp[root][0], dp[root][1])</p>
 
