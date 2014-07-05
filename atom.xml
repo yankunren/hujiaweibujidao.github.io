@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-05T21:07:59+08:00</updated>
+  <updated>2014-07-05T21:58:08+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -313,12 +313,95 @@ because we’ll never find any shortcuts to improve D[v].</p>
 
 <p>d(s,v) &lt;= d(s,u) + W[u,v]. This is an example of the triangle inequality.</p>
 
-<p>令h(u)=d(s,u), h(v)=d(s,v)，假设我们给边(u,v)重新赋权w’(u, v) = w(u, v) + h(u) - h(v)，根据三角不等性质可知w’(u, v)肯定非负，这样新图的边就满足Dijkstra算法的前提条件，但是，还有两个问题：(1)怎么得到每个节点的最短路径值d(s,v)？(2)这么改了之后会不会把问题搞砸了？得到的最短路径和原来的一样吗？</p>
+<p>令h(u)=d(s,u), h(v)=d(s,v)，假设我们给边(u,v)重新赋权w’(u, v) = w(u, v) + h(u) - h(v)，根据三角不等性质可知w’(u, v)肯定非负，这样新图的边就满足Dijkstra算法的前提条件，但是，我们怎么得到每个节点的最短路径值d(s,v)？</p>
 
-<p>首先，我们看下第一个问题，这个很好解决对吧，用前面介绍的Bellman-Ford算法就行了，但是源点 s 是什么？这里我们可以向图中添加一个顶点 s，并且让它连接图中的所有其他节点，边的权值都是0。做了上面的修改之后我们可以在新图上从源点 s 开始运行Bellman-Ford算法，这样就得到了每个节点的最短路径值d(s,v)。</p>
+<p>其实这个问题很好解决对吧，前面介绍的Bellman-Ford算法就干这行的，但是源点 s 是什么？这里的解决方案有点意思，我们可以向图中添加一个顶点 s，并且让它连接图中的所有其他节点，边的权值都是0，完了之后我们就可以在新图上从源点 s 开始运行Bellman-Ford算法，这样就得到了每个节点的最短路径值d(s,v)。但是，新的问题又来了，这么改了之后真的好吗？得到的最短路径对吗？</p>
 
-<p>然后，我们看下第二个问题，实际上就是要说明在新权值图(边权值重新赋值且删除了顶点s)上找到的最短路径会和在原来的图上找到的那个最短路径一样吗？&lt;p class=&#8217;post-footer&#8217;&gt;
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a> Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)&lt;/p&gt;</p>
+<p>这里的解释更加有意思，想想任何一条从源点 s 到节点 v 的路径<code>p=&lt;s, v1, v2, v3 ... u, v&gt;</code>，假设我们把路径上的边权值都加起来的话，你会发现下面的有意思的现象(telescoping sums)：</p>
+
+<p>sum=[w(s,v1)+h(s)-h(v1)]+[w(v1,v2)+h(v1)-h(v2)]+…+[w(u,v)+h(u)-h(v)]
+=w(v1,v2)+w(v2,v3)+…+w(u,v)-h(v)</p>
+
+<p>上面的式子说明，所有从源点 s 到节点 v 的路径都会减去h(v)，也就说明对于新图上的任何一条最短路径，它都是对应着原图的那条最短路径，只是路径的权值减去了h(v)，这也就说明采用上面的策略得到的最短路径没有问题。</p>
+
+<p>现在我们捋一捋思路，我们首先要使用Bellman-Ford算法得到每个节点的最短路径值，然后利用这些值修改图中边的权值，最后我们对图中所有节点都运行一次Dijkstra算法就解决了所有节点对最短路径问题，但是如果原图本来边的权值就都是正的话就直接运行Dijkstra算法就行了。这就是Johnson算法，一个巧妙地利用Bellman-Ford和Dijkstra算法结合来解决所有节点对最短路径问题的算法。它特别适合用于稀疏图，算法的时间复杂度是$O(mn lg n)$，比后面要介绍的Floyd-Warshall算法要好些。</p>
+
+<p>还有一点需要补充的是，在运行完了Dijkstra算法之后，如果我们要得到准确的最短路径的权值的话，我们还需要做一定的修改，从前面的式子可以看出，新图上节点 u 和节点 v 之间的最短路径 D’(u,v) 与原图上两个节点的最短路径 D(u,v) 有如下左式的关系，那么经过右式的简单计算就能得到原图的最短路径值</p>
+
+<p>D’(u,v)=D(u,v)+h(u)-h(v)  ==&gt; D(u,v)=D’(u,v)-h(u)+h(v) </p>
+
+<p>基于上面的思路，我们可以得到下面的Johnson算法实现</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c">#Johnson’s Algorithm</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">johnson</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>                                 <span class="c"># All pairs shortest paths</span>
+</span><span class="line">    <span class="n">G</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>                             <span class="c"># Don&#39;t want to break original</span>
+</span><span class="line">    <span class="n">s</span> <span class="o">=</span> <span class="nb">object</span><span class="p">()</span>                                <span class="c"># Guaranteed unique node</span>
+</span><span class="line">    <span class="n">G</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span><span class="mi">0</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="p">}</span>                     <span class="c"># Edges from s have zero wgt</span>
+</span><span class="line">    <span class="n">h</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">bellman_ford</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>                   <span class="c"># h[v]: Shortest dist from s</span>
+</span><span class="line">    <span class="k">del</span> <span class="n">G</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>                                    <span class="c"># No more need for s</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>                                 <span class="c"># The weight from u...</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>                          <span class="c"># ... to v...</span>
+</span><span class="line">            <span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">+=</span> <span class="n">h</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">-</span> <span class="n">h</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>              <span class="c"># ... is adjusted (nonneg.)</span>
+</span><span class="line">    <span class="n">D</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{}</span>                               <span class="c"># D[u][v] and P[u][v]</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>                                 <span class="c"># From every u...</span>
+</span><span class="line">        <span class="n">D</span><span class="p">[</span><span class="n">u</span><span class="p">],</span> <span class="n">P</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">dijkstra</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>             <span class="c"># ... find the shortest paths</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>                             <span class="c"># For each destination...</span>
+</span><span class="line">            <span class="n">D</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">+=</span> <span class="n">h</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">-</span> <span class="n">h</span><span class="p">[</span><span class="n">u</span><span class="p">]</span>              <span class="c"># ... readjust the distance</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">D</span><span class="p">,</span> <span class="n">P</span>                                 <span class="c"># These are two-dimensional</span>
+</span><span class="line">
+</span><span class="line"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span><span class="line"><span class="n">W</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class="line">    <span class="n">a</span><span class="p">:</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span><span class="mi">7</span><span class="p">},</span>
+</span><span class="line">    <span class="n">b</span><span class="p">:</span> <span class="p">{</span><span class="n">a</span><span class="p">:</span><span class="mi">4</span><span class="p">},</span>
+</span><span class="line">    <span class="n">c</span><span class="p">:</span> <span class="p">{</span><span class="n">b</span><span class="p">:</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span><span class="mi">2</span><span class="p">},</span>
+</span><span class="line">    <span class="n">d</span><span class="p">:</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span><span class="mi">6</span><span class="p">},</span>
+</span><span class="line">    <span class="n">e</span><span class="p">:</span> <span class="p">{</span><span class="n">a</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="n">D</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="n">johnson</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [0, -4, 1, -1, 3]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [4, 0, 5, 3, 7]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [-1, -5, 0, -2, 2]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">d</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [5, 1, 6, 0, 8]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">e</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [1, -3, 2, -4, 0]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>下面我们看下Floyd-Warshall算法，这是一个基于动态规划的算法。它的想法和一般的动态规划算法差不多，假设所有节点都有一个数字编号(从1开始)，我们要把原来的问题reduce成这么一个个子问题，子问题有三个参数：起点 u、终点 v、能经过的节点的最大编号k，也就是求从起点 u 到终点 v 的最多能够经过编号为(1,2,3,…,k)的节点的最短路径，这个子问题怎么考虑呢？还是采用选择还是不选择这种策略，如果我们选择经过节点 k 的话，我们</p>
+
+<p>[未完待续…]</p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
