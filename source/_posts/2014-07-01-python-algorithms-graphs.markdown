@@ -77,7 +77,7 @@ print D[v] # 8
 
 现在我们考虑一个问题，如果我们对图中的所有边都松弛一遍会怎样？可能部分顶点的距离估计值有所减小对吧，那如果再对图中的所有边都松弛一遍又会怎样呢？可能又有部分顶点的距离估计值有所减小对吧，那到底什么时候才会没有改进呢？到底什么时候可以停止了呢？
 
-这个问题可以这么想，假设从源点 s 到节点 v 的最短路径是`p=<v0, v1, v2, v3 ... vk>`，此时v0=s, vk=v，那除了源点 s 之外，这条路径总共经过了其他 k 个顶点对吧，k 肯定小于 |V|-1 对吧，也就是说从节点 s 到节点 v 要经过一条最多只有(|V|-1)条边的路径，因为每遍松弛都是松弛所有边，那么肯定会松弛路径p 中的所有边，我们可以保险地认为第 i 次循环松弛了边$$<v_{i-1}, v_{i}>$$，这样的话经过 k 次松弛遍历，我们肯定能够得到节点 v 的最短路径值，再根据这条路径最多只有(|V|-1)条边，也就说明了我们最多只要循环地对图中的所有边都松弛(|V|-1)遍就可以得到所有节点的最短路径值！上面的思路就是Bellman-Ford算法了，时间复杂度是$O(VE)$。
+这个问题可以这么想，假设从源点 s 到节点 v 的最短路径是`p=<v0, v1, v2, v3 ... vk>`，此时v0=s, vk=v，那除了源点 s 之外，这条路径总共经过了其他 k 个顶点对吧，k 肯定小于 (V-1) 对吧，也就是说从节点 s 到节点 v 要经过一条最多只有(V-1)条边的路径，因为每遍松弛都是松弛所有边，那么肯定会松弛路径p 中的所有边，我们可以保险地认为第 i 次循环松弛了边$$<v_{i-1}, v_{i}>$$，这样的话经过 k 次松弛遍历，我们肯定能够得到节点 v 的最短路径值，再根据这条路径最多只有(V-1)条边，也就说明了我们最多只要循环地对图中的所有边都松弛(V-1)遍就可以得到所有节点的最短路径值！上面的思路就是Bellman-Ford算法了，时间复杂度是$O(VE)$。
 
 下面看下算法导论上的Bellman-Ford算法的示例图
 
@@ -85,7 +85,7 @@ print D[v] # 8
 
 [上图的解释，需要注意的是，如果边的松弛顺序不同，可能中间得到的结果不同，但是最后的结果都是一样的：The execution of the Bellman-Ford algorithm. The source is vertex s. The d values are shown within the vertices, and shaded edges indicate predecessor values: if edge (u, v) is shaded, then π[v] = u. In this particular example, each pass relaxes the edges in the order (t, x), (t, y), (t, z), (x, t), (y, x), (y, z), (z, x), (z, s), (s, t), (s, y). (a) The situation just before the first pass over the edges. (b)-(e) The situation after each successive pass over the edges. The d and π values in part (e) are the final values. The Bellman-Ford algorithm returns TRUE in this example.]
 
-上面的分析很好，但是我们漏考虑了一个关键问题，那就是如果图中存在负权回路的话不论我们松弛多少遍，图中有些节点的最短路径值都还是会减小，所以我们在 (|V|-1) 次松弛遍历之后再松弛遍历一次，如果还有节点的最短路径减小的话就说明图中存在负权回路！这就引出了Bellman-Ford算法的一个重要作用：判断图中是否存在负权回路。
+上面的分析很好，但是我们漏考虑了一个关键问题，那就是如果图中存在负权回路的话不论我们松弛多少遍，图中有些节点的最短路径值都还是会减小，所以我们在 (V-1) 次松弛遍历之后再松弛遍历一次，如果还有节点的最短路径减小的话就说明图中存在负权回路！这就引出了Bellman-Ford算法的一个重要作用：判断图中是否存在负权回路。
 
 ```python
 #Bellman-Ford算法
