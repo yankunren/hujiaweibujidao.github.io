@@ -47,7 +47,9 @@ Python分类下的系列文章，不断更新中
 
 这里每篇文章都有实现代码，但是代码我一般都不会分析，更多地是分析算法思想，所以内容都比较多，即便如此也没有包括原书对应章节的所有内容，因为内容实在太丰富了，所以我只是选择经典的算法实例来介绍算法核心思想，除此之外，还有不少内容是原书没有得，部分是来自算法导论，部分是来自我自己的感悟，嘻嘻。该篇对于大神们来说是小菜，请一笑而过，对于菜鸟们来说可能有点难啃，所以最适合的是和我水平差不多的，对各个算法都有所了解但是理解还不算深刻的半桶水的程序猿，嘿嘿。
 
-本篇的顺序按照原书[Python Algorithms: Mastering Basic Algorithms in the Python Language](http://link.springer.com/book/10.1007%2F978-1-4302-3238-4)的章节来安排的(章节标题部分相同部分不同哟)，为了节省时间以及保持原著的原滋原味，部分内容直接摘自原著英文内容。 [友情提示：重点内容从第4节开始哟]
+本篇的顺序按照原书[Python Algorithms: Mastering Basic Algorithms in the Python Language](http://link.springer.com/book/10.1007%2F978-1-4302-3238-4)的章节来安排的(章节标题部分相同部分不同哟)，为了节省时间以及保持原著的原滋原味，部分内容直接摘自原著英文内容。 
+
+[**也许你觉得很多内容都和以前看的一样嘛，实则不然，如果你细读的话我保证会有不少收获的，温馨提示，精彩内容从第4节开始哟，么么哒**]
 
 (1)[Python Algorithms - C1 Introduction](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-introduction/) 
 
@@ -81,9 +83,11 @@ Python分类下的系列文章，不断更新中
 
 本节主要结合一些经典的动规问题介绍动态规划的备忘录法和迭代法这两种实现方式，并对这两种方式进行对比
 
-(9)[Python Algorithms - C9 Graphs](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs/) [还未完成]
+(9)[Python Algorithms - C9 Graphs](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs/) 
 
+本节主要介绍图算法中的各种最短路径算法，从不同的角度揭示它们的内核以及它们的异同
 
+[**原书后面的2个章节(网络流和NP)暂未总结，后期如果阅读之后有所感悟必将添加到该系列，嘿嘿**]
 
 
 
