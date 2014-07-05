@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-06T00:04:46+08:00</updated>
+  <updated>2014-07-06T00:13:50+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -490,7 +490,7 @@ because we’ll never find any shortcuts to improve D[v].</p>
 </span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">e</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [1, -3, 2, -4, 0]</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>仔细看的话，不难发现这个解法和我们介绍动态规划时介绍的最长公共子序列的问题非常类似，<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/">如果还没有阅读的话不妨看下最长公共子序列问题的5种实现</a>，有了对最长公共子序列问题的理解，我们就很容易理解对于Floyd-Warshall算法我们也可以采用类似的方式来减小算法所需占用的空间，当然还要将递归版本改成性能更好些的迭代版本。</p>
+<p>仔细看的话，不难发现这个解法和我们介绍动态规划时介绍的最长公共子序列的问题非常类似，<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/">如果还没有阅读的话不妨看下最长公共子序列问题的5种实现这篇文章</a>，有了对最长公共子序列问题的理解，我们就很容易发现对于Floyd-Warshall算法我们也可以采用类似的方式来减小算法所需占用的空间，当然首先要将递归版本改成性能更好些的迭代版本。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -550,7 +550,7 @@ because we’ll never find any shortcuts to improve D[v].</p>
 </span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">e</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [1, -3, 2, -4, 0]</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>当然啦，一般情况下，求最短路径问题我们还需要知道最短路径是什么，这个时候我们只需要在进行选择的时候设置一个前驱节点就行了</p>
+<p>当然啦，一般情况下求最短路径问题我们还需要知道最短路径是什么，这个时候我们只需要在进行选择的时候设置一个前驱节点就行了</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -637,6 +637,35 @@ because we’ll never find any shortcuts to improve D[v].</p>
 </span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">P</span><span class="p">[</span><span class="n">d</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span><span class="c">#[1, 2, 3, None, 2]</span>
 </span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">P</span><span class="p">[</span><span class="n">e</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span><span class="c">#[1, 2, 3, 4, None]</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>[算法导论在介绍所有节点对最短路径问题时先介绍了另一个基于动态规划的解法，但是那个算法时间复杂度较高，即使是使用了重复平方技术还是比较差，所以这里不介绍了，但是有意思的是书中将这个算法和矩阵乘法运算进行了对比，发现两者之间惊人的相似，其实同理，我们开始介绍的<strong>Bellman-Ford算法和矩阵与向量的乘法运算也有很多类似的地方</strong>，感兴趣可以自己探索下，也可以阅读算法导论了解下]</p>
+
+<p>本章节最后作者还提出了两个用来解最短路径问题的技巧：“Meeting in the middle” 和 “Knowing where you’re going,”，这部分的内容又都比较难翻译和理解，感兴趣还是阅读原文较好</p>
+
+<p>(1)Meeting in the middle</p>
+
+<p>简单来说就是双向进行，Dijkstra算法是从节点 u 出发去找到达节点 v 的最短路径，但是，如果两个节点同时进行呢，当它们找到相同的节点时就得到一条路径了，这种方式比一个方向查找的效率要高些，下图是一个图示</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/meetinmiddle.png" alt="image" /></p>
+
+<p>(2)Knowing where you’re going</p>
+
+<p>这里作者介绍了大名鼎鼎的A*算法，实际上也就非常类似采用了分支限界策略的BFS算法(the best-first search used in the branch and bound strategy )。</p>
+
+<p>By now you’ve seen that the basic idea of traversal is pretty versatile, and by simply using different queues, you get several useful algorithms. For example, for FIFO and LIFO queues, you get BFS and DFS, and with the appropriate priorities, you get the core of Prim’s and Dijkstra’s algorithms. The algorithm described in this section, called A*, extends Dijkstra’s, by tweaking the priority once again.</p>
+
+<p>As mentioned earlier, the A* algorithm uses an idea similar to Johnson’s algorithm, although for a different purpose. Johnson’s algorithm transforms all edge weights to ensure they’re positive, while ensuring that the shortest paths are still shortest. In A*, we want to modify the edges in a similar fashion, but this time the goal isn’t to make the edges positive—we’re assuming they already are (as we’re building on Dijkstra’s algorithm). No, what we want is to guide the traversal in the right direction, by using information of where we’re going: we want to make edges moving away from our target node more expensive than those that take us closer to it.</p>
+
+<hr />
+
+<p>练习题：来自算法导论24-3 货币兑换问题</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/bfex.png" alt="image" /></p>
+
+<p>简单来说就是在给定的不同货币的兑换率下是否存在一个货币兑换循环使得最终我们能够从中获利？[提示：Bellman-Ford算法]</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/bfans1.png" alt="image" />
+<img src="http://hujiaweibujidao.github.io/images/algos/bfans2.png" alt="image" /></p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
