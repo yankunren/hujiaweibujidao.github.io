@@ -77,15 +77,15 @@ print D[v] # 8
 
 现在我们考虑一个问题，如果我们对图中的所有边都松弛一遍会怎样？可能部分顶点的距离估计值有所改进对吧，那如果再对图中的所有边都松弛一遍又会怎样呢？可能又有部分顶点的距离估计值有所改进对吧，那到底什么时候才会没有改进呢？到底什么时候可以停止了呢？
 
-这个问题可以这么思考，假设从源点 s 到节点 v 的最短路径是`p=<v0, v1, v2, v3 ... vk>`，此时v0=s, vk=v，那除了源点 s 之外，这条路径总共经过了其他 k 个顶点对吧，k 肯定小于 |V|-1 对吧，也就是说从节点 s 到节点 v 要经过一条最多只有(|V|-1)条边的路径，因为每遍松弛都是松弛所有边，那么肯定会松弛路径p中的所有边，我们可以保险地认为第 i 次循环就松弛边$$<v_{i-1}, v_{i}>$$，这样的话经过 k 次松弛遍历，我们肯定能够得到节点 v 的最短路径值，再根据这条路径最多只有(|V|-1)条边，也就说明了我们最多只要循环地对图中的所有边都松弛(|V|-1)遍就可以得到所有节点的最短路径值！
+这个问题可以这么思考，假设从源点 s 到节点 v 的最短路径是`p=<v0, v1, v2, v3 ... vk>`，此时v0=s, vk=v，那除了源点 s 之外，这条路径总共经过了其他 k 个顶点对吧，k 肯定小于 |V|-1 对吧，也就是说从节点 s 到节点 v 要经过一条最多只有(|V|-1)条边的路径，因为每遍松弛都是松弛所有边，那么肯定会松弛路径p中的所有边，我们可以保险地认为第 i 次循环就松弛边$$<v_{i-1}, v_{i}>$$，这样的话经过 k 次松弛遍历，我们肯定能够得到节点 v 的最短路径值，再根据这条路径最多只有(|V|-1)条边，也就说明了我们最多只要循环地对图中的所有边都松弛(|V|-1)遍就可以得到所有节点的最短路径值！上面的思路就是Bellman-Ford算法了，时间复杂度是$O(VE)$。
 
-下面看下算法导论上的示例图
+下面看下算法导论上的Bellman-Ford算法的示例图
 
 ![image](http://hujiaweibujidao.github.io/images/algos/bellmanford.png)
 
 [上图的解释，需要注意的是，如果边的松弛顺序不同，可能中间得到的结果不同，但是最后的结果都是一样的：The execution of the Bellman-Ford algorithm. The source is vertex s. The d values are shown within the vertices, and shaded edges indicate predecessor values: if edge (u, v) is shaded, then π[v] = u. In this particular example, each pass relaxes the edges in the order (t, x), (t, y), (t, z), (x, t), (y, x), (y, z), (z, x), (z, s), (s, t), (s, y). (a) The situation just before the first pass over the edges. (b)-(e) The situation after each successive pass over the edges. The d and π values in part (e) are the final values. The Bellman-Ford algorithm returns TRUE in this example.]
 
-上面的思路就是Bellman-Ford算法了，时间复杂度是$O(VE)$。不过上面的分析中我们漏考虑了一个关键问题，那就是如果图中存在负权回路的话不论我们松弛多少遍，该回路上的节点的最短路径值都还是会减小。所以，假设我们在 (|V|-1) 次遍历之后再遍历一次，如果还有节点的最短路径减小的话就说明图中存在负权回路！这就引出了Bellman-Ford算法的一个重要作用：判断图中是否存在负权回路。
+不过上面的分析中我们漏考虑了一个关键问题，那就是如果图中存在负权回路的话不论我们松弛多少遍，该回路上的节点的最短路径值都还是会减小。所以，假设我们在 (|V|-1) 次遍历之后再遍历一次，如果还有节点的最短路径减小的话就说明图中存在负权回路！这就引出了Bellman-Ford算法的一个重要作用：判断图中是否存在负权回路。
 
 ```python
 #Bellman-Ford算法
@@ -191,3 +191,9 @@ print [D[v] for v in [s, t, x, y, z]] # [0, 8, 9, 5, 7]
 print s not in P # True
 print [P[v] for v in [t, x, y, z]] == [y, t, s, y] # True
 ```
+
+Dijkstra算法和Prim算法的实现很像，也和BFS算法实现很像，其实，如果我们把每条权值为 w 的边(u,v)想象成节点 u 和节点 v 中间有 (w-1) 个节点，且每条边都是权值为1的一条路径的话，BFS算法其实就和Dijkstra算法差不多了。
+
+Dijkstra算法的时间复杂度和使用的优先队列有关，上面的实现用的是最小堆，所以时间复杂度是$O(m lg n)$，其中 m 是边数，n 是节点数。
+
+
