@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-05T23:05:10+08:00</updated>
+  <updated>2014-07-05T23:10:19+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -396,7 +396,27 @@ because we’ll never find any shortcuts to improve D[v].</p>
 </span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">e</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [1, -3, 2, -4, 0]</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>下面我们看下Floyd-Warshall算法，这是一个基于动态规划的算法。它的想法和一般的动态规划算法差不多，假设所有节点都有一个数字编号(从1开始)，我们要把原来的问题reduce成这么一个个子问题，子问题有三个参数：起点 u、终点 v、能经过的节点的最大编号k，也就是求从起点 u 到终点 v 的最多能够经过编号为(1,2,3,…,k)的节点的最短路径，这个子问题怎么考虑呢？还是采用选择还是不选择这种策略，如果我们选择经过节点 k 的话，我们</p>
+<p>下面我们看下Floyd-Warshall算法，这是一个基于动态规划的算法。</p>
+
+<p>假设所有节点都有一个数字编号(从1开始)，我们要把原来的问题reduce成一个个子问题，子问题有三个参数：起点 u、终点 v、能经过的节点的最大编号k，也就是求从起点 u 到终点 v 只能够经过编号为(1,2,3,…,k)的节点的最短路径问题</p>
+
+<p>Let d(u, v, k) be the length of the shortest path that exists from node u to node v if you’re only allowed to use the k first nodes as intermediate nodes. </p>
+
+<p>这个子问题怎么考虑呢？当然还是采用之前动态规划中常用的选择还是不选择这种策略，如果我们选择不经过节点 k 的话，那么问题变成了求从起点 u 到终点 v 只能够经过编号为(1,2,3,…,k-1)的节点的最短路径问题；如果我们选择经过节点 k 的话，那么问题变成求从起点 u 到终点 k 只能够经过编号为(1,2,3,…,k-1)的节点的最短路径问题与求从起点 k 到终点 v 只能够经过编号为(1,2,3,…,k-1)的节点的最短路径问题之和，如下图所示</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/algos/fw0.png" alt="image" /></p>
+
+<p>经过上面的分析，我们可以得到下面的结论</p>
+
+<p>d(u,v,k) = min(d(u,v,k-1), d(u,k,k-1) + d(k,v,k-1))</p>
+
+<p>根据这个式子我们很快可以得到下面的递归实现</p>
+
+<p>&#8220;`</p>
+
+<p>&#8220;`</p>
+
+<p>仔细看的话，不难发现这个解法和我们介绍动态规划时介绍的最长公共子序列的问题非常类似，</p>
 
 <p>[未完待续…]</p>
 
