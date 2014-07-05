@@ -51,7 +51,7 @@ Python分类下的系列文章，不断更新中
 
 (1)[Python Algorithms - C1 Introduction](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-introduction/) 
 
-本节主要是对书籍中的内容做些简单介绍，从旅行商问题开始引入介绍了算法的重要性。
+本节主要是对原书中的内容做些简单介绍，说明算法的重要性以及各章节的内容概要。
 
 (2)[Python Algorithms - C2 The basics](http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/) 
 
