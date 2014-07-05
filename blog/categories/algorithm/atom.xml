@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-05T20:29:14+08:00</updated>
+  <updated>2014-07-05T21:07:59+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -232,6 +232,15 @@ print [P[v] for v in [t, x, y, z]] == [y, t, s, y] # True
 
 <p>下面我们来看看所有点对最短路径问题</p>
 
+<p>对于所有点对最短路径问题，我们第一个想法肯定是对每个节点运行一遍Dijkstra算法就可以了嘛，但是，Dijkstra算法有个前提条件，所有边的权值都是正的，那些包含了负权边的图怎么办？那就想办法对图进行些预处理，使得所有边的权值都是正的就可以了，那怎么处理能够做到呢？此时可以看下前面的三角不等性质，内容如下：</p>
+
+<p>d(s,v) &lt;= d(s,u) + W[u,v]. This is an example of the triangle inequality.</p>
+
+<p>令h(u)=d(s,u), h(v)=d(s,v)，假设我们给边(u,v)重新赋权w’(u, v) = w(u, v) + h(u) - h(v)，根据三角不等性质可知w’(u, v)肯定非负，这样新图的边就满足Dijkstra算法的前提条件，但是，还有两个问题：(1)怎么得到每个节点的最短路径值d(s,v)？(2)这么改了之后会不会把问题搞砸了？得到的最短路径和原来的一样吗？</p>
+
+<p>首先，我们看下第一个问题，这个很好解决对吧，用前面介绍的Bellman-Ford算法就行了，但是源点 s 是什么？这里我们可以向图中添加一个顶点 s，并且让它连接图中的所有其他节点，边的权值都是0。做了上面的修改之后我们可以在新图上从源点 s 开始运行Bellman-Ford算法，这样就得到了每个节点的最短路径值d(s,v)。</p>
+
+<p>然后，我们看下第二个问题，实际上就是要说明在新权值图(边权值重新赋值且删除了顶点s)上找到的最短路径会和在原来的图上找到的那个最短路径一样吗？</p>
 ]]></content>
   </entry>
   
