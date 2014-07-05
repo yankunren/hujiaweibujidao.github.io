@@ -17,8 +17,7 @@ published: true
 3. Write down the solution.    
      —— “The Feynman Algorithm” as described by Murray Gell-Mann
 
-本节主要是对书籍中的内容做些简单介绍，从旅行商问题开始引入介绍了算法的重要性。
-
+本节主要是对原书中的内容做些简单介绍，说明算法的重要性以及各章节的内容概要。
 
 #### 1.关于这本书的目的
 
