@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-06T00:23:23+08:00</updated>
+  <updated>2014-07-06T00:24:54+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -491,6 +491,19 @@ because we’ll never find any shortcuts to improve D[v].</p>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>仔细看的话，不难发现这个解法和我们介绍动态规划时介绍的最长公共子序列的问题非常类似，<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/">如果还没有阅读的话不妨看下最长公共子序列问题的5种实现这篇文章</a>，有了对最长公共子序列问题的理解，我们就很容易发现对于Floyd-Warshall算法我们也可以采用类似的方式来减小算法所需占用的空间，当然首先要将递归版本改成性能更好些的迭代版本。</p>
+
+<p>Floyd-Warshall算法的递推公式</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+d_{ij}^{k}= \left\{ 
+  \begin{array}{l l}
+    \omega_{ij} & \quad \text{如果k=0}\\
+    min(d_{ij}^{k-1},d_{ik}^{k-1}+d_{kj}^{k-1}) & \quad \text{如果$k \ge 1$}
+  \end{array} \right.
+ %]]&gt;</script>
+
+<p>从递推公式中可以看出，计算当前回合(k)只需要上一回合(k-1)得到的结果，所以，如果应用对于中间结果不需要的话，那么可以只使用2个nxn的矩阵，一个保存当前回合(k)的结果D(k)，另一个保存上一回合(k-1)的结果D(k-1)，待当前回合计算完了之后将其全部复制到D(k-1)中，这样就仅需要O(n^{2})的空间。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -979,7 +992,26 @@ because we’ll never find any shortcuts to improve D[v].</p>
 
 <hr />
 
-<p>练习：来试试写写最长公共子序列吧，<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/">这篇文章中给出了Python版本的5种实现方式</a>哟！</p>
+<p>练习1：来试试写写最长公共子序列吧，<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/">这篇文章中给出了Python版本的5种实现方式</a>哟！</p>
+
+<p>练习2：算法导论问题 15-4: Planning a company party 计划一个公司聚会</p>
+
+<p>Start example
+Professor Stewart is consulting for the president of a corporation that is planning a company party. The company has a hierarchical structure; that is, the supervisor relation forms a tree rooted at the president. The personnel office has ranked each employee with a conviviality rating, which is a real number. In order to make the party fun for all attendees, the president does not want both an employee and his or her immediate supervisor to attend.</p>
+
+<p>Professor Stewart is given the tree that describes the structure of the corporation, using the left-child, right-sibling representation described in Section 10.4. Each node of the tree holds, in addition to the pointers, the name of an employee and that employee’s conviviality ranking. Describe an algorithm to make up a guest list that maximizes the sum of the conviviality ratings of the guests. Analyze the running time of your algorithm.</p>
+
+<p>原问题可以转换成：假设有一棵树，用左孩子右兄弟的表示方式表示，树的每个结点有个值，选了某个结点，就不能选择它的父结点，求整棵树选的节点值最大是多少。</p>
+
+<p>假设如下：
+dp[i][0]表示不选i结点时，i子树的最大价值
+dp[i][1]表示选i结点时，i子树的最大价值</p>
+
+<p>列出状态方程
+dp[i][0] = sum(max(dp[u][0], dp[u][1])) $\quad$   (如果不选i结点，u为结点i的儿子)
+dp[i][1] = sum(dp[u][0]) + val[i]   $\quad$  (如果选i结点，val[i]表示i结点的价值)</p>
+
+<p>最后就是求max(dp[root][0], dp[root][1])</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-dynamic-programming/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-dynamic-programming/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
@@ -1412,6 +1444,10 @@ because we’ll never find any shortcuts to improve D[v].</p>
 </span><span class="line">        <span class="k">if</span> <span class="n">TT</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span> <span class="n">T</span> <span class="o">=</span> <span class="n">TT</span>                      <span class="c"># Is it valid? Use it!</span>
 </span><span class="line">    <span class="k">return</span> <span class="n">T</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<hr />
+
+<p>我不喜欢贪心算法，本节没有练习，嗯，就是这样啦…</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-greedy/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-greedy/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
