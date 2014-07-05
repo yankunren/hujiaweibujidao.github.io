@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-05T23:10:19+08:00</updated>
+  <updated>2014-07-05T23:39:22+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -289,9 +289,9 @@ print [D[d][v] for v in [a, b, c, d, e]] # [5, 1, 6, 0, 8]
 print [D[e][v] for v in [a, b, c, d, e]] # [1, -3, 2, -4, 0]
 ```</p>
 
-<p>下面我们看下Floyd-Warshall算法，这是一个基于动态规划的算法。</p>
+<p>下面我们看下Floyd-Warshall算法，这是一个基于动态规划的算法，时间复杂度是$O(n^3)$，n是图中节点数</p>
 
-<p>假设所有节点都有一个数字编号(从1开始)，我们要把原来的问题reduce成一个个子问题，子问题有三个参数：起点 u、终点 v、能经过的节点的最大编号k，也就是求从起点 u 到终点 v 只能够经过编号为(1,2,3,…,k)的节点的最短路径问题</p>
+<p>假设所有节点都有一个数字编号(从1开始)，我们要把原来的问题reduce成一个个子问题，子问题有三个参数：起点 u、终点 v、能经过的节点的最大编号k，也就是求从起点 u 到终点 v 只能够经过编号为(1,2,3,…,k)的节点的最短路径问题 (原文表述如下)</p>
 
 <p>Let d(u, v, k) be the length of the shortest path that exists from node u to node v if you’re only allowed to use the k first nodes as intermediate nodes. </p>
 
@@ -305,13 +305,126 @@ print [D[e][v] for v in [a, b, c, d, e]] # [1, -3, 2, -4, 0]
 
 <p>根据这个式子我们很快可以得到下面的递归实现</p>
 
-<p>```</p>
+<p>```
+#递归版本的Floyd-Warshall算法
+from functools import wraps</p>
 
-<p>```</p>
+<p>def memo(func):
+    cache = {}                                  # Stored subproblem solutions
+    @wraps(func)                                # Make wrap look like func
+    def wrap(<em>args):                            # The memoized wrapper
+        if args not in cache:                   # Not already computed?
+            cache[args] = func(</em>args)           # Compute &amp; cache the solution
+        return cache[args]                      # Return the cached solution
+    return wrap                                 # Return the wrapper</p>
 
-<p>仔细看的话，不难发现这个解法和我们介绍动态规划时介绍的最长公共子序列的问题非常类似，</p>
+<p>def rec_floyd_warshall(G):                                # All shortest paths
+    @memo                                                 # Store subsolutions
+    def d(u,v,k):                                         # u to v via 1..k
+        if k==0: return G[u][v]                           # Assumes v in G[u]
+        return min(d(u,v,k-1), d(u,k,k-1) + d(k,v,k-1))   # Use k or not?
+    return {(u,v): d(u,v,len(G)) for u in G for v in G}   # D[u,v] = d(u,v,n)</p>
 
-<p>[未完待续…]</p>
+<h1 id="section-3">测试代码</h1>
+<p>a, b, c, d, e = range(1,6) # One-based
+W = {
+    a: {c:1, d:7},
+    b: {a:4},
+    c: {b:-5, e:2},
+    d: {c:6},
+    e: {a:3, b:8, d:-4}
+    }
+for u in W:
+    for v in W:
+        if u == v: W[u][v] = 0
+        if v not in W[u]: W[u][v] = inf
+D = rec_floyd_warshall(W)
+print [D[a,v] for v in [a, b, c, d, e]] # [0, -4, 1, -1, 3]
+print [D[b,v] for v in [a, b, c, d, e]] # [4, 0, 5, 3, 7]
+print [D[c,v] for v in [a, b, c, d, e]] # [-1, -5, 0, -2, 2]
+print [D[d,v] for v in [a, b, c, d, e]] # [5, 1, 6, 0, 8]
+print [D[e,v] for v in [a, b, c, d, e]] # [1, -3, 2, -4, 0]
+```</p>
+
+<p>仔细看的话，不难发现这个解法和我们介绍动态规划时介绍的最长公共子序列的问题非常类似，<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/">如果还没有阅读的话不妨看下最长公共子序列问题的5种实现</a>，有了对最长公共子序列问题的理解，我们就很容易理解对于Floyd-Warshall算法我们也可以采用类似的方式来减小算法所需占用的空间，当然还要将递归版本改成性能更好些的迭代版本。</p>
+
+<p>```
+#空间优化后的Floyd-Warshall算法
+def floyd_warshall1(G):
+    D = deepcopy(G)                             # No intermediates yet
+    for k in G:                                 # Look for shortcuts with k
+        for u in G:
+            for v in G:
+                D[u][v] = min(D[u][v], D[u][k] + D[k][v])
+    return D</p>
+
+<h1 id="section-4">测试代码</h1>
+<p>a, b, c, d, e = range(1,6) # One-based
+W = {
+    a: {c:1, d:7},
+    b: {a:4},
+    c: {b:-5, e:2},
+    d: {c:6},
+    e: {a:3, b:8, d:-4}
+    }
+for u in W:
+    for v in W:
+        if u == v: W[u][v] = 0
+        if v not in W[u]: W[u][v] = inf
+D = floyd_warshall1(W)
+print [D[a][v] for v in [a, b, c, d, e]] # [0, -4, 1, -1, 3]
+print [D[b][v] for v in [a, b, c, d, e]] # [4, 0, 5, 3, 7]
+print [D[c][v] for v in [a, b, c, d, e]] # [-1, -5, 0, -2, 2]
+print [D[d][v] for v in [a, b, c, d, e]] # [5, 1, 6, 0, 8]
+print [D[e][v] for v in [a, b, c, d, e]] # [1, -3, 2, -4, 0]
+```</p>
+
+<p>当然啦，一般情况下，求最短路径问题我们还需要知道最短路径是什么，这个时候我们只需要在进行选择的时候设置一个前驱节点就行了</p>
+
+<p>```
+#最终版本的Floyd-Warshall算法
+def floyd_warshall(G):
+    D, P = deepcopy(G), {}
+    for u in G:
+        for v in G:
+            if u == v or G[u][v] == inf:
+                P[u,v] = None
+            else:
+                P[u,v] = u
+    for k in G:
+        for u in G:
+            for v in G:
+                shortcut = D[u][k] + D[k][v]
+                if shortcut &lt; D[u][v]:
+                    D[u][v] = shortcut
+                    P[u,v] = P[k,v]
+    return D, P</p>
+
+<h1 id="section-5">测试代码</h1>
+<p>a, b, c, d, e = range(5)
+W = {
+    a: {c:1, d:7},
+    b: {a:4},
+    c: {b:-5, e:2},
+    d: {c:6},
+    e: {a:3, b:8, d:-4}
+    }
+for u in W:
+    for v in W:
+        if u == v: W[u][v] = 0
+        if v not in W[u]: W[u][v] = inf
+D, P = floyd_warshall(W)
+print [D[a][v] for v in [a, b, c, d, e]]#[0, -4, 1, -1, 3]
+print [D[b][v] for v in [a, b, c, d, e]]#[4, 0, 5, 3, 7]
+print [D[c][v] for v in [a, b, c, d, e]]#[-1, -5, 0, -2, 2]
+print [D[d][v] for v in [a, b, c, d, e]]#[5, 1, 6, 0, 8]
+print [D[e][v] for v in [a, b, c, d, e]]#[1, -3, 2, -4, 0]
+print [P[a,v] for v in [a, b, c, d, e]]#[None, 2, 0, 4, 2]
+print [P[b,v] for v in [a, b, c, d, e]]#[1, None, 0, 4, 2]
+print [P[c,v] for v in [a, b, c, d, e]]#[1, 2, None, 4, 2]
+print [P[d,v] for v in [a, b, c, d, e]]#[1, 2, 3, None, 2]
+print [P[e,v] for v in [a, b, c, d, e]]#[1, 2, 3, 4, None]
+```</p>
 
 ]]></content>
   </entry>

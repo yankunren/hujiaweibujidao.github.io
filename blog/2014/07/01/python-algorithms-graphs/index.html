@@ -506,9 +506,9 @@ because we’ll never find any shortcuts to improve D[v].</p>
 </span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">e</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [1, -3, 2, -4, 0]</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>下面我们看下Floyd-Warshall算法，这是一个基于动态规划的算法。</p>
+<p>下面我们看下Floyd-Warshall算法，这是一个基于动态规划的算法，时间复杂度是$O(n^3)$，n是图中节点数</p>
 
-<p>假设所有节点都有一个数字编号(从1开始)，我们要把原来的问题reduce成一个个子问题，子问题有三个参数：起点 u、终点 v、能经过的节点的最大编号k，也就是求从起点 u 到终点 v 只能够经过编号为(1,2,3,…,k)的节点的最短路径问题</p>
+<p>假设所有节点都有一个数字编号(从1开始)，我们要把原来的问题reduce成一个个子问题，子问题有三个参数：起点 u、终点 v、能经过的节点的最大编号k，也就是求从起点 u 到终点 v 只能够经过编号为(1,2,3,…,k)的节点的最短路径问题 (原文表述如下)</p>
 
 <p>Let d(u, v, k) be the length of the shortest path that exists from node u to node v if you’re only allowed to use the k first nodes as intermediate nodes. </p>
 
@@ -522,13 +522,231 @@ because we’ll never find any shortcuts to improve D[v].</p>
 
 <p>根据这个式子我们很快可以得到下面的递归实现</p>
 
-<p>&#8220;`</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c">#递归版本的Floyd-Warshall算法</span>
+</span><span class="line"><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">memo</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+</span><span class="line">    <span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>                                  <span class="c"># Stored subproblem solutions</span>
+</span><span class="line">    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>                                <span class="c"># Make wrap look like func</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>                            <span class="c"># The memoized wrapper</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">args</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>                   <span class="c"># Not already computed?</span>
+</span><span class="line">            <span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>           <span class="c"># Compute &amp; cache the solution</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>                      <span class="c"># Return the cached solution</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">wrap</span>                                 <span class="c"># Return the wrapper</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">rec_floyd_warshall</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>                                <span class="c"># All shortest paths</span>
+</span><span class="line">    <span class="nd">@memo</span>                                                 <span class="c"># Store subsolutions</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">d</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>                                         <span class="c"># u to v via 1..k</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span>                           <span class="c"># Assumes v in G[u]</span>
+</span><span class="line">        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">d</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">d</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">d</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>   <span class="c"># Use k or not?</span>
+</span><span class="line">    <span class="k">return</span> <span class="p">{(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">):</span> <span class="n">d</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">))</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">G</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="p">}</span>   <span class="c"># D[u,v] = d(u,v,n)</span>
+</span><span class="line">
+</span><span class="line"><span class="c">#测试代码</span>
+</span><span class="line"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="c"># One-based</span>
+</span><span class="line"><span class="n">W</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class="line">    <span class="n">a</span><span class="p">:</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span><span class="mi">7</span><span class="p">},</span>
+</span><span class="line">    <span class="n">b</span><span class="p">:</span> <span class="p">{</span><span class="n">a</span><span class="p">:</span><span class="mi">4</span><span class="p">},</span>
+</span><span class="line">    <span class="n">c</span><span class="p">:</span> <span class="p">{</span><span class="n">b</span><span class="p">:</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span><span class="mi">2</span><span class="p">},</span>
+</span><span class="line">    <span class="n">d</span><span class="p">:</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span><span class="mi">6</span><span class="p">},</span>
+</span><span class="line">    <span class="n">e</span><span class="p">:</span> <span class="p">{</span><span class="n">a</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">W</span><span class="p">:</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">W</span><span class="p">:</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">u</span> <span class="o">==</span> <span class="n">v</span><span class="p">:</span> <span class="n">W</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">W</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span> <span class="n">W</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">inf</span>
+</span><span class="line"><span class="n">D</span> <span class="o">=</span> <span class="n">rec_floyd_warshall</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [0, -4, 1, -1, 3]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">b</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [4, 0, 5, 3, 7]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">c</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [-1, -5, 0, -2, 2]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">d</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [5, 1, 6, 0, 8]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">e</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [1, -3, 2, -4, 0]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>&#8220;`</p>
+<p>仔细看的话，不难发现这个解法和我们介绍动态规划时介绍的最长公共子序列的问题非常类似，<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/">如果还没有阅读的话不妨看下最长公共子序列问题的5种实现</a>，有了对最长公共子序列问题的理解，我们就很容易理解对于Floyd-Warshall算法我们也可以采用类似的方式来减小算法所需占用的空间，当然还要将递归版本改成性能更好些的迭代版本。</p>
 
-<p>仔细看的话，不难发现这个解法和我们介绍动态规划时介绍的最长公共子序列的问题非常类似，</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c">#空间优化后的Floyd-Warshall算法</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">floyd_warshall1</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+</span><span class="line">    <span class="n">D</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>                             <span class="c"># No intermediates yet</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>                                 <span class="c"># Look for shortcuts with k</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+</span><span class="line">            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+</span><span class="line">                <span class="n">D</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">],</span> <span class="n">D</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">v</span><span class="p">])</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">D</span>
+</span><span class="line">
+</span><span class="line"><span class="c">#测试代码</span>
+</span><span class="line"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="c"># One-based</span>
+</span><span class="line"><span class="n">W</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class="line">    <span class="n">a</span><span class="p">:</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span><span class="mi">7</span><span class="p">},</span>
+</span><span class="line">    <span class="n">b</span><span class="p">:</span> <span class="p">{</span><span class="n">a</span><span class="p">:</span><span class="mi">4</span><span class="p">},</span>
+</span><span class="line">    <span class="n">c</span><span class="p">:</span> <span class="p">{</span><span class="n">b</span><span class="p">:</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span><span class="mi">2</span><span class="p">},</span>
+</span><span class="line">    <span class="n">d</span><span class="p">:</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span><span class="mi">6</span><span class="p">},</span>
+</span><span class="line">    <span class="n">e</span><span class="p">:</span> <span class="p">{</span><span class="n">a</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">W</span><span class="p">:</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">W</span><span class="p">:</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">u</span> <span class="o">==</span> <span class="n">v</span><span class="p">:</span> <span class="n">W</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">W</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span> <span class="n">W</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">inf</span>
+</span><span class="line"><span class="n">D</span> <span class="o">=</span> <span class="n">floyd_warshall1</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [0, -4, 1, -1, 3]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [4, 0, 5, 3, 7]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [-1, -5, 0, -2, 2]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">d</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [5, 1, 6, 0, 8]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">e</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span> <span class="c"># [1, -3, 2, -4, 0]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>[未完待续…]</p>
+<p>当然啦，一般情况下，求最短路径问题我们还需要知道最短路径是什么，这个时候我们只需要在进行选择的时候设置一个前驱节点就行了</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c">#最终版本的Floyd-Warshall算法</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">floyd_warshall</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+</span><span class="line">    <span class="n">D</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="p">{}</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">u</span> <span class="o">==</span> <span class="n">v</span> <span class="ow">or</span> <span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="n">inf</span><span class="p">:</span>
+</span><span class="line">                <span class="n">P</span><span class="p">[</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class="line">            <span class="k">else</span><span class="p">:</span>
+</span><span class="line">                <span class="n">P</span><span class="p">[</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+</span><span class="line">            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+</span><span class="line">                <span class="n">shortcut</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">v</span><span class="p">]</span>
+</span><span class="line">                <span class="k">if</span> <span class="n">shortcut</span> <span class="o">&lt;</span> <span class="n">D</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]:</span>
+</span><span class="line">                    <span class="n">D</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">shortcut</span>
+</span><span class="line">                    <span class="n">P</span><span class="p">[</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">]</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">D</span><span class="p">,</span> <span class="n">P</span>
+</span><span class="line">
+</span><span class="line"><span class="c">#测试代码</span>
+</span><span class="line"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span><span class="line"><span class="n">W</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class="line">    <span class="n">a</span><span class="p">:</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span><span class="mi">7</span><span class="p">},</span>
+</span><span class="line">    <span class="n">b</span><span class="p">:</span> <span class="p">{</span><span class="n">a</span><span class="p">:</span><span class="mi">4</span><span class="p">},</span>
+</span><span class="line">    <span class="n">c</span><span class="p">:</span> <span class="p">{</span><span class="n">b</span><span class="p">:</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span><span class="mi">2</span><span class="p">},</span>
+</span><span class="line">    <span class="n">d</span><span class="p">:</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span><span class="mi">6</span><span class="p">},</span>
+</span><span class="line">    <span class="n">e</span><span class="p">:</span> <span class="p">{</span><span class="n">a</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">W</span><span class="p">:</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">W</span><span class="p">:</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">u</span> <span class="o">==</span> <span class="n">v</span><span class="p">:</span> <span class="n">W</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">W</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span> <span class="n">W</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">inf</span>
+</span><span class="line"><span class="n">D</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="n">floyd_warshall</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span><span class="c">#[0, -4, 1, -1, 3]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span><span class="c">#[4, 0, 5, 3, 7]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span><span class="c">#[-1, -5, 0, -2, 2]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">d</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span><span class="c">#[5, 1, 6, 0, 8]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">D</span><span class="p">[</span><span class="n">e</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span><span class="c">#[1, -3, 2, -4, 0]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">P</span><span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span><span class="c">#[None, 2, 0, 4, 2]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">P</span><span class="p">[</span><span class="n">b</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span><span class="c">#[1, None, 0, 4, 2]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">P</span><span class="p">[</span><span class="n">c</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span><span class="c">#[1, 2, None, 4, 2]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">P</span><span class="p">[</span><span class="n">d</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span><span class="c">#[1, 2, 3, None, 2]</span>
+</span><span class="line"><span class="k">print</span> <span class="p">[</span><span class="n">P</span><span class="p">[</span><span class="n">e</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]]</span><span class="c">#[1, 2, 3, 4, None]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
