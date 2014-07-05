@@ -312,6 +312,18 @@ print [D[e,v] for v in [a, b, c, d, e]] # [1, -3, 2, -4, 0]
 
 仔细看的话，不难发现这个解法和我们介绍动态规划时介绍的最长公共子序列的问题非常类似，[如果还没有阅读的话不妨看下最长公共子序列问题的5种实现这篇文章](http://hujiaweibujidao.github.io/blog/2014/05/19/longest-common-subsequence/)，有了对最长公共子序列问题的理解，我们就很容易发现对于Floyd-Warshall算法我们也可以采用类似的方式来减小算法所需占用的空间，当然首先要将递归版本改成性能更好些的迭代版本。
 
+Floyd-Warshall算法的递推公式
+
+$$
+d_{ij}^{k}= \left\{ 
+  \begin{array}{l l}
+    \omega_{ij} & \quad \text{如果k=0}\\
+    min(d_{ij}^{k-1},d_{ik}^{k-1}+d_{kj}^{k-1}) & \quad \text{如果$k \ge 1$}
+  \end{array} \right.
+$$
+
+从递推公式中可以看出，计算当前回合(k)只需要上一回合(k-1)得到的结果，所以，如果应用对于中间结果不需要的话，那么可以只使用2个nxn的矩阵，一个保存当前回合(k)的结果D(k)，另一个保存上一回合(k-1)的结果D(k-1)，待当前回合计算完了之后将其全部复制到D(k-1)中，这样就仅需要O(n^{2})的空间。
+
 ```
 #空间优化后的Floyd-Warshall算法
 def floyd_warshall1(G):
