@@ -253,9 +253,9 @@ print [D[d][v] for v in [a, b, c, d, e]] # [5, 1, 6, 0, 8]
 print [D[e][v] for v in [a, b, c, d, e]] # [1, -3, 2, -4, 0]
 ```
 
-下面我们看下Floyd-Warshall算法，这是一个基于动态规划的算法。
+下面我们看下Floyd-Warshall算法，这是一个基于动态规划的算法，时间复杂度是$O(n^3)$，n是图中节点数
 
-假设所有节点都有一个数字编号(从1开始)，我们要把原来的问题reduce成一个个子问题，子问题有三个参数：起点 u、终点 v、能经过的节点的最大编号k，也就是求从起点 u 到终点 v 只能够经过编号为(1,2,3,...,k)的节点的最短路径问题
+假设所有节点都有一个数字编号(从1开始)，我们要把原来的问题reduce成一个个子问题，子问题有三个参数：起点 u、终点 v、能经过的节点的最大编号k，也就是求从起点 u 到终点 v 只能够经过编号为(1,2,3,...,k)的节点的最短路径问题 (原文表述如下)
 
 Let d(u, v, k) be the length of the shortest path that exists from node u to node v if you’re only allowed to use the k first nodes as intermediate nodes. 
 
