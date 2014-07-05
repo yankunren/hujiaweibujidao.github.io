@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-05T18:58:10+08:00</updated>
+  <updated>2014-07-05T19:02:18+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -102,12 +102,12 @@ print D[v] # 8
       <td>V</td>
       <td>-1)条边，也就说明了我们最多只要循环地对图中的所有边都松弛(</td>
       <td>V</td>
-      <td>-1)遍就可以得到所有节点的最短路径值！</td>
+      <td>-1)遍就可以得到所有节点的最短路径值！上面的思路就是Bellman-Ford算法了，时间复杂度是$O(VE)$。</td>
     </tr>
   </tbody>
 </table>
 
-<p>下面看下算法导论上的示例图</p>
+<p>下面看下算法导论上的Bellman-Ford算法的示例图</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/bellmanford.png" alt="image" /></p>
 
@@ -116,7 +116,7 @@ print D[v] # 8
 <table>
   <tbody>
     <tr>
-      <td>上面的思路就是Bellman-Ford算法了，时间复杂度是$O(VE)$。不过上面的分析中我们漏考虑了一个关键问题，那就是如果图中存在负权回路的话不论我们松弛多少遍，该回路上的节点的最短路径值都还是会减小。所以，假设我们在 (</td>
+      <td>上面的分析很好，但是我们漏考虑了一个关键问题，那就是如果图中存在负权回路的话不论我们松弛多少遍，该回路上的节点的最短路径值都还是会减小。所以，假设我们在 (</td>
       <td>V</td>
       <td>-1) 次遍历之后再遍历一次，如果还有节点的最短路径减小的话就说明图中存在负权回路！这就引出了Bellman-Ford算法的一个重要作用：判断图中是否存在负权回路。</td>
     </tr>
@@ -227,6 +227,11 @@ print [D[v] for v in [s, t, x, y, z]] # [0, 8, 9, 5, 7]
 print s not in P # True
 print [P[v] for v in [t, x, y, z]] == [y, t, s, y] # True
 ```</p>
+
+<p>Dijkstra算法和Prim算法的实现很像，也和BFS算法实现很像，其实，如果我们把每条权值为 w 的边(u,v)想象成节点 u 和节点 v 中间有 (w-1) 个节点，且每条边都是权值为1的一条路径的话，BFS算法其实就和Dijkstra算法差不多了。</p>
+
+<p>Dijkstra算法的时间复杂度和使用的优先队列有关，上面的实现用的是最小堆，所以时间复杂度是$O(m lg n)$，其中 m 是边数，n 是节点数。</p>
+
 ]]></content>
   </entry>
   
