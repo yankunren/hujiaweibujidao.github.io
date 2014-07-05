@@ -77,5 +77,85 @@ print D[v] # 8
 
 现在我们考虑一个问题，如果我们对图中的所有边都松弛一遍会怎样？可能部分顶点的距离估计值有所改进对吧，那如果再对图中的所有边都松弛一遍又会怎样呢？可能又有部分顶点的距离估计值有所改进对吧，那到底什么时候才会没有改进呢？到底什么时候可以停止了呢？
 
-这个问题可以这么思考，假设从节点 s 到节点 v 要经过这么一条路径`p=<v0, v1, v2, v3 ... vk>`，此时v0=s, vk=v，那除了起点 s 之外，这条路径总共经过了其他 k 个顶点对吧，k 肯定小于 |V|-1 对吧，也就是说从节点 s 到节点 v 要经过一条最多只有(|V|-1)条边的路径，因为每遍松弛都是松弛所有边，那么肯定会松弛路径p中的所有边，我们可以保险地认为第 i 次循环就松弛边$$<v_{i-1}, v_{i}>$$，这样的话经过 k 次松弛遍历，我们肯定能够得到节点 v 的准确的距离值，再根据这条路径最多只有(|V|-1)条边，也就说明了我们最多只要循环地对图中的所有边都松弛(|V|-1)遍就可以得到所有节点的最短距离值！
+这个问题可以这么思考，假设从源点 s 到节点 v 的最短路径是`p=<v0, v1, v2, v3 ... vk>`，此时v0=s, vk=v，那除了源点 s 之外，这条路径总共经过了其他 k 个顶点对吧，k 肯定小于 |V|-1 对吧，也就是说从节点 s 到节点 v 要经过一条最多只有(|V|-1)条边的路径，因为每遍松弛都是松弛所有边，那么肯定会松弛路径p中的所有边，我们可以保险地认为第 i 次循环就松弛边$$<v_{i-1}, v_{i}>$$，这样的话经过 k 次松弛遍历，我们肯定能够得到节点 v 的最短路径值，再根据这条路径最多只有(|V|-1)条边，也就说明了我们最多只要循环地对图中的所有边都松弛(|V|-1)遍就可以得到所有节点的最短路径值！
+
+下面看下算法导论上的示例图
+
+![image](http://hujiaweibujidao.github.io/images/algos/bellmanford.png)
+
+[上图的解释，需要注意的是，如果边的松弛顺序不同，可能中间得到的结果不同，但是最后的结果都是一样的：The execution of the Bellman-Ford algorithm. The source is vertex s. The d values are shown within the vertices, and shaded edges indicate predecessor values: if edge (u, v) is shaded, then π[v] = u. In this particular example, each pass relaxes the edges in the order (t, x), (t, y), (t, z), (x, t), (y, x), (y, z), (z, x), (z, s), (s, t), (s, y). (a) The situation just before the first pass over the edges. (b)-(e) The situation after each successive pass over the edges. The d and π values in part (e) are the final values. The Bellman-Ford algorithm returns TRUE in this example.]
+
+上面的思路就是Bellman-Ford算法了，时间复杂度是$O(VE)$。不过上面的分析中我们漏考虑了一个关键问题，那就是如果图中存在负权回路的话不论我们松弛多少遍，该回路上的节点的最短路径值都还是会减小。所以，假设我们在 (|V|-1) 次遍历之后再遍历一次，如果还有节点的最短路径减小的话就说明图中存在负权回路！这就引出了Bellman-Ford算法的一个重要作用：判断图中是否存在负权回路。
+
+```python
+#Bellman-Ford算法
+def bellman_ford(G, s):
+    D, P = {s:0}, {}                            # Zero-dist to s; no parents
+    for rnd in G:                               # n = len(G) rounds
+        changed = False                         # No changes in round so far
+        for u in G:                             # For every from-node...
+            for v in G[u]:                      # ... and its to-nodes...
+                if relax(G, u, v, D, P):        # Shortcut to v from u?
+                    changed = True              # Yes! So something changed
+        if not changed: break                   # No change in round: Done
+    else:                                       # Not done before round n?
+        raise ValueError('negative cycle')      # Negative cycle detected
+    return D, P                                 # Otherwise: D and P correct
+
+#测试代码
+s, t, x, y, z = range(5)
+W = {
+    s: {t:6, y:7},
+    t: {x:5, y:8, z:-4},
+    x: {t:-2},
+    y: {x:-3, z:9},
+    z: {s:2, x:7}
+    }
+D, P = bellman_ford(W, s)
+print [D[v] for v in [s, t, x, y, z]] # [0, 2, 4, 7, -2]
+print s not in P # True
+print [P[v] for v in [t, x, y, z]] == [x, y, s, t] # True
+W[s][t] = -100
+print bellman_ford(W, s)
+# Traceback (most recent call last):
+#         ...
+# ValueError: negative cycle
+```
+
+前面我们在动态规划中介绍了一个DAG图中的最短路径算法，它的时间复杂度是$O(V+E)$的，下面我们用松弛的思路来快速回顾一下那个算法的迭代版本。因为它先对顶点进行了拓扑排序，所以它是一个典型的通过修改边松弛的顺序来提高算法运行速度的算法。也就是说，我们沿着拓扑排序得到的节点的顺序来进行松弛，怎么松弛呢？当我们到达一个节点时我们就松弛这个节点的出边，为什么这种方式能够奏效呢？
+
+这里还是假设从源点 s 到节点 v 的最短路径是`p=<v0, v1, v2, v3 ... vk>`，此时v0=s, vk=v，如果我们到达了节点 v，那么说明源点 s 和节点 v 之间的那些点都已经经过了(节点是经过了拓扑排序的哟)，而且它们的边也都已经松弛过了，所以当我们到达节点 v 时我们能够直接得到源点 s 到节点 v 的最短路径值。
+
+![image](http://hujiaweibujidao.github.io/images/algos/dagsp.png)
+
+[上图的解释：The execution of the algorithm for shortest paths in a directed acyclic graph. The vertices are topologically sorted from left to right. The source vertex is s. The d values are shown within the vertices, and shaded edges indicate the π values. (a) The situation before the first iteration of the for loop of lines 3-5. (b)-(g) The situation after each iteration of the for loop of lines 3-5. The newly blackened vertex in each iteration was used as u in that iteration. The values shown in part (g) are the final values.]
+
+接下来我们看下Dijkstra算法，它看起来非常像Prim算法，同样是基于贪心策略，每次贪心地选择松弛距离最近的“边缘节点”所在的那条边(另一个节点在已经包含的节点集合中)，那为什么这种方式也能奏效呢？因为算法导论给出了完整的证明，不信你去看看！呵呵，开玩笑的啦，如果光说有证明就用不着我来写文章咯，其实是因为Dijkstra算法隐藏了一个DAG最短路径算法，而DAG的最短路径问题我们上面已经介绍过了，仔细看也不难发现，它们的区别就是松弛的顺序不同，DAG最短路径算法是先进行拓扑排序然后松弛，而Dijkstra算法是每次直接贪心地选择一条边来松弛。那为什么Dijkstra算法隐藏了一个DAG？
+
+[**这里我想了好久怎么解释，但是还是觉得原文实在太精彩，我水平也实在有限难以说明白，故这里附上原文，前面部分作者解释了为什么DAG最短路径算法中边松弛的顺序和拓扑排序有关，然后作者继续解释(Dijkstra算法中)下一个要加入(到已包含的节点集合)的节点必须有正确的距离估计值，最后作者解释了这个节点肯定是那个具有最小距离估计值的节点！一切顺风顺水，但是有一个重点，那就是边不能有负权值，这是Dijkstra算法的重要前提条件**]
+
+作者下面的解释中提到的图9-1
+
+![image](http://hujiaweibujidao.github.io/images/algos/dijkstra0.png)
+
+To get thing started, we can imagine that we already know the distances from the start node to each of the others. We don’t, of course, but this imaginary situation can help our reasoning. Imagine ordering the nodes, left to right, based on their distance. What happens? For the general case—not much. However, we’re assuming that we have no negative edge weights, and that makes all the difference.
+
+Because all edges are positive, the only nodes that can contribute to a node’s solution will lie to its left in our hypothetical ordering. It will be impossible to locate a node to the right that will help us find a shortcut, because this node is further away, and could only give us a shortcut if it had a negative back edge. The positive back edges are completely useless to us, and aren’t part of the problem structure. What remains, then, is a DAG, and the topological ordering we’d like to use is exactly the hypothetical ordering we started with: nodes sorted by their actual distance. See Figure 9-1 for an illustration of this structure. (I’ll get back to the question marks in a minute.)
+
+Predictably enough, we now hit the major gap in the solution: it’s totally circular. In uncovering the basic problem structure (decomposing into subproblems or finding the hidden DAG), we’ve assumed that we’ve already solved the problem. The reasoning has still been useful, though, because we now have something specific to look for. We want to find the ordering—and we can find it with our trusty workhorse, induction!
+
+Consider, again, Figure 9-1. Assume that the highlighted node is the one we’re trying to identify in our inductive step (meaning that the earlier ones have been identified and already have correct distance estimates). Just like in the ordinary DAG shortest path problem, we’ll be relaxing all out-edges for each node, as soon as we’ve identified it and determined its correct distance. That means that we’ve relaxed the edges out of all earlier nodes. We haven’t relaxed the out-edges of later nodes, but as discussed, they can’t matter: the distance estimates of these later nodes are upper bounds, and the back-edges have positive weights, so there’s no way they can contribute to a shortcut.
+
+This means (by the earlier relaxation properties or the discussion of the DAG shortest path algorithm in Chapter 8) that the next node must have a correct distance estimate. That is, the highlighted node in Figure 9-1 must by now have received its correct distance estimate, because we’ve relaxed all edges out of the first three nodes. This is very good news, and all that remains is to figure out which node it is. We still don’t really know what the ordering is, remember? We’re figuring out the topological sorting as we go along, step by step.
+
+There is only one node that could possibly be the next one, of course:3 the one with the lowest distance estimate. We know it’s next in the sorted order, and we know it has a correct estimate; because these estimates are upper bounds, none of the later nodes could possibly have lower estimates. Cool, no? And now, by induction, we’ve solved the problem. We just relax all out-edges of the nodes of each node in distance order—which means always taking the one with the lowest estimate next.
+
+----------
+
+下图是算法导论中Dijkstra算法的示例图，可以参考下
+
+![image](http://hujiaweibujidao.github.io/images/algos/dijkstra.png)
+
+[上图的解释：The execution of Dijkstra's algorithm. The source s is the leftmost vertex. The shortest-path estimates are shown within the vertices, and shaded edges indicate predecessor values. Black vertices are in the set S, and white vertices are in the min-priority queue Q = V - S. (a) The situation just before the first iteration of the while loop of lines 4-8. The shaded vertex has the minimum d value and is chosen as vertex u in line 5. (b)-(f) The situation after each successive iteration of the while loop. The shaded vertex in each part is chosen as vertex u in line 5 of the next iteration. The d and π values shown in part (f) are the final values.]
+
 
