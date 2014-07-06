@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-06T10:38:39+08:00</updated>
+  <updated>2014-07-06T15:03:47+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -3674,6 +3674,229 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Problem: Delte Number Problem]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/05/20/delete-number-problem/"/>
+    <updated>2014-05-20T23:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/05/20/delete-number-problem</id>
+    <content type="html"><![CDATA[<h4 id="centerproblem-delte-number-problemcenter"><center>Problem: Delte Number Problem</center></h4>
+
+<h4 id="section">1.问题描述</h4>
+<p>现有一个n位数，你需要删除其中的k位，请问如何删除才能使得剩下的数最大？</p>
+
+<p>比如当数为2319274 k=1时，删去2变成319274后是可能的最大值。</p>
+
+<h4 id="section-1">2.问题分析</h4>
+
+<h5 id="section-2">[1]贪心解法</h5>
+
+<p>这题可以使用贪心策略，每次从高位向低位数，删除高位比低位数字小的那位上的数字，直到删除了k位之后，得到的数字肯定是最大值。</p>
+
+<p>(1)删数问题具有最优子结构：</p>
+
+<p>假设
+<script type="math/tex">a=x_{1}10^{n-1}+x_{2}10^{n-2}+ ··· +x_{p}10^{n-p}+x_{q}10^{n-q}+x_{r}10^{n-r} ··· +x_{n}</script>
+有$x<em>{q}&lt;x</em>{r}$，即要删除$x<em>{q}$则有：
+<script type="math/tex">a_{1}=x_{1}10^{n-2}+x_{2}10^{n-3}+ ··· +x_{p}10^{n-p-1}+x_{r}10^{n-r} ··· +x_{n}</script>
+假设删去的不是$x</em>{q}$，而是其它位，则有：
+<script type="math/tex">a_{2}=x_{1}10^{n-2}+x_{2}10^{n-3}+ ··· +x_{p}10^{n-p-1}+x_{q}10^{n-q} ··· +x_{n}</script>
+由于$x<em>{1}&gt;x</em>{2}&gt;···&gt;x<em>{p}&gt;x</em>{q}$且$x<em>{q}&lt;x</em>{r}$，则有$a<em>{1}&gt;a</em>{2}$。
+因此，删数问题满足最优子结构性质。</p>
+
+<p>(2)删数问题具有贪心选择性质：</p>
+
+<p>设问题T已按照上面的方法删除，假设
+<script type="math/tex">A=(y_{1},y_{2}, ···,y_{k})</script>
+是删数问题的一个最优解。易知，若问题有解，则$1≤ k ≤ n$。
+(1)当k=1时，由前得证，$A=(y<em>{1},A’)$是问题的最优解，其中$A’$是$A$中不删除了$y</em>{1}$而删除其他位的最优解；
+(2)当k=q时，由反证法，可得$A=(y<em>{1},y</em>{2} ··· ,y<em>{q})$是最优解；
+当k=q+1时，由前得证，$A=(y</em>{1},y<em>{2} ··· ,y</em>{q}+ y_{q}+1)$是最优解。
+所以，删数问题具有贪心选择性质。</p>
+
+<p>代码很容易实现，AC，1.484s，1.089MB</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">#include &lt;string&gt;
+</span><span class="line">#include &lt;iostream&gt;
+</span><span class="line">using namespace std;
+</span><span class="line">int t,k,len;
+</span><span class="line">string name;
+</span><span class="line">void deletek(){
+</span><span class="line">    int tlen=name.length();
+</span><span class="line">    int tk=k;
+</span><span class="line">    bool flag=true;
+</span><span class="line">    while (k--&gt; 0 &amp;&amp; flag) {
+</span><span class="line">        flag=false;
+</span><span class="line">        len = name.length();
+</span><span class="line">        for (int i=0; i&lt;len; i++) {
+</span><span class="line">            if (i+1&lt;len &amp;&amp; name[i]&lt;name[i+1]) {
+</span><span class="line">                name.erase(i,1);
+</span><span class="line">                len--;
+</span><span class="line">                flag=true;
+</span><span class="line">                break;
+</span><span class="line">            }
+</span><span class="line">        }
+</span><span class="line">    }
+</span><span class="line">    cout &lt;&lt; name.substr(0,tlen-tk) &lt;&lt; endl;
+</span><span class="line">}
+</span><span class="line">int main(int argc, const char * argv[])
+</span><span class="line">{
+</span><span class="line">    cin &gt;&gt; t;
+</span><span class="line">    while (t--&gt;0) {
+</span><span class="line">        cin &gt;&gt; name;
+</span><span class="line">        cin &gt;&gt; k;
+</span><span class="line">        deletek();
+</span><span class="line">    }
+</span><span class="line">    return 0;
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>[2]动态规划解法</p>
+
+<p>根据上面的分析可以看出此题还可用动态规划来解决，思路如下：</p>
+
+<p>假设$A(i,j)$表示输入数字(字符串)的从第i位到第j位数字组成的字符串，$S(i,j)$表示前i位中删除j位得到的最优解，它实际上可以看做两个子问题：如果删除第j位，那么$S(i,j)$等于前i-1位删除j-1位的最优解加上第j位数字；如果不删除第j位，那么$S(i,j)$等于前i-1位删除j位的最优解。于是便有下面的递推式：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+S(i,j)= \left\{ 
+  \begin{array}{l l}
+    A(0,i) & \quad \text{此时j=0}\\
+    min({S(i-1,j-1),S(i-1,j)+A(j,j)}) & \quad \text{此时0<j<i}
+  \end{array} \right.
+ %]]&gt;</script>
+
+<p>这个递推式非常类似最长公共子序列问题的递推式，所以解法也类似，在空间方面可以只使用一个一维数组，加上一个额外的O(1)的空间，计算过程如下面制作的表格所示，除了第一列，其他中间元素都只依赖于上面一行对应位置$S(i-1,j)$和上面一行左边位置$S(i-1,j-1)$两个元素的大小，比较的是字符串，使用字典序进行比较，C++内置的字符串比较函数<code>compare</code>即可。</p>
+
+<p><img src="https://lh6.googleusercontent.com/-3cF_n2rqwAw/U4FDVPzYBPI/AAAAAAAAAdA/fMqc-6v-A8g/s0/algosexp2.png" alt="image" /></p>
+
+<p>动态规划实现代码 [这份代码没有AC，只能得到60分就超时了，应该还可以改进]</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">#include &lt;string&gt;
+</span><span class="line">#include &lt;iostream&gt;
+</span><span class="line">using namespace std;
+</span><span class="line">#define MAX_K 1001
+</span><span class="line">int t,k;
+</span><span class="line">string name;string up;string last;string temp;
+</span><span class="line">void deletek(){
+</span><span class="line">    int len=name.length();
+</span><span class="line">    if(k&gt;=len){
+</span><span class="line">        cout &lt;&lt; "" &lt;&lt; endl;
+</span><span class="line">        return;
+</span><span class="line">    }
+</span><span class="line">    string cur[MAX_K]={""};
+</span><span class="line">    for (int i=1; i &lt;= len; i++) {
+</span><span class="line">        for (int j=0; j &lt; i &amp;&amp; j &lt;= k; j++) {//
+</span><span class="line">            if (j==0) {//sub string
+</span><span class="line">                last=cur[j];
+</span><span class="line">                cur[j]=name.substr(0,i);
+</span><span class="line">            }else{//0 &lt; j &lt;= i
+</span><span class="line">                up=cur[j]+name[i-1];//
+</span><span class="line">                if (up.compare(last)&gt;=0) {//up &gt; left
+</span><span class="line">                    last=cur[j];
+</span><span class="line">                    cur[j]=up;
+</span><span class="line">                }else{//up &lt; left
+</span><span class="line">                    temp=cur[j];
+</span><span class="line">                    cur[j]=last;
+</span><span class="line">                    last=temp;
+</span><span class="line">                }
+</span><span class="line">            }
+</span><span class="line">        }
+</span><span class="line">    }
+</span><span class="line">    cout &lt;&lt; cur[k] &lt;&lt; endl;
+</span><span class="line">}
+</span><span class="line">int main(int argc, const char * argv[])
+</span><span class="line">{
+</span><span class="line">    cin &gt;&gt; t;
+</span><span class="line">    while (t--&gt;0) {
+</span><span class="line">        cin &gt;&gt; name;
+</span><span class="line">        cin &gt;&gt; k;
+</span><span class="line">        deletek();
+</span><span class="line">    }
+</span><span class="line">    return 0;
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>从这道题中可以看出，虽然动态规划每次做出当前情况下最好的决策，但是为了做出最好的决策花费了大量的时间和空间，对于删数问题贪心算法应该是较好的解决方案。</p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/20/delete-number-problem/">http://hujiaweibujidao.github.io/blog/2014/05/20/delete-number-problem/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[CSU beautiful scenery]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/05/20/csu-beautiful-scenery/"/>
     <updated>2014-05-20T09:11:00+08:00</updated>
@@ -4323,54 +4546,6 @@ $E(X-Y)=E(X)-E(Y) \quad Var(X-Y)=Var(X)+Var(Y)$</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/">http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Statistics Summary]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary/"/>
-    <updated>2014-05-19T18:00:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary</id>
-    <content type="html"><![CDATA[<p><strong><center>统计学那些事 Things of Statistics</center></strong>
-<strong><center>逸夫图书馆, 2014/5/19</center></strong></p>
-
-<hr />
-
-<h4 id="center-center"><center>第零部分 碎碎念</center></h4>
-<p>本系列是对概率和数理统计中的重要内容的一个总结，不会侧重很多众所周知的细节，所以有啥疑问还是需要Google或者Wikipedia。关于本系列中出现的术语参照参考书籍中的定义，部分可能与大学教材中不同，请自行对应起来理解。小弟才疏学浅，若有错误请留言，欢迎批评指正。</p>
-
-<p>参考书籍：</p>
-
-<p>1.<a href="http://book.douban.com/subject/2985995/">《爱上统计学》</a></p>
-
-<p>2.<a href="http://book.douban.com/subject/7056708/">《深入浅出统计学》</a></p>
-
-<p>3.<a href="http://book.douban.com/subject/24381562/">《统计思维：程序员数学之概率统计》</a></p>
-
-<p>4.<a href="http://book.douban.com/subject/3165271/">《概率论与数理统计》</a></p>
-
-<p>全部内容：</p>
-
-<p>1.<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/">概率和统计量</a></p>
-
-<p>2.<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/">协方差和相关关系</a></p>
-
-<p>3.随机变量的分布</p>
-
-<p>(1)<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/">分布之离散型随机变量分布</a></p>
-
-<p>(2)<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-1/">分布之连续型随机变量分布</a></p>
-
-<p>(3)<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2-2/">分布之多维随机变量及其分布</a></p>
-
-<p>4.<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-4/">假设检验</a></p>
-
-<p>To do list: 显著性检验，ANOVA……</p>
-
-<p>[To be Continued…]</p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary/">http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
