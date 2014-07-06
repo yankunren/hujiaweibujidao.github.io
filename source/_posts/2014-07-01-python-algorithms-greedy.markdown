@@ -318,6 +318,7 @@ def greedy(E, S, w):
 
 ----------
 
-我不喜欢贪心算法，本节没有练习，嗯，就是这样啦...
+练习：[试试这道删数问题吧，这里对比了贪心算法和动态规划算法两种解法](http://hujiaweibujidao.github.io/blog/2014/05/20/delete-number-problem/)
+
 
 
