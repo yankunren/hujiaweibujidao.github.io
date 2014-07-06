@@ -6,7 +6,7 @@ comments: true
 categories: algorithm
 ---
 
-#### <center>Problem: Delte Number Problem</center>
+#### <center>Problem: Delete Number Problem</center>
 
 ####1.问题描述
 现有一个n位数，你需要删除其中的k位，请问如何删除才能使得剩下的数最大？
