@@ -94,7 +94,7 @@ $$
 
 这个递推式非常类似最长公共子序列问题的递推式，所以解法也类似，在空间方面可以只使用一个一维数组，加上一个额外的O(1)的空间，计算过程如下面制作的表格所示，除了第一列，其他中间元素都只依赖于上面一行对应位置$S(i-1,j)$和上面一行左边位置$S(i-1,j-1)$两个元素的大小，比较的是字符串，使用字典序进行比较，C++内置的字符串比较函数`compare`即可。
 
-![image](https://lh6.googleusercontent.com/-3cF_n2rqwAw/U4FDVPzYBPI/AAAAAAAAAdA/fMqc-6v-A8g/s0/algosexp2.png)
+![image](https://hujiaweibujidao.github.io/images/algos/algosexp2.png)
 
 动态规划实现代码 [这份代码没有AC，只能得到60分就超时了，应该还可以改进]
 
