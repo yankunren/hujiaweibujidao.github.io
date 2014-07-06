@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-06T15:03:47+08:00</updated>
+  <updated>2014-07-06T15:10:16+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -1429,7 +1429,7 @@ Professor Stewart is consulting for the president of a corporation that is plann
 
 <hr />
 
-<p>我不喜欢贪心算法，本节没有练习，嗯，就是这样啦…</p>
+<p>练习：<a href="http://hujiaweibujidao.github.io/blog/2014/05/20/delete-number-problem/">试试这道删数问题吧，这里对比了贪心算法和动态规划算法两种解法</a></p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-greedy/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-greedy/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
@@ -3695,11 +3695,13 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 
 <p>假设
 <script type="math/tex">a=x_{1}10^{n-1}+x_{2}10^{n-2}+ ··· +x_{p}10^{n-p}+x_{q}10^{n-q}+x_{r}10^{n-r} ··· +x_{n}</script>
-有$x<em>{q}&lt;x</em>{r}$，即要删除$x<em>{q}$则有：
+有<script type="math/tex">% &lt;![CDATA[
+x_{q}<x_{r} %]]&gt;</script>，即要删除<script type="math/tex">x_{q}</script>则有：
 <script type="math/tex">a_{1}=x_{1}10^{n-2}+x_{2}10^{n-3}+ ··· +x_{p}10^{n-p-1}+x_{r}10^{n-r} ··· +x_{n}</script>
-假设删去的不是$x</em>{q}$，而是其它位，则有：
+假设删去的不是<script type="math/tex">x_{q}</script>，而是其它位，则有：
 <script type="math/tex">a_{2}=x_{1}10^{n-2}+x_{2}10^{n-3}+ ··· +x_{p}10^{n-p-1}+x_{q}10^{n-q} ··· +x_{n}</script>
-由于$x<em>{1}&gt;x</em>{2}&gt;···&gt;x<em>{p}&gt;x</em>{q}$且$x<em>{q}&lt;x</em>{r}$，则有$a<em>{1}&gt;a</em>{2}$。
+由于<script type="math/tex">x_{1}>x_{2}>···>x_{p}>x_{q}</script>且<script type="math/tex">% &lt;![CDATA[
+x_{q}<x_{r} %]]&gt;</script>，则有<script type="math/tex">a_{1}>a_{2}</script>。
 因此，删数问题满足最优子结构性质。</p>
 
 <p>(2)删数问题具有贪心选择性质：</p>
@@ -3707,14 +3709,14 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 <p>设问题T已按照上面的方法删除，假设
 <script type="math/tex">A=(y_{1},y_{2}, ···,y_{k})</script>
 是删数问题的一个最优解。易知，若问题有解，则$1≤ k ≤ n$。
-(1)当k=1时，由前得证，$A=(y<em>{1},A’)$是问题的最优解，其中$A’$是$A$中不删除了$y</em>{1}$而删除其他位的最优解；
-(2)当k=q时，由反证法，可得$A=(y<em>{1},y</em>{2} ··· ,y<em>{q})$是最优解；
-当k=q+1时，由前得证，$A=(y</em>{1},y<em>{2} ··· ,y</em>{q}+ y_{q}+1)$是最优解。
+(1)当k=1时，由前得证，<script type="math/tex">A=(y_{1},A’)</script>是问题的最优解，其中$A’$是$A$中不删除了<script type="math/tex">y_{1}</script>而删除其他位的最优解；
+(2)当k=q时，由反证法，可得<script type="math/tex">A=(y_{1},y_{2} ··· ,y_{q})</script>是最优解；
+当k=q+1时，由前得证，<script type="math/tex">A=(y_{1},y_{2} ··· ,y_{q}+ y_{q}+1)</script>是最优解。
 所以，删数问题具有贪心选择性质。</p>
 
 <p>代码很容易实现，AC，1.484s，1.089MB</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -3747,39 +3749,40 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 <span class="line-number">31</span>
 <span class="line-number">32</span>
 <span class="line-number">33</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">#include &lt;string&gt;
-</span><span class="line">#include &lt;iostream&gt;
-</span><span class="line">using namespace std;
-</span><span class="line">int t,k,len;
-</span><span class="line">string name;
-</span><span class="line">void deletek(){
-</span><span class="line">    int tlen=name.length();
-</span><span class="line">    int tk=k;
-</span><span class="line">    bool flag=true;
-</span><span class="line">    while (k--&gt; 0 &amp;&amp; flag) {
-</span><span class="line">        flag=false;
-</span><span class="line">        len = name.length();
-</span><span class="line">        for (int i=0; i&lt;len; i++) {
-</span><span class="line">            if (i+1&lt;len &amp;&amp; name[i]&lt;name[i+1]) {
-</span><span class="line">                name.erase(i,1);
-</span><span class="line">                len--;
-</span><span class="line">                flag=true;
-</span><span class="line">                break;
-</span><span class="line">            }
-</span><span class="line">        }
-</span><span class="line">    }
-</span><span class="line">    cout &lt;&lt; name.substr(0,tlen-tk) &lt;&lt; endl;
-</span><span class="line">}
-</span><span class="line">int main(int argc, const char * argv[])
-</span><span class="line">{
-</span><span class="line">    cin &gt;&gt; t;
-</span><span class="line">    while (t--&gt;0) {
-</span><span class="line">        cin &gt;&gt; name;
-</span><span class="line">        cin &gt;&gt; k;
-</span><span class="line">        deletek();
-</span><span class="line">    }
-</span><span class="line">    return 0;
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="cpp"><span class="line"><span class="cp">#include &lt;string&gt;</span>
+</span><span class="line"><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class="line"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span><span class="line"><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">len</span><span class="p">;</span>
+</span><span class="line"><span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+</span><span class="line"><span class="kt">void</span> <span class="n">deletek</span><span class="p">(){</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">tlen</span><span class="o">=</span><span class="n">name</span><span class="p">.</span><span class="n">length</span><span class="p">();</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">tk</span><span class="o">=</span><span class="n">k</span><span class="p">;</span>
+</span><span class="line">    <span class="kt">bool</span> <span class="n">flag</span><span class="o">=</span><span class="kc">true</span><span class="p">;</span>
+</span><span class="line">    <span class="k">while</span> <span class="p">(</span><span class="n">k</span><span class="o">--&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">flag</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="n">flag</span><span class="o">=</span><span class="kc">false</span><span class="p">;</span>
+</span><span class="line">        <span class="n">len</span> <span class="o">=</span> <span class="n">name</span><span class="p">.</span><span class="n">length</span><span class="p">();</span>
+</span><span class="line">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">&lt;</span><span class="n">len</span> <span class="o">&amp;&amp;</span> <span class="n">name</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="n">name</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+</span><span class="line">                <span class="n">name</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+</span><span class="line">                <span class="n">len</span><span class="o">--</span><span class="p">;</span>
+</span><span class="line">                <span class="n">flag</span><span class="o">=</span><span class="kc">true</span><span class="p">;</span>
+</span><span class="line">                <span class="k">break</span><span class="p">;</span>
+</span><span class="line">            <span class="p">}</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">name</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">tlen</span><span class="o">-</span><span class="n">tk</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">t</span><span class="p">;</span>
+</span><span class="line">    <span class="k">while</span> <span class="p">(</span><span class="n">t</span><span class="o">--&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">name</span><span class="p">;</span>
+</span><span class="line">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">k</span><span class="p">;</span>
+</span><span class="line">        <span class="n">deletek</span><span class="p">();</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>[2]动态规划解法</p>
 
@@ -3802,7 +3805,7 @@ S(i,j)= \left\{
 
 <p>动态规划实现代码 [这份代码没有AC，只能得到60分就超时了，应该还可以改进]</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -3845,49 +3848,50 @@ S(i,j)= \left\{
 <span class="line-number">41</span>
 <span class="line-number">42</span>
 <span class="line-number">43</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">#include &lt;string&gt;
-</span><span class="line">#include &lt;iostream&gt;
-</span><span class="line">using namespace std;
-</span><span class="line">#define MAX_K 1001
-</span><span class="line">int t,k;
-</span><span class="line">string name;string up;string last;string temp;
-</span><span class="line">void deletek(){
-</span><span class="line">    int len=name.length();
-</span><span class="line">    if(k&gt;=len){
-</span><span class="line">        cout &lt;&lt; "" &lt;&lt; endl;
-</span><span class="line">        return;
-</span><span class="line">    }
-</span><span class="line">    string cur[MAX_K]={""};
-</span><span class="line">    for (int i=1; i &lt;= len; i++) {
-</span><span class="line">        for (int j=0; j &lt; i &amp;&amp; j &lt;= k; j++) {//
-</span><span class="line">            if (j==0) {//sub string
-</span><span class="line">                last=cur[j];
-</span><span class="line">                cur[j]=name.substr(0,i);
-</span><span class="line">            }else{//0 &lt; j &lt;= i
-</span><span class="line">                up=cur[j]+name[i-1];//
-</span><span class="line">                if (up.compare(last)&gt;=0) {//up &gt; left
-</span><span class="line">                    last=cur[j];
-</span><span class="line">                    cur[j]=up;
-</span><span class="line">                }else{//up &lt; left
-</span><span class="line">                    temp=cur[j];
-</span><span class="line">                    cur[j]=last;
-</span><span class="line">                    last=temp;
-</span><span class="line">                }
-</span><span class="line">            }
-</span><span class="line">        }
-</span><span class="line">    }
-</span><span class="line">    cout &lt;&lt; cur[k] &lt;&lt; endl;
-</span><span class="line">}
-</span><span class="line">int main(int argc, const char * argv[])
-</span><span class="line">{
-</span><span class="line">    cin &gt;&gt; t;
-</span><span class="line">    while (t--&gt;0) {
-</span><span class="line">        cin &gt;&gt; name;
-</span><span class="line">        cin &gt;&gt; k;
-</span><span class="line">        deletek();
-</span><span class="line">    }
-</span><span class="line">    return 0;
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="cpp"><span class="line"><span class="cp">#include &lt;string&gt;</span>
+</span><span class="line"><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class="line"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span><span class="line"><span class="cp">#define MAX_K 1001</span>
+</span><span class="line"><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">k</span><span class="p">;</span>
+</span><span class="line"><span class="n">string</span> <span class="n">name</span><span class="p">;</span><span class="n">string</span> <span class="n">up</span><span class="p">;</span><span class="n">string</span> <span class="n">last</span><span class="p">;</span><span class="n">string</span> <span class="n">temp</span><span class="p">;</span>
+</span><span class="line"><span class="kt">void</span> <span class="n">deletek</span><span class="p">(){</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">len</span><span class="o">=</span><span class="n">name</span><span class="p">.</span><span class="n">length</span><span class="p">();</span>
+</span><span class="line">    <span class="k">if</span><span class="p">(</span><span class="n">k</span><span class="o">&gt;=</span><span class="n">len</span><span class="p">){</span>
+</span><span class="line">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line">        <span class="k">return</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="n">string</span> <span class="n">cur</span><span class="p">[</span><span class="n">MAX_K</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;&quot;</span><span class="p">};</span>
+</span><span class="line">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span><span class="c1">//</span>
+</span><span class="line">            <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="c1">//sub string</span>
+</span><span class="line">                <span class="n">last</span><span class="o">=</span><span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span><span class="line">                <span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">name</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+</span><span class="line">            <span class="p">}</span><span class="k">else</span><span class="p">{</span><span class="c1">//0 &lt; j &lt;= i</span>
+</span><span class="line">                <span class="n">up</span><span class="o">=</span><span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">name</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span><span class="c1">//</span>
+</span><span class="line">                <span class="k">if</span> <span class="p">(</span><span class="n">up</span><span class="p">.</span><span class="n">compare</span><span class="p">(</span><span class="n">last</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="c1">//up &gt; left</span>
+</span><span class="line">                    <span class="n">last</span><span class="o">=</span><span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span><span class="line">                    <span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">up</span><span class="p">;</span>
+</span><span class="line">                <span class="p">}</span><span class="k">else</span><span class="p">{</span><span class="c1">//up &lt; left</span>
+</span><span class="line">                    <span class="n">temp</span><span class="o">=</span><span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span><span class="line">                    <span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">last</span><span class="p">;</span>
+</span><span class="line">                    <span class="n">last</span><span class="o">=</span><span class="n">temp</span><span class="p">;</span>
+</span><span class="line">                <span class="p">}</span>
+</span><span class="line">            <span class="p">}</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">cur</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">t</span><span class="p">;</span>
+</span><span class="line">    <span class="k">while</span> <span class="p">(</span><span class="n">t</span><span class="o">--&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">name</span><span class="p">;</span>
+</span><span class="line">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">k</span><span class="p">;</span>
+</span><span class="line">        <span class="n">deletek</span><span class="p">();</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>从这道题中可以看出，虽然动态规划每次做出当前情况下最好的决策，但是为了做出最好的决策花费了大量的时间和空间，对于删数问题贪心算法应该是较好的解决方案。</p>
 

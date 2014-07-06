@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-06T15:03:47+08:00</updated>
+  <updated>2014-07-06T15:10:16+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -1029,7 +1029,7 @@ def greedy(E, S, w):
 
 <hr />
 
-<p>我不喜欢贪心算法，本节没有练习，嗯，就是这样啦…</p>
+<p>练习：<a href="http://hujiaweibujidao.github.io/blog/2014/05/20/delete-number-problem/">试试这道删数问题吧，这里对比了贪心算法和动态规划算法两种解法</a></p>
 
 ]]></content>
   </entry>
