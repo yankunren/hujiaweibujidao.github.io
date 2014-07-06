@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Problem: Delte Number Problem"
+title: "Problem: Delete Number Problem"
 date: 2014-05-20 23:00
 comments: true
 categories: algorithm
