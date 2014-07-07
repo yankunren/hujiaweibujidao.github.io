@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
 2.Evaluate Reverse Polish Notation
 
-栈的利用，逆波兰表达式求值
+数据结构题，栈的利用，逆波兰表达式求值
 
 **注：在Java中`6/(-132)=0`但是在Python中`6/(-132)=-1`，OJ认为0是正解，所以Python中进行除法运算时使用`int(float(m)/float(n))`。**
 
@@ -132,7 +132,7 @@ if __name__=='__main__':
 
 4.Sort List
 
-数据结构题，在常数空间复杂度以及$O(nlogn)$的空间复杂度情况下对一个单链表进行排序
+排序题，在常数空间复杂度以及$O(nlogn)$的空间复杂度情况下对一个单链表进行排序
 
 注：1.有不少人用快排超时了，因为快排在最坏的情况下时间复杂度是$O(n^2)$，所以不能通过，但是如果是[使用一种特别的partition函数的话可以通过](http://oj.leetcode.com/discuss/584/think-the-complexity-of-my-method-is-nlogn-why-still-gets-tle)，具体为啥未考究，[这个也可以参考](http://oj.leetcode.com/discuss/3344/anyone-solve-this-in-python)。
 
@@ -219,6 +219,95 @@ if __name__=='__main__':
     pass
 ```
 
+5.Insertion Sort List
+
+排序题，使用插入排序对单链表进行排序，每次插入的时候都是从头开始找该元素正确的位置，时间复杂度为$O(n^2)$
+
+```
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+class Solution:
+    # @param head, a ListNode
+    # @return a ListNode
+    def insertionSortList(self, head):
+        if not head: return head
+        fh = ListNode(0)
+        fh.next = head
+        cur = head
+        while cur.next:
+            if cur.next.val < cur.val:
+                pre = fh
+                while pre.next.val < cur.next.val:
+                    pre = pre.next
+                t = cur.next
+                cur.next = t.next
+                t.next = pre.next
+                pre.next = t
+            else:
+                cur = cur.next
+        return fh.next
+
+if __name__ == '__main__':
+    head=ListNode(-1)
+    head.next=ListNode(3)
+    head.next.next=ListNode(5)
+    head.next.next.next=ListNode(2)
+    head=Solution().insertionSortList(head)
+    while head:
+        print(head.val)
+        head=head.next
+    pass
+```
+
+6.LRU Cache
+
+应用题，LRU缓存机制的实现，注意`set`操作之后也算是一次访问，需要考虑更新LRU的元素，这里用一个list按照LRU的顺序保存对应的key值
+
+```
+class LRUCache:
+
+    # @param capacity, an integer
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.size = 0
+        self.contents = {}
+        self.lru = []
+
+    # @return an integer
+    def get(self, key):
+        if key not in self.contents: return -1
+        else: self.lru.remove(key); self.lru.append(key)
+        return self.contents[key]
+
+    # @param key, an integer
+    # @param value, an integer
+    # @return nothing
+    def set(self, key, value):
+        if key in self.contents:
+            self.contents[key]=value
+            self.lru.remove(key);
+            self.lru.append(key)
+        else: #not exist the key
+            self.size = self.size + 1
+            self.contents[key]=value
+            self.lru.append(key)
+            if self.size > self.capacity:#remove one
+                dk = self.lru.pop(0)
+                del self.contents[dk]
+                self.size = self.capacity
+
+if __name__ == '__main__': #2,[set(2,1),set(1,1),set(2,3),set(4,1),get(1),get(2)]
+    cache = LRUCache(2)
+    cache.set(2,1)
+    cache.set(1,1)
+    cache.set(2,3)
+    cache.set(4,1)
+    print cache.get(1)
+    print cache.get(2)
+```
 
 To be continued......
 
