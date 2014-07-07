@@ -7,6 +7,8 @@ categories: algorithm
 published: true
 ---
 
+最后更新时间：2014-7-7
+
 **<center>Python算法设计篇(8)</center>**
 **<center>逸夫图书馆, 2014/7/1</center>**
 
@@ -248,6 +250,9 @@ dp[i][0] = sum(max(dp[u][0], dp[u][1])) $\quad$   (如果不选i结点，u为结
 dp[i][1] = sum(dp[u][0]) + val[i]   $\quad$  (如果选i结点，val[i]表示i结点的价值)
  
 最后就是求max(dp[root][0], dp[root][1])
+
+返回[Python数据结构与算法设计篇目录](http://hujiaweibujidao.github.io/python/)
+
 
 
 
