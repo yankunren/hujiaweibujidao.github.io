@@ -7,6 +7,8 @@ categories: algorithm
 published: true
 ---
 
+最后更新时间：2014-7-7
+
 **<center>Python算法设计篇(1)</center>**
 **<center>逸夫图书馆, 2014/7/1</center>**
 
@@ -94,4 +96,5 @@ Find a way of checking whether two strings are anagrams of each other (such as "
 
 A simple and quite scalable solution would be to sort the characters in each string and compare the results. (In theory, counting the character frequencies, possibly using collections.Counter, would scale even better.) A really poor solution would be to compare all possible orderings of one string with the other. I can’t overstate how poor this solution is; in fact, algorithms don’t get much worse than this. Feel free to code it up, and see how large anagrams you can check. I bet you won’t get far.
 
+返回[Python数据结构与算法设计篇目录](http://hujiaweibujidao.github.io/python/)
 
