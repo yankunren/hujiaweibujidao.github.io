@@ -352,3 +352,5 @@ In Kosaraju’s algorithm, we find starting nodes for the final traversal by des
 
 Try finding a simple example where this would give the wrong answer. (You can do it with a really small graph.)
 
+返回[Python数据结构与算法设计篇目录](http://hujiaweibujidao.github.io/python/)
+
