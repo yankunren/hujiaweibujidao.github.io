@@ -7,6 +7,8 @@ categories: algorithm
 published: true
 ---
 
+最后更新时间：2014-7-7
+
 **<center>Python算法设计篇(7)</center>**
 **<center>逸夫图书馆, 2014/7/1</center>**
 
@@ -320,5 +322,5 @@ def greedy(E, S, w):
 
 练习：[试试这道删数问题吧，这里对比了贪心算法和动态规划算法两种解法](http://hujiaweibujidao.github.io/blog/2014/05/20/delete-number-problem/)
 
-
+返回[Python数据结构与算法设计篇目录](http://hujiaweibujidao.github.io/python/)
 
