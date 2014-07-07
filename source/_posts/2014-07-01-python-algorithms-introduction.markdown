@@ -67,7 +67,7 @@ print t2 #3.68582415581
 
 #### 4.这本书完整的章节内容
 
-除去平摊分析外，内容差不多和我本学期的算法课的内容差不多
+除去平摊分析外，内容差不多和我本学期的算法课的内容一样
 
 Chapter 1: Introduction. You’ve already gotten through most of this. It gives an overview of the book.
 
