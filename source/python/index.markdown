@@ -7,6 +7,8 @@ sharing: true
 footer: true
 ---
 
+最后更新时间：2014-7-7
+
 ![image](http://hujiaweibujidao.github.io/images/python-logo.png)
 
 的确，正如偶像Bruce Eckel所说，"Life is short, you need Python"！
