@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-07T10:40:18+08:00</updated>
+  <updated>2014-07-07T10:43:52+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -2670,7 +2670,9 @@ B(n) &lt; lg n + 1 &lt; T(n).</p>
     <link href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-counting-101/"/>
     <updated>2014-07-01T10:30:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-counting-101</id>
-    <content type="html"><![CDATA[<p><strong><center>Python算法设计篇(3)</center></strong>
+    <content type="html"><![CDATA[<p>最后更新时间：2014-7-7</p>
+
+<p><strong><center>Python算法设计篇(3)</center></strong>
 <strong><center>逸夫图书馆, 2014/7/1</center></strong></p>
 
 <h3 id="centerchapter-3-counting-101center"><center>Chapter 3: Counting 101</center></h3>
@@ -2696,7 +2698,7 @@ B(n) &lt; lg n + 1 &lt; T(n).</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/sub2.png" alt="image" /></p>
 
-<p>下面是常用的一些迭代式以及它们对应的结果还有实际算法实例</p>
+<p>下面是常用的一些递归式以及它们对应的结果还有实际算法实例</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/sub3.png" alt="image" /></p>
 
@@ -2716,6 +2718,8 @@ B(n) &lt; lg n + 1 &lt; T(n).</p>
 
 <p>不喜欢本节的可以跳过，不留练习了这次，嘿嘿，想练习的话刷算法导论的题目吧</p>
 
+<p>返回<a href="http://hujiaweibujidao.github.io/python/">Python数据结构与算法设计篇目录</a></p>
+
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-counting-101/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-counting-101/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
@@ -2726,7 +2730,9 @@ B(n) &lt; lg n + 1 &lt; T(n).</p>
     <link href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/"/>
     <updated>2014-07-01T10:20:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics</id>
-    <content type="html"><![CDATA[<p><strong><center>Python算法设计篇(2)</center></strong>
+    <content type="html"><![CDATA[<p>最后更新时间：2014-7-7</p>
+
+<p><strong><center>Python算法设计篇(2)</center></strong>
 <strong><center>逸夫图书馆, 2014/7/1</center></strong></p>
 
 <h3 id="centerchapter-2-the-basicscenter"><center>Chapter 2: The basics</center></h3>
@@ -2766,13 +2772,13 @@ Tracey: I don’t think they covered that in basic.    <br />
 
 <h4 id="section-1">2.算法渐近运行时间</h4>
 
-<p>主要介绍了大O符号、大$\Omega$符号以及大$\Theta$符号，这部分内容网上很多资料，此处略过，可以参考<a href="http://en.wikipedia.org/wiki/Big_O_notation">wikipedia_大O符号</a></p>
+<p>主要介绍了大O符号、大$\Omega$符号以及大$\Theta$符号，这部分内容网上很多资料，大家也都知道了，此处略过，可以参考<a href="http://en.wikipedia.org/wiki/Big_O_notation">wikipedia_大O符号</a></p>
 
 <p>算法导论介绍到，对于三个符号可以做如下理解：$O$ = $\le$，$\Omega$ = $\ge$， $\Theta$ = $=$</p>
 
 <p>运行时间的三种特殊的情况：最优情况，最差情况，平均情况</p>
 
-<p>几种常见的运行时间以及算法实例 <a href="http://zh.wikipedia.org/zh-cn/时间复杂度">wiki中的时间复杂度</a></p>
+<p>几种常见的运行时间以及算法实例 <a href="http://zh.wikipedia.org/zh-cn/时间复杂度">点击这里可以参考下wiki中的时间复杂度</a></p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/algos/complexity.png" alt="image" /></p>
 
@@ -2784,7 +2790,7 @@ Tracey: I don’t think they covered that in basic.    <br />
 
 <p>(2)Tip 2: For timing things, use timeit.</p>
 
-<p>使用<code>timeit</code>模块对运行时间进行分析，在前面的<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/">数据结构篇中第三部分数据结构</a>的list中已经介绍过了timeit模块，在使用的时候需要注意前面的运行不会影响后面的重复的运行(例如，分析排序算法运行时间，如果将前面已经排好序的序列传递给后面的重复运行是不可以的)</p>
+<p>使用<code>timeit</code>模块对运行时间进行分析，在前面的<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/">数据结构篇中第三部分数据结构</a>的list中已经介绍过了timeit模块，在使用的时候需要注意前面的运行不会影响后面的重复的运行(例如，分析排序算法运行时间，如果将前面已经排好序的序列传递给后面的重复运行是不行的)</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -2794,7 +2800,7 @@ Tracey: I don’t think they covered that in basic.    <br />
 
 <p>(3)Tip 3: To find bottlenecks, use a profiler.</p>
 
-<p>使用<code>cProfile</code>模块来获取更多的关于运行情况的内容，从而可以发现问题的瓶颈，如果系统没有<code>cProfile</code>模块，可以使用<code>profile</code>模块代替，更多内容可以查看<a href="https://docs.python.org/2/library/profile.html">Python standard library-Python Profilers</a></p>
+<p>使用<code>cProfile</code>模块来获取更多的关于运行情况的内容，从而可以发现问题的瓶颈，如果系统没有<code>cProfile</code>模块，可以使用<code>profile</code>模块代替，关于这两者的更多内容可以查看<a href="https://docs.python.org/2/library/profile.html">Python standard library-Python Profilers</a></p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -2866,7 +2872,7 @@ Tracey: I don’t think they covered that in basic.    <br />
 
 <p>4.在Python中实现树和图</p>
 
-<p><strong>[Black Box: dict和set]</strong> <br />
+<p><strong>[Python中的dict和set]</strong> <br />
 Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/">Python数据结构篇中的搜索部分</a>已经介绍了hash的内容。Python提供了<code>hash</code>函数，例如<code>hash("Hello, world!")</code>得到<code>-943387004357456228</code> (结果不一定相同)。Python中的dict和set都使用了hash机制，所以平均情况下它们获取元素都是常数时间的。</p>
 
 <p>(1)图的表示：最常用的两种表示方式是邻接表和邻接矩阵 [假设要表示的图如下]</p>
@@ -3071,7 +3077,7 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 </span><span class="line"><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">W</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="k">if</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">inf</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c"># Degree</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p><strong>NumPy</strong>：这里作者提到了一个最常用的数值计算模块NumPy，它包含了很多与多维数组计算有关的函数。我可能会在以后的机器学习中详细学习它的使用，到时候再写篇文章介绍它的使用</p>
+<p><strong>NumPy</strong>：这里作者提到了一个最常用的数值计算模块NumPy，它包含了很多与多维数组计算有关的函数。我可能会在以后的机器学习中详细学习它的使用，到时候可能会写篇文章介绍它的使用</p>
 
 <p>(2)树的表示 [假设要表示下面的树]</p>
 
@@ -3085,7 +3091,7 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 </span><span class="line"><span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c"># &#39;e&#39;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>很多时候我们都能够肯定树中节点的孩子节点个数最多有多少个，所以比较方便的实现方式就是使用类class</p>
+<p>很多时候我们都能够肯定树中节点的孩子节点个数最多有多少个(比如二叉树，三叉树等等)，所以比较方便的实现方式就是使用类class</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -3105,7 +3111,7 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 </span><span class="line"><span class="n">t</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">left</span>  <span class="c"># &#39;c&#39;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>上面的实现方式的子节点都是孩子节点，但是还有一种很常用的树的表示方式，那就是“左孩子，右兄弟”表示形式</p>
+<p>上面的实现方式的子节点都是孩子节点，但是还有一种很常用的树的表示方式，那就是“左孩子，右兄弟”表示形式，它就适用于孩子节点数目不确定的情况</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -3129,9 +3135,9 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 
 <hr />
 
-<p><strong>[Bunch Pattern]</strong>：有意思的是，上面的实现方式使用了Python中一种常用的设计模式，叫做Bunch Pattern，原书介绍如下： </p>
+<p><strong>[Bunch Pattern]</strong>：有意思的是，上面的实现方式使用了Python中一种常用的设计模式，叫做Bunch Pattern，貌似来自经典书籍Python Cookbook，原书介绍如下： </p>
 
-<p>[因为这个不太好理解，还是原文比较有味，后期等我深刻理解了我可能会详细介绍它]</p>
+<p>[因为这个不太好理解和翻译，还是原文比较有味，后期等我深刻理解了我可能会详细介绍它]</p>
 
 <p>When prototyping (or even finalizing) data structures such as trees, it can be useful to have a flexible class that will allow you to specify arbitrary attributes in the constructor. In these cases, the “Bunch” pattern (named by Alex Martelli in the Python Cookbook) can come in handy. There are many ways of implementing it, but the gist of it is the following:</p>
 
@@ -3209,7 +3215,7 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 
 <p>In general, the more important your program, the more you should mistrust such black boxes and seek to find out what’s going on under the cover.</p>
 
-<p>作者在这里提到，你的程序越是重要的话，你就越是需要明白你所使用的数据结构的内部实现，甚至有些时候你要自己重新实现它。</p>
+<p>作者在这里提到，如果你的程序越是重要的话，你就越是需要明白你所使用的数据结构的内部实现，甚至有些时候你要自己重新实现它。</p>
 
 <p>(1)Hidden Squares 隐藏的平方运行时间</p>
 
@@ -3235,7 +3241,7 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 </pre></td><td class="code"><pre><code class="python"><span class="line"><span class="nb">sum</span><span class="p">(</span><span class="mf">0.1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mf">1.0</span> <span class="c"># False</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>永远不要使用小数比较结果来作为两者相等的判断依据！你最多只能判断两个浮点数在有限位数上是相等的。</p>
+<p><strong>永远不要使用小数比较结果来作为两者相等的判断依据！</strong>你最多只能判断两个浮点数在有限位数上是相等的，也就是近似相等了。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -3247,7 +3253,7 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 </span><span class="line"><span class="n">almost_equal</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="mf">0.1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="mf">1.0</span><span class="p">)</span> <span class="c"># True</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>除此之外，可以使用一些有用的第三方模块，例如<code>decimal</code>，这对于需要处理金融数据的时候很有帮助</p>
+<p>除此之外，可以使用一些有用的第三方模块，例如<code>decimal</code>，在需要处理金融数据的时候很有帮助</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -3273,6 +3279,8 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 
 <p>The advantages and disadvantages depend on what you’re using it for. It works well for looking up edge weights efficiently but less well for iterating over the graph’s nodes or a node’s neighbors, for example. You could improve that part by using some extra structures (for example, a global list of nodes, if that’s what you need or a simple adjacency list structure, if that’s required).</p>
 
+<p>返回<a href="http://hujiaweibujidao.github.io/python/">Python数据结构与算法设计篇目录</a></p>
+
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
@@ -3283,7 +3291,9 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
     <link href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-introduction/"/>
     <updated>2014-07-01T10:10:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-introduction</id>
-    <content type="html"><![CDATA[<p><strong><center>Python算法设计篇(1)</center></strong>
+    <content type="html"><![CDATA[<p>最后更新时间：2014-7-7</p>
+
+<p><strong><center>Python算法设计篇(1)</center></strong>
 <strong><center>逸夫图书馆, 2014/7/1</center></strong></p>
 
 <h3 id="centerchapter-1-introductioncenter"><center>Chapter 1: Introduction</center></h3>
@@ -3303,11 +3313,11 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 
 <p>算法导论是一本经典的大而全的算法书籍，而本书Python Algorithms不是来取代而是来补充算法导论的，因为算法导论提供的是简易的伪代码和详细的证明，而本书主要从作者的教学过程中从更高地层次来讲解算法，并使用Python代码来实现。</p>
 
-<p>[实际阅读之后，我个人感觉这本书虽然貌似名声不大，但是绝对可以和算法导论平分秋色]</p>
+<p><strong>[实际阅读之后，我个人感觉这本书虽然貌似名声不大，但是绝对可以和算法导论平分秋色]</strong></p>
 
 <h4 id="section-1">2.这本书关于什么？</h4>
 
-<p>算法分析，算法设计的基本原则，如何使用Python实现基本的数据结构和算法</p>
+<p>算法分析，算法设计的基本原则，如何使用Python实现基本的数据结构和算法 (以下内容不难理解就不做翻译了，原文原滋原味更加萌萌哒 ~(^o^)/~)</p>
 
 <p>What the book is about:  <br />
 • Algorithm analysis, with a focus on asymptotic running time <br />
@@ -3363,7 +3373,7 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 
 <h4 id="section-3">4.这本书完整的章节内容</h4>
 
-<p>除去平摊分析外，内容差不多和我本学期的算法课的内容差不多</p>
+<p>除去平摊分析外，内容差不多和我本学期的算法课的内容一样</p>
 
 <p>Chapter 1: Introduction. You’ve already gotten through most of this. It gives an overview of the book.</p>
 
@@ -3388,6 +3398,8 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 <p>Find a way of checking whether two strings are anagrams of each other (such as “debit card” and “bad credit”). How well do you think your solution scales? Can you think of a naïve solution that will scale very poorly?</p>
 
 <p>A simple and quite scalable solution would be to sort the characters in each string and compare the results. (In theory, counting the character frequencies, possibly using collections.Counter, would scale even better.) A really poor solution would be to compare all possible orderings of one string with the other. I can’t overstate how poor this solution is; in fact, algorithms don’t get much worse than this. Feel free to code it up, and see how large anagrams you can check. I bet you won’t get far.</p>
+
+<p>返回<a href="http://hujiaweibujidao.github.io/python/">Python数据结构与算法设计篇目录</a></p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-introduction/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-introduction/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
