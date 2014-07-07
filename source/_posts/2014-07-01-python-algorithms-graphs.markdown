@@ -7,6 +7,8 @@ categories: algorithm
 published: true
 ---
 
+最后更新时间：2014-7-7
+
 **<center>Python算法设计篇(9)</center>**
 **<center>逸夫图书馆, 2014/7/1</center>**
 
@@ -431,4 +433,6 @@ As mentioned earlier, the A* algorithm uses an idea similar to Johnson’s algor
 
 ![image](http://hujiaweibujidao.github.io/images/algos/bfans1.png)
 ![image](http://hujiaweibujidao.github.io/images/algos/bfans2.png)
+
+返回[Python数据结构与算法设计篇目录](http://hujiaweibujidao.github.io/python/)
 
