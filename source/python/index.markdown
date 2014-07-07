@@ -42,6 +42,7 @@ footer: true
 简述顺序查找和二分查找，详述Hash查找(hash函数的设计以及如何避免冲突)
 
 (2)[排序](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/)  
+
 简述各种排序算法的思想以及它的图示和实现
 
 (3)[数据结构](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)  
