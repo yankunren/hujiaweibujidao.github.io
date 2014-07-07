@@ -55,5 +55,6 @@ published: true
 
 不喜欢本节的可以跳过，不留练习了这次，嘿嘿，想练习的话刷算法导论的题目吧
 
+返回[Python数据结构与算法设计篇目录](http://hujiaweibujidao.github.io/python/)
 
 
