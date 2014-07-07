@@ -33,7 +33,9 @@ footer: true
 
 2.Python数据结构篇
 
-数据结构篇主要是阅读[Problem Solving with Python](http://interactivepython.org/courselib/static/pythonds/index.html) [该网址链接可能会比较慢]时写下的阅读记录，当然，也结合了部分[算法导论](http://en.wikipedia.org/wiki/Introduction_to_Algorithms)中的内容，此外还有不少wikipedia上的内容，所以内容比较多，可能有点杂乱。这部分主要是介绍了如何使用Python实现常用的一些数据结构，例如堆栈、队列、二叉树等等，也有Python内置的数据结构性能的分析，同时还包括了搜索和排序(在算法设计篇中会有更加详细的介绍)的简单总结。每篇文章都有实现代码，内容比较多，简单算法一般是大致介绍下思想及算法流程，复杂的算法会给出各种图示和代码实现详细介绍。这一部分是下面算法设计篇的前篇，如果数据结构还不错的可以直接看算法设计篇，遇到问题可以回来看数据结构篇中的某个具体内容充电一下，嘿嘿。
+数据结构篇主要是阅读[Problem Solving with Python](http://interactivepython.org/courselib/static/pythonds/index.html) [该网址链接可能会比较慢]时写下的阅读记录，当然，也结合了部分[算法导论](http://en.wikipedia.org/wiki/Introduction_to_Algorithms)中的内容，此外还有不少wikipedia上的内容，所以内容比较多，可能有点杂乱。这部分主要是介绍了如何使用Python实现常用的一些数据结构，例如堆栈、队列、二叉树等等，也有Python内置的数据结构性能的分析，同时还包括了搜索和排序(在算法设计篇中会有更加详细的介绍)的简单总结。每篇文章都有实现代码，内容比较多，简单算法一般是大致介绍下思想及算法流程，复杂的算法会给出各种图示和代码实现详细介绍。
+
+**这一部分是下面算法设计篇的前篇，如果数据结构还不错的可以直接看算法设计篇，遇到问题可以回来看数据结构篇中的某个具体内容充电一下，我个人认为可以直接读算法设计篇，因为大家时间也都比较宝贵，如果你会来读这些文章说明你肯定有一定基础了，后面的算法设计篇中更多的是思想，这里更多的是代码而已，嘿嘿。**
 
 (1)[搜索](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/) 简述顺序查找和二分查找，详述Hash查找(hash函数的设计以及如何避免冲突)
 
