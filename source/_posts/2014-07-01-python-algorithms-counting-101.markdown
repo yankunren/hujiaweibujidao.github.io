@@ -7,6 +7,8 @@ categories: algorithm
 published: true
 ---
 
+最后更新时间：2014-7-7
+
 **<center>Python算法设计篇(3)</center>**
 **<center>逸夫图书馆, 2014/7/1</center>**
 
@@ -32,7 +34,7 @@ published: true
 
 ![image](http://hujiaweibujidao.github.io/images/algos/sub2.png)
 
-下面是常用的一些迭代式以及它们对应的结果还有实际算法实例
+下面是常用的一些递归式以及它们对应的结果还有实际算法实例
 
 ![image](http://hujiaweibujidao.github.io/images/algos/sub3.png)
 
