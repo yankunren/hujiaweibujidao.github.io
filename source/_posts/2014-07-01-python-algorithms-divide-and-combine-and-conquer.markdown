@@ -7,6 +7,8 @@ categories: algorithm
 published: true
 ---
 
+最后更新时间：2014-7-7
+
 **<center>Python算法设计篇(6)</center>**
 **<center>逸夫图书馆, 2014/7/1</center>**
 
@@ -216,4 +218,6 @@ Binary search divides the sequence into two approximately equal parts in each re
 
 The asymptotic running time would be the same. The number of comparison goes up, however. To see this, consider the recurrences B(n) = B(n/2) + 1 and T(n) = T(n/3) + 2 for binary and ternary search, respectively (with base cases B(1) = T(1) = 0 and B(2) = T(2) = 1). You can show (by induction) that
 B(n) < lg n + 1 < T(n).
+
+返回[Python数据结构与算法设计篇目录](http://hujiaweibujidao.github.io/python/)
 
