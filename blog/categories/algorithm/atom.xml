@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-07T10:43:52+08:00</updated>
+  <updated>2014-07-07T11:52:14+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -18,7 +18,9 @@
     <link href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs/"/>
     <updated>2014-07-01T11:30:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-graphs</id>
-    <content type="html"><![CDATA[<p><strong><center>Python算法设计篇(9)</center></strong>
+    <content type="html"><![CDATA[<p>最后更新时间：2014-7-7</p>
+
+<p><strong><center>Python算法设计篇(9)</center></strong>
 <strong><center>逸夫图书馆, 2014/7/1</center></strong></p>
 
 <h3 id="centerchapter-9-from-a-to-b-with-edsger-and-friendscenter"><center>Chapter 9: From A to B with Edsger and Friends</center></h3>
@@ -446,6 +448,8 @@ print [P[e,v] for v in [a, b, c, d, e]]#[1, 2, 3, 4, None]
 <p><img src="http://hujiaweibujidao.github.io/images/algos/bfans1.png" alt="image" />
 <img src="http://hujiaweibujidao.github.io/images/algos/bfans2.png" alt="image" /></p>
 
+<p>返回<a href="http://hujiaweibujidao.github.io/python/">Python数据结构与算法设计篇目录</a></p>
+
 ]]></content>
   </entry>
   
@@ -454,7 +458,9 @@ print [P[e,v] for v in [a, b, c, d, e]]#[1, 2, 3, 4, None]
     <link href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-dynamic-programming/"/>
     <updated>2014-07-01T11:20:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-dynamic-programming</id>
-    <content type="html"><![CDATA[<p><strong><center>Python算法设计篇(8)</center></strong>
+    <content type="html"><![CDATA[<p>最后更新时间：2014-7-7</p>
+
+<p><strong><center>Python算法设计篇(8)</center></strong>
 <strong><center>逸夫图书馆, 2014/7/1</center></strong></p>
 
 <h3 id="centerchapter-8-tangled-dependencies-and-memoizationcenter"><center>Chapter 8 Tangled Dependencies and Memoization</center></h3>
@@ -697,6 +703,8 @@ Professor Stewart is consulting for the president of a corporation that is plann
 
 <p>最后就是求max(dp[root][0], dp[root][1])</p>
 
+<p>返回<a href="http://hujiaweibujidao.github.io/python/">Python数据结构与算法设计篇目录</a></p>
+
 ]]></content>
   </entry>
   
@@ -705,7 +713,9 @@ Professor Stewart is consulting for the president of a corporation that is plann
     <link href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-greedy/"/>
     <updated>2014-07-01T11:10:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-greedy</id>
-    <content type="html"><![CDATA[<p><strong><center>Python算法设计篇(7)</center></strong>
+    <content type="html"><![CDATA[<p>最后更新时间：2014-7-7</p>
+
+<p><strong><center>Python算法设计篇(7)</center></strong>
 <strong><center>逸夫图书馆, 2014/7/1</center></strong></p>
 
 <h3 id="centerchapter-7-greed-is-good-prove-itcenter"><center>Chapter 7: Greed is good? Prove it!</center></h3>
@@ -1031,6 +1041,8 @@ def greedy(E, S, w):
 
 <p>练习：<a href="http://hujiaweibujidao.github.io/blog/2014/05/20/delete-number-problem/">试试这道删数问题吧，这里对比了贪心算法和动态规划算法两种解法</a></p>
 
+<p>返回<a href="http://hujiaweibujidao.github.io/python/">Python数据结构与算法设计篇目录</a></p>
+
 ]]></content>
   </entry>
   
@@ -1039,7 +1051,9 @@ def greedy(E, S, w):
     <link href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-divide-and-combine-and-conquer/"/>
     <updated>2014-07-01T11:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-divide-and-combine-and-conquer</id>
-    <content type="html"><![CDATA[<p><strong><center>Python算法设计篇(6)</center></strong>
+    <content type="html"><![CDATA[<p>最后更新时间：2014-7-7</p>
+
+<p><strong><center>Python算法设计篇(6)</center></strong>
 <strong><center>逸夫图书馆, 2014/7/1</center></strong></p>
 
 <h3 id="centerchapter-6-divide-and-combine-and-conquercenter"><center>Chapter 6: Divide and Combine and Conquer</center></h3>
@@ -1251,6 +1265,8 @@ def mergesort(seq):
 <p>The asymptotic running time would be the same. The number of comparison goes up, however. To see this, consider the recurrences B(n) = B(n/2) + 1 and T(n) = T(n/3) + 2 for binary and ternary search, respectively (with base cases B(1) = T(1) = 0 and B(2) = T(2) = 1). You can show (by induction) that
 B(n) &lt; lg n + 1 &lt; T(n).</p>
 
+<p>返回<a href="http://hujiaweibujidao.github.io/python/">Python数据结构与算法设计篇目录</a></p>
+
 ]]></content>
   </entry>
   
@@ -1259,7 +1275,9 @@ B(n) &lt; lg n + 1 &lt; T(n).</p>
     <link href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-traversal/"/>
     <updated>2014-07-01T10:50:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-traversal</id>
-    <content type="html"><![CDATA[<p><strong><center>Python算法设计篇(5)</center></strong>
+    <content type="html"><![CDATA[<p>最后更新时间：2014-7-7</p>
+
+<p><strong><center>Python算法设计篇(5)</center></strong>
 <strong><center>逸夫图书馆, 2014/7/1</center></strong></p>
 
 <h3 id="centerchapter-5-traversalcenter"><center>Chapter 5: Traversal</center></h3>
@@ -1603,6 +1621,8 @@ print list(map(list, scc(G)))
 <p>问题就是说，我们干嘛要对转置图按照完成时间降序遍历一次呢？干嘛不直接在原图上按照完成时间升序遍历一次呢？</p>
 
 <p>Try finding a simple example where this would give the wrong answer. (You can do it with a really small graph.)</p>
+
+<p>返回<a href="http://hujiaweibujidao.github.io/python/">Python数据结构与算法设计篇目录</a></p>
 
 ]]></content>
   </entry>
