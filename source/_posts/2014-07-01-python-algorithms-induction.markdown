@@ -57,7 +57,7 @@ These are two major variations of reductions: reducing to a different problem an
 
 [Induction is what you use to show that recursion is correct, and recursion is a very direct way of implementing most inductive algorithm ideas. However, rewriting the algorithm to be iterative can avoid the overhead and limitations of recursive functions in most (nonfunctional) programming languages. ]
 
-有了Induction和Recursion，我们很容易就可以将一个inductive idea采用递归(recursion)的方式实现，根据我们的编程经验，任何一个递归方式的实现都可以改成非递归方式(即迭代方式)实现(反之亦然)，而且非递归方式要好些，为什么呢？因为迭代版本相对来讲运行速度更快，因为没有用栈去实现，也避免了栈溢出的情况，python中对栈深度是有限制的。
+有了Induction和Recursion，我们很容易就可以将一个inductive idea采用递归(recursion)的方式实现，根据我们的编程经验(事实也是如此)，任何一个递归方式的实现都可以改成非递归方式(即迭代方式)实现(反之亦然)，而且非递归方式要好些，为什么呢？因为非递归版本相对来讲运行速度更快，因为没有用栈去实现，也避免了栈溢出的情况，python中对栈深度是有限制的。
 
 举个例子，下面是一段遍历序列的代码，如果大小设置为100没有问题，如果设置为1000就会报`RuntimeError`的错误，提示超出了最大的递归深度。[当然，大家都不会像下面那样写代码对吧，这只是一个例子]
 
@@ -316,4 +316,7 @@ Redesign topsort so it selects the last node in each iteration, rather than the 
 This is quite similar to the original. You now have to maintain the out-degrees of the remaining nodes, and insert each node before the ones you have already found. (Remember not to insert anything in the beginning of a list, though; rather, append, and then reverse it at the end, to avoid a quadratic running time.)
 
 [注意是使用`append`然后`reverse`，而不要使用`insert`]
+
+返回[Python数据结构与算法设计篇目录](http://hujiaweibujidao.github.io/python/)
+
 
