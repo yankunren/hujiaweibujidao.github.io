@@ -7,6 +7,8 @@ categories: algorithm
 published: true
 ---
 
+最后更新时间：2014-7-7
+
 **<center>Python算法设计篇(2)</center>**
 **<center>逸夫图书馆, 2014/7/1</center>**
 
@@ -45,13 +47,13 @@ the notion of running time complexity (as described in the next section) is base
 
 #### 2.算法渐近运行时间
 
-主要介绍了大O符号、大$\Omega$符号以及大$\Theta$符号，这部分内容网上很多资料，此处略过，可以参考[wikipedia_大O符号](http://en.wikipedia.org/wiki/Big_O_notation)
+主要介绍了大O符号、大$\Omega$符号以及大$\Theta$符号，这部分内容网上很多资料，大家也都知道了，此处略过，可以参考[wikipedia_大O符号](http://en.wikipedia.org/wiki/Big_O_notation)
 
 算法导论介绍到，对于三个符号可以做如下理解：$O$ = $\le$，$\Omega$ = $\ge$， $\Theta$ = $=$
 
 运行时间的三种特殊的情况：最优情况，最差情况，平均情况
 
-几种常见的运行时间以及算法实例 [wiki中的时间复杂度](http://zh.wikipedia.org/zh-cn/时间复杂度)
+几种常见的运行时间以及算法实例 [点击这里可以参考下wiki中的时间复杂度](http://zh.wikipedia.org/zh-cn/时间复杂度)
 
 ![image](http://hujiaweibujidao.github.io/images/algos/complexity.png)
 
@@ -63,7 +65,7 @@ the notion of running time complexity (as described in the next section) is base
 
 (2)Tip 2: For timing things, use timeit.
 
-使用`timeit`模块对运行时间进行分析，在前面的[数据结构篇中第三部分数据结构](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)的list中已经介绍过了timeit模块，在使用的时候需要注意前面的运行不会影响后面的重复的运行(例如，分析排序算法运行时间，如果将前面已经排好序的序列传递给后面的重复运行是不可以的)
+使用`timeit`模块对运行时间进行分析，在前面的[数据结构篇中第三部分数据结构](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)的list中已经介绍过了timeit模块，在使用的时候需要注意前面的运行不会影响后面的重复的运行(例如，分析排序算法运行时间，如果将前面已经排好序的序列传递给后面的重复运行是不行的)
 
 ```python
 #timeit模块简单使用实例
@@ -72,7 +74,7 @@ timeit.timeit("x = sum(range(10))")
 
 (3)Tip 3: To find bottlenecks, use a profiler.
 
-使用`cProfile`模块来获取更多的关于运行情况的内容，从而可以发现问题的瓶颈，如果系统没有`cProfile`模块，可以使用`profile`模块代替，更多内容可以查看[Python standard library-Python Profilers](https://docs.python.org/2/library/profile.html)
+使用`cProfile`模块来获取更多的关于运行情况的内容，从而可以发现问题的瓶颈，如果系统没有`cProfile`模块，可以使用`profile`模块代替，关于这两者的更多内容可以查看[Python standard library-Python Profilers](https://docs.python.org/2/library/profile.html)
 
 ```python
 #cProfile模块简单使用实例
@@ -127,7 +129,7 @@ If you want to say something conclusively about the asymptotic behavior of an al
 
 4.在Python中实现树和图
 
-**[Black Box: dict和set]**   
+**[Python中的dict和set]**   
 Python中很多地方都使用了hash策略，在前面的[Python数据结构篇中的搜索部分](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/)已经介绍了hash的内容。Python提供了`hash`函数，例如`hash("Hello, world!")`得到`-943387004357456228` (结果不一定相同)。Python中的dict和set都使用了hash机制，所以平均情况下它们获取元素都是常数时间的。
 
 (1)图的表示：最常用的两种表示方式是邻接表和邻接矩阵 [假设要表示的图如下]
@@ -255,7 +257,7 @@ W[a][b] < inf # Neighborhood membership
 sum(1 for w in W[a] if w < inf) - 1  # Degree
 ```
 
-**NumPy**：这里作者提到了一个最常用的数值计算模块NumPy，它包含了很多与多维数组计算有关的函数。我可能会在以后的机器学习中详细学习它的使用，到时候再写篇文章介绍它的使用
+**NumPy**：这里作者提到了一个最常用的数值计算模块NumPy，它包含了很多与多维数组计算有关的函数。我可能会在以后的机器学习中详细学习它的使用，到时候可能会写篇文章介绍它的使用
 
 (2)树的表示 [假设要表示下面的树]
 
@@ -268,7 +270,7 @@ T = [["a", "b"], ["c"], ["d", ["e", "f"]]]
 T[2][1][0]  # 'e'
 ```
 
-很多时候我们都能够肯定树中节点的孩子节点个数最多有多少个，所以比较方便的实现方式就是使用类class
+很多时候我们都能够肯定树中节点的孩子节点个数最多有多少个(比如二叉树，三叉树等等)，所以比较方便的实现方式就是使用类class
 
 ```
 # A Binary Tree Class 二叉树实例
@@ -281,7 +283,7 @@ t = Tree(Tree("a", "b"), Tree("c", "d"))
 t.right.left  # 'c'
 ```
 
-上面的实现方式的子节点都是孩子节点，但是还有一种很常用的树的表示方式，那就是“左孩子，右兄弟”表示形式
+上面的实现方式的子节点都是孩子节点，但是还有一种很常用的树的表示方式，那就是“左孩子，右兄弟”表示形式，它就适用于孩子节点数目不确定的情况
 
 ```
 # 左孩子，右兄弟 表示方式
@@ -297,9 +299,9 @@ t.kids.next.next.val  # 'c'
 
 ----------
 
-**[Bunch Pattern]**：有意思的是，上面的实现方式使用了Python中一种常用的设计模式，叫做Bunch Pattern，原书介绍如下： 
+**[Bunch Pattern]**：有意思的是，上面的实现方式使用了Python中一种常用的设计模式，叫做Bunch Pattern，貌似来自经典书籍Python Cookbook，原书介绍如下： 
 
-[因为这个不太好理解，还是原文比较有味，后期等我深刻理解了我可能会详细介绍它]
+[因为这个不太好理解和翻译，还是原文比较有味，后期等我深刻理解了我可能会详细介绍它]
 
 When prototyping (or even finalizing) data structures such as trees, it can be useful to have a flexible class that will allow you to specify arbitrary attributes in the constructor. In these cases, the “Bunch” pattern (named by Alex Martelli in the Python Cookbook) can come in handy. There are many ways of implementing it, but the gist of it is the following:
 
@@ -360,7 +362,7 @@ This pattern isn’t useful only when building trees, of course. You could use i
 
 In general, the more important your program, the more you should mistrust such black boxes and seek to find out what’s going on under the cover.
 
-作者在这里提到，你的程序越是重要的话，你就越是需要明白你所使用的数据结构的内部实现，甚至有些时候你要自己重新实现它。
+作者在这里提到，如果你的程序越是重要的话，你就越是需要明白你所使用的数据结构的内部实现，甚至有些时候你要自己重新实现它。
 
 (1)Hidden Squares 隐藏的平方运行时间
 
@@ -382,7 +384,7 @@ S = set(L)
 sum(0.1 for i in range(10)) == 1.0 # False
 ```
 
-永远不要使用小数比较结果来作为两者相等的判断依据！你最多只能判断两个浮点数在有限位数上是相等的。
+**永远不要使用小数比较结果来作为两者相等的判断依据！**你最多只能判断两个浮点数在有限位数上是相等的，也就是近似相等了。
 
 ```
 def almost_equal(x, y, places=7):
@@ -391,7 +393,7 @@ def almost_equal(x, y, places=7):
 almost_equal(sum(0.1 for i in range(10)), 1.0) # True
 ```
 
-除此之外，可以使用一些有用的第三方模块，例如`decimal`，这对于需要处理金融数据的时候很有帮助
+除此之外，可以使用一些有用的第三方模块，例如`decimal`，在需要处理金融数据的时候很有帮助
 
 ```
 from decimal import *
@@ -415,4 +417,6 @@ sage: 3/5 * 11/7 + sqrt(5239)
 Consider the following graph representation: you use a dictionary and let each key be a pair (tuple) of two nodes, with the corresponding value set to the edge weight. For example W[u, v] = 42. What would be the advantages and disadvantages of this representation? Could you supplement it to mitigate the downsides?
 
 The advantages and disadvantages depend on what you’re using it for. It works well for looking up edge weights efficiently but less well for iterating over the graph’s nodes or a node’s neighbors, for example. You could improve that part by using some extra structures (for example, a global list of nodes, if that’s what you need or a simple adjacency list structure, if that’s required).
+
+返回[Python数据结构与算法设计篇目录](http://hujiaweibujidao.github.io/python/)
 
