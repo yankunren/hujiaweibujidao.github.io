@@ -37,13 +37,20 @@ footer: true
 
 **这一部分是下面算法设计篇的前篇，如果数据结构还不错的可以直接看算法设计篇，遇到问题可以回来看数据结构篇中的某个具体内容充电一下，我个人认为直接读算法设计篇比较好，因为大家时间也都比较宝贵，如果你会来读这些文章说明你肯定有一定基础了，后面的算法设计篇中更多的是思想，这里更多的是代码而已，嘿嘿。**
 
-(1)[搜索](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/) 简述顺序查找和二分查找，详述Hash查找(hash函数的设计以及如何避免冲突)
+(1)[搜索](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/) 
 
-(2)[排序](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/)  简述各种排序算法的思想以及它的图示和实现
+简述顺序查找和二分查找，详述Hash查找(hash函数的设计以及如何避免冲突)
 
-(3)[数据结构](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)  简述Python内置数据结构的性能分析和实现常用的数据结构：栈、队列和二叉堆
+(2)[排序](http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-sort/)  
+简述各种排序算法的思想以及它的图示和实现
 
-(4)[树总结](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees/)  简述二叉树，详述二叉搜索树和AVL树的思想和实现
+(3)[数据结构](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)  
+
+简述Python内置数据结构的性能分析和实现常用的数据结构：栈、队列和二叉堆
+
+(4)[树总结](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-Trees/)  
+
+简述二叉树，详述二叉搜索树和AVL树的思想和实现
 
 3.Python算法设计篇
 
