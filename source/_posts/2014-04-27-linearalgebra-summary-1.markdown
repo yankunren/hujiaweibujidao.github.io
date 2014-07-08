@@ -46,7 +46,7 @@ published: true
 
 ![image][13]
 
-下面看下什么是用行列式怎么理解线性变换，**线性变换就是把一个向量线性地变为另一个向量，行列式表示的是线性变换前后平行六面体的体积的变化系数**。
+下面看下用行列式怎么理解线性变换，**线性变换就是把一个向量线性地变为另一个向量，行列式表示的是线性变换前后平行六面体的体积的变化系数**。
 
 [下面这句话是我用来理解正交矩阵的：**n维行列式的本质是n维空间内的“体积”线性变换前后的变化系数，如果为正就是保持空间的定向，如果为负就是空间的反向。此外，正交矩阵的行列式肯定是1或者-1，如果行列式为1表示这个正交矩阵是旋转变换，如果为-1表示这个正交矩阵是反射变换。**]
 
@@ -104,4 +104,5 @@ published: true
 [12]: http://hujiaweibujidao.github.io/images/math/hanglieshi12.png
 [13]: http://hujiaweibujidao.github.io/images/math/hanglieshi13.png
 [14]: http://hujiaweibujidao.github.io/images/math/juzhen_matrix67.jpg
+
 
