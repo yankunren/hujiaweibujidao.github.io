@@ -43,11 +43,11 @@ published: true
 
 特征值的代数重数和几何重数(TODO：后者我没有看懂，若读者明白，请留言告知，谢谢)
 
-![image](http://hujiaweibujidao.github.io/images/math/eigenvectors4.png)
+![image](http://hujiaweibujidao.github.io/images/math/eigenvectors5.png)
 
 特征值的计算，简单的矩阵可以使用解特征方程的方法，但是一般情况下都是采用数值计算的方法，其中基于迭代技术的幂法可以用来计算矩阵的主特征值，反幂法类似，不过计算的是模最小的特征值，实际中常用的是QR分解。详情请参考请后面的[矩阵分解总结](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/)部分。
 
-![image](http://hujiaweibujidao.github.io/images/math/eigenvectors5.png)
+![image](http://hujiaweibujidao.github.io/images/math/eigenvectors4.png)
 
 到此，我觉得特征向量应该是清晰了，关于特征值和奇异值分解以及代码实现请参考后面的[矩阵分解](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/)部分，也可以直接看我写的另一份总结[Numerical Methods Using Matlab 第三章 矩阵特征值和奇异值分解](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)。
 
