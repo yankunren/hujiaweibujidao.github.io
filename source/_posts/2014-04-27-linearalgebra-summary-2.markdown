@@ -98,9 +98,7 @@ $$
 
 ![image](http://hujiaweibujidao.github.io/images/math/bansuijuzhen3.png)
 
-还需要注意的是，**逆矩阵是对于方阵来说的，只有方阵才有逆矩阵的概念，那要不是方阵呢？那么就是广义的逆矩阵**！广义逆矩阵在最小二乘法中有重要的应用。关于逆矩阵的求解以及代码实现请参考我写的另一份总结[《Numerical Methods Using Matlab》第一章 线性方程组求解，最小二乘问题请参考第四章 曲线拟合和多项式插值](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)。
-
-关于矩阵逆矩阵的求解可以看后面的[矩阵分解](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/)部分。
+还需要注意的是，**逆矩阵是对于方阵来说的，只有方阵才有逆矩阵的概念，那要不是方阵呢？那么就是广义的逆矩阵**！广义逆矩阵在最小二乘法中有重要的应用。关于逆矩阵的求解以及代码实现请参考我写的另一份总结[《Numerical Methods Using Matlab》第一章 线性方程组求解，最小二乘问题请参考第四章 曲线拟合和多项式插值](http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/)。关于矩阵逆矩阵的求解可以看后面的[矩阵分解](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/)部分。
 
 4.秩
 
@@ -119,7 +117,7 @@ $$
 
 说了这么多，那到底矩阵的秩对于矩阵表示的这个线性变换来说意味着什么？
 
-**我的理解是，矩阵的秩其实就是至少需要几个基向量就能完全表示该线性变换。**
+**我的理解是，矩阵的秩其实就是至少需要几个基向量就能完全表示该矩阵(线性变换)。**
 
 <!--
 矩阵的一个重要用途是解线性方程组。线性方程组中未知量的系数可以排成一个矩阵，加上常数项，则称为增广矩阵。另一个重要用途是表示线性变换，即是诸如f(x)  = 4x之类的线性函数的推广。设定基底后，某个向量v可以表示为m×1的矩阵,而线性变换f可以表示为行数为m的矩阵A，使得经过变换后得到的向量f(v)可以表示成Av的形式。矩阵的特征值和特征向量可以揭示线性变换的深层特性。
