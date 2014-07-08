@@ -169,9 +169,7 @@
 
 <p>我们思考一下，反射的逆矩阵是什么？反射的逆过程其实就是它自己对不对？也就是说反射的逆矩阵等于反射本身！所以就有了<strong>反射矩阵、反射矩阵的逆矩阵以及它的转置矩阵三者相同！</strong></p>
 
-<p>高维度下的正交矩阵比较复杂，但是可以通过基本模块例如置换、反射和旋转来构建高维的正交矩阵，例如下面要介绍的Householder变换和Givens旋转。</p>
-
-<p>(置换矩阵就是单位矩阵的某些行和列交换后得到的矩阵)</p>
+<p>高维度下的正交矩阵比较复杂，但是可以通过基本模块例如置换、反射和旋转来构建高维的正交矩阵，例如下面要介绍的Householder变换和Givens旋转。(置换矩阵就是单位矩阵的某些行和列交换后得到的矩阵)</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/math/zhengjiao2.png" alt="image" /></p>
 
@@ -226,7 +224,7 @@ H=I-\frac{2}{v^{T}v} vv^{T}
 
 <script type="math/tex; mode=display"> v=c+\|c\|_{2}e </script>
 
-<p>向量$c$和$e$是是包含n个元素的列向量，分别对应要变换的矩阵的某一列和单位阵的某一列，<script type="math/tex">\|c\|_{2}</script>是向量$c$的二范数 </p>
+<p>向量$c$和$e$是包含n个元素的列向量，分别对应要变换的矩阵的某一列和单位阵的某一列，<script type="math/tex">\|c\|_{2}</script>是向量$c$的二范数 </p>
 
 <script type="math/tex; mode=display"> \|c\|_{2}= \sqrt{c_{1}^2+c_{2}^2+c_{3}^2+ \cdots +c_{n}^2} </script>
 
