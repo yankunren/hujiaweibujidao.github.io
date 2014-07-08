@@ -66,6 +66,8 @@ open wikibook
 
 理解并实现矩阵的各种分解：LU分解，Cholesky分解，QR分解，特征值分解和奇异值分解
 
+![image](http://hujiaweibujidao.github.io/images/math/LinearAlgebra.jpg)
+
 [book]: http://hujiaweibujidao.github.io/files/linear_algebra_huangzhenghua.pdf
 
 
