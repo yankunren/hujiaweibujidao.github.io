@@ -45,7 +45,7 @@ published: true
 
 ![image](http://hujiaweibujidao.github.io/images/math/eigenvectors5.png)
 
-特征值的计算，简单的矩阵可以使用解特征方程的方法，但是一般情况下都是采用数值计算的方法，其中基于迭代技术的幂法可以用来计算矩阵的主特征值，反幂法类似，不过计算的是模最小的特征值，实际中常用的是QR分解。详情请参考请后面的[矩阵分解总结](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/)部分。
+特征值的计算，简单的矩阵可以使用解特征方程的方法，但是一般情况下都是采用数值计算的方法，其中基于迭代技术的幂法可以用来计算矩阵的主特征值，反幂法类似，不过计算的是模最小的特征值，实际中常用的是QR分解。详情请参考请后面的[矩阵分解](http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/)部分。
 
 ![image](http://hujiaweibujidao.github.io/images/math/eigenvectors4.png)
 
