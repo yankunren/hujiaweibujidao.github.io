@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-07-10T14:04:58+08:00</updated>
+  <updated>2014-07-12T12:52:45+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Download Coursera Courses in the Fastest Way]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/07/12/download-coursera-courses-in-the-fastest-way/"/>
+    <updated>2014-07-12T12:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/07/12/download-coursera-courses-in-the-fastest-way</id>
+    <content type="html"><![CDATA[<p>大家估计都上过C站的课吧？每个人都有自己的学习方式和下载方式，或许是看一节下一节，或者一次性全部下载，或者其他的方式等等。我是一个性子比较急的人，学东西喜欢一次性学完，所以我基本上没有去追C站的课程，都只是开课前加入，结课后我开始下载课程资料然后开始学习，嘿嘿，下面是我个人的C站课程一次性下载一门课程所有课程资源的方式，觉得还行特意共享一下</p>
+
+<p>1.使用Firefox浏览器，安装<a href="http://www.downthemall.net/">DownloadThemAll扩展插件</a></p>
+
+<p>2.修改下DownloadThemAll扩展插件的配置</p>
+
+<p>添加两个Filter：一个<code>CourseraVedio</code>，内容是<code>download.mp4?</code>，用于过滤得到课程视频文件；另一个<code>CourseraSubtitls</code>，内容是<code>subtitles?</code>，用于过滤得到课程视频对应的字幕文件</p>
+
+<p>3.进入课程的Video Lectures页面，点击<code>DownloadThemAll! Tools</code>下的<code>DownloadThemAll!</code>，选中新创建的两个filter再加上前面的<code>Documents</code>过滤器，然后选择一个目录点击<code>Start</code>就可以了，下载速度都是超快的哟！</p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/12/download-coursera-courses-in-the-fastest-way/">http://hujiaweibujidao.github.io/blog/2014/07/12/download-coursera-courses-in-the-fastest-way/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Python Algorithms - C9 Graphs]]></title>
@@ -4478,114 +4498,6 @@ r_{XY}=\frac{10 \times 247-54 \times 43}{\sqrt{[10 \times 320-(54)^2][10 \times 
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/">http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SS 1-Probability and Descriptive Statistics]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/"/>
-    <updated>2014-05-19T19:00:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1</id>
-    <content type="html"><![CDATA[<p><strong><center>统计学那些事 Things of Statistics</center></strong>
-<strong><center>逸夫图书馆, 2014/5/19</center></strong></p>
-
-<hr />
-
-<h4 id="center-center"><center>第一部分 概率和统计量</center></h4>
-<p>1.事件：对立事件(complementary event)，互斥事件(exclusive event)，相交事件(intersecting event)，相关事件(dependent event)，独立事件(independent event)，可以使用韦恩图(Venn Diagram)方便分析事件之间的关系。</p>
-
-<p>如果事件A和B会相互影响，那么它们是相关事件，否则是独立事件。
-事件A和B独立：$P(A|B)=P(A) \quad P(A \cap B)=P(A)P(B)$</p>
-
-<p>2.概率：条件概率(Conditional Probability)，全概率(Total Probability)，贝叶斯定理(Bayes’ Theorem)</p>
-
-<p>条件概率：$ P(A | B) = \frac{P(A \cap B)}{P(B)} $</p>
-
-<p>全概率：$ P(B) = P(B | A) P(A)+P(B | A’) P(A’) $</p>
-
-<p>贝叶斯定理(将条件概率和全概率整合到一起)：
-$P(A|B)=\frac{P(A \cap B)}{P(B|A)P(A)+P(B|A’)P(A’)}$</p>
-
-<p>3.描述数据的集中趋势：均值(mean)，中位数(median)，众数(mode)，加权平均数</p>
-
-<p>百分位点(percentile points)：中位数(Q2)就是50百分位点，Q1为25百分位点(lower quartile)，Q3为75百分位点(upper quartile)，<strong>经常使用Q3-Q1=IQR(interquartile range，四分差或四分位数)来检查分布是否对称。</strong></p>
-
-<!--
-[如果要计算一组数中的某个百分位数，一般比较好的排序方法是选择排序；当然，如果是计算该组数的特殊的百分位数，例如中位数，有其他更好地方法能够在线性时间内得到，之后我对做一些相关问题的研究，暂且说明一下]
--->
-
-<p>4.描述数据的变异性：极差(range)，标准差(standard deviation,简称s或者SD)，方差(deviation)</p>
-
-<p>标准差的计算公式：
-$$
-s=\sqrt{\frac{\Sigma(X-\bar{X})^2}{n-1}}
-$$</p>
-
-<p><strong>s是总体标准差的无偏估计，如果根号内部分母改成了n则是有偏估计，详细证明参见：<a href="http://en.wikipedia.org/wiki/Bias_of_an_estimator">Bias_of_an_estimator</a>，《爱上统计学》作者对此的解释是统计学家们通常比较保守，保守的含义是，如果我们不得不出错，我们出错也是因为过高地估计了标准差(因为除以n-1使得标准差大于实际值)。</strong></p>
-
-<p>如果想了解更加细致的内容可以看下这篇文章<a href="http://www.visiondummy.com/2014/03/divide-variance-n-1/">Why divide the sample variance by N-1?</a></p>
-
-<p>标准差和方差的异同：<strong>它们都是用来反映数据集的数据的变异性或者离散度的度量，但是标准差以原有的计算单位存在，然而方差以平方单位存在，前者在实际中更加具有意义</strong>。例如，某高校的男生的平均身高是170cm，标准差是5cm，那么说明该校男生的身高与平均身高的差异大概就是上下5cm，换成方差来解释的话就不好陈述了。</p>
-
-<p>使用有偏估计其实也可以，但是最好使用无偏估计，我记得Coursera上Machine Learning课中Andrew Ng曾经提到过，实际编码中其实还是使用有偏估计，因为它们在样本数据很大的时候其实结果没多大影响。</p>
-
-<p>5.数据集的图形化显示：直方图，饼图，线图，柱形图，条形图，茎叶图等</p>
-
-<p>数据分布的差异性描述：平均值，变异性，峰度(kurtosis)，偏度(skewness)</p>
-
-<p>峰值可能有多个，比如双峰或者多峰等。偏度有一个计算公式，由Pearson发明的，他同时也是相关系数的发明者，偏度虽有正负之分，但是绝对值越大说明图形越偏。</p>
-
-<script type="math/tex; mode=display">
-SK=\frac{3(\bar{X}-M)}{s},\quad M=Median,\bar{X}=Mean,s=SD
-</script>
-
-<p>峰度图：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/kurtosis.png" alt="image" /></p>
-
-<p>偏度图：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/skewness.png" alt="image" /></p>
-
-<p>6.两个最重要的统计量：期望(Expectation)与方差(Variance)</p>
-
-<p>$E(x)=\Sigma xP(X=x)=\mu \quad Var(x)=E(x-\mu)^{2}=\Sigma (x-\mu)^2P(X=x)=E(x^{2})-(E(x))^{2}$</p>
-
-<p>[注：上面的期望的等式是对于离散型随机变量x，如果是连续型随机变量x，那么<script type="math/tex">E=\int_{-\infty}^{\infty} xf(x)dx</script>，同理，方差就是<script type="math/tex">D=\int_{-\infty}^{\infty} (x-E)^{2}f(x)dx</script>，期望描述的是数据的集中趋势，方差描述的数据的偏移程度]</p>
-
-<p>线性变换之后的期望与方差：</p>
-
-<p>$E(ax+b)=aE(x)+b \quad Var(ax+b)=a^{2}Var(x)$
-$E(ax+by)=aE(x)+bE(y) \quad Var(ax+by)=a^{2}Var(x)+b^{2}Var(y)$</p>
-
-<p><strong>思考：为什么加上b，方差并没有发生变化呢？</strong></p>
-
-<p><strong>因为在变量中增加常数b只是将概率分布移动了一下，分布的形状并没有发生改变，所以b并没有在方差中起到作用。</strong></p>
-
-<p>相互独立事件X和Y(或者说是随机变量X和Y)：</p>
-
-<p>$E(X+Y)=E(X)+E(Y) \quad Var(X+Y)=Var(X)+Var(Y)$
-$E(X-Y)=E(X)-E(Y) \quad Var(X-Y)=Var(X)+Var(Y)$</p>
-
-<p><strong>思考：为什么$Var(X-Y)=Var(X)+Var(Y)$？</strong></p>
-
-<script type="math/tex; mode=display">Var(X-Y)=E[(X-Y)^{2}]-[E(X-Y)]^{2}=E(X^{2})+E(Y^{2})-2E(X)E(Y)+[E(X)-E(Y)]^{2}\\
-=E(X^{2})-[E(X)]^{2}+E(Y^{2})-[E(Y)]^{2}-2E(X)E(Y)+2E(X)E(Y)=Var(X)+Var(Y)</script>
-
-<p><strong>记住，一个随机变量减去另一个随机变量得到的概率分布的方差是两个随机变量的方差之和，方差只会增加！</strong></p>
-
-<p>下面两个图示演示了其结果</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/varxplusy.png" alt="image" /></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/varxminusy.png" alt="image" /></p>
-
-<p>相互独立的随机变量与独立观测值之间的区别：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/independentobservation.png" alt="image" /></p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/">http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-1/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
