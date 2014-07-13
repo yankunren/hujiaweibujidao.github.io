@@ -27,7 +27,7 @@ footer: true
 
 1.Python基础知识篇
 
-[Python Basics](http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/) 和 [Python Advances](http://hujiaweibujidao.github.io/blog/2014/05/16/python-tips2/)
+[Python Basics](http://hujiaweibujidao.github.io/blog/2014/05/10/python-tips1/) 和 [Python Advances](http://hujiaweibujidao.github.io/blog/2014/05/16/python-tips3/)
 
 前者是Python基础的简单总结(大部分摘自[网上恩师@廖雪峰老师的Python教程](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000))，后者推荐了些关于Python高级特性的好文章(大部分摘自[伯乐在线Python分类的文章](http://blog.jobbole.com/category/python/))
 
