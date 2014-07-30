@@ -261,6 +261,7 @@
 <span class="line-number">30</span>
 <span class="line-number">31</span>
 <span class="line-number">32</span>
+<span class="line-number">33</span>
 </pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">insertion_sort</span><span class="p">(</span><span class="n">a_list</span><span class="p">):</span>
 </span><span class="line">    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)):</span>
 </span><span class="line">        <span class="n">current_value</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
@@ -285,6 +286,7 @@
 </span><span class="line">                <span class="n">low</span><span class="o">=</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span>
 </span><span class="line">        <span class="k">while</span> <span class="n">position</span> <span class="o">&gt;</span> <span class="n">low</span><span class="p">:</span>
 </span><span class="line">            <span class="n">a_list</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[</span><span class="n">position</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class="line">            <span class="n">position</span> <span class="o">=</span> <span class="n">position</span> <span class="o">-</span><span class="mi">1</span>
 </span><span class="line">        <span class="n">a_list</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_value</span>
 </span><span class="line">
 </span><span class="line">
