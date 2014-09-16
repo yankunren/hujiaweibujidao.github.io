@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-09-16T18:40:14+08:00</updated>
+  <updated>2014-09-16T18:48:03+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -18,19 +18,19 @@
     <link href="http://hujiaweibujidao.github.io/blog/2014/09/16/bootcamp-an-open-source-django-site/"/>
     <updated>2014-09-16T17:57:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/09/16/bootcamp-an-open-source-django-site</id>
-    <content type="html"><![CDATA[<p>最近接了一个项目，用Django开发一个网站，于是打算看看用Django开发的开源网站，推荐一个网站 <a href="https://www.djangosites.org/with-source/">djangosites</a>，上面有大量的用django开发的开源的网站。最后我找到了Bootcamp，一个包含了Feed、Article和QA三部分的企业级社交网站，界面简洁大方，功能基本齐全，相当适合我这个新手拿来学习</p>
+    <content type="html"><![CDATA[<p>最近接了一个项目，用Django开发一个网站，于是打算看看用Django开发的开源网站，推荐一个网站 <a href="https://www.djangosites.org/with-source/">djangosites</a>，上面有大量用django开发的网站源码。最后我找到了Bootcamp，一个包含了Feed、Article和QA三部分的社交网站，界面简洁大方，功能基本齐全，相当适合我这个新手拿来学习</p>
 
-<p>试用Bootcamp网址： http://trybootcamp.vitorfs.com/</p>
+<p>试用Bootcamp网址： <a href="http://trybootcamp.vitorfs.com/">http://trybootcamp.vitorfs.com/</a></p>
 
-<p>Bootcamp源码： https://github.com/vitorfs/bootcamp</p>
+<p>Bootcamp源码： <a href="https://github.com/vitorfs/bootcamp">https://github.com/vitorfs/bootcamp</a></p>
 
-<p>Bootcamp安装说明： https://github.com/vitorfs/bootcamp/wiki/Installing-and-Running-Bootcamp</p>
+<p>Bootcamp安装说明： <a href="https://github.com/vitorfs/bootcamp/wiki/Installing-and-Running-Bootcamp">https://github.com/vitorfs/bootcamp/wiki/Installing-and-Running-Bootcamp</a></p>
 
 <p>安装过程很简单，以下是我安装过程中遇到的一些问题和关键步骤：</p>
 
 <p>(1)安装psycopg2报错 <code>Error: pg_config executable not found.</code></p>
 
-<p>http://stackoverflow.com/questions/11618898/pg-config-executable-not-found</p>
+<p>参考网址： <a href="http://stackoverflow.com/questions/11618898/pg-config-executable-not-found">http://stackoverflow.com/questions/11618898/pg-config-executable-not-found</a></p>
 
 <p>解决方案：<code>brew install postgresql</code></p>
 
@@ -80,6 +80,10 @@ Installed 0 object(s) from 0 fixture(s)</p>
 <p><code>html
 @import url(http://fonts.useso.com/css?family=Audiowide);
 </code></p>
+
+<p>网站界面如下：</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/others/bootcamp.png" alt="image" /></p>
 
 ]]></content>
   </entry>
