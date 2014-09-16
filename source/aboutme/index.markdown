@@ -25,7 +25,7 @@ echo "My email address is $emailaddress. Email me if you are interested in $name
 echo "Hope you enjoy my bolg site here! Have fun! :-) "
 ```
 
-大家好，我叫Hujiawei，[五道口男子职业技术与艺术学院](http://www.tsinghua.edu.cn/publish/th/index.html)计算机系2013级研究生，本科就读于伟大的[左家垅男子职业技术学院](http://www.csu.edu.cn/)，热爱编程，喜欢Java/C/Linux/Android/iOS/Python/RaspberryPi等等，在湖南永景股份有限公司/三星中国研究院实习过，开发过大型(商业)网站([ASP.NET](http://www.cnblogs.com/yinger/category/305399.html)和J2EE SSH架构)，也开发过(商用)桌面软件（[RCP](http://www.cnblogs.com/yinger/category/339483.html)和[JavaFx](http://www.cnblogs.com/yinger/category/372015.html)），同样也做过Android应用（[微微博TinyWeibo](http://hujiaweiyinger.diandian.com/post/2013-05-18/project_weiweibo)，爱学习iStudy和Gaze移植等）和小游戏（8Puzzle等），iOS无实际开发经验。我对移动互联网和数据挖掘/机器学习比较感兴趣，如果你有相同兴趣欢迎联系我，交个朋友。
+大家好，我叫Hujiawei，[五道口男子职业技术与艺术学院](http://www.tsinghua.edu.cn/publish/th/index.html)计算机系2013级研究生，本科就读于伟大的[左家垅男子职业技术学院](http://www.csu.edu.cn/)，热爱编程，喜欢Java/Python/Linux/Android/RaspberryPi等等，在三星中国研究院/湖南永景股份有限公司/湖南中途电子有限公司实习过，开发过大型(商业)网站([ASP.NET](http://www.cnblogs.com/yinger/category/305399.html)和J2EE SSH架构)，也开发过(商用)桌面软件（[RCP](http://www.cnblogs.com/yinger/category/339483.html)和[JavaFx](http://www.cnblogs.com/yinger/category/372015.html)），同样也做过Android应用（[微微博TinyWeibo](http://hujiaweiyinger.diandian.com/post/2013-05-18/project_weiweibo)，爱学习iStudy应用，眼球追踪Gaze的移植以及人脸识别应用XFace等）和小游戏（8Puzzle等），iOS无实际开发经验。我对移动互联网和数据挖掘/机器学习/模式识别比较感兴趣，如果你有相同兴趣欢迎联系我，交个朋友。
 
 <!-- [个人简历](http://hujiaweibujidao.github.io/resume.html) -->
 
@@ -35,7 +35,7 @@ echo "Hope you enjoy my bolg site here! Have fun! :-) "
 
 中南大学计科0902班毕业纪念网址：<http://hujiaweibujidao.github.io/csucs0902/>
 
-PS：读研阶段都会呆在北京，如果有不错的实习机会请和我联系，最好是和数据挖掘或者模式识别有关，谢谢！
+PS：读研阶段都会呆在北京，如果有不错的实习机会请和我联系，最好是和数据挖掘/机器学习/模式识别或者移动开发有关，谢谢！
 
 ####原博客地址：
 
@@ -45,15 +45,15 @@ PS：读研阶段都会呆在北京，如果有不错的实习机会请和我联
 
 ####  推荐博文
 
-1. <a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/project_weiweibo" target="_blank">微微博项目展示</a> [项目源代码 on Github](https://github.com/hujiaweibujidao/TinyWeibo)
+*. <a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/project_weiweibo" target="_blank">微微博项目展示</a> [项目源代码 on Github](https://github.com/hujiaweibujidao/TinyWeibo)
 
 注：该项目不再更新，请不要邮件咨询，谢谢
 
-2. <a href="http://hujiaweiyinger.diandian.com/post/2013-05-24/project_wechat4j" target="_blank">Wechat4j项目</a> [项目源代码 on Github](https://github.com/hujiaweibujidao/WeChat4j)
+*. <a href="http://hujiaweiyinger.diandian.com/post/2013-05-24/project_wechat4j" target="_blank">Wechat4j项目</a> [项目源代码 on Github](https://github.com/hujiaweibujidao/WeChat4j)
 
 注：该项目不再更新，请不要邮件咨询，谢谢
 
-3. <a href="http://hujiaweiyinger.diandian.com/post/2013-07-16/edx_build_edx_platform" target="_blank">Edx平台在MacOSX上的搭建</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hujiaweiyinger.diandian.com/post/2013-07-27/install_edx-platform_on_ubuntu12.04" target="_blank">在Ubuntu12.04LTS上的搭建</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hujiawei.tumblr.com/post/56574509577/the-instructions-to-install-edx-platform-on-ubuntu12-04" target="_blank">Tumblr上的英文版本</a>
+*. <a href="http://hujiaweiyinger.diandian.com/post/2013-07-16/edx_build_edx_platform" target="_blank">Edx平台在MacOSX上的搭建</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hujiaweiyinger.diandian.com/post/2013-07-27/install_edx-platform_on_ubuntu12.04" target="_blank">在Ubuntu12.04LTS上的搭建</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hujiawei.tumblr.com/post/56574509577/the-instructions-to-install-edx-platform-on-ubuntu12-04" target="_blank">Tumblr上的英文版本</a>
 
 注：我不再关注Edx平台开发，请不要邮件咨询，谢谢
 
