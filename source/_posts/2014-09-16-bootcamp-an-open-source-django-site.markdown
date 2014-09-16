@@ -6,19 +6,19 @@ comments: true
 categories: python
 ---
 
-最近接了一个项目，用Django开发一个网站，于是打算看看用Django开发的开源网站，推荐一个网站 [djangosites](https://www.djangosites.org/with-source/)，上面有大量的用django开发的开源的网站。最后我找到了Bootcamp，一个包含了Feed、Article和QA三部分的企业级社交网站，界面简洁大方，功能基本齐全，相当适合我这个新手拿来学习
+最近接了一个项目，用Django开发一个网站，于是打算看看用Django开发的开源网站，推荐一个网站 [djangosites](https://www.djangosites.org/with-source/)，上面有大量用django开发的网站源码。最后我找到了Bootcamp，一个包含了Feed、Article和QA三部分的社交网站，界面简洁大方，功能基本齐全，相当适合我这个新手拿来学习
 
-试用Bootcamp网址： http://trybootcamp.vitorfs.com/
+试用Bootcamp网址： [http://trybootcamp.vitorfs.com/](http://trybootcamp.vitorfs.com/)
 
-Bootcamp源码： https://github.com/vitorfs/bootcamp
+Bootcamp源码： [https://github.com/vitorfs/bootcamp](https://github.com/vitorfs/bootcamp)
 
-Bootcamp安装说明： https://github.com/vitorfs/bootcamp/wiki/Installing-and-Running-Bootcamp
+Bootcamp安装说明： [https://github.com/vitorfs/bootcamp/wiki/Installing-and-Running-Bootcamp](https://github.com/vitorfs/bootcamp/wiki/Installing-and-Running-Bootcamp)
 
 安装过程很简单，以下是我安装过程中遇到的一些问题和关键步骤：
 
 (1)安装psycopg2报错 `Error: pg_config executable not found.`
 
-http://stackoverflow.com/questions/11618898/pg-config-executable-not-found
+参考网址： [http://stackoverflow.com/questions/11618898/pg-config-executable-not-found](http://stackoverflow.com/questions/11618898/pg-config-executable-not-found)
 
 解决方案：`brew install postgresql`
 
@@ -69,5 +69,7 @@ Not synced (use migrations):
 @import url(http://fonts.useso.com/css?family=Audiowide);
 ```
 
+网站界面如下：
 
+![image](http://hujiaweibujidao.github.io/images/others/bootcamp.png)
 
