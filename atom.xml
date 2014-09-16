@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-09-12T10:05:19+08:00</updated>
+  <updated>2014-09-16T18:40:14+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,100 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Bootcamp an open source Django site]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/09/16/bootcamp-an-open-source-django-site/"/>
+    <updated>2014-09-16T17:57:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/09/16/bootcamp-an-open-source-django-site</id>
+    <content type="html"><![CDATA[<p>最近接了一个项目，用Django开发一个网站，于是打算看看用Django开发的开源网站，推荐一个网站 <a href="https://www.djangosites.org/with-source/">djangosites</a>，上面有大量的用django开发的开源的网站。最后我找到了Bootcamp，一个包含了Feed、Article和QA三部分的企业级社交网站，界面简洁大方，功能基本齐全，相当适合我这个新手拿来学习</p>
+
+<p>试用Bootcamp网址： http://trybootcamp.vitorfs.com/</p>
+
+<p>Bootcamp源码： https://github.com/vitorfs/bootcamp</p>
+
+<p>Bootcamp安装说明： https://github.com/vitorfs/bootcamp/wiki/Installing-and-Running-Bootcamp</p>
+
+<p>安装过程很简单，以下是我安装过程中遇到的一些问题和关键步骤：</p>
+
+<p>(1)安装psycopg2报错 <code>Error: pg_config executable not found.</code></p>
+
+<p>http://stackoverflow.com/questions/11618898/pg-config-executable-not-found</p>
+
+<p>解决方案：<code>brew install postgresql</code></p>
+
+<p>(2)新建文件<code>.env</code>，配置数据库为mysql</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">DEBUG</span><span class="o">=</span><span class="bp">True</span>
+</span><span class="line"><span class="n">SECRET_KEY</span><span class="o">=</span><span class="s">&#39;mys3cr3tk3y&#39;</span>
+</span><span class="line"><span class="n">DATABASE_URL</span><span class="o">=</span><span class="s">&#39;mysql://root:@localhost/bootcamp&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(3)同步数据库，运行 <code>python manage.py syncdb</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">hujiawei</span><span class="o">-</span><span class="n">MacBook</span><span class="o">-</span><span class="n">Pro</span><span class="p">:</span><span class="n">bootcamp</span> <span class="n">hujiawei</span><span class="err">$</span> <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">syncdb</span>
+</span><span class="line"><span class="n">Syncing</span><span class="o">...</span>
+</span><span class="line"><span class="n">Creating</span> <span class="n">tables</span> <span class="o">...</span>
+</span><span class="line"><span class="n">Creating</span> <span class="n">table</span> <span class="n">auth_permission</span> <span class="o">...</span>
+</span><span class="line">
+</span><span class="line"><span class="n">You</span> <span class="n">just</span> <span class="n">installed</span> <span class="n">Django</span><span class="s">&#39;s auth system, which means you don&#39;</span><span class="n">t</span> <span class="n">have</span> <span class="nb">any</span> <span class="n">superusers</span> <span class="n">defined</span><span class="o">.</span>
+</span><span class="line"><span class="n">Would</span> <span class="n">you</span> <span class="n">like</span> <span class="n">to</span> <span class="n">create</span> <span class="n">one</span> <span class="n">now</span><span class="err">?</span> <span class="p">(</span><span class="n">yes</span><span class="o">/</span><span class="n">no</span><span class="p">):</span> <span class="n">yes</span>
+</span><span class="line"><span class="n">Username</span> <span class="p">(</span><span class="n">leave</span> <span class="n">blank</span> <span class="n">to</span> <span class="n">use</span> <span class="s">&#39;hujiawei&#39;</span><span class="p">):</span> <span class="n">hujiawei</span>
+</span><span class="line"><span class="n">Email</span> <span class="n">address</span><span class="p">:</span> <span class="o">...</span>
+</span><span class="line"><span class="n">Installing</span> <span class="n">indexes</span> <span class="o">...</span>
+</span><span class="line"><span class="n">Installed</span> <span class="mi">0</span> <span class="nb">object</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="kn">from</span> <span class="mi">0</span> <span class="n">fixture</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="n">Synced</span><span class="p">:</span>
+</span><span class="line"> <span class="o">&gt;</span> <span class="n">django</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">auth</span> <span class="o">...</span>
+</span><span class="line">
+</span><span class="line"><span class="n">Not</span> <span class="n">synced</span> <span class="p">(</span><span class="n">use</span> <span class="n">migrations</span><span class="p">):</span>
+</span><span class="line"> <span class="o">-</span>
+</span><span class="line"><span class="p">(</span><span class="n">use</span> <span class="o">./</span><span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span> <span class="n">to</span> <span class="n">migrate</span> <span class="n">these</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(4)除去项目中的google痕迹，加速页面的加载</p>
+
+<p><code>base.html</code>中删除<code>ga.js</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="c">&lt;!--</span>
+</span><span class="line"><span class="c">&lt;script src=&quot;js/ga.js&quot;&gt;&lt;/script&gt;</span>
+</span><span class="line"><span class="c">--&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>static/css/bootcamp.css</code>中修改字体库url，改成360的CDN</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line">@import url(http://fonts.useso.com/css?family=Audiowide);
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/09/16/bootcamp-an-open-source-django-site/">http://hujiaweibujidao.github.io/blog/2014/09/16/bootcamp-an-open-source-django-site/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Download Coursera Courses in the Fastest Way]]></title>
@@ -4376,128 +4470,6 @@ $P(X=0)=p, P(X=1)=q, (q=1-p)$，它的期望是$p$，方差是$p(1-p)$。</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/">http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-2/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SS 2-Covariance and Correlation coefficient]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/"/>
-    <updated>2014-05-19T19:30:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3</id>
-    <content type="html"><![CDATA[<p><strong><center>统计学那些事 Things of Statistics</center></strong>
-<strong><center>逸夫图书馆, 2014/5/19</center></strong></p>
-
-<hr />
-
-<h4 id="center-center"><center>第二部分 协方差和相关关系</center></h4>
-
-<p>1.协方差</p>
-
-<p>随机变量X和Y的协方差Cov(X,Y)=E[X-E(X)]E[Y-E(Y)]=E(XY)-E(X)E(Y)。</p>
-
-<p>为什么D(X+Y)=E(XY)-E(X)E(Y)?</p>
-
-<script type="math/tex; mode=display">
-D(X+Y)=E[(X+Y)^{2}]-[E(X+Y)]^{2}=E[X^{2}+Y^{2}-2XY]-[E(X)+E(Y)]^{2} \\ =E[X^{2}]-[E(X)]^{2}+E[Y^{2}]-[E(Y)]^{2}+2E(XY)-2E(X)E(Y) \\ =D(X)+D(Y)+2E(XY)-2E(X)E(Y)
-</script>
-
-<p>因为 <strong>(X+Y)=D(X)+D(Y)+2Cov(X,Y)</strong>
-所以 <strong>D(X+Y)=E(XY)-E(X)E(Y)</strong></p>
-
-<p>协方差的性质：(基本上根据上式都可以简单证明得到)</p>
-
-<p>Cov(X,Y)=Cov(Y,X)， Cov(X,X)=D(X)，Cov(aX,bY)=abCov(X,Y)，<script type="math/tex">Cov(X_{1}+X_{2},Y)=Cov(X_{1},Y)+Cov(X_{2},Y)</script></p>
-
-<p>如果X和Y是相互独立的，那么Cov(X,Y)=0。</p>
-
-<p>2.相关系数(correlation coefficient)是两个变量之间<strong>线性关系</strong>的数值型指标，取值范围是[-1,1]，大于0表示正相关，小于0表示负相关，可以用散点图来直接查看相关性。<strong>根据某些不成文的规则，一般高于0.6表示强相关，低于0.4表示弱相关，中间部分表示中度相关。</strong></p>
-
-<p>[<strong>一般说的相关系数是Pearson相关系数，它考察的变量的属性是连续的，例如年龄，体重等，如果是离散型变量那么应该使用点二列相关系数</strong>]</p>
-
-<p>相关系数的计算，我们经常可以看到下面两种表示方式：</p>
-
-<p>一种表示方式是：[这是从协方差和方差的角度来看的]</p>
-
-<script type="math/tex; mode=display">
-\rho_{XY}=\frac{Cov(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)}}
-</script>
-
-<p>还有一种常见的表示方式是：[这是从数据本身来看的]</p>
-
-<script type="math/tex; mode=display">
-r_{XY}=\frac{n\Sigma{XY}-\Sigma{X}\Sigma{Y}}{\sqrt{[n\Sigma{X^2}-(\Sigma{X})^2][n\Sigma{Y^2}-(\Sigma{Y})^2]}}
-</script>
-
-<p>其实，很容易看出两者是等价的，因为$E(X)=\frac{\Sigma X}{n}, D(X)=\frac{\Sigma X^{2}}{n} - \frac{\Sigma X}{n^{2}}$，然后将第二个等式右边上下除以$n^{2}$即可得到第一个等式的右边。</p>
-
-<p>举个计算的例子：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/cor_1.png" alt="image" /></p>
-
-<p>得到的结果为0.692，算是一个强相关</p>
-
-<script type="math/tex; mode=display">
-r_{XY}=\frac{10 \times 247-54 \times 43}{\sqrt{[10 \times 320-(54)^2][10 \times 201-(43)^2]}} = 0.692
-</script>
-
-<p>为什么说相关系数反映的只是随机变量之间的线性关系呢？</p>
-
-<p>我们总是用关于X的线性函数a+bX去近似Y，也就是用直线a+bX去拟合Y，如何判断拟合的好坏呢？一般都是用均方误差，也就是误差值的平方的均值，然后用均方误差对a和b分别求导即可得到使得均方误差达到最小的拟合参数a和b。很有意思的一个结论就是，<strong>均值点(E(X),E(Y))一定在拟合直线a+bX上</strong>。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/cor_2.png" alt="image" /></p>
-
-<p>最后得到的结果是:<script type="math/tex">min E[(Y-(a+bX))^{2}]=(1-\rho_{XY}^{2})D(Y)</script>，从中可以得到很多性质：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/cor_3.png" alt="image" /></p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>均方误差e和相关系数$\rho$之间的关系，e是$$</td>
-      <td>\rho_{XY}</td>
-      <td>$$的严格单调递减函数。</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/cor_4.png" alt="image" /></p>
-
-<p>注意两点：</p>
-
-<p>(1)<strong>相关系数反映的是只是线性关系！如果两个变量的相关系数为0，只能说明它们没有线性关系存在，但是可能存在其他的非线性关系！不相关和相互独立是不一样的，不相关只是就线性关系来说，相互独立是就一般关系而言。</strong></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/cor_5.png" alt="image" /></p>
-
-<p>但是，有时候相关性和独立性是等价的，比如下面的二维正态分布，这是很重要的多维随机变量分布，随机变量X和Y相互独立的条件是$\rho=0$(不明白可以看下节对多维随机变量分布的介绍)，而$\rho$正好等于<script type="math/tex">\rho_{XY}</script>，且随机变量X和Y不相关的条件就是<script type="math/tex">\rho_{XY}=0</script>，所以此时相关性和独立性是等价的。[之后我会写一篇文章并通过作图的方式介绍相关系数到底是如何影响二维正态分布的数据的分布的]</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/cor_6.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/cor_7.png" alt="image" /></p>
-
-<p>(2)<strong>相关性和因果关系无关！</strong>例如，冰淇淋的消费量和犯罪率是正相关的(可以参考《爱上统计学》)，但是两者不存在任何因果关系！</p>
-
-<p>决定系数：相关系数的平方，它表述一个变量的方差可以被另一个变量的方差来解释的百分比。(参考《爱上统计学》)</p>
-
-<p>3.协方差矩阵</p>
-
-<p>协方差矩阵是非常重要的内容，经典算法PCA的基础就是协方差矩阵。引入它之前，先要看下原点矩和中心距的概念</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/corm_1.png" alt="image" /></p>
-
-<p>协方差矩阵其实就是由n维随机变量之间两两的二阶混合中心距组成的矩阵</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/corm_2.png" alt="image" /></p>
-
-<p>还是回到我们最重要的那个二维正态随机变量，看下如何将它的概率密度转换成协方差矩阵的表示形式，继而将其推广至n维正态随机变量。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/corm_5.png" alt="image" />
-<img src="http://hujiaweibujidao.github.io/images/math/corm_4.png" alt="image" /></p>
-
-<p>上面最后得到的n维正态随机变量的概率密度公式是在模式识别里面非常重要的，n维正态随机变量的性质如下：</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/corm_3.png" alt="image" /></p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/">http://hujiaweibujidao.github.io/blog/2014/05/19/statistics-summary-3/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   

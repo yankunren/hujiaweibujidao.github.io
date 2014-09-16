@@ -303,6 +303,12 @@
         <lastmod>2014-07-12T12:52:42+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://hujiaweibujidao.github.io/blog/2014/09/16/bootcamp-an-open-source-django-site/
+        </loc>
+        <lastmod>2014-09-16T18:40:11+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://hujiaweibujidao.github.io/404.html</loc>
         <lastmod>2014-05-18T21:00:58+08:00</lastmod>
     </url>
@@ -312,7 +318,7 @@
     </url>
     <url>
         <loc>http://hujiaweibujidao.github.io/blog/archives/</loc>
-        <lastmod>2014-09-12T10:05:10+08:00</lastmod>
+        <lastmod>2014-09-16T18:40:11+08:00</lastmod>
     </url>
     <url>
         <loc>http://hujiaweibujidao.github.io/datamining/</loc>
@@ -324,7 +330,7 @@
     </url>
     <url>
         <loc>http://hujiaweibujidao.github.io/</loc>
-        <lastmod>2014-09-12T10:05:10+08:00</lastmod>
+        <lastmod>2014-09-16T18:40:11+08:00</lastmod>
     </url>
     <url>
         <loc>http://hujiaweibujidao.github.io/index_stevejobs.html</loc>
