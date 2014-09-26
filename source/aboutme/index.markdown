@@ -29,21 +29,17 @@ echo "Hope you enjoy my bolg site here! Have fun! :-) "
 
 <!-- [个人简历](http://hujiaweibujidao.github.io/resume.html) -->
 
-我的邮箱地址：[别逗了，你要想联系我肯定知道代码中哪行有我的邮箱的啦. :-)] [英文简历下载](http://hujiaweibujidao.github.io/resume2014.pdf)
-
 我的GitHub主页： <https://github.com/hujiaweibujidao>
 
 中南大学计科0902班毕业纪念网址：<http://hujiaweibujidao.github.io/csucs0902/>
 
-PS：读研阶段都会呆在北京，如果有不错的实习机会请和我联系，最好是和数据挖掘/机器学习/模式识别或者移动开发有关，谢谢！
+PS：读研阶段都会呆在北京，如果有不错的实习机会请和我联系，最好是和数据挖掘/机器学习/模式识别或者移动开发有关，谢谢！[英文简历下载](http://hujiaweibujidao.github.io/resume2014.pdf)
+
+PPS：感谢很多人的来信邀请，小弟真的很感谢你们对我的关注，谢谢！但是目前研二了，要进行科研了，毕竟毕业要紧，嘿嘿。。。所以我不能有太多的时间做其他的事情了，不过还是谢谢你们的邀请！O(∩_∩)O~
 
 ####原博客地址：
 
 [点点博客](http://hujiaweiyinger.diandian.com)  [大四的技术总结] &nbsp;&nbsp; [博客园](http://www.cnblogs.com/yinger)  [大二大三的技术总结]  &nbsp;&nbsp; [Tumblr](http://hujiawei.tumblr.com)  [英文博客，较少更新]
-
-以下是过去的博客中比较好的内容，并没有收录在本博客中，欢迎阅读
-
-####  推荐博文
 
 *. <a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/project_weiweibo" target="_blank">微微博项目展示</a> [项目源代码 on Github](https://github.com/hujiaweibujidao/TinyWeibo)
 
@@ -56,6 +52,10 @@ PS：读研阶段都会呆在北京，如果有不错的实习机会请和我联
 *. <a href="http://hujiaweiyinger.diandian.com/post/2013-07-16/edx_build_edx_platform" target="_blank">Edx平台在MacOSX上的搭建</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hujiaweiyinger.diandian.com/post/2013-07-27/install_edx-platform_on_ubuntu12.04" target="_blank">在Ubuntu12.04LTS上的搭建</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hujiawei.tumblr.com/post/56574509577/the-instructions-to-install-edx-platform-on-ubuntu12-04" target="_blank">Tumblr上的英文版本</a>
 
 注：我不再关注Edx平台开发，请不要邮件咨询，谢谢
+
+以下是过去的博客中比较好的内容，并没有收录在本博客中，欢迎阅读
+
+####  推荐博文
 
 4. <a href="http://hujiaweiyinger.diandian.com/post/2013-05-18/project_rcp_mail_client" target="_blank">RCP版本的邮件客户端</a>
 
