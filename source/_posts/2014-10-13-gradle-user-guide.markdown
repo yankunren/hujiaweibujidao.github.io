@@ -11,7 +11,7 @@ Gradle Plugin User Guide ( for Android Development )  [未完成，撰写中]
 
 原文地址：[http://tools.android.com/tech-docs/new-build-system/user-guide](http://tools.android.com/tech-docs/new-build-system/user-guide)
 
-#####Introduction
+###Introduction
 
 This documentation is for the Gradle plugin version 0.9. Earlier versions may differ due to non-compatible we are introducing before 1.0.
 Goals of the new Build System
@@ -22,7 +22,7 @@ Make it easy to create several variants of an application, either for multi-apk 
 Make it easy to configure, extend and customize the build process     
 Good IDE integration    
 
-#####Why Gradle?
+###Why Gradle?
 
 Gradle is an advanced build system as well as an advanced build toolkit allowing to create custom build logic through plugins.
 
@@ -36,7 +36,7 @@ Good Tooling API allowing IDE integration
 
 [总结起来就是：DSL(Domain Specific Language ) + Groovy based Build files + Maven based Dependency Management + Plugin Supported]
 
-#####Requirements
+###Requirements
 
 Gradle 1.10 or 1.11 or 1.12 with the plugin 0.11.1      
 SDK with Build Tools 19.0.0. Some features may require a more recent version.
@@ -44,7 +44,7 @@ Basic Project
 
 A Gradle project describes its build in a file called build.gradle located in the root folder of the project.
 
-#####Simple build files
+###Simple build files
 
 The most simple Java-only project has the following build.gradle:
 
@@ -101,6 +101,7 @@ Note: You will also need a `local.properties` file to set the location of the SD
 Alternatively, you can set an environment variable called `ANDROID_HOME`. There is no differences between the two methods, you can use the one you prefer.
 
 关于设置Android SDK的位置有两种方式：
+
 （1）在项目根目录的`local.properties` 文件中指定`sdk.dir` 的值，如果包含ndk的话同时还要指定`ndk.dir` 的值
 
 ```
@@ -109,7 +110,7 @@ ndk.dir=/Volumes/hujiawei/Users/hujiawei/Android/android_ndk
 ```
 （2）在系统中设置环境变量`ANDROID_HOME`
 
-#####Project Structure
+###Project Structure
 
 The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.     
 [Gradle遵循大家约定俗成的目录结构和项目配置]
@@ -142,7 +143,7 @@ jni/
 
 Note: `src/androidTest/AndroidManifest.xml` is not needed as it is created automatically.
 
-#####Configuring the Structure
+####Configuring the Structure
 
 When the default project structure isn’t adequate, it is possible to configure it. According to the Gradle documentation, reconfiguring the `sourceSets` for a Java project can be done with the following:
 
@@ -202,9 +203,9 @@ This is Android specific and will not work on Java sourceSets.
 
 The ‘migrated’ sample shows this. [?]
 
-#####Build Tasks
+###Build Tasks
 
-######General Tasks
+####General Tasks
 
 Applying a plugin to the build file automatically creates a set of build tasks to run. Both the Java plugin and the Android plugin do this.
 
@@ -237,7 +238,7 @@ For a full list and seeing dependencies between the tasks run:
 **Note: Gradle automatically monitor the declared inputs and outputs of a task.
 Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations.**
 
-#####Java project tasks
+####Java project tasks
 
 The Java plugin creates mainly two tasks, that are dependencies of the main anchor tasks:
 
@@ -253,7 +254,7 @@ In general, you will probably only ever call `assemble` or `check`, and ignore t
 
 You can see the full set of tasks and their descriptions for the [Java plugin here](http://gradle.org/docs/current/userguide/java_plugin.html).
 
-#####Android tasks
+####Android tasks
 
 The Android plugin use the same convention to stay compatible with other plugins, and adds an additional anchor task:
 
@@ -261,9 +262,9 @@ The Android plugin use the same convention to stay compatible with other plugins
 
 `check`   The task to run all the checks.
 
-`connectedCheck`   Runs checks that requires a connected device or emulator. they will run on all connected devices in parallel. [?]
+`connectedCheck`   **Runs checks that requires a connected device or emulator. they will run on all connected devices in parallel. **[?]
 
-`deviceCheck`   Runs checks using APIs to connect to remote devices. This is used on CI servers. [?]
+`deviceCheck`   **Runs checks using APIs to connect to remote devices. This is used on CI servers.** [?]
 
 `build`   This task does both assemble and check
 
@@ -281,7 +282,7 @@ An Android project has at least two outputs: a debug APK and a release APK. Each
 
 They both depend on other tasks that execute the multiple steps needed to build an APK. The `assemble` task depends on both, so calling it will build both APKs.
 
-Tip: Gradle support camel case shortcuts for task names on the command line. For instance:
+**Tip: Gradle support camel case shortcuts for task names on the command line.**  For instance: [Gradle支持在命令行中使用某个task的名称的camel case缩写调用这个task]
 
 `gradle aR`
 
@@ -292,29 +293,38 @@ is the same as typing
 as long as no other task match ‘aR’
 
 The check anchor tasks have their own dependencies:
-check
-lint
-connectedCheck
-connectedAndroidTest
-connectedUiAutomatorTest (not implemented yet)
-deviceCheck
+
+`check`        
+`lint`      
+`connectedCheck`      
+`connectedAndroidTest`      
+`connectedUiAutomatorTest `(not implemented yet)      
+`deviceCheck`      
+
 This depends on tasks created when other plugins implement test extension points.
-Finally, the plugin creates install/uninstall tasks for all build types (debug, release, test), as long as they can be installed (which requires signing).
+
+Finally, the plugin creates `install/uninstall` tasks for all build types (debug, release, test), as long as they can be installed (which requires signing).
 Basic Build Customization
 
 The Android plugin provides a broad DSL to customize most things directly from the build system.
-Manifest entries
+
+###Manifest entries
+
+[通过DSL我们可以在`build.gradle` 文件中指定定义在AndroidManifest文件中的内容]
 
 Through the DSL it is possible to configure the following manifest entries:
-minSdkVersion
-targetSdkVersion
-versionCode
-versionName
-applicationId (the effective packageName -- see ApplicationId versus PackageName for more information)
-Package Name for the test application
-Instrumentation test runner
+
+`minSdkVersion`      
+`targetSdkVersion`     
+`versionCode`     
+`versionName`     
+`applicationId` (the effective packageName -- see [ApplicationId versus PackageName](http://tools.android.com/tech-docs/new-build-system/applicationid-vs-packagename) for more information)      
+`Package Name` for the test application     
+`Instrumentation test runner`     
+
 Example:
 
+```
 android {
     compileSdkVersion 19
     buildToolsVersion "19.0.0"
@@ -326,6 +336,7 @@ android {
         targetSdkVersion 16
     }
 }
+```
 
 The defaultConfig element inside the android element is where all this configuration is defined.
 
