@@ -113,8 +113,7 @@ ndk.dir=/Volumes/hujiawei/Users/hujiawei/Android/android_ndk
 
 ###Project Structure
 
-The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.     
-[Gradle遵循大家约定俗成的目录结构和项目配置]
+The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.    [Gradle遵循大家约定俗成的目录结构和项目配置] 
 
 The basic project starts with two components called `“source sets”`. The main source code and the test code. These live respectively in:
 
