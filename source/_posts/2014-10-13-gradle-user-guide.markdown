@@ -93,9 +93,9 @@ Finally, `android { ... } `configures all the parameters for the android build. 
 
 The compilation target is the same as the target property in the project.properties file of the old build system. This new property can either be assigned a int (the api level) or a string with the same value as the previous target property.
 
-Important: You should only apply the android plugin. Applying the java plugin as well will result in a build error.
+**Important: You should only apply the android plugin. Applying the java plugin as well will result in a build error.**
 
-**[注意：在Android中一般给定一个version都是指API version，此外，这里只能使用android插件，写成java插件会出现build错误]**
+[注意：在Android中一般给定一个version都是指API version，此外，这里只能使用android插件，写成java插件会出现build错误]
 
 Note: You will also need a `local.properties` file to set the location of the SDK in the same way that the existing SDK requires, using the `sdk.dir` property.
 
