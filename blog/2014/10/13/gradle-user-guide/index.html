@@ -229,9 +229,9 @@ In this case, this declares that it uses the Maven Central repository, and that 
 
 <p>The compilation target is the same as the target property in the project.properties file of the old build system. This new property can either be assigned a int (the api level) or a string with the same value as the previous target property.</p>
 
-<p>Important: You should only apply the android plugin. Applying the java plugin as well will result in a build error.</p>
+<p><strong>Important: You should only apply the android plugin. Applying the java plugin as well will result in a build error.</strong></p>
 
-<p><strong>[注意：在Android中一般给定一个version都是指API version，此外，这里只能使用android插件，写成java插件会出现build错误]</strong></p>
+<p>[注意：在Android中一般给定一个version都是指API version，此外，这里只能使用android插件，写成java插件会出现build错误]</p>
 
 <p>Note: You will also need a <code>local.properties</code> file to set the location of the SDK in the same way that the existing SDK requires, using the <code>sdk.dir</code> property.</p>
 
@@ -250,8 +250,7 @@ In this case, this declares that it uses the Maven Central repository, and that 
 
 <h3 id="project-structure">Project Structure</h3>
 
-<p>The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.   <br />
-[Gradle遵循大家约定俗成的目录结构和项目配置]</p>
+<p>The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.    [Gradle遵循大家约定俗成的目录结构和项目配置] </p>
 
 <p>The basic project starts with two components called <code>“source sets”</code>. The main source code and the test code. These live respectively in:</p>
 
@@ -406,21 +405,21 @@ This is Android specific and will not work on Java sourceSets.</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/gradle1.png" alt="image" /></p>
 
-<p>**Note: Gradle automatically monitor the declared inputs and outputs of a task. Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations. **</p>
+<p>Note: Gradle automatically monitor the declared inputs and outputs of a task. Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations. </p>
 
-<p>[Gradle会监视一个任务的输入和输出，重复运行build结果都没有变化的话Gradle会提示所有的任务都是UP-TO-DATE，这样可以避免不必要的build操作]</p>
+<p><strong>[Gradle会监视一个任务的输入和输出，重复运行build结果都没有变化的话Gradle会提示所有的任务都是UP-TO-DATE，这样可以避免不必要的build操作]</strong></p>
 
 <h4 id="java-project-tasks">Java project tasks</h4>
 
 <p>The Java plugin creates mainly two tasks, that are dependencies of the main anchor tasks:</p>
 
-<p><code>assemble</code>    <code>jar</code>   This task creates the output.</p>
+<p><code>assemble</code>  -&gt;   <code>jar</code>   This task creates the output.</p>
 
-<p><code>check</code>     <code>test</code>  This task runs the tests.</p>
+<p><code>check</code>  -&gt;    <code>test</code>  This task runs the tests.</p>
 
 <p>The <code>jar</code> task itself will depend directly and indirectly on other tasks: classes for instance will compile the Java code. [任务jar直接或者间接地依赖其他的任务]</p>
 
-<p>The tests are compiled with <code>testClasses</code>, but it is rarely useful to call this as <code>test</code> depends on it (as well as classes).</p>
+<p>The tests are compiled with testClasses, but it is rarely useful to call this as <code>test</code> depends on it (as well as classes).</p>
 
 <p>In general, you will probably only ever call <code>assemble</code> or <code>check</code>, and ignore the other tasks.</p>
 
