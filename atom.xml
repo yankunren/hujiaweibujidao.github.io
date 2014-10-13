@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-13T22:45:36+08:00</updated>
+  <updated>2014-10-13T23:28:58+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -564,42 +564,70 @@ The resources are overlayed over the main resources, replacing existing values.<
 
 <h3 id="signing-configurations">Signing Configurations</h3>
 
-<p>Signing an application requires the following:
-A keystore
-A keystore password
-A key alias name
-A key password
-The store type
-The location, as well as the key name, both passwords and store type form together a Signing Configuration (type SigningConfig)</p>
+<p>Signing an application requires the following:</p>
 
-<p>By default, there is a debug configuration that is setup to use a debug keystore, with a known password and a default key with a known password.
-The debug keystore is located in $HOME/.android/debug.keystore, and is created if not present.</p>
+<p>A keystore    <br />
+A keystore password   <br />
+A key alias name   <br />
+A key password   <br />
+The store type     </p>
 
-<p>The debug Build Type is set to use this debug SigningConfig automatically.</p>
+<p>The location, as well as the key name, both passwords and store type form together a Signing Configuration (type <code>SigningConfig</code>)     </p>
 
-<p>It is possible to create other configurations or customize the default built-in one. This is done through the signingConfigs DSL container:
-android {
-    signingConfigs {
-        debug {
-            storeFile file(“debug.keystore”)
-        }</p>
+<p>[上面这些信息组合起来就是类型SigningConfig，默认情况下，debug的配置使用了一个已知密码的keystore和已知密码的默认key，其中的keystore保存在<code>$HOME/.android/debug.keystore</code> 文件中，如果没有的话会自动创建]</p>
 
-<pre><code>    myConfig {
-        storeFile file("other.keystore")
-        storePassword "android"
-        keyAlias "androiddebugkey"
-        keyPassword "android"
-    }
-}
+<p><strong>By default, there is a <code>debug</code> configuration that is setup to use a debug keystore, with a known password and a default key with a known password.The debug keystore is located in <code>$HOME/.android/debug.keystore</code>, and is created if not present.</strong></p>
 
-buildTypes {
-    foo {
-        debuggable true
-        jniDebugBuild true
-        signingConfig signingConfigs.myConfig
-    }
-} } The above snippet changes the location of the debug keystore to be at the root of the project. This automatically impacts any Build Types that are set to using it, in this case the debug Build Type.
-</code></pre>
+<p>The debug Build Type is set to use this debug SigningConfig automatically.It is possible to create other configurations or customize the default built-in one. This is done through the signingConfigs DSL container:</p>
+
+<p>[默认情况下，debug的build过程会自动使用debug SigningConfig，当然我们可以自己定义]</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">android {
+</span><span class="line">    signingConfigs {
+</span><span class="line">        debug {
+</span><span class="line">            storeFile file("debug.keystore")
+</span><span class="line">        }
+</span><span class="line">
+</span><span class="line">        myConfig {
+</span><span class="line">            storeFile file("other.keystore")
+</span><span class="line">            storePassword "android"
+</span><span class="line">            keyAlias "androiddebugkey"
+</span><span class="line">            keyPassword "android"
+</span><span class="line">        }
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">    buildTypes {
+</span><span class="line">        foo {
+</span><span class="line">            debuggable true
+</span><span class="line">            jniDebugBuild true
+</span><span class="line">            signingConfig signingConfigs.myConfig
+</span><span class="line">        }
+</span><span class="line">    }
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>The above snippet changes the location of the debug keystore to be at the root of the project. This automatically impacts any Build Types that are set to using it, in this case the debug Build Type.</p>
 
 <p>It also creates a new Signing Config and a new Build Type that uses the new configuration.</p>
 
@@ -608,36 +636,61 @@ buildTypes {
 <p>Note: Location of keystores are usually relative to the root of the project, but could be absolute paths, thought it is not recommended (except for the debug one since it is automatically created).</p>
 
 <p>Note:  If you are checking these files into version control, you may not want the password in the file. The following Stack Overflow post shows ways to read the values from the console, or from environment variables.
-http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-file-using-gradle
-We’ll update this guide with more detailed information later.
-Running ProGuard</p>
+http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-file-using-gradle</p>
 
-<p>ProGuard is supported through the Gradle plugin for ProGuard version 4.10. The ProGuard plugin is applied automatically, and the tasks are created automatically if the Build Type is configured to run ProGuard through the runProguard property.</p>
+<p>We’ll update this guide with more detailed information later.</p>
 
-<p>android {
-    buildTypes {
-        release {
-            runProguard true
-            proguardFile getDefaultProguardFile(‘proguard-android.txt’)
-        }
-    }</p>
+<h3 id="running-proguard">Running ProGuard</h3>
 
-<pre><code>productFlavors {
-    flavor1 {
-    }
-    flavor2 {
-        proguardFile 'some-other-rules.txt'
-    }
-} }
-</code></pre>
+<p>[对ProGuard的支持是通过Gradle plugin for ProGuard 4.10来实现的]</p>
+
+<p>ProGuard is supported through the Gradle plugin for ProGuard version 4.10. The ProGuard plugin is applied automatically, and the tasks are created automatically if the Build Type is configured to run ProGuard through the <code>runProguard</code> property.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">android {
+</span><span class="line">    buildTypes {
+</span><span class="line">        release {
+</span><span class="line">            runProguard true
+</span><span class="line">            proguardFile getDefaultProguardFile('proguard-android.txt')
+</span><span class="line">        }
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">    productFlavors {
+</span><span class="line">        flavor1 {
+</span><span class="line">        }
+</span><span class="line">        flavor2 {
+</span><span class="line">            proguardFile 'some-other-rules.txt'
+</span><span class="line">        }
+</span><span class="line">    }
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Variants use all the rules files declared in their build type, and product flavors.</p>
 
-<p>There are 2 default rules files
-proguard-android.txt
-proguard-android-optimize.txt
-They are located in the SDK. Using getDefaultProguardFile() will return the full path to the files. They are identical except for enabling optimizations.
-Dependencies, Android Libraries and Multi-project setup</p>
+<p>[两个默认的proguard rule 文件，它们存放在Android SDK目录中，使用<code>getDefaultProguardFile()</code> 可以得到文件的完整路径]</p>
+
+<p>There are 2 default rules files </p>
+
+<p><code>proguard-android.txt</code>     <br />
+<code>proguard-android-optimize.txt</code>        </p>
+
+<p>They are located in the SDK. Using <code>getDefaultProguardFile()</code> will return the full path to the files. They are identical except for enabling optimizations.</p>
+
+<h3 id="dependencies-android-libraries-and-multi-project-setup">Dependencies, Android Libraries and Multi-project setup</h3>
 
 <p>Gradle projects can have dependencies on other components. These components can be external binary packages, or other Gradle projects.
 Dependencies on binary packages</p>
