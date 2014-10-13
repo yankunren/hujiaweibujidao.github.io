@@ -445,26 +445,38 @@ For each Build Type, a new matching `sourceSet` is created, with a default locat
 This means the Build Type names cannot be main or androidTest (this is enforced by the plugin), and that they have to be unique to each other.
 
 Like any other source sets, the location of the build type source set can be relocated:
+
+```
 android {
     sourceSets.jnidebug.setRoot('foo/jnidebug')
 }
-Additionally, for each Build Type, a new assemble<BuildTypeName> task is created.
+```
 
-The assembleDebug and assembleRelease tasks have already been mentioned, and this is where they come from. When the debug and release Build Types are pre-created, their tasks are automatically created as well.
+[类似其他的sourceSet，build type的source set的位置也可以重新定义，此外，对于每个build type，都会自动创建一个名为`assemble<BuildTypeName>` 的任务]
 
-The build.gradle snippet above would then also generate an assembleJnidebug task, and assemble would be made to depend on it the same way it depends on the assembleDebug and assembleRelease tasks.
+Additionally, for each Build Type, a new `assemble<BuildTypeName>` task is created.
+
+The `assembleDebug` and `assembleRelease` tasks have already been mentioned, and this is where they come from. When the debug and release Build Types are pre-created, their tasks are automatically created as well.
+
+The `build.gradle` snippet above would then also generate an `assembleJnidebug` task, and `assemble` would be made to depend on it the same way it depends on the `assembleDebug` and `assembleRelease` tasks.
 
 Tip: remember that you can type gradle aJ to run the assembleJnidebug task.
 
-Possible use case:
-Permissions in debug mode only, but not in release mode
-Custom implementation for debugging
+Possible use case: [?]
+
+Permissions in debug mode only, but not in release mode      
+Custom implementation for debugging     
 Different resources for debug mode (for instance when a resource value is tied to the signing certificate).
+
 The code/resources of the BuildType are used in the following way:
-The manifest is merged into the app manifest
-The code acts as just another source folder
+
+The manifest is merged into the app manifest      
+The code acts as just another source folder     
 The resources are overlayed over the main resources, replacing existing values.
-Signing Configurations
+
+**[build type的code/resources的利用: (1)Manifest整合进app的Manifest; (2)code就作为另一个源码目录; (3)resources覆盖原有的main resources]**
+
+###Signing Configurations     
 
 Signing an application requires the following:
 A keystore
