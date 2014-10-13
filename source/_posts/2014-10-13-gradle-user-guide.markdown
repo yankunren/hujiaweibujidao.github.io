@@ -47,12 +47,15 @@ A Gradle project describes its build in a file called build.gradle located in th
 #####Simple build files
 
 The most simple Java-only project has the following build.gradle:
+
 ```
 apply plugin: 'java'
 ```
+
 This applies the Java plugin, which is packaged with Gradle. The plugin provides everything to build and test Java applications.
 
 The most simple Android project has the following build.gradle:
+
 ```
 buildscript {
     repositories {
@@ -71,6 +74,7 @@ android {
     buildToolsVersion "19.0.0"
 }
 ```
+
 There are 3 main areas to this Android build file:
 
 `buildscript { ... }` configures the code driving the build.
@@ -105,17 +109,22 @@ The basic build files above expect a default folder structure. Gradle follows th
 [Gradle遵循大家约定俗成的目录结构和项目配置]
 
 The basic project starts with two components called `“source sets”`. The main source code and the test code. These live respectively in:
+
 ```
 src/main/
 src/androidTest/
 ```
+
 Inside each of these folders exists folder for each source components.
 For both the Java and Android plugin, the location of the Java source code and the Java resources:
+
 ```
 java/
 resources/
 ```
+
 For the Android plugin, extra files and folders specific to Android:
+
 ```
 AndroidManifest.xml
 res/
@@ -124,6 +133,7 @@ aidl/
 rs/
 jni/
 ```
+
 Note: `src/androidTest/AndroidManifest.xml` is not needed as it is created automatically.
 
 #####Configuring the Structure
@@ -142,21 +152,25 @@ sourceSets {
     }
 }
 ```
+
 **Note: srcDir will actually add the given folder to the existing list of source folders (this is not mentioned in the Gradle documentation but this is actually the behavior).**
 
 [`srcDir` 会自动将给定的目录加入到默认的已有的源码目录列表中，然而`srcDirs` 会覆盖默认的源码目录设置]
 
 To replace the default source folders, you will want to use `srcDirs` instead, which takes an array of path. This also shows a different way of using the objects involved:
+
 ```
 sourceSets {
     main.java.srcDirs = ['src/java']
     main.resources.srcDirs = ['src/resources']
 }
 ```
+
 For more information, see the Gradle documentation on the [Java plugin here](http://www.gradle.org/docs/current/userguide/java_plugin.html).
 
 The Android plugin uses a similar syntaxes, but because it uses its own sourceSets, this is done within the android object.
 Here’s an example, using the old project structure for the main code and remapping the `androidTest` sourceSet to the `tests` folder:
+
 ```
 android {
     sourceSets {
@@ -174,6 +188,7 @@ android {
     }
 }
 ```
+
 Note: because the old structure put all source files (java, aidl, renderscript, and java resources) in the same folder, we need to remap all those new components of the sourceSet to the same src folder.
 Note: `setRoot()` moves the whole sourceSet (and its sub folders) to a new folder. This moves `src/androidTest/*` to `tests/*`
 This is Android specific and will not work on Java sourceSets.
@@ -1270,3 +1285,6 @@ android {
 Note that you can use minSdkVersion with a value earlier than 19, for all language features except try with resources. If you want to use try with resources, you will need to also use a minSdkVersion of 19.
 
 You also need to make sure that Gradle is using version 1.7 or later of the JDK. (And version 0.6.1 or later of the Android Gradle plugin.)
+
+
+
