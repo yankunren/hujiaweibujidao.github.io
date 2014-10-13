@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-13T22:04:55+08:00</updated>
+  <updated>2014-10-13T22:21:11+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -278,16 +278,18 @@ This is Android specific and will not work on Java sourceSets.</p>
 
 <p>For instance, applying the findbugs plugin will create a new task and make check depend on it, making it be called whenever the check task is called.</p>
 
-<p>From the command line you can get the high level task running the following command:</p>
+<p>From the command line you can get the high level task running the following command:   <code>gradle tasks</code></p>
 
-<p><code>gradle tasks</code></p>
+<p>For a full list and seeing dependencies between the tasks run:  <code>gradle tasks --all</code></p>
 
-<p>For a full list and seeing dependencies between the tasks run:</p>
+<p>[在Android Studio的Terminal中运行结果如下]</p>
 
-<p><code>gradle tasks --all</code></p>
+<p><img src="http://hujiaweibujidao.github.io/images/gradle1.png" alt="image" /></p>
 
 <p><strong>Note: Gradle automatically monitor the declared inputs and outputs of a task.
 Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations.</strong></p>
+
+<p>[Gradle会监视一个任务的输入和输出，重复运行build结果都没有变化的话Gradle会提示所有的任务都是UP-TO-DATE，这样可以避免不必要的build操作]</p>
 
 <h4 id="java-project-tasks">Java project tasks</h4>
 
@@ -337,13 +339,7 @@ Running the build twice without change will make Gradle report all tasks as UP-T
 
 <p>[Gradle支持在命令行中使用某个task的名称的camel case缩写调用这个task]</p>
 
-<p>For instance:   <code>gradle aR</code></p>
-
-<p>is the same as typing</p>
-
-<p><code>gradle assembleRelease</code></p>
-
-<p>as long as no other task match ‘aR’</p>
+<p>For instance:   <code>gradle aR</code>  is the same as typing  <code>gradle assembleRelease</code>，as long as no other task match ‘aR’</p>
 
 <p>The check anchor tasks have their own dependencies:</p>
 
@@ -445,9 +441,11 @@ For instance, one could be reading the version name from a file somewhere or usi
 
 <p>[注意不要使用当前域中已有的getter方法作为自定义的函数名，否则会发生冲突]</p>
 
-<p>Note: Do not use function names that could conflict with existing getters in the given scope. For instance instance defaultConfig { …} calling getVersionName() will automatically use the getter of defaultConfig.getVersionName() instead of the custom method.</p>
+<p>Note: Do not use function names that could conflict with existing getters in the given scope. For instance instance <code>defaultConfig { ...}</code> calling <code>getVersionName()</code> will automatically use the getter of <code>defaultConfig.getVersionName()</code> instead of the custom method.</p>
 
 <p>If a property is not set through the DSL, some default value will be used. Here’s a table of how this is processed.</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/gradle2.png" alt="image" /></p>
 
 <p>The value of the 2nd column is important if you use custom logic in the build script that queries these properties. For instance, you could write:</p>
 
@@ -464,28 +462,48 @@ For instance, one could be reading the version name from a file somewhere or usi
 
 <h3 id="build-types">Build Types</h3>
 
-<p>By default, the Android plugin automatically sets up the project to build both a debug and a release version of the application.
-These differ mostly around the ability to debug the application on a secure (non dev) devices, and how the APK is signed.</p>
+<p>[默认情况下，Android插件会自动将原项目编译成debug和release两种版本]</p>
 
-<p>The debug version is signed with a key/certificate that is created automatically with a known name/password (to prevent required prompt during the build). The release is not signed during the build, this needs to happen after.</p>
+<p>By default, the Android plugin automatically sets up the project to build both a debug and a release version of the application.</p>
+
+<p><strong>These differ mostly around the ability to debug the application on a secure (non dev) devices, and how the APK is signed.</strong></p>
+
+<p>[它们的区别在于调试程序的功能和APK的签名方式]</p>
+
+<p><strong>The debug version is signed with a <code>key/certificate</code> that is created automatically with a known <code>name/password</code> (to prevent required prompt during the build). The release is not signed during the build, this needs to happen after.</strong></p>
+
+<p>[debug版本使用<code>key/certificate</code> 来签名，而release版本在build过程中并不签名，它的签名过程发生在后面]</p>
 
 <p>This configuration is done through an object called a BuildType. By default, 2 instances are created, a debug and a release one.</p>
 
 <p>The Android plugin allows customizing those two instances as well as creating other Build Types. This is done with the buildTypes DSL container:</p>
 
-<p>android {
-    buildTypes {
-        debug {
-            applicationIdSuffix “.debug”
-        }</p>
-
-<pre><code>    jnidebug.initWith(buildTypes.debug)
-    jnidebug {
-        packageNameSuffix ".jnidebug"
-        jnidebugBuild true
-    }
-} }
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">android {
+</span><span class="line">    buildTypes {
+</span><span class="line">        debug {
+</span><span class="line">            applicationIdSuffix ".debug"
+</span><span class="line">        }
+</span><span class="line">
+</span><span class="line">        jnidebug.initWith(buildTypes.debug)
+</span><span class="line">        jnidebug {
+</span><span class="line">            packageNameSuffix ".jnidebug"
+</span><span class="line">            jnidebugBuild true
+</span><span class="line">        }
+</span><span class="line">    }
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>The above snippet achieves the following:
 Configures the default debug Build Type:
