@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mobile | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mobile/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-13T23:28:58+08:00</updated>
+  <updated>2014-10-14T01:03:24+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -45,7 +45,7 @@ Very flexible. Allows using best practices but doesn’t force its own way of do
 Plugins can expose their own DSL and their own API for build files to use.
 Good Tooling API allowing IDE integration      </p>
 
-<p>[总结起来就是：DSL(Domain Specific Language ) + Groovy based Build files + Maven based Dependency Management + Plugin Supported]</p>
+<p>[总结起来就是：DSL(Domain Specific Language ) + Groovy based Build files + Maven/Ivy based Dependency Management + Plugin Supported]</p>
 
 <h3 id="requirements">Requirements</h3>
 
@@ -59,7 +59,7 @@ Basic Project</p>
 
 <p>The most simple Java-only project has the following build.gradle:</p>
 
-<p><code>
+<p><code>java
 apply plugin: 'java'
 </code></p>
 
@@ -566,7 +566,7 @@ android {
 
 <p>Variants use all the rules files declared in their build type, and product flavors.</p>
 
-<p>[两个默认的proguard rule 文件，它们存放在Android SDK目录中，使用<code>getDefaultProguardFile()</code> 可以得到文件的完整路径]</p>
+<p>[两个默认的proguard rule 文件，它们存放在Android SDK目录中，默认是<code>$ANDROID_HOME/tools/proguard/</code> 目录下 ，使用<code>getDefaultProguardFile()</code> 可以得到文件的完整路径]</p>
 
 <p>There are 2 default rules files </p>
 
@@ -577,40 +577,55 @@ android {
 
 <h3 id="dependencies-android-libraries-and-multi-project-setup">Dependencies, Android Libraries and Multi-project setup</h3>
 
-<p>Gradle projects can have dependencies on other components. These components can be external binary packages, or other Gradle projects.
-Dependencies on binary packages</p>
+<p>Gradle projects can have dependencies on other components. These components can be external binary packages, or other Gradle projects.</p>
 
-<p>Local packages</p>
+<h4 id="dependencies-on-binary-packages">Dependencies on binary packages</h4>
+
+<h4 id="local-packages">Local packages</h4>
 
 <p>To configure a dependency on an external library jar, you need to add a dependency on the compile configuration.</p>
 
-<p>dependencies {
+<p>```
+dependencies {
     compile files(‘libs/foo.jar’)
 }</p>
 
 <p>android {
     …
-}</p>
+}
+```</p>
 
-<p>Note: the dependencies DSL element is part of the standard Gradle API and does not belong inside the android element.</p>
+<p>[注意dependencies是标准Gradle API的一部分所以不是在android元素中声明]</p>
 
-<p>The compile configuration is used to compile the main application. Everything in it is added to the compilation classpath and also packaged in the final APK.
-There are other possible configurations to add dependencies to:
-compile: main application
-androidTestCompile: test application
-debugCompile: debug Build Type
-releaseCompile: release Build Type.
-Because it’s not possible to build an APK that does not have an associated Build Type, the APK is always configured with two (or more) configurations: compile and <buildtype>Compile.
-Creating a new Build Type automatically creates a new configuration based on its name.</buildtype></p>
+<p><strong>Note: the dependencies DSL element is part of the standard Gradle API and does not belong inside the android element.</strong></p>
 
-<p>This can be useful if the debug version needs to use a custom library (to report crashes for instance), while the release doesn’t, or if they rely on different versions of the same library.
-Remote artifacts</p>
+<p>[<code>compile</code> 的配置是用来编译main application的，所以其中的所有元素都会加入到编译的类路径中，同样也会打包进最终的APK中]</p>
+
+<p><strong>The <code>compile</code> configuration is used to compile the main application. Everything in it is added to the compilation classpath and also packaged in the final APK.</strong></p>
+
+<p>There are other possible configurations to add dependencies to:</p>
+
+<p>compile: main application     <br />
+androidTestCompile: test application    <br />
+debugCompile: debug Build Type    <br />
+releaseCompile: release Build Type.      </p>
+
+<p><strong>[对应每个build type都有一个对应的<code>&lt;buildtype&gt;Compile</code>， 它们的dependencies也都可以自行定义使其不同，如果对于不同的build type需要表现出不同的结果时，我们便可以使用这种方式让它们依赖不同的library]</strong></p>
+
+<p>Because it’s not possible to build an APK that does not have an associated Build Type, the APK is always configured with two (or more) configurations: <code>compile</code> and <code>&lt;buildtype&gt;Compile</code>.</p>
+
+<p>Creating a new Build Type automatically creates a new configuration based on its name.</p>
+
+<p>This can be useful if the debug version needs to use a custom library (to report crashes for instance), while the release doesn’t, or if they rely on different versions of the same library.</p>
+
+<h4 id="remote-artifacts">Remote artifacts</h4>
 
 <p>Gradle supports pulling artifacts from Maven and Ivy repositories.</p>
 
 <p>First the repository must be added to the list, and then the dependency must be declared in a way that Maven or Ivy declare their artifacts.</p>
 
-<p>repositories {
+<p>```
+repositories {
     mavenCentral()
 }</p>
 
@@ -620,33 +635,50 @@ Remote artifacts</p>
 
 <p>android {
     …
-}</p>
+}
+```</p>
 
-<p>Note: mavenCentral() is a shortcut to specifying the URL of the repository. Gradle supports both remote and local repositories.
-Note: Gradle will follow all dependencies transitively. This means that if a dependency has dependencies of its own, those are pulled in as well.</p>
+<p><strong>[<code>mavenCentral()</code> 方法返回的就是Maven Repository的URL，Gradle同时支持remote 和 local repositories，此外，Gradle能够处理dependency之间的相互依赖，然后自动pull所需要的dependencies]</strong></p>
 
-<p>For more information about setting up dependencies, read the Gradle user guide here, and DSL documentation here.
-Multi project setup</p>
+<p>Note: <code>mavenCentral()</code> is a shortcut to specifying the URL of the repository. Gradle supports both remote and local repositories.</p>
+
+<p>Note: Gradle will follow all dependencies transitively. This means that if a dependency has dependencies of its own, those are pulled in as well.</p>
+
+<p>For more information about setting up dependencies, read the <a href="http://gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html">Gradle user guide here</a>, and <a href="http://gradle.org/docs/current/dsl/org.gradle.api.artifacts.dsl.DependencyHandler.html">DSL documentation here</a>.</p>
+
+<h4 id="multi-project-setup">Multi project setup</h4>
+
+<p>[使用multi-project setup可以使得Gradle项目依赖其他的Gradle项目，它通常是通过将所有的项目作为某个指定的根项目的子目录来实现的。]</p>
 
 <p>Gradle projects can also depend on other gradle projects by using a multi-project setup.</p>
 
 <p>A multi-project setup usually works by having all the projects as sub folders of a given root project.</p>
 
-<p>For instance, given to following structure:
+<p>For instance, given to following structure:</p>
+
+<p><code>
 MyProject/
  + app/
  + libraries/
     + lib1/
-    + lib2/</p>
+    + lib2/
+</code></p>
 
-<p>We can identify 3 projects. Gradle will reference them with the following name:
+<p>We can identify 3 projects. Gradle will reference them with the following name:</p>
+
+<p><code>
 :app
 :libraries:lib1
-:libraries:lib2</p>
+:libraries:lib2
+</code></p>
 
-<p>Each projects will have its own build.gradle declaring how it gets built.
-Additionally, there will be a file called settings.gradle at the root declaring the projects.
-This gives the following structure:
+<p>Each projects will have its own <code>build.gradle</code> declaring how it gets built. Additionally, there will be a file called <code>settings.gradle</code> at the root declaring the projects.</p>
+
+<p><strong>[每个项目都有自己的<code>build.gradle</code> 文件声明它的build过程，此外，根项目下还有一个<code>settings.gradle</code> 文件用来指定这些子项目]</strong></p>
+
+<p>This gives the following structure:</p>
+
+<p><code>
 MyProject/
  | settings.gradle
  + app/
@@ -655,31 +687,45 @@ MyProject/
     + lib1/
        | build.gradle
     + lib2/
-       | build.gradle</p>
+       | build.gradle
+</code></p>
 
-<p>The content of settings.gradle is very simple:
-include ‘:app’, ‘:libraries:lib1’, ‘:libraries:lib2’
-This defines which folder is actually a Gradle project.</p>
+<p>The content of <code>settings.gradle</code> is very simple:</p>
 
-<p>The :app project is likely to depend on the libraries, and this is done by declaring the following dependencies:</p>
+<p><code>
+include ':app', ':libraries:lib1', ':libraries:lib2'
+</code></p>
 
-<p>dependencies {
-    compile project(‘:libraries:lib1’)
-}</p>
+<p>This defines which folder is actually a Gradle project.</p>
 
-<p>More general information about multi-project setup here.
-Library projects</p>
+<p>The <code>:app</code> project is likely to depend on the libraries, and this is done by declaring the following dependencies:</p>
 
-<p>In the above multi-project setup, :libraries:lib1 and :libraries:lib2 can be Java projects, and the :app Android project will use their jar output.</p>
+<p><code>
+dependencies {
+    compile project(':libraries:lib1')
+}
+</code></p>
 
-<p>However, if you want to share code that accesses Android APIs or uses Android-style resources, these libraries cannot be regular Java project, they have to be Android Library Projects.
-Creating a Library Project</p>
+<p>More general information about <a href="http://gradle.org/docs/current/userguide/multi_project_builds.html">multi-project setup here</a>.</p>
+
+<h4 id="library-projects">Library projects</h4>
+
+<p><strong>[前面例子中的两个library projects都是Java项目的话，那么app这个Android项目就使用它们的输出jar文件即可，但是如果你需要引用其中的资源或者代码的话，那它们必须是Android Library Projects]</strong></p>
+
+<p>In the above multi-project setup, <code>:libraries:lib1</code> and <code>:libraries:lib2</code> can be Java projects, and the <code>:app</code> Android project will use their jar output.</p>
+
+<p>However, if you want to share code that accesses Android APIs or uses Android-style resources, these libraries cannot be regular Java project, they have to be <code>Android Library Projects</code>.</p>
+
+<h4 id="creating-a-library-project">Creating a Library Project</h4>
 
 <p>A Library project is very similar to a regular Android project with a few differences.</p>
 
-<p>Since building libraries is different than building applications, a different plugin is used. Internally both plugins share most of the same code and they are both provided by the same com.android.tools.build.gradle jar.</p>
+<p>Since building libraries is different than building applications, a different plugin is used. Internally both plugins share most of the same code and they are both provided by the same <code>com.android.tools.build.gradle</code> jar.</p>
 
-<p>buildscript {
+<p><strong>[创建Library Project使用的是不同的plugin，即<code>android-library</code>，它和<code>android</code> 插件共享很多的代码(所以大部分的配置都和前面提到的一模一样)，并且也都是在<code>com.android.tools.build.gradle</code> 这个jar包中]</strong></p>
+
+<p>```
+buildscript {
     repositories {
         mavenCentral()
     }</p>
@@ -693,102 +739,156 @@ Creating a Library Project</p>
 
 <p>android {
     compileSdkVersion 15
-}</p>
+}
+```</p>
 
-<p>This creates a library project that uses API 15 to compile. SourceSets, and dependencies are handled the same as they are in an application project and can be customized the same way.
-Differences between a Project and a Library Project</p>
+<p>This creates a library project that uses API 15 to compile. SourceSets, and dependencies are handled the same as they are in an application project and can be customized the same way.</p>
 
-<p>A Library project’s main output is an .aar package (which stands for Android archive). It is a combination of compile code (as a jar file and/or native .so files) and resources (manifest, res, assets).
-A library project can also generate a test apk to test the library independently from an application.</p>
+<h4 id="differences-between-a-project-and-a-library-project">Differences between a Project and a Library Project</h4>
 
-<p>The same anchor tasks are used for this (assembleDebug, assembleRelease) so there’s no difference in commands to build such a project.</p>
+<p><strong>[一个Library Project的主要输出是一个aar包，它是编译后的代码与资源的集合，它同样可以生成test apk来独立地测试这个library。Library Project和普通Project的assemble task是一样的，所以它们的behave没啥区别。此外，因为它可以有不同的build type和product flavor，所以它可以得到很多个不同的aar]</strong></p>
 
-<p>For the rest, libraries behave the same as application projects. They have build types and product flavors, and can potentially generate more than one version of the aar.
-Note that most of the configuration of the Build Type do not apply to library projects. However you can use the custom sourceSet to change the content of the library depending on whether it’s used by a project or being tested.
-Referencing a Library</p>
+<p>A Library project’s main output is an .aar package (which stands for Android archive). It is a combination of compile code (as a jar file and/or native .so files) and resources (manifest, res, assets).</p>
+
+<p>**A library project can also generate a test apk to test the library independently from an application. **</p>
+
+<p>The same anchor tasks are used for this (<code>assembleDebug</code>, <code>assembleRelease</code>) so there’s no difference in commands to build such a project.</p>
+
+<p>For the rest, libraries behave the same as application projects. They have <strong>build types and product flavors, and can potentially generate more than one version of the aar.</strong></p>
+
+<p>[大多数的build type的配置都不会应用于Library Project中，当然它还是可以进行配置的]</p>
+
+<p><strong>Note that most of the configuration of the Build Type do not apply to library projects. However you can use the custom sourceSet to change the content of the library depending on whether it’s used by a project or being tested.</strong></p>
+
+<h4 id="referencing-a-library">Referencing a Library</h4>
 
 <p>Referencing a library is done the same way any other project is referenced:</p>
 
-<p>dependencies {
-    compile project(‘:libraries:lib1’)
-    compile project(‘:libraries:lib2’)
-}</p>
+<p><code>
+dependencies {
+    compile project(':libraries:lib1')
+    compile project(':libraries:lib2')
+}
+</code></p>
 
-<p>Note: if you have more than one library, then the order will be important. This is similar to the old build system where the order of the dependencies in the project.properties file was important.
-Library Publication</p>
+<p>Note: if you have more than one library, then the order will be important. This is similar to the old build system where the order of the dependencies in the <code>project.properties</code> file was important.  </p>
+
+<p>[注：这里应该是<code>settings.properties</code> 文件，就是说如果你有很多的library projects，那么你要根据它们相互之间的依赖关系确定一个正确的顺序]</p>
+
+<h4 id="library-publication">Library Publication</h4>
+
+<p>[默认情况下，library project只会publish它的release variant，所有其他的project都是引用这个variant]</p>
 
 <p>By default a library only publishes its release variant. This variant will be used by all projects referencing the library, no matter which variant they build themselves. This is a temporary limitation due to Gradle limitations that we are working towards removing.</p>
 
-<p>You can control which variant gets published with 
-android {
-    defaultPublishConfig “debug”
-}</p>
+<p>You can control which variant gets published with </p>
 
-<p>Note that this publishing configuration name references the full variant name. Release and debug are only applicable when there are no flavors. If you wanted to change the default published variant while using flavors, you would write:
+<p><code>
 android {
-    defaultPublishConfig “flavor1Debug”
-}</p>
+    defaultPublishConfig "debug"
+}
+</code></p>
 
-<p>It is also possible to publish all variants of a library. We are planning to allow this while using a normal project-to-project dependency (like shown above), but this is not possible right now due to limitations in Gradle (we are working toward fixing those as well).
-Publishing of all variants are not enabled by default. To enable them:
+<p>**Note that this publishing configuration name references the full variant name. Release and debug are only applicable when there are no flavors. **If you wanted to change the default published variant while using flavors, you would write:</p>
+
+<p><code>
+android {
+    defaultPublishConfig "flavor1Debug"
+}
+</code></p>
+
+<p>It is also possible to publish all variants of a library. We are planning to allow this while using a normal project-to-project dependency (like shown above), but this is not possible right now due to limitations in Gradle (we are working toward fixing those as well).</p>
+
+<p>Publishing of all variants are not enabled by default. To enable them:</p>
+
+<p><code>
 android {
     publishNonDefault true
-}</p>
+}
+</code></p>
 
-<p>It is important to realize that publishing multiple variants means publishing multiple aar files, instead of a single aar containing multiple variants. Each aar packaging contains a single variant.
-Publishing an variant means making this aar available as an output artifact of the Gradle project. This can then be used either when publishing to a maven repository, or when another project creates a dependency on the library project.</p>
+<p>It is important to realize that publishing multiple variants means publishing multiple aar files, instead of a single aar containing multiple variants. Each aar packaging contains a single variant.</p>
 
-<p>Gradle has a concept of default” artifact. This is the one that is used when writing:
-compile project(‘:libraries:lib2’)</p>
+<p>[publish一个variant意味着使得这个aar包作为Gradle项目的输出，它可以用于publish到maven repository，也可以被其他项目作为依赖项目被引用]</p>
 
-<p>To create a dependency on another published artifact, you need to specify which one to use:
+<p><strong>Publishing an variant means making this aar available as an output artifact of the Gradle project. This can then be used either when publishing to a maven repository, or when another project creates a dependency on the library project.</strong></p>
+
+<p>Gradle has a concept of default” artifact. This is the one that is used when writing:</p>
+
+<p><code>
+compile project(':libraries:lib2')
+</code></p>
+
+<p>To create a dependency on another published artifact, you need to specify which one to use:</p>
+
+<p><code>
 dependencies {
-    flavor1Compile project(path: ‘:lib1’, configuration: ‘flavor1Release’)
-    flavor2Compile project(path: ‘:lib1’, configuration: ‘flavor2Release’)
-}</p>
+    flavor1Compile project(path: ':lib1', configuration: 'flavor1Release')
+    flavor2Compile project(path: ':lib1', configuration: 'flavor2Release')
+}
+</code></p>
 
-<p>Important: Note that the published configuration is a full variant, including the build type, and needs to be referenced as such. 
-Important: When enabling publishing of non default, the Maven publishing plugin will publish these additional variants as extra packages (with classifier). This means that this is not really compatible with publishing to a maven repository. You should either publish a single variant to a repository OR enable all config publishing for inter-project dependencies.
-Testing</p>
+<p>Important: Note that the published configuration is a full variant, including the build type, and needs to be referenced as such. </p>
 
-<p>Building a test application is integrated into the application project. There is no need for a separate test project anymore.
-Basics and Configuration</p>
+<p><strong>Important: When enabling publishing of non default, the Maven publishing plugin will publish these additional variants as extra packages (with classifier). This means that this is not really compatible with publishing to a maven repository. You should either publish a single variant to a repository OR enable all config publishing for inter-project dependencies.</strong> [?]</p>
 
-<p>As mentioned previously, next to the main sourceSet is the androidTest sourceSet, located by default in src/androidTest/
-From this sourceSet is built a test apk that can be deployed to a device to test the application using the Android testing framework. This can contain unit tests, instrumentation tests, and later uiautomator tests.
-The sourceSet should not contain an AndroidManifest.xml as it is automatically generated.</p>
+<h3 id="testing">Testing</h3>
 
-<p>There are a few values that can be configured for the test app:
-testPackageName
-testInstrumentationRunner
-testHandleProfiling
-testFunctionalTest
-As seen previously, those are configured in the defaultConfig object:
+<p>Building a test application is integrated into the application project. There is no need for a separate test project anymore.</p>
+
+<h4 id="basics-and-configuration">Basics and Configuration</h4>
+
+<p>As mentioned previously, next to the main sourceSet is the androidTest sourceSet, located by default in <code>src/androidTest/</code></p>
+
+<p>From this sourceSet is built a test apk that can be deployed to a device to test the application using the <code>Android testing framework</code>. This can contain unit tests, instrumentation tests, and later uiautomator tests.</p>
+
+<p>The sourceSet should not contain an <code>AndroidManifest.xml</code> as it is automatically generated.</p>
+
+<p>There are a few values that can be configured for the test app:</p>
+
+<p><code>testPackageName</code>     <br />
+<code>testInstrumentationRunner</code>      <br />
+<code>testHandleProfiling</code>      <br />
+<code>testFunctionalTest</code>         </p>
+
+<p>As seen previously, those are configured in the defaultConfig object:</p>
+
+<p><code>
 android {
     defaultConfig {
-        testPackageName “com.test.foo”
-        testInstrumentationRunner “android.test.InstrumentationTestRunner”
+        testPackageName "com.test.foo"
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
         testHandleProfiling true
         testFunctionalTest true
     }
-}</p>
+}
+</code></p>
 
-<p>The value of the targetPackage attribute of the instrumentation node in the test application manifest is automatically filled with the package name of the tested app, even if it is customized through the defaultConfig and/or the Build Type objects. This is one of the reason the manifest is generated automatically.</p>
+<p>[test app的Manifest文件是自动生成的，所以它不需要在上面指定，此外，我们没必要设置instrumentation节点的<code>targetPackage</code> 属性，因为它会被test app的package name填充进去，这也就是为什么test app的Manifest文件是自动生成的]</p>
+
+<p><strong>The value of the <code>targetPackage</code> attribute of the instrumentation node in the test application manifest is automatically filled with the package name of the tested app, even if it is customized through the <code>defaultConfig</code> and/or the Build Type objects. This is one of the reason the manifest is generated automatically.</strong></p>
 
 <p>Additionally, the sourceSet can be configured to have its own dependencies.
-By default, the application and its own dependencies are added to the test app classpath, but this can be extended with 
+By default, the application and its own dependencies are added to the test app classpath, but this can be extended with </p>
+
+<p><code>
 dependencies {
-    androidTestCompile ‘com.google.guava:guava:11.0.2’
-}</p>
-
-<p>The test app is built by the task assembleTest. It is not a dependency of the main assemble task, and is instead called automatically when the tests are set to run.</p>
-
-<p>Currently only one Build Type is tested. By default it is the debug Build Type, but this can be reconfigured with:
-android {
-    …
-    testBuildType “staging”
+    androidTestCompile 'com.google.guava:guava:11.0.2'
 }
-Running tests</p>
+</code></p>
+
+<p>The test app is built by the task <code>assembleTest</code>. It is not a dependency of the main assemble task, and is instead called automatically when the tests are set to run.</p>
+
+<p>Currently only one Build Type is tested. By default it is the debug Build Type, but this can be reconfigured with:</p>
+
+<p><code>
+android {
+    ...
+    testBuildType "staging"
+}
+</code></p>
+
+<h4 id="running-tests">Running tests</h4>
 
 <p>As mentioned previously, checks requiring a connected device are launched with the anchor task called connectedCheck.
 This depends on the task androidTest and therefore will run it. This task does the following:
