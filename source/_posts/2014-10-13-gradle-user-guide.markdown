@@ -634,31 +634,47 @@ android {
 }
 ```
 
-Note: mavenCentral() is a shortcut to specifying the URL of the repository. Gradle supports both remote and local repositories.
+**[`mavenCentral()` 方法返回的就是Maven Repository的URL，Gradle同时支持remote 和 local repositories，此外，Gradle能够处理dependency之间的相互依赖，然后自动pull所需要的dependencies]**
+
+Note: `mavenCentral()` is a shortcut to specifying the URL of the repository. Gradle supports both remote and local repositories.
+
 Note: Gradle will follow all dependencies transitively. This means that if a dependency has dependencies of its own, those are pulled in as well.
 
-For more information about setting up dependencies, read the Gradle user guide here, and DSL documentation here.
-Multi project setup
+For more information about setting up dependencies, read the [Gradle user guide here](http://gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html), and [DSL documentation here](http://gradle.org/docs/current/dsl/org.gradle.api.artifacts.dsl.DependencyHandler.html).
+
+####Multi project setup
+
+[使用multi-project setup可以使得Gradle项目依赖其他的Gradle项目，它通常是通过将所有的项目作为某个指定的根项目的子目录来实现的。]
 
 Gradle projects can also depend on other gradle projects by using a multi-project setup.
 
 A multi-project setup usually works by having all the projects as sub folders of a given root project.
 
 For instance, given to following structure:
+
+```
 MyProject/
  + app/
  + libraries/
     + lib1/
     + lib2/
+```
 
 We can identify 3 projects. Gradle will reference them with the following name:
+
+```
 :app
 :libraries:lib1
 :libraries:lib2
+```
 
-Each projects will have its own build.gradle declaring how it gets built.
-Additionally, there will be a file called settings.gradle at the root declaring the projects.
+Each projects will have its own `build.gradle` declaring how it gets built. Additionally, there will be a file called `settings.gradle` at the root declaring the projects.
+
+**[每个项目都有自己的`build.gradle` 文件声明它的build过程，此外，根项目下还有一个`settings.gradle` 文件用来指定这些子项目]**
+
 This gives the following structure:
+
+```
 MyProject/
  | settings.gradle
  + app/
@@ -668,29 +684,43 @@ MyProject/
        | build.gradle
     + lib2/
        | build.gradle
+```
 
-The content of settings.gradle is very simple:
+The content of `settings.gradle` is very simple:
+
+```
 include ':app', ':libraries:lib1', ':libraries:lib2'
+```
+
 This defines which folder is actually a Gradle project.
 
-The :app project is likely to depend on the libraries, and this is done by declaring the following dependencies:
+The `:app` project is likely to depend on the libraries, and this is done by declaring the following dependencies:
 
+```
 dependencies {
     compile project(':libraries:lib1')
 }
+```
 
-More general information about multi-project setup here.
-Library projects
+More general information about [multi-project setup here](http://gradle.org/docs/current/userguide/multi_project_builds.html).
 
-In the above multi-project setup, :libraries:lib1 and :libraries:lib2 can be Java projects, and the :app Android project will use their jar output.
+####Library projects
 
-However, if you want to share code that accesses Android APIs or uses Android-style resources, these libraries cannot be regular Java project, they have to be Android Library Projects.
-Creating a Library Project
+**[前面例子中的两个library projects都是Java项目的话，那么app这个Android项目就使用它们的输出jar文件即可，但是如果你需要引用其中的资源或者代码的话，那它们必须是Android Library Projects]**
+
+In the above multi-project setup, `:libraries:lib1` and `:libraries:lib2` can be Java projects, and the `:app` Android project will use their jar output.
+
+However, if you want to share code that accesses Android APIs or uses Android-style resources, these libraries cannot be regular Java project, they have to be `Android Library Projects`.
+
+####Creating a Library Project
 
 A Library project is very similar to a regular Android project with a few differences.
 
-Since building libraries is different than building applications, a different plugin is used. Internally both plugins share most of the same code and they are both provided by the same com.android.tools.build.gradle jar.
+Since building libraries is different than building applications, a different plugin is used. Internally both plugins share most of the same code and they are both provided by the same `com.android.tools.build.gradle` jar.
 
+**[创建Library Project使用的是不同的plugin，即`android-library`，它和`android` 插件共享很多的代码(所以大部分的配置都和前面提到的一模一样)，并且也都是在`com.android.tools.build.gradle` 这个jar包中]**
+
+```
 buildscript {
     repositories {
         mavenCentral()
@@ -706,12 +736,17 @@ apply plugin: 'android-library'
 android {
     compileSdkVersion 15
 }
+```
 
 This creates a library project that uses API 15 to compile. SourceSets, and dependencies are handled the same as they are in an application project and can be customized the same way.
-Differences between a Project and a Library Project
+
+####Differences between a Project and a Library Project
+
+**[一个Library Project的主要输出是一个aar包，它是编译后的代码与资源的集合，它同样可以生成test apk来独立地测试这个library]**
 
 A Library project's main output is an .aar package (which stands for Android archive). It is a combination of compile code (as a jar file and/or native .so files) and resources (manifest, res, assets).
-A library project can also generate a test apk to test the library independently from an application.
+
+**A library project can also generate a test apk to test the library independently from an application. **
 
 The same anchor tasks are used for this (assembleDebug, assembleRelease) so there’s no difference in commands to build such a project.
 
