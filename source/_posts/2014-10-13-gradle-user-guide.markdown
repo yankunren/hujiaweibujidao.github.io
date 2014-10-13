@@ -235,9 +235,9 @@ For a full list and seeing dependencies between the tasks run:  `gradle tasks --
 
 ![image](http://hujiaweibujidao.github.io/images/gradle1.png)
 
-**Note: Gradle automatically monitor the declared inputs and outputs of a task. Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations. **
+Note: Gradle automatically monitor the declared inputs and outputs of a task. Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations. 
 
-[Gradle会监视一个任务的输入和输出，重复运行build结果都没有变化的话Gradle会提示所有的任务都是UP-TO-DATE，这样可以避免不必要的build操作]
+**[Gradle会监视一个任务的输入和输出，重复运行build结果都没有变化的话Gradle会提示所有的任务都是UP-TO-DATE，这样可以避免不必要的build操作]**
 
 ####Java project tasks
 
