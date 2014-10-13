@@ -396,7 +396,9 @@ By default, the Android plugin automatically sets up the project to build both a
 
 [它们的区别在于调试程序的功能和APK的签名方式]
 
-The debug version is signed with a key/certificate that is created automatically with a known name/password (to prevent required prompt during the build). The release is not signed during the build, this needs to happen after.
+**The debug version is signed with a `key/certificate` that is created automatically with a known `name/password` (to prevent required prompt during the build). The release is not signed during the build, this needs to happen after.**
+
+[debug版本使用`key/certificate` 来签名，而release版本在build过程中并不签名，它的签名过程发生在后面]
 
 This configuration is done through an object called a BuildType. By default, 2 instances are created, a debug and a release one.
 
