@@ -479,15 +479,18 @@ The resources are overlayed over the main resources, replacing existing values.
 ###Signing Configurations     
 
 Signing an application requires the following:
-A keystore
-A keystore password
-A key alias name
-A key password
-The store type
-The location, as well as the key name, both passwords and store type form together a Signing Configuration (type SigningConfig)
 
-By default, there is a debug configuration that is setup to use a debug keystore, with a known password and a default key with a known password.
-The debug keystore is located in $HOME/.android/debug.keystore, and is created if not present.
+A keystore      
+A keystore password     
+A key alias name     
+A key password     
+The store type     
+
+The location, as well as the key name, both passwords and store type form together a Signing Configuration (type `SigningConfig`)     
+
+[上面这些信息组合起来就是类型SigningConfig，默认情况下，debug的配置使用了一个已知密码的keystore和已知密码的默认key，其中的keystore保存在`$HOME/.android/debug.keystore` 文件中，如果没有的话会自动创建]
+
+**By default, there is a `debug` configuration that is setup to use a debug keystore, with a known password and a default key with a known password.The debug keystore is located in `$HOME/.android/debug.keystore`, and is created if not present.**
 
 The debug Build Type is set to use this debug SigningConfig automatically.
 
