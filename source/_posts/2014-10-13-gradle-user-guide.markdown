@@ -368,7 +368,7 @@ android {
 
 [注意不要使用当前域中已有的getter方法作为自定义的函数名，否则会发生冲突]
 
-Note: Do not use function names that could conflict with existing getters in the given scope. For instance instance defaultConfig { ...} calling getVersionName() will automatically use the getter of defaultConfig.getVersionName() instead of the custom method.
+Note: Do not use function names that could conflict with existing getters in the given scope. For instance instance `defaultConfig { ...}` calling `getVersionName()` will automatically use the getter of `defaultConfig.getVersionName()` instead of the custom method.
 
 If a property is not set through the DSL, some default value will be used. Here’s a table of how this is processed.
 
@@ -388,9 +388,13 @@ This is to prevent parsing the manifest of the application unless it’s really 
 
 ###Build Types
 
+[默认情况下，Android插件会自动将原项目编译成debug和release两种版本]
+
 By default, the Android plugin automatically sets up the project to build both a debug and a release version of the application.
 
-These differ mostly around the ability to debug the application on a secure (non dev) devices, and how the APK is signed.
+**These differ mostly around the ability to debug the application on a secure (non dev) devices, and how the APK is signed.**
+
+[它们的区别在于调试程序的功能和APK的签名方式]
 
 The debug version is signed with a key/certificate that is created automatically with a known name/password (to prevent required prompt during the build). The release is not signed during the build, this needs to happen after.
 
