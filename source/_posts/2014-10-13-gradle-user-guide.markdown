@@ -860,7 +860,9 @@ android {
 }
 ```
 
-The value of the `targetPackage` attribute of the instrumentation node in the test application manifest is automatically filled with the package name of the tested app, even if it is customized through the defaultConfig and/or the Build Type objects. This is one of the reason the manifest is generated automatically.
+[test app的Manifest文件是自动生成的，所以它不需要在上面指定，此外，我们没必要设置instrumentation节点的`targetPackage` 属性，因为它会被test app的package name填充进去，这也就是为什么test app的Manifest文件是自动生成的]
+
+**The value of the `targetPackage` attribute of the instrumentation node in the test application manifest is automatically filled with the package name of the tested app, even if it is customized through the `defaultConfig` and/or the Build Type objects. This is one of the reason the manifest is generated automatically.**
 
 Additionally, the sourceSet can be configured to have its own dependencies.
 By default, the application and its own dependencies are added to the test app classpath, but this can be extended with 
@@ -871,14 +873,18 @@ dependencies {
 }
 ```
 
-The test app is built by the task assembleTest. It is not a dependency of the main assemble task, and is instead called automatically when the tests are set to run.
+The test app is built by the task `assembleTest`. It is not a dependency of the main assemble task, and is instead called automatically when the tests are set to run.
 
 Currently only one Build Type is tested. By default it is the debug Build Type, but this can be reconfigured with:
+
+```
 android {
     ...
     testBuildType "staging"
 }
-Running tests
+```
+
+####Running tests
 
 As mentioned previously, checks requiring a connected device are launched with the anchor task called connectedCheck.
 This depends on the task androidTest and therefore will run it. This task does the following:
