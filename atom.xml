@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-13T21:07:28+08:00</updated>
+  <updated>2014-10-13T21:11:48+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -18,7 +18,11 @@
     <link href="http://hujiaweibujidao.github.io/blog/2014/10/13/gradle-user-guide/"/>
     <updated>2014-10-13T21:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/10/13/gradle-user-guide</id>
-    <content type="html"><![CDATA[<h5 id="introduction">Introduction</h5>
+    <content type="html"><![CDATA[<p>Gradle Plugin User Guide ( for Android Development )</p>
+
+<p>原文地址：<a href="http://tools.android.com/tech-docs/new-build-system/user-guide">http://tools.android.com/tech-docs/new-build-system/user-guide</a></p>
+
+<h5 id="introduction">Introduction</h5>
 
 <p>This documentation is for the Gradle plugin version 0.9. Earlier versions may differ due to non-compatible we are introducing before 1.0.
 Goals of the new Build System</p>
@@ -53,13 +57,16 @@ Basic Project</p>
 
 <h5 id="simple-build-files">Simple build files</h5>
 
-<p>The most simple Java-only project has the following build.gradle:
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">apply plugin: 'java'</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-This applies the Java plugin, which is packaged with Gradle. The plugin provides everything to build and test Java applications.</p>
+<p>The most simple Java-only project has the following build.gradle:</p>
 
-<p>The most simple Android project has the following build.gradle:
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">apply plugin: 'java'</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>This applies the Java plugin, which is packaged with Gradle. The plugin provides everything to build and test Java applications.</p>
+
+<p>The most simple Android project has the following build.gradle:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -75,7 +82,7 @@ This applies the Java plugin, which is packaged with Gradle. The plugin provides
 <span class="line-number">14</span>
 <span class="line-number">15</span>
 <span class="line-number">16</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">buildscript {
+</pre></td><td class="code"><pre><code class=""><span class="line">buildscript {
 </span><span class="line">    repositories {
 </span><span class="line">        mavenCentral()
 </span><span class="line">    }
@@ -90,8 +97,9 @@ This applies the Java plugin, which is packaged with Gradle. The plugin provides
 </span><span class="line">android {
 </span><span class="line">    compileSdkVersion 19
 </span><span class="line">    buildToolsVersion "19.0.0"
-</span><span class="line">}</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-There are 3 main areas to this Android build file:</p>
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>There are 3 main areas to this Android build file:</p>
 
 <p><code>buildscript { ... }</code> configures the code driving the build.
 In this case, this declares that it uses the Maven Central repository, and that there is a classpath dependency on a Maven artifact. This artifact is the library that contains the Android plugin for Gradle in version 0.11.1
@@ -124,31 +132,37 @@ Alternatively, you can set an environment variable called <code>ANDROID_HOME</co
 <p>The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.
 [Gradle遵循大家约定俗成的目录结构和项目配置]</p>
 
-<p>The basic project starts with two components called <code>“source sets”</code>. The main source code and the test code. These live respectively in:
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<p>The basic project starts with two components called <code>“source sets”</code>. The main source code and the test code. These live respectively in:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">src/main/
-</span><span class="line">src/androidTest/</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-Inside each of these folders exists folder for each source components.
-For both the Java and Android plugin, the location of the Java source code and the Java resources:
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">src/main/
+</span><span class="line">src/androidTest/</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Inside each of these folders exists folder for each source components.
+For both the Java and Android plugin, the location of the Java source code and the Java resources:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">java/
-</span><span class="line">resources/</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-For the Android plugin, extra files and folders specific to Android:
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">java/
+</span><span class="line">resources/</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>For the Android plugin, extra files and folders specific to Android:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 <span class="line-number">6</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">AndroidManifest.xml
+</pre></td><td class="code"><pre><code class=""><span class="line">AndroidManifest.xml
 </span><span class="line">res/
 </span><span class="line">assets/
 </span><span class="line">aidl/
 </span><span class="line">rs/
-</span><span class="line">jni/</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-Note: <code>src/androidTest/AndroidManifest.xml</code> is not needed as it is created automatically.</p>
+</span><span class="line">jni/</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Note: <code>src/androidTest/AndroidManifest.xml</code> is not needed as it is created automatically.</p>
 
 <h5 id="configuring-the-structure">Configuring the Structure</h5>
 
@@ -174,24 +188,28 @@ Note: <code>src/androidTest/AndroidManifest.xml</code> is not needed as it is cr
 </span><span class="line">        }
 </span><span class="line">    }
 </span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 <p><strong>Note: srcDir will actually add the given folder to the existing list of source folders (this is not mentioned in the Gradle documentation but this is actually the behavior).</strong></p>
 
 <p>[<code>srcDir</code> 会自动将给定的目录加入到默认的已有的源码目录列表中，然而<code>srcDirs</code> 会覆盖默认的源码目录设置]</p>
 
-<p>To replace the default source folders, you will want to use <code>srcDirs</code> instead, which takes an array of path. This also shows a different way of using the objects involved:
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<p>To replace the default source folders, you will want to use <code>srcDirs</code> instead, which takes an array of path. This also shows a different way of using the objects involved:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">sourceSets {
+</pre></td><td class="code"><pre><code class=""><span class="line">sourceSets {
 </span><span class="line">    main.java.srcDirs = ['src/java']
 </span><span class="line">    main.resources.srcDirs = ['src/resources']
-</span><span class="line">}</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-For more information, see the Gradle documentation on the <a href="http://www.gradle.org/docs/current/userguide/java_plugin.html">Java plugin here</a>.</p>
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>For more information, see the Gradle documentation on the <a href="http://www.gradle.org/docs/current/userguide/java_plugin.html">Java plugin here</a>.</p>
 
 <p>The Android plugin uses a similar syntaxes, but because it uses its own sourceSets, this is done within the android object.
-Here’s an example, using the old project structure for the main code and remapping the <code>androidTest</code> sourceSet to the <code>tests</code> folder:
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+Here’s an example, using the old project structure for the main code and remapping the <code>androidTest</code> sourceSet to the <code>tests</code> folder:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -206,7 +224,7 @@ Here’s an example, using the old project structure for the main code and remap
 <span class="line-number">13</span>
 <span class="line-number">14</span>
 <span class="line-number">15</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">android {
+</pre></td><td class="code"><pre><code class=""><span class="line">android {
 </span><span class="line">    sourceSets {
 </span><span class="line">        main {
 </span><span class="line">            manifest.srcFile 'AndroidManifest.xml'
@@ -220,8 +238,9 @@ Here’s an example, using the old project structure for the main code and remap
 </span><span class="line">
 </span><span class="line">        androidTest.setRoot('tests')
 </span><span class="line">    }
-</span><span class="line">}</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-Note: because the old structure put all source files (java, aidl, renderscript, and java resources) in the same folder, we need to remap all those new components of the sourceSet to the same src folder.
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Note: because the old structure put all source files (java, aidl, renderscript, and java resources) in the same folder, we need to remap all those new components of the sourceSet to the same src folder.
 Note: <code>setRoot()</code> moves the whole sourceSet (and its sub folders) to a new folder. This moves <code>src/androidTest/*</code> to <code>tests/*</code>
 This is Android specific and will not work on Java sourceSets.</p>
 
@@ -234,14 +253,14 @@ This is Android specific and will not work on Java sourceSets.</p>
 <p>Applying a plugin to the build file automatically creates a set of build tasks to run. Both the Java plugin and the Android plugin do this.</p>
 
 <p>The convention for tasks is the following: [下面是默认有的build task]
-<code>assemble</code>
-The task to assemble the output(s) of the project
-<code>check</code>
-The task to run all the checks.
-<code>build</code>
-This task does both assemble and check
-<code>clean</code>
-This task cleans the output of the project
+<code>assemble</code>  <br />
+The task to assemble the output(s) of the project   <br />
+<code>check</code>   <br />
+The task to run all the checks.   <br />
+<code>build</code>  <br />
+This task does both assemble and check  <br />
+<code>clean</code>    <br />
+This task cleans the output of the project   <br />
 <strong>The tasks assemble, check and build don’t actually do anything. They are anchor tasks for the plugins to add actual tasks that do the work.</strong></p>
 
 <p>This allows you to always call the same task(s) no matter what the type of project is, or what plugins are applied.
@@ -1309,9 +1328,10 @@ compileOptions {
 
 <p>Note that you can use minSdkVersion with a value earlier than 19, for all language features except try with resources. If you want to use try with resources, you will need to also use a minSdkVersion of 19.</p>
 
-<p>You also need to make sure that Gradle is using version 1.7 or later of the JDK. (And version 0.6.1 or later of the Android Gradle plugin.)
-&lt;p class=&#8217;post-footer&#8217;&gt;
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/10/13/gradle-user-guide/">http://hujiaweibujidao.github.io/blog/2014/10/13/gradle-user-guide/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a> Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)&lt;/p&gt;</p>
+<p>You also need to make sure that Gradle is using version 1.7 or later of the JDK. (And version 0.6.1 or later of the Android Gradle plugin.)</p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/10/13/gradle-user-guide/">http://hujiaweibujidao.github.io/blog/2014/10/13/gradle-user-guide/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
