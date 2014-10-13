@@ -40,11 +40,12 @@ Good Tooling API allowing IDE integration
 
 Gradle 1.10 or 1.11 or 1.12 with the plugin 0.11.1      
 SDK with Build Tools 19.0.0. Some features may require a more recent version.
-Basic Project
+
+###Basic Project
 
 A Gradle project describes its build in a file called build.gradle located in the root folder of the project.
 
-###Simple build files
+####Simple build files
 
 The most simple Java-only project has the following build.gradle:
 
