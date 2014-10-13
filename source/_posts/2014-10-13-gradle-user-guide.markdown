@@ -243,9 +243,9 @@ Note: Gradle automatically monitor the declared inputs and outputs of a task. Ru
 
 The Java plugin creates mainly two tasks, that are dependencies of the main anchor tasks:
 
-`assemble`    `jar`   This task creates the output.
+`assemble`  ->   `jar`   This task creates the output.
 
-`check`     `test`  This task runs the tests.
+`check`  ->    `test`  This task runs the tests.
 
 The `jar` task itself will depend directly and indirectly on other tasks: classes for instance will compile the Java code. [任务jar直接或者间接地依赖其他的任务]
 
