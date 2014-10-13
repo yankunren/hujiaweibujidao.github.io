@@ -282,9 +282,11 @@ An Android project has at least two outputs: a debug APK and a release APK. Each
 
 They both depend on other tasks that execute the multiple steps needed to build an APK. The `assemble` task depends on both, so calling it will build both APKs.
 
-**Tip: Gradle support camel case shortcuts for task names on the command line.**  For instance: [Gradle支持在命令行中使用某个task的名称的camel case缩写调用这个task]
+**Tip: Gradle support camel case shortcuts for task names on the command line.** 
 
-`gradle aR`
+[Gradle支持在命令行中使用某个task的名称的camel case缩写调用这个task]
+
+ For instance:   `gradle aR`
 
 is the same as typing
 
@@ -338,16 +340,19 @@ android {
 }
 ```
 
-The defaultConfig element inside the android element is where all this configuration is defined.
+The `defaultConfig` element inside the android element is where all this configuration is defined.
 
-Previous versions of the Android Plugin used packageName to configure the manifest 'packageName' attribute.
-Starting in 0.11.0, you should use applicationId in the build.gradle to configure the manifest 'packageName' entry.
-This was disambiguated to reduce confusion between the application's packageName (which is its ID) and 
+Previous versions of the Android Plugin used `packageName` to configure the manifest 'packageName' attribute. Starting in 0.11.0, you should use `applicationId` in the `build.gradle` to configure the manifest 'packageName' entry. This was disambiguated to reduce confusion between the application's packageName (which is its ID) and 
 java packages.
+
+**[从Gradle Plugin 0.11.0 版本开始在`build.gradle` 文件中使用`applicationId` 而不是 `packageName` 来指定AndroidManifest文件中的`packageName`]**
 
 The power of describing it in the build file is that it can be dynamic.
 For instance, one could be reading the version name from a file somewhere or using some custom logic:
 
+[将上面那些内容定义在build文件中的魔力在于它们可以是动态的，如下所示]
+
+```
 def computeVersionName() {
     ...
 }
@@ -363,6 +368,9 @@ android {
         targetSdkVersion 16
     }
 }
+```
+
+[注意不要使用当前域中已有的getter方法作为自定义的函数名，否则会发生冲突]
 
 Note: Do not use function names that could conflict with existing getters in the given scope. For instance instance defaultConfig { ...} calling getVersionName() will automatically use the getter of defaultConfig.getVersionName() instead of the custom method.
 
