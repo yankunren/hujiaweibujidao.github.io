@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-13T21:11:48+08:00</updated>
+  <updated>2014-10-13T21:38:49+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -14,11 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Gradle User Guide]]></title>
+    <title type="html"><![CDATA[Gradle Plugin User Guide]]></title>
     <link href="http://hujiaweibujidao.github.io/blog/2014/10/13/gradle-user-guide/"/>
     <updated>2014-10-13T21:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/10/13/gradle-user-guide</id>
-    <content type="html"><![CDATA[<p>Gradle Plugin User Guide ( for Android Development )</p>
+    <content type="html"><![CDATA[<p>Gradle Plugin User Guide ( for Android Development )  [未完成，撰写中]</p>
 
 <p>原文地址：<a href="http://tools.android.com/tech-docs/new-build-system/user-guide">http://tools.android.com/tech-docs/new-build-system/user-guide</a></p>
 
@@ -27,29 +27,29 @@
 <p>This documentation is for the Gradle plugin version 0.9. Earlier versions may differ due to non-compatible we are introducing before 1.0.
 Goals of the new Build System</p>
 
-<p>The goals of the new build system are:
-Make it easy to reuse code and resources
-Make it easy to create several variants of an application, either for multi-apk distribution or for different flavors of an application
-Make it easy to configure, extend and customize the build process
-Good IDE integration</p>
+<p>The goals of the new build system are:   <br />
+Make it easy to reuse code and resources     <br />
+Make it easy to create several variants of an application, either for multi-apk distribution or for different flavors of an application    <br />
+Make it easy to configure, extend and customize the build process   <br />
+Good IDE integration    </p>
 
 <h5 id="why-gradle">Why Gradle?</h5>
 
 <p>Gradle is an advanced build system as well as an advanced build toolkit allowing to create custom build logic through plugins.</p>
 
-<p>Here are some of its features that made us choose Gradle:
-Domain Specific Language (DSL) to describe and manipulate the build logic
-Build files are Groovy based and allow mixing of declarative elements through the DSL and using code to manipulate the DSL elements to provide custom logic.
-Built-in dependency management through Maven and/or Ivy.
-Very flexible. Allows using best practices but doesn’t force its own way of doing things.
+<p>Here are some of its features that made us choose Gradle:     <br />
+Domain Specific Language (DSL) to describe and manipulate the build logic    <br />
+Build files are Groovy based and allow mixing of declarative elements through the DSL and using code to manipulate the DSL elements to provide custom logic.    <br />
+Built-in dependency management through Maven and/or Ivy.     <br />
+Very flexible. Allows using best practices but doesn’t force its own way of doing things.     <br />
 Plugins can expose their own DSL and their own API for build files to use.
-Good Tooling API allowing IDE integration</p>
+Good Tooling API allowing IDE integration      </p>
 
 <p>[总结起来就是：DSL(Domain Specific Language ) + Groovy based Build files + Maven based Dependency Management + Plugin Supported]</p>
 
 <h5 id="requirements">Requirements</h5>
 
-<p>Gradle 1.10 or 1.11 or 1.12 with the plugin 0.11.1
+<p>Gradle 1.10 or 1.11 or 1.12 with the plugin 0.11.1    <br />
 SDK with Build Tools 19.0.0. Some features may require a more recent version.
 Basic Project</p>
 
@@ -102,21 +102,27 @@ Basic Project</p>
 <p>There are 3 main areas to this Android build file:</p>
 
 <p><code>buildscript { ... }</code> configures the code driving the build.
-In this case, this declares that it uses the Maven Central repository, and that there is a classpath dependency on a Maven artifact. This artifact is the library that contains the Android plugin for Gradle in version 0.11.1
-<strong>Note: This only affects the code running the build, not the project. The project itself needs to declare its own repositories and dependencies. This will be covered later.</strong>
-[注意：这里定义的repository和dependency只是build需要的，项目还需要定义自己的repository和dependency]</p>
+In this case, this declares that it uses the Maven Central repository, and that there is a classpath dependency on a Maven artifact. This artifact is the library that contains the Android plugin for Gradle in version 0.11.1</p>
+
+<p><strong>Note: This only affects the code running the build, not the project. The project itself needs to declare its own repositories and dependencies. This will be covered later.</strong></p>
+
+<p>[注意：这里定义的repository和dependency只是build需要的，项目还需要定义自己的repository和dependency]</p>
 
 <p>Then, the android plugin is applied like the Java plugin earlier.</p>
 
-<p>Finally, <code>android { ... } </code>configures all the parameters for the android build. This is the entry point for the Android DSL.
-<strong>By default, only the compilation target, and the version of the build-tools are needed. This is done with the compileSdkVersion and buildtoolsVersion properties.</strong>
-The compilation target is the same as the target property in the project.properties file of the old build system. This new property can either be assigned a int (the api level) or a string with the same value as the previous target property.</p>
+<p>Finally, <code>android { ... } </code>configures all the parameters for the android build. This is the entry point for the Android DSL.</p>
 
-<p>Important: You should only apply the android plugin. Applying the java plugin as well will result in a build error.
-<strong>[注意：在Android中一般给定一个version都是指API version，此外，这里只能使用android插件，写成java插件会出现build错误]</strong></p>
+<p><strong>By default, only the compilation target, and the version of the build-tools are needed. This is done with the compileSdkVersion and buildtoolsVersion properties.</strong></p>
 
-<p>Note: You will also need a <code>local.properties</code> file to set the location of the SDK in the same way that the existing SDK requires, using the <code>sdk.dir</code> property.
-Alternatively, you can set an environment variable called <code>ANDROID_HOME</code>. There is no differences between the two methods, you can use the one you prefer.</p>
+<p>The compilation target is the same as the target property in the project.properties file of the old build system. This new property can either be assigned a int (the api level) or a string with the same value as the previous target property.</p>
+
+<p>Important: You should only apply the android plugin. Applying the java plugin as well will result in a build error.</p>
+
+<p><strong>[注意：在Android中一般给定一个version都是指API version，此外，这里只能使用android插件，写成java插件会出现build错误]</strong></p>
+
+<p>Note: You will also need a <code>local.properties</code> file to set the location of the SDK in the same way that the existing SDK requires, using the <code>sdk.dir</code> property.</p>
+
+<p>Alternatively, you can set an environment variable called <code>ANDROID_HOME</code>. There is no differences between the two methods, you can use the one you prefer.</p>
 
 <p>关于设置Android SDK的位置有两种方式：
 （1）在项目根目录的<code>local.properties</code> 文件中指定<code>sdk.dir</code> 的值，如果包含ndk的话同时还要指定<code>ndk.dir</code> 的值</p>
@@ -129,7 +135,7 @@ Alternatively, you can set an environment variable called <code>ANDROID_HOME</co
 
 <h5 id="project-structure">Project Structure</h5>
 
-<p>The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.
+<p>The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.   <br />
 [Gradle遵循大家约定俗成的目录结构和项目配置]</p>
 
 <p>The basic project starts with two components called <code>“source sets”</code>. The main source code and the test code. These live respectively in:</p>
@@ -240,8 +246,9 @@ Here’s an example, using the old project structure for the main code and remap
 </span><span class="line">    }
 </span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>Note: because the old structure put all source files (java, aidl, renderscript, and java resources) in the same folder, we need to remap all those new components of the sourceSet to the same src folder.
-Note: <code>setRoot()</code> moves the whole sourceSet (and its sub folders) to a new folder. This moves <code>src/androidTest/*</code> to <code>tests/*</code>
+<p>Note: because the old structure put all source files (java, aidl, renderscript, and java resources) in the same folder, we need to remap all those new components of the sourceSet to the same src folder.</p>
+
+<p>Note: <code>setRoot()</code> moves the whole sourceSet (and its sub folders) to a new folder. This moves <code>src/androidTest/*</code> to <code>tests/*</code>
 This is Android specific and will not work on Java sourceSets.</p>
 
 <p>The ‘migrated’ sample shows this. [?]</p>
@@ -252,72 +259,88 @@ This is Android specific and will not work on Java sourceSets.</p>
 
 <p>Applying a plugin to the build file automatically creates a set of build tasks to run. Both the Java plugin and the Android plugin do this.</p>
 
-<p>The convention for tasks is the following: [下面是默认有的build task]
-<code>assemble</code>  <br />
-The task to assemble the output(s) of the project   <br />
-<code>check</code>   <br />
-The task to run all the checks.   <br />
-<code>build</code>  <br />
-This task does both assemble and check  <br />
-<code>clean</code>    <br />
-This task cleans the output of the project   <br />
-<strong>The tasks assemble, check and build don’t actually do anything. They are anchor tasks for the plugins to add actual tasks that do the work.</strong></p>
+<p>The convention for tasks is the following: [下面是默认有的build task]</p>
 
-<p>This allows you to always call the same task(s) no matter what the type of project is, or what plugins are applied.
-For instance, applying the findbugs plugin will create a new task and make check depend on it, making it be called whenever the check task is called.</p>
+<p><code>assemble</code>   The task to assemble the output(s) of the project     </p>
 
-<p>From the command line you can get the high level task running the following command:
-gradle tasks</p>
+<p><code>check</code>   The task to run all the checks.     </p>
 
-<p>For a full list and seeing dependencies between the tasks run:
-gradle tasks –all</p>
+<p><code>build</code>   This task does both assemble and check    </p>
 
-<p>Note: Gradle automatically monitor the declared inputs and outputs of a task.
-Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations.
-Java project tasks</p>
+<p><code>clean</code>    This task cleans the output of the project     </p>
 
-<p>The Java plugin creates mainly two tasks, that are dependencies of the main anchor tasks:
-assemble
-jar
-This task creates the output.
-check
-test
-This task runs the tests.
-The jar task itself will depend directly and indirectly on other tasks: classes for instance will compile the Java code.
-The tests are compiled with testClasses, but it is rarely useful to call this as test depends on it (as well as classes).</p>
+<p><strong>The tasks assemble, check and build don’t actually do anything. They are anchor tasks for the plugins to add actual tasks that do the work.</strong></p>
 
-<p>In general, you will probably only ever call assemble or check, and ignore the other tasks.</p>
+<p>[任务assemble，check，build实际上什么都没有做，它们只是anchor task，需要通过plugin中指定实际的task它们才会开始工作]</p>
 
-<p>You can see the full set of tasks and their descriptions for the Java plugin here.
-Android tasks</p>
+<p>This allows you to always call the same task(s) no matter what the type of project is, or what plugins are applied.</p>
 
-<p>The Android plugin use the same convention to stay compatible with other plugins, and adds an additional anchor task:
-assemble
-The task to assemble the output(s) of the project
-check
-The task to run all the checks.
-connectedCheck
-Runs checks that requires a connected device or emulator. they will run on all connected devices in parallel.
-deviceCheck
-Runs checks using APIs to connect to remote devices. This is used on CI servers.
-build
-This task does both assemble and check
-clean
-This task cleans the output of the project
-The new anchor tasks are necessary in order to be able to run regular checks without needing a connected device.
-Note that build does not depend on deviceCheck, or connectedCheck.</p>
+<p>For instance, applying the findbugs plugin will create a new task and make check depend on it, making it be called whenever the check task is called.</p>
+
+<p>From the command line you can get the high level task running the following command:</p>
+
+<p><code>gradle tasks</code></p>
+
+<p>For a full list and seeing dependencies between the tasks run:</p>
+
+<p><code>gradle tasks --all</code></p>
+
+<p><strong>Note: Gradle automatically monitor the declared inputs and outputs of a task.
+Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations.</strong></p>
+
+<h5 id="java-project-tasks">Java project tasks</h5>
+
+<p>The Java plugin creates mainly two tasks, that are dependencies of the main anchor tasks:</p>
+
+<p><code>assemble</code>    <code>jar</code>   This task creates the output.</p>
+
+<p><code>check</code>     <code>test</code>  This task runs the tests.</p>
+
+<p>The <code>jar</code> task itself will depend directly and indirectly on other tasks: classes for instance will compile the Java code. [任务jar直接或者间接地依赖其他的任务]</p>
+
+<p>The tests are compiled with <code>testClasses</code>, but it is rarely useful to call this as <code>test</code> depends on it (as well as classes).</p>
+
+<p>In general, you will probably only ever call <code>assemble</code> or <code>check</code>, and ignore the other tasks.</p>
+
+<p>You can see the full set of tasks and their descriptions for the <a href="http://gradle.org/docs/current/userguide/java_plugin.html">Java plugin here</a>.</p>
+
+<h5 id="android-tasks">Android tasks</h5>
+
+<p>The Android plugin use the same convention to stay compatible with other plugins, and adds an additional anchor task:</p>
+
+<p><code>assemble</code>    The task to assemble the output(s) of the project</p>
+
+<p><code>check</code>   The task to run all the checks.</p>
+
+<p><code>connectedCheck</code>   Runs checks that requires a connected device or emulator. they will run on all connected devices in parallel. [?]</p>
+
+<p><code>deviceCheck</code>   Runs checks using APIs to connect to remote devices. This is used on CI servers. [?]</p>
+
+<p><code>build</code>   This task does both assemble and check</p>
+
+<p><code>clean</code>    This task cleans the output of the project</p>
+
+<p>The new anchor tasks are necessary in order to be able to run regular checks without needing a connected device.Note that build does not depend on deviceCheck, or connectedCheck.
+[任务build并不依赖deviceCheck和connectedCheck这两个任务]</p>
 
 <p>An Android project has at least two outputs: a debug APK and a release APK. Each of these has its own anchor task to facilitate building them separately:
-assemble
-assembleDebug
-assembleRelease
-They both depend on other tasks that execute the multiple steps needed to build an APK. The assemble task depends on both, so calling it will build both APKs.</p>
+[Android项目至少有两个输出：一个debug模式的APK，另一个是release模式deAPK，每种模式都有自己的anchor task以便于将它们的build过程分开]</p>
 
-<p>Tip: Gradle support camel case shortcuts for task names on the command line. For instance:
-gradle aR
-is the same as typing
-gradle assembleRelease
-as long as no other task match ‘aR’</p>
+<p><code>assemble</code>   <br />
+<code>assembleDebug</code>    <br />
+<code>assembleRelease</code>     </p>
+
+<p>They both depend on other tasks that execute the multiple steps needed to build an APK. The <code>assemble</code> task depends on both, so calling it will build both APKs.</p>
+
+<p>Tip: Gradle support camel case shortcuts for task names on the command line. For instance:</p>
+
+<p><code>gradle aR</code></p>
+
+<p>is the same as typing</p>
+
+<p><code>gradle assembleRelease</code></p>
+
+<p>as long as no other task match ‘aR’</p>
 
 <p>The check anchor tasks have their own dependencies:
 check
