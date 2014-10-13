@@ -742,27 +742,34 @@ This creates a library project that uses API 15 to compile. SourceSets, and depe
 
 ####Differences between a Project and a Library Project
 
-**[一个Library Project的主要输出是一个aar包，它是编译后的代码与资源的集合，它同样可以生成test apk来独立地测试这个library]**
+**[一个Library Project的主要输出是一个aar包，它是编译后的代码与资源的集合，它同样可以生成test apk来独立地测试这个library。Library Project和普通Project的assemble task是一样的，所以它们的behave没啥区别。此外，因为它可以有不同的build type和product flavor，所以它可以得到很多个不同的aar]**
 
 A Library project's main output is an .aar package (which stands for Android archive). It is a combination of compile code (as a jar file and/or native .so files) and resources (manifest, res, assets).
 
 **A library project can also generate a test apk to test the library independently from an application. **
 
-The same anchor tasks are used for this (assembleDebug, assembleRelease) so there’s no difference in commands to build such a project.
+The same anchor tasks are used for this (`assembleDebug`, `assembleRelease`) so there’s no difference in commands to build such a project.
 
-For the rest, libraries behave the same as application projects. They have build types and product flavors, and can potentially generate more than one version of the aar.
-Note that most of the configuration of the Build Type do not apply to library projects. However you can use the custom sourceSet to change the content of the library depending on whether it’s used by a project or being tested.
-Referencing a Library
+For the rest, libraries behave the same as application projects. They have **build types and product flavors, and can potentially generate more than one version of the aar.**
+
+[大多数的build type的配置都不会应用于Library Project中，当然它还是可以进行配置的]
+
+**Note that most of the configuration of the Build Type do not apply to library projects. However you can use the custom sourceSet to change the content of the library depending on whether it’s used by a project or being tested.**
+
+####Referencing a Library
 
 Referencing a library is done the same way any other project is referenced:
 
+```
 dependencies {
     compile project(':libraries:lib1')
     compile project(':libraries:lib2')
 }
+```
 
 Note: if you have more than one library, then the order will be important. This is similar to the old build system where the order of the dependencies in the project.properties file was important.
-Library Publication
+
+####Library Publication
 
 By default a library only publishes its release variant. This variant will be used by all projects referencing the library, no matter which variant they build themselves. This is a temporary limitation due to Gradle limitations that we are working towards removing.
 
