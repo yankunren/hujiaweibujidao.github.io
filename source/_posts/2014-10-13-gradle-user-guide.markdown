@@ -375,27 +375,22 @@ android {
 Note: Do not use function names that could conflict with existing getters in the given scope. For instance instance defaultConfig { ...} calling getVersionName() will automatically use the getter of defaultConfig.getVersionName() instead of the custom method.
 
 If a property is not set through the DSL, some default value will be used. Here’s a table of how this is processed.
- Property Name	 Default value in DSL object	 Default value
- versionCode	 -1	 value from manifest if present
- versionName	 null	 value from manifest if present
- minSdkVersion	 -1	 value from manifest if present
- targetSdkVersion	 -1	 value from manifest if present
- applicationId	 null	 value from manifest if present
- testApplicationId	 null	 applicationId + “.test”
- testInstrumentationRunner	 null	 android.test.InstrumentationTestRunner
- signingConfig	 null	 null
- proguardFile	 N/A (set only)	 N/A (set only)
- proguardFiles	 N/A (set only)	 N/A (set only) 
+
 
 
 The value of the 2nd column is important if you use custom logic in the build script that queries these properties. For instance, you could write:
+
+```
 if (android.defaultConfig.testInstrumentationRunner == null) {
     // assign a better default...
 }
+```
 
 If the value remains null, then it is replaced at build time by the actual default from column 3, but the DSL element does not contain this default value so you can't query against it.
+
 This is to prevent parsing the manifest of the application unless it’s really needed. 
-Build Types
+
+###Build Types
 
 By default, the Android plugin automatically sets up the project to build both a debug and a release version of the application.
 These differ mostly around the ability to debug the application on a secure (non dev) devices, and how the APK is signed.
