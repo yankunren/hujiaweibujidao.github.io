@@ -202,14 +202,14 @@ The ‘migrated’ sample shows this. [?]
 Applying a plugin to the build file automatically creates a set of build tasks to run. Both the Java plugin and the Android plugin do this.
 
 The convention for tasks is the following: [下面是默认有的build task]
-`assemble`
-The task to assemble the output(s) of the project
-`check`
-The task to run all the checks.
-`build`
-This task does both assemble and check
-`clean`
-This task cleans the output of the project
+`assemble`    
+The task to assemble the output(s) of the project     
+`check`     
+The task to run all the checks.     
+`build`    
+This task does both assemble and check    
+`clean`      
+This task cleans the output of the project     
 **The tasks assemble, check and build don’t actually do anything. They are anchor tasks for the plugins to add actual tasks that do the work.**
 
 This allows you to always call the same task(s) no matter what the type of project is, or what plugins are applied.
