@@ -263,7 +263,7 @@ The Android plugin use the same convention to stay compatible with other plugins
 
 `check`   The task to run all the checks.
 
-`connectedCheck`   **Runs checks that requires a connected device or emulator. they will run on all connected devices in parallel. **[?]
+`connectedCheck`   **Runs checks that requires a connected device or emulator.they will run on all connected devices in parallel. ** [?]
 
 `deviceCheck`   **Runs checks using APIs to connect to remote devices. This is used on CI servers.** [?]
 
