@@ -235,8 +235,7 @@ For a full list and seeing dependencies between the tasks run:  `gradle tasks --
 
 ![image](http://hujiaweibujidao.github.io/images/gradle1.png)
 
-**Note: Gradle automatically monitor the declared inputs and outputs of a task.
-Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations.**
+**Note: Gradle automatically monitor the declared inputs and outputs of a task. Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations. **
 
 [Gradle会监视一个任务的输入和输出，重复运行build结果都没有变化的话Gradle会提示所有的任务都是UP-TO-DATE，这样可以避免不必要的build操作]
 
@@ -338,10 +337,9 @@ android {
 
 The `defaultConfig` element inside the android element is where all this configuration is defined.
 
-Previous versions of the Android Plugin used `packageName` to configure the manifest 'packageName' attribute. Starting in 0.11.0, you should use `applicationId` in the `build.gradle` to configure the manifest 'packageName' entry. This was disambiguated to reduce confusion between the application's packageName (which is its ID) and 
-java packages.
+**Previous versions of the Android Plugin used `packageName` to configure the manifest 'packageName' attribute. Starting in 0.11.0, you should use `applicationId` in the `build.gradle` to configure the manifest 'packageName' entry. This was disambiguated to reduce confusion between the application's packageName (which is its ID) and java packages.**
 
-**[从Gradle Plugin 0.11.0 版本开始在`build.gradle` 文件中使用`applicationId` 而不是 `packageName` 来指定AndroidManifest文件中的`packageName`]**
+[从Gradle Plugin 0.11.0 版本开始在`build.gradle` 文件中使用`applicationId` 而不是 `packageName` 来指定AndroidManifest文件中的`packageName`]
 
 The power of describing it in the build file is that it can be dynamic.
 For instance, one could be reading the version name from a file somewhere or using some custom logic:
@@ -368,7 +366,7 @@ android {
 
 [注意不要使用当前域中已有的getter方法作为自定义的函数名，否则会发生冲突]
 
-Note: Do not use function names that could conflict with existing getters in the given scope. For instance instance `defaultConfig { ...}` calling `getVersionName()` will automatically use the getter of `defaultConfig.getVersionName()` instead of the custom method.
+**Note: Do not use function names that could conflict with existing getters in the given scope. For instance instance `defaultConfig { ...}` calling `getVersionName()` will automatically use the getter of `defaultConfig.getVersionName()` instead of the custom method.**
 
 If a property is not set through the DSL, some default value will be used. Here’s a table of how this is processed.
 
@@ -400,9 +398,9 @@ By default, the Android plugin automatically sets up the project to build both a
 
 [debug版本使用`key/certificate` 来签名，而release版本在build过程中并不签名，它的签名过程发生在后面]
 
-This configuration is done through an object called a BuildType. By default, 2 instances are created, a debug and a release one.
+This configuration is done through an object called a `BuildType`. By default, 2 instances are created, a debug and a release one.
 
-The Android plugin allows customizing those two instances as well as creating other Build Types. This is done with the buildTypes DSL container:
+The Android plugin allows customizing those two instances as well as creating other Build Types. This is done with the `buildTypes` DSL container:
 
 ```
 android {
@@ -421,31 +419,29 @@ android {
 ```
 
 The above snippet achieves the following:
+
 Configures the default debug Build Type:
-set its package to be <app appliationId>.debug to be able to install both debug and release apk on the same device
-Creates a new BuildType called jnidebug and configure it to be a copy of the debug build type.
-Keep configuring the jnidebug, by enabling debug build of the JNI component, and add a different package suffix.
-Creating new Build Types is as easy as using a new element under the buildTypes container, either to call initWith() or to configure it with a closure.
+
+(1) set its package to be `<app appliationId>.debug` to be able to install both debug and release apk on the same device
+
+(2) Creates a new BuildType called jnidebug and configure it to be a copy of the debug build type.
+
+(3) Keep configuring the jnidebug, by enabling debug build of the JNI component, and add a different package suffix.
+
+[在buildTypes容器中创建一个新的build type很简单，要么调用`initWith()` 方法或者直接使用花括号来配置它]
+
+Creating new Build Types is as easy as using a new element under the buildTypes container, either to call `initWith()` or to configure it with a closure.
 
 The possible properties and their default values are:
 
- Property name	 Default values for debug	 Default values for release / other
- debuggable	 true	 false
- jniDebugBuild	 false	 false
- renderscriptDebugBuild	 false	 false
- renderscriptOptimLevel	 3	 3
- applicationIdSuffix	 null	 null
- versionNameSuffix	 null	 null
- signingConfig	 android.signingConfigs.debug	 null
- zipAlign	 false	 true
- runProguard	 false	 false
- proguardFile	 N/A (set only)	 N/A (set only)
- proguardFiles	 N/A (set only)	 N/A (set only)
-
+![image](http://hujiaweibujidao.github.io/images/gradle3.png)
 
 In addition to these properties, Build Types can contribute to the build with code and resources.
-For each Build Type, a new matching sourceSet is created, with a default location of
-src/<buildtypename>/
+
+**[对于每个build type都会生成一个对应的`sourceSet`，默认的位置是`src/<buildtypename>/` ，所以build type的名称不能是`main`或者`androidTest`，而且它们相互之间不能重名]**
+
+For each Build Type, a new matching `sourceSet` is created, with a default location of  `src/<buildtypename>/`
+
 This means the Build Type names cannot be main or androidTest (this is enforced by the plugin), and that they have to be unique to each other.
 
 Like any other source sets, the location of the build type source set can be relocated:
