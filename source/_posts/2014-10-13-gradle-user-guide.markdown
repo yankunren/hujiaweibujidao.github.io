@@ -492,9 +492,11 @@ The location, as well as the key name, both passwords and store type form togeth
 
 **By default, there is a `debug` configuration that is setup to use a debug keystore, with a known password and a default key with a known password.The debug keystore is located in `$HOME/.android/debug.keystore`, and is created if not present.**
 
-The debug Build Type is set to use this debug SigningConfig automatically.
+The debug Build Type is set to use this debug SigningConfig automatically.It is possible to create other configurations or customize the default built-in one. This is done through the signingConfigs DSL container:
 
-It is possible to create other configurations or customize the default built-in one. This is done through the signingConfigs DSL container:
+[默认情况下，debug的build过程会自动使用debug SigningConfig，当然我们可以自己定义]
+
+```
 android {
     signingConfigs {
         debug {
@@ -517,6 +519,8 @@ android {
         }
     }
 }
+```
+
 The above snippet changes the location of the debug keystore to be at the root of the project. This automatically impacts any Build Types that are set to using it, in this case the debug Build Type.
 
 It also creates a new Signing Config and a new Build Type that uses the new configuration.
@@ -527,11 +531,16 @@ Note: Location of keystores are usually relative to the root of the project, but
 
 Note:  If you are checking these files into version control, you may not want the password in the file. The following Stack Overflow post shows ways to read the values from the console, or from environment variables.
 http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-file-using-gradle
+
 We'll update this guide with more detailed information later.
-Running ProGuard
 
-ProGuard is supported through the Gradle plugin for ProGuard version 4.10. The ProGuard plugin is applied automatically, and the tasks are created automatically if the Build Type is configured to run ProGuard through the runProguard property.
+###Running ProGuard
 
+[对ProGuard的支持是通过Gradle plugin for ProGuard 4.10来实现的]
+
+ProGuard is supported through the Gradle plugin for ProGuard version 4.10. The ProGuard plugin is applied automatically, and the tasks are created automatically if the Build Type is configured to run ProGuard through the `runProguard` property.
+
+```
 android {
     buildTypes {
         release {
@@ -548,14 +557,20 @@ android {
         }
     }
 }
+```
 
 Variants use all the rules files declared in their build type, and product flavors.
 
-There are 2 default rules files
-proguard-android.txt
-proguard-android-optimize.txt
-They are located in the SDK. Using getDefaultProguardFile() will return the full path to the files. They are identical except for enabling optimizations.
-Dependencies, Android Libraries and Multi-project setup
+[两个默认的proguard rule 文件，它们存放在Android SDK目录中，使用`getDefaultProguardFile()` 可以得到文件的完整路径]
+
+There are 2 default rules files 
+
+`proguard-android.txt`       
+`proguard-android-optimize.txt`        
+ 
+They are located in the SDK. Using `getDefaultProguardFile()` will return the full path to the files. They are identical except for enabling optimizations.
+
+###Dependencies, Android Libraries and Multi-project setup
 
 Gradle projects can have dependencies on other components. These components can be external binary packages, or other Gradle projects.
 Dependencies on binary packages
@@ -1013,6 +1028,7 @@ Location src/androidTestFlavor1/
 android.sourceSets.androidTestFlavor2
 Location src/androidTestFlavor2/
 Those sourceSets are used to build the APK, alongside android.sourceSets.main and the Build Type sourceSet.
+ 
 
 The following rules are used when dealing with all the sourcesets used to build a single APK:
 All source code (src/*/java) are used together as multiple folders generating a single output.
