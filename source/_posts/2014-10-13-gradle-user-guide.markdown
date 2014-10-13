@@ -227,16 +227,18 @@ This allows you to always call the same task(s) no matter what the type of proje
 
 For instance, applying the findbugs plugin will create a new task and make check depend on it, making it be called whenever the check task is called.
 
-From the command line you can get the high level task running the following command:
+From the command line you can get the high level task running the following command:   `gradle tasks`
 
-`gradle tasks`
+For a full list and seeing dependencies between the tasks run:  `gradle tasks --all`
 
-For a full list and seeing dependencies between the tasks run:
+[在Android Studio的Terminal中运行结果如下]
 
-`gradle tasks --all`
+![image](http://hujiaweibujidao.github.io/images/gradle1.png)
 
 **Note: Gradle automatically monitor the declared inputs and outputs of a task.
 Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations.**
+
+[Gradle会监视一个任务的输入和输出，重复运行build结果都没有变化的话Gradle会提示所有的任务都是UP-TO-DATE，这样可以避免不必要的build操作]
 
 ####Java project tasks
 
@@ -286,13 +288,7 @@ They both depend on other tasks that execute the multiple steps needed to build 
 
 [Gradle支持在命令行中使用某个task的名称的camel case缩写调用这个task]
 
- For instance:   `gradle aR`
-
-is the same as typing
-
-`gradle assembleRelease`
-
-as long as no other task match ‘aR’
+ For instance:   `gradle aR`  is the same as typing  `gradle assembleRelease`，as long as no other task match ‘aR’
 
 The check anchor tasks have their own dependencies:
 
@@ -376,7 +372,7 @@ Note: Do not use function names that could conflict with existing getters in the
 
 If a property is not set through the DSL, some default value will be used. Here’s a table of how this is processed.
 
-
+![image](http://hujiaweibujidao.github.io/images/gradle2.png)
 
 The value of the 2nd column is important if you use custom logic in the build script that queries these properties. For instance, you could write:
 
@@ -393,6 +389,7 @@ This is to prevent parsing the manifest of the application unless it’s really 
 ###Build Types
 
 By default, the Android plugin automatically sets up the project to build both a debug and a release version of the application.
+
 These differ mostly around the ability to debug the application on a secure (non dev) devices, and how the APK is signed.
 
 The debug version is signed with a key/certificate that is created automatically with a known name/password (to prevent required prompt during the build). The release is not signed during the build, this needs to happen after.
@@ -401,6 +398,7 @@ This configuration is done through an object called a BuildType. By default, 2 i
 
 The Android plugin allows customizing those two instances as well as creating other Build Types. This is done with the buildTypes DSL container:
 
+```
 android {
     buildTypes {
         debug {
@@ -414,6 +412,7 @@ android {
         }
     }
 }
+```
 
 The above snippet achieves the following:
 Configures the default debug Build Type:
