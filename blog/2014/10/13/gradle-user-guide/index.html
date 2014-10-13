@@ -132,7 +132,7 @@
 
 <p>原文地址：<a href="http://tools.android.com/tech-docs/new-build-system/user-guide">http://tools.android.com/tech-docs/new-build-system/user-guide</a></p>
 
-<h5 id="introduction">Introduction</h5>
+<h3 id="introduction">Introduction</h3>
 
 <p>This documentation is for the Gradle plugin version 0.9. Earlier versions may differ due to non-compatible we are introducing before 1.0.
 Goals of the new Build System</p>
@@ -143,7 +143,7 @@ Make it easy to create several variants of an application, either for multi-apk 
 Make it easy to configure, extend and customize the build process   <br />
 Good IDE integration    </p>
 
-<h5 id="why-gradle">Why Gradle?</h5>
+<h3 id="why-gradle">Why Gradle?</h3>
 
 <p>Gradle is an advanced build system as well as an advanced build toolkit allowing to create custom build logic through plugins.</p>
 
@@ -157,7 +157,7 @@ Good Tooling API allowing IDE integration      </p>
 
 <p>[总结起来就是：DSL(Domain Specific Language ) + Groovy based Build files + Maven based Dependency Management + Plugin Supported]</p>
 
-<h5 id="requirements">Requirements</h5>
+<h3 id="requirements">Requirements</h3>
 
 <p>Gradle 1.10 or 1.11 or 1.12 with the plugin 0.11.1    <br />
 SDK with Build Tools 19.0.0. Some features may require a more recent version.
@@ -165,7 +165,7 @@ Basic Project</p>
 
 <p>A Gradle project describes its build in a file called build.gradle located in the root folder of the project.</p>
 
-<h5 id="simple-build-files">Simple build files</h5>
+<h3 id="simple-build-files">Simple build files</h3>
 
 <p>The most simple Java-only project has the following build.gradle:</p>
 
@@ -234,8 +234,9 @@ In this case, this declares that it uses the Maven Central repository, and that 
 
 <p>Alternatively, you can set an environment variable called <code>ANDROID_HOME</code>. There is no differences between the two methods, you can use the one you prefer.</p>
 
-<p>关于设置Android SDK的位置有两种方式：
-（1）在项目根目录的<code>local.properties</code> 文件中指定<code>sdk.dir</code> 的值，如果包含ndk的话同时还要指定<code>ndk.dir</code> 的值</p>
+<p>关于设置Android SDK的位置有两种方式：</p>
+
+<p>（1）在项目根目录的<code>local.properties</code> 文件中指定<code>sdk.dir</code> 的值，如果包含ndk的话同时还要指定<code>ndk.dir</code> 的值</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -243,7 +244,7 @@ In this case, this declares that it uses the Maven Central repository, and that 
 </span><span class="line">ndk.dir=/Volumes/hujiawei/Users/hujiawei/Android/android_ndk</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p>（2）在系统中设置环境变量<code>ANDROID_HOME</code></p>
 
-<h5 id="project-structure">Project Structure</h5>
+<h3 id="project-structure">Project Structure</h3>
 
 <p>The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.   <br />
 [Gradle遵循大家约定俗成的目录结构和项目配置]</p>
@@ -280,7 +281,7 @@ For both the Java and Android plugin, the location of the Java source code and t
 
 <p>Note: <code>src/androidTest/AndroidManifest.xml</code> is not needed as it is created automatically.</p>
 
-<h5 id="configuring-the-structure">Configuring the Structure</h5>
+<h4 id="configuring-the-structure">Configuring the Structure</h4>
 
 <p>When the default project structure isn’t adequate, it is possible to configure it. According to the Gradle documentation, reconfiguring the <code>sourceSets</code> for a Java project can be done with the following:</p>
 
@@ -363,9 +364,9 @@ This is Android specific and will not work on Java sourceSets.</p>
 
 <p>The ‘migrated’ sample shows this. [?]</p>
 
-<h5 id="build-tasks">Build Tasks</h5>
+<h3 id="build-tasks">Build Tasks</h3>
 
-<h6 id="general-tasks">General Tasks</h6>
+<h4 id="general-tasks">General Tasks</h4>
 
 <p>Applying a plugin to the build file automatically creates a set of build tasks to run. Both the Java plugin and the Android plugin do this.</p>
 
@@ -398,7 +399,7 @@ This is Android specific and will not work on Java sourceSets.</p>
 <p><strong>Note: Gradle automatically monitor the declared inputs and outputs of a task.
 Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations.</strong></p>
 
-<h5 id="java-project-tasks">Java project tasks</h5>
+<h4 id="java-project-tasks">Java project tasks</h4>
 
 <p>The Java plugin creates mainly two tasks, that are dependencies of the main anchor tasks:</p>
 
@@ -414,7 +415,7 @@ Running the build twice without change will make Gradle report all tasks as UP-T
 
 <p>You can see the full set of tasks and their descriptions for the <a href="http://gradle.org/docs/current/userguide/java_plugin.html">Java plugin here</a>.</p>
 
-<h5 id="android-tasks">Android tasks</h5>
+<h4 id="android-tasks">Android tasks</h4>
 
 <p>The Android plugin use the same convention to stay compatible with other plugins, and adds an additional anchor task:</p>
 
@@ -422,9 +423,9 @@ Running the build twice without change will make Gradle report all tasks as UP-T
 
 <p><code>check</code>   The task to run all the checks.</p>
 
-<p><code>connectedCheck</code>   Runs checks that requires a connected device or emulator. they will run on all connected devices in parallel. [?]</p>
+<p><code>connectedCheck</code>   **Runs checks that requires a connected device or emulator. they will run on all connected devices in parallel. **[?]</p>
 
-<p><code>deviceCheck</code>   Runs checks using APIs to connect to remote devices. This is used on CI servers. [?]</p>
+<p><code>deviceCheck</code>   <strong>Runs checks using APIs to connect to remote devices. This is used on CI servers.</strong> [?]</p>
 
 <p><code>build</code>   This task does both assemble and check</p>
 
@@ -442,9 +443,11 @@ Running the build twice without change will make Gradle report all tasks as UP-T
 
 <p>They both depend on other tasks that execute the multiple steps needed to build an APK. The <code>assemble</code> task depends on both, so calling it will build both APKs.</p>
 
-<p>Tip: Gradle support camel case shortcuts for task names on the command line. For instance:</p>
+<p><strong>Tip: Gradle support camel case shortcuts for task names on the command line.</strong> </p>
 
-<p><code>gradle aR</code></p>
+<p>[Gradle支持在命令行中使用某个task的名称的camel case缩写调用这个task]</p>
+
+<p>For instance:   <code>gradle aR</code></p>
 
 <p>is the same as typing</p>
 
@@ -452,67 +455,105 @@ Running the build twice without change will make Gradle report all tasks as UP-T
 
 <p>as long as no other task match ‘aR’</p>
 
-<p>The check anchor tasks have their own dependencies:
-check
-lint
-connectedCheck
-connectedAndroidTest
-connectedUiAutomatorTest (not implemented yet)
-deviceCheck
-This depends on tasks created when other plugins implement test extension points.
-Finally, the plugin creates install/uninstall tasks for all build types (debug, release, test), as long as they can be installed (which requires signing).
+<p>The check anchor tasks have their own dependencies:</p>
+
+<p><code>check</code>      <br />
+<code>lint</code>    <br />
+<code>connectedCheck</code>    <br />
+<code>connectedAndroidTest</code>    <br />
+<code>connectedUiAutomatorTest </code>(not implemented yet)    <br />
+<code>deviceCheck</code>      </p>
+
+<p>This depends on tasks created when other plugins implement test extension points.</p>
+
+<p>Finally, the plugin creates <code>install/uninstall</code> tasks for all build types (debug, release, test), as long as they can be installed (which requires signing).
 Basic Build Customization</p>
 
-<p>The Android plugin provides a broad DSL to customize most things directly from the build system.
-Manifest entries</p>
+<p>The Android plugin provides a broad DSL to customize most things directly from the build system.</p>
 
-<p>Through the DSL it is possible to configure the following manifest entries:
-minSdkVersion
-targetSdkVersion
-versionCode
-versionName
-applicationId (the effective packageName – see ApplicationId versus PackageName for more information)
-Package Name for the test application
-Instrumentation test runner
-Example:</p>
+<h3 id="manifest-entries">Manifest entries</h3>
 
-<p>android {
-    compileSdkVersion 19
-    buildToolsVersion “19.0.0”</p>
+<p>[通过DSL我们可以在<code>build.gradle</code> 文件中指定定义在AndroidManifest文件中的内容]</p>
 
-<pre><code>defaultConfig {
-    versionCode 12
-    versionName "2.0"
-    minSdkVersion 16
-    targetSdkVersion 16
-} }
-</code></pre>
+<p>Through the DSL it is possible to configure the following manifest entries:</p>
 
-<p>The defaultConfig element inside the android element is where all this configuration is defined.</p>
+<p><code>minSdkVersion</code>    <br />
+<code>targetSdkVersion</code>   <br />
+<code>versionCode</code>   <br />
+<code>versionName</code>   <br />
+<code>applicationId</code> (the effective packageName – see <a href="http://tools.android.com/tech-docs/new-build-system/applicationid-vs-packagename">ApplicationId versus PackageName</a> for more information)    <br />
+<code>Package Name</code> for the test application   <br />
+<code>Instrumentation test runner</code>     </p>
 
-<p>Previous versions of the Android Plugin used packageName to configure the manifest ‘packageName’ attribute.
-Starting in 0.11.0, you should use applicationId in the build.gradle to configure the manifest ‘packageName’ entry.
-This was disambiguated to reduce confusion between the application’s packageName (which is its ID) and 
+<p>Example:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">android {
+</span><span class="line">    compileSdkVersion 19
+</span><span class="line">    buildToolsVersion "19.0.0"
+</span><span class="line">
+</span><span class="line">    defaultConfig {
+</span><span class="line">        versionCode 12
+</span><span class="line">        versionName "2.0"
+</span><span class="line">        minSdkVersion 16
+</span><span class="line">        targetSdkVersion 16
+</span><span class="line">    }
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>The <code>defaultConfig</code> element inside the android element is where all this configuration is defined.</p>
+
+<p>Previous versions of the Android Plugin used <code>packageName</code> to configure the manifest ‘packageName’ attribute. Starting in 0.11.0, you should use <code>applicationId</code> in the <code>build.gradle</code> to configure the manifest ‘packageName’ entry. This was disambiguated to reduce confusion between the application’s packageName (which is its ID) and 
 java packages.</p>
+
+<p><strong>[从Gradle Plugin 0.11.0 版本开始在<code>build.gradle</code> 文件中使用<code>applicationId</code> 而不是 <code>packageName</code> 来指定AndroidManifest文件中的<code>packageName</code>]</strong></p>
 
 <p>The power of describing it in the build file is that it can be dynamic.
 For instance, one could be reading the version name from a file somewhere or using some custom logic:</p>
 
-<p>def computeVersionName() {
-    …
-}</p>
+<p>[将上面那些内容定义在build文件中的魔力在于它们可以是动态的，如下所示]</p>
 
-<p>android {
-    compileSdkVersion 19
-    buildToolsVersion “19.0.0”</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">def computeVersionName() {
+</span><span class="line">    ...
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">android {
+</span><span class="line">    compileSdkVersion 19
+</span><span class="line">    buildToolsVersion "19.0.0"
+</span><span class="line">
+</span><span class="line">    defaultConfig {
+</span><span class="line">        versionCode 12
+</span><span class="line">        versionName computeVersionName()
+</span><span class="line">        minSdkVersion 16
+</span><span class="line">        targetSdkVersion 16
+</span><span class="line">    }
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<pre><code>defaultConfig {
-    versionCode 12
-    versionName computeVersionName()
-    minSdkVersion 16
-    targetSdkVersion 16
-} }
-</code></pre>
+<p>[注意不要使用当前域中已有的getter方法作为自定义的函数名，否则会发生冲突]</p>
 
 <p>Note: Do not use function names that could conflict with existing getters in the given scope. For instance instance defaultConfig { …} calling getVersionName() will automatically use the getter of defaultConfig.getVersionName() instead of the custom method.</p>
 
