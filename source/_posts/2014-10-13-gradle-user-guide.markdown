@@ -228,15 +228,11 @@ For instance, applying the findbugs plugin will create a new task and make check
 
 From the command line you can get the high level task running the following command:
 
-```
-gradle tasks
-```
+`gradle tasks`
 
 For a full list and seeing dependencies between the tasks run:
 
-```
-gradle tasks --all
-```
+`gradle tasks --all`
 
 **Note: Gradle automatically monitor the declared inputs and outputs of a task.
 Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations.**
@@ -265,27 +261,34 @@ The Android plugin use the same convention to stay compatible with other plugins
 
 `check`   The task to run all the checks.
 
-`connectedCheck`   Runs checks that requires a connected device or emulator. they will run on all connected devices in parallel.
+`connectedCheck`   Runs checks that requires a connected device or emulator. they will run on all connected devices in parallel. [?]
 
-`deviceCheck`   Runs checks using APIs to connect to remote devices. This is used on CI servers.
+`deviceCheck`   Runs checks using APIs to connect to remote devices. This is used on CI servers. [?]
 
 `build`   This task does both assemble and check
 
 `clean`    This task cleans the output of the project
 
-The new anchor tasks are necessary in order to be able to run regular checks without needing a connected device.
-Note that build does not depend on deviceCheck, or connectedCheck.
+The new anchor tasks are necessary in order to be able to run regular checks without needing a connected device.Note that build does not depend on deviceCheck, or connectedCheck.
+[任务build并不依赖deviceCheck和connectedCheck这两个任务]
 
 An Android project has at least two outputs: a debug APK and a release APK. Each of these has its own anchor task to facilitate building them separately:
-assemble
-assembleDebug
-assembleRelease
-They both depend on other tasks that execute the multiple steps needed to build an APK. The assemble task depends on both, so calling it will build both APKs.
+[Android项目至少有两个输出：一个debug模式的APK，另一个是release模式deAPK，每种模式都有自己的anchor task以便于将它们的build过程分开]
+
+`assemble`     
+`assembleDebug`      
+`assembleRelease`     
+
+They both depend on other tasks that execute the multiple steps needed to build an APK. The `assemble` task depends on both, so calling it will build both APKs.
 
 Tip: Gradle support camel case shortcuts for task names on the command line. For instance:
-gradle aR
+
+`gradle aR`
+
 is the same as typing
-gradle assembleRelease
+
+`gradle assembleRelease`
+
 as long as no other task match ‘aR’
 
 The check anchor tasks have their own dependencies:
