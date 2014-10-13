@@ -16,29 +16,29 @@ Gradle Plugin User Guide ( for Android Development )
 This documentation is for the Gradle plugin version 0.9. Earlier versions may differ due to non-compatible we are introducing before 1.0.
 Goals of the new Build System
 
-The goals of the new build system are:
-Make it easy to reuse code and resources
-Make it easy to create several variants of an application, either for multi-apk distribution or for different flavors of an application
-Make it easy to configure, extend and customize the build process
-Good IDE integration
+The goals of the new build system are:     
+Make it easy to reuse code and resources       
+Make it easy to create several variants of an application, either for multi-apk distribution or for different flavors of an application      
+Make it easy to configure, extend and customize the build process     
+Good IDE integration    
 
 #####Why Gradle?
 
 Gradle is an advanced build system as well as an advanced build toolkit allowing to create custom build logic through plugins.
 
-Here are some of its features that made us choose Gradle:
-Domain Specific Language (DSL) to describe and manipulate the build logic
-Build files are Groovy based and allow mixing of declarative elements through the DSL and using code to manipulate the DSL elements to provide custom logic.
-Built-in dependency management through Maven and/or Ivy.
-Very flexible. Allows using best practices but doesn’t force its own way of doing things.
+Here are some of its features that made us choose Gradle:       
+Domain Specific Language (DSL) to describe and manipulate the build logic      
+Build files are Groovy based and allow mixing of declarative elements through the DSL and using code to manipulate the DSL elements to provide custom logic.      
+Built-in dependency management through Maven and/or Ivy.       
+Very flexible. Allows using best practices but doesn’t force its own way of doing things.       
 Plugins can expose their own DSL and their own API for build files to use.
-Good Tooling API allowing IDE integration
+Good Tooling API allowing IDE integration      
 
 [总结起来就是：DSL(Domain Specific Language ) + Groovy based Build files + Maven based Dependency Management + Plugin Supported]
 
 #####Requirements
 
-Gradle 1.10 or 1.11 or 1.12 with the plugin 0.11.1
+Gradle 1.10 or 1.11 or 1.12 with the plugin 0.11.1      
 SDK with Build Tools 19.0.0. Some features may require a more recent version.
 Basic Project
 
@@ -79,19 +79,25 @@ There are 3 main areas to this Android build file:
 
 `buildscript { ... }` configures the code driving the build.
 In this case, this declares that it uses the Maven Central repository, and that there is a classpath dependency on a Maven artifact. This artifact is the library that contains the Android plugin for Gradle in version 0.11.1
+
 **Note: This only affects the code running the build, not the project. The project itself needs to declare its own repositories and dependencies. This will be covered later.**
+
 [注意：这里定义的repository和dependency只是build需要的，项目还需要定义自己的repository和dependency]
 
 Then, the android plugin is applied like the Java plugin earlier.
 
 Finally, `android { ... } `configures all the parameters for the android build. This is the entry point for the Android DSL.
+
 **By default, only the compilation target, and the version of the build-tools are needed. This is done with the compileSdkVersion and buildtoolsVersion properties.**
+
 The compilation target is the same as the target property in the project.properties file of the old build system. This new property can either be assigned a int (the api level) or a string with the same value as the previous target property.
 
 Important: You should only apply the android plugin. Applying the java plugin as well will result in a build error.
+
 **[注意：在Android中一般给定一个version都是指API version，此外，这里只能使用android插件，写成java插件会出现build错误]**
 
 Note: You will also need a `local.properties` file to set the location of the SDK in the same way that the existing SDK requires, using the `sdk.dir` property.
+
 Alternatively, you can set an environment variable called `ANDROID_HOME`. There is no differences between the two methods, you can use the one you prefer.
 
 关于设置Android SDK的位置有两种方式：
@@ -105,7 +111,7 @@ ndk.dir=/Volumes/hujiawei/Users/hujiawei/Android/android_ndk
 
 #####Project Structure
 
-The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.
+The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.     
 [Gradle遵循大家约定俗成的目录结构和项目配置]
 
 The basic project starts with two components called `“source sets”`. The main source code and the test code. These live respectively in:
@@ -190,6 +196,7 @@ android {
 ```
 
 Note: because the old structure put all source files (java, aidl, renderscript, and java resources) in the same folder, we need to remap all those new components of the sourceSet to the same src folder.
+
 Note: `setRoot()` moves the whole sourceSet (and its sub folders) to a new folder. This moves `src/androidTest/*` to `tests/*`
 This is Android specific and will not work on Java sourceSets.
 
@@ -202,27 +209,38 @@ The ‘migrated’ sample shows this. [?]
 Applying a plugin to the build file automatically creates a set of build tasks to run. Both the Java plugin and the Android plugin do this.
 
 The convention for tasks is the following: [下面是默认有的build task]
-`assemble`    
-The task to assemble the output(s) of the project     
-`check`     
-The task to run all the checks.     
-`build`    
-This task does both assemble and check    
-`clean`      
-This task cleans the output of the project     
+
+`assemble`   The task to assemble the output(s) of the project     
+
+`check`   The task to run all the checks.     
+
+`build`   This task does both assemble and check    
+
+`clean`    This task cleans the output of the project     
+
 **The tasks assemble, check and build don’t actually do anything. They are anchor tasks for the plugins to add actual tasks that do the work.**
 
+[任务assemble，check，build实际上什么都没有做，它们只是anchor task，需要通过plugin中指定实际的task它们才会开始工作]
+
 This allows you to always call the same task(s) no matter what the type of project is, or what plugins are applied.
+
 For instance, applying the findbugs plugin will create a new task and make check depend on it, making it be called whenever the check task is called.
 
 From the command line you can get the high level task running the following command:
+
+```
 gradle tasks
+```
 
 For a full list and seeing dependencies between the tasks run:
-gradle tasks --all
 
-Note: Gradle automatically monitor the declared inputs and outputs of a task.
-Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations.
+```
+gradle tasks --all
+```
+
+**Note: Gradle automatically monitor the declared inputs and outputs of a task.
+Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations.**
+
 Java project tasks
 
 The Java plugin creates mainly two tasks, that are dependencies of the main anchor tasks:
