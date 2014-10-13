@@ -34,7 +34,7 @@ Very flexible. Allows using best practices but doesn’t force its own way of do
 Plugins can expose their own DSL and their own API for build files to use.
 Good Tooling API allowing IDE integration      
 
-[总结起来就是：DSL(Domain Specific Language ) + Groovy based Build files + Maven based Dependency Management + Plugin Supported]
+[总结起来就是：DSL(Domain Specific Language ) + Groovy based Build files + Maven/Ivy based Dependency Management + Plugin Supported]
 
 ###Requirements
 
@@ -48,7 +48,7 @@ A Gradle project describes its build in a file called build.gradle located in th
 
 The most simple Java-only project has the following build.gradle:
 
-```
+```java
 apply plugin: 'java'
 ```
 
@@ -561,7 +561,7 @@ android {
 
 Variants use all the rules files declared in their build type, and product flavors.
 
-[两个默认的proguard rule 文件，它们存放在Android SDK目录中，使用`getDefaultProguardFile()` 可以得到文件的完整路径]
+[两个默认的proguard rule 文件，它们存放在Android SDK目录中，默认是`$ANDROID_HOME/tools/proguard/` 目录下 ，使用`getDefaultProguardFile()` 可以得到文件的完整路径]
 
 There are 2 default rules files 
 
@@ -573,12 +573,14 @@ They are located in the SDK. Using `getDefaultProguardFile()` will return the fu
 ###Dependencies, Android Libraries and Multi-project setup
 
 Gradle projects can have dependencies on other components. These components can be external binary packages, or other Gradle projects.
-Dependencies on binary packages
 
-Local packages
+####Dependencies on binary packages
+
+####Local packages
 
 To configure a dependency on an external library jar, you need to add a dependency on the compile configuration.
 
+```
 dependencies {
     compile files('libs/foo.jar')
 }
@@ -586,25 +588,38 @@ dependencies {
 android {
     ...
 }
+```
 
-Note: the dependencies DSL element is part of the standard Gradle API and does not belong inside the android element.
+[注意dependencies是标准Gradle API的一部分所以不是在android元素中声明]
 
-The compile configuration is used to compile the main application. Everything in it is added to the compilation classpath and also packaged in the final APK.
+**Note: the dependencies DSL element is part of the standard Gradle API and does not belong inside the android element.**
+
+[`compile` 的配置是用来编译main application的，所以其中的所有元素都会加入到编译的类路径中，同样也会打包进最终的APK中]
+
+**The `compile` configuration is used to compile the main application. Everything in it is added to the compilation classpath and also packaged in the final APK.**
+
 There are other possible configurations to add dependencies to:
-compile: main application
-androidTestCompile: test application
-debugCompile: debug Build Type
-releaseCompile: release Build Type.
-Because it’s not possible to build an APK that does not have an associated Build Type, the APK is always configured with two (or more) configurations: compile and <buildtype>Compile.
+
+compile: main application       
+androidTestCompile: test application      
+debugCompile: debug Build Type      
+releaseCompile: release Build Type.      
+
+**[对应每个build type都有一个对应的`<buildtype>Compile`， 它们的dependencies也都可以自行定义使其不同，如果对于不同的build type需要表现出不同的结果时，我们便可以使用这种方式让它们依赖不同的library]**
+
+Because it’s not possible to build an APK that does not have an associated Build Type, the APK is always configured with two (or more) configurations: `compile` and `<buildtype>Compile`.
+
 Creating a new Build Type automatically creates a new configuration based on its name.
 
 This can be useful if the debug version needs to use a custom library (to report crashes for instance), while the release doesn’t, or if they rely on different versions of the same library.
-Remote artifacts
+
+####Remote artifacts
 
 Gradle supports pulling artifacts from Maven and Ivy repositories.
 
 First the repository must be added to the list, and then the dependency must be declared in a way that Maven or Ivy declare their artifacts.
 
+```
 repositories {
     mavenCentral()
 }
@@ -617,6 +632,7 @@ dependencies {
 android {
     ...
 }
+```
 
 Note: mavenCentral() is a shortcut to specifying the URL of the repository. Gradle supports both remote and local repositories.
 Note: Gradle will follow all dependencies transitively. This means that if a dependency has dependencies of its own, those are pulled in as well.
