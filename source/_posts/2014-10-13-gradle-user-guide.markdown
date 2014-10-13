@@ -275,6 +275,7 @@ The new anchor tasks are necessary in order to be able to run regular checks wit
 [任务build并不依赖deviceCheck和connectedCheck这两个任务]
 
 An Android project has at least two outputs: a debug APK and a release APK. Each of these has its own anchor task to facilitate building them separately:
+
 [Android项目至少有两个输出：一个debug模式的APK，另一个是release模式deAPK，每种模式都有自己的anchor task以便于将它们的build过程分开]
 
 `assemble`     
@@ -287,7 +288,7 @@ They both depend on other tasks that execute the multiple steps needed to build 
 
 [Gradle支持在命令行中使用某个task的名称的camel case缩写调用这个task]
 
- For instance:   `gradle aR`  is the same as typing  `gradle assembleRelease`，as long as no other task match ‘aR’
+ For instance:   `gradle aR`  is the same as typing  `gradle assembleRelease`，as long as no other task match `‘aR’`
 
 The check anchor tasks have their own dependencies:
 
@@ -525,9 +526,9 @@ The above snippet changes the location of the debug keystore to be at the root o
 
 It also creates a new Signing Config and a new Build Type that uses the new configuration.
 
-Note: Only debug keystores located in the default location will be automatically created. Changing the location of the debug keystore will not create it on-demand. Creating a SigningConfig with a different name that uses the default debug keystore location will create it automatically. In other words, it’s tied to the location of the keystore, not the name of the configuration.
+**Note: Only debug keystores located in the default location will be automatically created. Changing the location of the debug keystore will not create it on-demand. Creating a SigningConfig with a different name that uses the default debug keystore location will create it automatically. In other words, it’s tied to the location of the keystore, not the name of the configuration.**
 
-Note: Location of keystores are usually relative to the root of the project, but could be absolute paths, thought it is not recommended (except for the debug one since it is automatically created).
+**Note: Location of keystores are usually relative to the root of the project, but could be absolute paths, though it is not recommended (except for the debug one since it is automatically created).**
 
 Note:  If you are checking these files into version control, you may not want the password in the file. The following Stack Overflow post shows ways to read the values from the console, or from environment variables.
 http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-file-using-gradle
