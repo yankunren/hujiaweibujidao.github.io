@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Gradle User Guide"
+title: "Gradle Plugin User Guide"
 date: 2014-10-13 21:00
 comments: true
 categories: mobile
@@ -241,36 +241,38 @@ gradle tasks --all
 **Note: Gradle automatically monitor the declared inputs and outputs of a task.
 Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations.**
 
-Java project tasks
+#####Java project tasks
 
 The Java plugin creates mainly two tasks, that are dependencies of the main anchor tasks:
-assemble
-jar
-This task creates the output.
-check
-test
-This task runs the tests.
-The jar task itself will depend directly and indirectly on other tasks: classes for instance will compile the Java code.
-The tests are compiled with testClasses, but it is rarely useful to call this as test depends on it (as well as classes).
 
-In general, you will probably only ever call assemble or check, and ignore the other tasks.
+`assemble`    `jar`   This task creates the output.
 
-You can see the full set of tasks and their descriptions for the Java plugin here.
-Android tasks
+`check`     `test`  This task runs the tests.
+
+The `jar` task itself will depend directly and indirectly on other tasks: classes for instance will compile the Java code. [任务jar直接或者间接地依赖其他的任务]
+
+The tests are compiled with `testClasses`, but it is rarely useful to call this as `test` depends on it (as well as classes).
+
+In general, you will probably only ever call `assemble` or `check`, and ignore the other tasks.
+
+You can see the full set of tasks and their descriptions for the [Java plugin here](http://gradle.org/docs/current/userguide/java_plugin.html).
+
+#####Android tasks
 
 The Android plugin use the same convention to stay compatible with other plugins, and adds an additional anchor task:
-assemble
-The task to assemble the output(s) of the project
-check
-The task to run all the checks.
-connectedCheck
-Runs checks that requires a connected device or emulator. they will run on all connected devices in parallel.
-deviceCheck
-Runs checks using APIs to connect to remote devices. This is used on CI servers.
-build
-This task does both assemble and check
-clean
-This task cleans the output of the project
+
+`assemble`    The task to assemble the output(s) of the project
+
+`check`   The task to run all the checks.
+
+`connectedCheck`   Runs checks that requires a connected device or emulator. they will run on all connected devices in parallel.
+
+`deviceCheck`   Runs checks using APIs to connect to remote devices. This is used on CI servers.
+
+`build`   This task does both assemble and check
+
+`clean`    This task cleans the output of the project
+
 The new anchor tasks are necessary in order to be able to run regular checks without needing a connected device.
 Note that build does not depend on deviceCheck, or connectedCheck.
 
