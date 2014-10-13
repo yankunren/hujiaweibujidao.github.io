@@ -7,7 +7,7 @@ categories: mobile
 published: true
 ---
 
-Gradle Plugin User Guide ( for Android Development )
+Gradle Plugin User Guide ( for Android Development )  [未完成，撰写中]
 
 原文地址：[http://tools.android.com/tech-docs/new-build-system/user-guide](http://tools.android.com/tech-docs/new-build-system/user-guide)
 
