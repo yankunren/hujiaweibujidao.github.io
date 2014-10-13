@@ -767,57 +767,89 @@ dependencies {
 }
 ```
 
-Note: if you have more than one library, then the order will be important. This is similar to the old build system where the order of the dependencies in the project.properties file was important.
+Note: if you have more than one library, then the order will be important. This is similar to the old build system where the order of the dependencies in the `project.properties` file was important.  
+
+[注：这里应该是`settings.properties` 文件，就是说如果你有很多的library projects，那么你要根据它们相互之间的依赖关系确定一个正确的顺序]
 
 ####Library Publication
+
+[默认情况下，library project只会publish它的release variant，所有其他的project都是引用这个variant]
 
 By default a library only publishes its release variant. This variant will be used by all projects referencing the library, no matter which variant they build themselves. This is a temporary limitation due to Gradle limitations that we are working towards removing.
 
 You can control which variant gets published with 
+
+```
 android {
     defaultPublishConfig "debug"
 }
+```
 
-Note that this publishing configuration name references the full variant name. Release and debug are only applicable when there are no flavors. If you wanted to change the default published variant while using flavors, you would write:
+**Note that this publishing configuration name references the full variant name. Release and debug are only applicable when there are no flavors. **If you wanted to change the default published variant while using flavors, you would write:
+
+```
 android {
     defaultPublishConfig "flavor1Debug"
 }
+```
 
 It is also possible to publish all variants of a library. We are planning to allow this while using a normal project-to-project dependency (like shown above), but this is not possible right now due to limitations in Gradle (we are working toward fixing those as well).
+
 Publishing of all variants are not enabled by default. To enable them:
+
+```
 android {
     publishNonDefault true
 }
+```
 
 It is important to realize that publishing multiple variants means publishing multiple aar files, instead of a single aar containing multiple variants. Each aar packaging contains a single variant.
-Publishing an variant means making this aar available as an output artifact of the Gradle project. This can then be used either when publishing to a maven repository, or when another project creates a dependency on the library project.
+
+[publish一个variant意味着使得这个aar包作为Gradle项目的输出，它可以用于publish到maven repository，也可以被其他项目作为依赖项目被引用]
+
+**Publishing an variant means making this aar available as an output artifact of the Gradle project. This can then be used either when publishing to a maven repository, or when another project creates a dependency on the library project.**
 
 Gradle has a concept of default" artifact. This is the one that is used when writing:
+
+```
 compile project(':libraries:lib2')
+```
 
 To create a dependency on another published artifact, you need to specify which one to use:
+
+```
 dependencies {
     flavor1Compile project(path: ':lib1', configuration: 'flavor1Release')
     flavor2Compile project(path: ':lib1', configuration: 'flavor2Release')
 }
+```
 
 Important: Note that the published configuration is a full variant, including the build type, and needs to be referenced as such. 
-Important: When enabling publishing of non default, the Maven publishing plugin will publish these additional variants as extra packages (with classifier). This means that this is not really compatible with publishing to a maven repository. You should either publish a single variant to a repository OR enable all config publishing for inter-project dependencies.
-Testing
+
+**Important: When enabling publishing of non default, the Maven publishing plugin will publish these additional variants as extra packages (with classifier). This means that this is not really compatible with publishing to a maven repository. You should either publish a single variant to a repository OR enable all config publishing for inter-project dependencies.** [?]
+
+###Testing
 
 Building a test application is integrated into the application project. There is no need for a separate test project anymore.
-Basics and Configuration
 
-As mentioned previously, next to the main sourceSet is the androidTest sourceSet, located by default in src/androidTest/
-From this sourceSet is built a test apk that can be deployed to a device to test the application using the Android testing framework. This can contain unit tests, instrumentation tests, and later uiautomator tests.
-The sourceSet should not contain an AndroidManifest.xml as it is automatically generated.
+####Basics and Configuration
+
+As mentioned previously, next to the main sourceSet is the androidTest sourceSet, located by default in `src/androidTest/`
+
+From this sourceSet is built a test apk that can be deployed to a device to test the application using the `Android testing framework`. This can contain unit tests, instrumentation tests, and later uiautomator tests.
+
+The sourceSet should not contain an `AndroidManifest.xml` as it is automatically generated.
 
 There are a few values that can be configured for the test app:
-testPackageName
-testInstrumentationRunner
-testHandleProfiling
-testFunctionalTest
+
+`testPackageName`       
+`testInstrumentationRunner`        
+`testHandleProfiling`        
+`testFunctionalTest`         
+
 As seen previously, those are configured in the defaultConfig object:
+
+```
 android {
     defaultConfig {
         testPackageName "com.test.foo"
@@ -826,14 +858,18 @@ android {
         testFunctionalTest true
     }
 }
+```
 
-The value of the targetPackage attribute of the instrumentation node in the test application manifest is automatically filled with the package name of the tested app, even if it is customized through the defaultConfig and/or the Build Type objects. This is one of the reason the manifest is generated automatically.
+The value of the `targetPackage` attribute of the instrumentation node in the test application manifest is automatically filled with the package name of the tested app, even if it is customized through the defaultConfig and/or the Build Type objects. This is one of the reason the manifest is generated automatically.
 
 Additionally, the sourceSet can be configured to have its own dependencies.
 By default, the application and its own dependencies are added to the test app classpath, but this can be extended with 
+
+```
 dependencies {
     androidTestCompile 'com.google.guava:guava:11.0.2'
 }
+```
 
 The test app is built by the task assembleTest. It is not a dependency of the main assemble task, and is instead called automatically when the tests are set to run.
 
