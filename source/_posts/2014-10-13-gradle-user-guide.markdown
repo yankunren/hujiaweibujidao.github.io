@@ -249,7 +249,7 @@ The Java plugin creates mainly two tasks, that are dependencies of the main anch
 
 The `jar` task itself will depend directly and indirectly on other tasks: classes for instance will compile the Java code. [任务jar直接或者间接地依赖其他的任务]
 
-The tests are compiled with `testClasses`, but it is rarely useful to call this as `test` depends on it (as well as classes).
+The tests are compiled with testClasses, but it is rarely useful to call this as `test` depends on it (as well as classes).
 
 In general, you will probably only ever call `assemble` or `check`, and ignore the other tasks.
 
