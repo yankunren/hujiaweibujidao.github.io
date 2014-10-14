@@ -279,8 +279,8 @@ The Android plugin use the same convention to stay compatible with other plugins
 
 `assemble`    The task to assemble the output(s) of the project        
 `check`   The task to run all the checks.            
-`connectedCheck`   **Runs checks that requires a connected device or emulator, they will run on all connected devices in parallel. ** [在已连接的设备和模拟器上并行运行check任务]          
-`deviceCheck`   **Runs checks using APIs to connect to remote devices. This is used on CI servers.** [使用APIs来连接远程设备以运行check任务]                 
+`connectedCheck`   Runs checks that requires a connected device or emulator, they will run on all connected devices in parallel. ** [在已连接的设备和模拟器上并行运行check任务]**                
+`deviceCheck`   Runs checks using APIs to connect to remote devices. This is used on CI servers.  **[使用APIs来连接远程设备以运行check任务]**                           
 `build`   This task does both assemble and check       
 `clean`    This task cleans the output of the project
 
