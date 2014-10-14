@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-14T10:21:57+08:00</updated>
+  <updated>2014-10-14T10:33:12+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -18,17 +18,19 @@
     <link href="http://hujiaweibujidao.github.io/blog/2014/10/13/gradle-user-guide/"/>
     <updated>2014-10-13T21:00:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/10/13/gradle-user-guide</id>
-    <content type="html"><![CDATA[<p>Gradle Plugin User Guide ( for Android Development )  [未完成，撰写中]</p>
+    <content type="html"><![CDATA[<p>Gradle Plugin User Guide ( for Android Development )  [未完成，注解中]</p>
 
 <p>原文地址：<a href="http://tools.android.com/tech-docs/new-build-system/user-guide">http://tools.android.com/tech-docs/new-build-system/user-guide</a></p>
 
 <h3 id="introduction">Introduction</h3>
 
-<p>This documentation is for the Gradle plugin version 0.9. Earlier versions may differ due to non-compatible we are introducing before 1.0.
-Goals of the new Build System</p>
+<p>This documentation is for the Gradle plugin version 0.9. Earlier versions may differ due to non-compatible we are introducing before 1.0.</p>
 
-<p>The goals of the new build system are:   <br />
-Make it easy to reuse code and resources     <br />
+<h3 id="goals-of-the-new-build-system">Goals of the new Build System</h3>
+
+<p>The goals of the new build system are: </p>
+
+<p>Make it easy to reuse code and resources     <br />
 Make it easy to create several variants of an application, either for multi-apk distribution or for different flavors of an application    <br />
 Make it easy to configure, extend and customize the build process   <br />
 Good IDE integration    </p>
@@ -37,8 +39,9 @@ Good IDE integration    </p>
 
 <p>Gradle is an advanced build system as well as an advanced build toolkit allowing to create custom build logic through plugins.</p>
 
-<p>Here are some of its features that made us choose Gradle:     <br />
-Domain Specific Language (DSL) to describe and manipulate the build logic    <br />
+<p>Here are some of its features that made us choose Gradle:      </p>
+
+<p>Domain Specific Language (DSL) to describe and manipulate the build logic    <br />
 Build files are Groovy based and allow mixing of declarative elements through the DSL and using code to manipulate the DSL elements to provide custom logic.    <br />
 Built-in dependency management through Maven and/or Ivy.     <br />
 Very flexible. Allows using best practices but doesn’t force its own way of doing things.     <br />
@@ -54,11 +57,11 @@ SDK with Build Tools 19.0.0. Some features may require a more recent version.</p
 
 <h3 id="basic-project">Basic Project</h3>
 
-<p>A Gradle project describes its build in a file called build.gradle located in the root folder of the project.</p>
+<p>A Gradle project describes its build in a file called <code>build.gradle</code> located in the root folder of the project.</p>
 
 <h4 id="simple-build-files">Simple build files</h4>
 
-<p>The most simple Java-only project has the following build.gradle:</p>
+<p>The most simple Java-only project has the following <code>build.gradle</code>:</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">apply</span> <span class="nl">plugin:</span> <span class="err">&#39;</span><span class="n">java</span><span class="err">&#39;</span>
@@ -66,7 +69,7 @@ SDK with Build Tools 19.0.0. Some features may require a more recent version.</p
 
 <p>This applies the Java plugin, which is packaged with Gradle. The plugin provides everything to build and test Java applications.</p>
 
-<p>The most simple Android project has the following build.gradle:</p>
+<p>The most simple Android project has the following <code>build.gradle</code>:</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -104,20 +107,22 @@ SDK with Build Tools 19.0.0. Some features may require a more recent version.</p
 
 <p>There are 3 main areas to this Android build file:</p>
 
-<p><code>buildscript { ... }</code> configures the code driving the build.
+<p>(1) <code>buildscript { ... }</code> configures the code driving the build.
 In this case, this declares that it uses the Maven Central repository, and that there is a classpath dependency on a Maven artifact. This artifact is the library that contains the Android plugin for Gradle in version 0.11.1</p>
 
 <p><strong>Note: This only affects the code running the build, not the project. The project itself needs to declare its own repositories and dependencies. This will be covered later.</strong></p>
 
 <p>[注意：这里定义的repository和dependency只是build需要的，项目还需要定义自己的repository和dependency]</p>
 
-<p>Then, the android plugin is applied like the Java plugin earlier.</p>
+<p>(2) Then, the android plugin is applied like the Java plugin earlier.</p>
 
-<p>Finally, <code>android { ... } </code>configures all the parameters for the android build. This is the entry point for the Android DSL.</p>
+<p>(3) Finally, <code>android { ... } </code>configures all the parameters for the android build. This is the entry point for the Android DSL.</p>
 
 <p><strong>By default, only the compilation target, and the version of the build-tools are needed. This is done with the compileSdkVersion and buildtoolsVersion properties.</strong></p>
 
-<p>The compilation target is the same as the target property in the project.properties file of the old build system. This new property can either be assigned a int (the api level) or a string with the same value as the previous target property.</p>
+<p>[默认情况下，只有编译目标和编译工具的版本号是必须要给定的。以前的build系统需要项目的根目录下的<code>project.properties</code> 文件，其中指定的<code>target</code> (例如<code>target=android-18</code>)对应的就是这里的 compilation target]</p>
+
+<p>The compilation target is the same as the target property in the <code>project.properties</code> file of the old build system. This new property can either be assigned a int (the api level) or a string with the same value as the previous target property.</p>
 
 <p><strong>Important: You should only apply the android plugin. Applying the java plugin as well will result in a build error.</strong></p>
 
@@ -140,7 +145,9 @@ In this case, this declares that it uses the Maven Central repository, and that 
 
 <h3 id="project-structure">Project Structure</h3>
 
-<p>The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.    [Gradle遵循大家约定俗成的目录结构和项目配置] </p>
+<p>The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.    </p>
+
+<p>[Gradle遵循大家约定俗成的Android项目目录结构和项目配置，一个基本的项目开始时包含了两个源码集合，即main source code和test source code] </p>
 
 <p>The basic project starts with two components called <code>“source sets”</code>. The main source code and the test code. These live respectively in:</p>
 
@@ -579,7 +586,7 @@ The resources are overlayed over the main resources, replacing existing values.<
 
 <h3 id="signing-configurations">Signing Configurations</h3>
 
-<p>Signing an application requires the following:</p>
+<p>Signing an application requires the following: </p>
 
 <p>A keystore    <br />
 A keystore password   <br />
@@ -589,7 +596,7 @@ The store type     </p>
 
 <p>The location, as well as the key name, both passwords and store type form together a Signing Configuration (type <code>SigningConfig</code>)     </p>
 
-<p>[上面这些信息组合起来就是类型SigningConfig，默认情况下，debug的配置使用了一个已知密码的keystore和已知密码的默认key，其中的keystore保存在<code>$HOME/.android/debug.keystore</code> 文件中，如果没有的话会自动创建]</p>
+<p>[对一个应用程序进行签名需要5个信息，这些信息组合起来就是类型SigningConfig，默认情况下，debug的配置使用了一个已知密码的keystore和已知密码的默认key，其中的keystore保存在<code>$HOME/.android/debug.keystore</code> 文件中，如果没有的话它会自动被创建]</p>
 
 <p><strong>By default, there is a <code>debug</code> configuration that is setup to use a debug keystore, with a known password and a default key with a known password.The debug keystore is located in <code>$HOME/.android/debug.keystore</code>, and is created if not present.</strong></p>
 
