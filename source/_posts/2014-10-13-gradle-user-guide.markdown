@@ -94,13 +94,13 @@ In this case, this declares that it uses the Maven Central repository, and that 
 
 **By default, only the compilation target, and the version of the build-tools are needed. This is done with the compileSdkVersion and buildtoolsVersion properties.**
 
-[默认情况下，只有编译目标和编译工具的版本号是必须要给定的。以前的build系统需要项目的根目录下的`project.properties` 文件，其中指定的`target` (例如`target=android-18`)对应的就是这里的 compilation target]
+[默认情况下，只有编译目标和编译工具的版本号是必须要给定的。以前的build系统需要在项目的根目录下的`project.properties` 文件中指定`target` (例如`target=android-18`)，它对应的就是这里的 compilation target，不过此处的值只是一个int值，代表Android API version]
 
 The compilation target is the same as the target property in the `project.properties` file of the old build system. This new property can either be assigned a int (the api level) or a string with the same value as the previous target property.
 
 **Important: You should only apply the android plugin. Applying the java plugin as well will result in a build error.**
 
-[注意：在Android中一般给定一个version都是指API version，此外，这里只能使用android插件，写成java插件会出现build错误]
+[注意：这里只能使用android插件，写成java插件会出现build错误]
 
 Note: You will also need a `local.properties` file to set the location of the SDK in the same way that the existing SDK requires, using the `sdk.dir` property.
 
@@ -120,7 +120,7 @@ ndk.dir=/Volumes/hujiawei/Users/hujiawei/Android/android_ndk
 
 The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.    
 
-[Gradle遵循大家约定俗成的Android项目目录结构和项目配置，一个基本的项目开始时包含了两个源码集合，即main source code和test source code] 
+[Gradle遵循大家约定俗成的Android项目目录结构和项目配置，一个基本的项目开始时包含了两个源码集合，即main source code和test source code，它们各自的源码目录下有分别包含了Java source code和Java resource] 
 
 The basic project starts with two components called `“source sets”`. The main source code and the test code. These live respectively in:
 
@@ -150,7 +150,11 @@ jni/
 
 Note: `src/androidTest/AndroidManifest.xml` is not needed as it is created automatically.
 
+[Android插件对于Android项目还指定了一些其他的目录，注意test目录下的`AndroidManifest.xml` 文件不需要提供，因为它会自动创建，后面会提到为什么]
+
 ####Configuring the Structure
+
+[当我们的项目原本的目录结构和上面默认的目录结构不同时，我们可以进行配置，使用`sourceSets` 节点来修改目录结构]
 
 When the default project structure isn’t adequate, it is possible to configure it. According to the Gradle documentation, reconfiguring the `sourceSets` for a Java project can be done with the following:
 
@@ -182,7 +186,10 @@ sourceSets {
 
 For more information, see the Gradle documentation on the [Java plugin here](http://www.gradle.org/docs/current/userguide/java_plugin.html).
 
-The Android plugin uses a similar syntaxes, but because it uses its own sourceSets, this is done within the android object.
+[Android插件使用和上面相似的语法来完成配置，只不过它的`sourceSets` 节点是定义在 `android` 中的]
+
+The Android plugin uses a similar syntaxes, but because it uses its own `sourceSets`, this is done within the `android` object.
+
 Here’s an example, using the old project structure for the main code and remapping the `androidTest` sourceSet to the `tests` folder:
 
 ```
@@ -205,7 +212,10 @@ android {
 
 Note: because the old structure put all source files (java, aidl, renderscript, and java resources) in the same folder, we need to remap all those new components of the sourceSet to the same src folder.
 
+[`setRoot()` 会将整个sourceSet包括其中的子目录一起移动到新的目录中，这是Android插件特定的，Java插件没有此功能]
+
 Note: `setRoot()` moves the whole sourceSet (and its sub folders) to a new folder. This moves `src/androidTest/*` to `tests/*`
+
 This is Android specific and will not work on Java sourceSets.
 
 The ‘migrated’ sample shows this. [?]
@@ -214,28 +224,26 @@ The ‘migrated’ sample shows this. [?]
 
 ####General Tasks
 
+[使用plugin的好处是它会自动地帮我们创建一些默认的build task]
+
 Applying a plugin to the build file automatically creates a set of build tasks to run. Both the Java plugin and the Android plugin do this.
 
-The convention for tasks is the following: [下面是默认有的build task]
+The convention for tasks is the following: [下面是默认的build tasks]
 
-`assemble`   The task to assemble the output(s) of the project     
+`assemble`   The task to assemble the output(s) of the project       
+`check`   The task to run all the checks.       
+`build`   This task does both assemble and check      
+`clean`    This task cleans the output of the project        
 
-`check`   The task to run all the checks.     
-
-`build`   This task does both assemble and check    
-
-`clean`    This task cleans the output of the project     
+**[任务assemble，check，build实际上什么都没有做，它们只是anchor task，需要添加实际的task它们才知道如何工作，这样的话就可以不管你是什么类型的项目都可以调用相同名称的build task。例如如果使用了`findbugs` 插件的话，它会自动创建一个新的task，而且check task会依赖它，也就有是说，每当check task执行的时候，这个新的task都会被调用而执行]**
 
 **The tasks assemble, check and build don’t actually do anything. They are anchor tasks for the plugins to add actual tasks that do the work.**
 
-[任务assemble，check，build实际上什么都没有做，它们只是anchor task，需要通过plugin中指定实际的task它们才会开始工作]
-
 This allows you to always call the same task(s) no matter what the type of project is, or what plugins are applied.
 
-For instance, applying the findbugs plugin will create a new task and make check depend on it, making it be called whenever the check task is called.
+For instance, applying the `findbugs` plugin will create a new task and make `check` depend on it, making it be called whenever the `check` task is called.
 
-From the command line you can get the high level task running the following command:   `gradle tasks`
-
+From the command line you can get the high level task running the following command:   `gradle tasks`      
 For a full list and seeing dependencies between the tasks run:  `gradle tasks --all`
 
 [在Android Studio的Terminal中运行结果如下]
@@ -248,15 +256,19 @@ Note: Gradle automatically monitor the declared inputs and outputs of a task. Ru
 
 ####Java project tasks
 
+[Java插件主要创建了两个新的task，其中`jar` task是`assemble` task的依赖项，`test` task是`check` task的依赖项]
+
 The Java plugin creates mainly two tasks, that are dependencies of the main anchor tasks:
 
 `assemble`  ->   `jar`   This task creates the output.
 
 `check`  ->    `test`  This task runs the tests.
 
-The `jar` task itself will depend directly and indirectly on other tasks: classes for instance will compile the Java code. [任务jar直接或者间接地依赖其他的任务]
+**[任务jar直接或者间接地依赖其他的任务，例如用来编译Java代码的任务`classes`； 测试代码是由`testClasses` 任务来编译的，但是你不需要去调用这个task，因为`test` 任务依赖于`testClasses` 和 `classes` 任务]**
 
-The tests are compiled with testClasses, but it is rarely useful to call this as `test` depends on it (as well as classes).
+The `jar` task itself will depend directly and indirectly on other tasks: `classes` for instance will compile the Java code. 
+
+**The tests are compiled with `testClasses`, but it is rarely useful to call this as `test` depends on it (as well as `classes`). **
 
 In general, you will probably only ever call `assemble` or `check`, and ignore the other tasks.
 
@@ -266,20 +278,16 @@ You can see the full set of tasks and their descriptions for the [Java plugin he
 
 The Android plugin use the same convention to stay compatible with other plugins, and adds an additional anchor task:
 
-`assemble`    The task to assemble the output(s) of the project
-
-`check`   The task to run all the checks.
-
-`connectedCheck`   **Runs checks that requires a connected device or emulator.they will run on all connected devices in parallel. ** [?]
-
-`deviceCheck`   **Runs checks using APIs to connect to remote devices. This is used on CI servers.** [?]
-
-`build`   This task does both assemble and check
-
+`assemble`    The task to assemble the output(s) of the project        
+`check`   The task to run all the checks.            
+`connectedCheck`   **Runs checks that requires a connected device or emulator, they will run on all connected devices in parallel. ** [在已连接的设备和模拟器上并行运行check任务]          
+`deviceCheck`   **Runs checks using APIs to connect to remote devices. This is used on CI servers.** [使用APIs来连接远程设备以运行check任务]                 
+`build`   This task does both assemble and check       
 `clean`    This task cleans the output of the project
 
 The new anchor tasks are necessary in order to be able to run regular checks without needing a connected device.Note that build does not depend on deviceCheck, or connectedCheck.
-[任务build并不依赖deviceCheck和connectedCheck这两个任务]
+
+**[任务build并不依赖deviceCheck和connectedCheck这两个任务]**
 
 An Android project has at least two outputs: a debug APK and a release APK. Each of these has its own anchor task to facilitate building them separately:
 
@@ -297,7 +305,7 @@ They both depend on other tasks that execute the multiple steps needed to build 
 
  For instance:   `gradle aR`  is the same as typing  `gradle assembleRelease`，as long as no other task match `‘aR’`
 
-The check anchor tasks have their own dependencies:
+The `check` anchor tasks have their own dependencies:
 
 `check`        
 `lint`      
