@@ -7,16 +7,18 @@ categories: mobile
 published: true
 ---
 
-Gradle Plugin User Guide ( for Android Development )  [未完成，撰写中]
+Gradle Plugin User Guide ( for Android Development )  [未完成，注解中]
 
 原文地址：[http://tools.android.com/tech-docs/new-build-system/user-guide](http://tools.android.com/tech-docs/new-build-system/user-guide)
 
 ###Introduction
 
 This documentation is for the Gradle plugin version 0.9. Earlier versions may differ due to non-compatible we are introducing before 1.0.
-Goals of the new Build System
 
-The goals of the new build system are:     
+###Goals of the new Build System
+
+The goals of the new build system are: 
+    
 Make it easy to reuse code and resources       
 Make it easy to create several variants of an application, either for multi-apk distribution or for different flavors of an application      
 Make it easy to configure, extend and customize the build process     
@@ -26,7 +28,8 @@ Good IDE integration
 
 Gradle is an advanced build system as well as an advanced build toolkit allowing to create custom build logic through plugins.
 
-Here are some of its features that made us choose Gradle:       
+Here are some of its features that made us choose Gradle:      
+ 
 Domain Specific Language (DSL) to describe and manipulate the build logic      
 Build files are Groovy based and allow mixing of declarative elements through the DSL and using code to manipulate the DSL elements to provide custom logic.      
 Built-in dependency management through Maven and/or Ivy.       
@@ -43,11 +46,11 @@ SDK with Build Tools 19.0.0. Some features may require a more recent version.
 
 ###Basic Project
 
-A Gradle project describes its build in a file called build.gradle located in the root folder of the project.
+A Gradle project describes its build in a file called `build.gradle` located in the root folder of the project.
 
 ####Simple build files
 
-The most simple Java-only project has the following build.gradle:
+The most simple Java-only project has the following `build.gradle`:
 
 ```java
 apply plugin: 'java'
@@ -55,7 +58,7 @@ apply plugin: 'java'
 
 This applies the Java plugin, which is packaged with Gradle. The plugin provides everything to build and test Java applications.
 
-The most simple Android project has the following build.gradle:
+The most simple Android project has the following `build.gradle`:
 
 ```
 buildscript {
@@ -78,20 +81,22 @@ android {
 
 There are 3 main areas to this Android build file:
 
-`buildscript { ... }` configures the code driving the build.
+(1) `buildscript { ... }` configures the code driving the build.
 In this case, this declares that it uses the Maven Central repository, and that there is a classpath dependency on a Maven artifact. This artifact is the library that contains the Android plugin for Gradle in version 0.11.1
 
 **Note: This only affects the code running the build, not the project. The project itself needs to declare its own repositories and dependencies. This will be covered later.**
 
 [注意：这里定义的repository和dependency只是build需要的，项目还需要定义自己的repository和dependency]
 
-Then, the android plugin is applied like the Java plugin earlier.
+(2) Then, the android plugin is applied like the Java plugin earlier.
 
-Finally, `android { ... } `configures all the parameters for the android build. This is the entry point for the Android DSL.
+(3) Finally, `android { ... } `configures all the parameters for the android build. This is the entry point for the Android DSL.
 
 **By default, only the compilation target, and the version of the build-tools are needed. This is done with the compileSdkVersion and buildtoolsVersion properties.**
 
-The compilation target is the same as the target property in the project.properties file of the old build system. This new property can either be assigned a int (the api level) or a string with the same value as the previous target property.
+[默认情况下，只有编译目标和编译工具的版本号是必须要给定的。以前的build系统需要项目的根目录下的`project.properties` 文件，其中指定的`target` (例如`target=android-18`)对应的就是这里的 compilation target]
+
+The compilation target is the same as the target property in the `project.properties` file of the old build system. This new property can either be assigned a int (the api level) or a string with the same value as the previous target property.
 
 **Important: You should only apply the android plugin. Applying the java plugin as well will result in a build error.**
 
@@ -113,7 +118,9 @@ ndk.dir=/Volumes/hujiawei/Users/hujiawei/Android/android_ndk
 
 ###Project Structure
 
-The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.    [Gradle遵循大家约定俗成的目录结构和项目配置] 
+The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.    
+
+[Gradle遵循大家约定俗成的Android项目目录结构和项目配置，一个基本的项目开始时包含了两个源码集合，即main source code和test source code] 
 
 The basic project starts with two components called `“source sets”`. The main source code and the test code. These live respectively in:
 
@@ -479,7 +486,7 @@ The resources are overlayed over the main resources, replacing existing values.
 
 ###Signing Configurations     
 
-Signing an application requires the following:
+Signing an application requires the following: 
 
 A keystore      
 A keystore password     
@@ -489,7 +496,7 @@ The store type
 
 The location, as well as the key name, both passwords and store type form together a Signing Configuration (type `SigningConfig`)     
 
-[上面这些信息组合起来就是类型SigningConfig，默认情况下，debug的配置使用了一个已知密码的keystore和已知密码的默认key，其中的keystore保存在`$HOME/.android/debug.keystore` 文件中，如果没有的话会自动创建]
+[对一个应用程序进行签名需要5个信息，这些信息组合起来就是类型SigningConfig，默认情况下，debug的配置使用了一个已知密码的keystore和已知密码的默认key，其中的keystore保存在`$HOME/.android/debug.keystore` 文件中，如果没有的话它会自动被创建]
 
 **By default, there is a `debug` configuration that is setup to use a debug keystore, with a known password and a default key with a known password.The debug keystore is located in `$HOME/.android/debug.keystore`, and is created if not present.**
 
