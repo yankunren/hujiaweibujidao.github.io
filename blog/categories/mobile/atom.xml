@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mobile | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mobile/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-14T01:10:29+08:00</updated>
+  <updated>2014-10-14T10:21:57+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -273,7 +273,7 @@ This is Android specific and will not work on Java sourceSets.</p>
 
 <p><code>check</code>   The task to run all the checks.</p>
 
-<p><code>connectedCheck</code>   **Runs checks that requires a connected device or emulator. they will run on all connected devices in parallel. **[?]</p>
+<p><code>connectedCheck</code>   **Runs checks that requires a connected device or emulator.they will run on all connected devices in parallel. ** [?]</p>
 
 <p><code>deviceCheck</code>   <strong>Runs checks using APIs to connect to remote devices. This is used on CI servers.</strong> [?]</p>
 
@@ -284,8 +284,9 @@ This is Android specific and will not work on Java sourceSets.</p>
 <p>The new anchor tasks are necessary in order to be able to run regular checks without needing a connected device.Note that build does not depend on deviceCheck, or connectedCheck.
 [任务build并不依赖deviceCheck和connectedCheck这两个任务]</p>
 
-<p>An Android project has at least two outputs: a debug APK and a release APK. Each of these has its own anchor task to facilitate building them separately:
-[Android项目至少有两个输出：一个debug模式的APK，另一个是release模式deAPK，每种模式都有自己的anchor task以便于将它们的build过程分开]</p>
+<p>An Android project has at least two outputs: a debug APK and a release APK. Each of these has its own anchor task to facilitate building them separately:</p>
+
+<p>[Android项目至少有两个输出：一个debug模式的APK，另一个是release模式deAPK，每种模式都有自己的anchor task以便于将它们的build过程分开]</p>
 
 <p><code>assemble</code>   <br />
 <code>assembleDebug</code>    <br />
@@ -297,7 +298,7 @@ This is Android specific and will not work on Java sourceSets.</p>
 
 <p>[Gradle支持在命令行中使用某个task的名称的camel case缩写调用这个task]</p>
 
-<p>For instance:   <code>gradle aR</code>  is the same as typing  <code>gradle assembleRelease</code>，as long as no other task match ‘aR’</p>
+<p>For instance:   <code>gradle aR</code>  is the same as typing  <code>gradle assembleRelease</code>，as long as no other task match <code>‘aR’</code></p>
 
 <p>The check anchor tasks have their own dependencies:</p>
 
@@ -531,9 +532,9 @@ buildTypes {
 
 <p>It also creates a new Signing Config and a new Build Type that uses the new configuration.</p>
 
-<p>Note: Only debug keystores located in the default location will be automatically created. Changing the location of the debug keystore will not create it on-demand. Creating a SigningConfig with a different name that uses the default debug keystore location will create it automatically. In other words, it’s tied to the location of the keystore, not the name of the configuration.</p>
+<p><strong>Note: Only debug keystores located in the default location will be automatically created. Changing the location of the debug keystore will not create it on-demand. Creating a SigningConfig with a different name that uses the default debug keystore location will create it automatically. In other words, it’s tied to the location of the keystore, not the name of the configuration.</strong></p>
 
-<p>Note: Location of keystores are usually relative to the root of the project, but could be absolute paths, thought it is not recommended (except for the debug one since it is automatically created).</p>
+<p><strong>Note: Location of keystores are usually relative to the root of the project, but could be absolute paths, though it is not recommended (except for the debug one since it is automatically created).</strong></p>
 
 <p>Note:  If you are checking these files into version control, you may not want the password in the file. The following Stack Overflow post shows ways to read the values from the console, or from environment variables.
 http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-file-using-gradle</p>
