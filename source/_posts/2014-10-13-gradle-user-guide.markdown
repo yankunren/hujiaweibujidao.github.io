@@ -625,7 +625,7 @@ androidTestCompile: test application
 debugCompile: debug Build Type      
 releaseCompile: release Build Type.      
 
-**[对应每个build type都有一个对应的`<buildtype>Compile`， 它们的dependencies也都可以自行定义使其不同，如果对于不同的build type需要表现出不同的结果时，我们便可以使用这种方式让它们依赖不同的library]**
+**[对应每个build type都有一个对应的`<buildtype>Compile`， 它们的dependencies也都可以自行定义使其不同。如果希望不同的build type表现出不同的结果时，我们便可以使用这种方式让它们依赖不同的library]**
 
 Because it’s not possible to build an APK that does not have an associated Build Type, the APK is always configured with two (or more) configurations: `compile` and `<buildtype>Compile`.
 
