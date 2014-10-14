@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-14T18:13:55+08:00</updated>
+  <updated>2014-10-14T19:55:06+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -339,8 +339,8 @@ For a full list and seeing dependencies between the tasks run:  <code>gradle tas
 
 <p><code>assemble</code>    The task to assemble the output(s) of the project      <br />
 <code>check</code>   The task to run all the checks.          <br />
-<code>connectedCheck</code>   <strong>Runs checks that requires a connected device or emulator, they will run on all connected devices in parallel. ** [在已连接的设备和模拟器上并行运行check任务]        <br />
-<code>deviceCheck</code>   **Runs checks using APIs to connect to remote devices. This is used on CI servers.</strong> [使用APIs来连接远程设备以运行check任务]               <br />
+<code>connectedCheck</code>   Runs checks that requires a connected device or emulator, they will run on all connected devices in parallel. ** [在已连接的设备和模拟器上并行运行check任务]**              <br />
+<code>deviceCheck</code>   Runs checks using APIs to connect to remote devices. This is used on CI servers.  <strong>[使用APIs来连接远程设备以运行check任务]</strong>                         <br />
 <code>build</code>   This task does both assemble and check     <br />
 <code>clean</code>    This task cleans the output of the project</p>
 
