@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-14T23:49:59+08:00</updated>
+  <updated>2014-10-15T00:34:55+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -849,9 +849,9 @@ http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-f
 </span><span class="line"><span class="o">:</span><span class="nl">libraries:</span><span class="n">lib2</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>Each projects will have its own <code>build.gradle</code> declaring how it gets built. Additionally, there will be a file called <code>settings.gradle</code> at the root declaring the projects.</p>
+<p><strong>Each projects will have its own <code>build.gradle</code> declaring how it gets built. Additionally, there will be a file called <code>settings.gradle</code> at the root declaring the projects.</strong></p>
 
-<p><strong>[每个项目都有自己的<code>build.gradle</code> 文件声明它的build过程，此外，根项目下还有一个<code>settings.gradle</code> 文件用来指定这些子项目]</strong></p>
+<p>[每个项目都有自己的<code>build.gradle</code> 文件声明它的build过程，此外，根项目下还有一个<code>settings.gradle</code> 文件用来指定这些子项目]</p>
 
 <p>This gives the following structure:</p>
 
@@ -881,7 +881,7 @@ http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-f
 </pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">include</span> <span class="err">&#39;</span><span class="o">:</span><span class="n">app</span><span class="err">&#39;</span><span class="o">,</span> <span class="err">&#39;</span><span class="o">:</span><span class="nl">libraries:</span><span class="n">lib1</span><span class="err">&#39;</span><span class="o">,</span> <span class="err">&#39;</span><span class="o">:</span><span class="nl">libraries:</span><span class="n">lib2</span><span class="err">&#39;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>This defines which folder is actually a Gradle project.</p>
+<p>This defines which folder is actually a Gradle project. [它声明了哪个目录是一个Gradle项目]</p>
 
 <p>The <code>:app</code> project is likely to depend on the libraries, and this is done by declaring the following dependencies:</p>
 
@@ -897,7 +897,7 @@ http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-f
 
 <h4 id="library-projects">Library projects</h4>
 
-<p><strong>[前面例子中的两个library projects都是Java项目的话，那么app这个Android项目就使用它们的输出jar文件即可，但是如果你需要引用其中的资源或者代码的话，那它们必须是Android Library Projects]</strong></p>
+<p><strong>[如果前面例子中的两个library projects都是Java项目的话，那么app这个Android项目就使用它们的输出jar文件即可，但是如果你需要引用library project中的资源或者代码的话，那它们必须是Android Library Projects]</strong></p>
 
 <p>In the above multi-project setup, <code>:libraries:lib1</code> and <code>:libraries:lib2</code> can be Java projects, and the <code>:app</code> Android project will use their jar output.</p>
 
@@ -909,7 +909,7 @@ http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-f
 
 <p>Since building libraries is different than building applications, a different plugin is used. Internally both plugins share most of the same code and they are both provided by the same <code>com.android.tools.build.gradle</code> jar.</p>
 
-<p><strong>[创建Library Project使用的是不同的plugin，即<code>android-library</code>，它和<code>android</code> 插件共享很多的代码(所以大部分的配置都和前面提到的一模一样)，并且也都是在<code>com.android.tools.build.gradle</code> 这个jar包中]</strong></p>
+<p><strong>[创建Library Project使用的是不同的插件，即<code>android-library</code>，它和<code>android</code> 插件共享很多的代码(所以大部分的配置都和前面提到的一模一样)，并且这个插件的源码也是在<code>com.android.tools.build.gradle</code> 这个jar包中]</strong></p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -955,7 +955,7 @@ http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-f
 
 <p>The same anchor tasks are used for this (<code>assembleDebug</code>, <code>assembleRelease</code>) so there’s no difference in commands to build such a project.</p>
 
-<p>For the rest, libraries behave the same as application projects. They have <strong>build types and product flavors, and can potentially generate more than one version of the aar.</strong></p>
+<p>For the rest, libraries behave the same as application projects. <strong>They have build types and product flavors, and can potentially generate more than one version of the aar.</strong></p>
 
 <p>[大多数的build type的配置都不会应用于Library Project中，当然它还是可以进行配置的]</p>
 
@@ -977,11 +977,15 @@ http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-f
 
 <p>Note: if you have more than one library, then the order will be important. This is similar to the old build system where the order of the dependencies in the <code>project.properties</code> file was important.  </p>
 
-<p>[注：这里应该是<code>settings.properties</code> 文件，就是说如果你有很多的library projects，那么你要根据它们相互之间的依赖关系确定一个正确的顺序]</p>
+<p>[注：如果你有很多的library projects，那么你要根据它们相互之间的依赖关系确定一个正确的顺序，就类似以前build系统中的<code>project.properties</code> 文件一样，以前需要如下地声明<code>android.library.reference</code>]</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">android</span><span class="o">.</span><span class="na">library</span><span class="o">.</span><span class="na">reference</span><span class="o">.</span><span class="mi">1</span><span class="o">=</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">libraryproject</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h4 id="library-publication">Library Publication</h4>
 
-<p>[默认情况下，library project只会publish它的release variant，所有其他的project都是引用这个variant]</p>
+<p>[默认情况下，library project只会publish它的release variant，所有其他的project都是引用这个variant，但是你还是可以通过配置<code>defaultPublishConfig</code> 控制将哪个variant进行publish，而且你也可以设置为publish所有variant]</p>
 
 <p>By default a library only publishes its release variant. This variant will be used by all projects referencing the library, no matter which variant they build themselves. This is a temporary limitation due to Gradle limitations that we are working towards removing.</p>
 
@@ -995,7 +999,7 @@ http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-f
 </span><span class="line"><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>**Note that this publishing configuration name references the full variant name. Release and debug are only applicable when there are no flavors. **If you wanted to change the default published variant while using flavors, you would write:</p>
+<p>**Note that this publishing configuration name references the full variant name. Release and debug are only applicable when there are no flavors. ** If you wanted to change the default published variant while using flavors, you would write:</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -1005,7 +1009,7 @@ http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-f
 </span><span class="line"><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>It is also possible to publish all variants of a library. We are planning to allow this while using a normal project-to-project dependency (like shown above), but this is not possible right now due to limitations in Gradle (we are working toward fixing those as well).</p>
+<p><strong>It is also possible to publish all variants of a library. We are planning to allow this while using a normal project-to-project dependency (like shown above), but this is not possible right now due to limitations in Gradle (we are working toward fixing those as well).</strong></p>
 
 <p>Publishing of all variants are not enabled by default. To enable them:</p>
 
@@ -1047,17 +1051,23 @@ http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-f
 
 <h3 id="testing">Testing</h3>
 
+<p>[现在我们可以直接将test application集成到我们的application project中，没有必要再创建一个独立的test project了]</p>
+
 <p>Building a test application is integrated into the application project. There is no need for a separate test project anymore.</p>
 
 <h4 id="basics-and-configuration">Basics and Configuration</h4>
 
-<p>As mentioned previously, next to the main sourceSet is the androidTest sourceSet, located by default in <code>src/androidTest/</code></p>
+<p>[测试代码默认存放在<code>src/androidTest/</code> 目录下，使用Android Testing Framework 我们可以创建unit tests，instrumentation tests, 和 uiautomator tests.]</p>
+
+<p>As mentioned previously, next to the <code>main</code> sourceSet is the <code>androidTest</code> sourceSet, located by default in <code>src/androidTest/</code></p>
 
 <p>From this sourceSet is built a test apk that can be deployed to a device to test the application using the <code>Android testing framework</code>. This can contain unit tests, instrumentation tests, and later uiautomator tests.</p>
 
+<p>[test app的<code>AndroidManifest.xml</code> 文件是自动生成的，所以它不需要指定位置，此外，我们没必要设置test application的instrumentation节点的<code>targetPackage</code> 属性，因为它会被test app的package name填充进去，这也就是为什么test app的Manifest文件是自动生成的]</p>
+
 <p>The sourceSet should not contain an <code>AndroidManifest.xml</code> as it is automatically generated.</p>
 
-<p>There are a few values that can be configured for the test app:</p>
+<p>There are a few values that can be configured for the test app: [test app可以指定的属性]</p>
 
 <p><code>testPackageName</code>     <br />
 <code>testInstrumentationRunner</code>      <br />
@@ -1084,8 +1094,6 @@ http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-f
 </span><span class="line"><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>[test app的Manifest文件是自动生成的，所以它不需要在上面指定，此外，我们没必要设置instrumentation节点的<code>targetPackage</code> 属性，因为它会被test app的package name填充进去，这也就是为什么test app的Manifest文件是自动生成的]</p>
-
 <p><strong>The value of the <code>targetPackage</code> attribute of the instrumentation node in the test application manifest is automatically filled with the package name of the tested app, even if it is customized through the <code>defaultConfig</code> and/or the Build Type objects. This is one of the reason the manifest is generated automatically.</strong></p>
 
 <p>Additionally, the sourceSet can be configured to have its own dependencies.
@@ -1099,9 +1107,11 @@ By default, the application and its own dependencies are added to the test app c
 </span><span class="line"><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>The test app is built by the task <code>assembleTest</code>. It is not a dependency of the main assemble task, and is instead called automatically when the tests are set to run.</p>
+<p>[test app是通过任务<code>assembleTest</code> 来构建的，它不是main assemble任务的依赖项，所以它是在test运行时自动调用的。目前之后debug这个build type会被test]</p>
 
-<p>Currently only one Build Type is tested. By default it is the debug Build Type, but this can be reconfigured with:</p>
+<p><strong>The test app is built by the task <code>assembleTest</code>. It is not a dependency of the main assemble task, and is instead called automatically when the tests are set to run.</strong></p>
+
+<p><strong>Currently only one Build Type is tested. By default it is the <code>debug</code> Build Type, but this can be reconfigured with:</strong></p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
