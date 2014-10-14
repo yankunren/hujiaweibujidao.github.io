@@ -116,7 +116,7 @@ ndk.dir=/Volumes/hujiawei/Users/hujiawei/Android/android_ndk
 ```
 （2）在系统中设置环境变量`ANDROID_HOME`
 
-###Project Structure
+####Project Structure
 
 The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.    
 
@@ -260,9 +260,8 @@ Note: Gradle automatically monitor the declared inputs and outputs of a task. Ru
 
 The Java plugin creates mainly two tasks, that are dependencies of the main anchor tasks:
 
-`assemble`  ->   `jar`   This task creates the output.
-
-`check`  ->    `test`  This task runs the tests.
+`assemble`  ->   `jar`   This task creates the output.       
+`check`  ->    `test`  This task runs the tests.       
 
 **[任务jar直接或者间接地依赖其他的任务，例如用来编译Java代码的任务`classes`； 测试代码是由`testClasses` 任务来编译的，但是你不需要去调用这个task，因为`test` 任务依赖于`testClasses` 和 `classes` 任务]**
 
@@ -316,14 +315,17 @@ The `check` anchor tasks have their own dependencies:
 
 This depends on tasks created when other plugins implement test extension points.
 
-Finally, the plugin creates `install/uninstall` tasks for all build types (debug, release, test), as long as they can be installed (which requires signing).
-Basic Build Customization
+**Finally, the plugin creates `install/uninstall` tasks for all build types (debug, release, test), as long as they can be installed (which requires signing).**
+
+[Android插件还会对所有build type创建它们的`install/uninstall` 任务，只要它们可以被安装，安装需要签名]
+
+###Basic Build Customization
 
 The Android plugin provides a broad DSL to customize most things directly from the build system.
 
-###Manifest entries
+####Manifest entries
 
-[通过DSL我们可以在`build.gradle` 文件中指定定义在AndroidManifest文件中的内容]
+[通过DSL我们可以在`build.gradle` 文件中指定那些定义在AndroidManifest文件中的内容，不过能够指定的内容有限]
 
 Through the DSL it is possible to configure the following manifest entries:
 
@@ -360,7 +362,7 @@ The `defaultConfig` element inside the android element is where all this configu
 The power of describing it in the build file is that it can be dynamic.
 For instance, one could be reading the version name from a file somewhere or using some custom logic:
 
-[将上面那些内容定义在build文件中的魔力在于它们可以是动态的，如下所示]
+[将上面那些内容定义在build文件中的魔力就在于它们可以是动态的，如下所示]
 
 ```
 def computeVersionName() {
@@ -388,6 +390,8 @@ If a property is not set through the DSL, some default value will be used. Here�
 
 ![image](http://hujiaweibujidao.github.io/images/gradle2.png)
 
+**[第2列是当你在build script中使用自定义逻辑去查询第1列元素对应的默认结果，如果结果不是你想要的话，你可以指定另一个结果，但是在build时如果这个结果是null的话，build系统就会使用第3列中的结果]**
+
 The value of the 2nd column is important if you use custom logic in the build script that queries these properties. For instance, you could write:
 
 ```
@@ -400,21 +404,17 @@ If the value remains null, then it is replaced at build time by the actual defau
 
 This is to prevent parsing the manifest of the application unless it’s really needed. 
 
-###Build Types
+####Build Types
 
-[默认情况下，Android插件会自动将原项目编译成debug和release两种版本]
+[默认情况下，Android插件会自动将原项目编译成debug和release两个版本，它们的区别在于调试程序的功能和APK的签名方式。debug版本使用`key/certificate` 来签名，而release版本在build过程中并不签名，它的签名过程发生在后面。Android插件允许我们自定义build type]
 
 By default, the Android plugin automatically sets up the project to build both a debug and a release version of the application.
 
 **These differ mostly around the ability to debug the application on a secure (non dev) devices, and how the APK is signed.**
 
-[它们的区别在于调试程序的功能和APK的签名方式]
-
 **The debug version is signed with a `key/certificate` that is created automatically with a known `name/password` (to prevent required prompt during the build). The release is not signed during the build, this needs to happen after.**
 
-[debug版本使用`key/certificate` 来签名，而release版本在build过程中并不签名，它的签名过程发生在后面]
-
-This configuration is done through an object called a `BuildType`. By default, 2 instances are created, a debug and a release one.
+This configuration is done through an object called a `BuildType`. By default, 2 instances are created, a `debug` and a `release` one.
 
 The Android plugin allows customizing those two instances as well as creating other Build Types. This is done with the `buildTypes` DSL container:
 
@@ -444,7 +444,7 @@ Configures the default debug Build Type:
 
 (3) Keep configuring the jnidebug, by enabling debug build of the JNI component, and add a different package suffix.
 
-[在buildTypes容器中创建一个新的build type很简单，要么调用`initWith()` 方法或者直接使用花括号来配置它]
+[在buildTypes容器中创建一个新的build type很简单，要么调用`initWith()` 方法继承自某个build type或者直接使用花括号来配置它]
 
 Creating new Build Types is as easy as using a new element under the buildTypes container, either to call `initWith()` or to configure it with a closure.
 
@@ -468,7 +468,7 @@ android {
 }
 ```
 
-[类似其他的sourceSet，build type的source set的位置也可以重新定义，此外，对于每个build type，都会自动创建一个名为`assemble<BuildTypeName>` 的任务]
+[类似其他的sourceSet，build type的source set的位置也可以重新定义，此外，对于每个build type，都会自动创建一个名为`assemble<BuildTypeName>` 的任务，而且自动称为`assemble` 任务的依赖项]
 
 Additionally, for each Build Type, a new `assemble<BuildTypeName>` task is created.
 
@@ -478,11 +478,13 @@ The `build.gradle` snippet above would then also generate an `assembleJnidebug` 
 
 Tip: remember that you can type gradle aJ to run the assembleJnidebug task.
 
-Possible use case: [?]
+Possible use case: [使用场景]
 
 Permissions in debug mode only, but not in release mode      
 Custom implementation for debugging     
-Different resources for debug mode (for instance when a resource value is tied to the signing certificate).
+Different resources for debug mode (for instance when a resource value is tied to the signing certificate).      
+
+**[build type的code/resources的处理过程: (1)Manifest整合进app的Manifest; (2)code就作为另一个源码目录; (3)resources覆盖原有的main resources]**
 
 The code/resources of the BuildType are used in the following way:
 
@@ -490,9 +492,7 @@ The manifest is merged into the app manifest
 The code acts as just another source folder     
 The resources are overlayed over the main resources, replacing existing values.
 
-**[build type的code/resources的利用: (1)Manifest整合进app的Manifest; (2)code就作为另一个源码目录; (3)resources覆盖原有的main resources]**
-
-###Signing Configurations     
+####Signing Configurations     
 
 Signing an application requires the following: 
 
@@ -504,9 +504,9 @@ The store type
 
 The location, as well as the key name, both passwords and store type form together a Signing Configuration (type `SigningConfig`)     
 
-[对一个应用程序进行签名需要5个信息，这些信息组合起来就是类型SigningConfig，默认情况下，debug的配置使用了一个已知密码的keystore和已知密码的默认key，其中的keystore保存在`$HOME/.android/debug.keystore` 文件中，如果没有的话它会自动被创建]
+**[对一个应用程序进行签名需要5个信息，这些信息组合起来就是类型SigningConfig。默认情况下，debug的配置使用了一个已知密码的keystore和已知密码的默认key，其中的keystore保存在`$HOME/.android/debug.keystore` 文件中，如果没有的话它会自动被创建]**
 
-**By default, there is a `debug` configuration that is setup to use a debug keystore, with a known password and a default key with a known password.The debug keystore is located in `$HOME/.android/debug.keystore`, and is created if not present.**
+By default, there is a `debug` configuration that is setup to use a debug keystore, with a known password and a default key with a known password.The debug keystore is located in `$HOME/.android/debug.keystore`, and is created if not present.
 
 The debug Build Type is set to use this debug SigningConfig automatically.It is possible to create other configurations or customize the default built-in one. This is done through the signingConfigs DSL container:
 
@@ -541,20 +541,24 @@ The above snippet changes the location of the debug keystore to be at the root o
 
 It also creates a new Signing Config and a new Build Type that uses the new configuration.
 
-**Note: Only debug keystores located in the default location will be automatically created. Changing the location of the debug keystore will not create it on-demand. Creating a SigningConfig with a different name that uses the default debug keystore location will create it automatically. In other words, it’s tied to the location of the keystore, not the name of the configuration.**
+**[只有当debug keystore是放在默认的位置，即使修改了keystore文件的名称，keystore也会被自动创建，但是如果改变了默认位置的话则不会被自动创建。此外，设置keystore的位置一般使用相对于项目根目录的路径，虽然也可以使用绝对路径，但是并不推荐这样做]**
 
-**Note: Location of keystores are usually relative to the root of the project, but could be absolute paths, though it is not recommended (except for the debug one since it is automatically created).**
+Note: Only debug keystores located in the default location will be automatically created. Changing the location of the debug keystore will not create it on-demand. Creating a SigningConfig with a different name that uses the default debug keystore location will create it automatically. In other words, it’s tied to the location of the keystore, not the name of the configuration.
+
+Note: Location of keystores are usually relative to the root of the project, but could be absolute paths, though it is not recommended (except for the debug one since it is automatically created).
 
 Note:  If you are checking these files into version control, you may not want the password in the file. The following Stack Overflow post shows ways to read the values from the console, or from environment variables.
 http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-file-using-gradle
 
 We'll update this guide with more detailed information later.
 
-###Running ProGuard
+####Running ProGuard
 
-[对ProGuard的支持是通过Gradle plugin for ProGuard 4.10来实现的]
+[对ProGuard的支持是通过Gradle plugin for ProGuard 4.10来实现的，给build type添加`runProguard` 属性即可自动生成相应的task]
 
-ProGuard is supported through the Gradle plugin for ProGuard version 4.10. The ProGuard plugin is applied automatically, and the tasks are created automatically if the Build Type is configured to run ProGuard through the `runProguard` property.
+ProGuard is supported through the Gradle plugin for ProGuard version 4.10. 
+
+The ProGuard plugin is applied automatically, and the tasks are created automatically if the Build Type is configured to run ProGuard through the `runProguard` property.
 
 ```
 android {
@@ -577,7 +581,7 @@ android {
 
 Variants use all the rules files declared in their build type, and product flavors.
 
-[两个默认的proguard rule 文件，它们存放在Android SDK目录中，默认是`$ANDROID_HOME/tools/proguard/` 目录下 ，使用`getDefaultProguardFile()` 可以得到文件的完整路径]
+**[默认情况下有两个proguard rule 文件，它们存放在Android SDK目录中，默认是`$ANDROID_HOME/tools/proguard/` 目录下 ，使用`getDefaultProguardFile()` 可以得到它们的完整路径]**
 
 There are 2 default rules files 
 
@@ -594,7 +598,7 @@ Gradle projects can have dependencies on other components. These components can 
 
 ####Local packages
 
-To configure a dependency on an external library jar, you need to add a dependency on the compile configuration.
+To configure a dependency on an external library jar, you need to add a dependency on the `compile` configuration.
 
 ```
 dependencies {
@@ -606,7 +610,7 @@ android {
 }
 ```
 
-[注意dependencies是标准Gradle API的一部分所以不是在android元素中声明]
+[注意dependencies是标准Gradle API的一部分，所以不是在android元素中声明]
 
 **Note: the dependencies DSL element is part of the standard Gradle API and does not belong inside the android element.**
 
