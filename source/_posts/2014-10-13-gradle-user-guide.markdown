@@ -856,17 +856,23 @@ Important: Note that the published configuration is a full variant, including th
 
 ###Testing
 
+[现在我们可以直接将test application集成到我们的application project中，没有必要再创建一个独立的test project了]
+
 Building a test application is integrated into the application project. There is no need for a separate test project anymore.
 
 ####Basics and Configuration
 
-As mentioned previously, next to the main sourceSet is the androidTest sourceSet, located by default in `src/androidTest/`
+[测试代码默认存放在`src/androidTest/` 目录下，使用Android Testing Framework 我们可以创建unit tests，instrumentation tests, 和 uiautomator tests.]
+
+As mentioned previously, next to the `main` sourceSet is the `androidTest` sourceSet, located by default in `src/androidTest/`
 
 From this sourceSet is built a test apk that can be deployed to a device to test the application using the `Android testing framework`. This can contain unit tests, instrumentation tests, and later uiautomator tests.
 
+[test app的`AndroidManifest.xml` 文件是自动生成的，所以它不需要指定位置，此外，我们没必要设置test application的instrumentation节点的`targetPackage` 属性，因为它会被test app的package name填充进去，这也就是为什么test app的Manifest文件是自动生成的]
+
 The sourceSet should not contain an `AndroidManifest.xml` as it is automatically generated.
 
-There are a few values that can be configured for the test app:
+There are a few values that can be configured for the test app: [test app可以指定的属性]
 
 `testPackageName`       
 `testInstrumentationRunner`        
@@ -886,8 +892,6 @@ android {
 }
 ```
 
-[test app的Manifest文件是自动生成的，所以它不需要在上面指定，此外，我们没必要设置instrumentation节点的`targetPackage` 属性，因为它会被test app的package name填充进去，这也就是为什么test app的Manifest文件是自动生成的]
-
 **The value of the `targetPackage` attribute of the instrumentation node in the test application manifest is automatically filled with the package name of the tested app, even if it is customized through the `defaultConfig` and/or the Build Type objects. This is one of the reason the manifest is generated automatically.**
 
 Additionally, the sourceSet can be configured to have its own dependencies.
@@ -899,9 +903,11 @@ dependencies {
 }
 ```
 
-The test app is built by the task `assembleTest`. It is not a dependency of the main assemble task, and is instead called automatically when the tests are set to run.
+[test app是通过任务`assembleTest` 来构建的，它不是main assemble任务的依赖项，所以它是在test运行时自动调用的。目前之后debug这个build type会被test]
 
-Currently only one Build Type is tested. By default it is the debug Build Type, but this can be reconfigured with:
+**The test app is built by the task `assembleTest`. It is not a dependency of the main assemble task, and is instead called automatically when the tests are set to run.**
+
+**Currently only one Build Type is tested. By default it is the `debug` Build Type, but this can be reconfigured with:**
 
 ```
 android {
