@@ -690,9 +690,9 @@ We can identify 3 projects. Gradle will reference them with the following name:
 :libraries:lib2
 ```
 
-Each projects will have its own `build.gradle` declaring how it gets built. Additionally, there will be a file called `settings.gradle` at the root declaring the projects.
+**Each projects will have its own `build.gradle` declaring how it gets built. Additionally, there will be a file called `settings.gradle` at the root declaring the projects.**
 
-**[每个项目都有自己的`build.gradle` 文件声明它的build过程，此外，根项目下还有一个`settings.gradle` 文件用来指定这些子项目]**
+[每个项目都有自己的`build.gradle` 文件声明它的build过程，此外，根项目下还有一个`settings.gradle` 文件用来指定这些子项目]
 
 This gives the following structure:
 
@@ -714,7 +714,7 @@ The content of `settings.gradle` is very simple:
 include ':app', ':libraries:lib1', ':libraries:lib2'
 ```
 
-This defines which folder is actually a Gradle project.
+This defines which folder is actually a Gradle project. [它声明了哪个目录是一个Gradle项目]
 
 The `:app` project is likely to depend on the libraries, and this is done by declaring the following dependencies:
 
@@ -728,7 +728,7 @@ More general information about [multi-project setup here](http://gradle.org/docs
 
 ####Library projects
 
-**[前面例子中的两个library projects都是Java项目的话，那么app这个Android项目就使用它们的输出jar文件即可，但是如果你需要引用其中的资源或者代码的话，那它们必须是Android Library Projects]**
+**[如果前面例子中的两个library projects都是Java项目的话，那么app这个Android项目就使用它们的输出jar文件即可，但是如果你需要引用library project中的资源或者代码的话，那它们必须是Android Library Projects]**
 
 In the above multi-project setup, `:libraries:lib1` and `:libraries:lib2` can be Java projects, and the `:app` Android project will use their jar output.
 
@@ -740,7 +740,7 @@ A Library project is very similar to a regular Android project with a few differ
 
 Since building libraries is different than building applications, a different plugin is used. Internally both plugins share most of the same code and they are both provided by the same `com.android.tools.build.gradle` jar.
 
-**[创建Library Project使用的是不同的plugin，即`android-library`，它和`android` 插件共享很多的代码(所以大部分的配置都和前面提到的一模一样)，并且也都是在`com.android.tools.build.gradle` 这个jar包中]**
+**[创建Library Project使用的是不同的插件，即`android-library`，它和`android` 插件共享很多的代码(所以大部分的配置都和前面提到的一模一样)，并且这个插件的源码也是在`com.android.tools.build.gradle` 这个jar包中]**
 
 ```
 buildscript {
@@ -772,7 +772,7 @@ A Library project's main output is an .aar package (which stands for Android arc
 
 The same anchor tasks are used for this (`assembleDebug`, `assembleRelease`) so there’s no difference in commands to build such a project.
 
-For the rest, libraries behave the same as application projects. They have **build types and product flavors, and can potentially generate more than one version of the aar.**
+For the rest, libraries behave the same as application projects. **They have build types and product flavors, and can potentially generate more than one version of the aar.**
 
 [大多数的build type的配置都不会应用于Library Project中，当然它还是可以进行配置的]
 
@@ -791,11 +791,15 @@ dependencies {
 
 Note: if you have more than one library, then the order will be important. This is similar to the old build system where the order of the dependencies in the `project.properties` file was important.  
 
-[注：这里应该是`settings.properties` 文件，就是说如果你有很多的library projects，那么你要根据它们相互之间的依赖关系确定一个正确的顺序]
+[注：如果你有很多的library projects，那么你要根据它们相互之间的依赖关系确定一个正确的顺序，就类似以前build系统中的`project.properties` 文件一样，以前需要如下地声明`android.library.reference`]
+
+```
+android.library.reference.1=path/to/libraryproject
+```
 
 ####Library Publication
 
-[默认情况下，library project只会publish它的release variant，所有其他的project都是引用这个variant]
+[默认情况下，library project只会publish它的release variant，所有其他的project都是引用这个variant，但是你还是可以通过配置`defaultPublishConfig` 控制将哪个variant进行publish，而且你也可以设置为publish所有variant]
 
 By default a library only publishes its release variant. This variant will be used by all projects referencing the library, no matter which variant they build themselves. This is a temporary limitation due to Gradle limitations that we are working towards removing.
 
@@ -807,7 +811,7 @@ android {
 }
 ```
 
-**Note that this publishing configuration name references the full variant name. Release and debug are only applicable when there are no flavors. **If you wanted to change the default published variant while using flavors, you would write:
+**Note that this publishing configuration name references the full variant name. Release and debug are only applicable when there are no flavors. ** If you wanted to change the default published variant while using flavors, you would write:
 
 ```
 android {
@@ -815,7 +819,7 @@ android {
 }
 ```
 
-It is also possible to publish all variants of a library. We are planning to allow this while using a normal project-to-project dependency (like shown above), but this is not possible right now due to limitations in Gradle (we are working toward fixing those as well).
+**It is also possible to publish all variants of a library. We are planning to allow this while using a normal project-to-project dependency (like shown above), but this is not possible right now due to limitations in Gradle (we are working toward fixing those as well).**
 
 Publishing of all variants are not enabled by default. To enable them:
 
