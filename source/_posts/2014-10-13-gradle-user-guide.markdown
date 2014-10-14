@@ -620,10 +620,10 @@ android {
 
 There are other possible configurations to add dependencies to:
 
-compile: main application       
-androidTestCompile: test application      
-debugCompile: debug Build Type      
-releaseCompile: release Build Type.      
+`compile`: main application       
+`androidTestCompile`: test application      
+`debugCompile`: debug Build Type      
+`releaseCompile`: release Build Type.      
 
 **[对应每个build type都有一个对应的`<buildtype>Compile`， 它们的dependencies也都可以自行定义使其不同。如果希望不同的build type表现出不同的结果时，我们便可以使用这种方式让它们依赖不同的library]**
 
@@ -634,6 +634,8 @@ Creating a new Build Type automatically creates a new configuration based on its
 This can be useful if the debug version needs to use a custom library (to report crashes for instance), while the release doesn’t, or if they rely on different versions of the same library.
 
 ####Remote artifacts
+
+[Gradle支持Maven和Ivy资源库]
 
 Gradle supports pulling artifacts from Maven and Ivy repositories.
 
