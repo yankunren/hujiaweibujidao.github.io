@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-14T19:55:06+08:00</updated>
+  <updated>2014-10-14T23:49:59+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -762,10 +762,10 @@ http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-f
 
 <p>There are other possible configurations to add dependencies to:</p>
 
-<p>compile: main application     <br />
-androidTestCompile: test application    <br />
-debugCompile: debug Build Type    <br />
-releaseCompile: release Build Type.      </p>
+<p><code>compile</code>: main application     <br />
+<code>androidTestCompile</code>: test application    <br />
+<code>debugCompile</code>: debug Build Type    <br />
+<code>releaseCompile</code>: release Build Type.      </p>
 
 <p><strong>[对应每个build type都有一个对应的<code>&lt;buildtype&gt;Compile</code>， 它们的dependencies也都可以自行定义使其不同。如果希望不同的build type表现出不同的结果时，我们便可以使用这种方式让它们依赖不同的library]</strong></p>
 
@@ -776,6 +776,8 @@ releaseCompile: release Build Type.      </p>
 <p>This can be useful if the debug version needs to use a custom library (to report crashes for instance), while the release doesn’t, or if they rely on different versions of the same library.</p>
 
 <h4 id="remote-artifacts">Remote artifacts</h4>
+
+<p>[Gradle支持Maven和Ivy资源库]</p>
 
 <p>Gradle supports pulling artifacts from Maven and Ivy repositories.</p>
 
