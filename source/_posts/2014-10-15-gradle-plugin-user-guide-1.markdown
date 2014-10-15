@@ -9,9 +9,9 @@ published: true
 
 Gradle Plugin for Android Development User Guide (1)
 
-终于有点时间可以学学一直打算了解的Gradle，毕竟打算以后在移动开发这条路上走到黑的话就要与时俱进，首先自然得用Google推荐的Android Studio，就目前来看，它除了还未完全支持NDK之外，很多方面都是完爆Eclipse+ADT Plugin的，而新的构建系统Gradle更是不能不了解的内容，于是找了些有用的资料开始上手看，这篇来自[http://tools.android.com/](http://tools.android.com/)的Gradle User Guide我想应该是最好的读物了，于是细细地通读了一下，边读边注解，注意不是翻译，因为宝贵的时间有限而且此文英文并不难懂，所以只能是挑重要的内容注解一下，以便以后用到的时候能够更快的检索到重要信息。
+终于有点时间可以学学一直打算了解的Gradle，毕竟打算以后在移动开发这条路上走到黑的话就要与时俱进，首先自然得用Google推荐的Android Studio，就目前来看，它除了还未完全支持NDK之外，很多方面都是完爆Eclipse+ADT Plugin的，而新的构建系统Gradle更是不能不了解的内容，于是找了些有用的资料开始上手看，这篇来自[http://tools.android.com/](http://tools.android.com/)的Gradle User Guide我想应该是最好的读物了，于是细细地通读了一下，边读边注解，注意不是翻译，因为宝贵的时间有限而且原文并不难懂，所以只能是挑重要的内容注解一下，以便以后用到的时候能够更快的检索到重要信息。
 
-文中标有`[?]`的地方表示我没有理解，如有理解了的或者文中有任何错误烦请留言告知我，不胜感激！
+文中标有`[?]`的地方表示我没有理解，如有理解了的或者文中有任何错误烦请留言告知，不胜感激！
 
 原文地址：[http://tools.android.com/tech-docs/new-build-system/user-guide](http://tools.android.com/tech-docs/new-build-system/user-guide)
 
