@@ -15,3 +15,14 @@ blockquote{
 	line-height:1.0em;
 	color:rgba(0,0,0,0.5);
 }
+
+// code in line, not code in block
+p code, li code{
+	color: #9f0cee;
+	border-width: 0px;
+	font-size: inherit;
+}
+
+strong {
+	color: #D2691E;
+}
