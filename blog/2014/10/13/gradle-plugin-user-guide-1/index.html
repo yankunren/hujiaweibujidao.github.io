@@ -130,13 +130,15 @@
 
 <div class="entry-content"><p>Gradle Plugin for Android Development User Guide (1)</p>
 
-<p>终于有点时间可以学学一直打算了解的Gradle，毕竟打算以后在移动开发这条路上走到黑的话就要与时俱进，首先自然得用Google推荐的Android Studio，就目前来看，它除了还未完全支持NDK之外，很多方面都是完爆Eclipse+ADT Plugin的，而新的构建系统Gradle更是不能不了解的内容，于是找了些有用的资料开始上手看，这篇来自<a href="http://tools.android.com/">http://tools.android.com/</a>的Gradle User Guide我想应该是最好的读物了，于是细细地通读了一下，边读边注解，注意不是翻译，因为宝贵的时间有限而且原文并不难懂，所以只能是挑重要的内容注解一下，以便以后用到的时候能够更快的检索到重要信息。</p>
+<p>终于有点时间可以学学一直打算了解的Gradle，毕竟打算以后在移动开发这条路上走到黑的话就要与时俱进，首先自然得用Google推荐的Android Studio，就目前来看，它除了还未完全支持NDK之外，很多方面都是完爆Eclipse+ADT Plugin的，而新的构建系统Gradle更是不能不了解的内容，于是找了些有用的资料开始上手看。如果你一般都是进行常规的Android SDK的开发而且对Gradle没啥兴趣的话那么直接看这篇官网教程就行了<a href="http://developer.android.com/sdk/installing/studio-build.html">http://developer.android.com/sdk/installing/studio-build.html</a>。</p>
+
+<p>而本篇文章来自<a href="http://tools.android.com/">http://tools.android.com/</a>的<code>Gradle Plugin User Guide</code>我想应该是最好的读物了，于是细细地通读了一下，边读边注解，注意不是翻译，因为宝贵的时间有限而且原文并不难懂，所以只能是挑重要的内容注解一下，以便以后用到的时候能够更快的检索到重要信息。</p>
 
 <p>文中标有<code>[?]</code>的地方表示我没有理解，如有理解了的或者文中有任何错误烦请留言告知，不胜感激！</p>
 
 <p>原文地址：<a href="http://tools.android.com/tech-docs/new-build-system/user-guide">http://tools.android.com/tech-docs/new-build-system/user-guide</a></p>
 
-<p>因为注解完之后文章变得特别长，所以分成2部分，第二部分地址：</p>
+<p>因为注解完之后文章变得特别长，所以分成2部分，第二部分地址：<a href="http://hujiaweibujidao.github.io/blog/2014/10/15/gradle-plugin-user-guide-2/">http://hujiaweibujidao.github.io/blog/2014/10/15/gradle-plugin-user-guide-2</a></p>
 
 <h3 id="introduction">Introduction</h3>
 
@@ -236,7 +238,7 @@ In this case, this declares that it uses the Maven Central repository, and that 
 
 <p><strong>By default, only the compilation target, and the version of the build-tools are needed. This is done with the compileSdkVersion and buildtoolsVersion properties.</strong></p>
 
-<p>[默认情况下，只有编译目标和编译工具的版本号是必须要给定的。以前的build系统需要在项目的根目录下的<code>project.properties</code> 文件中指定<code>target</code> (例如<code>target=android-18</code>)，它对应的就是这里的 compilation target，不过此处的值只是一个int值，代表Android API version]</p>
+<p>[默认情况下，只有编译目标和编译工具的版本号是必须要给定的。以前的build系统需要在项目的根目录下的<code>project.properties</code> 文件中指定<code>target</code> (例如<code>target=android-18</code>)，它对应的就是这里的 <code>compilation target</code>，不过此处的值只是一个int值，代表Android API version]</p>
 
 <p>The compilation target is the same as the target property in the <code>project.properties</code> file of the old build system. This new property can either be assigned a int (the api level) or a string with the same value as the previous target property.</p>
 
@@ -443,7 +445,7 @@ For a full list and seeing dependencies between the tasks run:  <code>gradle tas
 
 <p>The <code>jar</code> task itself will depend directly and indirectly on other tasks: <code>classes</code> for instance will compile the Java code. </p>
 
-<p>**The tests are compiled with <code>testClasses</code>, but it is rarely useful to call this as <code>test</code> depends on it (as well as <code>classes</code>). **</p>
+<p>** The tests are compiled with <code>testClasses</code>, but it is rarely useful to call this as <code>test</code> depends on it (as well as <code>classes</code>). **</p>
 
 <p>In general, you will probably only ever call <code>assemble</code> or <code>check</code>, and ignore the other tasks.</p>
 
@@ -455,7 +457,7 @@ For a full list and seeing dependencies between the tasks run:  <code>gradle tas
 
 <p><code>assemble</code>    The task to assemble the output(s) of the project      <br />
 <code>check</code>   The task to run all the checks.          <br />
-<code>connectedCheck</code>   Runs checks that requires a connected device or emulator, they will run on all connected devices in parallel. ** [在已连接的设备和模拟器上并行运行check任务]**              <br />
+<code>connectedCheck</code>   Runs checks that requires a connected device or emulator, they will run on all connected devices in parallel. <strong>[在已连接的设备和模拟器上并行运行check任务]</strong>              <br />
 <code>deviceCheck</code>   Runs checks using APIs to connect to remote devices. This is used on CI servers.  <strong>[使用APIs来连接远程设备以运行check任务]</strong>                         <br />
 <code>build</code>   This task does both assemble and check     <br />
 <code>clean</code>    This task cleans the output of the project</p>
