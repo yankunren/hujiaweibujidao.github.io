@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mobile | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mobile/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-15T17:39:27+08:00</updated>
+  <updated>2014-10-15T17:41:58+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -94,10 +94,10 @@ android {
 
 <p>This depends on the task <code>androidTest</code> and therefore will run it. This task does the following:  [<code>androidTest</code> 任务的工作流程]</p>
 
-<p>Ensure the app and the test app are built (depending on <code>assembleDebug</code> and <code>assembleTest</code>)  <br />
-Install both apps    <br />
-Run the tests     <br />
-Uninstall both apps.      </p>
+<p>1 Ensure the app and the test app are built (depending on <code>assembleDebug</code> and <code>assembleTest</code>)  <br />
+2 Install both apps    <br />
+3 Run the tests     <br />
+4 Uninstall both apps.      </p>
 
 <p>If more than one device is connected, all tests are run in parallel on all connected devices. If one of the test fails, on any device, the build will fail.</p>
 
@@ -671,7 +671,7 @@ android.applicationVariants.each { variant -&gt;
 
 <p>[除了ZipAlign任务之外，其他类型的任务都需要private data才能工作，所以没有办法manual创建这些类型的新任务]</p>
 
-<p>**This API is subject to change. ** In general the current API is around giving access to the outputs and inputs (when possible) of the tasks to add extra processing when required). Feedback is appreciated, especially around needs that may not have been foreseen.</p>
+<p><strong>This API is subject to change.</strong> In general the current API is around giving access to the outputs and inputs (when possible) of the tasks to add extra processing when required). Feedback is appreciated, especially around needs that may not have been foreseen.</p>
 
 <p>For Gradle tasks (<code>DefaultTask</code>, <code>JavaCompile</code>, <code>Copy</code>, <code>Zip</code>), refer to the Gradle documentation.</p>
 
