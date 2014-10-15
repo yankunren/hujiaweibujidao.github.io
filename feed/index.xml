@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-15T17:46:11+08:00</updated>
+  <updated>2014-10-15T17:50:00+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -530,7 +530,7 @@ See <a href="http://developer.android.com/google/play/publishing/multiple-apks.h
 
 <p>2 Manifests are all merged together into a single manifest. This allows Product Flavors to have different components and/or permissions, similarly to Build Types.  [所有的Manifest文件也都会整合成为一个Manifest文件，其中product flavor和build type类似，都可以有不同的components或者permissions]</p>
 
-<p>3 <strong>All resources (Android <code>res</code> and <code>assets</code>) are used using overlay priority where the Build Type overrides the Product Flavor, which overrides the main sourceSet. ** [所有的资源文件按照优先级的不同采用覆盖的方式整合，product flavor覆盖main，build type覆盖product flavor]  **[?这里的优先级总觉得有点问题?]</strong></p>
+<p>3 <strong>All resources (Android <code>res</code> and <code>assets</code>) are used using overlay priority where the Build Type overrides the Product Flavor, which overrides the main sourceSet.</strong> [所有的资源文件按照优先级的不同采用覆盖的方式整合，product flavor覆盖main，build type覆盖product flavor] <strong>[?这里的优先级总觉得有点问题?]</strong></p>
 
 <p>4 Each Build Variant generates its own <code>R</code> class (or other generated source code) from the resources. Nothing is shared between variants. [每个Build Variant都会根据它的资源文件产生一个R清单类，并且在variants之间不进行共享]</p>
 
