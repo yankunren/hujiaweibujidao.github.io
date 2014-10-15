@@ -9,7 +9,7 @@ published: true
 
 Gradle Plugin for Android Development User Guide (2)
 
-阅读本文前请先阅读第一部分：
+阅读本文前请先阅读第一部分：[http://hujiaweibujidao.github.io/blog/2014/10/15/gradle-plugin-user-guide-1](http://hujiaweibujidao.github.io/blog/2014/10/15/gradle-plugin-user-guide-1/)
 
 原文地址：[http://tools.android.com/tech-docs/new-build-system/user-guide](http://tools.android.com/tech-docs/new-build-system/user-guide)
 
@@ -40,7 +40,7 @@ There are a few values that can be configured for the test app: [test app可以�
 
 As seen previously, those are configured in the defaultConfig object:
 
-```
+```java
 android {
     defaultConfig {
         testPackageName "com.test.foo"
@@ -83,10 +83,10 @@ As mentioned previously, checks requiring a connected device are launched with t
 
 This depends on the task `androidTest` and therefore will run it. This task does the following:  [`androidTest` 任务的工作流程]
 
-Ensure the app and the test app are built (depending on `assembleDebug` and `assembleTest`)    
-Install both apps      
-Run the tests       
-Uninstall both apps.      
+1 Ensure the app and the test app are built (depending on `assembleDebug` and `assembleTest`)    
+2 Install both apps      
+3 Run the tests       
+4 Uninstall both apps.      
 
 If more than one device is connected, all tests are run in parallel on all connected devices. If one of the test fails, on any device, the build will fail.
 
@@ -473,7 +473,7 @@ Similarly, test APK building tasks and install/uninstall tasks are per variant:
 `installFlavor1Debug`        
 `installFlavor1Test`        
 `uninstallFlavor1Debug`        
-...
+`...`
 
 Finally the HTML report generation supports aggregation by flavor.
 The location of the test results and reports is as follows, first for the per flavor version, and then for the aggregated one:
@@ -556,7 +556,7 @@ Multi-flavors projects also have additional sourcesets, similar to the variant s
 
 `android.sourceSets.x86Freeapp`   Location `src/x86Freeapp/`         
 `android.sourceSets.armPaidapp`   Location `src/armPaidapp/`        
-etc...
+`etc...`
 
 **These allow customization at the flavor-combination level. They have higher priority than the basic flavor sourcesets, but lower priority than the build type sourcesets.**
 
@@ -665,7 +665,7 @@ API for Android specific task types.
 
  [除了ZipAlign任务之外，其他类型的任务都需要private data才能工作，所以没有办法manual创建这些类型的新任务]
 
-**This API is subject to change. ** In general the current API is around giving access to the outputs and inputs (when possible) of the tasks to add extra processing when required). Feedback is appreciated, especially around needs that may not have been foreseen.
+**This API is subject to change.** In general the current API is around giving access to the outputs and inputs (when possible) of the tasks to add extra processing when required). Feedback is appreciated, especially around needs that may not have been foreseen.
 
 For Gradle tasks (`DefaultTask`, `JavaCompile`, `Copy`, `Zip`), refer to the Gradle documentation.
 

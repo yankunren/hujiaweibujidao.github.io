@@ -9,15 +9,15 @@ published: true
 
 Gradle Plugin for Android Development User Guide (1)
 
-终于有点时间可以学学一直打算了解的Gradle，毕竟打算以后在移动开发这条路上走到黑的话就要与时俱进，首先自然得用Google推荐的Android Studio，就目前来看，它除了还未完全支持NDK之外，很多方面都是完爆Eclipse+ADT Plugin的，而新的构建系统Gradle更是不能不了解的内容，于是找了些有用的资料开始上手看，这篇来自[http://tools.android.com/](http://tools.android.com/)的Gradle User Guide我想应该是最好的读物了，于是细细地通读了一下，边读边注解，注意不是翻译，因为宝贵的时间有限而且原文并不难懂，所以只能是挑重要的内容注解一下，以便以后用到的时候能够更快的检索到重要信息。
+终于有点时间可以学学一直打算了解的Gradle，毕竟打算以后在移动开发这条路上走到黑的话就要与时俱进，首先自然得用Google推荐的Android Studio，就目前来看，它除了还未完全支持NDK之外，很多方面都是完爆Eclipse+ADT Plugin的，而新的构建系统Gradle更是不能不了解的内容，于是找了些有用的资料开始上手看。如果你一般都是进行常规的Android SDK的开发而且对Gradle没啥兴趣的话那么直接看这篇官网教程就行了[http://developer.android.com/sdk/installing/studio-build.html](http://developer.android.com/sdk/installing/studio-build.html)。
+
+而本篇文章来自[http://tools.android.com/](http://tools.android.com/)的`Gradle Plugin User Guide`我想应该是最好的读物了，于是细细地通读了一下，边读边注解，注意不是翻译，因为宝贵的时间有限而且原文并不难懂，所以只能是挑重要的内容注解一下，以便以后用到的时候能够更快的检索到重要信息。
 
 文中标有`[?]`的地方表示我没有理解，如有理解了的或者文中有任何错误烦请留言告知，不胜感激！
 
 原文地址：[http://tools.android.com/tech-docs/new-build-system/user-guide](http://tools.android.com/tech-docs/new-build-system/user-guide)
 
-因为注解完之后文章变得特别长，所以分成2部分，第二部分地址：
-
-
+因为注解完之后文章变得特别长，所以分成2部分，第二部分地址：[http://hujiaweibujidao.github.io/blog/2014/10/15/gradle-plugin-user-guide-2](http://hujiaweibujidao.github.io/blog/2014/10/15/gradle-plugin-user-guide-2/)
 
 ###Introduction
 
@@ -102,7 +102,7 @@ In this case, this declares that it uses the Maven Central repository, and that 
 
 **By default, only the compilation target, and the version of the build-tools are needed. This is done with the compileSdkVersion and buildtoolsVersion properties.**
 
-[默认情况下，只有编译目标和编译工具的版本号是必须要给定的。以前的build系统需要在项目的根目录下的`project.properties` 文件中指定`target` (例如`target=android-18`)，它对应的就是这里的 compilation target，不过此处的值只是一个int值，代表Android API version]
+[默认情况下，只有编译目标和编译工具的版本号是必须要给定的。以前的build系统需要在项目的根目录下的`project.properties` 文件中指定`target` (例如`target=android-18`)，它对应的就是这里的 `compilation target`，不过此处的值只是一个int值，代表Android API version]
 
 The compilation target is the same as the target property in the `project.properties` file of the old build system. This new property can either be assigned a int (the api level) or a string with the same value as the previous target property.
 
@@ -275,7 +275,7 @@ The Java plugin creates mainly two tasks, that are dependencies of the main anch
 
 The `jar` task itself will depend directly and indirectly on other tasks: `classes` for instance will compile the Java code. 
 
-**The tests are compiled with `testClasses`, but it is rarely useful to call this as `test` depends on it (as well as `classes`). **
+** The tests are compiled with `testClasses`, but it is rarely useful to call this as `test` depends on it (as well as `classes`). **
 
 In general, you will probably only ever call `assemble` or `check`, and ignore the other tasks.
 
@@ -287,7 +287,7 @@ The Android plugin use the same convention to stay compatible with other plugins
 
 `assemble`    The task to assemble the output(s) of the project        
 `check`   The task to run all the checks.            
-`connectedCheck`   Runs checks that requires a connected device or emulator, they will run on all connected devices in parallel. ** [在已连接的设备和模拟器上并行运行check任务]**                
+`connectedCheck`   Runs checks that requires a connected device or emulator, they will run on all connected devices in parallel. **[在已连接的设备和模拟器上并行运行check任务]**                
 `deviceCheck`   Runs checks using APIs to connect to remote devices. This is used on CI servers.  **[使用APIs来连接远程设备以运行check任务]**                           
 `build`   This task does both assemble and check       
 `clean`    This task cleans the output of the project
