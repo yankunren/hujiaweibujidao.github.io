@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-15T17:41:58+08:00</updated>
+  <updated>2014-10-15T17:46:11+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -613,7 +613,7 @@ See <a href="http://developer.android.com/google/play/publishing/multiple-apks.h
 <code>installFlavor1Debug</code>      <br />
 <code>installFlavor1Test</code>      <br />
 <code>uninstallFlavor1Debug</code>      <br />
-…</p>
+<code>...</code></p>
 
 <p>Finally the HTML report generation supports aggregation by flavor.
 The location of the test results and reports is as follows, first for the per flavor version, and then for the aggregated one:</p>
@@ -723,7 +723,7 @@ One from the <code>version</code> group</p>
 
 <p><code>android.sourceSets.x86Freeapp</code>   Location <code>src/x86Freeapp/</code>       <br />
 <code>android.sourceSets.armPaidapp</code>   Location <code>src/armPaidapp/</code>      <br />
-etc…</p>
+<code>etc...</code></p>
 
 <p><strong>These allow customization at the flavor-combination level. They have higher priority than the basic flavor sourcesets, but lower priority than the build type sourcesets.</strong></p>
 
