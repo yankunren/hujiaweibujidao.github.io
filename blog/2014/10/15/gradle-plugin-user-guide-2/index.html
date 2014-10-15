@@ -161,7 +161,7 @@
 
 <p>As seen previously, those are configured in the defaultConfig object:</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -169,26 +169,28 @@
 <span class="line-number">6</span>
 <span class="line-number">7</span>
 <span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">android {
-</span><span class="line">    defaultConfig {
-</span><span class="line">        testPackageName "com.test.foo"
-</span><span class="line">        testInstrumentationRunner "android.test.InstrumentationTestRunner"
-</span><span class="line">        testHandleProfiling true
-</span><span class="line">        testFunctionalTest true
-</span><span class="line">    }
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">android</span> <span class="o">{</span>
+</span><span class="line">    <span class="n">defaultConfig</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">testPackageName</span> <span class="s">&quot;com.test.foo&quot;</span>
+</span><span class="line">        <span class="n">testInstrumentationRunner</span> <span class="s">&quot;android.test.InstrumentationTestRunner&quot;</span>
+</span><span class="line">        <span class="n">testHandleProfiling</span> <span class="kc">true</span>
+</span><span class="line">        <span class="n">testFunctionalTest</span> <span class="kc">true</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><strong>The value of the <code>targetPackage</code> attribute of the instrumentation node in the test application manifest is automatically filled with the package name of the tested app, even if it is customized through the <code>defaultConfig</code> and/or the Build Type objects. This is one of the reason the manifest is generated automatically.</strong></p>
 
 <p>Additionally, the sourceSet can be configured to have its own dependencies.
 By default, the application and its own dependencies are added to the test app classpath, but this can be extended with </p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">dependencies {
-</span><span class="line">    androidTestCompile 'com.google.guava:guava:11.0.2'
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">dependencies</span> <span class="o">{</span>
+</span><span class="line">    <span class="n">androidTestCompile</span> <span class="err">&#39;</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">guava</span><span class="o">:</span><span class="nl">guava:</span><span class="mf">11.0</span><span class="o">.</span><span class="mi">2</span><span class="err">&#39;</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>[test app是通过任务<code>assembleTest</code> 来构建的，它不是main assemble任务的依赖项，所以它是在test运行时自动调用的。目前只有debug这个build type会被测试，当然也可以自定义]</p>
 
@@ -196,14 +198,15 @@ By default, the application and its own dependencies are added to the test app c
 
 <p><strong>Currently only one Build Type is tested. By default it is the <code>debug</code> Build Type, but this can be reconfigured with:</strong></p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">android {
-</span><span class="line">    ...
-</span><span class="line">    testBuildType "staging"
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">android</span> <span class="o">{</span>
+</span><span class="line">    <span class="o">...</span>
+</span><span class="line">    <span class="n">testBuildType</span> <span class="s">&quot;staging&quot;</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h4 id="running-tests">Running tests</h4>
 
@@ -228,20 +231,21 @@ Uninstall both apps.      </p>
 
 <p>This can be configured with</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 <span class="line-number">6</span>
 <span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">android {
-</span><span class="line">    ...
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">android</span> <span class="o">{</span>
+</span><span class="line">    <span class="o">...</span>
 </span><span class="line">
-</span><span class="line">    testOptions {
-</span><span class="line">        resultsDir = "$project.buildDir/foo/results"
-</span><span class="line">    }
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line">    <span class="n">testOptions</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">resultsDir</span> <span class="o">=</span> <span class="s">&quot;$project.buildDir/foo/results&quot;</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><strong>The value of <code>android.testOptions.resultsDir</code> is evaluated with <code>Project.file(String)</code></strong></p>
 
@@ -275,20 +279,21 @@ Uninstall both apps.      </p>
 
 <p>The location can be customized with</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 <span class="line-number">6</span>
 <span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">android {
-</span><span class="line">    ...
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">android</span> <span class="o">{</span>
+</span><span class="line">    <span class="o">...</span>
 </span><span class="line">
-</span><span class="line">    testOptions {
-</span><span class="line">        reportDir = "$project.buildDir/foo/report"
-</span><span class="line">    }
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line">    <span class="n">testOptions</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">reportDir</span> <span class="o">=</span> <span class="s">&quot;$project.buildDir/foo/report&quot;</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>The report will aggregate tests that ran on different devices.</p>
 
@@ -300,7 +305,7 @@ Uninstall both apps.      </p>
 
 <p>To do this, a different plugin is available in the same artifact. It can be applied with:</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -311,17 +316,18 @@ Uninstall both apps.      </p>
 <span class="line-number">9</span>
 <span class="line-number">10</span>
 <span class="line-number">11</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">buildscript {
-</span><span class="line">    repositories {
-</span><span class="line">        mavenCentral()
-</span><span class="line">    }
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">buildscript</span> <span class="o">{</span>
+</span><span class="line">    <span class="n">repositories</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">mavenCentral</span><span class="o">()</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">    dependencies {
-</span><span class="line">        classpath 'com.android.tools.build:gradle:0.5.6'
-</span><span class="line">    }
-</span><span class="line">}
+</span><span class="line">    <span class="n">dependencies</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">classpath</span> <span class="err">&#39;</span><span class="n">com</span><span class="o">.</span><span class="na">android</span><span class="o">.</span><span class="na">tools</span><span class="o">.</span><span class="na">build</span><span class="o">:</span><span class="nl">gradle:</span><span class="mf">0.5</span><span class="o">.</span><span class="mi">6</span><span class="err">&#39;</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
 </span><span class="line">
-</span><span class="line">apply plugin: 'android-reporting'</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line"><span class="n">apply</span> <span class="nl">plugin:</span> <span class="err">&#39;</span><span class="n">android</span><span class="o">-</span><span class="n">reporting</span><span class="err">&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>This should be applied to the root project, ie in <code>build.gradle</code> next to <code>settings.gradle</code></p>
 
@@ -329,8 +335,9 @@ Uninstall both apps.      </p>
 
 <p>Then from the root folder, the following command line will run all the tests and aggregate the reports:</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">gradle deviceCheck mergeAndroidReports --continue</span></code></pre></td></tr></table></div></figure></notextile></div>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">gradle</span> <span class="n">deviceCheck</span> <span class="n">mergeAndroidReports</span> <span class="o">--</span><span class="k">continue</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Note: the <code>--continue</code> option ensure that all tests, from all sub-projects will be run even if one of them fails. Without it the first failing test will interrupt the run and not all projects may have their tests run.</p>
 
@@ -342,7 +349,7 @@ Uninstall both apps.      </p>
 
 <p>You can configure lint by adding a <code>lintOptions</code> section like following. You typically only specify a few of these; this section shows all the available options.</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -395,59 +402,60 @@ Uninstall both apps.      </p>
 <span class="line-number">51</span>
 <span class="line-number">52</span>
 <span class="line-number">53</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">android {
-</span><span class="line">    lintOptions {
-</span><span class="line">        // set to true to turn off analysis progress reporting by lint
-</span><span class="line">        quiet true
-</span><span class="line">        // if true, stop the gradle build if errors are found
-</span><span class="line">        abortOnError false
-</span><span class="line">        // if true, only report errors
-</span><span class="line">        ignoreWarnings true
-</span><span class="line">        // if true, emit full/absolute paths to files with errors (true by default)
-</span><span class="line">        //absolutePaths true
-</span><span class="line">        // if true, check all issues, including those that are off by default
-</span><span class="line">        checkAllWarnings true
-</span><span class="line">        // if true, treat all warnings as errors
-</span><span class="line">        warningsAsErrors true
-</span><span class="line">        // turn off checking the given issue id's
-</span><span class="line">        disable 'TypographyFractions','TypographyQuotes'
-</span><span class="line">        // turn on the given issue id's
-</span><span class="line">        enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
-</span><span class="line">        // check *only* the given issue id's
-</span><span class="line">        check 'NewApi', 'InlinedApi'
-</span><span class="line">        // if true, don't include source code lines in the error output
-</span><span class="line">        noLines true
-</span><span class="line">        // if true, show all locations for an error, do not truncate lists, etc.
-</span><span class="line">        showAll true
-</span><span class="line">        // Fallback lint configuration (default severities, etc.)
-</span><span class="line">        lintConfig file("default-lint.xml")
-</span><span class="line">        // if true, generate a text report of issues (false by default)
-</span><span class="line">        textReport true
-</span><span class="line">        // location to write the output; can be a file or 'stdout'
-</span><span class="line">        textOutput 'stdout'
-</span><span class="line">        // if true, generate an XML report for use by for example Jenkins
-</span><span class="line">        xmlReport false
-</span><span class="line">        // file to write report to (if not specified, defaults to lint-results.xml)
-</span><span class="line">        xmlOutput file("lint-report.xml")
-</span><span class="line">        // if true, generate an HTML report (with issue explanations, sourcecode, etc)
-</span><span class="line">        htmlReport true
-</span><span class="line">        // optional path to report (default will be lint-results.html in the builddir)
-</span><span class="line">        htmlOutput file("lint-report.html")
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">android</span> <span class="o">{</span>
+</span><span class="line">    <span class="n">lintOptions</span> <span class="o">{</span>
+</span><span class="line">        <span class="c1">// set to true to turn off analysis progress reporting by lint</span>
+</span><span class="line">        <span class="n">quiet</span> <span class="kc">true</span>
+</span><span class="line">        <span class="c1">// if true, stop the gradle build if errors are found</span>
+</span><span class="line">        <span class="n">abortOnError</span> <span class="kc">false</span>
+</span><span class="line">        <span class="c1">// if true, only report errors</span>
+</span><span class="line">        <span class="n">ignoreWarnings</span> <span class="kc">true</span>
+</span><span class="line">        <span class="c1">// if true, emit full/absolute paths to files with errors (true by default)</span>
+</span><span class="line">        <span class="c1">//absolutePaths true</span>
+</span><span class="line">        <span class="c1">// if true, check all issues, including those that are off by default</span>
+</span><span class="line">        <span class="n">checkAllWarnings</span> <span class="kc">true</span>
+</span><span class="line">        <span class="c1">// if true, treat all warnings as errors</span>
+</span><span class="line">        <span class="n">warningsAsErrors</span> <span class="kc">true</span>
+</span><span class="line">        <span class="c1">// turn off checking the given issue id&#39;s</span>
+</span><span class="line">        <span class="n">disable</span> <span class="err">&#39;</span><span class="n">TypographyFractions</span><span class="sc">&#39;,&#39;</span><span class="n">TypographyQuotes</span><span class="err">&#39;</span>
+</span><span class="line">        <span class="c1">// turn on the given issue id&#39;s</span>
+</span><span class="line">        <span class="n">enable</span> <span class="err">&#39;</span><span class="n">RtlHardcoded</span><span class="sc">&#39;,&#39;</span><span class="n">RtlCompat</span><span class="err">&#39;</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">RtlEnabled</span><span class="err">&#39;</span>
+</span><span class="line">        <span class="c1">// check *only* the given issue id&#39;s</span>
+</span><span class="line">        <span class="n">check</span> <span class="err">&#39;</span><span class="n">NewApi</span><span class="err">&#39;</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">InlinedApi</span><span class="err">&#39;</span>
+</span><span class="line">        <span class="c1">// if true, don&#39;t include source code lines in the error output</span>
+</span><span class="line">        <span class="n">noLines</span> <span class="kc">true</span>
+</span><span class="line">        <span class="c1">// if true, show all locations for an error, do not truncate lists, etc.</span>
+</span><span class="line">        <span class="n">showAll</span> <span class="kc">true</span>
+</span><span class="line">        <span class="c1">// Fallback lint configuration (default severities, etc.)</span>
+</span><span class="line">        <span class="n">lintConfig</span> <span class="nf">file</span><span class="o">(</span><span class="s">&quot;default-lint.xml&quot;</span><span class="o">)</span>
+</span><span class="line">        <span class="c1">// if true, generate a text report of issues (false by default)</span>
+</span><span class="line">        <span class="n">textReport</span> <span class="kc">true</span>
+</span><span class="line">        <span class="c1">// location to write the output; can be a file or &#39;stdout&#39;</span>
+</span><span class="line">        <span class="n">textOutput</span> <span class="err">&#39;</span><span class="n">stdout</span><span class="err">&#39;</span>
+</span><span class="line">        <span class="c1">// if true, generate an XML report for use by for example Jenkins</span>
+</span><span class="line">        <span class="n">xmlReport</span> <span class="kc">false</span>
+</span><span class="line">        <span class="c1">// file to write report to (if not specified, defaults to lint-results.xml)</span>
+</span><span class="line">        <span class="n">xmlOutput</span> <span class="nf">file</span><span class="o">(</span><span class="s">&quot;lint-report.xml&quot;</span><span class="o">)</span>
+</span><span class="line">        <span class="c1">// if true, generate an HTML report (with issue explanations, sourcecode, etc)</span>
+</span><span class="line">        <span class="n">htmlReport</span> <span class="kc">true</span>
+</span><span class="line">        <span class="c1">// optional path to report (default will be lint-results.html in the builddir)</span>
+</span><span class="line">        <span class="n">htmlOutput</span> <span class="nf">file</span><span class="o">(</span><span class="s">&quot;lint-report.html&quot;</span><span class="o">)</span>
 </span><span class="line">
-</span><span class="line">   // set to true to have all release builds run lint on issues with severity=fatal
-</span><span class="line">   // and abort the build (controlled by abortOnError above) if fatal issues are found
-</span><span class="line">   checkReleaseBuilds true
-</span><span class="line">        // Set the severity of the given issues to fatal (which means they will be
-</span><span class="line">        // checked during release builds (even if the lint target is not included)
-</span><span class="line">        fatal 'NewApi', 'InlineApi'
-</span><span class="line">        // Set the severity of the given issues to error
-</span><span class="line">        error 'Wakelock', 'TextViewEdits'
-</span><span class="line">        // Set the severity of the given issues to warning
-</span><span class="line">        warning 'ResourceAsColor'
-</span><span class="line">        // Set the severity of the given issues to ignore (same as disabling the check)
-</span><span class="line">        ignore 'TypographyQuotes'
-</span><span class="line">    }
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line">   <span class="c1">// set to true to have all release builds run lint on issues with severity=fatal</span>
+</span><span class="line">   <span class="c1">// and abort the build (controlled by abortOnError above) if fatal issues are found</span>
+</span><span class="line">   <span class="n">checkReleaseBuilds</span> <span class="kc">true</span>
+</span><span class="line">        <span class="c1">// Set the severity of the given issues to fatal (which means they will be</span>
+</span><span class="line">        <span class="c1">// checked during release builds (even if the lint target is not included)</span>
+</span><span class="line">        <span class="n">fatal</span> <span class="err">&#39;</span><span class="n">NewApi</span><span class="err">&#39;</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">InlineApi</span><span class="err">&#39;</span>
+</span><span class="line">        <span class="c1">// Set the severity of the given issues to error</span>
+</span><span class="line">        <span class="n">error</span> <span class="err">&#39;</span><span class="n">Wakelock</span><span class="err">&#39;</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">TextViewEdits</span><span class="err">&#39;</span>
+</span><span class="line">        <span class="c1">// Set the severity of the given issues to warning</span>
+</span><span class="line">        <span class="n">warning</span> <span class="err">&#39;</span><span class="n">ResourceAsColor</span><span class="err">&#39;</span>
+</span><span class="line">        <span class="c1">// Set the severity of the given issues to ignore (same as disabling the check)</span>
+</span><span class="line">        <span class="n">ignore</span> <span class="err">&#39;</span><span class="n">TypographyQuotes</span><span class="err">&#39;</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="build-variants">Build Variants</h3>
 
@@ -476,7 +484,7 @@ See <a href="http://developer.android.com/google/play/publishing/multiple-apks.h
 
 <p>Product flavors are declared using a productFlavors DSL container:</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -489,19 +497,20 @@ See <a href="http://developer.android.com/google/play/publishing/multiple-apks.h
 <span class="line-number">11</span>
 <span class="line-number">12</span>
 <span class="line-number">13</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">android {
-</span><span class="line">    ....
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">android</span> <span class="o">{</span>
+</span><span class="line">    <span class="o">....</span>
 </span><span class="line">
-</span><span class="line">    productFlavors {
-</span><span class="line">        flavor1 {
-</span><span class="line">            ...
-</span><span class="line">        }
+</span><span class="line">    <span class="n">productFlavors</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">flavor1</span> <span class="o">{</span>
+</span><span class="line">            <span class="o">...</span>
+</span><span class="line">        <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">        flavor2 {
-</span><span class="line">            ...
-</span><span class="line">        }
-</span><span class="line">    }
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line">        <span class="n">flavor2</span> <span class="o">{</span>
+</span><span class="line">            <span class="o">...</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>This creates two flavors, called flavor1 and flavor2.</p>
 
@@ -532,7 +541,7 @@ See <a href="http://developer.android.com/google/play/publishing/multiple-apks.h
 
 <p>Each flavors is configured with a closure:</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -552,26 +561,27 @@ See <a href="http://developer.android.com/google/play/publishing/multiple-apks.h
 <span class="line-number">18</span>
 <span class="line-number">19</span>
 <span class="line-number">20</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">android {
-</span><span class="line">    ...
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">android</span> <span class="o">{</span>
+</span><span class="line">    <span class="o">...</span>
 </span><span class="line">
-</span><span class="line">    defaultConfig {
-</span><span class="line">        minSdkVersion 8
-</span><span class="line">        versionCode 10
-</span><span class="line">    }
+</span><span class="line">    <span class="n">defaultConfig</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">minSdkVersion</span> <span class="mi">8</span>
+</span><span class="line">        <span class="n">versionCode</span> <span class="mi">10</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">    productFlavors {
-</span><span class="line">        flavor1 {
-</span><span class="line">            packageName "com.example.flavor1"
-</span><span class="line">            versionCode 20
-</span><span class="line">        }
+</span><span class="line">    <span class="n">productFlavors</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">flavor1</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">packageName</span> <span class="s">&quot;com.example.flavor1&quot;</span>
+</span><span class="line">            <span class="n">versionCode</span> <span class="mi">20</span>
+</span><span class="line">        <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">        flavor2 {
-</span><span class="line">            packageName "com.example.flavor2"
-</span><span class="line">            minSdkVersion 14
-</span><span class="line">        }
-</span><span class="line">    }
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line">        <span class="n">flavor2</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">packageName</span> <span class="s">&quot;com.example.flavor2&quot;</span>
+</span><span class="line">            <span class="n">minSdkVersion</span> <span class="mi">14</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>[ProductFlavor对象和<code>android.defaultConfig</code> 对象有相同的属性，即可以使用类似的配置方式]</p>
 
@@ -579,7 +589,7 @@ See <a href="http://developer.android.com/google/play/publishing/multiple-apks.h
 
 <p><code>defaultConfig</code> provides the base configuration for all flavors and each flavor can override any value. In the example above, the configurations end up being:</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -588,15 +598,16 @@ See <a href="http://developer.android.com/google/play/publishing/multiple-apks.h
 <span class="line-number">7</span>
 <span class="line-number">8</span>
 <span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">flavor1
-</span><span class="line">packageName: com.example.flavor1
-</span><span class="line">minSdkVersion: 8
-</span><span class="line">versionCode: 20
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">flavor1</span>
+</span><span class="line"><span class="nl">packageName:</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">flavor1</span>
+</span><span class="line"><span class="nl">minSdkVersion:</span> <span class="mi">8</span>
+</span><span class="line"><span class="nl">versionCode:</span> <span class="mi">20</span>
 </span><span class="line">
-</span><span class="line">flavor2
-</span><span class="line">packageName: com.example.flavor2
-</span><span class="line">minSdkVersion: 14
-</span><span class="line">versionCode: 10</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line"><span class="n">flavor2</span>
+</span><span class="line"><span class="nl">packageName:</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">flavor2</span>
+</span><span class="line"><span class="nl">minSdkVersion:</span> <span class="mi">14</span>
+</span><span class="line"><span class="nl">versionCode:</span> <span class="mi">10</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Usually, the Build Type configuration is an overlay over the other configuration. For instance, the Build Type’s packageNameSuffix is appended to the Product Flavor’s packageName.</p>
 
@@ -635,12 +646,13 @@ See <a href="http://developer.android.com/google/play/publishing/multiple-apks.h
 
 <p>5 Finally, like Build Types, Product Flavors can have their own dependencies. For instance, if the flavors are used to generate a ads-based app and a paid app, one of the flavors could have a dependency on an Ads SDK, while the other does not. [最后，build type和product flavor一样都可以有自己的依赖项]</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">dependencies {
-</span><span class="line">    flavor1Compile "..."
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">dependencies</span> <span class="o">{</span>
+</span><span class="line">    <span class="n">flavor1Compile</span> <span class="s">&quot;...&quot;</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>In this particular case, the file <code>src/flavor1/AndroidManifest.xml</code> would probably need to include the internet permission.</p>
 
@@ -690,12 +702,13 @@ See <a href="http://developer.android.com/google/play/publishing/multiple-apks.h
 
 <p>Similarly, those can have their own dependencies:</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">dependencies {
-</span><span class="line">    androidTestFlavor1Compile "..."
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">dependencies</span> <span class="o">{</span>
+</span><span class="line">    <span class="n">androidTestFlavor1Compile</span> <span class="s">&quot;...&quot;</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Running the tests can be done through the main <code>deviceCheck</code> anchor task, or the main <code>androidTest</code> tasks which acts as an anchor task when flavors are used.</p>
 
@@ -738,7 +751,7 @@ The location of the test results and reports is as follows, first for the per fl
 
 <p>This feature is implemented using Flavor Groups. Each group represents a dimension, and flavors are assigned to a specific group.</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -755,29 +768,30 @@ The location of the test results and reports is as follows, first for the per fl
 <span class="line-number">15</span>
 <span class="line-number">16</span>
 <span class="line-number">17</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">android {
-</span><span class="line">    ...
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">android</span> <span class="o">{</span>
+</span><span class="line">    <span class="o">...</span>
 </span><span class="line">
-</span><span class="line">    flavorGroups "abi", "version"
+</span><span class="line">    <span class="n">flavorGroups</span> <span class="s">&quot;abi&quot;</span><span class="o">,</span> <span class="s">&quot;version&quot;</span>
 </span><span class="line">
-</span><span class="line">    productFlavors {
-</span><span class="line">        freeapp {
-</span><span class="line">            flavorGroup "version"
-</span><span class="line">            ...
-</span><span class="line">        }
+</span><span class="line">    <span class="n">productFlavors</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">freeapp</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">flavorGroup</span> <span class="s">&quot;version&quot;</span>
+</span><span class="line">            <span class="o">...</span>
+</span><span class="line">        <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">        x86 {
-</span><span class="line">            flavorGroup "abi"
-</span><span class="line">            ...
-</span><span class="line">        }
-</span><span class="line">    }
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line">        <span class="n">x86</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">flavorGroup</span> <span class="s">&quot;abi&quot;</span>
+</span><span class="line">            <span class="o">...</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>The <code>android.flavorGroups</code> array defines the possible groups, as well as the order. Each defined Product Flavor is assigned to a group.</p>
 
 <p>From the following grouped Product Flavors <code>[freeapp, paidapp]</code> and <code>[x86, arm, mips]</code> and the <code>[debug, release]</code> Build Types, the following build variants will be created:</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -789,18 +803,19 @@ The location of the test results and reports is as follows, first for the per fl
 <span class="line-number">10</span>
 <span class="line-number">11</span>
 <span class="line-number">12</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">x86-freeapp-debug
-</span><span class="line">x86-freeapp-release
-</span><span class="line">arm-freeapp-debug
-</span><span class="line">arm-freeapp-release
-</span><span class="line">mips-freeapp-debug
-</span><span class="line">mips-freeapp-release
-</span><span class="line">x86-paidapp-debug
-</span><span class="line">x86-paidapp-release
-</span><span class="line">arm-paidapp-debug
-</span><span class="line">arm-paidapp-release
-</span><span class="line">mips-paidapp-debug
-</span><span class="line">mips-paidapp-release</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">x86</span><span class="o">-</span><span class="n">freeapp</span><span class="o">-</span><span class="n">debug</span>
+</span><span class="line"><span class="n">x86</span><span class="o">-</span><span class="n">freeapp</span><span class="o">-</span><span class="n">release</span>
+</span><span class="line"><span class="n">arm</span><span class="o">-</span><span class="n">freeapp</span><span class="o">-</span><span class="n">debug</span>
+</span><span class="line"><span class="n">arm</span><span class="o">-</span><span class="n">freeapp</span><span class="o">-</span><span class="n">release</span>
+</span><span class="line"><span class="n">mips</span><span class="o">-</span><span class="n">freeapp</span><span class="o">-</span><span class="n">debug</span>
+</span><span class="line"><span class="n">mips</span><span class="o">-</span><span class="n">freeapp</span><span class="o">-</span><span class="n">release</span>
+</span><span class="line"><span class="n">x86</span><span class="o">-</span><span class="n">paidapp</span><span class="o">-</span><span class="n">debug</span>
+</span><span class="line"><span class="n">x86</span><span class="o">-</span><span class="n">paidapp</span><span class="o">-</span><span class="n">release</span>
+</span><span class="line"><span class="n">arm</span><span class="o">-</span><span class="n">paidapp</span><span class="o">-</span><span class="n">debug</span>
+</span><span class="line"><span class="n">arm</span><span class="o">-</span><span class="n">paidapp</span><span class="o">-</span><span class="n">release</span>
+</span><span class="line"><span class="n">mips</span><span class="o">-</span><span class="n">paidapp</span><span class="o">-</span><span class="n">debug</span>
+</span><span class="line"><span class="n">mips</span><span class="o">-</span><span class="n">paidapp</span><span class="o">-</span><span class="n">release</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>The order of the group as defined by <code>android.flavorGroups</code> is very important.</p>
 
@@ -828,54 +843,57 @@ etc…</p>
 
 <h5 id="java-compilation-options">Java Compilation options</h5>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 <span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">android {
-</span><span class="line">    compileOptions {
-</span><span class="line">        sourceCompatibility = "1.6"
-</span><span class="line">        targetCompatibility = "1.6"
-</span><span class="line">    }
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">android</span> <span class="o">{</span>
+</span><span class="line">    <span class="n">compileOptions</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">sourceCompatibility</span> <span class="o">=</span> <span class="s">&quot;1.6&quot;</span>
+</span><span class="line">        <span class="n">targetCompatibility</span> <span class="o">=</span> <span class="s">&quot;1.6&quot;</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Default value is “1.6”. This affect all tasks compiling Java source code.</p>
 
 <h5 id="aapt-options">aapt options</h5>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 <span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">android {
-</span><span class="line">    aaptOptions {
-</span><span class="line">        noCompress 'foo', 'bar'
-</span><span class="line">        ignoreAssetsPattern "!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir&gt;_*:!CVS:!thumbs.db:!picasa.ini:!*~"
-</span><span class="line">    }
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">android</span> <span class="o">{</span>
+</span><span class="line">    <span class="n">aaptOptions</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">noCompress</span> <span class="err">&#39;</span><span class="n">foo</span><span class="err">&#39;</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">bar</span><span class="err">&#39;</span>
+</span><span class="line">        <span class="n">ignoreAssetsPattern</span> <span class="s">&quot;!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir&gt;_*:!CVS:!thumbs.db:!picasa.ini:!*~&quot;</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>This affects all tasks using aapt.</p>
 
 <h5 id="dex-options">dex options</h5>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 <span class="line-number">6</span>
 <span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">android {
-</span><span class="line">    dexOptions {
-</span><span class="line">        incremental false
-</span><span class="line">        preDexLibraries = false
-</span><span class="line">        jumboMode = false
-</span><span class="line">    }
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">android</span> <span class="o">{</span>
+</span><span class="line">    <span class="n">dexOptions</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">incremental</span> <span class="kc">false</span>
+</span><span class="line">        <span class="n">preDexLibraries</span> <span class="o">=</span> <span class="kc">false</span>
+</span><span class="line">        <span class="n">jumboMode</span> <span class="o">=</span> <span class="kc">false</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>This affects all tasks using dex.</p>
 
@@ -904,12 +922,13 @@ It’s easy to access from <code>build.gradle</code> by simply using <code>class
 
 <p>The <code>DomainObjectCollection</code> gives access to all the objects directly, or through filters which can be convenient.</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">android.applicationVariants.each { variant -&gt;
-</span><span class="line">    ....
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">android</span><span class="o">.</span><span class="na">applicationVariants</span><span class="o">.</span><span class="na">each</span> <span class="o">{</span> <span class="n">variant</span> <span class="o">-&gt;</span>
+</span><span class="line">    <span class="o">....</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>All three variant classes share the following properties:</p>
 
@@ -957,7 +976,7 @@ It’s easy to access from <code>build.gradle</code> by simply using <code>class
 
 <p>With <code>Android KitKat (buildToolsVersion 19)</code> you can use the <code>diamond operator</code>, <code>multi-catch</code>, <code>strings in switches</code>, <code>try with resources</code>, etc. To do this, add the following to your build file:</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -971,20 +990,21 @@ It’s easy to access from <code>build.gradle</code> by simply using <code>class
 <span class="line-number">12</span>
 <span class="line-number">13</span>
 <span class="line-number">14</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">android {
-</span><span class="line">    compileSdkVersion 19
-</span><span class="line">    buildToolsVersion "19.0.0"
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">android</span> <span class="o">{</span>
+</span><span class="line">    <span class="n">compileSdkVersion</span> <span class="mi">19</span>
+</span><span class="line">    <span class="n">buildToolsVersion</span> <span class="s">&quot;19.0.0&quot;</span>
 </span><span class="line">
-</span><span class="line">    defaultConfig {
-</span><span class="line">        minSdkVersion 7
-</span><span class="line">        targetSdkVersion 19
-</span><span class="line">    }
+</span><span class="line">    <span class="n">defaultConfig</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">minSdkVersion</span> <span class="mi">7</span>
+</span><span class="line">        <span class="n">targetSdkVersion</span> <span class="mi">19</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">    compileOptions {
-</span><span class="line">        sourceCompatibility JavaVersion.VERSION_1_7
-</span><span class="line">        targetCompatibility JavaVersion.VERSION_1_7
-</span><span class="line">    }
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line">    <span class="n">compileOptions</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">sourceCompatibility</span> <span class="n">JavaVersion</span><span class="o">.</span><span class="na">VERSION_1_7</span>
+</span><span class="line">        <span class="n">targetCompatibility</span> <span class="n">JavaVersion</span><span class="o">.</span><span class="na">VERSION_1_7</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Note that you can use <code>minSdkVersion</code> with a value earlier than 19, for all language features except <code>try with resources</code>. If you want to use <code>try with resources</code>, you will need to also use a <code>minSdkVersion</code> of 19.</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mobile | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/mobile/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-15T17:36:54+08:00</updated>
+  <updated>2014-10-15T17:39:27+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -51,7 +51,7 @@
 
 <p>As seen previously, those are configured in the defaultConfig object:</p>
 
-<p><code>
+<p><code>java
 android {
     defaultConfig {
         testPackageName "com.test.foo"
