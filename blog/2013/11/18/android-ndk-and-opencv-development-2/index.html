@@ -144,9 +144,7 @@
   <li><a href="http://docs.oracle.com/javase/6/docs/technotes/tools/windows/javah.html">javah命令：查看命令详细参数</a>：  </li>
 </ul>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">javah</span> <span class="n">produces</span> <span class="n">C</span> <span class="n">header</span> <span class="n">files</span> <span class="n">and</span> <span class="n">C</span> <span class="n">source</span> <span class="n">files</span> <span class="n">from</span> <span class="n">a</span> <span class="n">Java</span> <span class="n">class</span><span class="o">.</span> <span class="n">These</span> <span class="n">files</span> <span class="n">provide</span> <span class="n">the</span> <span class="n">connective</span> <span class="n">glue</span> <span class="n">that</span> <span class="n">allow</span> <span class="n">your</span> <span class="n">Java</span> <span class="n">and</span> <span class="n">C</span> <span class="n">code</span> <span class="n">to</span> <span class="n">interact</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p><code>javah produces C header files and C source files from a Java class. These files provide the connective glue that allow your Java and C code to interact.</code></p>
 
 <ul>
   <li>在Eclipse中配置<strong>万能的javah工具</strong>的方法</li>
@@ -180,17 +178,16 @@
 <p>Android.mk文件是用来描述源代码是如何进行编译的，<strong>ndk-build命令实际上对GNU Make命令的一个封装</strong>，所以，Android.mk文件的写法就类似Makefile的写法[关于Make的详细内容可以看这本书，[GNU Make的中文手册]，虽然是今年读的，但是我记得的也不多了，老了老了…] <br />
 Android.mk文件可以生成一个动态链接库或者一个静态链接库，但是只有动态链接库是会复制到应用的安装包中的，静态库一般是用来生成其他的动态链接库的。你可以在一个Android.mk文件定义一个或者多个module，不同的module可以使用相同的source file进行编译得到。你不需要列出头文件，也不需要显示指明要生成的目标文件之间的依赖关系(这些内容在GNU Make中是很重要的，虽然GNU Make中的隐式规则也可以做到)。下面以hello-jni项目中的Android.mk文件为例讲解其中重要的几点。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">LOCAL_PATH</span> <span class="o">:=</span> <span class="n">$</span><span class="o">(</span><span class="n">call</span> <span class="n">my</span><span class="o">-</span><span class="n">dir</span><span class="o">)</span>
-</span><span class="line"><span class="n">include</span> <span class="n">$</span><span class="o">(</span><span class="n">CLEAR_VARS</span><span class="o">)</span>
-</span><span class="line"><span class="n">LOCAL_MODULE</span>    <span class="o">:=</span> <span class="n">hello</span><span class="o">-</span><span class="n">jni</span>
-</span><span class="line"><span class="n">LOCAL_SRC_FILES</span> <span class="o">:=</span> <span class="n">hello</span><span class="o">-</span><span class="n">jni</span><span class="o">.</span><span class="na">c</span>
-</span><span class="line"><span class="n">include</span> <span class="n">$</span><span class="o">(</span><span class="n">BUILD_SHARED_LIBRARY</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class=""><span class="line">LOCAL_PATH := $(call my-dir)
+</span><span class="line">include $(CLEAR_VARS)
+</span><span class="line">LOCAL_MODULE    := hello-jni
+</span><span class="line">LOCAL_SRC_FILES := hello-jni.c
+</span><span class="line">include $(BUILD_SHARED_LIBRARY)</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>①<code>LOCAL_PATH := $(call my-dir)</code>：Android.mk文件的第一行必须要指明<code>LOCAL_PATH</code>，<code>my-dir</code>是编译系统提供的一个宏函数，这个宏函数会返回当前Android.mk文件所在的目录</p>
 
@@ -200,29 +197,27 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 
 <p>④<code>LOCAL_SRC_FILES := hello-jni.c</code>：指定C/C++源文件列表，不要包含头文件。如果需要自定义C++源文件的后缀，可以配置<code>LOCAL_CPP_EXTENSION</code>参数。注意写法，我给个例子，一定要记住每行后面加上一个反斜线符，并且反斜线符后面不能再有任何内容，否则编译会报错！</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">LOCAL_SRC_FILES</span> <span class="o">:=</span> <span class="n">hello</span><span class="o">-</span><span class="n">jni</span><span class="o">.</span><span class="na">c</span> <span class="err">\</span>
-</span><span class="line"><span class="n">foo</span><span class="o">.</span><span class="na">c</span>  <span class="err">\</span>
-</span><span class="line"><span class="n">boo</span><span class="o">.</span><span class="na">cpp</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class=""><span class="line">LOCAL_SRC_FILES := hello-jni.c \
+</span><span class="line">foo.c  \
+</span><span class="line">boo.cpp</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>⑤<code>include $(BUILD_SHARED_LIBRARY)</code>：<code>BUILD_SHARED_LIBRARY</code>是编译系统提供的一个Makefile文件，它会根据你前面提供的参数来生成动态链接库，同理，如果是<code>BUILD_STATIC_LIBRARY</code>的话，便是生成静态链接库。</p>
 
 <p><strong>最佳实践</strong>：一般来说，<code>LOCAL_</code>作为前缀的一般定义LOCAL Module的变量，<code>PRIVATE_</code>或者<code>NDK_</code>或者<code>APP_</code>一般定义内部使用的变量，<code>lower-case</code>小写字母的名称一般也是定义内部使用的变量或者函数。如果你要在Android.mk文件定义自己的变量，建议使用<code>MY_</code>作为前缀！</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">MY_SOURCES</span> <span class="o">:=</span> <span class="n">foo</span><span class="o">.</span><span class="na">c</span>
-</span><span class="line"><span class="n">ifneq</span> <span class="o">(</span><span class="n">$</span><span class="o">(</span><span class="n">MY_CONFIG_BAR</span><span class="o">),)</span>
-</span><span class="line">   <span class="n">MY_SOURCES</span> <span class="o">+=</span> <span class="n">bar</span><span class="o">.</span><span class="na">c</span>
-</span><span class="line"><span class="n">endif</span>
-</span><span class="line"><span class="n">LOCAL_SRC_FILES</span> <span class="o">+=</span> <span class="n">$</span><span class="o">(</span><span class="n">MY_SOURCES</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class=""><span class="line">MY_SOURCES := foo.c
+</span><span class="line">ifneq ($(MY_CONFIG_BAR),)
+</span><span class="line">   MY_SOURCES += bar.c
+</span><span class="line">endif
+</span><span class="line">LOCAL_SRC_FILES += $(MY_SOURCES)</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Android.mk这篇文章中后面详细介绍了很多编译系统内置的变量和函数，以及该文件内可以设置的变量，此处就不再赘述了。</p>
 
@@ -238,7 +233,7 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 
 <p>③<code>APP_ABI</code>：这个参数很重要，默认情况下，ndk-build将生成对应<code>armeabi</code>CPU架构的库文件，你可以指定其他的CPU架构，或者同时指定多个(自从NDK r7之后，设置为<code>all</code>可以生成所有CPU架构的库文件)！关于不同CPU架构的介绍在<code>CPU Arch ABIs</code>中介绍了，我不是很懂，此文不细讲。如果想要查看某个android设备是什么CPU架构，可以上网查设备的资料，或者通过执行<code>adb shell getprop ro.product.cpu.abi</code>得到，下面这段摘自<a href="http://docs.opencv.org/doc/tutorials/introduction/android_binary_package/O4A_SDK.html">OpenCV for Android SDK</a></p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -247,49 +242,46 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 <span class="line-number">7</span>
 <span class="line-number">8</span>
 <span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">armeabi</span><span class="o">,</span> <span class="n">armv7a</span><span class="o">-</span><span class="n">neon</span><span class="o">,</span> <span class="n">arm7a</span><span class="o">-</span><span class="n">neon</span><span class="o">-</span><span class="n">android8</span><span class="o">,</span> <span class="n">mips</span> <span class="n">and</span> <span class="n">x86</span> <span class="n">stand</span> <span class="n">forplatform</span> <span class="nl">targets:</span>
-</span><span class="line">   <span class="o">*</span> <span class="n">armeabi</span> <span class="n">is</span> <span class="k">for</span> <span class="n">ARM</span> <span class="n">v5</span> <span class="n">and</span> <span class="n">ARM</span> <span class="n">v6</span> <span class="n">architectures</span> <span class="n">with</span> <span class="n">Android</span> <span class="n">API</span> <span class="mi">8</span><span class="o">+,</span>
-</span><span class="line">   <span class="o">*</span> <span class="n">armv7a</span><span class="o">-</span><span class="n">neon</span> <span class="n">is</span> <span class="k">for</span> <span class="n">NEON</span><span class="o">-</span><span class="n">optimized</span> <span class="n">ARM</span> <span class="n">v7</span> <span class="n">with</span> <span class="n">Android</span> <span class="n">API</span> <span class="mi">9</span><span class="o">+,</span>
-</span><span class="line">   <span class="o">*</span> <span class="n">arm7a</span><span class="o">-</span><span class="n">neon</span><span class="o">-</span><span class="n">android8</span> <span class="n">is</span> <span class="k">for</span> <span class="n">NEON</span><span class="o">-</span><span class="n">optimized</span> <span class="n">ARM</span> <span class="n">v7</span> <span class="n">with</span> <span class="n">Android</span> <span class="n">API</span> <span class="mi">8</span><span class="o">,</span>
-</span><span class="line">   <span class="o">*</span> <span class="n">mips</span> <span class="n">is</span> <span class="k">for</span> <span class="n">MIPS</span> <span class="n">architecture</span> <span class="n">with</span> <span class="n">Android</span> <span class="n">API</span> <span class="mi">9</span><span class="o">+,</span>
-</span><span class="line">   <span class="o">*</span> <span class="n">x86</span> <span class="n">is</span> <span class="k">for</span> <span class="n">Intel</span> <span class="n">x86</span> <span class="n">CPUs</span> <span class="n">with</span> <span class="n">Android</span> <span class="n">API</span> <span class="mi">9</span><span class="o">+.</span>
-</span><span class="line"><span class="n">If</span> <span class="n">using</span> <span class="n">hardware</span> <span class="n">device</span> <span class="k">for</span> <span class="n">testing</span><span class="o">/</span><span class="n">debugging</span><span class="o">,</span> <span class="n">run</span> <span class="n">the</span> <span class="n">following</span> <span class="n">command</span> <span class="n">to</span> <span class="n">learnits</span> <span class="n">CPU</span> <span class="nl">architecture:</span>
-</span><span class="line"><span class="o">***</span> <span class="n">adb</span> <span class="n">shell</span> <span class="n">getprop</span> <span class="n">ro</span><span class="o">.</span><span class="na">product</span><span class="o">.</span><span class="na">cpu</span><span class="o">.</span><span class="na">abi</span> <span class="o">***</span>
-</span><span class="line"><span class="n">If</span> <span class="n">you</span><span class="err">’</span><span class="n">re</span> <span class="n">using</span> <span class="n">an</span> <span class="n">AVD</span> <span class="n">emulator</span><span class="o">,</span> <span class="n">go</span> <span class="n">Window</span> <span class="o">&gt;</span> <span class="n">AVD</span> <span class="n">Manager</span> <span class="n">to</span> <span class="n">see</span> <span class="n">thelist</span> <span class="n">of</span> <span class="n">availible</span> <span class="n">devices</span><span class="o">.</span> <span class="n">Click</span> <span class="n">Edit</span> <span class="n">in</span> <span class="n">the</span> <span class="n">context</span> <span class="n">menu</span> <span class="n">of</span> <span class="n">theselected</span> <span class="n">device</span><span class="o">.</span> <span class="n">In</span> <span class="n">the</span> <span class="n">window</span><span class="o">,</span> <span class="n">which</span> <span class="n">then</span> <span class="n">pop</span><span class="o">-</span><span class="n">ups</span><span class="o">,</span> <span class="n">find</span> <span class="n">the</span> <span class="n">CPU</span> <span class="n">field</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class=""><span class="line">armeabi, armv7a-neon, arm7a-neon-android8, mips and x86 stand forplatform targets:
+</span><span class="line">   * armeabi is for ARM v5 and ARM v6 architectures with Android API 8+,
+</span><span class="line">   * armv7a-neon is for NEON-optimized ARM v7 with Android API 9+,
+</span><span class="line">   * arm7a-neon-android8 is for NEON-optimized ARM v7 with Android API 8,
+</span><span class="line">   * mips is for MIPS architecture with Android API 9+,
+</span><span class="line">   * x86 is for Intel x86 CPUs with Android API 9+.
+</span><span class="line">If using hardware device for testing/debugging, run the following command to learnits CPU architecture:
+</span><span class="line">*** adb shell getprop ro.product.cpu.abi ***
+</span><span class="line">If you’re using an AVD emulator, go Window &gt; AVD Manager to see thelist of availible devices. Click Edit in the context menu of theselected device. In the window, which then pop-ups, find the CPU field.</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>④<code>APP_STL</code>：指定STL，默认情况下ndk编译系统使用最精简的C++运行时库<code>/system/lib/libstdc++.so</code>，但是你可以指定其他的。详细的内容可以查看<code>$NDK/docs/CPLUSPLUS-SUPPORT.html</code>文件，这个文件可能并没有列出在document.html中！</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 <span class="line-number">6</span>
 <span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">system</span>          <span class="o">-&gt;</span> <span class="n">Use</span> <span class="n">the</span> <span class="k">default</span> <span class="n">minimal</span> <span class="n">system</span> <span class="n">C</span><span class="o">++</span> <span class="n">runtime</span> <span class="n">library</span><span class="o">.</span>
-</span><span class="line"><span class="n">gabi</span><span class="o">++</span><span class="n">_static</span>   <span class="o">-&gt;</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">GAbi</span><span class="o">++</span> <span class="n">runtime</span> <span class="n">as</span> <span class="n">a</span> <span class="kd">static</span> <span class="n">library</span><span class="o">.</span>
-</span><span class="line"><span class="n">gabi</span><span class="o">++</span><span class="n">_shared</span>   <span class="o">-&gt;</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">GAbi</span><span class="o">++</span> <span class="n">runtime</span> <span class="n">as</span> <span class="n">a</span> <span class="n">shared</span> <span class="n">library</span><span class="o">.</span>
-</span><span class="line"><span class="n">stlport_static</span>  <span class="o">-&gt;</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">STLport</span> <span class="n">runtime</span> <span class="n">as</span> <span class="n">a</span> <span class="kd">static</span> <span class="n">library</span><span class="o">.</span>
-</span><span class="line"><span class="n">stlport_shared</span>  <span class="o">-&gt;</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">STLport</span> <span class="n">runtime</span> <span class="n">as</span> <span class="n">a</span> <span class="n">shared</span> <span class="n">library</span><span class="o">.</span>
-</span><span class="line"><span class="n">gnustl_static</span>   <span class="o">-&gt;</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">GNU</span> <span class="n">STL</span> <span class="n">as</span> <span class="n">a</span> <span class="kd">static</span> <span class="n">library</span><span class="o">.</span>
-</span><span class="line"><span class="n">gnustl_shared</span>   <span class="o">-&gt;</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">GNU</span> <span class="n">STL</span> <span class="n">as</span> <span class="n">a</span> <span class="n">shared</span> <span class="n">library</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class=""><span class="line">system          -&gt; Use the default minimal system C++ runtime library.
+</span><span class="line">gabi++_static   -&gt; Use the GAbi++ runtime as a static library.
+</span><span class="line">gabi++_shared   -&gt; Use the GAbi++ runtime as a shared library.
+</span><span class="line">stlport_static  -&gt; Use the STLport runtime as a static library.
+</span><span class="line">stlport_shared  -&gt; Use the STLport runtime as a shared library.
+</span><span class="line">gnustl_static   -&gt; Use the GNU STL as a static library.
+</span><span class="line">gnustl_shared   -&gt; Use the GNU STL as a shared library.</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p>我们可以从下面的表格中看出它们对C++语言特性的支持程度：  </p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 <span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class="java"><span class="line">         <span class="n">C</span><span class="o">++</span>       <span class="n">C</span><span class="o">++</span>   <span class="n">Standard</span>
-</span><span class="line">       <span class="n">Exceptions</span>  <span class="n">RTTI</span>    <span class="n">Library</span>
-</span><span class="line"><span class="n">system</span>        <span class="n">no</span>       <span class="n">no</span>        <span class="n">no</span>
-</span><span class="line"><span class="n">gabi</span><span class="o">++</span>       <span class="n">yes</span>      <span class="n">yes</span>        <span class="n">no</span>
-</span><span class="line"><span class="n">stlport</span>      <span class="n">yes</span>      <span class="n">yes</span>       <span class="n">yes</span>
-</span><span class="line"><span class="n">gnustl</span>       <span class="n">yes</span>      <span class="n">yes</span>       <span class="n">yes</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class=""><span class="line">         C++       C++   Standard
+</span><span class="line">       Exceptions  RTTI    Library
+</span><span class="line">system        no       no        no
+</span><span class="line">gabi++       yes      yes        no
+</span><span class="line">stlport      yes      yes       yes
+</span><span class="line">gnustl       yes      yes       yes</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>从中我们可以看出gnustl很不错，所以一般会配置为gnustl_static。如果选用的是gnustl的话，一般还需要在<code>C/C++ General</code>下的<code>Paths and Symbols</code>中的<code>GNU C</code>和<code>GNU C++</code>配置里添加<code>${NDKROOT}/sources/cxx-stl/gnu-libstdc++/4.6/include</code> 和 <code>${NDKROOT}/sources/cxx-stl/gnu-libstdc++/4.6/libs/armeabi-v7a/include</code> 这两项。</p>
 
@@ -303,7 +295,7 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 
 <p>build system会自动加载C库，Math库以及C++支持库，所以你不需要通过<code>LOCAL_LDLIBS</code>指定加载他们。Android系统下有多个<code>API level</code>，每个<code>API level</code>都对应了一个Android的发布系统，对应关系如下所示。其中<code>android-6</code>，<code>android-7</code>和<code>android-5</code>是一样的NDK，也就是说他们提供的是相同的native ABIs。对应<code>API level</code>的头文件都放在了<code>$NDK/platforms/android-&lt;level&gt;/arch-arm/usr/include</code>目录下，这正是上一节中导入的项目中在<code>C/C++ General</code>下的<code>Paths and Symbols</code>中的<code>GNU C</code>和<code>GNU C++</code>配置。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -322,26 +314,25 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 <span class="line-number">17</span>
 <span class="line-number">18</span>
 <span class="line-number">19</span>
-</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">Note</span> <span class="n">that</span> <span class="n">the</span> <span class="n">build</span> <span class="n">system</span> <span class="n">automatically</span> <span class="n">links</span> <span class="n">the</span> <span class="n">C</span> <span class="n">library</span><span class="o">,</span> <span class="n">the</span> <span class="n">Math</span>
-</span><span class="line"><span class="n">library</span> <span class="n">and</span> <span class="n">the</span> <span class="n">C</span><span class="o">++</span> <span class="n">support</span> <span class="n">library</span> <span class="n">to</span> <span class="n">your</span> <span class="kd">native</span> <span class="n">code</span><span class="o">,</span> <span class="n">there</span> <span class="n">is</span> <span class="n">no</span>
-</span><span class="line"><span class="n">need</span> <span class="n">to</span> <span class="n">list</span> <span class="n">them</span> <span class="n">in</span> <span class="n">a</span> <span class="n">LOCAL_LDLIBS</span> <span class="n">line</span><span class="o">.</span>
-</span><span class="line"><span class="n">There</span> <span class="n">are</span> <span class="n">several</span> <span class="s">&quot;API Levels&quot;</span> <span class="n">defined</span><span class="o">.</span> <span class="n">Each</span> <span class="n">API</span> <span class="n">level</span> <span class="n">corresponds</span> <span class="n">to</span>
-</span><span class="line"><span class="n">a</span> <span class="n">given</span> <span class="n">Android</span> <span class="n">system</span> <span class="n">platform</span> <span class="n">release</span><span class="o">.</span> <span class="n">The</span> <span class="n">following</span> <span class="n">levels</span> <span class="n">are</span>
-</span><span class="line"><span class="n">currently</span> <span class="nl">supported:</span>
-</span><span class="line">    <span class="n">android</span><span class="o">-</span><span class="mi">3</span>      <span class="o">-&gt;</span> <span class="n">Official</span> <span class="n">Android</span> <span class="mf">1.5</span> <span class="n">system</span> <span class="n">images</span>
-</span><span class="line">    <span class="n">android</span><span class="o">-</span><span class="mi">4</span>      <span class="o">-&gt;</span> <span class="n">Official</span> <span class="n">Android</span> <span class="mf">1.6</span> <span class="n">system</span> <span class="n">images</span>
-</span><span class="line">    <span class="n">android</span><span class="o">-</span><span class="mi">5</span>      <span class="o">-&gt;</span> <span class="n">Official</span> <span class="n">Android</span> <span class="mf">2.0</span> <span class="n">system</span> <span class="n">images</span>
-</span><span class="line">    <span class="n">android</span><span class="o">-</span><span class="mi">6</span>      <span class="o">-&gt;</span> <span class="n">Official</span> <span class="n">Android</span> <span class="mf">2.0</span><span class="o">.</span><span class="mi">1</span> <span class="n">system</span> <span class="n">images</span>
-</span><span class="line">    <span class="n">android</span><span class="o">-</span><span class="mi">7</span>      <span class="o">-&gt;</span> <span class="n">Official</span> <span class="n">Android</span> <span class="mf">2.1</span> <span class="n">system</span> <span class="n">images</span>
-</span><span class="line">    <span class="n">android</span><span class="o">-</span><span class="mi">8</span>      <span class="o">-&gt;</span> <span class="n">Official</span> <span class="n">Android</span> <span class="mf">2.2</span> <span class="n">system</span> <span class="n">images</span>
-</span><span class="line">    <span class="n">android</span><span class="o">-</span><span class="mi">9</span>      <span class="o">-&gt;</span> <span class="n">Official</span> <span class="n">Android</span> <span class="mf">2.3</span> <span class="n">system</span> <span class="n">images</span>
-</span><span class="line">    <span class="n">android</span><span class="o">-</span><span class="mi">14</span>     <span class="o">-&gt;</span> <span class="n">Official</span> <span class="n">Android</span> <span class="mf">4.0</span> <span class="n">system</span> <span class="n">images</span>
-</span><span class="line"><span class="n">Note</span> <span class="n">that</span> <span class="n">android</span><span class="o">-</span><span class="mi">6</span> <span class="n">and</span> <span class="n">android</span><span class="o">-</span><span class="mi">7</span> <span class="n">are</span> <span class="n">the</span> <span class="n">same</span> <span class="n">as</span> <span class="n">android</span><span class="o">-</span><span class="mi">5</span> <span class="k">for</span> <span class="n">the</span> <span class="n">NDK</span><span class="o">,</span>
-</span><span class="line"><span class="n">i</span><span class="o">.</span><span class="na">e</span><span class="o">.</span> <span class="n">they</span> <span class="n">provide</span> <span class="n">exactly</span> <span class="n">the</span> <span class="n">same</span> <span class="kd">native</span> <span class="n">ABIs</span><span class="o">!</span>
-</span><span class="line"><span class="nl">IMPORTANT:</span>
-</span><span class="line">    <span class="n">The</span> <span class="n">headers</span> <span class="n">corresponding</span> <span class="n">to</span> <span class="n">a</span> <span class="n">given</span> <span class="n">API</span> <span class="n">level</span> <span class="n">are</span> <span class="n">now</span> <span class="n">located</span>
-</span><span class="line">    <span class="n">under</span> <span class="n">$NDK</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">android</span><span class="o">-&lt;</span><span class="n">level</span><span class="o">&gt;/</span><span class="n">arch</span><span class="o">-</span><span class="n">arm</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">include</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class=""><span class="line">Note that the build system automatically links the C library, the Math
+</span><span class="line">library and the C++ support library to your native code, there is no
+</span><span class="line">need to list them in a LOCAL_LDLIBS line.
+</span><span class="line">There are several "API Levels" defined. Each API level corresponds to
+</span><span class="line">a given Android system platform release. The following levels are
+</span><span class="line">currently supported:
+</span><span class="line">    android-3      -&gt; Official Android 1.5 system images
+</span><span class="line">    android-4      -&gt; Official Android 1.6 system images
+</span><span class="line">    android-5      -&gt; Official Android 2.0 system images
+</span><span class="line">    android-6      -&gt; Official Android 2.0.1 system images
+</span><span class="line">    android-7      -&gt; Official Android 2.1 system images
+</span><span class="line">    android-8      -&gt; Official Android 2.2 system images
+</span><span class="line">    android-9      -&gt; Official Android 2.3 system images
+</span><span class="line">    android-14     -&gt; Official Android 4.0 system images
+</span><span class="line">Note that android-6 and android-7 are the same as android-5 for the NDK,
+</span><span class="line">i.e. they provide exactly the same native ABIs!
+</span><span class="line">IMPORTANT:
+</span><span class="line">    The headers corresponding to a given API level are now located
+</span><span class="line">    under $NDK/platforms/android-&lt;level&gt;/arch-arm/usr/include</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>介绍几个比较重要的库：<br />
 (1)C库(libc)：不需要指定 –lpthread –lrt，也就是说它会自动链接<br />
@@ -351,7 +342,7 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 (5)Android log(liblog)：<strong>需要</strong>指定 –llog<br />
 (6)Jnigraphics库(libjnigraphics)：这个C语言库提供了对Java中Bitmap的操作，<strong>需要</strong>指定 –ljnigraphics，这个库是<code>android-8</code>新增加的内容，典型的使用方式是：  </p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -360,20 +351,19 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 <span class="line-number">7</span>
 <span class="line-number">8</span>
 <span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">Briefly</span><span class="o">,</span> <span class="n">typical</span> <span class="n">usage</span> <span class="n">should</span> <span class="n">look</span> <span class="nl">like:</span>
-</span><span class="line">    <span class="mi">1</span><span class="o">/</span> <span class="n">Use</span> <span class="n">AndroidBitmap_getInfo</span><span class="o">()</span> <span class="n">to</span> <span class="n">retrieve</span> <span class="n">information</span> <span class="n">about</span> <span class="n">a</span>
-</span><span class="line">       <span class="n">given</span> <span class="n">bitmap</span> <span class="n">handle</span> <span class="n">from</span> <span class="nf">JNI</span> <span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">g</span><span class="o">.</span> <span class="n">its</span> <span class="n">width</span><span class="o">/</span><span class="n">height</span><span class="o">/</span><span class="n">pixel</span> <span class="n">format</span><span class="o">)</span>
-</span><span class="line">    <span class="mi">2</span><span class="o">/</span> <span class="n">Use</span> <span class="n">AndroidBitmap_lockPixels</span><span class="o">()</span> <span class="n">to</span> <span class="n">lock</span> <span class="n">the</span> <span class="n">pixel</span> <span class="n">buffer</span> <span class="n">and</span>
-</span><span class="line">       <span class="n">retrieve</span> <span class="n">a</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">it</span><span class="o">.</span> <span class="n">This</span> <span class="n">ensures</span> <span class="n">the</span> <span class="n">pixels</span> <span class="n">will</span> <span class="n">not</span> <span class="n">move</span>
-</span><span class="line">       <span class="n">until</span> <span class="nf">AndroidBitmap_unlockPixels</span><span class="o">()</span> <span class="n">is</span> <span class="n">called</span><span class="o">.</span>
-</span><span class="line">    <span class="mi">3</span><span class="o">/</span> <span class="n">Modify</span> <span class="n">the</span> <span class="n">pixel</span> <span class="n">buffer</span><span class="o">,</span> <span class="n">according</span> <span class="n">to</span> <span class="n">its</span> <span class="n">pixel</span> <span class="n">format</span><span class="o">,</span> <span class="n">width</span><span class="o">,</span>
-</span><span class="line">       <span class="n">stride</span><span class="o">,</span> <span class="n">etc</span><span class="o">..,</span> <span class="n">in</span> <span class="kd">native</span> <span class="n">code</span><span class="o">.</span>
-</span><span class="line">    <span class="mi">4</span><span class="o">/</span> <span class="n">Call</span> <span class="n">AndroidBitmap_unlockPixels</span><span class="o">()</span> <span class="n">to</span> <span class="n">unlock</span> <span class="n">the</span> <span class="n">buffer</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class=""><span class="line">Briefly, typical usage should look like:
+</span><span class="line">    1/ Use AndroidBitmap_getInfo() to retrieve information about a
+</span><span class="line">       given bitmap handle from JNI (e.g. its width/height/pixel format)
+</span><span class="line">    2/ Use AndroidBitmap_lockPixels() to lock the pixel buffer and
+</span><span class="line">       retrieve a pointer to it. This ensures the pixels will not move
+</span><span class="line">       until AndroidBitmap_unlockPixels() is called.
+</span><span class="line">    3/ Modify the pixel buffer, according to its pixel format, width,
+</span><span class="line">       stride, etc.., in native code.
+</span><span class="line">    4/ Call AndroidBitmap_unlockPixels() to unlock the buffer.</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>(7)The Android native application APIs：<code>android-9</code>新增加的内容，这些API使得你可以完全使用native code编写android app，但是一般情况下还是需要通过jni的，相关API如下：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -408,62 +398,62 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 <span class="line-number">33</span>
 <span class="line-number">34</span>
 <span class="line-number">35</span>
-</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">The</span> <span class="n">following</span> <span class="n">headers</span> <span class="n">correspond</span> <span class="n">to</span> <span class="n">these</span> <span class="k">new</span> <span class="kd">native</span> <span class="nf">APIs</span> <span class="o">(</span><span class="n">see</span> <span class="n">comments</span>
-</span><span class="line"><span class="n">inside</span> <span class="n">them</span> <span class="k">for</span> <span class="n">more</span> <span class="n">details</span><span class="o">):</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">The following headers correspond to these new native APIs (see comments
+</span><span class="line">inside them for more details):
 </span><span class="line">
-</span><span class="line">  <span class="o">&lt;</span><span class="n">android</span><span class="o">/</span><span class="n">native_activity</span><span class="o">.</span><span class="na">h</span><span class="o">&gt;</span>
+</span><span class="line">  &lt;android/native_activity.h&gt;
 </span><span class="line">
-</span><span class="line">        <span class="n">Activity</span> <span class="n">lifecycle</span> <span class="nf">management</span> <span class="o">(</span><span class="n">and</span> <span class="n">general</span> <span class="n">entry</span> <span class="n">point</span><span class="o">)</span>
+</span><span class="line">        Activity lifecycle management (and general entry point)
 </span><span class="line">
-</span><span class="line">  <span class="o">&lt;</span><span class="n">android</span><span class="o">/</span><span class="n">looper</span><span class="o">.</span><span class="na">h</span><span class="o">&gt;</span>
-</span><span class="line">  <span class="o">&lt;</span><span class="n">android</span><span class="o">/</span><span class="n">input</span><span class="o">.</span><span class="na">h</span><span class="o">&gt;</span>
-</span><span class="line">  <span class="o">&lt;</span><span class="n">android</span><span class="o">/</span><span class="n">keycodes</span><span class="o">.</span><span class="na">h</span><span class="o">&gt;</span>
-</span><span class="line">  <span class="o">&lt;</span><span class="n">android</span><span class="o">/</span><span class="n">sensor</span><span class="o">.</span><span class="na">h</span><span class="o">&gt;</span>
+</span><span class="line">  &lt;android/looper.h&gt;
+</span><span class="line">  &lt;android/input.h&gt;
+</span><span class="line">  &lt;android/keycodes.h&gt;
+</span><span class="line">  &lt;android/sensor.h&gt;
 </span><span class="line">
-</span><span class="line">        <span class="n">To</span> <span class="n">Listen</span> <span class="n">to</span> <span class="n">input</span> <span class="n">events</span> <span class="n">and</span> <span class="n">sensors</span> <span class="n">directly</span> <span class="n">from</span> <span class="kd">native</span> <span class="n">code</span><span class="o">.</span>
+</span><span class="line">        To Listen to input events and sensors directly from native code.
 </span><span class="line">
-</span><span class="line">  <span class="o">&lt;</span><span class="n">android</span><span class="o">/</span><span class="n">rect</span><span class="o">.</span><span class="na">h</span><span class="o">&gt;</span>
-</span><span class="line">  <span class="o">&lt;</span><span class="n">android</span><span class="o">/</span><span class="n">window</span><span class="o">.</span><span class="na">h</span><span class="o">&gt;</span>
-</span><span class="line">  <span class="o">&lt;</span><span class="n">android</span><span class="o">/</span><span class="n">native_window</span><span class="o">.</span><span class="na">h</span><span class="o">&gt;</span>
-</span><span class="line">  <span class="o">&lt;</span><span class="n">android</span><span class="o">/</span><span class="n">native_window_jni</span><span class="o">.</span><span class="na">h</span><span class="o">&gt;</span>
+</span><span class="line">  &lt;android/rect.h&gt;
+</span><span class="line">  &lt;android/window.h&gt;
+</span><span class="line">  &lt;android/native_window.h&gt;
+</span><span class="line">  &lt;android/native_window_jni.h&gt;
 </span><span class="line">
-</span><span class="line">        <span class="n">Window</span> <span class="n">management</span><span class="o">,</span> <span class="n">including</span> <span class="n">the</span> <span class="n">ability</span> <span class="n">to</span> <span class="n">lock</span><span class="o">/</span><span class="n">unlock</span> <span class="n">the</span> <span class="n">pixel</span>
-</span><span class="line">        <span class="n">buffer</span> <span class="n">to</span> <span class="n">draw</span> <span class="n">directly</span> <span class="n">into</span> <span class="n">it</span><span class="o">.</span>
+</span><span class="line">        Window management, including the ability to lock/unlock the pixel
+</span><span class="line">        buffer to draw directly into it.
 </span><span class="line">
-</span><span class="line">  <span class="o">&lt;</span><span class="n">android</span><span class="o">/</span><span class="n">configuration</span><span class="o">.</span><span class="na">h</span><span class="o">&gt;</span>
-</span><span class="line">  <span class="o">&lt;</span><span class="n">android</span><span class="o">/</span><span class="n">asset_manager</span><span class="o">.</span><span class="na">h</span><span class="o">&gt;</span>
-</span><span class="line">  <span class="o">&lt;</span><span class="n">android</span><span class="o">/</span><span class="n">storage_manager</span><span class="o">.</span><span class="na">h</span><span class="o">&gt;</span>
-</span><span class="line">  <span class="o">&lt;</span><span class="n">android</span><span class="o">/</span><span class="n">obb</span><span class="o">.</span><span class="na">h</span><span class="o">&gt;</span>
-</span><span class="line">        <span class="n">Direct</span> <span class="o">(</span><span class="n">read</span><span class="o">-</span><span class="n">only</span><span class="o">)</span> <span class="n">access</span> <span class="n">to</span> <span class="n">assets</span> <span class="n">embedded</span> <span class="n">in</span> <span class="n">your</span> <span class="o">.</span><span class="na">apk</span><span class="o">.</span> <span class="n">or</span>
-</span><span class="line">        <span class="n">the</span> <span class="n">Opaque</span> <span class="n">Binary</span> <span class="nf">Blob</span> <span class="o">(</span><span class="n">OBB</span><span class="o">)</span> <span class="n">files</span><span class="o">,</span> <span class="n">a</span> <span class="k">new</span> <span class="n">feature</span> <span class="n">of</span> <span class="n">Android</span> <span class="n">X</span><span class="o">.</span><span class="na">X</span>
-</span><span class="line">        <span class="n">that</span> <span class="n">allows</span> <span class="n">one</span> <span class="n">to</span> <span class="n">distribute</span> <span class="n">large</span> <span class="n">amount</span> <span class="n">of</span> <span class="n">application</span> <span class="n">data</span>
-</span><span class="line">        <span class="n">outside</span> <span class="n">of</span> <span class="n">the</span> <span class="o">.</span><span class="na">apk</span> <span class="o">(</span><span class="n">useful</span> <span class="k">for</span> <span class="n">game</span> <span class="n">assets</span><span class="o">,</span> <span class="k">for</span> <span class="n">example</span><span class="o">).</span>
+</span><span class="line">  &lt;android/configuration.h&gt;
+</span><span class="line">  &lt;android/asset_manager.h&gt;
+</span><span class="line">  &lt;android/storage_manager.h&gt;
+</span><span class="line">  &lt;android/obb.h&gt;
+</span><span class="line">        Direct (read-only) access to assets embedded in your .apk. or
+</span><span class="line">        the Opaque Binary Blob (OBB) files, a new feature of Android X.X
+</span><span class="line">        that allows one to distribute large amount of application data
+</span><span class="line">        outside of the .apk (useful for game assets, for example).
 </span><span class="line">
-</span><span class="line"><span class="n">All</span> <span class="n">the</span> <span class="n">corresponding</span> <span class="n">functions</span> <span class="n">are</span> <span class="n">provided</span> <span class="n">by</span> <span class="n">the</span> <span class="s">&quot;libandroid.so&quot;</span> <span class="n">library</span>
-</span><span class="line"><span class="n">version</span> <span class="n">that</span> <span class="n">comes</span> <span class="n">with</span> <span class="n">API</span> <span class="n">level</span> <span class="mi">9</span><span class="o">.</span> <span class="n">To</span> <span class="n">use</span> <span class="n">it</span><span class="o">,</span> <span class="n">use</span> <span class="n">the</span> <span class="nl">following:</span>
+</span><span class="line">All the corresponding functions are provided by the "libandroid.so" library
+</span><span class="line">version that comes with API level 9. To use it, use the following:
 </span><span class="line">
-</span><span class="line">    <span class="n">LOCAL_LDLIBS</span> <span class="o">+=</span> <span class="o">-</span><span class="n">landroid</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line">    LOCAL_LDLIBS += -landroid</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li><strong>[5]NDK Build</strong></li>
 </ul>
 
 <p>使用<code>ndk-build</code>命令(ndk r4之后引入的)实际上是GNU Make的封装，它等价于<code>make -f $NDK/build/core/build-local.mk [参数]</code>命令。系统必须要安装GNU Make 3.81以上版本，否则编译将报错！如果你安装了GNU Make 3.81，但是默认的make命令没有启动，那么可以在执行<code>ndk-build</code>之前定义GNUMAKE这个变量，例如<code>GNUMAKE=/usr/local/bin/gmake ndk-build</code>。<br />
-<strong>注意</strong> 在Windows下进行NDK开发的话，一般使用的是Cygwin自带的Make工具，但是默认是使用NDK的awk工具，所以可能会报一个错误<code>Android NDK: Host 'awk' tool is outdated. Please define HOST_AWK to point to Gawk or Nawk !</code> 解决方案就是删除NDK自带的awk工具(<a href="http://blog.csdn.net/achellies/article/details/7531440">参考网址</a>)，这也就是第一节中使用<code>ndk-build -v</code>命令得到的GNU Make信息输出不同了，嘿嘿，我这伏笔埋的够深吧！其实，也可以使用下面的方式直接覆盖系统的环境变量<br />
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;figcaption&gt;<span></span>&lt;/figcaption&gt;&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<strong>注意</strong> 在Windows下进行NDK开发的话，一般使用的是Cygwin自带的Make工具，但是默认是使用NDK的awk工具，所以可能会报一个错误<code>Android NDK: Host 'awk' tool is outdated. Please define HOST_AWK to point to Gawk or Nawk !</code> 解决方案就是删除NDK自带的awk工具(<a href="http://blog.csdn.net/achellies/article/details/7531440">参考网址</a>)，这也就是第一节中使用<code>ndk-build -v</code>命令得到的GNU Make信息输出不同了，嘿嘿，我这伏笔埋的够深吧！其实，也可以使用下面的方式直接覆盖系统的环境变量  </p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class="java"><span class="line"><span class="n">NDK_HOST_AWK</span><span class="o">=&lt;</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">awk</span><span class="o">&gt;</span>
-</span><span class="line"><span class="n">NDK_HOST_ECHO</span><span class="o">=&lt;</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">echo</span><span class="o">&gt;</span>
-</span><span class="line"><span class="n">NDK_HOST_CMP</span><span class="o">=&lt;</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">cmp</span><span class="o">&gt;</span>
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;<br />
-如果还是不行的话，参见<a href="http://stackoverflow.com/questions/8384213/android-ndk-revision-7-host-awk-tool-is-outdated-error">StackOverflow上的解答</a><br />
+</pre></td><td class="code"><pre><code class=""><span class="line">NDK_HOST_AWK=&lt;path-to-awk&gt;
+</span><span class="line">NDK_HOST_ECHO=&lt;path-to-echo&gt;
+</span><span class="line">NDK_HOST_CMP=&lt;path-to-cmp&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>如果还是不行的话，参见<a href="http://stackoverflow.com/questions/8384213/android-ndk-revision-7-host-awk-tool-is-outdated-error">StackOverflow上的解答</a><br />
 在Windows先开发还有一个需要注意的是，如果是使用Cygwin对native code进行编译，那么需要在使用<code>ndk-build</code>之前调用<code>NDK_USE_CYGPATH=1</code>！(不过不用每次都使用)  </p>
 
 <p>下面是ndk-build命令的可用参数，比较常用的是 <code>ndk-build NDK_DEBUG=1</code> 或者 <code>ndk-build V=1</code></p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -481,25 +471,24 @@ Android.mk文件可以生成一个动态链接库或者一个静态链接库，�
 <span class="line-number">16</span>
 <span class="line-number">17</span>
 <span class="line-number">18</span>
-</pre></td><td class="code"><pre><code class="java"><span class="line">  <span class="n">ndk</span><span class="o">-</span><span class="n">build</span>                  <span class="o">--&gt;</span> <span class="n">rebuild</span> <span class="n">required</span> <span class="n">machine</span> <span class="n">code</span><span class="o">.</span>
-</span><span class="line">  <span class="n">ndk</span><span class="o">-</span><span class="n">build</span> <span class="n">clean</span>            <span class="o">--&gt;</span> <span class="n">clean</span> <span class="n">all</span> <span class="n">generated</span> <span class="n">binaries</span><span class="o">.</span>
-</span><span class="line">  <span class="n">ndk</span><span class="o">-</span><span class="n">build</span> <span class="n">NDK_DEBUG</span><span class="o">=</span><span class="mi">1</span>      <span class="o">--&gt;</span> <span class="n">generate</span> <span class="n">debuggable</span> <span class="kd">native</span> <span class="n">code</span><span class="o">.</span>
-</span><span class="line">  <span class="n">ndk</span><span class="o">-</span><span class="n">build</span> <span class="n">V</span><span class="o">=</span><span class="mi">1</span>              <span class="o">--&gt;</span> <span class="n">launch</span> <span class="n">build</span><span class="o">,</span> <span class="n">displaying</span> <span class="n">build</span> <span class="n">commands</span><span class="o">.</span>
-</span><span class="line">  <span class="n">ndk</span><span class="o">-</span><span class="n">build</span> <span class="o">-</span><span class="n">B</span>               <span class="o">--&gt;</span> <span class="n">force</span> <span class="n">a</span> <span class="n">complete</span> <span class="n">rebuild</span><span class="o">.</span>
-</span><span class="line">  <span class="n">ndk</span><span class="o">-</span><span class="n">build</span> <span class="o">-</span><span class="n">B</span> <span class="n">V</span><span class="o">=</span><span class="mi">1</span>           <span class="o">--&gt;</span> <span class="n">force</span> <span class="n">a</span> <span class="n">complete</span> <span class="n">rebuild</span> <span class="n">and</span> <span class="n">display</span> <span class="n">build</span>
-</span><span class="line">                                 <span class="n">commands</span><span class="o">.</span>
-</span><span class="line">  <span class="n">ndk</span><span class="o">-</span><span class="n">build</span> <span class="n">NDK_LOG</span><span class="o">=</span><span class="mi">1</span>        <span class="o">--&gt;</span> <span class="n">display</span> <span class="n">internal</span> <span class="n">NDK</span> <span class="n">log</span> <span class="n">messages</span>
-</span><span class="line">                                 <span class="o">(</span><span class="n">used</span> <span class="k">for</span> <span class="n">debugging</span> <span class="n">the</span> <span class="n">NDK</span> <span class="n">itself</span><span class="o">).</span>
-</span><span class="line">  <span class="n">ndk</span><span class="o">-</span><span class="n">build</span> <span class="n">NDK_DEBUG</span><span class="o">=</span><span class="mi">1</span>      <span class="o">--&gt;</span> <span class="n">force</span> <span class="n">a</span> <span class="n">debuggable</span> <span class="n">build</span> <span class="o">(</span><span class="n">see</span> <span class="n">below</span><span class="o">)</span>
-</span><span class="line">  <span class="n">ndk</span><span class="o">-</span><span class="n">build</span> <span class="n">NDK_DEBUG</span><span class="o">=</span><span class="mi">0</span>      <span class="o">--&gt;</span> <span class="n">force</span> <span class="n">a</span> <span class="n">release</span> <span class="n">build</span> <span class="o">(</span><span class="n">see</span> <span class="n">below</span><span class="o">)</span>
-</span><span class="line">  <span class="n">ndk</span><span class="o">-</span><span class="n">build</span> <span class="n">NDK_HOST_32BIT</span><span class="o">=</span><span class="mi">1</span> <span class="o">--&gt;</span> <span class="n">Always</span> <span class="n">use</span> <span class="n">toolchain</span> <span class="n">in</span> <span class="mi">32</span><span class="o">-</span><span class="n">bit</span> <span class="o">(</span><span class="n">see</span> <span class="n">below</span><span class="o">)</span>
-</span><span class="line">  <span class="n">ndk</span><span class="o">-</span><span class="n">build</span> <span class="n">NDK_APPLICATION_MK</span><span class="o">=&lt;</span><span class="n">file</span><span class="o">&gt;</span>
-</span><span class="line">    <span class="o">--&gt;</span> <span class="n">rebuild</span><span class="o">,</span> <span class="n">using</span> <span class="n">a</span> <span class="n">specific</span> <span class="n">Application</span><span class="o">.</span><span class="na">mk</span> <span class="n">pointed</span> <span class="n">to</span> <span class="n">by</span>
-</span><span class="line">        <span class="n">the</span> <span class="n">NDK_APPLICATION_MK</span> <span class="n">command</span><span class="o">-</span><span class="n">line</span> <span class="n">variable</span><span class="o">.</span>
-</span><span class="line">  <span class="n">ndk</span><span class="o">-</span><span class="n">build</span> <span class="o">-</span><span class="n">C</span> <span class="o">&lt;</span><span class="n">project</span><span class="o">&gt;</span>     <span class="o">--&gt;</span> <span class="n">build</span> <span class="n">the</span> <span class="kd">native</span> <span class="n">code</span> <span class="k">for</span> <span class="n">the</span> <span class="n">project</span>
-</span><span class="line">                                 <span class="n">path</span> <span class="n">located</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">project</span><span class="o">&gt;.</span> <span class="n">Useful</span> <span class="k">if</span> <span class="n">you</span>
-</span><span class="line">                                 <span class="n">don</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">want</span> <span class="n">to</span> <span class="err">&#39;</span><span class="n">cd</span><span class="err">&#39;</span> <span class="n">to</span> <span class="n">it</span> <span class="n">in</span> <span class="n">your</span> <span class="n">terminal</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class=""><span class="line">  ndk-build                  --&gt; rebuild required machine code.
+</span><span class="line">  ndk-build clean            --&gt; clean all generated binaries.
+</span><span class="line">  ndk-build NDK_DEBUG=1      --&gt; generate debuggable native code.
+</span><span class="line">  ndk-build V=1              --&gt; launch build, displaying build commands.
+</span><span class="line">  ndk-build -B               --&gt; force a complete rebuild.
+</span><span class="line">  ndk-build -B V=1           --&gt; force a complete rebuild and display build
+</span><span class="line">                                 commands.
+</span><span class="line">  ndk-build NDK_LOG=1        --&gt; display internal NDK log messages
+</span><span class="line">                                 (used for debugging the NDK itself).
+</span><span class="line">  ndk-build NDK_DEBUG=1      --&gt; force a debuggable build (see below)
+</span><span class="line">  ndk-build NDK_DEBUG=0      --&gt; force a release build (see below)
+</span><span class="line">  ndk-build NDK_HOST_32BIT=1 --&gt; Always use toolchain in 32-bit (see below)
+</span><span class="line">  ndk-build NDK_APPLICATION_MK=&lt;file&gt;
+</span><span class="line">    --&gt; rebuild, using a specific Application.mk pointed to by
+</span><span class="line">        the NDK_APPLICATION_MK command-line variable.
+</span><span class="line">  ndk-build -C &lt;project&gt;     --&gt; build the native code for the project
+</span><span class="line">                                 path located at &lt;project&gt;. Useful if you
+</span><span class="line">                                 don't want to 'cd' to it in your terminal.</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li>

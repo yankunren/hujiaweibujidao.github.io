@@ -4,7 +4,7 @@
   <title><![CDATA[Category: android | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-17T14:37:00+08:00</updated>
+  <updated>2014-10-18T21:30:29+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -839,9 +839,7 @@ protected void deliverAndDrawFrame(CvCameraViewFrame frame) {
   <li><a href="http://docs.oracle.com/javase/6/docs/technotes/tools/windows/javah.html">javah命令：查看命令详细参数</a>：  </li>
 </ul>
 
-<p><code>java
-javah produces C header files and C source files from a Java class. These files provide the connective glue that allow your Java and C code to interact.
-</code></p>
+<p><code>javah produces C header files and C source files from a Java class. These files provide the connective glue that allow your Java and C code to interact.</code></p>
 
 <ul>
   <li>在Eclipse中配置<strong>万能的javah工具</strong>的方法</li>
@@ -1059,13 +1057,15 @@ version that comes with API level 9. To use it, use the following:</p>
 </ul>
 
 <p>使用<code>ndk-build</code>命令(ndk r4之后引入的)实际上是GNU Make的封装，它等价于<code>make -f $NDK/build/core/build-local.mk [参数]</code>命令。系统必须要安装GNU Make 3.81以上版本，否则编译将报错！如果你安装了GNU Make 3.81，但是默认的make命令没有启动，那么可以在执行<code>ndk-build</code>之前定义GNUMAKE这个变量，例如<code>GNUMAKE=/usr/local/bin/gmake ndk-build</code>。<br />
-<strong>注意</strong> 在Windows下进行NDK开发的话，一般使用的是Cygwin自带的Make工具，但是默认是使用NDK的awk工具，所以可能会报一个错误<code>Android NDK: Host 'awk' tool is outdated. Please define HOST_AWK to point to Gawk or Nawk !</code> 解决方案就是删除NDK自带的awk工具(<a href="http://blog.csdn.net/achellies/article/details/7531440">参考网址</a>)，这也就是第一节中使用<code>ndk-build -v</code>命令得到的GNU Make信息输出不同了，嘿嘿，我这伏笔埋的够深吧！其实，也可以使用下面的方式直接覆盖系统的环境变量<br />
-<code>
-    NDK_HOST_AWK=&lt;path-to-awk&gt;
-    NDK_HOST_ECHO=&lt;path-to-echo&gt;
-    NDK_HOST_CMP=&lt;path-to-cmp&gt;
-</code><br />
-如果还是不行的话，参见<a href="http://stackoverflow.com/questions/8384213/android-ndk-revision-7-host-awk-tool-is-outdated-error">StackOverflow上的解答</a><br />
+<strong>注意</strong> 在Windows下进行NDK开发的话，一般使用的是Cygwin自带的Make工具，但是默认是使用NDK的awk工具，所以可能会报一个错误<code>Android NDK: Host 'awk' tool is outdated. Please define HOST_AWK to point to Gawk or Nawk !</code> 解决方案就是删除NDK自带的awk工具(<a href="http://blog.csdn.net/achellies/article/details/7531440">参考网址</a>)，这也就是第一节中使用<code>ndk-build -v</code>命令得到的GNU Make信息输出不同了，嘿嘿，我这伏笔埋的够深吧！其实，也可以使用下面的方式直接覆盖系统的环境变量  </p>
+
+<p><code>
+NDK_HOST_AWK=&lt;path-to-awk&gt;
+NDK_HOST_ECHO=&lt;path-to-echo&gt;
+NDK_HOST_CMP=&lt;path-to-cmp&gt;
+</code>  </p>
+
+<p>如果还是不行的话，参见<a href="http://stackoverflow.com/questions/8384213/android-ndk-revision-7-host-awk-tool-is-outdated-error">StackOverflow上的解答</a><br />
 在Windows先开发还有一个需要注意的是，如果是使用Cygwin对native code进行编译，那么需要在使用<code>ndk-build</code>之前调用<code>NDK_USE_CYGPATH=1</code>！(不过不用每次都使用)  </p>
 
 <p>下面是ndk-build命令的可用参数，比较常用的是 <code>ndk-build NDK_DEBUG=1</code> 或者 <code>ndk-build V=1</code></p>
