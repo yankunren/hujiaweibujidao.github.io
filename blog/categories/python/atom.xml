@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-22T22:02:45+08:00</updated>
+  <updated>2014-10-22T22:04:25+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -71,7 +71,7 @@ Installed 0 object(s) from 0 fixture(s)</p>
 
 <p><code>html
 &lt;!--
-&lt;script src="{{ STATIC_URL }}js/ga.js"&gt;&lt;/script&gt;
+&lt;script src="js/ga.js"&gt;&lt;/script&gt;
 --&gt;
 </code></p>
 
