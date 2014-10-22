@@ -394,7 +394,7 @@ The following rules are used when dealing with all the sourcesets used to build 
 
 2 Manifests are all merged together into a single manifest. This allows Product Flavors to have different components and/or permissions, similarly to Build Types.  [所有的Manifest文件也都会整合成为一个Manifest文件，其中product flavor和build type类似，都可以有不同的components或者permissions]
 
-3 **All resources (Android `res` and `assets`) are used using overlay priority where the Build Type overrides the Product Flavor, which overrides the main sourceSet. ** [所有的资源文件按照优先级的不同采用覆盖的方式整合，product flavor覆盖main，build type覆盖product flavor]  **[?这里的优先级总觉得有点问题?]**
+3 **All resources (Android `res` and `assets`) are used using overlay priority where the Build Type overrides the Product Flavor, which overrides the main sourceSet.** [所有的资源文件按照优先级的不同采用覆盖的方式整合，product flavor覆盖main，build type覆盖product flavor] **[?这里的优先级总觉得有点问题?]**
 
 4 Each Build Variant generates its own `R` class (or other generated source code) from the resources. Nothing is shared between variants. [每个Build Variant都会根据它的资源文件产生一个R清单类，并且在variants之间不进行共享]
 

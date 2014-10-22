@@ -19,10 +19,7 @@ NDK开发的核心之一便是JNI，在[Oracle官方的JNI相关文档](http://d
 
 - [javah命令：查看命令详细参数](http://docs.oracle.com/javase/6/docs/technotes/tools/windows/javah.html)：  
 
-```java
-javah produces C header files and C source files from a Java class. These files provide the connective glue that allow your Java and C code to interact.
-```
-
+`javah produces C header files and C source files from a Java class. These files provide the connective glue that allow your Java and C code to interact.`
 
 - 在Eclipse中配置**万能的javah工具**的方法
 
@@ -228,11 +225,13 @@ version that comes with API level 9. To use it, use the following:
 
 使用`ndk-build`命令(ndk r4之后引入的)实际上是GNU Make的封装，它等价于`make -f $NDK/build/core/build-local.mk [参数]`命令。系统必须要安装GNU Make 3.81以上版本，否则编译将报错！如果你安装了GNU Make 3.81，但是默认的make命令没有启动，那么可以在执行`ndk-build`之前定义GNUMAKE这个变量，例如`GNUMAKE=/usr/local/bin/gmake ndk-build`。  
 **注意** 在Windows下进行NDK开发的话，一般使用的是Cygwin自带的Make工具，但是默认是使用NDK的awk工具，所以可能会报一个错误`Android NDK: Host 'awk' tool is outdated. Please define HOST_AWK to point to Gawk or Nawk !` 解决方案就是删除NDK自带的awk工具([参考网址](http://blog.csdn.net/achellies/article/details/7531440))，这也就是第一节中使用`ndk-build -v`命令得到的GNU Make信息输出不同了，嘿嘿，我这伏笔埋的够深吧！其实，也可以使用下面的方式直接覆盖系统的环境变量  
+
 ```
-    NDK_HOST_AWK=<path-to-awk>
-    NDK_HOST_ECHO=<path-to-echo>
-    NDK_HOST_CMP=<path-to-cmp>
+NDK_HOST_AWK=<path-to-awk>
+NDK_HOST_ECHO=<path-to-echo>
+NDK_HOST_CMP=<path-to-cmp>
 ```  
+
 如果还是不行的话，参见[StackOverflow上的解答](http://stackoverflow.com/questions/8384213/android-ndk-revision-7-host-awk-tool-is-outdated-error)  
 在Windows先开发还有一个需要注意的是，如果是使用Cygwin对native code进行编译，那么需要在使用`ndk-build`之前调用`NDK_USE_CYGPATH=1`！(不过不用每次都使用)  
 
