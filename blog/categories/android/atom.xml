@@ -4,7 +4,7 @@
   <title><![CDATA[Category: android | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-22T22:27:54+08:00</updated>
+  <updated>2014-10-23T14:17:01+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,1878 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Android NDK and OpenCV development with Android Studio]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/10/22/android-ndk-and-opencv-development-with-android-studio/"/>
+    <updated>2014-10-22T09:51:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/10/22/android-ndk-and-opencv-development-with-android-studio</id>
+    <content type="html"><![CDATA[<p>—————- If you do <strong>NOT</strong> know Chinese, you can just skip this part —————-</p>
+
+<p>一直打算将原来的XFace进行改进，最近终于有了些时间可以动手了，改进计划如下：开发上使用Android Studio作为新的开发环境，配上新的构建系统Gradle；应用上将修改原来的UI设计，内部代码也将有很大的变化，可能会用上ContentProvider和Service等略高级内容；算法上打算让应用扩展性增强以适应不同的算法，并结合强大的Android Studio和Gradle让这个项目变得更加丰富。说了一堆废话，言归正传，本文的重点是介绍如何在Android Studio中进行NDK开发(目前它还不完全支持NDK开发)，难点是NDK中还包含OpenCV的动态库。最后的最后，本文剩下部分将使用英文，因为它要成为我在StackOverflow上的处女答，么么哒 ~O(∩_∩)O~</p>
+
+<p>—————————- Here is the right stuff you may need ——————————–</p>
+
+<h4 id="this-post-shows-how-to-develop-an-android-ndk-application-with-opencv-included-using-android-studio-and-gradle-if-youre-working-on-migrating-your-original-eclipse-project-to-android-studio-you-may-find-this-post-is-what-exactly-you-want">This post shows how to develop an Android NDK application with OpenCV included using Android Studio and Gradle. If you’re working on migrating your original Eclipse Project to Android Studio, you may find this post is what exactly you want!</h4>
+
+<p>OK，Let’s start! </p>
+
+<h3 id="section-1--three-things-you-must-know">Section 1:  Three things you must know</h3>
+
+<h4 id="firstly-if-you-are-not-familiar-with-android-studio-and-gradle-you-may-find-these-links-useful-if-you-already-know-these-well-skip-this-part">1.Firstly, if you are not familiar with Android Studio and Gradle, you may find these links useful. (if you already know these well, skip this part)</h4>
+
+<p>①<a href="http://developer.android.com/sdk/installing/create-project.html">Creating a new Project with Android Studio</a></p>
+
+<p>②<a href="http://developer.android.com/sdk/installing/studio-build.html">Building Your Project with Gradle</a></p>
+
+<p>③<a href="http://tools.android.com/tech-docs/new-build-system/user-guide">Gradle Plugin User Guide</a>  or you may want to read a Chinese commented version in my blog <a href="http://hujiaweibujidao.github.io/blog/2014/10/13/gradle-plugin-user-guide-1/">here</a>.</p>
+
+<h4 id="secondly-if-your-android-ndk-project-is-not-that-complicatedfor-example-having-no-opencv-included-you-may-wanna-see-ph0b-s-introduction-here-its-quite-a-nice-job-with-a-video-recorded-you-can-also-follow-section-2-in-this-post-to-get-a-simple-android-ndk-demo-application">2.Secondly, if your android ndk project is not that complicated(for example, having no opencv included), you may wanna see <code>ph0b</code> ‘s introduction here, it’s quite a nice job with a video recorded! (you can also follow Section 2 in this post to get a simple Android NDK demo application)</h4>
+
+<p><a href="http://ph0b.com/android-studio-gradle-and-ndk-integration/"><code>ph0b</code>’s post: ANDROID STUDIO, GRADLE AND NDK INTEGRATION</a></p>
+
+<h4 id="thirdly-if-those-above-two-do-not-meet-your-needs-then-i-think-you-may-want-to-customize-the-androidmk-with-gradle-in-android-studio-thanks-to-gaku-ueda--he-had-made-a-great-job-explaining-how-to-achieve-that-goal-actually-i-have-found-another-nicer-solution-without-adding-that-many-codes-and-also-achieve-that-goal---find-it-out-in-the-next-sections">3.Thirdly, if those above two do not meet your needs, then I think you may want to customize the Android.mk with Gradle in Android Studio. Thanks to <code>Gaku Ueda</code> , he had made a great job explaining how to achieve that goal. Actually I have found another nicer solution without adding that many codes and also achieve that goal. :-) Find it out in the next sections.</h4>
+
+<p><a href="http://blog.gaku.net/ndk/"><code>Gaku Ueda</code>’s post: Using custom Android.mk with Gradle/Android Studio</a></p>
+
+<p>OK, I will cover all above and give another nice solution in the end, have fun!</p>
+
+<h3 id="section-2-a-simple-android-ndk-demo-application">Section 2: A simple Android NDK demo application</h3>
+
+<p>This section shows creating a simple Android NDK demo application, if you already know, you can directly go the section 3.</p>
+
+<p>1.Create a new Android project named <code>NDKDemo</code> with a blank Activity in AS(=Android Studio).</p>
+
+<p>2.Give an <code>id</code> to the <code>TextView</code> in <code>activity_my.xml</code> such as <code>android:id="@+id/textview"</code>, then add these codes in <code>MyActivity.java</code>.</p>
+
+<p>```java
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_my);</p>
+
+<pre><code>TextView textView = (TextView) findViewById(R.id.textview);
+textView.setText(hello()); }
+</code></pre>
+
+<p>static {
+    System.loadLibrary(“hello”);
+}</p>
+
+<p>public native String hello();
+```</p>
+
+<p>3.Create a new directory <code>jni</code> in folder <code>app/src/main</code>, then you have <code>java</code>, <code>jni</code> and <code>res</code> in this folder.</p>
+
+<p>4.This step is very important! <strong>You can add a external tool to run the <code>javah</code> command without typing that much code!</strong> </p>
+
+<p>Open AS’s <code>Preferences</code>, then find <code>External Tools</code> in <code>IDE Settings</code>, click <code>+</code> to add one tool with the following configurations. (Make sure you have add <code>JDK tools</code>  in your <code>system path</code>, if you don’t know how, click <a href="http://hujiaweibujidao.github.io/blog/2014/02/21/android-ndk-and-opencv-development-4/">here</a>)</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/javah_as.png" alt="image" /></p>
+
+<p>With the help of this tool, each time we right click on a <code>class file</code>, then choose <code>Android Tools -&gt; javah</code> to run this tool, it will automatically generate a <code>C head file</code> for us in the target folder <code>$ModuleFileDir$/src/main/jni</code> , in this case, it is <code>app/src/main/jni</code>. Try this on <code>MyActivity.java</code> file now! The console will print out a log like:</p>
+
+<p><code>/usr/bin/javah -v -jni -d /Users/hujiawei/AndroidStudioProjects/NDKDemo/app/src/main/jni com.android.hacks.ndkdemo.MyActivity
+[Creating file RegularFileObject[/Users/hujiawei/AndroidStudioProjects/NDKDemo/app/src/main/jni/
+com_android_hacks_ndkdemo_MyActivity.h]]</code></p>
+
+<p>Then you get a <code>com_android_hacks_ndkdemo_MyActivity.h</code> file in <code>jni</code>  folder with the following content.</p>
+
+<p>```
+/* DO NOT EDIT THIS FILE - it is machine generated */
+#include <jni.h>
+/* Header for class com_android_hacks_ndkdemo_MyActivity */</jni.h></p>
+
+<h1 id="ifndef-includedcomandroidhacksndkdemomyactivity">ifndef _Included_com_android_hacks_ndkdemo_MyActivity</h1>
+<p>#define _Included_com_android_hacks_ndkdemo_MyActivity
+#ifdef __cplusplus
+extern “C” {
+#endif
+/*
+ * Class:     com_android_hacks_ndkdemo_MyActivity
+ * Method:    hello
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_android_hacks_ndkdemo_MyActivity_hello
+  (JNIEnv *, jobject);</p>
+
+<h1 id="ifdef-cplusplus">ifdef __cplusplus</h1>
+<p>}
+#endif
+#endif
+```</p>
+
+<p>5.Write a simple <code>C</code> implementation file named <code>main.c</code> in <code>jni</code> folder</p>
+
+<p>```
+#include <jni.h>
+#include "com_android_hacks_ndkdemo_MyActivity.h"</jni.h></p>
+
+<p>JNIEXPORT jstring JNICALL Java_com_android_hacks_ndkdemo_MyActivity_hello
+  (JNIEnv * env, jobject obj){
+    return (*env)-&gt;NewStringUTF(env, “Hello from JNI”);
+  }
+```</p>
+
+<p>6.In the <code>build.gradle</code> file under <code>app</code> module, add the following codes to configure <code>ndk</code> in <code>defaultConfig</code> element, here we just give the uni module a name <code>hello</code>, you can find other configurations in <a href="http://tools.android.com/tech-docs/new-build-system/user-guide">Gradle Plugin User Guide</a>.</p>
+
+<p>```
+defaultConfig {
+    applicationId “com.android.hacks.ndkdemo”
+    minSdkVersion 16
+    targetSdkVersion 20
+    versionCode 1
+    versionName “1.0”</p>
+
+<pre><code>ndk{
+    moduleName "hello"
+} } ```
+</code></pre>
+
+<p>7.In order to let Gradle run <code>ndk-build</code> command (in some task, maybe <code>NdkCompile</code> task), we should configure the <code>ndk.dir</code> in <code>local.properties</code> file in Project root.</p>
+
+<p><code>
+sdk.dir=/Volumes/hujiawei/Users/hujiawei/Android/android_sdk
+ndk.dir=/Volumes/hujiawei/Users/hujiawei/Android/android_ndk
+</code></p>
+
+<p>8.OK, everything is ready, click <code>Run</code> to give it a try, you will see the result like</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/ndkdemo_ss.png" alt="image" /></p>
+
+<p>All right, so what’s happening inside?</p>
+
+<p><strong>Since you have a <code>jni</code> folder, Gradle will consider it as a default native code folder. When Gradle builds the <code>app</code>, it will run <code>ndk-build</code> command(since you have configured <code>ndk.dir</code>,  Gradle knows where to find it) with a generated <code>Android.mk</code> file(locates in <code>app/build/intermediates/ndk/debug/Android.mk</code>), after compiling the native codes, it will generate the <code>libs</code> and <code>obj</code> folder into folder  <code>app/build/intermediates/ndk/debug/</code>. Gradle will then package the <code>libs</code> into final <code>apk</code> file in folder <code>app/build/outputs/apk/app-debug.apk</code>(you can unarchive this file to check whether <code>libs</code> is contained)</strong></p>
+
+<p><code>app/build/intermediates/ndk/debug</code> (<code>lib</code> and <code>obj</code> folders)</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/ndkdemo_ndk.png" alt="image" /></p>
+
+<p><code>app/build/outputs/apk/app-debug.apk</code> (and files within it)</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/ndkdemo_apk.png" alt="image" /></p>
+
+<h3 id="secontion-3-using-opencv">Secontion 3: Using OpenCV</h3>
+
+<p>If your project do not use OpenCV, then the section 2 is just enough. But what if you wanna use OpenCV to do other stuff? Of course, we want to use <code>OpenCV for Android</code> instead of  <code>JavaCV</code> here, and Of course, we need to package OpenCV library for Android into our application’s APK file (then users who use this app does not have to install <code>OpenCV Manager</code>). So, how can we achieve these goals?</p>
+
+<p>The simplest way has been posted by <code>TGMCians</code> on Stack Overflow <a href="http://stackoverflow.com/questions/17767557/how-to-use-opencv-in-android-studio-using-gradle-build-tool?answertab=active#tab-top">here</a>, that is, let the main app include the OpenCV library as a dependency, and copy all <code>&lt;abi&gt;/*.so</code> files in OpenCV for Android SDK to <code>jniLibs</code> folder under <code>app/src/main/</code>, Gradle will automatically package these <code>&lt;abi&gt;/*.so</code> files into <code>libs</code> folder within the final APK file. Of course, this method will work, but it has a few backwards: (1) Unless you only copy the needed <code>*.so</code> files, you will always have a large APK due to this reason; (2) How about the building of the <code>jni</code> files? How to run <code>ndk-build</code> if these files contain <code>opencv</code> related codes? </p>
+
+<p>So, here comes to our <code>Using custom Android.mk with Gradle and Android Studio</code> part. For testing, we first creat an <code>Android.mk</code> and an <code>Application.mk</code> file under <code>jni</code> folder. </p>
+
+<p><code>Android.mk</code></p>
+
+<p>```
+LOCAL_PATH := $(call my-dir)</p>
+
+<p>include $(CLEAR_VARS)</p>
+
+<p>LOCAL_SRC_FILES := main.c
+LOCAL_LDLIBS += -llog
+LOCAL_MODULE := hello</p>
+
+<p>include $(BUILD_SHARED_LIBRARY)
+```</p>
+
+<p><code>Application.mk</code></p>
+
+<p><code>
+APP_ABI := armeabi
+APP_PLATFORM := android-16
+</code></p>
+
+<p>Thanks to <code>Gaku Ueda</code>, he had made a great job explaining how to achieve that goal with <a href="http://blog.gaku.net/ndk/">this post</a>. The core idea of his method is to run <code>ndk-build</code> command in some task, then zip the <code>&lt;abi&gt;/*.so</code> files under the output <code>app/build/libs/</code> folder into a <code>jar</code> file which is finally put in <code>app/build/libs/</code> folder, then add a compile dependency to this jar file. The key code for his method listed below</p>
+
+<p><strong>Notice 1: When using custom Android.mk, we should first disable Gradle to build the <code>jni</code> folder as before, and <code>sourceSets.main.jni.srcDirs = []</code> just does this job!</strong></p>
+
+<p><strong>Notice 2: The code is not exactly the same with Gaku Ueda’s code: <code>tasks.withType(Compile)</code> to <code>tasks.withType(JavaCompile)</code>, because <code>Compile</code> is deprecated.</strong></p>
+
+<p><strong>Notice 3: You can get  <code>$ndkDir</code> variable with <code>project.plugins.findPlugin('com.android.application').getNdkFolder()</code> or you can define it in <code>grade.properties</code> file under Project root, so you need to add <code>ndkDir=path/to/your/ndk</code> in that file, if the file is not created, simply create a new one.</strong></p>
+
+<p>```
+android{
+	…
+    sourceSets.main.jni.srcDirs = []</p>
+
+<pre><code>task ndkBuild(type: Exec, description: 'Compile JNI source via NDK') {
+    ndkDir = project.plugins.findPlugin('com.android.application').getNdkFolder()
+    commandLine "$ndkDir/ndk-build",
+            'NDK_PROJECT_PATH=build',
+            'APP_BUILD_SCRIPT=src/main/jni/Android.mk',
+            'NDK_APPLICATION_MK=src/main/jni/Application.mk'
+}
+
+task ndkLibsToJar(type: Zip, dependsOn: 'ndkBuild', description: 'Create a JAR of the native libs') {
+    destinationDir new File(buildDir, 'libs')
+    baseName 'ndk-libs'
+    extension 'jar'
+    from(new File(buildDir, 'libs')) { include '**/*.so' }
+    into 'lib/'
+}
+
+tasks.withType(JavaCompile) {
+    compileTask -&gt; compileTask.dependsOn ndkLibsToJar
+}
+... }
+</code></pre>
+
+<p>dependencies {
+    compile fileTree(dir: ‘libs’, include: [’<em>.jar’])
+    // add begin
+    compile fileTree(dir: new File(buildDir, ‘libs’), include: ‘</em>.jar’)
+    // add end
+}
+```</p>
+
+<p>But we can still do a little improvements here. We have already know that Gradle will take <code>jniLibs</code> folder as its default native libraries folder, so we can simply output the <code>libs/&lt;abi&gt;/*.so</code> files generated by <code>ndk-build</code> command into <code>jniLibs</code> folder, so there’s no need to zip these <code>*.so</code> files into a <code>jar</code> file. </p>
+
+<p>The final <code>build.gradle</code> file under <code>app</code> module</p>
+
+<p>```
+apply plugin: ‘com.android.application’</p>
+
+<p>android {
+    compileSdkVersion 20
+    buildToolsVersion “20.0.0”</p>
+
+<pre><code>defaultConfig {
+    applicationId "com.android.hacks.ndkdemo"
+    minSdkVersion 16
+    targetSdkVersion 20
+    versionCode 1
+    versionName "1.0"
+}
+
+// add begin
+sourceSets.main.jni.srcDirs = []
+
+task ndkBuild(type: Exec, description: 'Compile JNI source via NDK') {
+    ndkDir = project.plugins.findPlugin('com.android.application').getNdkFolder()
+    commandLine "$ndkDir/ndk-build",
+            'NDK_PROJECT_PATH=build/intermediates/ndk',
+            'NDK_LIBS_OUT=src/main/jniLibs',
+            'APP_BUILD_SCRIPT=src/main/jni/Android.mk',
+            'NDK_APPLICATION_MK=src/main/jni/Application.mk'
+}
+
+tasks.withType(JavaCompile) {
+    compileTask -&gt; compileTask.dependsOn ndkBuild
+}
+// add end
+
+buildTypes {
+    release {
+        runProguard false
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+} }
+</code></pre>
+
+<p>dependencies {
+    compile fileTree(dir: ‘libs’, include: [’*.jar’])
+}
+```</p>
+
+<p>So simple, right? <code>'NDK_LIBS_OUT=src/main/jniLibs'</code> helps us do the right job!</p>
+
+<p>For testing, you can also add some lines relating with OpenCV in your <code>Android.mk</code> file and some line in your <code>main.c</code> to check whether everything is readlly working. For example, add <code>#include &lt;opencv2/core/core.hpp&gt;</code> in <code>main.c</code> file, and change  <code>Android.mk</code> to </p>
+
+<p>```
+LOCAL_PATH := $(call my-dir)</p>
+
+<p>include $(CLEAR_VARS)</p>
+
+<h1 id="opencv">opencv</h1>
+<p>OPENCVROOT:= /Volumes/hujiawei/Users/hujiawei/Android/opencv_sdk
+OPENCV_CAMERA_MODULES:=on
+OPENCV_INSTALL_MODULES:=on
+OPENCV_LIB_TYPE:=SHARED
+include ${OPENCVROOT}/sdk/native/jni/OpenCV.mk</p>
+
+<p>LOCAL_SRC_FILES := main.c
+LOCAL_LDLIBS += -llog
+LOCAL_MODULE := hello</p>
+
+<p>include $(BUILD_SHARED_LIBRARY)
+```</p>
+
+<p>In Gradle Console window, you can see these similar lines</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/ndkdemo_gradle.png" alt="image" /></p>
+
+<p><code>*.so</code> files relating with OpenCV has been packaged into the final APK</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/ndkdemo_opencvlibs.png" alt="image" /></p>
+
+<h4 id="one-more-thing"><strong>One More Thing</strong></h4>
+
+<p>Of course, maybe you don’t want to change your <code>build.grale</code> file with that much code, and Of course, you also don’t want to run <code>ndk-build</code> outside the IDE, then copy the <code>&lt;abi&gt;/*.so</code> files into <code>jniLibs</code> folder each time you want to rebuild the native codes!</p>
+
+<p>At last, I came out another nicer solution, if you like, that is to create a <code>ndk-build</code> external tool in Android Studio, and every time you want to rebuild the native codes, simply run the external tool, then it automatically generates the <code>libs/&lt;abi&gt;/*.so</code> files into <code>jniLibs</code> folder, so everything is ready to run this app, :-)</p>
+
+<p>The configuration is simple</p>
+
+<p>Parameters:  <code>NDK_PROJECT_PATH=$ModuleFileDir$/build/intermediates/ndk NDK_LIBS_OUT=$ModuleFileDir$/src/main/jniLibs NDK_APPLICATION_MK=$ModuleFileDir$/src/main/jni/Application.mk APP_BUILD_SCRIPT=$ModuleFileDir$/src/main/jni/Android.mk V=1</code></p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/ndk_build_as.png" alt="image" /></p>
+
+<p>OK, I hope it is helpful. Let me know if it is really helpful, or tell me what’s your problem. :-)</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Gradle Plugin for Android Development User Guide (2)]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/10/15/gradle-plugin-user-guide-2/"/>
+    <updated>2014-10-15T12:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/10/15/gradle-plugin-user-guide-2</id>
+    <content type="html"><![CDATA[<p>Gradle Plugin for Android Development User Guide (2)</p>
+
+<p>阅读本文前请先阅读第一部分：<a href="http://hujiaweibujidao.github.io/blog/2014/10/15/gradle-plugin-user-guide-1/">http://hujiaweibujidao.github.io/blog/2014/10/15/gradle-plugin-user-guide-1</a></p>
+
+<p>原文地址：<a href="http://tools.android.com/tech-docs/new-build-system/user-guide">http://tools.android.com/tech-docs/new-build-system/user-guide</a></p>
+
+<h3 id="testing">Testing</h3>
+
+<p>[现在我们可以直接将test application集成到我们的application project中，没有必要再创建一个独立的test project了]</p>
+
+<p>Building a test application is integrated into the application project. There is no need for a separate test project anymore.</p>
+
+<h4 id="basics-and-configuration">Basics and Configuration</h4>
+
+<p>[测试代码默认存放在<code>src/androidTest/</code> 目录下，使用Android Testing Framework 我们可以创建unit tests，instrumentation tests, 和 uiautomator tests.]</p>
+
+<p>As mentioned previously, next to the <code>main</code> sourceSet is the <code>androidTest</code> sourceSet, located by default in <code>src/androidTest/</code></p>
+
+<p>From this sourceSet is built a test apk that can be deployed to a device to test the application using the <code>Android testing framework</code>. This can contain unit tests, instrumentation tests, and later uiautomator tests.</p>
+
+<p>[test app的<code>AndroidManifest.xml</code> 文件是自动生成的，所以它不需要指定位置，此外，我们没必要设置test application的instrumentation节点的<code>targetPackage</code> 属性，因为它会被test app的package name填充进去，这也就是为什么test app的Manifest文件是自动生成的]</p>
+
+<p>The sourceSet should not contain an <code>AndroidManifest.xml</code> as it is automatically generated.</p>
+
+<p>There are a few values that can be configured for the test app: [test app可以指定的属性]</p>
+
+<p><code>testPackageName</code>     <br />
+<code>testInstrumentationRunner</code>      <br />
+<code>testHandleProfiling</code>      <br />
+<code>testFunctionalTest</code>         </p>
+
+<p>As seen previously, those are configured in the defaultConfig object:</p>
+
+<p><code>java
+android {
+    defaultConfig {
+        testPackageName "com.test.foo"
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+        testHandleProfiling true
+        testFunctionalTest true
+    }
+}
+</code></p>
+
+<p><strong>The value of the <code>targetPackage</code> attribute of the instrumentation node in the test application manifest is automatically filled with the package name of the tested app, even if it is customized through the <code>defaultConfig</code> and/or the Build Type objects. This is one of the reason the manifest is generated automatically.</strong></p>
+
+<p>Additionally, the sourceSet can be configured to have its own dependencies.
+By default, the application and its own dependencies are added to the test app classpath, but this can be extended with </p>
+
+<p><code>
+dependencies {
+    androidTestCompile 'com.google.guava:guava:11.0.2'
+}
+</code></p>
+
+<p>[test app是通过任务<code>assembleTest</code> 来构建的，它不是main assemble任务的依赖项，所以它是在test运行时自动调用的。目前只有debug这个build type会被测试，当然也可以自定义]</p>
+
+<p><strong>The test app is built by the task <code>assembleTest</code>. It is not a dependency of the main assemble task, and is instead called automatically when the tests are set to run.</strong></p>
+
+<p><strong>Currently only one Build Type is tested. By default it is the <code>debug</code> Build Type, but this can be reconfigured with:</strong></p>
+
+<p><code>
+android {
+    ...
+    testBuildType "staging"
+}
+</code></p>
+
+<h4 id="running-tests">Running tests</h4>
+
+<p>[前面提到过，在所有已连接的设备上进行check的任务是<code>connectedCheck</code>，它依赖任务<code>androidTest</code>，该任务的工作是并行地在所有已连接的设备上运行测试，任何一个设备测试失败的话，build就会失败。测试的结果会保存在XML文件中，存放在<code>build/androidTest-results</code> 目录下，当然也可以修改目标目录]</p>
+
+<p>As mentioned previously, checks requiring a connected device are launched with the anchor task called <code>connectedCheck</code>.</p>
+
+<p>This depends on the task <code>androidTest</code> and therefore will run it. This task does the following:  [<code>androidTest</code> 任务的工作流程]</p>
+
+<p>1 Ensure the app and the test app are built (depending on <code>assembleDebug</code> and <code>assembleTest</code>)  <br />
+2 Install both apps    <br />
+3 Run the tests     <br />
+4 Uninstall both apps.      </p>
+
+<p>If more than one device is connected, all tests are run in parallel on all connected devices. If one of the test fails, on any device, the build will fail.</p>
+
+<p>All test results are stored as XML files under</p>
+
+<p><code>build/androidTest-results</code></p>
+
+<p>(This is similar to regular jUnit results that are stored under <code>build/test-results</code>)</p>
+
+<p>This can be configured with</p>
+
+<p>```
+android {
+    …</p>
+
+<pre><code>testOptions {
+    resultsDir = "$project.buildDir/foo/results"
+} } ```
+</code></pre>
+
+<p><strong>The value of <code>android.testOptions.resultsDir</code> is evaluated with <code>Project.file(String)</code></strong></p>
+
+<h4 id="testing-android-libraries">Testing Android Libraries</h4>
+
+<p>[测试android library project和测试一般的application差不多，区别在于整个library和它的依赖项都会被自动添加到test app，Manifest文件也被整合到test app的Manifest中。此外，<code>androidTest</code> 任务只能安装和卸载test APK]</p>
+
+<p>Testing Android Library project is done exactly the same way as application projects.</p>
+
+<p>The only difference is that the whole library (and its dependencies) is automatically added as a Library dependency to the test app. The result is that the test APK includes not only its own code, but also the library itself and all its dependencies.</p>
+
+<p>The manifest of the Library is merged into the manifest of the test app (as is the case for any project referencing this Library).</p>
+
+<p>The <code>androidTest</code> task is changed to only install (and uninstall) the test APK (since there are no other APK to install.)</p>
+
+<p>Everything else is identical.</p>
+
+<h4 id="test-reports">Test reports</h4>
+
+<p>[在进行单元测试时，Gradle会输出一份HTML文档形式的报告。Android插件在此之上进行扩展，输出一份整合了所有已连接设备的测试结果的测试报告]</p>
+
+<p>When running unit tests, Gradle outputs an HTML report to easily look at the results.</p>
+
+<p>The Android plugins build on this and extends the HTML report to aggregate the results from all connected devices.</p>
+
+<h4 id="single-projects">Single projects</h4>
+
+<p>The project is automatically generated upon running the tests. Its default location is <code>build/reports/androidTests</code></p>
+
+<p>This is similar to the jUnit report location, which is <code>build/reports/tests</code>, or other reports usually located in <code>build/reports/&lt;plugin&gt;/</code></p>
+
+<p>The location can be customized with</p>
+
+<p>```
+android {
+    …</p>
+
+<pre><code>testOptions {
+    reportDir = "$project.buildDir/foo/report"
+} } ```
+</code></pre>
+
+<p>The report will aggregate tests that ran on different devices.</p>
+
+<h4 id="multi-projects-reports">Multi-projects reports</h4>
+
+<p>[对于多项目的测试，可以使用插件<code>android-reporting</code> 来将所有的测试结果输出到一个单一的报告中，而且这个设置必须是要设置在根项目的<code>build.gradle</code> 文件中]</p>
+
+<p>In a multi project setup with application(s) and library(ies) projects, when running all tests at the same time, it might be useful to generate a single reports for all tests.</p>
+
+<p>To do this, a different plugin is available in the same artifact. It can be applied with:</p>
+
+<p>```
+buildscript {
+    repositories {
+        mavenCentral()
+    }</p>
+
+<pre><code>dependencies {
+    classpath 'com.android.tools.build:gradle:0.5.6'
+} }
+</code></pre>
+
+<p>apply plugin: ‘android-reporting’
+```</p>
+
+<p>This should be applied to the root project, ie in <code>build.gradle</code> next to <code>settings.gradle</code></p>
+
+<p>[在项目根目录下使用下面的命令可以保证运行所有的测试并聚合所有的测试结果，其中的<code>--continue</code> 选项能够保证即使某个设备在测试过程中出现了问题也不会打断其他的设备继续测试]</p>
+
+<p>Then from the root folder, the following command line will run all the tests and aggregate the reports:</p>
+
+<p><code>
+gradle deviceCheck mergeAndroidReports --continue
+</code></p>
+
+<p>Note: the <code>--continue</code> option ensure that all tests, from all sub-projects will be run even if one of them fails. Without it the first failing test will interrupt the run and not all projects may have their tests run.</p>
+
+<h4 id="lint-support">Lint support</h4>
+
+<p>[lint可以指出程序中可能出现的issue，android插件同样支持]</p>
+
+<p>As of version 0.7.0, you can run lint for a specific variant, or for all variants, in which case it produces a report which describes which specific variants a given issue applies to.</p>
+
+<p>You can configure lint by adding a <code>lintOptions</code> section like following. You typically only specify a few of these; this section shows all the available options.</p>
+
+<p>```
+android {
+    lintOptions {
+        // set to true to turn off analysis progress reporting by lint
+        quiet true
+        // if true, stop the gradle build if errors are found
+        abortOnError false
+        // if true, only report errors
+        ignoreWarnings true
+        // if true, emit full/absolute paths to files with errors (true by default)
+        //absolutePaths true
+        // if true, check all issues, including those that are off by default
+        checkAllWarnings true
+        // if true, treat all warnings as errors
+        warningsAsErrors true
+        // turn off checking the given issue id’s
+        disable ‘TypographyFractions’,’TypographyQuotes’
+        // turn on the given issue id’s
+        enable ‘RtlHardcoded’,’RtlCompat’, ‘RtlEnabled’
+        // check <em>only</em> the given issue id’s
+        check ‘NewApi’, ‘InlinedApi’
+        // if true, don’t include source code lines in the error output
+        noLines true
+        // if true, show all locations for an error, do not truncate lists, etc.
+        showAll true
+        // Fallback lint configuration (default severities, etc.)
+        lintConfig file(“default-lint.xml”)
+        // if true, generate a text report of issues (false by default)
+        textReport true
+        // location to write the output; can be a file or ‘stdout’
+        textOutput ‘stdout’
+        // if true, generate an XML report for use by for example Jenkins
+        xmlReport false
+        // file to write report to (if not specified, defaults to lint-results.xml)
+        xmlOutput file(“lint-report.xml”)
+        // if true, generate an HTML report (with issue explanations, sourcecode, etc)
+        htmlReport true
+        // optional path to report (default will be lint-results.html in the builddir)
+        htmlOutput file(“lint-report.html”)</p>
+
+<p>// set to true to have all release builds run lint on issues with severity=fatal
+   // and abort the build (controlled by abortOnError above) if fatal issues are found
+   checkReleaseBuilds true
+        // Set the severity of the given issues to fatal (which means they will be
+        // checked during release builds (even if the lint target is not included)
+        fatal ‘NewApi’, ‘InlineApi’
+        // Set the severity of the given issues to error
+        error ‘Wakelock’, ‘TextViewEdits’
+        // Set the severity of the given issues to warning
+        warning ‘ResourceAsColor’
+        // Set the severity of the given issues to ignore (same as disabling the check)
+        ignore ‘TypographyQuotes’
+    }
+}
+```</p>
+
+<h3 id="build-variants">Build Variants</h3>
+
+<p>One goal of the new build system is to enable creating different versions of the same application.</p>
+
+<p>There are two main use cases: [同一套程序代码生成多种不同的结果的应用场景]</p>
+
+<p>(1) Different versions of the same application</p>
+
+<p>For instance, a free/demo version vs the “pro” paid application. [一个是展示应用，另一个是真正的付费应用]</p>
+
+<p>Same application packaged differently for multi-apk in Google Play Store.
+See <a href="http://developer.android.com/google/play/publishing/multiple-apks.html">http://developer.android.com/google/play/publishing/multiple-apks.html </a> for more information.</p>
+
+<p>(2) A combination of 1. and 2. </p>
+
+<p>The goal was to be able to generate these different APKs from the same project, as opposed to using a single Library Projects and 2+ Application Projects.</p>
+
+<h4 id="product-flavors">Product flavors</h4>
+
+<p>[product flavor是一个项目的特别定制版的应用程序输出，单个项目可以有很多不同的product flavors，它们的名称不要和build type和sourceSet的名称相同]</p>
+
+<p>A product flavor defines a customized version of the application build by the project. A single project can have different flavors which change the generated application.</p>
+
+<p><strong>This new concept is designed to help when the differences are very minimum. If the answer to “Is this the same application?” is yes, then this is probably the way to go over Library Projects.</strong></p>
+
+<p>Product flavors are declared using a productFlavors DSL container:</p>
+
+<p>```
+android {
+    ….</p>
+
+<pre><code>productFlavors {
+    flavor1 {
+        ...
+    }
+
+    flavor2 {
+        ...
+    }
+} } ```
+</code></pre>
+
+<p>This creates two flavors, called flavor1 and flavor2.</p>
+
+<p>Note: The name of the flavors cannot collide with existing Build Type names, or with the <code>androidTest</code> sourceSet.</p>
+
+<p>[重要的式子：每个build type和product flavor的组合就是一个build variant]</p>
+
+<p><strong>Build Type + Product Flavor = Build Variant</strong>  </p>
+
+<p>As we have seen before, each Build Type generates a new APK.</p>
+
+<p>Product Flavors do the same: the output of the project becomes all possible combinations of Build Types and, if applicable, Product Flavors.</p>
+
+<p><strong>Each (Build Type, Product Flavor) combination is called a Build Variant.</strong></p>
+
+<p>For instance, with the default <code>debug</code> and <code>release</code> Build Types, the above example generates four Build Variants:</p>
+
+<p><code>Flavor1 - debug</code>    <br />
+<code>Flavor1 - release</code>    <br />
+<code>Flavor2 - debug</code>    <br />
+<code>Flavor2 - release</code>      </p>
+
+<p>[没有配置flavor的项目会有一个默认的flavor配置]</p>
+
+<p>Projects with no flavors still have Build Variants, but the single default <code>flavor/config</code> is used, nameless, making the list of variants similar to the list of Build Types.</p>
+
+<h4 id="product-flavor-configuration">Product Flavor Configuration</h4>
+
+<p>Each flavors is configured with a closure:</p>
+
+<p>```
+android {
+    …</p>
+
+<pre><code>defaultConfig {
+    minSdkVersion 8
+    versionCode 10
+}
+
+productFlavors {
+    flavor1 {
+        packageName "com.example.flavor1"
+        versionCode 20
+    }
+
+    flavor2 {
+        packageName "com.example.flavor2"
+        minSdkVersion 14
+    }
+} } ```
+</code></pre>
+
+<p>[ProductFlavor对象和<code>android.defaultConfig</code> 对象有相同的属性，即可以使用类似的配置方式]</p>
+
+<p><strong>Note that the <code>android.productFlavors.*</code> objects are of type <code>ProductFlavor</code> which is the same type as the <code>android.defaultConfig</code> object. This means they share the same properties.</strong></p>
+
+<p><code>defaultConfig</code> provides the base configuration for all flavors and each flavor can override any value. In the example above, the configurations end up being:</p>
+
+<p>```
+flavor1
+packageName: com.example.flavor1
+minSdkVersion: 8
+versionCode: 20</p>
+
+<p>flavor2
+packageName: com.example.flavor2
+minSdkVersion: 14
+versionCode: 10
+```</p>
+
+<p>Usually, the Build Type configuration is an overlay over the other configuration. For instance, the Build Type’s packageNameSuffix is appended to the Product Flavor’s packageName.</p>
+
+<p>[有些情况下，我们希望一个设置同时作用在build type和product flavor上，例如<code>signingConfig</code> 就是其中的一种配置，我们既可以设置所有的build type使用相同的SigningConfig，又可以设置某些flavor使用某个特定的SigningConfig]</p>
+
+<p>There are cases where a setting is settable on both the Build Type and the Product Flavor. In this case, it’s is on a case by case basis.</p>
+
+<p>For instance, <code>signingConfig</code> is one of these properties.</p>
+
+<p>This enables either having all release packages share the same <code>SigningConfig</code>, by setting <code>android.buildTypes.release.signingConfig</code>, or have each release package use their own SigningConfig by setting each <code>android.productFlavors.*.signingConfig</code> objects separately.</p>
+
+<h4 id="sourcesets-and-dependencies">Sourcesets and Dependencies</h4>
+
+<p>[和build type类似，product flavor也会产生自己的sourceSets，这些sourceSets和build type的sourceSets以及<code>android.sourceSets.main</code> 组合起来构建最终的APK]</p>
+
+<p>Similar to Build Types, Product Flavors also contribute code and resources through their own sourceSets.</p>
+
+<p>The above example creates four sourceSets:</p>
+
+<p><code>android.sourceSets.flavor1</code>   Location <code>src/flavor1/</code>      <br />
+<code>android.sourceSets.flavor2</code>   Location <code>src/flavor2/</code>     <br />
+<code>android.sourceSets.androidTestFlavor1</code>   Location <code>src/androidTestFlavor1/</code>    <br />
+<code>android.sourceSets.androidTestFlavor2</code>   Location <code>src/androidTestFlavor2/</code>     </p>
+
+<p>Those sourceSets are used to build the APK, alongside <code>android.sourceSets.main</code> and the Build Type sourceSet.</p>
+
+<p>The following rules are used when dealing with all the sourcesets used to build a single APK:  <strong>[重点：在构建APK过程中处理所有源码和资源的规则]</strong></p>
+
+<p>1 All source code (<code>src/*/java</code>) are used together as multiple folders generating a single output.  [所有的源代码都会整合到一起作为输出]</p>
+
+<p>2 Manifests are all merged together into a single manifest. This allows Product Flavors to have different components and/or permissions, similarly to Build Types.  [所有的Manifest文件也都会整合成为一个Manifest文件，其中product flavor和build type类似，都可以有不同的components或者permissions]</p>
+
+<p>3 <strong>All resources (Android <code>res</code> and <code>assets</code>) are used using overlay priority where the Build Type overrides the Product Flavor, which overrides the main sourceSet.</strong> [所有的资源文件按照优先级的不同采用覆盖的方式整合，product flavor覆盖main，build type覆盖product flavor] <strong>[?这里的优先级总觉得有点问题?]</strong></p>
+
+<p>4 Each Build Variant generates its own <code>R</code> class (or other generated source code) from the resources. Nothing is shared between variants. [每个Build Variant都会根据它的资源文件产生一个R清单类，并且在variants之间不进行共享]</p>
+
+<p>5 Finally, like Build Types, Product Flavors can have their own dependencies. For instance, if the flavors are used to generate a ads-based app and a paid app, one of the flavors could have a dependency on an Ads SDK, while the other does not. [最后，build type和product flavor一样都可以有自己的依赖项]</p>
+
+<p><code>
+dependencies {
+    flavor1Compile "..."
+}
+</code></p>
+
+<p>In this particular case, the file <code>src/flavor1/AndroidManifest.xml</code> would probably need to include the internet permission.</p>
+
+<p>Additional sourcesets are also created for each variants:</p>
+
+<p><code>android.sourceSets.flavor1Debug</code>   Location <code>src/flavor1Debug/</code>   <br />
+<code>android.sourceSets.flavor1Release</code>   Location <code>src/flavor1Release/</code>    <br />
+<code>android.sourceSets.flavor2Debug</code>    Location <code>src/flavor2Debug/</code>  <br />
+<code>android.sourceSets.flavor2Release</code>    Location <code>src/flavor2Release/</code>     </p>
+
+<p>These have higher priority than the build type sourcesets, and allow customization at the variant level.</p>
+
+<p>[这些sourceSets的优先级比build type的sourceSets高，而且可以在variant层进行自定义]</p>
+
+<h4 id="building-and-tasks">Building and Tasks</h4>
+
+<p>We previously saw that each Build Type creates its own <code>assemble&lt;name&gt;</code> task, but that Build Variants are a combination of Build Type and Product Flavor.</p>
+
+<p>[当一个product flavor被使用时，更多的assemble类型的任务会被创建，它们分别针对了特定的variant或者build type或者flavor]</p>
+
+<p>When Product Flavors are used, more assemble-type tasks are created. These are:  </p>
+
+<p><code>assemble&lt;Variant Name&gt;</code>    <br />
+<code>assemble&lt;Build Type Name&gt;</code>        <br />
+<code>assemble&lt;Product Flavor Name&gt;</code>        </p>
+
+<p>1 allows directly building a <code>single variant</code>. For instance <code>assembleFlavor1Debug</code>.</p>
+
+<p>2 allows building all APKs for a given <code>Build Type</code>. For instance <code>assembleDebug </code>will build both <code>Flavor1Debug</code> and <code>Flavor2Debug</code> variants.</p>
+
+<p>3 allows building all APKs for a given <code>flavor</code>. For instance <code>assembleFlavor1</code> will build both <code>Flavor1Debug</code> and <code>Flavor1Release</code> variants.</p>
+
+<p>The task <code>assemble</code> will build all possible variants.</p>
+
+<h4 id="testing-1">Testing</h4>
+
+<p>[测试包含多个<code>flavor</code> 的项目]</p>
+
+<p>Testing multi-flavors project is very similar to simpler projects.</p>
+
+<p>The <code>androidTest</code> sourceset is used for common tests across all flavors, while each flavor can also have its own tests.</p>
+
+<p>As mentioned above, sourceSets to test each flavor are created:</p>
+
+<p><code>android.sourceSets.androidTestFlavor1</code>    Location <code>src/androidTestFlavor1/</code>       <br />
+<code>android.sourceSets.androidTestFlavor2</code>    Location <code>src/androidTestFlavor2/</code>      </p>
+
+<p>Similarly, those can have their own dependencies:</p>
+
+<p><code>
+dependencies {
+    androidTestFlavor1Compile "..."
+}
+</code></p>
+
+<p>Running the tests can be done through the main <code>deviceCheck</code> anchor task, or the main <code>androidTest</code> tasks which acts as an anchor task when flavors are used.</p>
+
+<p>Each flavor has its own task to run <code>tests: androidTest&lt;VariantName&gt;</code>. For instance:</p>
+
+<p><code>androidTestFlavor1Debug</code>           <br />
+<code>androidTestFlavor2Debug</code>           </p>
+
+<p>Similarly, test APK building tasks and install/uninstall tasks are per variant:</p>
+
+<p><code>assembleFlavor1Test</code>      <br />
+<code>installFlavor1Debug</code>      <br />
+<code>installFlavor1Test</code>      <br />
+<code>uninstallFlavor1Debug</code>      <br />
+<code>...</code></p>
+
+<p>Finally the HTML report generation supports aggregation by flavor.
+The location of the test results and reports is as follows, first for the per flavor version, and then for the aggregated one:</p>
+
+<p><code>build/androidTest-results/flavors/&lt;FlavorName&gt;</code>      <br />
+<code>build/androidTest-results/all/</code>      <br />
+<code>build/reports/androidTests/flavors&lt;FlavorName&gt;</code>      <br />
+<code>build/reports/androidTests/all/</code>        </p>
+
+<p>Customizing either path, will only change the root folder and still create sub folders per-flavor and aggregated <code>results/reports</code>.</p>
+
+<h4 id="multi-flavor-variants">Multi-flavor variants</h4>
+
+<p>[使用<code>flavorGroups</code>，此处有些复杂，如果有这种需求请细读原文]</p>
+
+<p>In some case, one may want to create several versions of the same apps based on more than one criteria.</p>
+
+<p>For instance, multi-apk support in Google Play supports 4 different filters. </p>
+
+<p>Creating different APKs split on each filter requires being able to use more than one dimension of Product Flavors.</p>
+
+<p>Consider the example of a game that has a demo and a paid version and wants to use the ABI filter in the multi-apk support. With 3 ABIs and two versions of the application, 6 APKs needs to be generated (not counting the variants introduced by the different Build Types).</p>
+
+<p>However, the code of the paid version is the same for all three ABIs, so creating simply 6 flavors is not the way to go.Instead, there are two dimensions of flavors, and variants should automatically build all possible combinations.</p>
+
+<p>This feature is implemented using Flavor Groups. Each group represents a dimension, and flavors are assigned to a specific group.</p>
+
+<p>```
+android {
+    …</p>
+
+<pre><code>flavorGroups "abi", "version"
+
+productFlavors {
+    freeapp {
+        flavorGroup "version"
+        ...
+    }
+
+    x86 {
+        flavorGroup "abi"
+        ...
+    }
+} } ```
+</code></pre>
+
+<p>The <code>android.flavorGroups</code> array defines the possible groups, as well as the order. Each defined Product Flavor is assigned to a group.</p>
+
+<p>From the following grouped Product Flavors <code>[freeapp, paidapp]</code> and <code>[x86, arm, mips]</code> and the <code>[debug, release]</code> Build Types, the following build variants will be created:</p>
+
+<p><code>
+x86-freeapp-debug
+x86-freeapp-release
+arm-freeapp-debug
+arm-freeapp-release
+mips-freeapp-debug
+mips-freeapp-release
+x86-paidapp-debug
+x86-paidapp-release
+arm-paidapp-debug
+arm-paidapp-release
+mips-paidapp-debug
+mips-paidapp-release
+</code></p>
+
+<p>The order of the group as defined by <code>android.flavorGroups</code> is very important.</p>
+
+<p>Each variant is configured by several Product Flavor objects:
+<code>android.defaultConfig</code>
+One from the <code>abi</code> group
+One from the <code>version</code> group</p>
+
+<p>The order of the group drives which flavor override the other, which is important for resources when a value in a flavor replaces a value defined in a lower priority flavor.</p>
+
+<p>The flavor groups is defined with higher priority first. So in this case:
+<code>abi &gt; version &gt; defaultConfig</code></p>
+
+<p>Multi-flavors projects also have additional sourcesets, similar to the variant sourcesets but without the build type:</p>
+
+<p><code>android.sourceSets.x86Freeapp</code>   Location <code>src/x86Freeapp/</code>       <br />
+<code>android.sourceSets.armPaidapp</code>   Location <code>src/armPaidapp/</code>      <br />
+<code>etc...</code></p>
+
+<p><strong>These allow customization at the flavor-combination level. They have higher priority than the basic flavor sourcesets, but lower priority than the build type sourcesets.</strong></p>
+
+<h3 id="advanced-build-customization">Advanced Build Customization</h3>
+
+<h4 id="build-options">Build options</h4>
+
+<h5 id="java-compilation-options">Java Compilation options</h5>
+
+<p><code>
+android {
+    compileOptions {
+        sourceCompatibility = "1.6"
+        targetCompatibility = "1.6"
+    }
+}
+</code></p>
+
+<p>Default value is “1.6”. This affect all tasks compiling Java source code.</p>
+
+<h5 id="aapt-options">aapt options</h5>
+
+<p><code>
+android {
+    aaptOptions {
+        noCompress 'foo', 'bar'
+        ignoreAssetsPattern "!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir&gt;_*:!CVS:!thumbs.db:!picasa.ini:!*~"
+    }
+}
+</code></p>
+
+<p>This affects all tasks using aapt.</p>
+
+<h5 id="dex-options">dex options</h5>
+
+<p><code>
+android {
+    dexOptions {
+        incremental false
+        preDexLibraries = false
+        jumboMode = false
+    }
+}
+</code></p>
+
+<p>This affects all tasks using dex.</p>
+
+<h5 id="manipulating-tasks">Manipulating tasks</h5>
+
+<p>[简单的Java项目一般都是有限的任务一起工作然后得到一个输出，例如<code>classes</code> 任务是用来编译Java源代码的任务，在<code>build.gradle</code> 文件中可以使用<code>classes</code> 来引用]</p>
+
+<p>Basic Java projects have a finite set of tasks that all work together to create an output.</p>
+
+<p>The <code>classes</code> task is the one that compile the Java source code.
+It’s easy to access from <code>build.gradle</code> by simply using <code>classes</code> in a script. This is a shortcut for <code>project.tasks.classes</code>.</p>
+
+<p>[但是Android项目优点复杂，因为它可能有很多相同的任务，这些任务的名称是基于build type和product flavor来生成的]</p>
+
+<p>In Android projects, this is a bit more complicated because there could be a large number of the same task and their name is generated based on the Build Types and Product Flavors.</p>
+
+<p>In order to fix this, the android object has two properties:</p>
+
+<p><code>applicationVariants</code> (only for the app plugin)      <br />
+<code>libraryVariants</code> (only for the library plugin)     <br />
+<code>testVariants</code> (for both plugins)        </p>
+
+<p>All three return a <code>DomainObjectCollection</code> of <code>ApplicationVariant</code>, <code>LibraryVariant</code>, and <code>TestVariant</code> objects respectively.</p>
+
+<p>Note that accessing any of these collections will trigger the creations of all the tasks. This means no (re)configuration should take place after accessing the collections.</p>
+
+<p>The <code>DomainObjectCollection</code> gives access to all the objects directly, or through filters which can be convenient.</p>
+
+<p><code>
+android.applicationVariants.each { variant -&gt;
+    ....
+}
+</code></p>
+
+<p>All three variant classes share the following properties:</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/gradle4.png" alt="image" /></p>
+
+<p>The ApplicationVariant class adds the following:</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/gradle5.png" alt="image" /></p>
+
+<p>The LibraryVariant class adds the following:</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/gradle6.png" alt="image" /></p>
+
+<p>The TestVariant class adds the following:</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/gradle7.png" alt="image" /></p>
+
+<p>API for Android specific task types.</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/gradle8.png" alt="image" /></p>
+
+<p><strong>The API for each task type is limited due to both <code>how Gradle works</code> and <code>how the Android plugin sets them up</code>.</strong></p>
+
+<p>1 First, Gradle is meant to have the tasks be only configured for <code>input/output</code> location and possible optional flags. So here, the tasks only define (some of) the inputs/outputs.</p>
+
+<p>2 Second, the input for most of those tasks is non-trivial, often coming from mixing values from the sourceSets, the Build Types, and the Product Flavors. To keep build files simple to read and understand, the goal is to let developers modify the build by tweak these objects through the DSL, rather than diving deep in the inputs and options of the tasks and changing them.</p>
+
+<p><strong>Also note, that except for the <code>ZipAlign</code> task type, all other types require setting up <code>private data</code> to make them work. This means it’s not possible to manually create new tasks of these types.</strong></p>
+
+<p>[除了ZipAlign任务之外，其他类型的任务都需要private data才能工作，所以没有办法manual创建这些类型的新任务]</p>
+
+<p><strong>This API is subject to change.</strong> In general the current API is around giving access to the outputs and inputs (when possible) of the tasks to add extra processing when required). Feedback is appreciated, especially around needs that may not have been foreseen.</p>
+
+<p>For Gradle tasks (<code>DefaultTask</code>, <code>JavaCompile</code>, <code>Copy</code>, <code>Zip</code>), refer to the Gradle documentation.</p>
+
+<h4 id="buildtype-and-product-flavor-property-reference">BuildType and Product Flavor property reference</h4>
+
+<p>coming soon.</p>
+
+<p>For Gradle tasks (<code>DefaultTask</code>, <code>JavaCompile</code>, <code>Copy</code>, <code>Zip</code>), refer to the Gradle documentation.</p>
+
+<h4 id="using-sourcecompatibility-17">Using sourceCompatibility 1.7</h4>
+
+<p>[兼容JDK 1.7的方式，使用某些特性时还需要注意项目<code>minSdkVersion</code> 的配置]</p>
+
+<p>With <code>Android KitKat (buildToolsVersion 19)</code> you can use the <code>diamond operator</code>, <code>multi-catch</code>, <code>strings in switches</code>, <code>try with resources</code>, etc. To do this, add the following to your build file:</p>
+
+<p>```
+android {
+    compileSdkVersion 19
+    buildToolsVersion “19.0.0”</p>
+
+<pre><code>defaultConfig {
+    minSdkVersion 7
+    targetSdkVersion 19
+}
+
+compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_7
+    targetCompatibility JavaVersion.VERSION_1_7
+} } ```
+</code></pre>
+
+<p>Note that you can use <code>minSdkVersion</code> with a value earlier than 19, for all language features except <code>try with resources</code>. If you want to use <code>try with resources</code>, you will need to also use a <code>minSdkVersion</code> of 19.</p>
+
+<p>You also need to make sure that Gradle is using version 1.7 or later of the JDK. (And version 0.6.1 or later of the Android Gradle plugin.)</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Gradle Plugin for Android Development User Guide (1)]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/10/13/gradle-plugin-user-guide-1/"/>
+    <updated>2014-10-13T21:00:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/10/13/gradle-plugin-user-guide-1</id>
+    <content type="html"><![CDATA[<p>Gradle Plugin for Android Development User Guide (1)</p>
+
+<p>终于有点时间可以学学一直打算了解的Gradle，毕竟打算以后在移动开发这条路上走到黑的话就要与时俱进，首先自然得用Google推荐的Android Studio，就目前来看，它除了还未完全支持NDK之外，很多方面都是完爆Eclipse+ADT Plugin的，而新的构建系统Gradle更是不能不了解的内容，于是找了些有用的资料开始上手看。如果你一般都是进行常规的Android SDK的开发而且对Gradle没啥兴趣的话那么直接看这篇官网教程就行了<a href="http://developer.android.com/sdk/installing/studio-build.html">http://developer.android.com/sdk/installing/studio-build.html</a>。</p>
+
+<p>而本篇文章来自<a href="http://tools.android.com/">http://tools.android.com/</a>的<code>Gradle Plugin User Guide</code>我想应该是最好的读物了，于是细细地通读了一下，边读边注解，注意不是翻译，因为宝贵的时间有限而且原文并不难懂，所以只能是挑重要的内容注解一下，以便以后用到的时候能够更快的检索到重要信息。</p>
+
+<p>文中标有<code>[?]</code>的地方表示我没有理解，如有理解了的或者文中有任何错误烦请留言告知，不胜感激！</p>
+
+<p>原文地址：<a href="http://tools.android.com/tech-docs/new-build-system/user-guide">http://tools.android.com/tech-docs/new-build-system/user-guide</a></p>
+
+<p>因为注解完之后文章变得特别长，所以分成2部分，第二部分地址：<a href="http://hujiaweibujidao.github.io/blog/2014/10/15/gradle-plugin-user-guide-2/">http://hujiaweibujidao.github.io/blog/2014/10/15/gradle-plugin-user-guide-2</a></p>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>This documentation is for the Gradle plugin version 0.9. Earlier versions may differ due to non-compatible we are introducing before 1.0.</p>
+
+<h3 id="goals-of-the-new-build-system">Goals of the new Build System</h3>
+
+<p>The goals of the new build system are: </p>
+
+<p>Make it easy to reuse code and resources     <br />
+Make it easy to create several variants of an application, either for multi-apk distribution or for different flavors of an application    <br />
+Make it easy to configure, extend and customize the build process   <br />
+Good IDE integration    </p>
+
+<h3 id="why-gradle">Why Gradle?</h3>
+
+<p>Gradle is an advanced build system as well as an advanced build toolkit allowing to create custom build logic through plugins.</p>
+
+<p>Here are some of its features that made us choose Gradle:      </p>
+
+<p>Domain Specific Language (DSL) to describe and manipulate the build logic    <br />
+Build files are Groovy based and allow mixing of declarative elements through the DSL and using code to manipulate the DSL elements to provide custom logic.    <br />
+Built-in dependency management through Maven and/or Ivy.     <br />
+Very flexible. Allows using best practices but doesn’t force its own way of doing things.     <br />
+Plugins can expose their own DSL and their own API for build files to use.
+Good Tooling API allowing IDE integration      </p>
+
+<p>[总结起来就是：DSL(Domain Specific Language ) + Groovy based Build files + Maven/Ivy based Dependency Management + Plugin Supported]</p>
+
+<h3 id="requirements">Requirements</h3>
+
+<p>Gradle 1.10 or 1.11 or 1.12 with the plugin 0.11.1    <br />
+SDK with Build Tools 19.0.0. Some features may require a more recent version.</p>
+
+<h3 id="basic-project">Basic Project</h3>
+
+<p>A Gradle project describes its build in a file called <code>build.gradle</code> located in the root folder of the project.</p>
+
+<h4 id="simple-build-files">Simple build files</h4>
+
+<p>The most simple Java-only project has the following <code>build.gradle</code>:</p>
+
+<p><code>java
+apply plugin: 'java'
+</code></p>
+
+<p>This applies the Java plugin, which is packaged with Gradle. The plugin provides everything to build and test Java applications.</p>
+
+<p>The most simple Android project has the following <code>build.gradle</code>:</p>
+
+<p>```
+buildscript {
+    repositories {
+        mavenCentral()
+    }</p>
+
+<pre><code>dependencies {
+    classpath 'com.android.tools.build:gradle:0.11.1'
+} }
+</code></pre>
+
+<p>apply plugin: ‘android’</p>
+
+<p>android {
+    compileSdkVersion 19
+    buildToolsVersion “19.0.0”
+}
+```</p>
+
+<p>There are 3 main areas to this Android build file:</p>
+
+<p>(1) <code>buildscript { ... }</code> configures the code driving the build.
+In this case, this declares that it uses the Maven Central repository, and that there is a classpath dependency on a Maven artifact. This artifact is the library that contains the Android plugin for Gradle in version 0.11.1</p>
+
+<p><strong>Note: This only affects the code running the build, not the project. The project itself needs to declare its own repositories and dependencies. This will be covered later.</strong></p>
+
+<p>[注意：这里定义的repository和dependency只是build需要的，项目还需要定义自己的repository和dependency]</p>
+
+<p>(2) Then, the android plugin is applied like the Java plugin earlier.</p>
+
+<p>(3) Finally, <code>android { ... } </code>configures all the parameters for the android build. This is the entry point for the Android DSL.</p>
+
+<p><strong>By default, only the compilation target, and the version of the build-tools are needed. This is done with the compileSdkVersion and buildtoolsVersion properties.</strong></p>
+
+<p>[默认情况下，只有编译目标和编译工具的版本号是必须要给定的。以前的build系统需要在项目的根目录下的<code>project.properties</code> 文件中指定<code>target</code> (例如<code>target=android-18</code>)，它对应的就是这里的 <code>compilation target</code>，不过此处的值只是一个int值，代表Android API version]</p>
+
+<p>The compilation target is the same as the target property in the <code>project.properties</code> file of the old build system. This new property can either be assigned a int (the api level) or a string with the same value as the previous target property.</p>
+
+<p><strong>Important: You should only apply the android plugin. Applying the java plugin as well will result in a build error.</strong></p>
+
+<p>[注意：这里只能使用android插件，写成java插件会出现build错误]</p>
+
+<p>Note: You will also need a <code>local.properties</code> file to set the location of the SDK in the same way that the existing SDK requires, using the <code>sdk.dir</code> property.</p>
+
+<p>Alternatively, you can set an environment variable called <code>ANDROID_HOME</code>. There is no differences between the two methods, you can use the one you prefer.</p>
+
+<p>关于设置Android SDK的位置有两种方式：</p>
+
+<p>（1）在项目根目录的<code>local.properties</code> 文件中指定<code>sdk.dir</code> 的值，如果包含ndk的话同时还要指定<code>ndk.dir</code> 的值</p>
+
+<p><code>
+sdk.dir=/Volumes/hujiawei/Users/hujiawei/Android/android_sdk
+ndk.dir=/Volumes/hujiawei/Users/hujiawei/Android/android_ndk
+</code>
+（2）在系统中设置环境变量<code>ANDROID_HOME</code></p>
+
+<h4 id="project-structure">Project Structure</h4>
+
+<p>The basic build files above expect a default folder structure. Gradle follows the concept of convention over configuration, providing sensible default option values when possible.    </p>
+
+<p>[Gradle遵循大家约定俗成的Android项目目录结构和项目配置，一个基本的项目开始时包含了两个源码集合，即main source code和test source code，它们各自的源码目录下有分别包含了Java source code和Java resource] </p>
+
+<p>The basic project starts with two components called <code>“source sets”</code>. The main source code and the test code. These live respectively in:</p>
+
+<p><code>
+src/main/
+src/androidTest/
+</code></p>
+
+<p>Inside each of these folders exists folder for each source components.
+For both the Java and Android plugin, the location of the Java source code and the Java resources:</p>
+
+<p><code>
+java/
+resources/
+</code></p>
+
+<p>For the Android plugin, extra files and folders specific to Android:</p>
+
+<p><code>
+AndroidManifest.xml
+res/
+assets/
+aidl/
+rs/
+jni/
+</code></p>
+
+<p>Note: <code>src/androidTest/AndroidManifest.xml</code> is not needed as it is created automatically.</p>
+
+<p>[Android插件对于Android项目还指定了一些其他的目录，注意test目录下的<code>AndroidManifest.xml</code> 文件不需要提供，因为它会自动创建，后面会提到为什么]</p>
+
+<h4 id="configuring-the-structure">Configuring the Structure</h4>
+
+<p>[当我们的项目原本的目录结构和上面默认的目录结构不同时，我们可以进行配置，使用<code>sourceSets</code> 节点来修改目录结构]</p>
+
+<p>When the default project structure isn’t adequate, it is possible to configure it. According to the Gradle documentation, reconfiguring the <code>sourceSets</code> for a Java project can be done with the following:</p>
+
+<p><code>
+sourceSets {
+    main {
+        java {
+            srcDir 'src/java'
+        }
+        resources {
+            srcDir 'src/resources'
+        }
+    }
+}
+</code></p>
+
+<p><strong>Note: srcDir will actually add the given folder to the existing list of source folders (this is not mentioned in the Gradle documentation but this is actually the behavior).</strong></p>
+
+<p>[<code>srcDir</code> 会自动将给定的目录加入到默认的已有的源码目录列表中，然而<code>srcDirs</code> 会覆盖默认的源码目录设置]</p>
+
+<p>To replace the default source folders, you will want to use <code>srcDirs</code> instead, which takes an array of path. This also shows a different way of using the objects involved:</p>
+
+<p><code>
+sourceSets {
+    main.java.srcDirs = ['src/java']
+    main.resources.srcDirs = ['src/resources']
+}
+</code></p>
+
+<p>For more information, see the Gradle documentation on the <a href="http://www.gradle.org/docs/current/userguide/java_plugin.html">Java plugin here</a>.</p>
+
+<p>[Android插件使用和上面相似的语法来完成配置，只不过它的<code>sourceSets</code> 节点是定义在 <code>android</code> 中的]</p>
+
+<p>The Android plugin uses a similar syntaxes, but because it uses its own <code>sourceSets</code>, this is done within the <code>android</code> object.</p>
+
+<p>Here’s an example, using the old project structure for the main code and remapping the <code>androidTest</code> sourceSet to the <code>tests</code> folder:</p>
+
+<p>```
+android {
+    sourceSets {
+        main {
+            manifest.srcFile ‘AndroidManifest.xml’
+            java.srcDirs = [‘src’]
+            resources.srcDirs = [‘src’]
+            aidl.srcDirs = [‘src’]
+            renderscript.srcDirs = [‘src’]
+            res.srcDirs = [‘res’]
+            assets.srcDirs = [‘assets’]
+        }</p>
+
+<pre><code>    androidTest.setRoot('tests')
+} } ```
+</code></pre>
+
+<p>Note: because the old structure put all source files (java, aidl, renderscript, and java resources) in the same folder, we need to remap all those new components of the sourceSet to the same src folder.</p>
+
+<p>[<code>setRoot()</code> 会将整个sourceSet包括其中的子目录一起移动到新的目录中，这是Android插件特定的，Java插件没有此功能]</p>
+
+<p>Note: <code>setRoot()</code> moves the whole sourceSet (and its sub folders) to a new folder. This moves <code>src/androidTest/*</code> to <code>tests/*</code></p>
+
+<p>This is Android specific and will not work on Java sourceSets.</p>
+
+<p>The ‘migrated’ sample shows this. [?]</p>
+
+<h3 id="build-tasks">Build Tasks</h3>
+
+<h4 id="general-tasks">General Tasks</h4>
+
+<p>[使用plugin的好处是它会自动地帮我们创建一些默认的build task]</p>
+
+<p>Applying a plugin to the build file automatically creates a set of build tasks to run. Both the Java plugin and the Android plugin do this.</p>
+
+<p>The convention for tasks is the following: [下面是默认的build tasks]</p>
+
+<p><code>assemble</code>   The task to assemble the output(s) of the project     <br />
+<code>check</code>   The task to run all the checks.     <br />
+<code>build</code>   This task does both assemble and check    <br />
+<code>clean</code>    This task cleans the output of the project        </p>
+
+<p><strong>[任务assemble，check，build实际上什么都没有做，它们只是anchor task，需要添加实际的task它们才知道如何工作，这样的话就可以不管你是什么类型的项目都可以调用相同名称的build task。例如如果使用了<code>findbugs</code> 插件的话，它会自动创建一个新的task，而且check task会依赖它，也就有是说，每当check task执行的时候，这个新的task都会被调用而执行]</strong></p>
+
+<p><strong>The tasks assemble, check and build don’t actually do anything. They are anchor tasks for the plugins to add actual tasks that do the work.</strong></p>
+
+<p>This allows you to always call the same task(s) no matter what the type of project is, or what plugins are applied.</p>
+
+<p>For instance, applying the <code>findbugs</code> plugin will create a new task and make <code>check</code> depend on it, making it be called whenever the <code>check</code> task is called.</p>
+
+<p>From the command line you can get the high level task running the following command:   <code>gradle tasks</code>    <br />
+For a full list and seeing dependencies between the tasks run:  <code>gradle tasks --all</code></p>
+
+<p>[在Android Studio的Terminal中运行结果如下]</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/gradle1.png" alt="image" /></p>
+
+<p>Note: Gradle automatically monitor the declared inputs and outputs of a task. Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations. </p>
+
+<p><strong>[Gradle会监视一个任务的输入和输出，重复运行build结果都没有变化的话Gradle会提示所有的任务都是UP-TO-DATE，这样可以避免不必要的build操作]</strong></p>
+
+<h4 id="java-project-tasks">Java project tasks</h4>
+
+<p>[Java插件主要创建了两个新的task，其中<code>jar</code> task是<code>assemble</code> task的依赖项，<code>test</code> task是<code>check</code> task的依赖项]</p>
+
+<p>The Java plugin creates mainly two tasks, that are dependencies of the main anchor tasks:</p>
+
+<p><code>assemble</code>  -&gt;   <code>jar</code>   This task creates the output.     <br />
+<code>check</code>  -&gt;    <code>test</code>  This task runs the tests.       </p>
+
+<p><strong>[任务jar直接或者间接地依赖其他的任务，例如用来编译Java代码的任务<code>classes</code>； 测试代码是由<code>testClasses</code> 任务来编译的，但是你不需要去调用这个task，因为<code>test</code> 任务依赖于<code>testClasses</code> 和 <code>classes</code> 任务]</strong></p>
+
+<p>The <code>jar</code> task itself will depend directly and indirectly on other tasks: <code>classes</code> for instance will compile the Java code. </p>
+
+<p>** The tests are compiled with <code>testClasses</code>, but it is rarely useful to call this as <code>test</code> depends on it (as well as <code>classes</code>). **</p>
+
+<p>In general, you will probably only ever call <code>assemble</code> or <code>check</code>, and ignore the other tasks.</p>
+
+<p>You can see the full set of tasks and their descriptions for the <a href="http://gradle.org/docs/current/userguide/java_plugin.html">Java plugin here</a>.</p>
+
+<h4 id="android-tasks">Android tasks</h4>
+
+<p>The Android plugin use the same convention to stay compatible with other plugins, and adds an additional anchor task:</p>
+
+<p><code>assemble</code>    The task to assemble the output(s) of the project      <br />
+<code>check</code>   The task to run all the checks.          <br />
+<code>connectedCheck</code>   Runs checks that requires a connected device or emulator, they will run on all connected devices in parallel. <strong>[在已连接的设备和模拟器上并行运行check任务]</strong>              <br />
+<code>deviceCheck</code>   Runs checks using APIs to connect to remote devices. This is used on CI servers.  <strong>[使用APIs来连接远程设备以运行check任务]</strong>                         <br />
+<code>build</code>   This task does both assemble and check     <br />
+<code>clean</code>    This task cleans the output of the project</p>
+
+<p>The new anchor tasks are necessary in order to be able to run regular checks without needing a connected device.Note that build does not depend on deviceCheck, or connectedCheck.</p>
+
+<p><strong>[任务build并不依赖deviceCheck和connectedCheck这两个任务]</strong></p>
+
+<p>An Android project has at least two outputs: a debug APK and a release APK. Each of these has its own anchor task to facilitate building them separately:</p>
+
+<p>[Android项目至少有两个输出：一个debug模式的APK，另一个是release模式deAPK，每种模式都有自己的anchor task以便于将它们的build过程分开]</p>
+
+<p><code>assemble</code>   <br />
+<code>assembleDebug</code>    <br />
+<code>assembleRelease</code>     </p>
+
+<p>They both depend on other tasks that execute the multiple steps needed to build an APK. The <code>assemble</code> task depends on both, so calling it will build both APKs.</p>
+
+<p><strong>Tip: Gradle support camel case shortcuts for task names on the command line.</strong> </p>
+
+<p>[Gradle支持在命令行中使用某个task的名称的camel case缩写调用这个task]</p>
+
+<p>For instance:   <code>gradle aR</code>  is the same as typing  <code>gradle assembleRelease</code>，as long as no other task match <code>‘aR’</code></p>
+
+<p>The <code>check</code> anchor tasks have their own dependencies:</p>
+
+<p><code>check</code>      <br />
+<code>lint</code>    <br />
+<code>connectedCheck</code>    <br />
+<code>connectedAndroidTest</code>    <br />
+<code>connectedUiAutomatorTest </code>(not implemented yet)    <br />
+<code>deviceCheck</code>      </p>
+
+<p>This depends on tasks created when other plugins implement test extension points.</p>
+
+<p><strong>Finally, the plugin creates <code>install/uninstall</code> tasks for all build types (debug, release, test), as long as they can be installed (which requires signing).</strong></p>
+
+<p>[Android插件还会对所有build type创建它们的<code>install/uninstall</code> 任务，只要它们可以被安装，安装需要签名]</p>
+
+<h3 id="basic-build-customization">Basic Build Customization</h3>
+
+<p>The Android plugin provides a broad DSL to customize most things directly from the build system.</p>
+
+<h4 id="manifest-entries">Manifest entries</h4>
+
+<p>[通过DSL我们可以在<code>build.gradle</code> 文件中指定那些定义在AndroidManifest文件中的内容，不过能够指定的内容有限]</p>
+
+<p>Through the DSL it is possible to configure the following manifest entries:</p>
+
+<p><code>minSdkVersion</code>    <br />
+<code>targetSdkVersion</code>   <br />
+<code>versionCode</code>   <br />
+<code>versionName</code>   <br />
+<code>applicationId</code> (the effective packageName – see <a href="http://tools.android.com/tech-docs/new-build-system/applicationid-vs-packagename">ApplicationId versus PackageName</a> for more information)    <br />
+<code>Package Name</code> for the test application   <br />
+<code>Instrumentation test runner</code>     </p>
+
+<p>Example:</p>
+
+<p>```
+android {
+    compileSdkVersion 19
+    buildToolsVersion “19.0.0”</p>
+
+<pre><code>defaultConfig {
+    versionCode 12
+    versionName "2.0"
+    minSdkVersion 16
+    targetSdkVersion 16
+} } ```
+</code></pre>
+
+<p>The <code>defaultConfig</code> element inside the android element is where all this configuration is defined.</p>
+
+<p><strong>Previous versions of the Android Plugin used <code>packageName</code> to configure the manifest ‘packageName’ attribute. Starting in 0.11.0, you should use <code>applicationId</code> in the <code>build.gradle</code> to configure the manifest ‘packageName’ entry. This was disambiguated to reduce confusion between the application’s packageName (which is its ID) and java packages.</strong></p>
+
+<p>[从Gradle Plugin 0.11.0 版本开始在<code>build.gradle</code> 文件中使用<code>applicationId</code> 而不是 <code>packageName</code> 来指定AndroidManifest文件中的<code>packageName</code>]</p>
+
+<p>The power of describing it in the build file is that it can be dynamic.
+For instance, one could be reading the version name from a file somewhere or using some custom logic:</p>
+
+<p>[将上面那些内容定义在build文件中的魔力就在于它们可以是动态的，如下所示]</p>
+
+<p>```
+def computeVersionName() {
+    …
+}</p>
+
+<p>android {
+    compileSdkVersion 19
+    buildToolsVersion “19.0.0”</p>
+
+<pre><code>defaultConfig {
+    versionCode 12
+    versionName computeVersionName()
+    minSdkVersion 16
+    targetSdkVersion 16
+} } ```
+</code></pre>
+
+<p>[注意不要使用当前域中已有的getter方法作为自定义的函数名，否则会发生冲突]</p>
+
+<p><strong>Note: Do not use function names that could conflict with existing getters in the given scope. For instance instance <code>defaultConfig { ...}</code> calling <code>getVersionName()</code> will automatically use the getter of <code>defaultConfig.getVersionName()</code> instead of the custom method.</strong></p>
+
+<p>If a property is not set through the DSL, some default value will be used. Here’s a table of how this is processed.</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/gradle2.png" alt="image" /></p>
+
+<p><strong>[第2列是当你在build script中使用自定义逻辑去查询第1列元素对应的默认结果，如果结果不是你想要的话，你可以指定另一个结果，但是在build时如果这个结果是null的话，build系统就会使用第3列中的结果]</strong></p>
+
+<p>The value of the 2nd column is important if you use custom logic in the build script that queries these properties. For instance, you could write:</p>
+
+<p><code>
+if (android.defaultConfig.testInstrumentationRunner == null) {
+    // assign a better default...
+}
+</code></p>
+
+<p>If the value remains null, then it is replaced at build time by the actual default from column 3, but the DSL element does not contain this default value so you can’t query against it.</p>
+
+<p>This is to prevent parsing the manifest of the application unless it’s really needed. </p>
+
+<h4 id="build-types">Build Types</h4>
+
+<p>[默认情况下，Android插件会自动将原项目编译成debug和release两个版本，它们的区别在于调试程序的功能和APK的签名方式。debug版本使用<code>key/certificate</code> 来签名，而release版本在build过程中并不签名，它的签名过程发生在后面。Android插件允许我们自定义build type]</p>
+
+<p>By default, the Android plugin automatically sets up the project to build both a debug and a release version of the application.</p>
+
+<p><strong>These differ mostly around the ability to debug the application on a secure (non dev) devices, and how the APK is signed.</strong></p>
+
+<p><strong>The debug version is signed with a <code>key/certificate</code> that is created automatically with a known <code>name/password</code> (to prevent required prompt during the build). The release is not signed during the build, this needs to happen after.</strong></p>
+
+<p>This configuration is done through an object called a <code>BuildType</code>. By default, 2 instances are created, a <code>debug</code> and a <code>release</code> one.</p>
+
+<p>The Android plugin allows customizing those two instances as well as creating other Build Types. This is done with the <code>buildTypes</code> DSL container:</p>
+
+<p>```
+android {
+    buildTypes {
+        debug {
+            applicationIdSuffix “.debug”
+        }</p>
+
+<pre><code>    jnidebug.initWith(buildTypes.debug)
+    jnidebug {
+        packageNameSuffix ".jnidebug"
+        jnidebugBuild true
+    }
+} } ```
+</code></pre>
+
+<p>The above snippet achieves the following:</p>
+
+<p>Configures the default debug Build Type:</p>
+
+<p>(1) set its package to be <code>&lt;app appliationId&gt;.debug</code> to be able to install both debug and release apk on the same device</p>
+
+<p>(2) Creates a new BuildType called jnidebug and configure it to be a copy of the debug build type.</p>
+
+<p>(3) Keep configuring the jnidebug, by enabling debug build of the JNI component, and add a different package suffix.</p>
+
+<p>[在buildTypes容器中创建一个新的build type很简单，要么调用<code>initWith()</code> 方法继承自某个build type或者直接使用花括号来配置它]</p>
+
+<p>Creating new Build Types is as easy as using a new element under the buildTypes container, either to call <code>initWith()</code> or to configure it with a closure.</p>
+
+<p>The possible properties and their default values are:</p>
+
+<p><img src="http://hujiaweibujidao.github.io/images/gradle3.png" alt="image" /></p>
+
+<p>In addition to these properties, Build Types can contribute to the build with code and resources.</p>
+
+<p><strong>[对于每个build type都会生成一个对应的<code>sourceSet</code>，默认的位置是<code>src/&lt;buildtypename&gt;/</code> ，所以build type的名称不能是<code>main</code>或者<code>androidTest</code>，而且它们相互之间不能重名]</strong></p>
+
+<p>For each Build Type, a new matching <code>sourceSet</code> is created, with a default location of  <code>src/&lt;buildtypename&gt;/</code></p>
+
+<p>This means the Build Type names cannot be main or androidTest (this is enforced by the plugin), and that they have to be unique to each other.</p>
+
+<p>Like any other source sets, the location of the build type source set can be relocated:</p>
+
+<p><code>
+android {
+    sourceSets.jnidebug.setRoot('foo/jnidebug')
+}
+</code></p>
+
+<p>[类似其他的sourceSet，build type的source set的位置也可以重新定义，此外，对于每个build type，都会自动创建一个名为<code>assemble&lt;BuildTypeName&gt;</code> 的任务，而且自动称为<code>assemble</code> 任务的依赖项]</p>
+
+<p>Additionally, for each Build Type, a new <code>assemble&lt;BuildTypeName&gt;</code> task is created.</p>
+
+<p>The <code>assembleDebug</code> and <code>assembleRelease</code> tasks have already been mentioned, and this is where they come from. When the debug and release Build Types are pre-created, their tasks are automatically created as well.</p>
+
+<p>The <code>build.gradle</code> snippet above would then also generate an <code>assembleJnidebug</code> task, and <code>assemble</code> would be made to depend on it the same way it depends on the <code>assembleDebug</code> and <code>assembleRelease</code> tasks.</p>
+
+<p>Tip: remember that you can type gradle aJ to run the assembleJnidebug task.</p>
+
+<p>Possible use case: [使用场景]</p>
+
+<p>Permissions in debug mode only, but not in release mode    <br />
+Custom implementation for debugging   <br />
+Different resources for debug mode (for instance when a resource value is tied to the signing certificate).      </p>
+
+<p><strong>[build type的code/resources的处理过程: (1)Manifest整合进app的Manifest; (2)code就作为另一个源码目录; (3)resources覆盖原有的main resources]</strong></p>
+
+<p>The code/resources of the BuildType are used in the following way:</p>
+
+<p>The manifest is merged into the app manifest    <br />
+The code acts as just another source folder   <br />
+The resources are overlayed over the main resources, replacing existing values.</p>
+
+<h4 id="signing-configurations">Signing Configurations</h4>
+
+<p>Signing an application requires the following: </p>
+
+<p>A keystore    <br />
+A keystore password   <br />
+A key alias name   <br />
+A key password   <br />
+The store type     </p>
+
+<p>The location, as well as the key name, both passwords and store type form together a Signing Configuration (type <code>SigningConfig</code>)     </p>
+
+<p><strong>[对一个应用程序进行签名需要5个信息，这些信息组合起来就是类型SigningConfig。默认情况下，debug的配置使用了一个已知密码的keystore和已知密码的默认key，其中的keystore保存在<code>$HOME/.android/debug.keystore</code> 文件中，如果没有的话它会自动被创建]</strong></p>
+
+<p>By default, there is a <code>debug</code> configuration that is setup to use a debug keystore, with a known password and a default key with a known password.The debug keystore is located in <code>$HOME/.android/debug.keystore</code>, and is created if not present.</p>
+
+<p>The debug Build Type is set to use this debug SigningConfig automatically.It is possible to create other configurations or customize the default built-in one. This is done through the signingConfigs DSL container:</p>
+
+<p>[默认情况下，debug的build过程会自动使用debug SigningConfig，当然我们可以自己定义]</p>
+
+<p>```
+android {
+    signingConfigs {
+        debug {
+            storeFile file(“debug.keystore”)
+        }</p>
+
+<pre><code>    myConfig {
+        storeFile file("other.keystore")
+        storePassword "android"
+        keyAlias "androiddebugkey"
+        keyPassword "android"
+    }
+}
+
+buildTypes {
+    foo {
+        debuggable true
+        jniDebugBuild true
+        signingConfig signingConfigs.myConfig
+    }
+} } ```
+</code></pre>
+
+<p>The above snippet changes the location of the debug keystore to be at the root of the project. This automatically impacts any Build Types that are set to using it, in this case the debug Build Type.</p>
+
+<p>It also creates a new Signing Config and a new Build Type that uses the new configuration.</p>
+
+<p><strong>[只有当debug keystore是放在默认的位置，即使修改了keystore文件的名称，keystore也会被自动创建，但是如果改变了默认位置的话则不会被自动创建。此外，设置keystore的位置一般使用相对于项目根目录的路径，虽然也可以使用绝对路径，但是并不推荐这样做]</strong></p>
+
+<p>Note: Only debug keystores located in the default location will be automatically created. Changing the location of the debug keystore will not create it on-demand. Creating a SigningConfig with a different name that uses the default debug keystore location will create it automatically. In other words, it’s tied to the location of the keystore, not the name of the configuration.</p>
+
+<p>Note: Location of keystores are usually relative to the root of the project, but could be absolute paths, though it is not recommended (except for the debug one since it is automatically created).</p>
+
+<p>Note:  If you are checking these files into version control, you may not want the password in the file. The following Stack Overflow post shows ways to read the values from the console, or from environment variables.
+http://stackoverflow.com/questions/18328730/how-to-create-a-release-signed-apk-file-using-gradle</p>
+
+<p>We’ll update this guide with more detailed information later.</p>
+
+<h4 id="running-proguard">Running ProGuard</h4>
+
+<p>[对ProGuard的支持是通过Gradle plugin for ProGuard 4.10来实现的，给build type添加<code>runProguard</code> 属性即可自动生成相应的task]</p>
+
+<p>ProGuard is supported through the Gradle plugin for ProGuard version 4.10. </p>
+
+<p>The ProGuard plugin is applied automatically, and the tasks are created automatically if the Build Type is configured to run ProGuard through the <code>runProguard</code> property.</p>
+
+<p>```
+android {
+    buildTypes {
+        release {
+            runProguard true
+            proguardFile getDefaultProguardFile(‘proguard-android.txt’)
+        }
+    }</p>
+
+<pre><code>productFlavors {
+    flavor1 {
+    }
+    flavor2 {
+        proguardFile 'some-other-rules.txt'
+    }
+} } ```
+</code></pre>
+
+<p>Variants use all the rules files declared in their build type, and product flavors.</p>
+
+<p><strong>[默认情况下有两个proguard rule 文件，它们存放在Android SDK目录中，默认是<code>$ANDROID_HOME/tools/proguard/</code> 目录下 ，使用<code>getDefaultProguardFile()</code> 可以得到它们的完整路径]</strong></p>
+
+<p>There are 2 default rules files </p>
+
+<p><code>proguard-android.txt</code>     <br />
+<code>proguard-android-optimize.txt</code>        </p>
+
+<p>They are located in the SDK. Using <code>getDefaultProguardFile()</code> will return the full path to the files. They are identical except for enabling optimizations.</p>
+
+<h3 id="dependencies-android-libraries-and-multi-project-setup">Dependencies, Android Libraries and Multi-project setup</h3>
+
+<p>Gradle projects can have dependencies on other components. These components can be external binary packages, or other Gradle projects.</p>
+
+<h4 id="dependencies-on-binary-packages">Dependencies on binary packages</h4>
+
+<h4 id="local-packages">Local packages</h4>
+
+<p>To configure a dependency on an external library jar, you need to add a dependency on the <code>compile</code> configuration.</p>
+
+<p>```
+dependencies {
+    compile files(‘libs/foo.jar’)
+}</p>
+
+<p>android {
+    …
+}
+```</p>
+
+<p>[注意dependencies是标准Gradle API的一部分，所以不是在android元素中声明]</p>
+
+<p><strong>Note: the dependencies DSL element is part of the standard Gradle API and does not belong inside the android element.</strong></p>
+
+<p>[<code>compile</code> 的配置是用来编译main application的，所以其中的所有元素都会加入到编译的类路径中，同样也会打包进最终的APK中]</p>
+
+<p><strong>The <code>compile</code> configuration is used to compile the main application. Everything in it is added to the compilation classpath and also packaged in the final APK.</strong></p>
+
+<p>There are other possible configurations to add dependencies to:</p>
+
+<p><code>compile</code>: main application     <br />
+<code>androidTestCompile</code>: test application    <br />
+<code>debugCompile</code>: debug Build Type    <br />
+<code>releaseCompile</code>: release Build Type.      </p>
+
+<p><strong>[对应每个build type都有一个对应的<code>&lt;buildtype&gt;Compile</code>， 它们的dependencies也都可以自行定义使其不同。如果希望不同的build type表现出不同的结果时，我们便可以使用这种方式让它们依赖不同的library]</strong></p>
+
+<p>Because it’s not possible to build an APK that does not have an associated Build Type, the APK is always configured with two (or more) configurations: <code>compile</code> and <code>&lt;buildtype&gt;Compile</code>.</p>
+
+<p>Creating a new Build Type automatically creates a new configuration based on its name.</p>
+
+<p>This can be useful if the debug version needs to use a custom library (to report crashes for instance), while the release doesn’t, or if they rely on different versions of the same library.</p>
+
+<h4 id="remote-artifacts">Remote artifacts</h4>
+
+<p>[Gradle支持Maven和Ivy资源库]</p>
+
+<p>Gradle supports pulling artifacts from Maven and Ivy repositories.</p>
+
+<p>First the repository must be added to the list, and then the dependency must be declared in a way that Maven or Ivy declare their artifacts.</p>
+
+<p>```
+repositories {
+    mavenCentral()
+}</p>
+
+<p>dependencies {
+    compile ‘com.google.guava:guava:11.0.2’
+}</p>
+
+<p>android {
+    …
+}
+```</p>
+
+<p><strong>[<code>mavenCentral()</code> 方法返回的就是Maven Repository的URL，Gradle同时支持remote 和 local repositories，此外，Gradle能够处理dependency之间的相互依赖，然后自动pull所需要的dependencies]</strong></p>
+
+<p>Note: <code>mavenCentral()</code> is a shortcut to specifying the URL of the repository. Gradle supports both remote and local repositories.</p>
+
+<p>Note: Gradle will follow all dependencies transitively. This means that if a dependency has dependencies of its own, those are pulled in as well.</p>
+
+<p>For more information about setting up dependencies, read the <a href="http://gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html">Gradle user guide here</a>, and <a href="http://gradle.org/docs/current/dsl/org.gradle.api.artifacts.dsl.DependencyHandler.html">DSL documentation here</a>.</p>
+
+<h4 id="multi-project-setup">Multi project setup</h4>
+
+<p>[使用multi-project setup可以使得Gradle项目依赖其他的Gradle项目，它通常是通过将所有的项目作为某个指定的根项目的子目录来实现的。]</p>
+
+<p>Gradle projects can also depend on other gradle projects by using a multi-project setup.</p>
+
+<p>A multi-project setup usually works by having all the projects as sub folders of a given root project.</p>
+
+<p>For instance, given to following structure:</p>
+
+<p><code>
+MyProject/
+ + app/
+ + libraries/
+    + lib1/
+    + lib2/
+</code></p>
+
+<p>We can identify 3 projects. Gradle will reference them with the following name:</p>
+
+<p><code>
+:app
+:libraries:lib1
+:libraries:lib2
+</code></p>
+
+<p><strong>Each projects will have its own <code>build.gradle</code> declaring how it gets built. Additionally, there will be a file called <code>settings.gradle</code> at the root declaring the projects.</strong></p>
+
+<p>[每个项目都有自己的<code>build.gradle</code> 文件声明它的build过程，此外，根项目下还有一个<code>settings.gradle</code> 文件用来指定这些子项目]</p>
+
+<p>This gives the following structure:</p>
+
+<p><code>
+MyProject/
+ | settings.gradle
+ + app/
+    | build.gradle
+ + libraries/
+    + lib1/
+       | build.gradle
+    + lib2/
+       | build.gradle
+</code></p>
+
+<p>The content of <code>settings.gradle</code> is very simple:</p>
+
+<p><code>
+include ':app', ':libraries:lib1', ':libraries:lib2'
+</code></p>
+
+<p>This defines which folder is actually a Gradle project. [它声明了哪个目录是一个Gradle项目]</p>
+
+<p>The <code>:app</code> project is likely to depend on the libraries, and this is done by declaring the following dependencies:</p>
+
+<p><code>
+dependencies {
+    compile project(':libraries:lib1')
+}
+</code></p>
+
+<p>More general information about <a href="http://gradle.org/docs/current/userguide/multi_project_builds.html">multi-project setup here</a>.</p>
+
+<h4 id="library-projects">Library projects</h4>
+
+<p><strong>[如果前面例子中的两个library projects都是Java项目的话，那么app这个Android项目就使用它们的输出jar文件即可，但是如果你需要引用library project中的资源或者代码的话，那它们必须是Android Library Projects]</strong></p>
+
+<p>In the above multi-project setup, <code>:libraries:lib1</code> and <code>:libraries:lib2</code> can be Java projects, and the <code>:app</code> Android project will use their jar output.</p>
+
+<p>However, if you want to share code that accesses Android APIs or uses Android-style resources, these libraries cannot be regular Java project, they have to be <code>Android Library Projects</code>.</p>
+
+<h4 id="creating-a-library-project">Creating a Library Project</h4>
+
+<p>A Library project is very similar to a regular Android project with a few differences.</p>
+
+<p>Since building libraries is different than building applications, a different plugin is used. Internally both plugins share most of the same code and they are both provided by the same <code>com.android.tools.build.gradle</code> jar.</p>
+
+<p><strong>[创建Library Project使用的是不同的插件，即<code>android-library</code>，它和<code>android</code> 插件共享很多的代码(所以大部分的配置都和前面提到的一模一样)，并且这个插件的源码也是在<code>com.android.tools.build.gradle</code> 这个jar包中]</strong></p>
+
+<p>```
+buildscript {
+    repositories {
+        mavenCentral()
+    }</p>
+
+<pre><code>dependencies {
+    classpath 'com.android.tools.build:gradle:0.5.6'
+} }
+</code></pre>
+
+<p>apply plugin: ‘android-library’</p>
+
+<p>android {
+    compileSdkVersion 15
+}
+```</p>
+
+<p>This creates a library project that uses API 15 to compile. SourceSets, and dependencies are handled the same as they are in an application project and can be customized the same way.</p>
+
+<h4 id="differences-between-a-project-and-a-library-project">Differences between a Project and a Library Project</h4>
+
+<p><strong>[一个Library Project的主要输出是一个aar包，它是编译后的代码与资源的集合，它同样可以生成test apk来独立地测试这个library。Library Project和普通Project的assemble task是一样的，所以它们的behave没啥区别。此外，因为它可以有不同的build type和product flavor，所以它可以得到很多个不同的aar]</strong></p>
+
+<p>A Library project’s main output is an .aar package (which stands for Android archive). It is a combination of compile code (as a jar file and/or native .so files) and resources (manifest, res, assets).</p>
+
+<p>**A library project can also generate a test apk to test the library independently from an application. **</p>
+
+<p>The same anchor tasks are used for this (<code>assembleDebug</code>, <code>assembleRelease</code>) so there’s no difference in commands to build such a project.</p>
+
+<p>For the rest, libraries behave the same as application projects. <strong>They have build types and product flavors, and can potentially generate more than one version of the aar.</strong></p>
+
+<p>[大多数的build type的配置都不会应用于Library Project中，当然它还是可以进行配置的]</p>
+
+<p><strong>Note that most of the configuration of the Build Type do not apply to library projects. However you can use the custom sourceSet to change the content of the library depending on whether it’s used by a project or being tested.</strong></p>
+
+<h4 id="referencing-a-library">Referencing a Library</h4>
+
+<p>Referencing a library is done the same way any other project is referenced:</p>
+
+<p><code>
+dependencies {
+    compile project(':libraries:lib1')
+    compile project(':libraries:lib2')
+}
+</code></p>
+
+<p>Note: if you have more than one library, then the order will be important. This is similar to the old build system where the order of the dependencies in the <code>project.properties</code> file was important.  </p>
+
+<p>[注：如果你有很多的library projects，那么你要根据它们相互之间的依赖关系确定一个正确的顺序，就类似以前build系统中的<code>project.properties</code> 文件一样，以前需要如下地声明<code>android.library.reference</code>]</p>
+
+<p><code>
+android.library.reference.1=path/to/libraryproject
+</code></p>
+
+<h4 id="library-publication">Library Publication</h4>
+
+<p>[默认情况下，library project只会publish它的release variant，所有其他的project都是引用这个variant，但是你还是可以通过配置<code>defaultPublishConfig</code> 控制将哪个variant进行publish，而且你也可以设置为publish所有variant]</p>
+
+<p>By default a library only publishes its release variant. This variant will be used by all projects referencing the library, no matter which variant they build themselves. This is a temporary limitation due to Gradle limitations that we are working towards removing.</p>
+
+<p>You can control which variant gets published with </p>
+
+<p><code>
+android {
+    defaultPublishConfig "debug"
+}
+</code></p>
+
+<p>**Note that this publishing configuration name references the full variant name. Release and debug are only applicable when there are no flavors. ** If you wanted to change the default published variant while using flavors, you would write:</p>
+
+<p><code>
+android {
+    defaultPublishConfig "flavor1Debug"
+}
+</code></p>
+
+<p><strong>It is also possible to publish all variants of a library. We are planning to allow this while using a normal project-to-project dependency (like shown above), but this is not possible right now due to limitations in Gradle (we are working toward fixing those as well).</strong></p>
+
+<p>Publishing of all variants are not enabled by default. To enable them:</p>
+
+<p><code>
+android {
+    publishNonDefault true
+}
+</code></p>
+
+<p>It is important to realize that publishing multiple variants means publishing multiple aar files, instead of a single aar containing multiple variants. Each aar packaging contains a single variant.</p>
+
+<p>[publish一个variant意味着使得这个aar包作为Gradle项目的输出，它可以用于publish到maven repository，也可以被其他项目作为依赖项目被引用]</p>
+
+<p><strong>Publishing an variant means making this aar available as an output artifact of the Gradle project. This can then be used either when publishing to a maven repository, or when another project creates a dependency on the library project.</strong></p>
+
+<p>Gradle has a concept of default” artifact. This is the one that is used when writing:</p>
+
+<p><code>
+compile project(':libraries:lib2')
+</code></p>
+
+<p>To create a dependency on another published artifact, you need to specify which one to use:</p>
+
+<p><code>
+dependencies {
+    flavor1Compile project(path: ':lib1', configuration: 'flavor1Release')
+    flavor2Compile project(path: ':lib1', configuration: 'flavor2Release')
+}
+</code></p>
+
+<p>Important: Note that the published configuration is a full variant, including the build type, and needs to be referenced as such. </p>
+
+<p><strong>Important: When enabling publishing of non default, the Maven publishing plugin will publish these additional variants as extra packages (with classifier). This means that this is not really compatible with publishing to a maven repository. You should either publish a single variant to a repository OR enable all config publishing for inter-project dependencies.</strong> [?]</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Material on Mobile Development]]></title>
@@ -512,805 +2384,6 @@ new Thread(new Runnable() {
 <p>⑥<a href="http://bytefish.de/blog/opencv_facerecognizer_documentation/">关于OpenCV中的人脸识别算法 - OpenCV FaceRecognizer documentation</a></p>
 
 <p>该博客作者是OpenCV2.4之后内置的人脸识别模块的原作者，他在他的博客中详细介绍了FaceRecognizer的API以及他使用的人脸识别算法，算法讲解部分可以参考<a href="http://bytefish.de/blog/face_recognition_with_opencv2/">Face Recognition with Python/GNU Octave/Matlab</a>。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Android Ndk and Opencv Development 3]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3/"/>
-    <updated>2013-11-18T21:35:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3</id>
-    <content type="html"><![CDATA[<h3 id="android-ndk--opencv-3">Android NDK 和 OpenCV 整合开发总结(3)</h3>
-
-<p>终于写到第三节啦，虽然很累，但是还是要坚持，坚持写完这3篇文章。</p>
-
-<p>这一节的主要内容是OpenCV在Android NDK开发中的应用，包括下面几个方面的内容：</p>
-
-<ul>
-  <li>如何实现Static Initialization从而不需要安装OpenCV Manager运行含OpenCV library的app</li>
-  <li>对十份论文和报告中的关于OpenCV和Android NDK开发的总结</li>
-  <li>如何使用Android中的摄像头，常见的问题有哪些? </li>
-  <li>OpenCV 和 Android NDK 整合开发的一般途径</li>
-</ul>
-
-<h4 id="static-initialization">1.实现Static Initialization</h4>
-
-<p>实现Static Initialization就是指将OpenCV Library添加到app package中，不需要安装OpenCV Manager这个app就能运行，<a href="http://docs.OpenCV.org/trunk/doc/tutorials/introduction/Android_binary_package/dev_with_OCV_on_Android.html">官方文档有介绍</a>，但是不详细，尤其是最后那句代码到底要放在什么地方很多人都不清楚，其实并不需要像官方文档中介绍的那样配置，我想在这里介绍下如何修改FaceDetection项目的源码来做到这点。(最好是找一个包含jni代码的项目进行修改)</p>
-
-<ul>
-  <li>[1]打开jni下的Android.mk文件，修改OpenCV的那一部分，将<code>off</code>设置为<code>on</code>，并设置<code>OpenCV_LIB_TYPE</code>为<code>SHARED</code>，结果如下：  </li>
-</ul>
-
-<p><code>java
-OpenCV_CAMERA_MODULES:=on
-OpenCV_INSTALL_MODULES:=on
-OpenCV_LIB_TYPE:=SHARED
-include ${OpenCVROOT}/sdk/native/jni/OpenCV.mk
-</code></p>
-
-<ul>
-  <li>[2]打开FdActivity.java文件，在其中添加一个静态初始化块代码，它是用来加载<code>OpenCV_java</code>库的，由于FaceDetection中还用了另一个库detection_based_tracker(用于人脸跟踪)，所以要在<code>else</code>子句中加载进来：</li>
-</ul>
-
-<p><code>
-static {
-	Log.i(TAG, "OpenCV library load!");
-	if (!OpenCVLoader.initDebug()) {
-		Log.i(TAG, "OpenCV load not successfully");
-	} else {
-		System.loadLibrary("detection_based_tracker");// load other libraries
-	}
-}
-</code></p>
-
-<ul>
-  <li>[3]删除FdActivity.java的OnResume()方法的最后那句，不让它去访问OpenCV Manager。</li>
-</ul>
-
-<p><code>
-@Override
-public void onResume() {
-	super.onResume();
-//OpenCVLoader.initAsync(OpenCVLoader.OpenCV_VERSION_2_4_3, this, mLoaderCallback);//
-}
-</code></p>
-
-<ul>
-  <li>[4]修改FdActivity.java的OnCreate()方法，从上面的<code>private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this)</code>代码块中拷贝<code>try-catch</code>块放到OnCreate的<code>setContentView()</code>之后，然后拷贝<code>mOpenCVCameraView.enableView();</code>放到<code>mOpenCVCameraView = (CameraBridgeViewBase) findViewById(R.id.fd_activity_surface_view);</code>之后，修改后的OnCreate()方法如下：</li>
-</ul>
-
-<p>```
-public void onCreate(Bundle savedInstanceState) {
-	Log.i(TAG, “called onCreate”);
-	super.onCreate(savedInstanceState);
-	getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);</p>
-
-<pre><code>setContentView(R.layout.face_detect_surface_view);
-
-//
-try {
-	// load cascade file from application resources
-	InputStream is = getResources().openRawResource(R.raw.lbpcascade_frontalface);
-	File cascadeDir = getDir("cascade", Context.MODE_PRIVATE);
-	mCascadeFile = new File(cascadeDir, "lbpcascade_frontalface.xml");
-	FileOutputStream os = new FileOutputStream(mCascadeFile);
-
-	byte[] buffer = new byte[4096];
-	int bytesRead;
-	while ((bytesRead = is.read(buffer)) != -1) {
-		os.write(buffer, 0, bytesRead);
-	}
-	is.close();
-	os.close();
-
-	mJavaDetector = new CascadeClassifier(mCascadeFile.getAbsolutePath());
-	if (mJavaDetector.empty()) {
-		Log.e(TAG, "Failed to load cascade classifier");
-		mJavaDetector = null;
-	} else
-		Log.i(TAG, "Loaded cascade classifier from " + mCascadeFile.getAbsolutePath());
-
-	mNativeDetector = new DetectionBasedTracker(mCascadeFile.getAbsolutePath(), 0);// hujiawei
-
-	cascadeDir.delete();
-
-} catch (IOException e) {
-	e.printStackTrace();
-	Log.e(TAG, "Failed to load cascade. Exception thrown: " + e);
-}
-
-//
-
-mOpenCVCameraView = (CameraBridgeViewBase) findViewById(R.id.fd_activity_surface_view);
-mOpenCVCameraView.enableView();//
-mOpenCVCameraView.setCvCameraViewListener(this); } ```
-</code></pre>
-
-<ul>
-  <li>[5]OK，卸载安装好的OpenCV Manager，然后重新调试运行FaceDetection试试，它已经可以自行运行了！  </li>
-</ul>
-
-<h4 id="opencvandroid-ndk">2.对十份论文和报告中的关于OpenCV和Android NDK开发的总结</h4>
-
-<p>这10篇文献大部分[<a href="http://pan.baidu.com/s/19WOVq">百度网盘下载地址</a>]都还是停留如何在Android开发中使用OpenCV library，没有牵涉到具体的实现领域。具体总结如下：</p>
-
-<ul>
-  <li>_利用OpenCV实现在Android系统下的人脸检测</li>
-</ul>
-
-<p>本文主要介绍了如何在底层通过OpenCV来对人脸部分进行检测，得到的人脸位置数据通过JNI传递给Java层，详细介绍了其中的JNI代码和共享库的构建过程，对图片是通过图片的路径来进行传递的，因为这里的检测只是对单张静态的图片进行检测。</p>
-
-<ul>
-  <li>_Tutorial-2-OpenCV-for-Android-Setup-Macintosh-API11</li>
-</ul>
-
-<p>本文主要是介绍了OpenCV和Android NDK开发环境的搭建，以及基于示例程序Face-Detection的演示。使用的方式是将OpenCV Library Project作为库，然后调用OpenCV Android API。</p>
-
-<ul>
-  <li>_Android application for Face Recognition</li>
-</ul>
-
-<p>这是一份详细的项目介绍，实现了几种基于Android平台的人脸检测和识别，包括Google API和OpenCV的，但是OpenCV的由于需要Library Project，而且算法过于复杂，作者便自行开发了人脸检测库，有6大特性，其中包括了眼镜和嘴巴的检测。</p>
-
-<ul>
-  <li>_ECCV-2012-OpenCV4Android</li>
-</ul>
-
-<p>这份报告写得精简但是内容丰富，有几个重要点：<br />
-(1) 使用OpenCV的Android应用开发方式，对应不同的开发人群：Java developer / Native developer <br />
-(2) OpenCV4Android目前的局限性，以及开发过程中对于提高性能和开发效率需要注意的事项</p>
-
-<ul>
-  <li>_Introduction to OpenCV for Android devices</li>
-</ul>
-
-<p>本文设计的内容都很基础，涉及到OpenCV和Android开发的环境搭建，亮点是最后的Using C++ OpenCV code，这里是在Android ndk中使用OpenCV本地代码的重要配置项。</p>
-
-<ul>
-  <li>_OpenCV-facedetection</li>
-</ul>
-
-<p>这份报告讲述了很多OpenCV的相关知识，另外还详细讲述了一个人脸检测的算法</p>
-
-<ul>
-  <li>_OpenCV on Android Platforms</li>
-</ul>
-
-<p>这份报告内容也比较多，但是都很基础。</p>
-
-<ul>
-  <li><em>BDTI_ARMTechCon</em>2012_OpenCV_Android</li>
-</ul>
-
-<p>这份报告讲的是OpenCV在嵌入式设备中的应用，其中介绍了OpenCV在Android上的开发，需要注意的是OpenCV2.4开始提供了native Android camera support！</p>
-
-<ul>
-  <li>_OpenCV Based Real-Time Video Processing  Using Android Smartphone</li>
-</ul>
-
-<p>这篇论文介绍了利用OpenCV对实时的视频进行处理和纯Android library进行处理的比较，发现利用OpenCV处理的结果更加准确，效率更快，而且更加省电。比较时使用的都是基本图像处理操作，例如灰度化，高斯模糊，Sobel边缘检测等等。</p>
-
-<ul>
-  <li>_Realtime Computer Vision  with OpenCV</li>
-</ul>
-
-<p>这篇文章比较有意思，大致看了下，介绍了OpenCV在移动终端的应用。</p>
-
-<h4 id="android">3.Android的摄像头</h4>
-
-<ul>
-  <li>
-    <p>关于如何使用Android的摄像头：Android设备一般有两个摄像头，前置摄像头和后置摄像头，在进行和摄像头相关的应用开发的时候很容易遇到各种问题，推荐以下几篇文章：<br />
-<a href="https://developer.Android.com/guide/topics/media/camera.html">Android Developer中有对应的文档:Camera</a><br />
-<a href="http://blog.csdn.net/yinyuan1987/article/details/6969225">这位作者的总结：Android相机</a><br />
-<a href="http://stackoverflow.com/questions/2779002/how-to-open-front-camera-on-Android-platform">StackOverflow上关于如何调用前置摄像头</a><br />
-<a href="http://blog.csdn.net/yangzl2008/article/details/9262505">如何在Android中后台开启摄像头默默拍照</a><br />
-<a href="http://blog.csdn.net/ocean20/article/details/8772196">关于Camera的三种Callback</a></p>
-  </li>
-  <li>
-    <p>关于保存预览图片：Android中的<code>BitmapFactory.decodeByteArray</code>只支持一定的格式，Camara默认的previewformat格式为<code>NV21</code>(对于大多数的Android设备，即使修改CameraParameters的设置也还是不行)，所以在获得bitmap时，需要进行转换，通过YuvImage类来转换成JPEG格式，然后再保存到文件中。<br />
-<a href="http://www.cnblogs.com/liuan/archive/2012/01/10/2318300.html">Google Group上的讨论</a>  </p>
-  </li>
-  <li>
-    <p>关于如何在预览界面上添加一个矩形框，类似二维码扫描那样，原理很简单，一个使用SurfaceView，另一个使用ImageVIew(或者SurfaceView也行)，推荐文章：<br />
-<a href="http://blog.csdn.net/yanzi1225627/article/details/8580034">Android摄像头中预览界面添加矩形框</a></p>
-  </li>
-  <li>
-    <p>关于如何进行和OpenCV有关的摄像头开发：有了OpenCV的library之后，关于摄像头的开发可谓是简单了很多，可以参见OpenCV for Android中的三个Tutorial(CameraPreview, MixingProcessing和CameraControl)，源码都在OpenCV-Android sdk的samples目录下，这里简单介绍下： <br />
-OpenCV Library中提供了两种摄像头，一种是Java摄像头-<code>org.OpenCV.Android.JavaCameraView</code>，另一种是Native摄像头-<code>org.OpenCV.Android.NativeCameraView</code> (可以运行CameraPreview这个项目来体验下两者的不同，其实差不多)。两者都继承自<code>CameraBridgeViewBase</code>这个抽象类，但是JavaCamera使用的就是Android SDK中的<code>Camera</code>，而NativeCamera使用的是OpenCV中的<code>VideoCapture</code>。    </p>
-  </li>
-  <li>
-    <p>关于OpenCV的Camera在Layout文件中的配置：<code>OpenCV:show_fps</code>在layout中如果设置为<code>true</code>的话显示界面中会出现当前摄像头帧率的信息以及图片的大小，<code>OpenCV:camera_id</code>的配置有三种<code>front</code>,<code>back</code>,<code>any</code>分别对应前置摄像头，后置摄像头和默认的摄像头(其实也就是后置摄像头)。  </p>
-  </li>
-  <li>
-    <p>关于<code>CvCameraViewListener2</code>接口：它可以方便的处理和摄像头的交互，该接口只有三个函数，分别在Camera打开(<code>onCameraViewStarted</code>)，关闭(<code>onCameraViewStopped</code>)和预览的图片帧到了的时候(<code>onCameraFrame</code>)调用。其中<code>OnCameraFrame</code>这个方法很重要，如果要对图片进行处理的话一般都是在这里面处理的，这个函数的输入参数是<code>CvCameraViewFrame</code>，需要注意的是，不要在这个方法的外面使用这个变量，因为这个对象没有它自己的状态，在回调方法的外面它的行为是不可预测的！它提供了两个有用的方法<code>rgba()</code>和<code>gray()</code>分别得到图像帧的RGBA格式和灰度图，<code>OnCameraFrame</code>的返回值是<strong>RGBA格式</strong>的图像，这个很重要！一定要保证处理了之后的图像是RGBA格式的Android系统才能正常显示！<a href="http://docs.OpenCV.org/trunk/doc/tutorials/introduction/Android_binary_package/dev_with_OCV_on_Android.html">来自OpenCV文档:Android Development with Android</a>     </p>
-  </li>
-</ul>
-
-<p><code>Note Do not save or use CvCameraViewFrame object out of onCameraFrame callback. This object does not have its own state and its behavior out of callback is unpredictable!</code>  </p>
-
-<ul>
-  <li>关于如何传递摄像头预览的图像数据给Native代码：这个很重要！我曾经试过很多的方式，大致思路有：   </li>
-</ul>
-
-<p>①传递图片路径：这是最差的方式，我使用过，速度很慢，主要用于前期开发的时候进行测试，测试Java层和Native层的互调是否正常。   </p>
-
-<p>②传递预览图像的字节数组到Native层，然后将字节数组处理成RGB或者RGBA的格式[具体哪种格式要看你的图像处理函数能否处理RGBA格式的，如果可以的话推荐转换成RGBA格式，因为返回的也是RGBA格式的。网上有很多的文章讨论如何转换：一种方式是使用一个自定义的函数进行编码转换(可以搜索到这个函数)，另一个种方式是使用OpenCV中的Mat和cvtColor函数进行转换，接着调用图像处理函数，处理完成之后，将处理的结果保存在一个整形数组中(实际上就是RGB或者RGBA格式的图像数据)，最后调用Bitmap的方法将其转换成bitmap返回。这种方法速度也比较慢，但是比第一种方案要快了不少，具体实现过程可以看下面的推荐书籍。   </p>
-
-<p>③使用OpenCV的摄像头：JavaCamera或者NativeCamera都行，好处是它进行了很多的封装，可以直接将预览图像的Mat结构传递给Native层，这种传递是使用Mat的内存地址(long型)，Native层只要根据这个地址将其封装成Mat就可以进行处理了，另外，它的回调函数的返回值也是Mat，非常方便！这种方式速度较快。详细过程可以查看OpenCV-Android sdk的samples项目中的Tutorial2-MixedProcessing。 </p>
-
-<ul>
-  <li>关于摄像头预览界面倒置的问题：很多时候(一般是将应用设置为<code>portrait</code>模式之后)在调用了OpenCV的Camera之后，出现预览内容倒置了90度的现象，原因是OpenCV的Camera默认情况下是以<code>landscape</code>模式运行的，一个可行但是不是很好的解决方案是修改OpenCV库中的<code>org.opencv.android.CameraBridgeViewBase</code>类中的<code>deliverAndDrawFrame</code>方法，<a href="http://stackoverflow.com/questions/19190921/always-open-in-landscape-mode-orientation-for-front-camera-in-opencv-javacv">问题参考链接</a></li>
-</ul>
-
-<p>```
-protected void deliverAndDrawFrame(CvCameraViewFrame frame) {
-        Mat modified;</p>
-
-<pre><code>    if (mListener != null) {
-        modified = mListener.onCameraFrame(frame);
-    } else {
-        modified = frame.rgba();
-    }
-
-    boolean bmpValid = true;
-    if (modified != null) {
-        try {
-            Utils.matToBitmap(modified, mCacheBitmap);
-        } catch(Exception e) {
-            Log.e(TAG, "Mat type: " + modified);
-            Log.e(TAG, "Bitmap type: " + mCacheBitmap.getWidth() + "*" + mCacheBitmap.getHeight());
-            Log.e(TAG, "Utils.matToBitmap() throws an exception: " + e.getMessage());
-            bmpValid = false;
-        }
-    }
-
-    if (bmpValid &amp;&amp; mCacheBitmap != null) {
-        Canvas canvas = getHolder().lockCanvas();
-        if (canvas != null) { //                canvas.drawColor(0, android.graphics.PorterDuff.Mode.CLEAR); //                Log.d(TAG, "mStretch value: " + mScale); // //                if (mScale != 0) { //                    canvas.drawBitmap(mCacheBitmap, new Rect(0,0,mCacheBitmap.getWidth(), mCacheBitmap.getHeight()), //                         new Rect((int)((canvas.getWidth() - mScale*mCacheBitmap.getWidth()) / 2), //                         (int)((canvas.getHeight() - mScale*mCacheBitmap.getHeight()) / 2), //                         (int)((canvas.getWidth() - mScale*mCacheBitmap.getWidth()) / 2 + mScale*mCacheBitmap.getWidth()), //                         (int)((canvas.getHeight() - mScale*mCacheBitmap.getHeight()) / 2 + mScale*mCacheBitmap.getHeight())), null); //                } else { //                     canvas.drawBitmap(mCacheBitmap, new Rect(0,0,mCacheBitmap.getWidth(), mCacheBitmap.getHeight()), //                         new Rect((canvas.getWidth() - mCacheBitmap.getWidth()) / 2, //                         (canvas.getHeight() - mCacheBitmap.getHeight()) / 2, //                         (canvas.getWidth() - mCacheBitmap.getWidth()) / 2 + mCacheBitmap.getWidth(), //                         (canvas.getHeight() - mCacheBitmap.getHeight()) / 2 + mCacheBitmap.getHeight()), null); //                }
-
-            //ABC : Fixed for image rotation
-            //TODO Why portrait is not opening in fulls creen
-            Matrix matrix = new Matrix();
-            int height_Canvas = canvas.getHeight();
-            int width_Canvas = canvas.getWidth();
-
-            int width = mCacheBitmap.getWidth();
-            int height = mCacheBitmap.getHeight();
-
-            float f1 = (width_Canvas - width) / 2;
-            float f2 = (height_Canvas - height) / 2;
-            matrix.preTranslate(f1, f2);
-            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
-            matrix.postRotate(270f,(width_Canvas) / 2,(height_Canvas) / 2);
-            canvas.drawBitmap(mCacheBitmap, matrix, new Paint());
-
-
-
-            if (mFpsMeter != null) {
-                mFpsMeter.measure();
-                mFpsMeter.draw(canvas, 20, 30);
-            }
-            getHolder().unlockCanvasAndPost(canvas);
-        }
-    }
-} ```
-</code></pre>
-
-<h4 id="opencv--opencv-ndk-">3.OpenCV 和 OpenCV NDK 整合开发的一般途径</h4>
-
-<p>在进行这类开发的时候，需要考虑如何在Android中使用OpenCV，并且如果需要调用摄像头的话，要考虑以下内容：<br />
-首先，是否是在原有的C/C++代码上进行移植，如果是的话，那么尽量考虑使用ndk开发，否则使用OpenCV for Android编写Java代码进行开发，效率不会比native代码低多少； <br />
-其次，如果是需要OpenCV library，是否能够容忍运行应用还需要安装OpenCV Manager，如果不能的话，则在开发时要考虑将OpenCV binaries添加到应用中进行static initialization，但其实使用OpenCV Manager是有很多好处的，上面的论文和OpenCV官网都有相应的文档介绍它的好处和使用方式； <br />
-接着，是否需要调用摄像头，如果需要的话，是使用原生Android的Camera还是使用OpenCV的Camera，如果是OpenCV Camera的话，是使用Java调用摄像头还是Native调用摄像头；<br />
-最后，图片如何进行传递，如果是单张静态图片进行处理的话，只需要路径就行了，但是如果是在视频状态下对图片进行处理的话，那么就只能传递图像数据了，这里涉及到了Android中如何获取预览的图像数据以及如何将其传递到底层，又如何进行转换(一般是YUV转成RGB)使得OpenCV可以进行处理，处理完了之后，又如何将处理得到的图片传递给Java层。</p>
-
-<p>推荐一本书籍《Mastering OpenCV with Practical Computer Vision Projects》，电子书可以在<a href="http://www.ppurl.com/2012/12/mastering-OpenCV-with-practical-computer-vision-projects.html">皮皮书屋</a>下载，<a href="https://github.com/MasteringOpenCV">原书源码在Github上</a>。该书第一章介绍如何开发一个使用OpenCV的Android项目-<code>Cartoonifer and Skin Changer for Android</code>，这个项目涉及到了OpenCV在Android中的方方面面，采用的是第二种图像数据传递方式，其中他提出了很多可以优化的地方，包括： <br />
-①尽量使用Mat而不要使用IplImage <br />
-②尽量保证你的图像处理函数能够处理RGBA格式的图像  <br />
-③如果可以先压缩图像大小再对图像进行处理  <br />
-④使用noise filter降低图像中的噪声。    </p>
-
-<p>总之，极力推荐此书，我以后的文章中还会提到这本书，嘿嘿。</p>
-
-<p>OK！脑子有点乱了，这节逻辑不太严谨，嘿嘿，但总算完结了！多谢关注！</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Android Ndk and Opencv Development 2]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/"/>
-    <updated>2013-11-18T15:59:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2</id>
-    <content type="html"><![CDATA[<h3 id="android-ndk--opencv-2">Android NDK 和 OpenCV 整合开发总结(2)</h3>
-
-<p>这节主要介绍的内容是<a href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>开发的核心内容和开发总结(包括很多常见问题的解决方案)，本节主要分为三部分：<br />
-* JNI技术和javah命令 <br />
-* Android NDK Dev Guide <br />
-* NDK开发中常见的问题  </p>
-
-<h4 id="jnijavah">1.不得不说的JNI和javah命令</h4>
-
-<p>NDK开发的核心之一便是JNI，在<a href="http://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/jniTOC.html">Oracle官方的JNI相关文档</a>中重要的是里面的第3-4部分(数据类型和函数)，本文不会介绍这些，如果想快速入手可以查看<a href="http://my.oschina.net/zhiweiofli/blog?catalog=225458">这位作者的几篇关于JNI的文章</a>，讲得深入浅出，另外推荐一篇<a href="http://www.ibm.com/developerworks/cn/java/j-lo-jni/index.html">IBM DeveloperWorks上的文章:JNI 对象在函数调用中的生命周期</a>，讲得有点深奥哟。</p>
-
-<ul>
-  <li><a href="http://docs.oracle.com/javase/6/docs/technotes/tools/windows/javah.html">javah命令：查看命令详细参数</a>：  </li>
-</ul>
-
-<p><code>javah produces C header files and C source files from a Java class. These files provide the connective glue that allow your Java and C code to interact.</code></p>
-
-<ul>
-  <li>在Eclipse中配置<strong>万能的javah工具</strong>的方法</li>
-</ul>
-
-<p>(1)在<code>External Tools Configurations</code>中新建<code>Program</code></p>
-
-<p>(2)<code>Location</code>设置为<code>/usr/bin/javah</code> [你可能不是这个位置，试试<code>${system_path:javah}</code>]</p>
-
-<p>(3)<code>Working Directory</code>设置为<code>${project_loc}/bin/classes</code> [适用于Android项目开发]</p>
-
-<p>(4)<code>Arguments</code>设置为<code>-jni -verbose -d "${project_loc}${system_property:file.separator}jni" ${java_type_name}</code></p>
-
-<p>(5)OK，以后只要选中要进行”反编译”的Java Class，然后运行这个External Tool就可以了！  <br />
-<strong>注意</strong>因为我的<code>Arguments</code>设置为导出的头文件是放在项目的jni目录中，如果不是Android NDK开发的话，请自行修改输出路径，还有<code>Working Directory</code>设置为<code>${project_loc}/bin</code>，不要包含后面的<code>/classes</code>。如果还有问题的话，推荐看下<a href="http://blog.csdn.net/mirkerson/article/details/8901270">这位作者的JNI相关配置</a></p>
-
-<h4 id="android-ndk-dev-guide">2.那些年的Android NDK Dev Guide</h4>
-
-<p>在ndk的根目录下有一个html文件<code>document.html</code>，这个就是Android NDK Dev Guide，用浏览器打开可以看到里面介绍了NDK开发中的很多配置问题，不同版本的NDK差别还是蛮大的，而且NDK开发中问题会很多，不像SDK开发那么简单，所以，一旦出现了问题，运气好能够Google解决，RP弱的时候只能啃这些Guide来找答案了。这几篇文章的简单介绍可以查看<a href="http://developer.android.com/tools/sdk/ndk/index.html#Docs">Android Developer上的解释</a>。对于这部分的内容，可以阅读下<a href="http://blog.csdn.net/smfwuxiao/article/category/1328624">这位作者的几篇NDK Dev Guide的翻译版本</a>，虽然略有过时，但是看后肯定会很受用的，下面我简单介绍下这里的几个内容：</p>
-
-<ul>
-  <li><strong>[1]Android NDK Overview</strong></li>
-</ul>
-
-<p>这篇文章介绍了NDK的目标和NDK开发的简易实践过程，后面的那些文章基本上都是围绕这个核心内容展开的，非常建议阅读。需要注意的是，NDK只支持Android 1.5版本以上的设备。</p>
-
-<ul>
-  <li><strong>[2]Android.mk文件</strong></li>
-</ul>
-
-<p>Android.mk文件是用来描述源代码是如何进行编译的，<strong>ndk-build命令实际上对GNU Make命令的一个封装</strong>，所以，Android.mk文件的写法就类似Makefile的写法[关于Make的详细内容可以看这本书，[GNU Make的中文手册]，虽然是今年读的，但是我记得的也不多了，老了老了…] <br />
-Android.mk文件可以生成一个动态链接库或者一个静态链接库，但是只有动态链接库是会复制到应用的安装包中的，静态库一般是用来生成其他的动态链接库的。你可以在一个Android.mk文件定义一个或者多个module，不同的module可以使用相同的source file进行编译得到。你不需要列出头文件，也不需要显示指明要生成的目标文件之间的依赖关系(这些内容在GNU Make中是很重要的，虽然GNU Make中的隐式规则也可以做到)。下面以hello-jni项目中的Android.mk文件为例讲解其中重要的几点。</p>
-
-<p><code>
-LOCAL_PATH := $(call my-dir)
-include $(CLEAR_VARS)
-LOCAL_MODULE    := hello-jni
-LOCAL_SRC_FILES := hello-jni.c
-include $(BUILD_SHARED_LIBRARY)
-</code></p>
-
-<p>①<code>LOCAL_PATH := $(call my-dir)</code>：Android.mk文件的第一行必须要指明<code>LOCAL_PATH</code>，<code>my-dir</code>是编译系统提供的一个宏函数，这个宏函数会返回当前Android.mk文件所在的目录</p>
-
-<p>②<code>include $(CLEAR_VARS)</code>：<code>CLEAR_VARS</code>是编译系统提供的一个变量，这个变量指向一个特殊的Makefile文件，它会清除所有除了<code>LOCAL_PATH</code>之外的其他的<code>LOCAL_XXX</code>变量。</p>
-
-<p>③<code>LOCAL_MODULE := hello-jni</code>：必须要指定<code>LOCAL_MODULE</code>，它是指这个Android.mk要生成的目标，这个名称是一个<strong>不包含空格的唯一的字符串</strong>，编译系统会自动根据名称进行一定的修改，例如<code>foo.so</code>和<code>libfoo.so</code>得到的都是<code>libfoo.so</code>！在Java代码中进行加载的时候使用的是没有<code>lib</code>的module名。</p>
-
-<p>④<code>LOCAL_SRC_FILES := hello-jni.c</code>：指定C/C++源文件列表，不要包含头文件。如果需要自定义C++源文件的后缀，可以配置<code>LOCAL_CPP_EXTENSION</code>参数。注意写法，我给个例子，一定要记住每行后面加上一个反斜线符，并且反斜线符后面不能再有任何内容，否则编译会报错！</p>
-
-<p><code>
-LOCAL_SRC_FILES := hello-jni.c \
-foo.c  \
-boo.cpp
-</code></p>
-
-<p>⑤<code>include $(BUILD_SHARED_LIBRARY)</code>：<code>BUILD_SHARED_LIBRARY</code>是编译系统提供的一个Makefile文件，它会根据你前面提供的参数来生成动态链接库，同理，如果是<code>BUILD_STATIC_LIBRARY</code>的话，便是生成静态链接库。</p>
-
-<p><strong>最佳实践</strong>：一般来说，<code>LOCAL_</code>作为前缀的一般定义LOCAL Module的变量，<code>PRIVATE_</code>或者<code>NDK_</code>或者<code>APP_</code>一般定义内部使用的变量，<code>lower-case</code>小写字母的名称一般也是定义内部使用的变量或者函数。如果你要在Android.mk文件定义自己的变量，建议使用<code>MY_</code>作为前缀！</p>
-
-<p><code>
-MY_SOURCES := foo.c
-ifneq ($(MY_CONFIG_BAR),)
-   MY_SOURCES += bar.c
-endif
-LOCAL_SRC_FILES += $(MY_SOURCES)
-</code></p>
-
-<p>Android.mk这篇文章中后面详细介绍了很多编译系统内置的变量和函数，以及该文件内可以设置的变量，此处就不再赘述了。</p>
-
-<ul>
-  <li><strong>[3]Application.mk文件</strong></li>
-</ul>
-
-<p>Application.mk文件描述的是你的应用需要使用哪些native modules，这个文件不是必须的，小项目可以不用编写这个文件。这个文件可以放在两个不同的位置，最常用的是放在jni目录下，和Android.mk文件放在一块，也可以放在<code>$NDK/apps/&lt;myapp&gt;/</code>目录下(不推荐使用后者，如果使用的是后者，那么必须要显示指定<code>APP_PROJECT_PATH</code>)</p>
-
-<p>①<code>APP_MODULES</code>：这个参数在NDK r4之前是一定要指定的，之后便是可选的，默认情况下，NDK将编译Android.mk文件中定义的所有的modules。</p>
-
-<p>②<code>APP_CFLAGS</code>：这个参数用来指定编译C/C++文件选项参数，例如<code>-frtti -fexceptions</code>等等，而<code>APP_CPPFLAGS</code>是专门用来指定编译C++源文件的选项参数。</p>
-
-<p>③<code>APP_ABI</code>：这个参数很重要，默认情况下，ndk-build将生成对应<code>armeabi</code>CPU架构的库文件，你可以指定其他的CPU架构，或者同时指定多个(自从NDK r7之后，设置为<code>all</code>可以生成所有CPU架构的库文件)！关于不同CPU架构的介绍在<code>CPU Arch ABIs</code>中介绍了，我不是很懂，此文不细讲。如果想要查看某个android设备是什么CPU架构，可以上网查设备的资料，或者通过执行<code>adb shell getprop ro.product.cpu.abi</code>得到，下面这段摘自<a href="http://docs.opencv.org/doc/tutorials/introduction/android_binary_package/O4A_SDK.html">OpenCV for Android SDK</a></p>
-
-<p><code>
-armeabi, armv7a-neon, arm7a-neon-android8, mips and x86 stand forplatform targets:
-   * armeabi is for ARM v5 and ARM v6 architectures with Android API 8+,
-   * armv7a-neon is for NEON-optimized ARM v7 with Android API 9+,
-   * arm7a-neon-android8 is for NEON-optimized ARM v7 with Android API 8,
-   * mips is for MIPS architecture with Android API 9+,
-   * x86 is for Intel x86 CPUs with Android API 9+.
-If using hardware device for testing/debugging, run the following command to learnits CPU architecture:
-*** adb shell getprop ro.product.cpu.abi ***
-If you’re using an AVD emulator, go Window &gt; AVD Manager to see thelist of availible devices. Click Edit in the context menu of theselected device. In the window, which then pop-ups, find the CPU field.
-</code></p>
-
-<p>④<code>APP_STL</code>：指定STL，默认情况下ndk编译系统使用最精简的C++运行时库<code>/system/lib/libstdc++.so</code>，但是你可以指定其他的。详细的内容可以查看<code>$NDK/docs/CPLUSPLUS-SUPPORT.html</code>文件，这个文件可能并没有列出在document.html中！</p>
-
-<p><code>
-system          -&gt; Use the default minimal system C++ runtime library.
-gabi++_static   -&gt; Use the GAbi++ runtime as a static library.
-gabi++_shared   -&gt; Use the GAbi++ runtime as a shared library.
-stlport_static  -&gt; Use the STLport runtime as a static library.
-stlport_shared  -&gt; Use the STLport runtime as a shared library.
-gnustl_static   -&gt; Use the GNU STL as a static library.
-gnustl_shared   -&gt; Use the GNU STL as a shared library.
-</code>
-我们可以从下面的表格中看出它们对C++语言特性的支持程度：  </p>
-
-<p><code>
-             C++       C++   Standard
-           Exceptions  RTTI    Library
-system        no       no        no
-gabi++       yes      yes        no
-stlport      yes      yes       yes
-gnustl       yes      yes       yes
-</code>  </p>
-
-<p>从中我们可以看出gnustl很不错，所以一般会配置为gnustl_static。如果选用的是gnustl的话，一般还需要在<code>C/C++ General</code>下的<code>Paths and Symbols</code>中的<code>GNU C</code>和<code>GNU C++</code>配置里添加<code>${NDKROOT}/sources/cxx-stl/gnu-libstdc++/4.6/include</code> 和 <code>${NDKROOT}/sources/cxx-stl/gnu-libstdc++/4.6/libs/armeabi-v7a/include</code> 这两项。</p>
-
-<p>另外需要注意的是，如果你指定的是<code>xxx_shared</code>，想要在运行时加载它，并且其他的库是基于<code>xxx_shared</code>的话，一定记得要先加载<code>xxx_shared</code>，然后再去加载其他的库。</p>
-
-<p>⑤<code>APP_PLATFORM</code>：指定目标android系统版本，注意，指定的是<code>API level</code>，一般情况下，这里可能会与<code>AndroidManifest.xml</code>文件中定义的<code>minSdkVersion</code>冲突而报错，处理办法是类似上一节中提到的修改<code>APP_PLATFORM</code>保证两个不冲突就行了。</p>
-
-<ul>
-  <li><strong>[4]Stable-APIS</strong></li>
-</ul>
-
-<p>build system会自动加载C库，Math库以及C++支持库，所以你不需要通过<code>LOCAL_LDLIBS</code>指定加载他们。Android系统下有多个<code>API level</code>，每个<code>API level</code>都对应了一个Android的发布系统，对应关系如下所示。其中<code>android-6</code>，<code>android-7</code>和<code>android-5</code>是一样的NDK，也就是说他们提供的是相同的native ABIs。对应<code>API level</code>的头文件都放在了<code>$NDK/platforms/android-&lt;level&gt;/arch-arm/usr/include</code>目录下，这正是上一节中导入的项目中在<code>C/C++ General</code>下的<code>Paths and Symbols</code>中的<code>GNU C</code>和<code>GNU C++</code>配置。</p>
-
-<p><code>
-Note that the build system automatically links the C library, the Math
-library and the C++ support library to your native code, there is no
-need to list them in a LOCAL_LDLIBS line.
-There are several "API Levels" defined. Each API level corresponds to
-a given Android system platform release. The following levels are
-currently supported:
-    android-3      -&gt; Official Android 1.5 system images
-    android-4      -&gt; Official Android 1.6 system images
-    android-5      -&gt; Official Android 2.0 system images
-    android-6      -&gt; Official Android 2.0.1 system images
-    android-7      -&gt; Official Android 2.1 system images
-    android-8      -&gt; Official Android 2.2 system images
-    android-9      -&gt; Official Android 2.3 system images
-    android-14     -&gt; Official Android 4.0 system images
-Note that android-6 and android-7 are the same as android-5 for the NDK,
-i.e. they provide exactly the same native ABIs!
-IMPORTANT:
-    The headers corresponding to a given API level are now located
-    under $NDK/platforms/android-&lt;level&gt;/arch-arm/usr/include
-</code></p>
-
-<p>介绍几个比较重要的库：<br />
-(1)C库(libc)：不需要指定 –lpthread –lrt，也就是说它会自动链接<br />
-(2)C++库(lstdc++)：不需要指定 –lstdc++<br />
-(3)Math库(libm)：不需要指定 –lm<br />
-(4)动态链接器库(libdl)：不需要指定 –ldl <br />
-(5)Android log(liblog)：<strong>需要</strong>指定 –llog<br />
-(6)Jnigraphics库(libjnigraphics)：这个C语言库提供了对Java中Bitmap的操作，<strong>需要</strong>指定 –ljnigraphics，这个库是<code>android-8</code>新增加的内容，典型的使用方式是：  </p>
-
-<p><code>
-Briefly, typical usage should look like:
-    1/ Use AndroidBitmap_getInfo() to retrieve information about a
-       given bitmap handle from JNI (e.g. its width/height/pixel format)
-    2/ Use AndroidBitmap_lockPixels() to lock the pixel buffer and
-       retrieve a pointer to it. This ensures the pixels will not move
-       until AndroidBitmap_unlockPixels() is called.
-    3/ Modify the pixel buffer, according to its pixel format, width,
-       stride, etc.., in native code.
-    4/ Call AndroidBitmap_unlockPixels() to unlock the buffer.
-</code></p>
-
-<p>(7)The Android native application APIs：<code>android-9</code>新增加的内容，这些API使得你可以完全使用native code编写android app，但是一般情况下还是需要通过jni的，相关API如下：</p>
-
-<p>```
-The following headers correspond to these new native APIs (see comments
-inside them for more details):</p>
-
-<p>&lt;android/native_activity.h&gt;</p>
-
-<pre><code>    Activity lifecycle management (and general entry point)
-</code></pre>
-
-<p>&lt;android/looper.h&gt;
-  &lt;android/input.h&gt;
-  &lt;android/keycodes.h&gt;
-  &lt;android/sensor.h&gt;</p>
-
-<pre><code>    To Listen to input events and sensors directly from native code.
-</code></pre>
-
-<p>&lt;android/rect.h&gt;
-  &lt;android/window.h&gt;
-  &lt;android/native_window.h&gt;
-  &lt;android/native_window_jni.h&gt;</p>
-
-<pre><code>    Window management, including the ability to lock/unlock the pixel
-    buffer to draw directly into it.
-</code></pre>
-
-<p>&lt;android/configuration.h&gt;
-  &lt;android/asset_manager.h&gt;
-  &lt;android/storage_manager.h&gt;
-  &lt;android/obb.h&gt;
-        Direct (read-only) access to assets embedded in your .apk. or
-        the Opaque Binary Blob (OBB) files, a new feature of Android X.X
-        that allows one to distribute large amount of application data
-        outside of the .apk (useful for game assets, for example).</p>
-
-<p>All the corresponding functions are provided by the “libandroid.so” library
-version that comes with API level 9. To use it, use the following:</p>
-
-<pre><code>LOCAL_LDLIBS += -landroid ```
-</code></pre>
-
-<ul>
-  <li><strong>[5]NDK Build</strong></li>
-</ul>
-
-<p>使用<code>ndk-build</code>命令(ndk r4之后引入的)实际上是GNU Make的封装，它等价于<code>make -f $NDK/build/core/build-local.mk [参数]</code>命令。系统必须要安装GNU Make 3.81以上版本，否则编译将报错！如果你安装了GNU Make 3.81，但是默认的make命令没有启动，那么可以在执行<code>ndk-build</code>之前定义GNUMAKE这个变量，例如<code>GNUMAKE=/usr/local/bin/gmake ndk-build</code>。<br />
-<strong>注意</strong> 在Windows下进行NDK开发的话，一般使用的是Cygwin自带的Make工具，但是默认是使用NDK的awk工具，所以可能会报一个错误<code>Android NDK: Host 'awk' tool is outdated. Please define HOST_AWK to point to Gawk or Nawk !</code> 解决方案就是删除NDK自带的awk工具(<a href="http://blog.csdn.net/achellies/article/details/7531440">参考网址</a>)，这也就是第一节中使用<code>ndk-build -v</code>命令得到的GNU Make信息输出不同了，嘿嘿，我这伏笔埋的够深吧！其实，也可以使用下面的方式直接覆盖系统的环境变量  </p>
-
-<p><code>
-NDK_HOST_AWK=&lt;path-to-awk&gt;
-NDK_HOST_ECHO=&lt;path-to-echo&gt;
-NDK_HOST_CMP=&lt;path-to-cmp&gt;
-</code>  </p>
-
-<p>如果还是不行的话，参见<a href="http://stackoverflow.com/questions/8384213/android-ndk-revision-7-host-awk-tool-is-outdated-error">StackOverflow上的解答</a><br />
-在Windows先开发还有一个需要注意的是，如果是使用Cygwin对native code进行编译，那么需要在使用<code>ndk-build</code>之前调用<code>NDK_USE_CYGPATH=1</code>！(不过不用每次都使用)  </p>
-
-<p>下面是ndk-build命令的可用参数，比较常用的是 <code>ndk-build NDK_DEBUG=1</code> 或者 <code>ndk-build V=1</code></p>
-
-<p><code>
-  ndk-build                  --&gt; rebuild required machine code.
-  ndk-build clean            --&gt; clean all generated binaries.
-  ndk-build NDK_DEBUG=1      --&gt; generate debuggable native code.
-  ndk-build V=1              --&gt; launch build, displaying build commands.
-  ndk-build -B               --&gt; force a complete rebuild.
-  ndk-build -B V=1           --&gt; force a complete rebuild and display build
-                                 commands.
-  ndk-build NDK_LOG=1        --&gt; display internal NDK log messages
-                                 (used for debugging the NDK itself).
-  ndk-build NDK_DEBUG=1      --&gt; force a debuggable build (see below)
-  ndk-build NDK_DEBUG=0      --&gt; force a release build (see below)
-  ndk-build NDK_HOST_32BIT=1 --&gt; Always use toolchain in 32-bit (see below)
-  ndk-build NDK_APPLICATION_MK=&lt;file&gt;
-    --&gt; rebuild, using a specific Application.mk pointed to by
-        the NDK_APPLICATION_MK command-line variable.
-  ndk-build -C &lt;project&gt;     --&gt; build the native code for the project
-                                 path located at &lt;project&gt;. Useful if you
-                                 don't want to 'cd' to it in your terminal.
-</code></p>
-
-<ul>
-  <li>
-    <p><strong>[6]NDK GDB，Import Module，Prebuilts，Standalone Toolchains以及和CPU相关的三个内容</strong>因为我没有涉及过，自己也不是很了解，所以此处暂时搁置了，以后如果用到以后补充。关于NDK调试环境的搭建可以参见<a href="http://qiang106.iteye.com/blog/1830416">这位作者的实践博文</a></p>
-  </li>
-  <li>
-    <p><strong>[7]<a href="http://blog.csdn.net/smfwuxiao/article/details/6612373">Tips and Tricks 建议和技巧</a></strong>  </p>
-  </li>
-</ul>
-
-<h4 id="section">那些曾经的头疼的问题</h4>
-
-<ul>
-  <li><strong>[1]使用Android SDK Manager下载SDK时失败或者很慢</strong>  </li>
-</ul>
-
-<p>在Windows下修改hosts文件：<code>C:\Windows\System32\drivers\etc</code> <br />
-增加如下一行配置：<code>74.125.237.1 dl-ssl.google.com</code></p>
-
-<ul>
-  <li><strong>[2]<code>Fatal signal 11 (SIGSEGV) at 0x00000004 (code=1), thread 23487 (mple)</code></strong>  </li>
-</ul>
-
-<p>错误原因是因为访问了非法访问的内存地址，具体的原因可能是访问了null对象或者数组，很有可能是Java层传给Native层的对象是null，导致Native层访问了非法访问的地址。<a href="http://stackoverflow.com/questions/14495242/android-fatal-signal-11-sigsegv-at-0x00000040-code-1-error?rq=1">参考网址1</a>   <a href="http://stackoverflow.com/questions/10787676/fatal-signal-11-sigsegv-at-0x00000000-code-1">参考网址2</a></p>
-
-<ul>
-  <li><strong>[3]使用ADB命令向AVD中复制文件或文件夹时报错</strong>  </li>
-</ul>
-
-<p>默认情况下avd对应的目录是只读的，去掉只读就好了。<a href="http://www.crifan.com/ddms_import_file_error_transfer_error_read_only_file_system/">参考网址</a></p>
-
-<ul>
-  <li><strong>[4]对android项目执行<code>add Native Support</code>报错</strong></li>
-</ul>
-
-<p>使用<code>add Native Support</code>时一定要记住项目不能有jni目录！如果有的话，那就只能先删除(或者备份重要内容)，然后再执行<code>add Native Support</code>。</p>
-
-<ul>
-  <li><strong>[5]将String传递到Native层解析出现了乱码！</strong></li>
-</ul>
-
-<p>使用自定义的将jstring转换成char*的函数，内容如下：</p>
-
-<p><code>c++
-static char* jstringToString(JNIEnv* env, jstring jstr) {
-    char* rtn = NULL;
-    jclass clsstring = env-&gt;FindClass("java/lang/String");
-    jstring strencode = env-&gt;NewStringUTF("utf-8"); //"gbk");//
-    jmethodID mid = env-&gt;GetMethodID(clsstring, "getBytes",
-            "(Ljava/lang/String;)[B");
-    jbyteArray barr = (jbyteArray) env-&gt;CallObjectMethod(jstr, mid, strencode);
-    jsize alen = env-&gt;GetArrayLength(barr);
-    jbyte* ba = env-&gt;GetByteArrayElements(barr, JNI_FALSE);
-    if (alen &gt; 0) {
-        rtn = (char*) malloc(alen + 1);
-        memcpy(rtn, ba, alen);
-        rtn[alen] = '\0';
-    }
-    env-&gt;ReleaseByteArrayElements(barr, ba, 0);
-    return rtn;
-}
-</code></p>
-
-<ul>
-  <li>[6]To be continued</li>
-</ul>
-
-<p>哦了，还不痛快? 请看下节<a href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3/">OpenCV 在 Android NDK 开发中的应用</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Android Ndk and Opencv Development]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-developement/"/>
-    <updated>2013-11-18T14:41:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-developement</id>
-    <content type="html"><![CDATA[<h3 id="android-ndk--opencv-1">Android NDK 和 OpenCV 整合开发总结(1)</h3>
-
-<p>在Samsung呆了段时间，还是学了不少东西的，主要做的任务是做<a href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>开发，也涉及到了<a href="http://opencv.org/">OpenCV</a>的内容，正好自己最近在开发XFace，这些知识都用得上，所以，想写几篇文章总结下这些知识。该系列内容均为原创，摘录的部分我都会引用提示，尊重版权嘛，嘿嘿，我保证这里有不少内容是搜索不到的独家秘笈哟！很多都是我的开发经验，嘿嘿<br />
-该系列主要包括三大部分，分为下面三节来介绍，本节主要介绍第一部分</p>
-
-<ul>
-  <li>Android NDK 和 OpenCV 整合开发的环境搭建以及人脸检测项目的运行测试</li>
-  <li><a href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/">Android NDK 的核心内容和开发总结</a></li>
-  <li><a href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-3/">OpenCV 在 Android NDK 开发中的应用</a></li>
-</ul>
-
-<p>[本文假设你是安装配置好了Java和Android SDK开发环境的，如果没有的话，可以看<a href="http://hujiaweiyinger.diandian.com/post/2013-10-30/setup_android_ndk_environment_and_solve_some_problems">我以前在点点博客写的这篇文章</a>，开发工具建议使用<a href="http://developer.android.com/sdk/installing/bundle.html">ADT</a>，它更加方便，包含了Android SDK 和 安装了 ADT Plugin 的 Eclipse，何乐而不为呢?]</p>
-
-<h4 id="android-ndk">1. 下载Android NDK，解压即可</h4>
-
-<p>下载地址： <a href="https://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a> <br />
-<a href="http://download.csdn.net/download/xiao87651234/3991166">如果不能下载(公司内部可能就不让访问或者访问很慢)，可以查看这位作者的备用下载地址</a></p>
-
-<h4 id="opencv26-">2. 下载安装OpenCV[2.6版本] (可选步骤)</h4>
-
-<p>下载地址：<a href="http://opencv.org/">OpenCV首页</a> 
-<a href="http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation">Linux平台的安装教程</a>  <a href="http://tilomitra.com/opencv-on-mac-osx/">Mac平台的安装教程</a> </p>
-
-<p>(1) 首先安装需要安装的工具和依赖包[详见前面的Linux安装教程]，Mac平台基本上只要安装CMake即可 <br />
-(2) 使用CMake编译opencv源码，然后通过make安装opencv[完成之后在<code>/usr/local/include</code>目录下便有了<code>opencv</code>和<code>opencv2</code>两个目录，在<code>/usr/local/lib</code>目录下有很多的<code>opencv</code>相关的动态库，例如<code>libopencv_core.dylib</code>等等]</p>
-
-<p><code>java
-cd &lt;path-to-opencv-source&gt;
-mkdir release
-cd release
-cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. 
-make
-sudo make install
-</code></p>
-
-<h4 id="opencvandroidsdk-244sdkjavalibrary-project-opencv-for-android">3. 下载opencv_android_sdk 2.4.4版本，导入目录sdk/java作为Library Project (这个是OpenCV for Android)</h4>
-
-<p>下载地址：<a href="http://sourceforge.net/projects/opencvlibrary/files/opencv-android/">opencv-android on sourceforge</a></p>
-
-<p>[2.4.2相对比较旧了，有些新特性不支持，比如人脸识别(但是有人脸检测)，不推荐下载这个；2.4.6相对比较新，但是可能导入的Library Project一直报错，所以如果不能解决就考虑使用2.4.4，只要Library Project导入进来没问题就行]</p>
-
-<p><a href="http://docs.opencv.org/doc/tutorials/introduction/android_binary_package/O4A_SDK.html#general-info">关于opencv for android的目录结构的详细解释</a></p>
-
-<h4 id="ndkopencv">4. 环境配置NDK和OpenCV环境</h4>
-
-<ul>
-  <li>安装Android SDK(略过)和NDK，配置到系统PATH中</li>
-</ul>
-
-<p>[推荐配置，方便以后在终端执行adb和ndk-build等命令]</p>
-
-<p><code>
-export ANDROID_SDK_ROOT=/Users/hujiawei/Android/android_sdk
-export PATH=${PATH}:${ANDROID_SDK_ROOT}/platform-tools:${ANDROID_SDK_ROOT}/tools
-export ANDROID_NDK_ROOT=/Users/hujiawei/Android/android_ndk
-export PATH=${PATH}:${ANDROID_NDK_ROOT}
-</code></p>
-
-<ul>
-  <li>使用<code>ndk-build -v</code>测试配置</li>
-</ul>
-
-<p><code>
-GNU Make 3.81
-Copyright (C) 2006  Free Software Foundation, Inc.
-This is free software; see the source for copying conditions.
-There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE.
-This program built for i386-apple-darwin10.8.0
-</code></p>
-
-<p>如果是在Windows下，并且安装了Cygwin的话，输出就略有不同，它使用的不是系统内置的GNU Make</p>
-
-<p><code>
-$ ndk-build -v
-GNU Make 3.82.90
-Built for i686-pc-cygwin
-Copyright (C) 2010  Free Software Foundation, Inc.
-License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
-This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.
-</code></p>
-
-<ul>
-  <li>在Eclipse(Android Development Tool)的设置中，在 C/C++ -&gt; Build -&gt; Environment 中添加下面两个配置 [添加这两项配置是为了后面进行各项关于路径配置的方便]</li>
-</ul>
-
-<p><code>
-NDKROOT = /Users/hujiawei/Android/android_ndk
-OPENCVROOT = /Users/hujiawei/Android/opencv_sdk
-</code></p>
-
-<h4 id="opencv-for-androidsamplefacedetection">5. 运行OpenCV for Android中的Sample项目FaceDetection</h4>
-
-<ul>
-  <li>
-    <p>导入OpenCV for Android中的<code>Library Project</code> - <code>OpenCV Library - 2.4.4</code></p>
-  </li>
-  <li>
-    <p>修改<code>Library Project</code>，改为前面导入到workspace中的<code>Library Project</code></p>
-  </li>
-</ul>
-
-<p>[原有的配置默认该项目和<code>Library Project</code>是在同一个目录下，所以如果你以前接触过的话，会发现很多文章都是告诉你要把<code>Library Project</code>拷贝到和当前项目同一个目录下，其实是完全没有必要的！]</p>
-
-<ul>
-  <li>修改<code>C/C++ Build</code>，将<code>Build Command</code>改成： <code>${NDKROOT}/ndk-build</code>  </li>
-</ul>
-
-<p>[Windows平台则不要删除末尾的<code>.cmd</code>，Linux和Mac平台则需要删掉<code>.cmd</code>]</p>
-
-<ul>
-  <li>修改<code>C/C++ General</code>，将<code>Paths and Symbols</code>中的<code>GNU C</code>和<code>GNU C++</code>配置的最后一个路径修改成 <code>${OPENCVROOT}/sdk/native/jni/include</code> (这个路径保存的是opencv的native code头文件)</li>
-</ul>
-
-<p>[建议将这个配置导出到文件中，方便以后做类似项目时可以快速进行配置]</p>
-
-<ul>
-  <li>修改jni目录下的<code>Android.mk</code>，将<code>include OpenCV.mk</code>这行改成：<code>include${OPENCVROOT}/sdk/native/jni/OpenCV.mk</code></li>
-</ul>
-
-<p>[原有的配置是默认OpenCV的sdk文件夹和包含项目根目录的文件夹是同一个目录下]</p>
-
-<ul>
-  <li>
-    <p>经过上面的配置之后，FaceDetection项目便没有问题了，打开jni目录下的cpp和h文件也不会报错了，当然，手机必须安装OpenCV Manager才能成功运行FaceDetection</p>
-  </li>
-  <li>
-    <p>运行人眼检测的示例程序</p>
-  </li>
-</ul>
-
-<p>项目来源：<a href="http://romanhosek.cz/android-eye-detection-and-tracking-with-opencv/">http://romanhosek.cz/android-eye-detection-and-tracking-with-opencv/</a><br />
-该作者根据原有的人脸检测做了一个人眼检测，博文最后附有<a href="http://romanhosek.cz/?wpdmact=process&amp;did=MS5ob3RsaW5r">下载地址</a>，我的<a href="https://github.com/yinger090807/XFace">Github</a>上已经有了一份备份，配置方式和Face Detection一样，至于人脸检测和人眼检测的算法我以后会有相关文章进行介绍，暂且期待下吧，嘿嘿<br />
-[如果配置完了之后提示一个<code>app_platform</code>的警告的话，可以在<code>Application.mk</code>文件中添加 <code>APP_PLATFORM := android-8</code>]<br />
-仔细理解上面的配置和操作，如果还有啥问题或者不清楚的可以查看<a href="http://docs.opencv.org/doc/tutorials/introduction/android_binary_package/O4A_SDK.html">OpenCV官方这篇入门文档:Manual OpenCV4Android SDK setup</a></p>
-
-<p>两个项目运行结果：[帮主，对不住啦，谁叫您长得这么帅呢！我的脸识别不了，只能用您老的啦！] </p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201311/face_detection.png" alt="image" /></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/201311/eye_detection.png" alt="image" /></p>
-
-<p>OK！本节结束！如果觉得好，请看下节<a href="http://hujiaweibujidao.github.io/blog/2013/11/18/android-ndk-and-opencv-development-2/">Android NDK 的核心内容和开发总结</a>！</p>
 
 ]]></content>
   </entry>
