@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-23T22:39:18+08:00</updated>
+  <updated>2014-10-24T12:08:27+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -47,21 +47,21 @@
 <p>参考网址：<a href="http://stackoverflow.com/questions/21207755/opencv-javacv-vs-opencv-c-c-interfaces">http://stackoverflow.com/questions/21207755/opencv-javacv-vs-opencv-c-c-interfaces</a></p>
 
 <blockquote>
-  <p>I’d like to add a couple of things to @ejbs’s answer.
-First of all, you concerned 2 separate issues:
-Java vs. C++ performance
-OpenCV vs JavaCV
-Java vs. C++ performance is a long, long story. On one hand, C++ programs are compiled to a highly optimized native code. They start quickly and run fast all the time without pausing for garbage collection or other VM duties (as Java do). On other hand, once compiled, program in C++ can’t change, no matter on what machine they are run, while Java bytecode is compiled “just-in-time” and is always optimized for processor architecture they run on. In modern world, with so many different devices (and processor architectures) this may be really significant. Moreover, some JVMs (e.g. Oracle Hotspot) can optimize even the code that is already compiled to native code! VM collect data about program execution and from time to time tries to rewrite code in such a way that it is optimized for this specific execution. So in such complicated circumstances the only real way to compare performance of implementations in different programming languages is to just run them and see the result.
-OpenCV vs. JavaCV is another story. First you need to understand stack of technologies behind these libraries.
+  <p>I’d like to add a couple of things to @ejbs’s answer.     <br />
+First of all, you concerned 2 separate issues:     <br />
+Java vs. C++ performance     <br />
+OpenCV vs JavaCV     <br />
+Java vs. C++ performance is a long, long story. On one hand, C++ programs are compiled to a highly optimized native code. They start quickly and run fast all the time without pausing for garbage collection or other VM duties (as Java do). On other hand, once compiled, program in C++ can’t change, no matter on what machine they are run, while Java bytecode is compiled “just-in-time” and is always optimized for processor architecture they run on. In modern world, with so many different devices (and processor architectures) this may be really significant. Moreover, some JVMs (e.g. Oracle Hotspot) can optimize even the code that is already compiled to native code! VM collect data about program execution and from time to time tries to rewrite code in such a way that it is optimized for this specific execution. So in such complicated circumstances the only real way to compare performance of implementations in different programming languages is to just run them and see the result.      <br />
+OpenCV vs. JavaCV is another story. First you need to understand stack of technologies behind these libraries.       <br />
 OpenCV was originally created in 1999 in Intel research labs and was written in C. Since that time, it changed the maintainer several times, became open source and reached 3rd version (upcoming release). At the moment, core of the library is written in C++ with popular interface in Python and a number of wrappers in other programming languages.
-JavaCV is one of such wrappers. So in most cases when you run program with JavaCV you actually use OpenCV too, just call it via another interface. But JavaCV provides more than just one-to-one wrapper around OpenCV. In fact, it bundles the whole number of image processing libraries, including FFmpeg, OpenKinect and others. (Note, that in C++ you can bind these libraries too).
-So, in general it doesn’t matter what you are using - OpenCV or JavaCV, you will get just about same performance. It more depends on your main task - is it Java or C++ which is better suited for your needs.
-There’s one more important point about performance. Using OpenCV (directly or via wrapper) you will sometimes find that OpenCV functions overcome other implementations by several orders. This is because of heavy use of low-level optimizations in its core. For example, OpenCV’s filter2D function is SIMD-accelerated and thus can process several sets of data in parallel. And when it comes to computer vision, such optimizations of common functions may easily lead to significant speedup.</p>
+JavaCV is one of such wrappers. So in most cases when you run program with JavaCV you actually use OpenCV too, just call it via another interface. But JavaCV provides more than just one-to-one wrapper around OpenCV. In fact, it bundles the whole number of image processing libraries, including FFmpeg, OpenKinect and others. (Note, that in C++ you can bind these libraries too).       <br />
+So, in general it doesn’t matter what you are using - OpenCV or JavaCV, you will get just about same performance. It more depends on your main task - is it Java or C++ which is better suited for your needs.      <br />
+There’s one more important point about performance. Using OpenCV (directly or via wrapper) you will sometimes find that OpenCV functions overcome other implementations by several orders. This is because of heavy use of low-level optimizations in its core. For example, OpenCV’s filter2D function is SIMD-accelerated and thus can process several sets of data in parallel. And when it comes to computer vision, such optimizations of common functions may easily lead to significant speedup.       </p>
 </blockquote>
 
 <h4 id="android">(3) <strong>人脸识别的Android应用</strong></h4>
 
-<h4 id="section">对人脸识别算法的支持</h4>
+<h4 id="section"><strong>对人脸识别算法的支持</strong></h4>
 
 <p>目前OpenCV的最新版本是2.4.10，OpenCV4Android是2.4.9，JavaCV的版本是0.9</p>
 
@@ -71,7 +71,7 @@ There’s one more important point about performance. Using OpenCV (directly or 
 
 <p>JavaCV现在已经支持人脸识别算法了，在Samples中可以找到一份样例代码<a href="https://github.com/bytedeco/javacv/blob/master/samples/OpenCVFaceRecognizer.java">OpenCVFaceRecognizer.java</a></p>
 
-<h4 id="section-1">不可忽视的摄像头！</h4>
+<h4 id="section-1"><strong>不可忽视的摄像头！</strong></h4>
 
 <p>因为是移动应用，所以要能够从移动设备中获取摄像头返回的数据是关键！而这个恰恰是这类应用要考虑的一个重要因素，因为它直接决定了你的应用需要使用的技术方案！</p>
 
@@ -95,31 +95,209 @@ There’s one more important point about performance. Using OpenCV (directly or 
 
 <p>③使用OpenCV的摄像头：JavaCamera或者NativeCamera都行，好处是它进行了很多的封装，可以直接将预览图像的<code>Mat</code>结构传递给Native层，这种传递是使用<code>Mat</code>的内存地址(<code>long</code>型)，Native层只要根据这个地址将其封装成<code>Mat</code>就可以进行处理了，另外，它的回调函数的返回值也是<code>Mat</code>，非常方便！这种方式速度较快。具体过程可以参考OpenCV-Android sdk的samples项目中的<code>Tutorial2-MixedProcessing</code>。 </p>
 
-<h4 id="section-2">可选方案有哪些？</h4>
+<h4 id="section-2"><strong>可选方案有哪些？</strong></h4>
 
 <p>综上所述，我们来总结下如果想要开发一个人脸识别的Android应用程序，大致会有哪些技术方案呢？</p>
 
-<p>(1) 摄像头使用纯Android Camera API，将<code>YUV</code>格式的数据传入到Native层，转换成<code>RGB(A)</code> 格式，然后调用OpenCV人脸识别算法进行处理，最后将处理结果<code>RGB(A)</code> 格式数据返回给Java层。优点是对其他内容的依赖较少，缺点自然是需要开发者具有很强的技术水平，至少要熟练OpenCV和Android NDK开发。</p>
+<p>(1) 摄像头使用纯Android Camera API，将<code>YUV</code>格式的数据传入到Native层，转换成<code>RGB(A)</code> 格式，然后调用OpenCV人脸识别算法进行处理，最后将处理结果<code>RGB(A)</code> 格式数据返回给Java层。优点是对其他内容的依赖较少，灵活性好，开发者甚至可以对内部算法进行修改，缺点自然是需要开发者具有很强的技术水平，要同时熟练OpenCV和Android NDK开发，在三星Galaxy I9000上测试比较慢，有明显卡顿延迟。</p>
 
-<p>这种方式可以参考书籍<a href="https://github.com/MasteringOpenCV">《Mastering OpenCV with Practical Computer Vision Projects》</a> 的第一章<code>Cartoonifer and Skin Changer for Android</code> 的实现方式。</p>
+<p>这种方式可以参考书籍<a href="https://github.com/MasteringOpenCV">《Mastering OpenCV with Practical Computer Vision Projects》</a> 的第一章<code>Cartoonifer and Skin Changer for Android</code> 的实现方式。 »&gt; <a href="http://hujiaweibujidao.github.io/files/Cartoonifier_Android.zip">我测试通过的源码下载</a></p>
 
-<p>(2) 摄像头使用纯Android Camera API，将<code>YUV</code>格式的数据直接在Java层转换成<code>RGB(A)</code> 格式，直接传给JavaCV人脸识别算法进行处理，然后返回识别结果即可。优点是只依赖了JavaCV，缺点是需要熟练JavaCV开发。</p>
+<p>(2) 摄像头使用纯Android Camera API，将<code>YUV</code>格式的数据直接在Java层转换成<code>RGB(A)</code> 格式，直接传给JavaCV人脸识别算法进行处理，然后返回识别结果即可。优点是只依赖了JavaCV，缺点是从OpenCV算法转成JavaCV实现需要些工作量。</p>
 
 <p>这种方式我没有试验过，转换的方式可以参考<a href="http://stackoverflow.com/questions/16471884/opencv-for-android-convert-camera-preview-from-yuv-to-rgb-with-imgproc-cvtcolor">这里</a> <strong>[我会尽快试验一下，如果可行我会将代码公开]</strong></p>
 
-<p>(3) 摄像头使用OpenCV4Android Library，将得到的数据<code>Mat</code> 的内存地址传给Native层，Native层通过地址还原成<code>Mat</code>，然后调用OpenCV人脸识别算法进行处理，最后将处理结果<code>RGB(A)</code> 格式数据返回给Java层。优点是依赖还不算多，缺点是还是需要掌握OpenCV和Android NDK开发的技术。</p>
+<p>(3) 摄像头使用OpenCV4Android Library，将得到的数据<code>Mat</code> 的内存地址传给Native层，Native层通过地址还原成<code>Mat</code>，然后调用OpenCV人脸识别算法进行处理，最后将处理结果<code>RGB(A)</code> 格式数据返回给Java层。优点是灵活性好，缺点是依赖了OpenCV4Android Library和OpenCV，所以需要掌握OpenCV和Android NDK开发，在三星Galaxy I9000上测试还行，如果算法处理比较慢的话会慢1-3s左右才返回结果。</p>
 
 <p>这种方式可以参考OpenCV-Android sdk的samples项目中的<code>Tutorial2-MixedProcessing</code> [我的开源项目<code>XFace</code>采用的正是这种方案]</p>
 
 <p>(4) 摄像头使用OpenCV4Android Library，Native层对OpenCV人脸识别算法类进行简单封装，然后将摄像头得到的数据<code>Mat</code> 直接传给OpenCV4Android Library的人脸识别算法，然后返回识别结果即可。优点是依赖还不算多而且可能要写的Native层代码也不多。</p>
 
-<p>这种方式我没有试验过，前面提到过封装的方法可以参考<a href="http://stackoverflow.com/questions/25830660/face-recognize-using-opencv4android-sdk-tutorial">这里</a> <strong>[我会尽快试验一下，如果可行我会将代码公开]</strong></p>
+<p>这种方式我试验过，利用前面提到过封装的方法，可以参考<a href="http://stackoverflow.com/questions/25830660/face-recognize-using-opencv4android-sdk-tutorial">这里</a>，注意按照答案的例子在加载<code>facerec</code> 库之前要记得加载<code>opencv_java</code> 库才行！ »&gt;<a href="http://hujiaweibujidao.github.io/files/NDKDemo.zip">我测试通过的源码下载</a></p>
 
 <p>(5) 摄像头使用OpenCV4Android Library，然后将摄像头得到的数据<code>Mat</code> 直接传给JavaCV的人脸识别算法，然后返回识别结果即可。优点是看起来方案很不错，只需要写Java代码就行了，Native层可能只需要导入一些<code>*so</code> 文件到<code>jniLibs</code> 目录中就行了，缺点是依赖太多了！</p>
 
-<p>这种方式可以参考<a href="https://github.com/ayuso2013/face-recognition">Github上的这个项目</a> [我运行过了，没有问题]</p>
+<p>这种方式可以参考<a href="https://github.com/ayuso2013/face-recognition">Github上的这个项目</a>     »&gt; <a href="http://hujiaweibujidao.github.io/files/face-recognition-ayuso.zip">我测试通过的源码下载</a></p>
 
 <p>各种方案各有利弊，一方面要考虑技术方案是否可行，另一方面还要考虑该技术方案是否便于开发！哎，码农真是伤不起啊！</p>
+
+<p><strong>补充部分</strong></p>
+
+<p>这里假设你是按照我上一篇文章<a href="http://hujiaweibujidao.github.io/blog/2014/10/22/android-ndk-and-opencv-development-with-android-studio/">Android NDK and OpenCV Development With Android Studio</a> 的方式来创建的项目。</p>
+
+<p>(1) 方案1中的部分代码</p>
+
+<p>实现将<code>YUV</code> 格式数据转换成 <code>RGBA</code> 格式数据的Native层代码</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="c1">// Just show the plain camera image without modifying it.</span>
+</span><span class="line"><span class="n">JNIEXPORT</span> <span class="kt">void</span> <span class="n">JNICALL</span> <span class="nf">Java_com_Cartoonifier_CartoonifierView_ShowPreview</span><span class="o">(</span><span class="n">JNIEnv</span><span class="o">*</span> <span class="n">env</span><span class="o">,</span> <span class="n">jobject</span><span class="o">,</span>
+</span><span class="line">        <span class="n">jint</span> <span class="n">width</span><span class="o">,</span> <span class="n">jint</span> <span class="n">height</span><span class="o">,</span> <span class="n">jbyteArray</span> <span class="n">yuv</span><span class="o">,</span> <span class="n">jintArray</span> <span class="n">bgra</span><span class="o">)</span>
+</span><span class="line"><span class="o">{</span>
+</span><span class="line">    <span class="c1">// Get native access to the given Java arrays.</span>
+</span><span class="line">    <span class="n">jbyte</span><span class="o">*</span> <span class="n">_yuv</span>  <span class="o">=</span> <span class="n">env</span><span class="o">-&gt;</span><span class="n">GetByteArrayElements</span><span class="o">(</span><span class="n">yuv</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+</span><span class="line">    <span class="n">jint</span><span class="o">*</span>  <span class="n">_bgra</span> <span class="o">=</span> <span class="n">env</span><span class="o">-&gt;</span><span class="n">GetIntArrayElements</span><span class="o">(</span><span class="n">bgra</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+</span><span class="line">
+</span><span class="line">    <span class="c1">// Prepare a cv::Mat that points to the YUV420sp data.</span>
+</span><span class="line">    <span class="n">Mat</span> <span class="nf">myuv</span><span class="o">(</span><span class="n">height</span> <span class="o">+</span> <span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span> <span class="n">width</span><span class="o">,</span> <span class="n">CV_8UC1</span><span class="o">,</span> <span class="o">(</span><span class="n">uchar</span> <span class="o">*)</span><span class="n">_yuv</span><span class="o">);</span>
+</span><span class="line">    <span class="c1">// Prepare a cv::Mat that points to the BGRA output data.</span>
+</span><span class="line">    <span class="n">Mat</span> <span class="nf">mbgra</span><span class="o">(</span><span class="n">height</span><span class="o">,</span> <span class="n">width</span><span class="o">,</span> <span class="n">CV_8UC4</span><span class="o">,</span> <span class="o">(</span><span class="n">uchar</span> <span class="o">*)</span><span class="n">_bgra</span><span class="o">);</span>
+</span><span class="line">
+</span><span class="line">    <span class="c1">// Convert the color format from the camera&#39;s</span>
+</span><span class="line">    <span class="c1">// NV21 &quot;YUV420sp&quot; format to an Android BGRA color image.</span>
+</span><span class="line">    <span class="n">cvtColor</span><span class="o">(</span><span class="n">myuv</span><span class="o">,</span> <span class="n">mbgra</span><span class="o">,</span> <span class="n">CV_YUV420sp2BGRA</span><span class="o">);</span>
+</span><span class="line">
+</span><span class="line">    <span class="c1">// OpenCV can now access/modify the BGRA image if we want ...</span>
+</span><span class="line">
+</span><span class="line">    <span class="c1">// Release the native lock we placed on the Java arrays.</span>
+</span><span class="line">    <span class="n">env</span><span class="o">-&gt;</span><span class="n">ReleaseIntArrayElements</span><span class="o">(</span><span class="n">bgra</span><span class="o">,</span> <span class="n">_bgra</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+</span><span class="line">    <span class="n">env</span><span class="o">-&gt;</span><span class="n">ReleaseByteArrayElements</span><span class="o">(</span><span class="n">yuv</span><span class="o">,</span> <span class="n">_yuv</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>(2) 方案4中的部分代码 </p>
+
+<p><code>Android.mk</code> 文件</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">LOCAL_PATH</span> <span class="o">:=</span> <span class="n">$</span><span class="o">(</span><span class="n">call</span> <span class="n">my</span><span class="o">-</span><span class="n">dir</span><span class="o">)</span>
+</span><span class="line">
+</span><span class="line"><span class="n">include</span> <span class="n">$</span><span class="o">(</span><span class="n">CLEAR_VARS</span><span class="o">)</span>
+</span><span class="line">
+</span><span class="line"><span class="err">#</span><span class="n">opencv</span>
+</span><span class="line"><span class="nl">OPENCVROOT:</span><span class="o">=</span> <span class="o">/</span><span class="n">Volumes</span><span class="o">/</span><span class="n">hujiawei</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hujiawei</span><span class="o">/</span><span class="n">Android</span><span class="o">/</span><span class="n">opencv_sdk</span>
+</span><span class="line"><span class="nl">OPENCV_CAMERA_MODULES:</span><span class="o">=</span><span class="n">on</span>
+</span><span class="line"><span class="nl">OPENCV_INSTALL_MODULES:</span><span class="o">=</span><span class="n">on</span>
+</span><span class="line"><span class="nl">OPENCV_LIB_TYPE:</span><span class="o">=</span><span class="n">SHARED</span>
+</span><span class="line"><span class="n">include</span> <span class="n">$</span><span class="o">{</span><span class="n">OPENCVROOT</span><span class="o">}/</span><span class="n">sdk</span><span class="o">/</span><span class="kd">native</span><span class="o">/</span><span class="n">jni</span><span class="o">/</span><span class="n">OpenCV</span><span class="o">.</span><span class="na">mk</span>
+</span><span class="line">
+</span><span class="line"><span class="n">LOCAL_SRC_FILES</span> <span class="o">:=</span> <span class="n">facerec</span><span class="o">.</span><span class="na">cpp</span>
+</span><span class="line">
+</span><span class="line"><span class="n">LOCAL_LDLIBS</span> <span class="o">+=</span> <span class="o">-</span><span class="n">llog</span>
+</span><span class="line"><span class="n">LOCAL_MODULE</span> <span class="o">:=</span> <span class="n">facerec</span>
+</span><span class="line">
+</span><span class="line"><span class="n">include</span> <span class="n">$</span><span class="o">(</span><span class="n">BUILD_SHARED_LIBRARY</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>Application.mk</code> 文件</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">APP_STL</span> <span class="o">:=</span> <span class="n">gnustl_static</span>
+</span><span class="line"><span class="n">APP_CPPFLAGS</span> <span class="o">:=</span> <span class="o">-</span><span class="n">frtti</span> <span class="o">-</span><span class="n">fexceptions</span>
+</span><span class="line"><span class="n">APP_ABI</span> <span class="o">:=</span> <span class="n">armeabi</span>
+</span><span class="line"><span class="n">APP_PLATFORM</span> <span class="o">:=</span> <span class="n">android</span><span class="o">-</span><span class="mi">16</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>FisherFaceRecognizer</code> 文件</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">android</span><span class="o">.</span><span class="na">hacks</span><span class="o">.</span><span class="na">ndkdemo</span><span class="o">;</span>
+</span><span class="line">
+</span><span class="line"><span class="kn">import</span> <span class="nn">org.opencv.contrib.FaceRecognizer</span><span class="o">;</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FisherFaceRecognizer</span> <span class="kd">extends</span> <span class="n">FaceRecognizer</span> <span class="o">{</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">static</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">System</span><span class="o">.</span><span class="na">loadLibrary</span><span class="o">(</span><span class="s">&quot;opencv_java&quot;</span><span class="o">);</span><span class="c1">//</span>
+</span><span class="line">        <span class="n">System</span><span class="o">.</span><span class="na">loadLibrary</span><span class="o">(</span><span class="s">&quot;facerec&quot;</span><span class="o">);</span><span class="c1">//</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">native</span> <span class="kt">long</span> <span class="nf">createFisherFaceRecognizer0</span><span class="o">();</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">native</span> <span class="kt">long</span> <span class="nf">createFisherFaceRecognizer1</span><span class="o">(</span><span class="kt">int</span> <span class="n">num_components</span><span class="o">);</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">native</span> <span class="kt">long</span> <span class="nf">createFisherFaceRecognizer2</span><span class="o">(</span><span class="kt">int</span> <span class="n">num_components</span><span class="o">,</span> <span class="kt">double</span> <span class="n">threshold</span><span class="o">);</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">public</span> <span class="nf">FisherFaceRecognizer</span><span class="o">()</span> <span class="o">{</span>
+</span><span class="line">        <span class="kd">super</span><span class="o">(</span><span class="n">createFisherFaceRecognizer0</span><span class="o">());</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">public</span> <span class="nf">FisherFaceRecognizer</span><span class="o">(</span><span class="kt">int</span> <span class="n">num_components</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="kd">super</span><span class="o">(</span><span class="n">createFisherFaceRecognizer1</span><span class="o">(</span><span class="n">num_components</span><span class="o">));</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">public</span> <span class="nf">FisherFaceRecognizer</span><span class="o">(</span><span class="kt">int</span> <span class="n">num_components</span><span class="o">,</span> <span class="kt">double</span> <span class="n">threshold</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="kd">super</span><span class="o">(</span><span class="n">createFisherFaceRecognizer2</span><span class="o">(</span><span class="n">num_components</span><span class="o">,</span> <span class="n">threshold</span><span class="o">));</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>之后你可以测试，当然你还可以做一个完整的例子来测试这个算法是否正确</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">facerec</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FisherFaceRecognizer</span><span class="o">();</span>
+</span><span class="line"><span class="n">textView</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">facerec</span><span class="o">.</span><span class="na">getDouble</span><span class="o">(</span><span class="s">&quot;threshold&quot;</span><span class="o">)));</span><span class="c1">//1.7976xxxx</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/10/23/differences-between-opencv-javacv-and-opencv4android/">http://hujiaweibujidao.github.io/blog/2014/10/23/differences-between-opencv-javacv-and-opencv4android/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
