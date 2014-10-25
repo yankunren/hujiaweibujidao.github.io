@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-24T21:03:48+08:00</updated>
+  <updated>2014-10-25T11:13:43+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -133,7 +133,9 @@ There’s one more important point about performance. Using OpenCV (directly or 
 
 <p>(1) 摄像头使用纯Android Camera API，将<code>YUV</code>格式的数据传入到Native层，转换成<code>RGB(A)</code> 格式，然后调用OpenCV人脸识别算法进行处理，最后将处理结果<code>RGB(A)</code> 格式数据返回给Java层。优点是对其他内容的依赖较少，灵活性好，开发者甚至可以对内部算法进行修改，缺点自然是需要开发者具有很强的技术水平，要同时熟练OpenCV和Android NDK开发，在三星Galaxy I9000上测试比较慢，有明显卡顿延迟。</p>
 
-<p>这种方式可以参考书籍<a href="https://github.com/MasteringOpenCV">《Mastering OpenCV with Practical Computer Vision Projects》</a> 的第一章<code>Cartoonifer and Skin Changer for Android</code> 的实现方式。 »&gt; <a href="http://hujiaweibujidao.github.io/files/Cartoonifier_Android.zip">我测试通过的源码下载</a></p>
+<p>这种方式可以参考书籍<a href="https://github.com/MasteringOpenCV">《Mastering OpenCV with Practical Computer Vision Projects》</a> 的第一章<code>Cartoonifer and Skin Changer for Android</code> 的实现方式。 &gt; <a href="http://hujiaweibujidao.github.io/files/Cartoonifier_Android.zip">我测试通过的源码下载</a></p>
+
+<p>最近发现一个项目也是采用这种方式，而且代码质量较高，可惜的是并没有公开Native层代码，而只是提供了Java层的SDK，<a href="https://github.com/Vinisoft/Face-Recognition-SDK-for-Android">详情可见这里</a></p>
 
 <p>(2) 摄像头使用纯Android Camera API，将<code>YUV</code>格式的数据直接在Java层转换成<code>RGB(A)</code> 格式，直接传给JavaCV人脸识别算法进行处理，然后返回识别结果即可。优点是只依赖了JavaCV，缺点是从OpenCV算法转成JavaCV实现需要些工作量。</p>
 
@@ -145,11 +147,11 @@ There’s one more important point about performance. Using OpenCV (directly or 
 
 <p>(4) 摄像头使用OpenCV4Android Library，Native层对OpenCV人脸识别算法类进行简单封装，然后将摄像头得到的数据<code>Mat</code> 直接传给OpenCV4Android Library的人脸识别算法，然后返回识别结果即可。优点是依赖还不算多而且可能要写的Native层代码也不多。</p>
 
-<p>这种方式我试验过，利用前面提到过封装的方法，可以参考<a href="http://stackoverflow.com/questions/25830660/face-recognize-using-opencv4android-sdk-tutorial">这里</a>，注意按照答案的例子在加载<code>facerec</code> 库之前要记得加载<code>opencv_java</code> 库才行！ »&gt;<a href="http://hujiaweibujidao.github.io/files/NDKDemo.zip">我测试通过的源码下载</a></p>
+<p>这种方式我试验过，利用前面提到过封装的方法，可以参考<a href="http://stackoverflow.com/questions/25830660/face-recognize-using-opencv4android-sdk-tutorial">这里</a>，注意按照答案的例子在加载<code>facerec</code> 库之前要记得加载<code>opencv_java</code> 库才行！ &gt;<a href="http://hujiaweibujidao.github.io/files/NDKDemo.zip">我测试通过的源码下载</a></p>
 
 <p>(5) 摄像头使用OpenCV4Android Library，然后将摄像头得到的数据<code>Mat</code> 直接传给JavaCV的人脸识别算法，然后返回识别结果即可。优点是看起来方案很不错，只需要写Java代码就行了，Native层可能只需要导入一些<code>*so</code> 文件到<code>jniLibs</code> 目录中就行了，缺点是依赖太多了！</p>
 
-<p>这种方式可以参考<a href="https://github.com/ayuso2013/face-recognition">Github上的这个项目</a>     »&gt; <a href="http://hujiaweibujidao.github.io/files/face-recognition-ayuso.zip">我测试通过的源码下载</a></p>
+<p>这种方式可以参考<a href="https://github.com/ayuso2013/face-recognition">Github上的这个项目</a>     &gt; <a href="http://hujiaweibujidao.github.io/files/face-recognition-ayuso.zip">我测试通过的源码下载</a></p>
 
 <p>各种方案各有利弊，一方面要考虑技术方案是否可行，另一方面还要考虑该技术方案是否便于开发！哎，码农真是伤不起啊！</p>
 
