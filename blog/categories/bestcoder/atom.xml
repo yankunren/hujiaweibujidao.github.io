@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bestcoder | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/bestcoder/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-11-09T21:00:17+08:00</updated>
+  <updated>2014-11-09T21:04:53+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -18,9 +18,9 @@
     <link href="http://hujiaweibujidao.github.io/blog/2014/11/09/bestcoder-round-17/"/>
     <updated>2014-11-09T20:16:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/11/09/bestcoder-round-17</id>
-    <content type="html"><![CDATA[<p>最近终于确定了接下来要做什么，要从平时开始多做题了，多思考，不再接什么项目了。搜索了一番发现了一些好的比赛，比如CodeForces和BestCoder，哈哈哈，说练就练！</p>
+    <content type="html"><![CDATA[<p>最近终于确定了接下来要做什么，为了明年能够顺利拿到offer，我要从平时开始多做题了，多思考，不再接什么项目了。搜索了一番发现了一些好的比赛，比如CodeForces和BestCoder，哈哈哈，说练就练！</p>
 
-<p>下面是昨天注册参加的BestCoder Round 17</p>
+<p>下面是昨天注册参加的BestCoder Round 17，总共四道题，只搞定了两道，后面那道还被别人hack掉了，当时想过可能会超过int的表示范围，但是时间不多就没多想了，菜鸟阶段暂时只能如此了。</p>
 
 <p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=5100">Chessboard</a></p>
 
@@ -157,7 +157,7 @@ private static int bs(int[] vs, int r, int from, int end) {
 
 <p>```</p>
 
-<p>后面的还是等我写好了再附上，嘿嘿嘿。</p>
+<p>后面的等我写好了再附上，嘿嘿嘿。</p>
 
 ]]></content>
   </entry>
