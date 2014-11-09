@@ -4,7 +4,7 @@
   <title><![CDATA[Category: codejam | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/codejam/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-11-09T19:56:01+08:00</updated>
+  <updated>2014-11-09T20:00:18+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -24,7 +24,7 @@
 
 <p>[我的代码总是冗长冗长的，可读性高，但是花的时间总是比别人长，所以我真心不适合比赛，汗⊙﹏⊙]</p>
 
-<p><a href="https://code.google.com/codejam/contest/6214486/dashboard#s=p0">Problem A. Cube IV</a></p>
+<h3 id="problem-a-cube-ivhttpscodegooglecomcodejamcontest6214486dashboardsp0"><a href="https://code.google.com/codejam/contest/6214486/dashboard#s=p0">Problem A. Cube IV</a></h3>
 
 <p>问题A是说在S*S个方格中，每个方格代表一个房间，房间有一个房间编号，从1到S的平方，每个里面有一个人，这个人可以从一个房间A移动到另一个房间B，但是必须满足房间B的编号比房间A的编号大1才行，问哪个房间的人能够移动的距离最远，最远的距离又是多少？如果两个人能够移动的距离相同，输出房间号小的那个人。</p>
 
@@ -177,7 +177,7 @@ Result(int r, int d) {
 
 <p>```</p>
 
-<p><a href="https://code.google.com/codejam/contest/6214486/dashboard#s=p1">Problem B. GBus count</a></p>
+<h3 id="problem-b-gbus-counthttpscodegooglecomcodejamcontest6214486dashboardsp1"><a href="https://code.google.com/codejam/contest/6214486/dashboard#s=p1">Problem B. GBus count</a></h3>
 
 <p>问题B是说在一些城市之间有一些公交车，给你这些车的起点和终点的数据，假设某辆公交车是从1到10，那么城市1、城市2、城市3等一直到城市10都被经过了，现在要求的是有多少辆车经过了某个城市？</p>
 
@@ -330,7 +330,7 @@ Bus(int x, int y) {
 
 <p>```</p>
 
-<p><a href="https://code.google.com/codejam/contest/6214486/dashboard#s=p2">Problem C. Sort a scrambled itinerary</a></p>
+<h3 id="problem-c-sort-a-scrambled-itineraryhttpscodegooglecomcodejamcontest6214486dashboardsp2"><a href="https://code.google.com/codejam/contest/6214486/dashboard#s=p2">Problem C. Sort a scrambled itinerary</a></h3>
 
 <p>问题C是说给你一些航班的信息，包括起点城市和终点城市，但是顺序乱了，让你来确定这些航班整合起来最后是从哪里到哪里之后又到了哪里。</p>
 
