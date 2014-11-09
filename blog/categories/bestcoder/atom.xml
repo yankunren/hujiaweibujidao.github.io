@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bestcoder | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/bestcoder/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-11-09T21:04:53+08:00</updated>
+  <updated>2014-11-09T21:07:07+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -26,13 +26,13 @@
 
 <p>第一题是说用大小为 k<em>1 的方砖来填充 n</em>n 的棋盘，问棋盘中最多能够有多少个方格能够被覆盖。</p>
 
-<p><a href="http://www.matrix67.com/blog/archives/5900">Matrix67</a> 在他的博客中具体地介绍过这个问题的解法，其实就是两种情况，一个是可以直观地尽可能多地覆盖，另一个是以风车形式覆盖。</p>
+<p><a href="http://www.matrix67.com/blog/archives/5900">Matrix67</a> 在他的博客中具体地介绍过这个问题的解法，其实就是两种情况，一个是可以直观地尽可能多地覆盖，另一个是以风车形式覆盖，这题代码很好写，但是思路不好想。</p>
 
 <p>BestCoder题解：</p>
 
 <p>首先，若n&lt;k，则棋盘连一个1×k的矩形都放不下，输出0。      <br />
 我们只需要考虑n≥k的情况。将棋盘类似于黑白染色，按(i+j)模k划分等价类，给每个格子标一个号。标号之后，会注意到每条从左下到右上的斜线数字都是相同的，那么对于s×s的格子，其内部数字有且恰好有2s−1种，所以当s&lt;=k/2的时候，内部数字有floor(k2)*2−1&lt;k种，所以不能有更佳的方案。从而证明最优的方案一定是仅剩下一个s×s的正方形区域没有被覆盖到，其中s≤k/2。     <br />
-而令l=n mod k之后，根据l大小的不同，可以构造出中心为l×l或(k−l)×(k−l)的风车形图案，又通过上面证明这个l（或k−l）就是之前的s，所以是最优的。所以令l=n mod k，如果l≤k2，最多可覆盖的格子数即为 <script type="math/tex">n^2−l^2</script>，否则为 <script type="math/tex">n^2−(k−l)^2</script>，显然这样的方案是可以构造出来的（风车形）。</p>
+而令l=n mod k之后，根据l大小的不同，可以构造出中心为l×l或(k−l)×(k−l)的风车形图案，又通过上面证明这个l（或k−l）就是之前的s，所以是最优的。所以令l=n mod k，如果l≤k/2，最多可覆盖的格子数即为 <script type="math/tex">n^2−l^2</script>，否则为 <script type="math/tex">n^2−(k−l)^2</script>，显然这样的方案是可以构造出来的（风车形）。</p>
 
 <p>```java</p>
 
