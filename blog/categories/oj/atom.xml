@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: oj | Hujiawei Bujidao]]></title>
+  <link href="http://hujiaweibujidao.github.io/blog/categories/oj/atom.xml" rel="self"/>
+  <link href="http://hujiaweibujidao.github.io/"/>
+  <updated>2014-11-09T19:39:37+08:00</updated>
+  <id>http://hujiaweibujidao.github.io/</id>
+  <author>
+    <name><![CDATA[hujiawei]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Google APAC 2015 University Graduates Test Round D]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/11/09/google-apac-2015-university-graduates-test-round-d/"/>
+    <updated>2014-11-09T19:09:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/11/09/google-apac-2015-university-graduates-test-round-d</id>
+    <content type="html"><![CDATA[<p>前段时间才知道的Google APAC比赛，于是乎注册了今天下午的比赛，Round D，总共四道题，只过了两道，完了之后现在过了三道。这三道都不难只是觉得很奇怪，不熟悉这种比赛模式，它是让你下载输入文件，然后你在给定时间内提交输出文件和源程序即可，对于每道题目都有一个小测试集和大测试集。我以为一般大测试集肯定不好过的，但是纳闷的是其实也很好过，所以本来第二题暴力很简单就能过，我以为要优化，写了半天还是错了，于是在比赛前暴力了一下，结果竟然过了，哎，请理解俺这个菜鸟。</p>
+
+<p>废话不多说了，下面是前三题的解题报告 </p>
+
+<p>[我的代码总是冗长冗长的，可读性高，但是花的时间总是比别人长，所以我真心不适合比赛，汗⊙﹏⊙]</p>
+
+<p><a href="https://code.google.com/codejam/contest/6214486/dashboard#s=p0">Problem A. Cube IV</a></p>
+
+<p>问题A是说在S*S个方格中，每个方格代表一个房间，房间有一个房间编号，从1到S的平方，每个里面有一个人，这个人可以从一个房间A移动到另一个房间B，但是必须满足房间B的编号比房间A的编号大1才行，问哪个房间的人能够移动的距离最远，最远的距离又是多少？如果两个人能够移动的距离相同，输出房间号小的那个人。</p>
+
+<p>思路：自始至终维护结果r和d，从房间号最大的那个房间开始DFS，遇到房间号小1的房间就进入，一直下去直到不能移动了，修改r和d的值，然后从比上次停下来的房间小1的房间开始继续DFS，如果他移动的距离更多的话，那么就修改d和r即可，一直下去就能得到最终解。</p>
+
+<p>```
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.util.Scanner;</p>
+
+<p>//https://code.google.com/codejam/contest/6214486/dashboard#s=p0</p>
+
+<p>public class ProblemA {</p>
+
+<pre><code>private static int s;
+private static int[][] p;
+
+public static void main(String[] args) throws Exception {
+    PrintStream out = new PrintStream(new BufferedOutputStream(new FileOutputStream("data/out.txt")));
+    System.setOut(out);
+    System.setErr(out);
+    Scanner scanner = new Scanner(new FileInputStream("data/in.txt"));
+    int t = scanner.nextInt();
+    int c = 1;
+    while (t-- &gt; 0) {
+        s = scanner.nextInt();
+        p = new int[s][s];
+        for (int i = 0; i &lt; s; i++) {
+            for (int j = 0; j &lt; s; j++) {
+                p[i][j] = scanner.nextInt();
+            }
+        }
+        System.out.print("Case #" + c + ": ");
+        solve();
+        c++;
+    }
+    out.flush();
+    out.close();
+}
+
+private static void solve() {
+    int r = 0, d = 1, max = s * s;
+    while (max &gt; 0 &amp;&amp; max &gt;= d) {
+        Point maxp = findPoint(max);
+        Result result = new Result(1, 1);
+        dfs(maxp, result);
+        if (result.d &gt;= d) {
+            r = result.r;
+            d = result.d;
+        }
+        max = max - result.d;//
+    }
+    System.out.println(r + " " + d);
+}
+
+private static void dfs(Point current, Result result) {
+    //left
+    Point left = current.left();
+    if (left != null &amp;&amp; p[left.x][left.y] == p[current.x][current.y] - 1) {
+        result.r = p[left.x][left.y];
+        result.d++;
+        dfs(left, result);
+        return;
+    }
+    //right
+    Point right = current.right();
+    if (right != null &amp;&amp; p[right.x][right.y] == p[current.x][current.y] - 1) {
+        result.r = p[right.x][right.y];
+        result.d++;
+        dfs(right, result);
+        return;
+    }
+    //up
+    Point up = current.up();
+    if (up != null &amp;&amp; p[up.x][up.y] == p[current.x][current.y] - 1) {
+        result.r = p[up.x][up.y];
+        result.d++;
+        dfs(up, result);
+        return;
+    }
+    //down
+    Point down = current.down();
+    if (down != null &amp;&amp; p[down.x][down.y] == p[current.x][current.y] - 1) {
+        result.r = p[down.x][down.y];
+        result.d++;
+        dfs(down, result);
+        return;
+    }
+}
+
+private static Point findPoint(int max) {
+    for (int i = 0; i &lt; s; i++) {
+        for (int j = 0; j &lt; s; j++) {
+            if (p[i][j] == max) {
+                return new Point(s, i, j);
+            }
+        }
+    }
+    return null;
+}
+</code></pre>
+
+<p>}</p>
+
+<p>class Point {</p>
+
+<pre><code>int s;
+int x;
+int y;
+
+Point(int s, int x, int y) {
+    this.s = s;
+    this.x = x;
+    this.y = y;
+}
+
+Point up() {
+    if (x - 1 &gt;= 0) return new Point(this.s, this.x - 1, this.y);
+    return null;
+}
+
+Point down() {
+    if (x + 1 &lt; s) return new Point(this.s, this.x + 1, this.y);
+    return null;
+}
+
+Point left() {
+    if (y - 1 &gt;= 0) return new Point(this.s, this.x, this.y - 1);
+    return null;
+}
+
+Point right() {
+    if (y + 1 &lt; s) return new Point(this.s, this.x, this.y + 1);
+    return null;
+} }
+</code></pre>
+
+<p>class Result {</p>
+
+<pre><code>int r;
+int d;
+
+Result(int r, int d) {
+    this.r = r;
+    this.d = d;
+} }
+</code></pre>
+
+<p>```</p>
+
+<p><a href="https://code.google.com/codejam/contest/6214486/dashboard#s=p1">Problem B. GBus count</a></p>
+
+<p>问题B是说在一些城市之间有一些公交车，给你这些车的起点和终点的数据，假设某辆公交车是从1到10，那么城市1、城市2、城市3等一直到城市10都被经过了，现在要求的是有多少辆车经过了某个城市？</p>
+
+<p>思路：这简直不能叫做思路！纯暴力就行了！遍历所有公交车的线路，统计判断该城市是否在这个线路上即可。这样就已经可以过了！比赛时我想了写优化，大致思路是假设城市编号为c，公交车的线路为$a<em>{i}$ 和 $b</em>{i}$，首先对所有公交线路按照 $a<em>{i}$ 排序，保留那些 $a</em>{i}&lt;=c$ 的线路，然后对这些线路按照 $b<em>{i}$ 排序，保留那些 ${b</em>{i}&gt;=c} 的线路，最后保留下来的线路的个数就是最终的解。[但是我的代码有问题，即下面的<code>solve</code>方法，提交了几次都报错]</p>
+
+<p>```
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.util.*;</p>
+
+<p>//https://code.google.com/codejam/contest/6214486/dashboard#s=p1</p>
+
+<p>public class ProblemB {</p>
+
+<pre><code>private static int n, p;
+private static ArrayList&lt;Bus&gt; buses;
+private static ArrayList&lt;Integer&gt; cities;
+
+public static void main(String[] args) throws Exception {
+    PrintStream out = new PrintStream(new BufferedOutputStream(new FileOutputStream("data/out.txt")));
+    System.setOut(out);
+    System.setErr(out);
+    Scanner scanner = new Scanner(new FileInputStream("data/in.txt"));
+
+    int t = scanner.nextInt();
+    int c = 1;
+    while (t-- &gt; 0) {
+        buses = new ArrayList&lt;Bus&gt;();
+        cities = new ArrayList&lt;Integer&gt;();
+        n = scanner.nextInt();
+        for (int i = 0; i &lt; n; i++) {
+            buses.add(new Bus(scanner.nextInt(), scanner.nextInt()));
+        }
+        p = scanner.nextInt();
+        for (int i = 0; i &lt; p; i++) {
+            cities.add(scanner.nextInt());
+        }
+        System.out.print("Case #" + c + ": ");
+        solve2();
+        System.out.println();
+        c++;
+    }
+
+    out.flush();
+    out.close();
+}
+
+//暴力解决
+private static void solve2() {
+    int key, sum;
+    for (int i = 0; i &lt; p; i++) {
+        key = cities.get(i);
+        sum = 0;
+        for (Bus bus : buses) {
+            if (key &gt;= bus.x &amp;&amp; key &lt;= bus.y) {
+                sum++;
+            }
+        }
+        System.out.print(sum + " ");
+    }
+}
+
+//非暴力解决，但是仍然存在问题
+private static void solve() {
+    Comparator&lt;Bus&gt; cf = new Comparator&lt;Bus&gt;() {
+        @Override
+        public int compare(Bus o1, Bus o2) {
+            if (o1.x &gt; o2.x) {
+                return 1;
+            } else if (o1.x &lt; o2.x) {
+                return -1;
+            }
+            return 0;
+        }
+    };
+    Comparator&lt;Bus&gt; ct = new Comparator&lt;Bus&gt;() {
+        @Override
+        public int compare(Bus o1, Bus o2) {
+            if (o1.y &gt; o2.y) {
+                return 1;
+            } else if (o1.y &lt; o2.y) {
+                return -1;
+            }
+            return 0;
+        }
+    };
+
+    Collections.sort(buses, cf);
+
+    int left, right, key;
+    for (int i = 0; i &lt; p; i++) {
+        key = cities.get(i);
+        left = bs_f(buses, key);//从left开始都是大于key的数字
+        List&lt;Bus&gt; flist = buses.subList(0, left);//left=0, size=0
+        if (flist.size() &gt; 0) {
+            Collections.sort(flist, ct);
+            right = bs_t(flist, key);//从right开始都是大于等于key的数字
+            List&lt;Bus&gt; tlist = flist.subList(right, flist.size());
+            System.out.print(tlist.size() + " ");
+        } else {
+            System.out.print("0 ");
+        }
+    }
+}
+
+private static int bs_f(List&lt;Bus&gt; lbus, int r) {
+    int len = lbus.size();
+    int left = 0, right = len - 1, mid = 0;
+    while (left &lt;= right) {
+        mid = (left + right) / 2;
+        if (r &lt; lbus.get(mid).x) {
+            right = mid - 1;
+        } else if (r &gt;= lbus.get(mid).x) {
+            left = mid + 1;
+        }
+    }
+    return left;
+}
+
+private static int bs_t(List&lt;Bus&gt; lbus, int r) {
+    int len = lbus.size();
+    int left = 0, right = len - 1, mid = 0;
+    while (left &lt;= right) {
+        mid = (left + right) / 2;
+        if (r &lt;= lbus.get(mid).y) {
+            right = mid - 1;
+        } else if (r &gt; lbus.get(mid).y) {
+            left = mid + 1;
+        }
+    }
+    return left;
+}
+</code></pre>
+
+<p>}</p>
+
+<p>class Bus {</p>
+
+<pre><code>int x;
+int y;
+
+Bus(int x, int y) {
+    this.x = x;
+    this.y = y;
+} }
+</code></pre>
+
+<p>```</p>
+
+<p><a href="https://code.google.com/codejam/contest/6214486/dashboard#s=p2">Problem C. Sort a scrambled itinerary</a></p>
+
+<p>问题C是说给你一些航班的信息，包括起点城市和终点城市，但是顺序乱了，让你来确定这些航班整合起来最后是从哪里到哪里之后又到了哪里。</p>
+
+<p>思路：这题很简单，起点是入度为0的点，终点是出度为0的点，一个while循环就能搞定，就这样简单的思路这道题目就可以过。</p>
+
+<p>```
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.util.*;</p>
+
+<p>//https://code.google.com/codejam/contest/6214486/dashboard#s=p2</p>
+
+<p>public class ProblemC {</p>
+
+<pre><code>private static Map&lt;String, String&gt; flights;
+private static Map&lt;String, City&gt; citymap;
+
+public static void main(String[] args) throws Exception {
+    PrintStream out = new PrintStream(new BufferedOutputStream(new FileOutputStream("data/out.txt")));
+    System.setOut(out);
+    System.setErr(out);
+    Scanner scanner = new Scanner(new FileInputStream("data/in.txt"));
+
+    int t = scanner.nextInt();
+    int c = 1;
+    while (t-- &gt; 0) {
+        System.out.print("Case #" + c + ": ");
+        flights = new HashMap&lt;String, String&gt;();
+        citymap = new HashMap&lt;String, City&gt;();
+        int p = scanner.nextInt();
+        String from, to;
+        City cf, ct;
+        for (int i = 0; i &lt; p; i++) {
+            from = scanner.next();
+            to = scanner.next();
+
+            if (citymap.containsKey(from)) {
+                cf = citymap.get(from);
+            } else {
+                cf = new City();
+                citymap.put(from, cf);
+            }
+            cf.name = from;
+            cf.out = 1;
+
+            if (citymap.containsKey(to)) {
+                ct = citymap.get(to);
+            } else {
+                ct = new City();
+                citymap.put(to, ct);
+            }
+            ct.name = to;
+            ct.in = 1;
+
+            flights.put(from, to);
+        }
+        solve();
+        c++;
+        System.out.println();
+    }
+
+    out.flush();
+    out.close();
+}
+
+private static void solve() {
+    String from = null;
+    Set&lt;Map.Entry&lt;String, City&gt;&gt; entries = citymap.entrySet();
+    for (Map.Entry&lt;String, City&gt; entry : entries) {
+        //System.out.println("name=" + entry.getValue().name + " in=" + entry.getValue().in + " out=" + entry.getValue().out);
+        if (entry.getValue().in == 0) {
+            from = entry.getKey();
+            break;
+        }
+    }
+
+    String next;
+    String current = from;
+    while (current != null &amp;&amp; flights.containsKey(current)) {
+        next = flights.get(current);
+        System.out.print(citymap.get(current).name + "-" + citymap.get(next).name + " ");
+        current = next;
+    }
+}
+</code></pre>
+
+<p>}</p>
+
+<p>class City {</p>
+
+<pre><code>String name;
+int in = 0;
+int out = 0;
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<p>问题D暂时没看，有空了再倒腾一下！ :-)</p>
+
+]]></content>
+  </entry>
+  
+</feed>

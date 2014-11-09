@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-10-25T11:13:43+08:00</updated>
+  <updated>2014-11-09T19:39:37+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,794 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Google APAC 2015 University Graduates Test Round D]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/11/09/google-apac-2015-university-graduates-test-round-d/"/>
+    <updated>2014-11-09T19:09:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/11/09/google-apac-2015-university-graduates-test-round-d</id>
+    <content type="html"><![CDATA[<p>前段时间才知道的Google APAC比赛，于是乎注册了今天下午的比赛，Round D，总共四道题，只过了两道，完了之后现在过了三道。这三道都不难只是觉得很奇怪，不熟悉这种比赛模式，它是让你下载输入文件，然后你在给定时间内提交输出文件和源程序即可，对于每道题目都有一个小测试集和大测试集。我以为一般大测试集肯定不好过的，但是纳闷的是其实也很好过，所以本来第二题暴力很简单就能过，我以为要优化，写了半天还是错了，于是在比赛前暴力了一下，结果竟然过了，哎，请理解俺这个菜鸟。</p>
+
+<p>废话不多说了，下面是前三题的解题报告 </p>
+
+<p>[我的代码总是冗长冗长的，可读性高，但是花的时间总是比别人长，所以我真心不适合比赛，汗⊙﹏⊙]</p>
+
+<p><a href="https://code.google.com/codejam/contest/6214486/dashboard#s=p0">Problem A. Cube IV</a></p>
+
+<p>问题A是说在S*S个方格中，每个方格代表一个房间，房间有一个房间编号，从1到S的平方，每个里面有一个人，这个人可以从一个房间A移动到另一个房间B，但是必须满足房间B的编号比房间A的编号大1才行，问哪个房间的人能够移动的距离最远，最远的距离又是多少？如果两个人能够移动的距离相同，输出房间号小的那个人。</p>
+
+<p>思路：自始至终维护结果r和d，从房间号最大的那个房间开始DFS，遇到房间号小1的房间就进入，一直下去直到不能移动了，修改r和d的值，然后从比上次停下来的房间小1的房间开始继续DFS，如果他移动的距离更多的话，那么就修改d和r即可，一直下去就能得到最终解。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span>
+<span class="line-number">81</span>
+<span class="line-number">82</span>
+<span class="line-number">83</span>
+<span class="line-number">84</span>
+<span class="line-number">85</span>
+<span class="line-number">86</span>
+<span class="line-number">87</span>
+<span class="line-number">88</span>
+<span class="line-number">89</span>
+<span class="line-number">90</span>
+<span class="line-number">91</span>
+<span class="line-number">92</span>
+<span class="line-number">93</span>
+<span class="line-number">94</span>
+<span class="line-number">95</span>
+<span class="line-number">96</span>
+<span class="line-number">97</span>
+<span class="line-number">98</span>
+<span class="line-number">99</span>
+<span class="line-number">100</span>
+<span class="line-number">101</span>
+<span class="line-number">102</span>
+<span class="line-number">103</span>
+<span class="line-number">104</span>
+<span class="line-number">105</span>
+<span class="line-number">106</span>
+<span class="line-number">107</span>
+<span class="line-number">108</span>
+<span class="line-number">109</span>
+<span class="line-number">110</span>
+<span class="line-number">111</span>
+<span class="line-number">112</span>
+<span class="line-number">113</span>
+<span class="line-number">114</span>
+<span class="line-number">115</span>
+<span class="line-number">116</span>
+<span class="line-number">117</span>
+<span class="line-number">118</span>
+<span class="line-number">119</span>
+<span class="line-number">120</span>
+<span class="line-number">121</span>
+<span class="line-number">122</span>
+<span class="line-number">123</span>
+<span class="line-number">124</span>
+<span class="line-number">125</span>
+<span class="line-number">126</span>
+<span class="line-number">127</span>
+<span class="line-number">128</span>
+<span class="line-number">129</span>
+<span class="line-number">130</span>
+<span class="line-number">131</span>
+<span class="line-number">132</span>
+<span class="line-number">133</span>
+<span class="line-number">134</span>
+<span class="line-number">135</span>
+<span class="line-number">136</span>
+<span class="line-number">137</span>
+<span class="line-number">138</span>
+<span class="line-number">139</span>
+<span class="line-number">140</span>
+<span class="line-number">141</span>
+<span class="line-number">142</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">import java.io.BufferedOutputStream;
+</span><span class="line">import java.io.FileInputStream;
+</span><span class="line">import java.io.FileOutputStream;
+</span><span class="line">import java.io.PrintStream;
+</span><span class="line">import java.util.Scanner;
+</span><span class="line">
+</span><span class="line">//https://code.google.com/codejam/contest/6214486/dashboard#s=p0
+</span><span class="line">
+</span><span class="line">public class ProblemA {
+</span><span class="line">
+</span><span class="line">    private static int s;
+</span><span class="line">    private static int[][] p;
+</span><span class="line">
+</span><span class="line">    public static void main(String[] args) throws Exception {
+</span><span class="line">        PrintStream out = new PrintStream(new BufferedOutputStream(new FileOutputStream("data/out.txt")));
+</span><span class="line">        System.setOut(out);
+</span><span class="line">        System.setErr(out);
+</span><span class="line">        Scanner scanner = new Scanner(new FileInputStream("data/in.txt"));
+</span><span class="line">        int t = scanner.nextInt();
+</span><span class="line">        int c = 1;
+</span><span class="line">        while (t-- &gt; 0) {
+</span><span class="line">            s = scanner.nextInt();
+</span><span class="line">            p = new int[s][s];
+</span><span class="line">            for (int i = 0; i &lt; s; i++) {
+</span><span class="line">                for (int j = 0; j &lt; s; j++) {
+</span><span class="line">                    p[i][j] = scanner.nextInt();
+</span><span class="line">                }
+</span><span class="line">            }
+</span><span class="line">            System.out.print("Case #" + c + ": ");
+</span><span class="line">            solve();
+</span><span class="line">            c++;
+</span><span class="line">        }
+</span><span class="line">        out.flush();
+</span><span class="line">        out.close();
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">    private static void solve() {
+</span><span class="line">        int r = 0, d = 1, max = s * s;
+</span><span class="line">        while (max &gt; 0 &amp;&amp; max &gt;= d) {
+</span><span class="line">            Point maxp = findPoint(max);
+</span><span class="line">            Result result = new Result(1, 1);
+</span><span class="line">            dfs(maxp, result);
+</span><span class="line">            if (result.d &gt;= d) {
+</span><span class="line">                r = result.r;
+</span><span class="line">                d = result.d;
+</span><span class="line">            }
+</span><span class="line">            max = max - result.d;//
+</span><span class="line">        }
+</span><span class="line">        System.out.println(r + " " + d);
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">    private static void dfs(Point current, Result result) {
+</span><span class="line">        //left
+</span><span class="line">        Point left = current.left();
+</span><span class="line">        if (left != null &amp;&amp; p[left.x][left.y] == p[current.x][current.y] - 1) {
+</span><span class="line">            result.r = p[left.x][left.y];
+</span><span class="line">            result.d++;
+</span><span class="line">            dfs(left, result);
+</span><span class="line">            return;
+</span><span class="line">        }
+</span><span class="line">        //right
+</span><span class="line">        Point right = current.right();
+</span><span class="line">        if (right != null &amp;&amp; p[right.x][right.y] == p[current.x][current.y] - 1) {
+</span><span class="line">            result.r = p[right.x][right.y];
+</span><span class="line">            result.d++;
+</span><span class="line">            dfs(right, result);
+</span><span class="line">            return;
+</span><span class="line">        }
+</span><span class="line">        //up
+</span><span class="line">        Point up = current.up();
+</span><span class="line">        if (up != null &amp;&amp; p[up.x][up.y] == p[current.x][current.y] - 1) {
+</span><span class="line">            result.r = p[up.x][up.y];
+</span><span class="line">            result.d++;
+</span><span class="line">            dfs(up, result);
+</span><span class="line">            return;
+</span><span class="line">        }
+</span><span class="line">        //down
+</span><span class="line">        Point down = current.down();
+</span><span class="line">        if (down != null &amp;&amp; p[down.x][down.y] == p[current.x][current.y] - 1) {
+</span><span class="line">            result.r = p[down.x][down.y];
+</span><span class="line">            result.d++;
+</span><span class="line">            dfs(down, result);
+</span><span class="line">            return;
+</span><span class="line">        }
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">    private static Point findPoint(int max) {
+</span><span class="line">        for (int i = 0; i &lt; s; i++) {
+</span><span class="line">            for (int j = 0; j &lt; s; j++) {
+</span><span class="line">                if (p[i][j] == max) {
+</span><span class="line">                    return new Point(s, i, j);
+</span><span class="line">                }
+</span><span class="line">            }
+</span><span class="line">        }
+</span><span class="line">        return null;
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">class Point {
+</span><span class="line">
+</span><span class="line">    int s;
+</span><span class="line">    int x;
+</span><span class="line">    int y;
+</span><span class="line">
+</span><span class="line">    Point(int s, int x, int y) {
+</span><span class="line">        this.s = s;
+</span><span class="line">        this.x = x;
+</span><span class="line">        this.y = y;
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">    Point up() {
+</span><span class="line">        if (x - 1 &gt;= 0) return new Point(this.s, this.x - 1, this.y);
+</span><span class="line">        return null;
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">    Point down() {
+</span><span class="line">        if (x + 1 &lt; s) return new Point(this.s, this.x + 1, this.y);
+</span><span class="line">        return null;
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">    Point left() {
+</span><span class="line">        if (y - 1 &gt;= 0) return new Point(this.s, this.x, this.y - 1);
+</span><span class="line">        return null;
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">    Point right() {
+</span><span class="line">        if (y + 1 &lt; s) return new Point(this.s, this.x, this.y + 1);
+</span><span class="line">        return null;
+</span><span class="line">    }
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">class Result {
+</span><span class="line">
+</span><span class="line">    int r;
+</span><span class="line">    int d;
+</span><span class="line">
+</span><span class="line">    Result(int r, int d) {
+</span><span class="line">        this.r = r;
+</span><span class="line">        this.d = d;
+</span><span class="line">    }
+</span><span class="line">}
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><a href="https://code.google.com/codejam/contest/6214486/dashboard#s=p1">Problem B. GBus count</a></p>
+
+<p>问题B是说在一些城市之间有一些公交车，给你这些车的起点和终点的数据，假设某辆公交车是从1到10，那么城市1、城市2、城市3等一直到城市10都被经过了，现在要求的是有多少辆车经过了某个城市？</p>
+
+<p>思路：这简直不能叫做思路！纯暴力就行了！遍历所有公交车的线路，统计判断该城市是否在这个线路上即可。这样就已经可以过了！比赛时我想了写优化，大致思路是假设城市编号为c，公交车的线路为$a<em>{i}$ 和 $b</em>{i}$，首先对所有公交线路按照 $a<em>{i}$ 排序，保留那些 $a</em>{i}&lt;=c$ 的线路，然后对这些线路按照 $b<em>{i}$ 排序，保留那些 ${b</em>{i}&gt;=c} 的线路，最后保留下来的线路的个数就是最终的解。[但是我的代码有问题，即下面的<code>solve</code>方法，提交了几次都报错]</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span>
+<span class="line-number">81</span>
+<span class="line-number">82</span>
+<span class="line-number">83</span>
+<span class="line-number">84</span>
+<span class="line-number">85</span>
+<span class="line-number">86</span>
+<span class="line-number">87</span>
+<span class="line-number">88</span>
+<span class="line-number">89</span>
+<span class="line-number">90</span>
+<span class="line-number">91</span>
+<span class="line-number">92</span>
+<span class="line-number">93</span>
+<span class="line-number">94</span>
+<span class="line-number">95</span>
+<span class="line-number">96</span>
+<span class="line-number">97</span>
+<span class="line-number">98</span>
+<span class="line-number">99</span>
+<span class="line-number">100</span>
+<span class="line-number">101</span>
+<span class="line-number">102</span>
+<span class="line-number">103</span>
+<span class="line-number">104</span>
+<span class="line-number">105</span>
+<span class="line-number">106</span>
+<span class="line-number">107</span>
+<span class="line-number">108</span>
+<span class="line-number">109</span>
+<span class="line-number">110</span>
+<span class="line-number">111</span>
+<span class="line-number">112</span>
+<span class="line-number">113</span>
+<span class="line-number">114</span>
+<span class="line-number">115</span>
+<span class="line-number">116</span>
+<span class="line-number">117</span>
+<span class="line-number">118</span>
+<span class="line-number">119</span>
+<span class="line-number">120</span>
+<span class="line-number">121</span>
+<span class="line-number">122</span>
+<span class="line-number">123</span>
+<span class="line-number">124</span>
+<span class="line-number">125</span>
+<span class="line-number">126</span>
+<span class="line-number">127</span>
+<span class="line-number">128</span>
+<span class="line-number">129</span>
+<span class="line-number">130</span>
+<span class="line-number">131</span>
+<span class="line-number">132</span>
+<span class="line-number">133</span>
+<span class="line-number">134</span>
+<span class="line-number">135</span>
+<span class="line-number">136</span>
+<span class="line-number">137</span>
+<span class="line-number">138</span>
+<span class="line-number">139</span>
+<span class="line-number">140</span>
+<span class="line-number">141</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">import java.io.BufferedOutputStream;
+</span><span class="line">import java.io.FileInputStream;
+</span><span class="line">import java.io.FileOutputStream;
+</span><span class="line">import java.io.PrintStream;
+</span><span class="line">import java.util.*;
+</span><span class="line">
+</span><span class="line">//https://code.google.com/codejam/contest/6214486/dashboard#s=p1
+</span><span class="line">
+</span><span class="line">public class ProblemB {
+</span><span class="line">
+</span><span class="line">    private static int n, p;
+</span><span class="line">    private static ArrayList&lt;Bus&gt; buses;
+</span><span class="line">    private static ArrayList&lt;Integer&gt; cities;
+</span><span class="line">
+</span><span class="line">    public static void main(String[] args) throws Exception {
+</span><span class="line">        PrintStream out = new PrintStream(new BufferedOutputStream(new FileOutputStream("data/out.txt")));
+</span><span class="line">        System.setOut(out);
+</span><span class="line">        System.setErr(out);
+</span><span class="line">        Scanner scanner = new Scanner(new FileInputStream("data/in.txt"));
+</span><span class="line">
+</span><span class="line">        int t = scanner.nextInt();
+</span><span class="line">        int c = 1;
+</span><span class="line">        while (t-- &gt; 0) {
+</span><span class="line">            buses = new ArrayList&lt;Bus&gt;();
+</span><span class="line">            cities = new ArrayList&lt;Integer&gt;();
+</span><span class="line">            n = scanner.nextInt();
+</span><span class="line">            for (int i = 0; i &lt; n; i++) {
+</span><span class="line">                buses.add(new Bus(scanner.nextInt(), scanner.nextInt()));
+</span><span class="line">            }
+</span><span class="line">            p = scanner.nextInt();
+</span><span class="line">            for (int i = 0; i &lt; p; i++) {
+</span><span class="line">                cities.add(scanner.nextInt());
+</span><span class="line">            }
+</span><span class="line">            System.out.print("Case #" + c + ": ");
+</span><span class="line">            solve2();
+</span><span class="line">            System.out.println();
+</span><span class="line">            c++;
+</span><span class="line">        }
+</span><span class="line">
+</span><span class="line">        out.flush();
+</span><span class="line">        out.close();
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">    //暴力解决
+</span><span class="line">    private static void solve2() {
+</span><span class="line">        int key, sum;
+</span><span class="line">        for (int i = 0; i &lt; p; i++) {
+</span><span class="line">            key = cities.get(i);
+</span><span class="line">            sum = 0;
+</span><span class="line">            for (Bus bus : buses) {
+</span><span class="line">                if (key &gt;= bus.x &amp;&amp; key &lt;= bus.y) {
+</span><span class="line">                    sum++;
+</span><span class="line">                }
+</span><span class="line">            }
+</span><span class="line">            System.out.print(sum + " ");
+</span><span class="line">        }
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">    //非暴力解决，但是仍然存在问题
+</span><span class="line">    private static void solve() {
+</span><span class="line">        Comparator&lt;Bus&gt; cf = new Comparator&lt;Bus&gt;() {
+</span><span class="line">            @Override
+</span><span class="line">            public int compare(Bus o1, Bus o2) {
+</span><span class="line">                if (o1.x &gt; o2.x) {
+</span><span class="line">                    return 1;
+</span><span class="line">                } else if (o1.x &lt; o2.x) {
+</span><span class="line">                    return -1;
+</span><span class="line">                }
+</span><span class="line">                return 0;
+</span><span class="line">            }
+</span><span class="line">        };
+</span><span class="line">        Comparator&lt;Bus&gt; ct = new Comparator&lt;Bus&gt;() {
+</span><span class="line">            @Override
+</span><span class="line">            public int compare(Bus o1, Bus o2) {
+</span><span class="line">                if (o1.y &gt; o2.y) {
+</span><span class="line">                    return 1;
+</span><span class="line">                } else if (o1.y &lt; o2.y) {
+</span><span class="line">                    return -1;
+</span><span class="line">                }
+</span><span class="line">                return 0;
+</span><span class="line">            }
+</span><span class="line">        };
+</span><span class="line">
+</span><span class="line">        Collections.sort(buses, cf);
+</span><span class="line">
+</span><span class="line">        int left, right, key;
+</span><span class="line">        for (int i = 0; i &lt; p; i++) {
+</span><span class="line">            key = cities.get(i);
+</span><span class="line">            left = bs_f(buses, key);//从left开始都是大于key的数字
+</span><span class="line">            List&lt;Bus&gt; flist = buses.subList(0, left);//left=0, size=0
+</span><span class="line">            if (flist.size() &gt; 0) {
+</span><span class="line">                Collections.sort(flist, ct);
+</span><span class="line">                right = bs_t(flist, key);//从right开始都是大于等于key的数字
+</span><span class="line">                List&lt;Bus&gt; tlist = flist.subList(right, flist.size());
+</span><span class="line">                System.out.print(tlist.size() + " ");
+</span><span class="line">            } else {
+</span><span class="line">                System.out.print("0 ");
+</span><span class="line">            }
+</span><span class="line">        }
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">    private static int bs_f(List&lt;Bus&gt; lbus, int r) {
+</span><span class="line">        int len = lbus.size();
+</span><span class="line">        int left = 0, right = len - 1, mid = 0;
+</span><span class="line">        while (left &lt;= right) {
+</span><span class="line">            mid = (left + right) / 2;
+</span><span class="line">            if (r &lt; lbus.get(mid).x) {
+</span><span class="line">                right = mid - 1;
+</span><span class="line">            } else if (r &gt;= lbus.get(mid).x) {
+</span><span class="line">                left = mid + 1;
+</span><span class="line">            }
+</span><span class="line">        }
+</span><span class="line">        return left;
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">    private static int bs_t(List&lt;Bus&gt; lbus, int r) {
+</span><span class="line">        int len = lbus.size();
+</span><span class="line">        int left = 0, right = len - 1, mid = 0;
+</span><span class="line">        while (left &lt;= right) {
+</span><span class="line">            mid = (left + right) / 2;
+</span><span class="line">            if (r &lt;= lbus.get(mid).y) {
+</span><span class="line">                right = mid - 1;
+</span><span class="line">            } else if (r &gt; lbus.get(mid).y) {
+</span><span class="line">                left = mid + 1;
+</span><span class="line">            }
+</span><span class="line">        }
+</span><span class="line">        return left;
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">class Bus {
+</span><span class="line">
+</span><span class="line">    int x;
+</span><span class="line">    int y;
+</span><span class="line">
+</span><span class="line">    Bus(int x, int y) {
+</span><span class="line">        this.x = x;
+</span><span class="line">        this.y = y;
+</span><span class="line">    }
+</span><span class="line">}
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><a href="https://code.google.com/codejam/contest/6214486/dashboard#s=p2">Problem C. Sort a scrambled itinerary</a></p>
+
+<p>问题C是说给你一些航班的信息，包括起点城市和终点城市，但是顺序乱了，让你来确定这些航班整合起来最后是从哪里到哪里之后又到了哪里。</p>
+
+<p>思路：这题很简单，起点是入度为0的点，终点是出度为0的点，一个while循环就能搞定，就这样简单的思路这道题目就可以过。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span>
+<span class="line-number">81</span>
+<span class="line-number">82</span>
+<span class="line-number">83</span>
+<span class="line-number">84</span>
+<span class="line-number">85</span>
+<span class="line-number">86</span>
+<span class="line-number">87</span>
+<span class="line-number">88</span>
+<span class="line-number">89</span>
+<span class="line-number">90</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">import java.io.BufferedOutputStream;
+</span><span class="line">import java.io.FileInputStream;
+</span><span class="line">import java.io.FileOutputStream;
+</span><span class="line">import java.io.PrintStream;
+</span><span class="line">import java.util.*;
+</span><span class="line">
+</span><span class="line">//https://code.google.com/codejam/contest/6214486/dashboard#s=p2
+</span><span class="line">
+</span><span class="line">public class ProblemC {
+</span><span class="line">
+</span><span class="line">    private static Map&lt;String, String&gt; flights;
+</span><span class="line">    private static Map&lt;String, City&gt; citymap;
+</span><span class="line">
+</span><span class="line">    public static void main(String[] args) throws Exception {
+</span><span class="line">        PrintStream out = new PrintStream(new BufferedOutputStream(new FileOutputStream("data/out.txt")));
+</span><span class="line">        System.setOut(out);
+</span><span class="line">        System.setErr(out);
+</span><span class="line">        Scanner scanner = new Scanner(new FileInputStream("data/in.txt"));
+</span><span class="line">
+</span><span class="line">        int t = scanner.nextInt();
+</span><span class="line">        int c = 1;
+</span><span class="line">        while (t-- &gt; 0) {
+</span><span class="line">            System.out.print("Case #" + c + ": ");
+</span><span class="line">            flights = new HashMap&lt;String, String&gt;();
+</span><span class="line">            citymap = new HashMap&lt;String, City&gt;();
+</span><span class="line">            int p = scanner.nextInt();
+</span><span class="line">            String from, to;
+</span><span class="line">            City cf, ct;
+</span><span class="line">            for (int i = 0; i &lt; p; i++) {
+</span><span class="line">                from = scanner.next();
+</span><span class="line">                to = scanner.next();
+</span><span class="line">
+</span><span class="line">                if (citymap.containsKey(from)) {
+</span><span class="line">                    cf = citymap.get(from);
+</span><span class="line">                } else {
+</span><span class="line">                    cf = new City();
+</span><span class="line">                    citymap.put(from, cf);
+</span><span class="line">                }
+</span><span class="line">                cf.name = from;
+</span><span class="line">                cf.out = 1;
+</span><span class="line">
+</span><span class="line">                if (citymap.containsKey(to)) {
+</span><span class="line">                    ct = citymap.get(to);
+</span><span class="line">                } else {
+</span><span class="line">                    ct = new City();
+</span><span class="line">                    citymap.put(to, ct);
+</span><span class="line">                }
+</span><span class="line">                ct.name = to;
+</span><span class="line">                ct.in = 1;
+</span><span class="line">
+</span><span class="line">                flights.put(from, to);
+</span><span class="line">            }
+</span><span class="line">            solve();
+</span><span class="line">            c++;
+</span><span class="line">            System.out.println();
+</span><span class="line">        }
+</span><span class="line">
+</span><span class="line">        out.flush();
+</span><span class="line">        out.close();
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">    private static void solve() {
+</span><span class="line">        String from = null;
+</span><span class="line">        Set&lt;Map.Entry&lt;String, City&gt;&gt; entries = citymap.entrySet();
+</span><span class="line">        for (Map.Entry&lt;String, City&gt; entry : entries) {
+</span><span class="line">            //System.out.println("name=" + entry.getValue().name + " in=" + entry.getValue().in + " out=" + entry.getValue().out);
+</span><span class="line">            if (entry.getValue().in == 0) {
+</span><span class="line">                from = entry.getKey();
+</span><span class="line">                break;
+</span><span class="line">            }
+</span><span class="line">        }
+</span><span class="line">
+</span><span class="line">        String next;
+</span><span class="line">        String current = from;
+</span><span class="line">        while (current != null &amp;&amp; flights.containsKey(current)) {
+</span><span class="line">            next = flights.get(current);
+</span><span class="line">            System.out.print(citymap.get(current).name + "-" + citymap.get(next).name + " ");
+</span><span class="line">            current = next;
+</span><span class="line">        }
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">class City {
+</span><span class="line">
+</span><span class="line">    String name;
+</span><span class="line">    int in = 0;
+</span><span class="line">    int out = 0;
+</span><span class="line">
+</span><span class="line">}
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>问题D暂时没看，有空了再倒腾一下！ :-)</p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/11/09/google-apac-2015-university-graduates-test-round-d/">http://hujiaweibujidao.github.io/blog/2014/11/09/google-apac-2015-university-graduates-test-round-d/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Talk big of West Travelling]]></title>
@@ -6558,233 +7346,6 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/06/09/Dog-Face-Recognition/">http://hujiaweibujidao.github.io/blog/2014/06/09/Dog-Face-Recognition/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Problem: Delete Number Problem]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/05/20/delete-number-problem/"/>
-    <updated>2014-05-20T23:00:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/05/20/delete-number-problem</id>
-    <content type="html"><![CDATA[<h4 id="centerproblem-delete-number-problemcenter"><center>Problem: Delete Number Problem</center></h4>
-
-<h4 id="section">1.问题描述</h4>
-<p>现有一个n位数，你需要删除其中的k位，请问如何删除才能使得剩下的数最大？</p>
-
-<p>比如当数为2319274 k=1时，删去2变成319274后是可能的最大值。</p>
-
-<h4 id="section-1">2.问题分析</h4>
-
-<h5 id="section-2">[1]贪心解法</h5>
-
-<p>这题可以使用贪心策略，每次从高位向低位数，删除高位比低位数字小的那位上的数字，直到删除了k位之后，得到的数字肯定是最大值。</p>
-
-<p>(1)删数问题具有最优子结构：</p>
-
-<p>假设
-<script type="math/tex">a=x_{1}10^{n-1}+x_{2}10^{n-2}+ ··· +x_{p}10^{n-p}+x_{q}10^{n-q}+x_{r}10^{n-r} ··· +x_{n}</script>
-有<script type="math/tex">% &lt;![CDATA[
-x_{q}<x_{r} %]]&gt;</script>，即要删除<script type="math/tex">x_{q}</script>则有：
-<script type="math/tex">a_{1}=x_{1}10^{n-2}+x_{2}10^{n-3}+ ··· +x_{p}10^{n-p-1}+x_{r}10^{n-r} ··· +x_{n}</script>
-假设删去的不是<script type="math/tex">x_{q}</script>，而是其它位，则有：
-<script type="math/tex">a_{2}=x_{1}10^{n-2}+x_{2}10^{n-3}+ ··· +x_{p}10^{n-p-1}+x_{q}10^{n-q} ··· +x_{n}</script>
-由于<script type="math/tex">x_{1}>x_{2}>···>x_{p}>x_{q}</script>且<script type="math/tex">% &lt;![CDATA[
-x_{q}<x_{r} %]]&gt;</script>，则有<script type="math/tex">a_{1}>a_{2}</script>。
-因此，删数问题满足最优子结构性质。</p>
-
-<p>(2)删数问题具有贪心选择性质：</p>
-
-<p>设问题T已按照上面的方法删除，假设
-<script type="math/tex">A=(y_{1},y_{2}, ···,y_{k})</script>
-是删数问题的一个最优解。易知，若问题有解，则$1≤ k ≤ n$。
-(1)当k=1时，由前得证，<script type="math/tex">A=(y_{1},A’)</script>是问题的最优解，其中$A’$是$A$中不删除了<script type="math/tex">y_{1}</script>而删除其他位的最优解；
-(2)当k=q时，由反证法，可得<script type="math/tex">A=(y_{1},y_{2} ··· ,y_{q})</script>是最优解；
-当k=q+1时，由前得证，<script type="math/tex">A=(y_{1},y_{2} ··· ,y_{q}+ y_{q}+1)</script>是最优解。
-所以，删数问题具有贪心选择性质。</p>
-
-<p>代码很容易实现，AC，1.484s，1.089MB</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-</pre></td><td class="code"><pre><code class="cpp"><span class="line"><span class="cp">#include &lt;string&gt;</span>
-</span><span class="line"><span class="cp">#include &lt;iostream&gt;</span>
-</span><span class="line"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-</span><span class="line"><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">len</span><span class="p">;</span>
-</span><span class="line"><span class="n">string</span> <span class="n">name</span><span class="p">;</span>
-</span><span class="line"><span class="kt">void</span> <span class="n">deletek</span><span class="p">(){</span>
-</span><span class="line">    <span class="kt">int</span> <span class="n">tlen</span><span class="o">=</span><span class="n">name</span><span class="p">.</span><span class="n">length</span><span class="p">();</span>
-</span><span class="line">    <span class="kt">int</span> <span class="n">tk</span><span class="o">=</span><span class="n">k</span><span class="p">;</span>
-</span><span class="line">    <span class="kt">bool</span> <span class="n">flag</span><span class="o">=</span><span class="kc">true</span><span class="p">;</span>
-</span><span class="line">    <span class="k">while</span> <span class="p">(</span><span class="n">k</span><span class="o">--&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">flag</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">        <span class="n">flag</span><span class="o">=</span><span class="kc">false</span><span class="p">;</span>
-</span><span class="line">        <span class="n">len</span> <span class="o">=</span> <span class="n">name</span><span class="p">.</span><span class="n">length</span><span class="p">();</span>
-</span><span class="line">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">            <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">&lt;</span><span class="n">len</span> <span class="o">&amp;&amp;</span> <span class="n">name</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="n">name</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
-</span><span class="line">                <span class="n">name</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
-</span><span class="line">                <span class="n">len</span><span class="o">--</span><span class="p">;</span>
-</span><span class="line">                <span class="n">flag</span><span class="o">=</span><span class="kc">true</span><span class="p">;</span>
-</span><span class="line">                <span class="k">break</span><span class="p">;</span>
-</span><span class="line">            <span class="p">}</span>
-</span><span class="line">        <span class="p">}</span>
-</span><span class="line">    <span class="p">}</span>
-</span><span class="line">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">name</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">tlen</span><span class="o">-</span><span class="n">tk</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span><span class="line"><span class="p">}</span>
-</span><span class="line"><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
-</span><span class="line"><span class="p">{</span>
-</span><span class="line">    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">t</span><span class="p">;</span>
-</span><span class="line">    <span class="k">while</span> <span class="p">(</span><span class="n">t</span><span class="o">--&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">name</span><span class="p">;</span>
-</span><span class="line">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">k</span><span class="p">;</span>
-</span><span class="line">        <span class="n">deletek</span><span class="p">();</span>
-</span><span class="line">    <span class="p">}</span>
-</span><span class="line">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class="line"><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>[2]动态规划解法</p>
-
-<p>根据上面的分析可以看出此题还可用动态规划来解决，思路如下：</p>
-
-<p>假设$A(i,j)$表示输入数字(字符串)的从第i位到第j位数字组成的字符串，$S(i,j)$表示前i位中删除j位得到的最优解，它实际上可以看做两个子问题：如果删除第j位，那么$S(i,j)$等于前i-1位删除j-1位的最优解加上第j位数字；如果不删除第j位，那么$S(i,j)$等于前i-1位删除j位的最优解。于是便有下面的递推式：</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-
-S(i,j)= \left\{ 
-  \begin{array}{l l}
-    A(0,i) & \quad \text{此时j=0}\\
-    min({S(i-1,j-1),S(i-1,j)+A(j,j)}) & \quad \text{此时0<j<i}
-  \end{array} \right.
- %]]&gt;</script>
-
-<p>这个递推式非常类似最长公共子序列问题的递推式，所以解法也类似，在空间方面可以只使用一个一维数组，加上一个额外的O(1)的空间，计算过程如下面制作的表格所示，除了第一列，其他中间元素都只依赖于上面一行对应位置$S(i-1,j)$和上面一行左边位置$S(i-1,j-1)$两个元素的大小，比较的是字符串，使用字典序进行比较，C++内置的字符串比较函数<code>compare</code>即可。</p>
-
-<p><img src="https://hujiaweibujidao.github.io/images/algos/algosexp2.png" alt="image" /></p>
-
-<p>动态规划实现代码 [这份代码没有AC，只能得到60分就超时了，应该还可以改进]</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-</pre></td><td class="code"><pre><code class="cpp"><span class="line"><span class="cp">#include &lt;string&gt;</span>
-</span><span class="line"><span class="cp">#include &lt;iostream&gt;</span>
-</span><span class="line"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-</span><span class="line"><span class="cp">#define MAX_K 1001</span>
-</span><span class="line"><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">k</span><span class="p">;</span>
-</span><span class="line"><span class="n">string</span> <span class="n">name</span><span class="p">;</span><span class="n">string</span> <span class="n">up</span><span class="p">;</span><span class="n">string</span> <span class="n">last</span><span class="p">;</span><span class="n">string</span> <span class="n">temp</span><span class="p">;</span>
-</span><span class="line"><span class="kt">void</span> <span class="n">deletek</span><span class="p">(){</span>
-</span><span class="line">    <span class="kt">int</span> <span class="n">len</span><span class="o">=</span><span class="n">name</span><span class="p">.</span><span class="n">length</span><span class="p">();</span>
-</span><span class="line">    <span class="k">if</span><span class="p">(</span><span class="n">k</span><span class="o">&gt;=</span><span class="n">len</span><span class="p">){</span>
-</span><span class="line">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span><span class="line">        <span class="k">return</span><span class="p">;</span>
-</span><span class="line">    <span class="p">}</span>
-</span><span class="line">    <span class="n">string</span> <span class="n">cur</span><span class="p">[</span><span class="n">MAX_K</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;&quot;</span><span class="p">};</span>
-</span><span class="line">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span><span class="c1">//</span>
-</span><span class="line">            <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="c1">//sub string</span>
-</span><span class="line">                <span class="n">last</span><span class="o">=</span><span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-</span><span class="line">                <span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">name</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
-</span><span class="line">            <span class="p">}</span><span class="k">else</span><span class="p">{</span><span class="c1">//0 &lt; j &lt;= i</span>
-</span><span class="line">                <span class="n">up</span><span class="o">=</span><span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">name</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span><span class="c1">//</span>
-</span><span class="line">                <span class="k">if</span> <span class="p">(</span><span class="n">up</span><span class="p">.</span><span class="n">compare</span><span class="p">(</span><span class="n">last</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="c1">//up &gt; left</span>
-</span><span class="line">                    <span class="n">last</span><span class="o">=</span><span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-</span><span class="line">                    <span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">up</span><span class="p">;</span>
-</span><span class="line">                <span class="p">}</span><span class="k">else</span><span class="p">{</span><span class="c1">//up &lt; left</span>
-</span><span class="line">                    <span class="n">temp</span><span class="o">=</span><span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-</span><span class="line">                    <span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">last</span><span class="p">;</span>
-</span><span class="line">                    <span class="n">last</span><span class="o">=</span><span class="n">temp</span><span class="p">;</span>
-</span><span class="line">                <span class="p">}</span>
-</span><span class="line">            <span class="p">}</span>
-</span><span class="line">        <span class="p">}</span>
-</span><span class="line">    <span class="p">}</span>
-</span><span class="line">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">cur</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span><span class="line"><span class="p">}</span>
-</span><span class="line"><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
-</span><span class="line"><span class="p">{</span>
-</span><span class="line">    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">t</span><span class="p">;</span>
-</span><span class="line">    <span class="k">while</span> <span class="p">(</span><span class="n">t</span><span class="o">--&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">name</span><span class="p">;</span>
-</span><span class="line">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">k</span><span class="p">;</span>
-</span><span class="line">        <span class="n">deletek</span><span class="p">();</span>
-</span><span class="line">    <span class="p">}</span>
-</span><span class="line">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class="line"><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>从这道题中可以看出，虽然动态规划每次做出当前情况下最好的决策，但是为了做出最好的决策花费了大量的时间和空间，对于删数问题贪心算法应该是较好的解决方案。</p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/05/20/delete-number-problem/">http://hujiaweibujidao.github.io/blog/2014/05/20/delete-number-problem/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   
