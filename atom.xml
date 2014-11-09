@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-11-09T19:39:37+08:00</updated>
+  <updated>2014-11-09T19:49:27+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -30,7 +30,7 @@
 
 <p>思路：自始至终维护结果r和d，从房间号最大的那个房间开始DFS，遇到房间号小1的房间就进入，一直下去直到不能移动了，修改r和d的值，然后从比上次停下来的房间小1的房间开始继续DFS，如果他移动的距离更多的话，那么就修改d和r即可，一直下去就能得到最终解。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -172,157 +172,157 @@
 <span class="line-number">140</span>
 <span class="line-number">141</span>
 <span class="line-number">142</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">import java.io.BufferedOutputStream;
-</span><span class="line">import java.io.FileInputStream;
-</span><span class="line">import java.io.FileOutputStream;
-</span><span class="line">import java.io.PrintStream;
-</span><span class="line">import java.util.Scanner;
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kn">import</span> <span class="nn">java.io.BufferedOutputStream</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.io.FileInputStream</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.io.FileOutputStream</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.io.PrintStream</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 </span><span class="line">
-</span><span class="line">//https://code.google.com/codejam/contest/6214486/dashboard#s=p0
+</span><span class="line"><span class="c1">//https://code.google.com/codejam/contest/6214486/dashboard#s=p0</span>
 </span><span class="line">
-</span><span class="line">public class ProblemA {
+</span><span class="line"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ProblemA</span> <span class="o">{</span>
 </span><span class="line">
-</span><span class="line">    private static int s;
-</span><span class="line">    private static int[][] p;
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">s</span><span class="o">;</span>
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">p</span><span class="o">;</span>
 </span><span class="line">
-</span><span class="line">    public static void main(String[] args) throws Exception {
-</span><span class="line">        PrintStream out = new PrintStream(new BufferedOutputStream(new FileOutputStream("data/out.txt")));
-</span><span class="line">        System.setOut(out);
-</span><span class="line">        System.setErr(out);
-</span><span class="line">        Scanner scanner = new Scanner(new FileInputStream("data/in.txt"));
-</span><span class="line">        int t = scanner.nextInt();
-</span><span class="line">        int c = 1;
-</span><span class="line">        while (t-- &gt; 0) {
-</span><span class="line">            s = scanner.nextInt();
-</span><span class="line">            p = new int[s][s];
-</span><span class="line">            for (int i = 0; i &lt; s; i++) {
-</span><span class="line">                for (int j = 0; j &lt; s; j++) {
-</span><span class="line">                    p[i][j] = scanner.nextInt();
-</span><span class="line">                }
-</span><span class="line">            }
-</span><span class="line">            System.out.print("Case #" + c + ": ");
-</span><span class="line">            solve();
-</span><span class="line">            c++;
-</span><span class="line">        }
-</span><span class="line">        out.flush();
-</span><span class="line">        out.close();
-</span><span class="line">    }
+</span><span class="line">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">PrintStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrintStream</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">&quot;data/out.txt&quot;</span><span class="o">)));</span>
+</span><span class="line">        <span class="n">System</span><span class="o">.</span><span class="na">setOut</span><span class="o">(</span><span class="n">out</span><span class="o">);</span>
+</span><span class="line">        <span class="n">System</span><span class="o">.</span><span class="na">setErr</span><span class="o">(</span><span class="n">out</span><span class="o">);</span>
+</span><span class="line">        <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">&quot;data/in.txt&quot;</span><span class="o">));</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class="line">        <span class="k">while</span> <span class="o">(</span><span class="n">t</span><span class="o">--</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">s</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">            <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">s</span><span class="o">][</span><span class="n">s</span><span class="o">];</span>
+</span><span class="line">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">s</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">p</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;Case #&quot;</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="s">&quot;: &quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="n">solve</span><span class="o">();</span>
+</span><span class="line">            <span class="n">c</span><span class="o">++;</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">        <span class="n">out</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+</span><span class="line">        <span class="n">out</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">    private static void solve() {
-</span><span class="line">        int r = 0, d = 1, max = s * s;
-</span><span class="line">        while (max &gt; 0 &amp;&amp; max &gt;= d) {
-</span><span class="line">            Point maxp = findPoint(max);
-</span><span class="line">            Result result = new Result(1, 1);
-</span><span class="line">            dfs(maxp, result);
-</span><span class="line">            if (result.d &gt;= d) {
-</span><span class="line">                r = result.r;
-</span><span class="line">                d = result.d;
-</span><span class="line">            }
-</span><span class="line">            max = max - result.d;//
-</span><span class="line">        }
-</span><span class="line">        System.out.println(r + " " + d);
-</span><span class="line">    }
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">solve</span><span class="o">()</span> <span class="o">{</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">s</span><span class="o">;</span>
+</span><span class="line">        <span class="k">while</span> <span class="o">(</span><span class="n">max</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">max</span> <span class="o">&gt;=</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">Point</span> <span class="n">maxp</span> <span class="o">=</span> <span class="n">findPoint</span><span class="o">(</span><span class="n">max</span><span class="o">);</span>
+</span><span class="line">            <span class="n">Result</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Result</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+</span><span class="line">            <span class="n">dfs</span><span class="o">(</span><span class="n">maxp</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">d</span> <span class="o">&gt;=</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">r</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">r</span><span class="o">;</span>
+</span><span class="line">                <span class="n">d</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">d</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="n">max</span> <span class="o">=</span> <span class="n">max</span> <span class="o">-</span> <span class="n">result</span><span class="o">.</span><span class="na">d</span><span class="o">;</span><span class="c1">//</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">r</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">d</span><span class="o">);</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">    private static void dfs(Point current, Result result) {
-</span><span class="line">        //left
-</span><span class="line">        Point left = current.left();
-</span><span class="line">        if (left != null &amp;&amp; p[left.x][left.y] == p[current.x][current.y] - 1) {
-</span><span class="line">            result.r = p[left.x][left.y];
-</span><span class="line">            result.d++;
-</span><span class="line">            dfs(left, result);
-</span><span class="line">            return;
-</span><span class="line">        }
-</span><span class="line">        //right
-</span><span class="line">        Point right = current.right();
-</span><span class="line">        if (right != null &amp;&amp; p[right.x][right.y] == p[current.x][current.y] - 1) {
-</span><span class="line">            result.r = p[right.x][right.y];
-</span><span class="line">            result.d++;
-</span><span class="line">            dfs(right, result);
-</span><span class="line">            return;
-</span><span class="line">        }
-</span><span class="line">        //up
-</span><span class="line">        Point up = current.up();
-</span><span class="line">        if (up != null &amp;&amp; p[up.x][up.y] == p[current.x][current.y] - 1) {
-</span><span class="line">            result.r = p[up.x][up.y];
-</span><span class="line">            result.d++;
-</span><span class="line">            dfs(up, result);
-</span><span class="line">            return;
-</span><span class="line">        }
-</span><span class="line">        //down
-</span><span class="line">        Point down = current.down();
-</span><span class="line">        if (down != null &amp;&amp; p[down.x][down.y] == p[current.x][current.y] - 1) {
-</span><span class="line">            result.r = p[down.x][down.y];
-</span><span class="line">            result.d++;
-</span><span class="line">            dfs(down, result);
-</span><span class="line">            return;
-</span><span class="line">        }
-</span><span class="line">    }
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">dfs</span><span class="o">(</span><span class="n">Point</span> <span class="n">current</span><span class="o">,</span> <span class="n">Result</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="c1">//left</span>
+</span><span class="line">        <span class="n">Point</span> <span class="n">left</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="na">left</span><span class="o">();</span>
+</span><span class="line">        <span class="k">if</span> <span class="o">(</span><span class="n">left</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">p</span><span class="o">[</span><span class="n">left</span><span class="o">.</span><span class="na">x</span><span class="o">][</span><span class="n">left</span><span class="o">.</span><span class="na">y</span><span class="o">]</span> <span class="o">==</span> <span class="n">p</span><span class="o">[</span><span class="n">current</span><span class="o">.</span><span class="na">x</span><span class="o">][</span><span class="n">current</span><span class="o">.</span><span class="na">y</span><span class="o">]</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">result</span><span class="o">.</span><span class="na">r</span> <span class="o">=</span> <span class="n">p</span><span class="o">[</span><span class="n">left</span><span class="o">.</span><span class="na">x</span><span class="o">][</span><span class="n">left</span><span class="o">.</span><span class="na">y</span><span class="o">];</span>
+</span><span class="line">            <span class="n">result</span><span class="o">.</span><span class="na">d</span><span class="o">++;</span>
+</span><span class="line">            <span class="n">dfs</span><span class="o">(</span><span class="n">left</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+</span><span class="line">            <span class="k">return</span><span class="o">;</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">        <span class="c1">//right</span>
+</span><span class="line">        <span class="n">Point</span> <span class="n">right</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="na">right</span><span class="o">();</span>
+</span><span class="line">        <span class="k">if</span> <span class="o">(</span><span class="n">right</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">p</span><span class="o">[</span><span class="n">right</span><span class="o">.</span><span class="na">x</span><span class="o">][</span><span class="n">right</span><span class="o">.</span><span class="na">y</span><span class="o">]</span> <span class="o">==</span> <span class="n">p</span><span class="o">[</span><span class="n">current</span><span class="o">.</span><span class="na">x</span><span class="o">][</span><span class="n">current</span><span class="o">.</span><span class="na">y</span><span class="o">]</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">result</span><span class="o">.</span><span class="na">r</span> <span class="o">=</span> <span class="n">p</span><span class="o">[</span><span class="n">right</span><span class="o">.</span><span class="na">x</span><span class="o">][</span><span class="n">right</span><span class="o">.</span><span class="na">y</span><span class="o">];</span>
+</span><span class="line">            <span class="n">result</span><span class="o">.</span><span class="na">d</span><span class="o">++;</span>
+</span><span class="line">            <span class="n">dfs</span><span class="o">(</span><span class="n">right</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+</span><span class="line">            <span class="k">return</span><span class="o">;</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">        <span class="c1">//up</span>
+</span><span class="line">        <span class="n">Point</span> <span class="n">up</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="na">up</span><span class="o">();</span>
+</span><span class="line">        <span class="k">if</span> <span class="o">(</span><span class="n">up</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">p</span><span class="o">[</span><span class="n">up</span><span class="o">.</span><span class="na">x</span><span class="o">][</span><span class="n">up</span><span class="o">.</span><span class="na">y</span><span class="o">]</span> <span class="o">==</span> <span class="n">p</span><span class="o">[</span><span class="n">current</span><span class="o">.</span><span class="na">x</span><span class="o">][</span><span class="n">current</span><span class="o">.</span><span class="na">y</span><span class="o">]</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">result</span><span class="o">.</span><span class="na">r</span> <span class="o">=</span> <span class="n">p</span><span class="o">[</span><span class="n">up</span><span class="o">.</span><span class="na">x</span><span class="o">][</span><span class="n">up</span><span class="o">.</span><span class="na">y</span><span class="o">];</span>
+</span><span class="line">            <span class="n">result</span><span class="o">.</span><span class="na">d</span><span class="o">++;</span>
+</span><span class="line">            <span class="n">dfs</span><span class="o">(</span><span class="n">up</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+</span><span class="line">            <span class="k">return</span><span class="o">;</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">        <span class="c1">//down</span>
+</span><span class="line">        <span class="n">Point</span> <span class="n">down</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="na">down</span><span class="o">();</span>
+</span><span class="line">        <span class="k">if</span> <span class="o">(</span><span class="n">down</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">p</span><span class="o">[</span><span class="n">down</span><span class="o">.</span><span class="na">x</span><span class="o">][</span><span class="n">down</span><span class="o">.</span><span class="na">y</span><span class="o">]</span> <span class="o">==</span> <span class="n">p</span><span class="o">[</span><span class="n">current</span><span class="o">.</span><span class="na">x</span><span class="o">][</span><span class="n">current</span><span class="o">.</span><span class="na">y</span><span class="o">]</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">result</span><span class="o">.</span><span class="na">r</span> <span class="o">=</span> <span class="n">p</span><span class="o">[</span><span class="n">down</span><span class="o">.</span><span class="na">x</span><span class="o">][</span><span class="n">down</span><span class="o">.</span><span class="na">y</span><span class="o">];</span>
+</span><span class="line">            <span class="n">result</span><span class="o">.</span><span class="na">d</span><span class="o">++;</span>
+</span><span class="line">            <span class="n">dfs</span><span class="o">(</span><span class="n">down</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+</span><span class="line">            <span class="k">return</span><span class="o">;</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">    private static Point findPoint(int max) {
-</span><span class="line">        for (int i = 0; i &lt; s; i++) {
-</span><span class="line">            for (int j = 0; j &lt; s; j++) {
-</span><span class="line">                if (p[i][j] == max) {
-</span><span class="line">                    return new Point(s, i, j);
-</span><span class="line">                }
-</span><span class="line">            }
-</span><span class="line">        }
-</span><span class="line">        return null;
-</span><span class="line">    }
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Point</span> <span class="nf">findPoint</span><span class="o">(</span><span class="kt">int</span> <span class="n">max</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">s</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">p</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">==</span> <span class="n">max</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                    <span class="k">return</span> <span class="k">new</span> <span class="nf">Point</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">j</span><span class="o">);</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">}
+</span><span class="line"><span class="o">}</span>
 </span><span class="line">
-</span><span class="line">class Point {
+</span><span class="line"><span class="kd">class</span> <span class="nc">Point</span> <span class="o">{</span>
 </span><span class="line">
-</span><span class="line">    int s;
-</span><span class="line">    int x;
-</span><span class="line">    int y;
+</span><span class="line">    <span class="kt">int</span> <span class="n">s</span><span class="o">;</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
 </span><span class="line">
-</span><span class="line">    Point(int s, int x, int y) {
-</span><span class="line">        this.s = s;
-</span><span class="line">        this.x = x;
-</span><span class="line">        this.y = y;
-</span><span class="line">    }
+</span><span class="line">    <span class="n">Point</span><span class="o">(</span><span class="kt">int</span> <span class="n">s</span><span class="o">,</span> <span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="k">this</span><span class="o">.</span><span class="na">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
+</span><span class="line">        <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+</span><span class="line">        <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">    Point up() {
-</span><span class="line">        if (x - 1 &gt;= 0) return new Point(this.s, this.x - 1, this.y);
-</span><span class="line">        return null;
-</span><span class="line">    }
+</span><span class="line">    <span class="n">Point</span> <span class="nf">up</span><span class="o">()</span> <span class="o">{</span>
+</span><span class="line">        <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">s</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">y</span><span class="o">);</span>
+</span><span class="line">        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">    Point down() {
-</span><span class="line">        if (x + 1 &lt; s) return new Point(this.s, this.x + 1, this.y);
-</span><span class="line">        return null;
-</span><span class="line">    }
+</span><span class="line">    <span class="n">Point</span> <span class="nf">down</span><span class="o">()</span> <span class="o">{</span>
+</span><span class="line">        <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">s</span><span class="o">)</span> <span class="k">return</span> <span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">s</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">y</span><span class="o">);</span>
+</span><span class="line">        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">    Point left() {
-</span><span class="line">        if (y - 1 &gt;= 0) return new Point(this.s, this.x, this.y - 1);
-</span><span class="line">        return null;
-</span><span class="line">    }
+</span><span class="line">    <span class="n">Point</span> <span class="nf">left</span><span class="o">()</span> <span class="o">{</span>
+</span><span class="line">        <span class="k">if</span> <span class="o">(</span><span class="n">y</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">s</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+</span><span class="line">        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">    Point right() {
-</span><span class="line">        if (y + 1 &lt; s) return new Point(this.s, this.x, this.y + 1);
-</span><span class="line">        return null;
-</span><span class="line">    }
-</span><span class="line">}
+</span><span class="line">    <span class="n">Point</span> <span class="nf">right</span><span class="o">()</span> <span class="o">{</span>
+</span><span class="line">        <span class="k">if</span> <span class="o">(</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">s</span><span class="o">)</span> <span class="k">return</span> <span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">s</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+</span><span class="line">        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
 </span><span class="line">
-</span><span class="line">class Result {
+</span><span class="line"><span class="kd">class</span> <span class="nc">Result</span> <span class="o">{</span>
 </span><span class="line">
-</span><span class="line">    int r;
-</span><span class="line">    int d;
+</span><span class="line">    <span class="kt">int</span> <span class="n">r</span><span class="o">;</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">d</span><span class="o">;</span>
 </span><span class="line">
-</span><span class="line">    Result(int r, int d) {
-</span><span class="line">        this.r = r;
-</span><span class="line">        this.d = d;
-</span><span class="line">    }
-</span><span class="line">}
+</span><span class="line">    <span class="n">Result</span><span class="o">(</span><span class="kt">int</span> <span class="n">r</span><span class="o">,</span> <span class="kt">int</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="k">this</span><span class="o">.</span><span class="na">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">;</span>
+</span><span class="line">        <span class="k">this</span><span class="o">.</span><span class="na">d</span> <span class="o">=</span> <span class="n">d</span><span class="o">;</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><a href="https://code.google.com/codejam/contest/6214486/dashboard#s=p1">Problem B. GBus count</a></p>
 
 <p>问题B是说在一些城市之间有一些公交车，给你这些车的起点和终点的数据，假设某辆公交车是从1到10，那么城市1、城市2、城市3等一直到城市10都被经过了，现在要求的是有多少辆车经过了某个城市？</p>
 
-<p>思路：这简直不能叫做思路！纯暴力就行了！遍历所有公交车的线路，统计判断该城市是否在这个线路上即可。这样就已经可以过了！比赛时我想了写优化，大致思路是假设城市编号为c，公交车的线路为$a<em>{i}$ 和 $b</em>{i}$，首先对所有公交线路按照 $a<em>{i}$ 排序，保留那些 $a</em>{i}&lt;=c$ 的线路，然后对这些线路按照 $b<em>{i}$ 排序，保留那些 ${b</em>{i}&gt;=c} 的线路，最后保留下来的线路的个数就是最终的解。[但是我的代码有问题，即下面的<code>solve</code>方法，提交了几次都报错]</p>
+<p>思路：这简直不能叫做思路！纯暴力就行了！遍历所有公交车的线路，统计判断该城市是否在这个线路上即可。这样就已经可以过了！比赛时我想了写优化，大致思路是假设城市编号为c，公交车的线路为<script type="math/tex">a_{i}</script> 和 <script type="math/tex">b_{i}</script>，首先对所有公交线路按照 $a<em>{i}$ 排序，保留那些 $a</em>{i}&lt;=c$ 的线路，然后对这些线路按照 $b<em>{i}$ 排序，保留那些 ${b</em>{i}&gt;=c} 的线路，最后保留下来的线路的个数就是最终的解。[但是我的代码有问题，即下面的<code>solve</code>方法，提交了几次都报错]</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -463,147 +463,147 @@
 <span class="line-number">139</span>
 <span class="line-number">140</span>
 <span class="line-number">141</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">import java.io.BufferedOutputStream;
-</span><span class="line">import java.io.FileInputStream;
-</span><span class="line">import java.io.FileOutputStream;
-</span><span class="line">import java.io.PrintStream;
-</span><span class="line">import java.util.*;
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kn">import</span> <span class="nn">java.io.BufferedOutputStream</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.io.FileInputStream</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.io.FileOutputStream</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.io.PrintStream</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
 </span><span class="line">
-</span><span class="line">//https://code.google.com/codejam/contest/6214486/dashboard#s=p1
+</span><span class="line"><span class="c1">//https://code.google.com/codejam/contest/6214486/dashboard#s=p1</span>
 </span><span class="line">
-</span><span class="line">public class ProblemB {
+</span><span class="line"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ProblemB</span> <span class="o">{</span>
 </span><span class="line">
-</span><span class="line">    private static int n, p;
-</span><span class="line">    private static ArrayList&lt;Bus&gt; buses;
-</span><span class="line">    private static ArrayList&lt;Integer&gt; cities;
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="n">p</span><span class="o">;</span>
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Bus</span><span class="o">&gt;</span> <span class="n">buses</span><span class="o">;</span>
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">cities</span><span class="o">;</span>
 </span><span class="line">
-</span><span class="line">    public static void main(String[] args) throws Exception {
-</span><span class="line">        PrintStream out = new PrintStream(new BufferedOutputStream(new FileOutputStream("data/out.txt")));
-</span><span class="line">        System.setOut(out);
-</span><span class="line">        System.setErr(out);
-</span><span class="line">        Scanner scanner = new Scanner(new FileInputStream("data/in.txt"));
+</span><span class="line">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">PrintStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrintStream</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">&quot;data/out.txt&quot;</span><span class="o">)));</span>
+</span><span class="line">        <span class="n">System</span><span class="o">.</span><span class="na">setOut</span><span class="o">(</span><span class="n">out</span><span class="o">);</span>
+</span><span class="line">        <span class="n">System</span><span class="o">.</span><span class="na">setErr</span><span class="o">(</span><span class="n">out</span><span class="o">);</span>
+</span><span class="line">        <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">&quot;data/in.txt&quot;</span><span class="o">));</span>
 </span><span class="line">
-</span><span class="line">        int t = scanner.nextInt();
-</span><span class="line">        int c = 1;
-</span><span class="line">        while (t-- &gt; 0) {
-</span><span class="line">            buses = new ArrayList&lt;Bus&gt;();
-</span><span class="line">            cities = new ArrayList&lt;Integer&gt;();
-</span><span class="line">            n = scanner.nextInt();
-</span><span class="line">            for (int i = 0; i &lt; n; i++) {
-</span><span class="line">                buses.add(new Bus(scanner.nextInt(), scanner.nextInt()));
-</span><span class="line">            }
-</span><span class="line">            p = scanner.nextInt();
-</span><span class="line">            for (int i = 0; i &lt; p; i++) {
-</span><span class="line">                cities.add(scanner.nextInt());
-</span><span class="line">            }
-</span><span class="line">            System.out.print("Case #" + c + ": ");
-</span><span class="line">            solve2();
-</span><span class="line">            System.out.println();
-</span><span class="line">            c++;
-</span><span class="line">        }
+</span><span class="line">        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class="line">        <span class="k">while</span> <span class="o">(</span><span class="n">t</span><span class="o">--</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">buses</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Bus</span><span class="o">&gt;();</span>
+</span><span class="line">            <span class="n">cities</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+</span><span class="line">            <span class="n">n</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">buses</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Bus</span><span class="o">(</span><span class="n">scanner</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(),</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextInt</span><span class="o">()));</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="n">p</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">p</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">cities</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">scanner</span><span class="o">.</span><span class="na">nextInt</span><span class="o">());</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;Case #&quot;</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="s">&quot;: &quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="n">solve2</span><span class="o">();</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+</span><span class="line">            <span class="n">c</span><span class="o">++;</span>
+</span><span class="line">        <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">        out.flush();
-</span><span class="line">        out.close();
-</span><span class="line">    }
+</span><span class="line">        <span class="n">out</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+</span><span class="line">        <span class="n">out</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">    //暴力解决
-</span><span class="line">    private static void solve2() {
-</span><span class="line">        int key, sum;
-</span><span class="line">        for (int i = 0; i &lt; p; i++) {
-</span><span class="line">            key = cities.get(i);
-</span><span class="line">            sum = 0;
-</span><span class="line">            for (Bus bus : buses) {
-</span><span class="line">                if (key &gt;= bus.x &amp;&amp; key &lt;= bus.y) {
-</span><span class="line">                    sum++;
-</span><span class="line">                }
-</span><span class="line">            }
-</span><span class="line">            System.out.print(sum + " ");
-</span><span class="line">        }
-</span><span class="line">    }
+</span><span class="line">    <span class="c1">//暴力解决</span>
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">solve2</span><span class="o">()</span> <span class="o">{</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">key</span><span class="o">,</span> <span class="n">sum</span><span class="o">;</span>
+</span><span class="line">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">p</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">key</span> <span class="o">=</span> <span class="n">cities</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span><span class="line">            <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class="line">            <span class="k">for</span> <span class="o">(</span><span class="n">Bus</span> <span class="n">bus</span> <span class="o">:</span> <span class="n">buses</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">key</span> <span class="o">&gt;=</span> <span class="n">bus</span><span class="o">.</span><span class="na">x</span> <span class="o">&amp;&amp;</span> <span class="n">key</span> <span class="o">&lt;=</span> <span class="n">bus</span><span class="o">.</span><span class="na">y</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">sum</span><span class="o">++;</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">sum</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">    //非暴力解决，但是仍然存在问题
-</span><span class="line">    private static void solve() {
-</span><span class="line">        Comparator&lt;Bus&gt; cf = new Comparator&lt;Bus&gt;() {
-</span><span class="line">            @Override
-</span><span class="line">            public int compare(Bus o1, Bus o2) {
-</span><span class="line">                if (o1.x &gt; o2.x) {
-</span><span class="line">                    return 1;
-</span><span class="line">                } else if (o1.x &lt; o2.x) {
-</span><span class="line">                    return -1;
-</span><span class="line">                }
-</span><span class="line">                return 0;
-</span><span class="line">            }
-</span><span class="line">        };
-</span><span class="line">        Comparator&lt;Bus&gt; ct = new Comparator&lt;Bus&gt;() {
-</span><span class="line">            @Override
-</span><span class="line">            public int compare(Bus o1, Bus o2) {
-</span><span class="line">                if (o1.y &gt; o2.y) {
-</span><span class="line">                    return 1;
-</span><span class="line">                } else if (o1.y &lt; o2.y) {
-</span><span class="line">                    return -1;
-</span><span class="line">                }
-</span><span class="line">                return 0;
-</span><span class="line">            }
-</span><span class="line">        };
+</span><span class="line">    <span class="c1">//非暴力解决，但是仍然存在问题</span>
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">solve</span><span class="o">()</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Bus</span><span class="o">&gt;</span> <span class="n">cf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Bus</span><span class="o">&gt;()</span> <span class="o">{</span>
+</span><span class="line">            <span class="nd">@Override</span>
+</span><span class="line">            <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Bus</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Bus</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">o1</span><span class="o">.</span><span class="na">x</span> <span class="o">&gt;</span> <span class="n">o2</span><span class="o">.</span><span class="na">x</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                    <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class="line">                <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">o1</span><span class="o">.</span><span class="na">x</span> <span class="o">&lt;</span> <span class="n">o2</span><span class="o">.</span><span class="na">x</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">                <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">        <span class="o">};</span>
+</span><span class="line">        <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Bus</span><span class="o">&gt;</span> <span class="n">ct</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Bus</span><span class="o">&gt;()</span> <span class="o">{</span>
+</span><span class="line">            <span class="nd">@Override</span>
+</span><span class="line">            <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Bus</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Bus</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">o1</span><span class="o">.</span><span class="na">y</span> <span class="o">&gt;</span> <span class="n">o2</span><span class="o">.</span><span class="na">y</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                    <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class="line">                <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">o1</span><span class="o">.</span><span class="na">y</span> <span class="o">&lt;</span> <span class="n">o2</span><span class="o">.</span><span class="na">y</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">                <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">        <span class="o">};</span>
 </span><span class="line">
-</span><span class="line">        Collections.sort(buses, cf);
+</span><span class="line">        <span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">buses</span><span class="o">,</span> <span class="n">cf</span><span class="o">);</span>
 </span><span class="line">
-</span><span class="line">        int left, right, key;
-</span><span class="line">        for (int i = 0; i &lt; p; i++) {
-</span><span class="line">            key = cities.get(i);
-</span><span class="line">            left = bs_f(buses, key);//从left开始都是大于key的数字
-</span><span class="line">            List&lt;Bus&gt; flist = buses.subList(0, left);//left=0, size=0
-</span><span class="line">            if (flist.size() &gt; 0) {
-</span><span class="line">                Collections.sort(flist, ct);
-</span><span class="line">                right = bs_t(flist, key);//从right开始都是大于等于key的数字
-</span><span class="line">                List&lt;Bus&gt; tlist = flist.subList(right, flist.size());
-</span><span class="line">                System.out.print(tlist.size() + " ");
-</span><span class="line">            } else {
-</span><span class="line">                System.out.print("0 ");
-</span><span class="line">            }
-</span><span class="line">        }
-</span><span class="line">    }
+</span><span class="line">        <span class="kt">int</span> <span class="n">left</span><span class="o">,</span> <span class="n">right</span><span class="o">,</span> <span class="n">key</span><span class="o">;</span>
+</span><span class="line">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">p</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">key</span> <span class="o">=</span> <span class="n">cities</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span><span class="line">            <span class="n">left</span> <span class="o">=</span> <span class="n">bs_f</span><span class="o">(</span><span class="n">buses</span><span class="o">,</span> <span class="n">key</span><span class="o">);</span><span class="c1">//从left开始都是大于key的数字</span>
+</span><span class="line">            <span class="n">List</span><span class="o">&lt;</span><span class="n">Bus</span><span class="o">&gt;</span> <span class="n">flist</span> <span class="o">=</span> <span class="n">buses</span><span class="o">.</span><span class="na">subList</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">left</span><span class="o">);</span><span class="c1">//left=0, size=0</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">flist</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">flist</span><span class="o">,</span> <span class="n">ct</span><span class="o">);</span>
+</span><span class="line">                <span class="n">right</span> <span class="o">=</span> <span class="n">bs_t</span><span class="o">(</span><span class="n">flist</span><span class="o">,</span> <span class="n">key</span><span class="o">);</span><span class="c1">//从right开始都是大于等于key的数字</span>
+</span><span class="line">                <span class="n">List</span><span class="o">&lt;</span><span class="n">Bus</span><span class="o">&gt;</span> <span class="n">tlist</span> <span class="o">=</span> <span class="n">flist</span><span class="o">.</span><span class="na">subList</span><span class="o">(</span><span class="n">right</span><span class="o">,</span> <span class="n">flist</span><span class="o">.</span><span class="na">size</span><span class="o">());</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">tlist</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;0 &quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">    private static int bs_f(List&lt;Bus&gt; lbus, int r) {
-</span><span class="line">        int len = lbus.size();
-</span><span class="line">        int left = 0, right = len - 1, mid = 0;
-</span><span class="line">        while (left &lt;= right) {
-</span><span class="line">            mid = (left + right) / 2;
-</span><span class="line">            if (r &lt; lbus.get(mid).x) {
-</span><span class="line">                right = mid - 1;
-</span><span class="line">            } else if (r &gt;= lbus.get(mid).x) {
-</span><span class="line">                left = mid + 1;
-</span><span class="line">            }
-</span><span class="line">        }
-</span><span class="line">        return left;
-</span><span class="line">    }
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">bs_f</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Bus</span><span class="o">&gt;</span> <span class="n">lbus</span><span class="o">,</span> <span class="kt">int</span> <span class="n">r</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">lbus</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="n">mid</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class="line">        <span class="k">while</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">mid</span> <span class="o">=</span> <span class="o">(</span><span class="n">left</span> <span class="o">+</span> <span class="n">right</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="n">lbus</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">mid</span><span class="o">).</span><span class="na">x</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">r</span> <span class="o">&gt;=</span> <span class="n">lbus</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">mid</span><span class="o">).</span><span class="na">x</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">left</span><span class="o">;</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">    private static int bs_t(List&lt;Bus&gt; lbus, int r) {
-</span><span class="line">        int len = lbus.size();
-</span><span class="line">        int left = 0, right = len - 1, mid = 0;
-</span><span class="line">        while (left &lt;= right) {
-</span><span class="line">            mid = (left + right) / 2;
-</span><span class="line">            if (r &lt;= lbus.get(mid).y) {
-</span><span class="line">                right = mid - 1;
-</span><span class="line">            } else if (r &gt; lbus.get(mid).y) {
-</span><span class="line">                left = mid + 1;
-</span><span class="line">            }
-</span><span class="line">        }
-</span><span class="line">        return left;
-</span><span class="line">    }
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">bs_t</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Bus</span><span class="o">&gt;</span> <span class="n">lbus</span><span class="o">,</span> <span class="kt">int</span> <span class="n">r</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">lbus</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="n">mid</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class="line">        <span class="k">while</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">mid</span> <span class="o">=</span> <span class="o">(</span><span class="n">left</span> <span class="o">+</span> <span class="n">right</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">r</span> <span class="o">&lt;=</span> <span class="n">lbus</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">mid</span><span class="o">).</span><span class="na">y</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">r</span> <span class="o">&gt;</span> <span class="n">lbus</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">mid</span><span class="o">).</span><span class="na">y</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">left</span><span class="o">;</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">}
+</span><span class="line"><span class="o">}</span>
 </span><span class="line">
-</span><span class="line">class Bus {
+</span><span class="line"><span class="kd">class</span> <span class="nc">Bus</span> <span class="o">{</span>
 </span><span class="line">
-</span><span class="line">    int x;
-</span><span class="line">    int y;
+</span><span class="line">    <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
 </span><span class="line">
-</span><span class="line">    Bus(int x, int y) {
-</span><span class="line">        this.x = x;
-</span><span class="line">        this.y = y;
-</span><span class="line">    }
-</span><span class="line">}
+</span><span class="line">    <span class="n">Bus</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+</span><span class="line">        <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><a href="https://code.google.com/codejam/contest/6214486/dashboard#s=p2">Problem C. Sort a scrambled itinerary</a></p>
@@ -612,7 +612,7 @@
 
 <p>思路：这题很简单，起点是入度为0的点，终点是出度为0的点，一个while循环就能搞定，就这样简单的思路这道题目就可以过。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -702,96 +702,96 @@
 <span class="line-number">88</span>
 <span class="line-number">89</span>
 <span class="line-number">90</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">import java.io.BufferedOutputStream;
-</span><span class="line">import java.io.FileInputStream;
-</span><span class="line">import java.io.FileOutputStream;
-</span><span class="line">import java.io.PrintStream;
-</span><span class="line">import java.util.*;
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kn">import</span> <span class="nn">java.io.BufferedOutputStream</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.io.FileInputStream</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.io.FileOutputStream</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.io.PrintStream</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
 </span><span class="line">
-</span><span class="line">//https://code.google.com/codejam/contest/6214486/dashboard#s=p2
+</span><span class="line"><span class="c1">//https://code.google.com/codejam/contest/6214486/dashboard#s=p2</span>
 </span><span class="line">
-</span><span class="line">public class ProblemC {
+</span><span class="line"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ProblemC</span> <span class="o">{</span>
 </span><span class="line">
-</span><span class="line">    private static Map&lt;String, String&gt; flights;
-</span><span class="line">    private static Map&lt;String, City&gt; citymap;
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">flights</span><span class="o">;</span>
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">City</span><span class="o">&gt;</span> <span class="n">citymap</span><span class="o">;</span>
 </span><span class="line">
-</span><span class="line">    public static void main(String[] args) throws Exception {
-</span><span class="line">        PrintStream out = new PrintStream(new BufferedOutputStream(new FileOutputStream("data/out.txt")));
-</span><span class="line">        System.setOut(out);
-</span><span class="line">        System.setErr(out);
-</span><span class="line">        Scanner scanner = new Scanner(new FileInputStream("data/in.txt"));
+</span><span class="line">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">PrintStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrintStream</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">&quot;data/out.txt&quot;</span><span class="o">)));</span>
+</span><span class="line">        <span class="n">System</span><span class="o">.</span><span class="na">setOut</span><span class="o">(</span><span class="n">out</span><span class="o">);</span>
+</span><span class="line">        <span class="n">System</span><span class="o">.</span><span class="na">setErr</span><span class="o">(</span><span class="n">out</span><span class="o">);</span>
+</span><span class="line">        <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">&quot;data/in.txt&quot;</span><span class="o">));</span>
 </span><span class="line">
-</span><span class="line">        int t = scanner.nextInt();
-</span><span class="line">        int c = 1;
-</span><span class="line">        while (t-- &gt; 0) {
-</span><span class="line">            System.out.print("Case #" + c + ": ");
-</span><span class="line">            flights = new HashMap&lt;String, String&gt;();
-</span><span class="line">            citymap = new HashMap&lt;String, City&gt;();
-</span><span class="line">            int p = scanner.nextInt();
-</span><span class="line">            String from, to;
-</span><span class="line">            City cf, ct;
-</span><span class="line">            for (int i = 0; i &lt; p; i++) {
-</span><span class="line">                from = scanner.next();
-</span><span class="line">                to = scanner.next();
+</span><span class="line">        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class="line">        <span class="k">while</span> <span class="o">(</span><span class="n">t</span><span class="o">--</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;Case #&quot;</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="s">&quot;: &quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="n">flights</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
+</span><span class="line">            <span class="n">citymap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">City</span><span class="o">&gt;();</span>
+</span><span class="line">            <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">            <span class="n">String</span> <span class="n">from</span><span class="o">,</span> <span class="n">to</span><span class="o">;</span>
+</span><span class="line">            <span class="n">City</span> <span class="n">cf</span><span class="o">,</span> <span class="n">ct</span><span class="o">;</span>
+</span><span class="line">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">p</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">from</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+</span><span class="line">                <span class="n">to</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
 </span><span class="line">
-</span><span class="line">                if (citymap.containsKey(from)) {
-</span><span class="line">                    cf = citymap.get(from);
-</span><span class="line">                } else {
-</span><span class="line">                    cf = new City();
-</span><span class="line">                    citymap.put(from, cf);
-</span><span class="line">                }
-</span><span class="line">                cf.name = from;
-</span><span class="line">                cf.out = 1;
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">citymap</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">from</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">cf</span> <span class="o">=</span> <span class="n">citymap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">from</span><span class="o">);</span>
+</span><span class="line">                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">cf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">City</span><span class="o">();</span>
+</span><span class="line">                    <span class="n">citymap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">from</span><span class="o">,</span> <span class="n">cf</span><span class="o">);</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">                <span class="n">cf</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">from</span><span class="o">;</span>
+</span><span class="line">                <span class="n">cf</span><span class="o">.</span><span class="na">out</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
 </span><span class="line">
-</span><span class="line">                if (citymap.containsKey(to)) {
-</span><span class="line">                    ct = citymap.get(to);
-</span><span class="line">                } else {
-</span><span class="line">                    ct = new City();
-</span><span class="line">                    citymap.put(to, ct);
-</span><span class="line">                }
-</span><span class="line">                ct.name = to;
-</span><span class="line">                ct.in = 1;
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">citymap</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">to</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">ct</span> <span class="o">=</span> <span class="n">citymap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">to</span><span class="o">);</span>
+</span><span class="line">                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">ct</span> <span class="o">=</span> <span class="k">new</span> <span class="n">City</span><span class="o">();</span>
+</span><span class="line">                    <span class="n">citymap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">to</span><span class="o">,</span> <span class="n">ct</span><span class="o">);</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">                <span class="n">ct</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">to</span><span class="o">;</span>
+</span><span class="line">                <span class="n">ct</span><span class="o">.</span><span class="na">in</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
 </span><span class="line">
-</span><span class="line">                flights.put(from, to);
-</span><span class="line">            }
-</span><span class="line">            solve();
-</span><span class="line">            c++;
-</span><span class="line">            System.out.println();
-</span><span class="line">        }
+</span><span class="line">                <span class="n">flights</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">from</span><span class="o">,</span> <span class="n">to</span><span class="o">);</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="n">solve</span><span class="o">();</span>
+</span><span class="line">            <span class="n">c</span><span class="o">++;</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+</span><span class="line">        <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">        out.flush();
-</span><span class="line">        out.close();
-</span><span class="line">    }
+</span><span class="line">        <span class="n">out</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+</span><span class="line">        <span class="n">out</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">    private static void solve() {
-</span><span class="line">        String from = null;
-</span><span class="line">        Set&lt;Map.Entry&lt;String, City&gt;&gt; entries = citymap.entrySet();
-</span><span class="line">        for (Map.Entry&lt;String, City&gt; entry : entries) {
-</span><span class="line">            //System.out.println("name=" + entry.getValue().name + " in=" + entry.getValue().in + " out=" + entry.getValue().out);
-</span><span class="line">            if (entry.getValue().in == 0) {
-</span><span class="line">                from = entry.getKey();
-</span><span class="line">                break;
-</span><span class="line">            }
-</span><span class="line">        }
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">solve</span><span class="o">()</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">String</span> <span class="n">from</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class="line">        <span class="n">Set</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">City</span><span class="o">&gt;&gt;</span> <span class="n">entries</span> <span class="o">=</span> <span class="n">citymap</span><span class="o">.</span><span class="na">entrySet</span><span class="o">();</span>
+</span><span class="line">        <span class="k">for</span> <span class="o">(</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">City</span><span class="o">&gt;</span> <span class="n">entry</span> <span class="o">:</span> <span class="n">entries</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="c1">//System.out.println(&quot;name=&quot; + entry.getValue().name + &quot; in=&quot; + entry.getValue().in + &quot; out=&quot; + entry.getValue().out);</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">entry</span><span class="o">.</span><span class="na">getValue</span><span class="o">().</span><span class="na">in</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">from</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="na">getKey</span><span class="o">();</span>
+</span><span class="line">                <span class="k">break</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">        <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">        String next;
-</span><span class="line">        String current = from;
-</span><span class="line">        while (current != null &amp;&amp; flights.containsKey(current)) {
-</span><span class="line">            next = flights.get(current);
-</span><span class="line">            System.out.print(citymap.get(current).name + "-" + citymap.get(next).name + " ");
-</span><span class="line">            current = next;
-</span><span class="line">        }
-</span><span class="line">    }
+</span><span class="line">        <span class="n">String</span> <span class="n">next</span><span class="o">;</span>
+</span><span class="line">        <span class="n">String</span> <span class="n">current</span> <span class="o">=</span> <span class="n">from</span><span class="o">;</span>
+</span><span class="line">        <span class="k">while</span> <span class="o">(</span><span class="n">current</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">flights</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">current</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">next</span> <span class="o">=</span> <span class="n">flights</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">current</span><span class="o">);</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">citymap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">current</span><span class="o">).</span><span class="na">name</span> <span class="o">+</span> <span class="s">&quot;-&quot;</span> <span class="o">+</span> <span class="n">citymap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">next</span><span class="o">).</span><span class="na">name</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="n">current</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
 </span><span class="line">
-</span><span class="line">}
+</span><span class="line"><span class="o">}</span>
 </span><span class="line">
-</span><span class="line">class City {
+</span><span class="line"><span class="kd">class</span> <span class="nc">City</span> <span class="o">{</span>
 </span><span class="line">
-</span><span class="line">    String name;
-</span><span class="line">    int in = 0;
-</span><span class="line">    int out = 0;
+</span><span class="line">    <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">in</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">out</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 </span><span class="line">
-</span><span class="line">}
+</span><span class="line"><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>问题D暂时没看，有空了再倒腾一下！ :-)</p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: oj | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/oj/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-11-09T19:39:37+08:00</updated>
+  <updated>2014-11-09T19:49:27+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -30,7 +30,7 @@
 
 <p>思路：自始至终维护结果r和d，从房间号最大的那个房间开始DFS，遇到房间号小1的房间就进入，一直下去直到不能移动了，修改r和d的值，然后从比上次停下来的房间小1的房间开始继续DFS，如果他移动的距离更多的话，那么就修改d和r即可，一直下去就能得到最终解。</p>
 
-<p>```
+<p>```java
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -181,7 +181,7 @@ Result(int r, int d) {
 
 <p>问题B是说在一些城市之间有一些公交车，给你这些车的起点和终点的数据，假设某辆公交车是从1到10，那么城市1、城市2、城市3等一直到城市10都被经过了，现在要求的是有多少辆车经过了某个城市？</p>
 
-<p>思路：这简直不能叫做思路！纯暴力就行了！遍历所有公交车的线路，统计判断该城市是否在这个线路上即可。这样就已经可以过了！比赛时我想了写优化，大致思路是假设城市编号为c，公交车的线路为$a<em>{i}$ 和 $b</em>{i}$，首先对所有公交线路按照 $a<em>{i}$ 排序，保留那些 $a</em>{i}&lt;=c$ 的线路，然后对这些线路按照 $b<em>{i}$ 排序，保留那些 ${b</em>{i}&gt;=c} 的线路，最后保留下来的线路的个数就是最终的解。[但是我的代码有问题，即下面的<code>solve</code>方法，提交了几次都报错]</p>
+<p>思路：这简直不能叫做思路！纯暴力就行了！遍历所有公交车的线路，统计判断该城市是否在这个线路上即可。这样就已经可以过了！比赛时我想了写优化，大致思路是假设城市编号为c，公交车的线路为<script type="math/tex">a_{i}</script> 和 <script type="math/tex">b_{i}</script>，首先对所有公交线路按照 $a<em>{i}$ 排序，保留那些 $a</em>{i}&lt;=c$ 的线路，然后对这些线路按照 $b<em>{i}$ 排序，保留那些 ${b</em>{i}&gt;=c} 的线路，最后保留下来的线路的个数就是最终的解。[但是我的代码有问题，即下面的<code>solve</code>方法，提交了几次都报错]</p>
 
 <p>```
 import java.io.BufferedOutputStream;
