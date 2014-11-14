@@ -4,7 +4,7 @@
   <title><![CDATA[Category: acdream | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/acdream/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-11-14T16:49:40+08:00</updated>
+  <updated>2014-11-14T17:01:37+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -74,23 +74,9 @@ private static void solve(BigInteger n) {
 
 <p>这题纯数学题，表示不知道这个公式的跪了好久好久。。。</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>欧拉函数 $$phi(x) = x \prod_{p</td>
-      <td>x}{1-1/p}$$ ，其中p是x的质因子</td>
-    </tr>
-  </tbody>
-</table>
+<p>欧拉函数 <script type="math/tex">phi(x) = x \prod_{p,x}{1-1/p}</script> ，其中p是x的质因子</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>问题就变成了求 $$\prod_{p</td>
-      <td>x}{1-1/p}$$ 的在不超过n的情况下最小值，而质因子都是大于等于2的，所以这个值随着质因子越来越多值反而越来越小，所以只要保证其值不超过n，尽可能地添加质因子就能得到最小值。以下代码包含一个素数筛选过程，和标程略有不同。</td>
-    </tr>
-  </tbody>
-</table>
+<p>问题就变成了求 <script type="math/tex">\prod_{p,x}{1-1/p}</script> 的在不超过n的情况下最小值，而质因子都是大于等于2的，所以这个值随着质因子越来越多值反而越来越小，所以只要保证其值不超过n，尽可能地添加质因子就能得到最小值。以下代码包含一个素数筛选过程，和标程略有不同。</p>
 
 <p>```
 import java.math.BigInteger;
