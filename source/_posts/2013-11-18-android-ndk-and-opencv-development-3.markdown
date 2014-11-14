@@ -3,7 +3,7 @@ layout: post
 title: "Android Ndk and Opencv Development 3"
 date: 2013-11-18 21:35
 comments: true
-categories: android opencv mobiledev
+categories: mobile android opencv
 ---
 
 ### Android NDK 和 OpenCV 整合开发总结(3)
@@ -178,9 +178,9 @@ OpenCV Library中提供了两种摄像头，一种是Java摄像头-`org.OpenCV.A
 
 `Note Do not save or use CvCameraViewFrame object out of onCameraFrame callback. This object does not have its own state and its behavior out of callback is unpredictable!`  
 
-- 关于如何传递摄像头预览的图像数据给Native代码：这个很重要！我曾经试过很多的方式，大致思路有：   
+- 关于如何传递摄像头预览的图像数据给Native层：这个很重要！我曾经试过很多的方式，大致思路有：   
 
-①传递图片路径：这是最差的方式，我使用过，速度很慢，主要用于前期开发的时候进行测试，测试Java层和Native层的互调是否正常。   
+①传递图片路径：这是最差的方式，我使用过，速度很慢，实时性很差，主要用于前期开发的时候进行测试，测试Java层和Native层的互调是否正常。   
 
 ②传递预览图像的字节数组到Native层，然后将字节数组处理成RGB或者RGBA的格式[具体哪种格式要看你的图像处理函数能否处理RGBA格式的，如果可以的话推荐转换成RGBA格式，因为返回的也是RGBA格式的。网上有很多的文章讨论如何转换：一种方式是使用一个自定义的函数进行编码转换(可以搜索到这个函数)，另一个种方式是使用OpenCV中的Mat和cvtColor函数进行转换，接着调用图像处理函数，处理完成之后，将处理的结果保存在一个整形数组中(实际上就是RGB或者RGBA格式的图像数据)，最后调用Bitmap的方法将其转换成bitmap返回。这种方法速度也比较慢，但是比第一种方案要快了不少，具体实现过程可以看下面的推荐书籍。   
 

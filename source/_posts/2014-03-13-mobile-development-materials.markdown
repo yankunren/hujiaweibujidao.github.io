@@ -3,7 +3,7 @@ layout: post
 title: "Material on Mobile Development"
 date: 2014-03-13 20:28
 comments: true
-categories: mobiledev android ios
+categories: mobile android ios
 ---
 
 ### Android部分

@@ -3,7 +3,7 @@ layout: post
 title: "Gradle Plugin for Android Development User Guide (2)"
 date: 2014-10-15 12:00
 comments: true
-categories: mobile
+categories: mobile android
 published: true
 ---
 

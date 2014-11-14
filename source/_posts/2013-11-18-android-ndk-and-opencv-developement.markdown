@@ -3,7 +3,7 @@ layout: post
 title: "Android Ndk and Opencv Development"
 date: 2013-11-18 14:41
 comments: true
-categories: mobiledev android opencv
+categories: mobile android opencv
 ---
 
 ### Android NDK 和 OpenCV 整合开发总结(1)
