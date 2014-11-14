@@ -4,7 +4,7 @@
   <title><![CDATA[Category: acdream | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/acdream/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-11-14T16:38:54+08:00</updated>
+  <updated>2014-11-14T16:46:09+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -77,8 +77,8 @@ private static void solve(BigInteger n) {
 <table>
   <tbody>
     <tr>
-      <td>欧拉函数 $$ phi(x) = x \prod_{p</td>
-      <td>x}{1-\frac{1}{p}}$$，其中p是x的质因子</td>
+      <td>欧拉函数 $$phi(x) = \prod_{p</td>
+      <td>x}{1-\frac{1}{p}}$$ ，其中p是x的质因子</td>
     </tr>
   </tbody>
 </table>
