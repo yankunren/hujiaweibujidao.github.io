@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/feed" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-11-09T21:07:07+08:00</updated>
+  <updated>2014-11-14T16:17:58+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,430 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ACdream Java Contest]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/11/14/acdream-java-contest/"/>
+    <updated>2014-11-14T15:34:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/11/14/acdream-java-contest</id>
+    <content type="html"><![CDATA[<p>前天参加了ACdream训练赛系列のJava专场，成绩很烂，感谢<a href="http://mathlover.info/archives/acdream_java#comment-4460">出题人的解题报告</a></p>
+
+<p><a href="http://acdream.info/problem?pid=1669">A题:数一的偶像</a></p>
+
+<p>这道题目出得很好，我也是输出前面100个数字的结果看到一点规律，可惜不是最终的规律。我发现的是首先出现3个1，然后5个0，然后7个1，然后9个0，一直往下延续，仔细想，个数刚好是相邻的完全平方数的差值，3=4-1，5=9-4，7=16-9等等，如果写下来更加容易看出规律：</p>
+
+<p>3(1):  1  2  3  <br />
+5(0):  4  5  6  7  8  <br />
+7(1):  9 10 11 12 13 14 15  <br />
+9(0): 16 17 18 19 20 21 22 23 24  <br />
+…</p>
+
+<p>仔细观察每行的第一个数字就知道它们正是完全平方数，但是为什么这么凑巧呢？其实，函数 <script type="math/tex">y=\frac{n}{x}</script> 是一个关于直线 <script type="math/tex">y=x</script> 对称的函数，那么除了在直线 <script type="math/tex">y=x</script> 上的点之外，其他的点数之和一定是偶数，所以只要看该函数与直线 <script type="math/tex">y=x</script> 的交点即可，实际上问题的解就是n的平方根对2取模。</p>
+
+<p>但是题目给出的n可能很大很大，对它求平方根又成为了一个问题，这里可以使用经典的二分法来逼近。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kn">import</span> <span class="nn">java.math.BigInteger</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">//http://acdream.info/problem?pid=1669</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test1669</span> <span class="o">{</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+</span><span class="line">        <span class="n">BigInteger</span> <span class="n">n</span><span class="o">;</span>
+</span><span class="line">        <span class="k">while</span> <span class="o">(</span><span class="n">scanner</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">n</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextBigInteger</span><span class="o">();</span>
+</span><span class="line">            <span class="n">solve</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">solve</span><span class="o">(</span><span class="n">BigInteger</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">BigInteger</span> <span class="n">l</span> <span class="o">=</span> <span class="n">BigInteger</span><span class="o">.</span><span class="na">ONE</span><span class="o">;</span>
+</span><span class="line">        <span class="n">BigInteger</span> <span class="n">r</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span>
+</span><span class="line">        <span class="n">BigInteger</span> <span class="n">mid</span><span class="o">;</span>
+</span><span class="line">        <span class="k">while</span> <span class="o">(</span><span class="n">l</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">r</span><span class="o">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">r</span><span class="o">).</span><span class="na">shiftRight</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">mid</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="n">mid</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">mid</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">mid</span><span class="o">).</span><span class="na">compareTo</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">l</span> <span class="o">=</span> <span class="n">mid</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">BigInteger</span><span class="o">.</span><span class="na">ONE</span><span class="o">);</span>
+</span><span class="line">            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">r</span> <span class="o">=</span> <span class="n">mid</span><span class="o">.</span><span class="na">subtract</span><span class="o">(</span><span class="n">BigInteger</span><span class="o">.</span><span class="na">ONE</span><span class="o">);</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">l</span><span class="o">.</span><span class="na">remainder</span><span class="o">(</span><span class="n">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">2</span><span class="o">)));</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line">
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><a href="http://acdream.info/problem?pid=1670">B题:数一的偶像2</a></p>
+
+<p>这题纯数学题，表示不知道这个公式的跪了好久好久。。。</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>欧拉函数 $$phi(x)=x \prod_{p</td>
+      <td>x}{1-\frac{1}{p}}$$，其中p是x的质因子</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>问题就变成了求 $$\prod_{p</td>
+      <td>x}{1-\frac{1}{p}}$$ 的在不超过n的情况下最小值，而质因子都是大于等于2的，所以这个值随着质因子越来越多值反而越来越小，所以只要保证其值不超过n，尽可能地添加质因子就能得到最小值。以下代码包含一个素数筛选过程，和标程略有不同。</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kn">import</span> <span class="nn">java.math.BigInteger</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">//http://acdream.info/problem?pid=1670</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test1670</span> <span class="o">{</span>
+</span><span class="line">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">arg</span><span class="o">[])</span> <span class="o">{</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">p</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">10000</span><span class="o">];</span><span class="c1">//存储素数 2 3 5 7 11 13 17 19 23 29 ...</span>
+</span><span class="line">        <span class="kt">boolean</span> <span class="n">isnp</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="mi">10001</span><span class="o">];</span><span class="c1">//标记是否为素数</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">pn</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span><span class="c1">//标记是第pn个素数，结合p[]可以得到对应的素数，2是第0个</span>
+</span><span class="line">        <span class="n">isnp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">isnp</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span><span class="c1">//isnp[i]=true表示i不是素数</span>
+</span><span class="line">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">10000</span><span class="o">;</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(!</span><span class="n">isnp</span><span class="o">[</span><span class="n">i</span><span class="o">])</span> <span class="o">{</span><span class="c1">//默认都是false的</span>
+</span><span class="line">                <span class="n">p</span><span class="o">[</span><span class="n">pn</span><span class="o">++]</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span><span class="c1">//添加一个素数</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="c1">//for (int j = 0; j &lt; pn &amp;&amp; i * p[j] &lt;= 10000; ++j) {</span>
+</span><span class="line">            <span class="c1">//    isnp[i * p[j]] = true;</span>
+</span><span class="line">            <span class="c1">//    if (i % p[j] == 0)</span>
+</span><span class="line">            <span class="c1">//        break;</span>
+</span><span class="line">            <span class="c1">//}</span>
+</span><span class="line">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">*</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="mi">10000</span><span class="o">;</span> <span class="o">++</span><span class="n">j</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">isnp</span><span class="o">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span><span class="c1">//给定范围的数字中素数的整数倍一定不是素数</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">
+</span><span class="line">        <span class="n">Scanner</span> <span class="n">cin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+</span><span class="line">        <span class="k">while</span> <span class="o">(</span><span class="n">cin</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span><span class="line">            <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class="line">            <span class="n">BigInteger</span> <span class="n">n</span> <span class="o">=</span> <span class="n">cin</span><span class="o">.</span><span class="na">nextBigInteger</span><span class="o">(),</span> <span class="n">now</span> <span class="o">=</span> <span class="n">BigInteger</span><span class="o">.</span><span class="na">ONE</span><span class="o">;</span>
+</span><span class="line">            <span class="k">while</span> <span class="o">(</span><span class="n">now</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="n">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">p</span><span class="o">[</span><span class="n">i</span><span class="o">])).</span><span class="na">compareTo</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">now</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="n">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">p</span><span class="o">[</span><span class="n">i</span><span class="o">]));</span>
+</span><span class="line">                <span class="n">i</span><span class="o">++;</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">now</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><a href="http://acdream.info/problem?pid=1668">C题:数一与ACM的虐恋</a></p>
+
+<p>我表示做这道题目很虐好么，要不要这么虐我们，就当是学习了下BigDecimal怎么用的吧，精度精度。。。</p>
+
+<p>这题其实很简单，DP，但是状态转移是带着概率的，标程的坐标系是自底向上从左往右来的，初始时dp[n][1]=0，dp[n][i]=i-1，对于整个上三角的斜边上的位置有</p>
+
+<p>dp[i][1]=(a+c<em>0.5)</em>(dp[i+1][1]+1))+(b+c<em>0.5)</em>(dp[i+1][2]+1)</p>
+
+<p>其他位置上有三种走法</p>
+
+<p>dp[i][j]=a<em>(dp[i+1][j]+1)+b</em>(dp[i+1][j+1]+1)+c*(dp[i][j-1]+1)</p>
+
+<p>以下是标程</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kn">import</span> <span class="nn">java.math.BigDecimal</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">//http://acdream.info/problem?pid=1668</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test1668</span> <span class="o">{</span>
+</span><span class="line">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">arg</span><span class="o">[])</span> <span class="o">{</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">n</span><span class="o">;</span>
+</span><span class="line">        <span class="n">BigDecimal</span> <span class="n">p</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+</span><span class="line">        <span class="n">Scanner</span> <span class="n">cin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+</span><span class="line">        <span class="k">while</span> <span class="o">(</span><span class="n">cin</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">n</span> <span class="o">=</span> <span class="n">cin</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="o">;</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">cin</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">                <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">cin</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">                <span class="n">p</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">a</span><span class="o">).</span><span class="na">divide</span><span class="o">(</span><span class="n">BigDecimal</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">c</span><span class="o">),</span> <span class="mi">100</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">ROUND_HALF_EVEN</span><span class="o">);</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="c1">//a=p[0], b=p[1], c=p[2], a+c/2=p[3], b+c/2=p[4]</span>
+</span><span class="line">            <span class="n">p</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="o">=</span> <span class="n">p</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">[</span><span class="mi">2</span><span class="o">].</span><span class="na">divide</span><span class="o">(</span><span class="n">BigDecimal</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">2</span><span class="o">),</span> <span class="mi">100</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">ROUND_HALF_EVEN</span><span class="o">));</span>
+</span><span class="line">            <span class="n">p</span><span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="o">=</span> <span class="n">p</span><span class="o">[</span><span class="mi">1</span><span class="o">].</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">[</span><span class="mi">2</span><span class="o">].</span><span class="na">divide</span><span class="o">(</span><span class="n">BigDecimal</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">2</span><span class="o">),</span> <span class="mi">100</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">ROUND_HALF_EVEN</span><span class="o">));</span>
+</span><span class="line">            <span class="c1">//</span>
+</span><span class="line">            <span class="n">BigDecimal</span><span class="o">[][]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">2</span><span class="o">][</span><span class="n">n</span> <span class="o">+</span> <span class="mi">2</span><span class="o">];</span>
+</span><span class="line">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span>
+</span><span class="line">                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span> <span class="o">++</span><span class="n">j</span><span class="o">)</span>
+</span><span class="line">                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mf">0.0</span><span class="o">).</span><span class="na">setScale</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+</span><span class="line">            <span class="c1">//dp[n][1] = BigDecimal.valueOf(0.0).setScale(100);//多余</span>
+</span><span class="line">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span>
+</span><span class="line">                <span class="n">dp</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">i</span><span class="o">].</span><span class="na">add</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">].</span><span class="na">add</span><span class="o">(</span><span class="n">BigDecimal</span><span class="o">.</span><span class="na">ONE</span><span class="o">));</span><span class="c1">//no += here!</span>
+</span><span class="line">            <span class="c1">//从上往下，从左往右依次递推</span>
+</span><span class="line">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="o">;</span> <span class="o">--</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">].</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">[</span><span class="mi">3</span><span class="o">].</span><span class="na">multiply</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">][</span><span class="mi">1</span><span class="o">].</span><span class="na">add</span><span class="o">(</span><span class="n">BigDecimal</span><span class="o">.</span><span class="na">ONE</span><span class="o">))).</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">[</span><span class="mi">4</span><span class="o">].</span><span class="na">multiply</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">][</span><span class="mi">2</span><span class="o">].</span><span class="na">add</span><span class="o">(</span><span class="n">BigDecimal</span><span class="o">.</span><span class="na">ONE</span><span class="o">)));</span>
+</span><span class="line">                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span> <span class="o">++</span><span class="n">j</span><span class="o">)</span>
+</span><span class="line">                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">].</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">multiply</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">].</span><span class="na">add</span><span class="o">(</span><span class="n">BigDecimal</span><span class="o">.</span><span class="na">ONE</span><span class="o">)).</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">[</span><span class="mi">1</span><span class="o">].</span><span class="na">multiply</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">][</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="o">].</span><span class="na">add</span><span class="o">(</span><span class="n">BigDecimal</span><span class="o">.</span><span class="na">ONE</span><span class="o">))).</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">[</span><span class="mi">2</span><span class="o">].</span><span class="na">multiply</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">].</span><span class="na">add</span><span class="o">(</span><span class="n">BigDecimal</span><span class="o">.</span><span class="na">ONE</span><span class="o">))));</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="mi">1</span><span class="o">][</span><span class="mi">1</span><span class="o">].</span><span class="na">setScale</span><span class="o">(</span><span class="mi">50</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">ROUND_HALF_EVEN</span><span class="o">).</span><span class="na">toString</span><span class="o">());</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><a href="http://acdream.info/problem?pid=1667">D题:调皮的数一</a></p>
+
+<p>这题其实很简单，DP，不过我找到的又不是最好的递推式，不过易于理解，好在卡得不紧张可以打表通过。[标程600ms多一点，我的1000ms多一点]</p>
+
+<p>设f[k][t]表示第k步在t跑道，f[0][1]=1，f[1][1]=1，且有</p>
+
+<p>f[k][t]=f[k-1][t-1]+f[k-1][t]+f[k-1][t+1]</p>
+
+<p>根据递推式能够求得最终解f[n][1]。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kn">import</span> <span class="nn">java.math.BigInteger</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">//http://acdream.info/problem?pid=1667</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test1667</span> <span class="o">{</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="n">BigInteger</span><span class="o">[][]</span> <span class="n">f</span><span class="o">;</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">cal</span><span class="o">();</span>
+</span><span class="line">        <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">n</span><span class="o">;</span>
+</span><span class="line">        <span class="k">while</span> <span class="o">(</span><span class="n">scanner</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">n</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">f</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="mi">1</span><span class="o">]);</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">cal</span><span class="o">()</span> <span class="o">{</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">1001</span><span class="o">;</span>
+</span><span class="line">        <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigInteger</span><span class="o">[</span><span class="n">len</span><span class="o">][</span><span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="o">];</span>
+</span><span class="line">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">f</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">BigInteger</span><span class="o">.</span><span class="na">ZERO</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">        <span class="n">f</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">BigInteger</span><span class="o">.</span><span class="na">ONE</span><span class="o">;</span>
+</span><span class="line">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">f</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">f</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">].</span><span class="na">add</span><span class="o">(</span><span class="n">f</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">]).</span><span class="na">add</span><span class="o">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">len</span> <span class="o">?</span> <span class="n">BigInteger</span><span class="o">.</span><span class="na">ZERO</span> <span class="o">:</span> <span class="n">f</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="o">]);</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line">
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>但是此题还有更优的递推式，我打表算法是 <script type="math/tex">O(n^2)</script>的，但是其实可以根据上面的递推式得到一个新的 <script type="math/tex">O(n)</script> 的递推式，具体式子见<a href="http://mathlover.info/archives/acdream_java#comment-4460">出题者的解题报告</a>，我目前还未理解，等我理解了再更新。</p>
+
+<p>标程如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kn">import</span> <span class="nn">java.math.BigInteger</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span>
+</span><span class="line"><span class="o">{</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">arg</span><span class="o">[])</span> <span class="kd">throws</span> <span class="n">IOException</span>
+</span><span class="line">    <span class="o">{</span>
+</span><span class="line">        <span class="n">Scanner</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+</span><span class="line">        <span class="n">BigInteger</span> <span class="n">ans</span><span class="o">[]=</span><span class="k">new</span> <span class="n">BigInteger</span><span class="o">[</span><span class="mi">1005</span><span class="o">];</span>
+</span><span class="line">        <span class="n">ans</span><span class="o">[</span><span class="mi">0</span><span class="o">]=</span><span class="n">BigInteger</span><span class="o">.</span><span class="na">ONE</span><span class="o">;</span>
+</span><span class="line">        <span class="n">ans</span><span class="o">[</span><span class="mi">1</span><span class="o">]=</span><span class="n">BigInteger</span><span class="o">.</span><span class="na">ONE</span><span class="o">;</span>
+</span><span class="line">        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">1000</span><span class="o">;++</span><span class="n">i</span><span class="o">)</span>
+</span><span class="line">            <span class="n">ans</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="n">ans</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">].</span><span class="na">multiply</span><span class="o">(</span><span class="n">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">)).</span><span class="na">add</span><span class="o">(</span><span class="n">ans</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="o">].</span><span class="na">multiply</span><span class="o">(</span><span class="n">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="o">-</span><span class="mi">3</span><span class="o">))).</span><span class="na">divide</span><span class="o">(</span><span class="n">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="o">));</span>
+</span><span class="line">        <span class="k">while</span><span class="o">(</span><span class="n">in</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span>
+</span><span class="line">        <span class="o">{</span>
+</span><span class="line">            <span class="kt">int</span> <span class="n">n</span><span class="o">=</span><span class="n">in</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">            <span class="kt">byte</span><span class="o">[]</span> <span class="n">buff</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">ans</span><span class="o">[</span><span class="n">n</span><span class="o">])+</span><span class="s">&quot;\n&quot;</span><span class="o">).</span><span class="na">getBytes</span><span class="o">();</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">buff</span><span class="o">);</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>E题算了，我觉得此题很无聊，=o=</p>
+
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/11/14/acdream-java-contest/">http://hujiaweibujidao.github.io/blog/2014/11/14/acdream-java-contest/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[BestCoder Round 17]]></title>
@@ -31,7 +455,7 @@
 <p>BestCoder题解：</p>
 
 <p>首先，若n&lt;k，则棋盘连一个1×k的矩形都放不下，输出0。      <br />
-我们只需要考虑n≥k的情况。将棋盘类似于黑白染色，按(i+j)模k划分等价类，给每个格子标一个号。标号之后，会注意到每条从左下到右上的斜线数字都是相同的，那么对于s×s的格子，其内部数字有且恰好有2s−1种，所以当s&lt;=k/2的时候，内部数字有floor(k2)*2−1&lt;k种，所以不能有更佳的方案。从而证明最优的方案一定是仅剩下一个s×s的正方形区域没有被覆盖到，其中s≤k/2。     <br />
+我们只需要考虑n≥k的情况。将棋盘类似于黑白染色，按(i+j)模k划分等价类，给每个格子标一个号。标号之后，会注意到每条从左下到右上的斜线数字都是相同的，那么对于s×s的格子，其内部数字有且恰好有2s−1种，所以当s&lt;=k/2的时候，内部数字有floor(k/2)*2−1&lt;k种，所以不能有更佳的方案。从而证明最优的方案一定是仅剩下一个s×s的正方形区域没有被覆盖到，其中s≤k/2。     <br />
 而令l=n mod k之后，根据l大小的不同，可以构造出中心为l×l或(k−l)×(k−l)的风车形图案，又通过上面证明这个l（或k−l）就是之前的s，所以是最优的。所以令l=n mod k，如果l≤k/2，最多可覆盖的格子数即为 <script type="math/tex">n^2−l^2</script>，否则为 <script type="math/tex">n^2−(k−l)^2</script>，显然这样的方案是可以构造出来的（风车形）。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
@@ -1043,7 +1467,9 @@ a_{i}<=c %]]&gt;</script> 的线路，然后对这些线路按照 <script type="
 </span><span class="line"><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>问题D暂时没看，有空了再倒腾一下！ :-)</p>
+<p><a href="https://code.google.com/codejam/contest/6214486/dashboard#s=p3">Problem D. Itz Chess</a></p>
+
+<p>问题D</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/11/09/google-apac-2015-university-graduates-test-round-d/">http://hujiaweibujidao.github.io/blog/2014/11/09/google-apac-2015-university-graduates-test-round-d/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
@@ -7330,86 +7756,6 @@ Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaw
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/06/22/Forza-Azzurri/">http://hujiaweibujidao.github.io/blog/2014/06/22/Forza-Azzurri/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Thanks to 360 CDN]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/06/22/thanks-to-360-cdn/"/>
-    <updated>2014-06-22T10:40:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/06/22/thanks-to-360-cdn</id>
-    <content type="html"><![CDATA[<p>由于众所周知的原因，最近各种网站(以Google、Dropbox为首)都纷纷被墙，作为码农，简直要了俺们的命根子啊，没办法生在天朝也就只能发发牢骚而已，可是，最令人无奈的是Github也时常被拒之于墙外，这可让我这个把个人博客搭在Github上的小屌丝更是吓得心惊胆战，难道真的是要闭关锁国的节奏吗？</p>
-
-<p>有人说的对，一开始不知道为什么Evernote在中国国内要另搞一个印象笔记，现在想想这招真是太聪明了，Dropbox要学着点了，但即使是学过来了，面对国内各种免费送N个T云空间的网盘你的竞争优势有多大呢？</p>
-
-<p>OK，不发牢骚了，因为Google被墙的厉害，而且博客中不少使用了Google API(js库和字体库)，导致博客前段时间访问速度特别慢，所以考完我就来整理整理下，这里要感谢<a href="http://libs.useso.com/">360网站卫士提供的常用前端公共库CDN服务</a>，你们总是能够推出关乎码农们痛痒的东西，永远支持你们！</p>
-
-<p>主要修改下面两处即可：</p>
-
-<p>文件： <code>source/_includes</code>目录下的<code>head.html</code>，修改如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="c">&lt;!--</span>
-</span><span class="line"><span class="c">&lt;script src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;&gt;&lt;/script&gt;</span>
-</span><span class="line"><span class="c">--&gt;</span>
-</span><span class="line"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&#39;text/javascript&#39;</span> <span class="na">src=</span><span class="s">&#39;http://ajax.useso.com/ajax/libs/jquery/1.7.2/jquery.min.js?ver=3.4.2&#39;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>文件： <code>source/_includes</code>目录下的<code>header.html</code>，修改如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="c">&lt;!-- 注释掉下面的js --&gt;</span>
-</span><span class="line"><span class="c">&lt;!--</span>
-</span><span class="line"><span class="c">&lt;script src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;&gt;&lt;/script&gt;</span>
-</span><span class="line"><span class="c">--&gt;</span>
-</span><span class="line"><span class="c">&lt;!-- 添加下面的js --&gt;</span>
-</span><span class="line"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&#39;text/javascript&#39;</span> <span class="na">src=</span><span class="s">&#39;http://ajax.useso.com/ajax/libs/jquery/1.7.2/jquery.min.js?ver=3.4.2&#39;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class="line"><span class="c">&lt;!-- 省略部分代码 --&gt;</span>
-</span><span class="line"><span class="c">&lt;!-- 我没有使用Google analytics，所以注释下面一行代码(略有删减) --&gt;</span>
-</span><span class="line"><span class="c">&lt;!--</span>
-</span><span class="line"><span class="c">inlcude google_analytics.html</span>
-</span><span class="line"><span class="c">--&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>文件： <code>source/_includes/custom</code>目录下的<code>head.html</code>，修改如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="c">&lt;!-- 注释掉下面的css --&gt;</span>
-</span><span class="line"><span class="c">&lt;!--Fonts from Google&quot;s Web font directory at http://google.com/webfonts --&gt;</span>
-</span><span class="line"><span class="c">&lt;!--</span>
-</span><span class="line"><span class="c">&lt;link href=&quot;http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;</span>
-</span><span class="line"><span class="c">&lt;link href=&quot;http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;</span>
-</span><span class="line"><span class="c">--&gt;</span>
-</span><span class="line"><span class="c">&lt;!-- 添加下面的css --&gt;</span>
-</span><span class="line"><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;http://fonts.useso.com/css?family=PT+Serif:regular,italic,bold,bolditalic&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span><span class="nt">&gt;</span>
-</span><span class="line"><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;http://fonts.useso.com/css?family=PT+Sans:regular,italic,bold,bolditalic&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>OK，大功告成，更新文件，重新打开，你会瞬间感觉世界又重新美好了！</p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/06/22/thanks-to-360-cdn/">http://hujiaweibujidao.github.io/blog/2014/06/22/thanks-to-360-cdn/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   

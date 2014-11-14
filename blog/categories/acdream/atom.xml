@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: acdream | Hujiawei Bujidao]]></title>
+  <link href="http://hujiaweibujidao.github.io/blog/categories/acdream/atom.xml" rel="self"/>
+  <link href="http://hujiaweibujidao.github.io/"/>
+  <updated>2014-11-14T16:17:58+08:00</updated>
+  <id>http://hujiaweibujidao.github.io/</id>
+  <author>
+    <name><![CDATA[hujiawei]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ACdream Java Contest]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/11/14/acdream-java-contest/"/>
+    <updated>2014-11-14T15:34:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/11/14/acdream-java-contest</id>
+    <content type="html"><![CDATA[<p>前天参加了ACdream训练赛系列のJava专场，成绩很烂，感谢<a href="http://mathlover.info/archives/acdream_java#comment-4460">出题人的解题报告</a></p>
+
+<p><a href="http://acdream.info/problem?pid=1669">A题:数一的偶像</a></p>
+
+<p>这道题目出得很好，我也是输出前面100个数字的结果看到一点规律，可惜不是最终的规律。我发现的是首先出现3个1，然后5个0，然后7个1，然后9个0，一直往下延续，仔细想，个数刚好是相邻的完全平方数的差值，3=4-1，5=9-4，7=16-9等等，如果写下来更加容易看出规律：</p>
+
+<p>3(1):  1  2  3  <br />
+5(0):  4  5  6  7  8  <br />
+7(1):  9 10 11 12 13 14 15  <br />
+9(0): 16 17 18 19 20 21 22 23 24  <br />
+…</p>
+
+<p>仔细观察每行的第一个数字就知道它们正是完全平方数，但是为什么这么凑巧呢？其实，函数 <script type="math/tex">y=\frac{n}{x}</script> 是一个关于直线 <script type="math/tex">y=x</script> 对称的函数，那么除了在直线 <script type="math/tex">y=x</script> 上的点之外，其他的点数之和一定是偶数，所以只要看该函数与直线 <script type="math/tex">y=x</script> 的交点即可，实际上问题的解就是n的平方根对2取模。</p>
+
+<p>但是题目给出的n可能很大很大，对它求平方根又成为了一个问题，这里可以使用经典的二分法来逼近。</p>
+
+<p>```java
+import java.math.BigInteger;
+import java.util.Scanner;</p>
+
+<p>//http://acdream.info/problem?pid=1669</p>
+
+<p>public class Test1669 {</p>
+
+<pre><code>public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    BigInteger n;
+    while (scanner.hasNext()) {
+        n = scanner.nextBigInteger();
+        solve(n);
+    }
+}
+
+private static void solve(BigInteger n) {
+    BigInteger l = BigInteger.ONE;
+    BigInteger r = n;
+    BigInteger mid;
+    while (l.compareTo(r) &lt;= 0) {
+        mid = l.add(r).shiftRight(1);
+        if (mid.multiply(mid).add(mid).add(mid).compareTo(n) &lt; 0) {
+            l = mid.add(BigInteger.ONE);
+        } else {
+            r = mid.subtract(BigInteger.ONE);
+        }
+    }
+    System.out.println(l.remainder(BigInteger.valueOf(2)));
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p><a href="http://acdream.info/problem?pid=1670">B题:数一的偶像2</a></p>
+
+<p>这题纯数学题，表示不知道这个公式的跪了好久好久。。。</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>欧拉函数 $$phi(x)=x \prod_{p</td>
+      <td>x}{1-\frac{1}{p}}$$，其中p是x的质因子</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>问题就变成了求 $$\prod_{p</td>
+      <td>x}{1-\frac{1}{p}}$$ 的在不超过n的情况下最小值，而质因子都是大于等于2的，所以这个值随着质因子越来越多值反而越来越小，所以只要保证其值不超过n，尽可能地添加质因子就能得到最小值。以下代码包含一个素数筛选过程，和标程略有不同。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>```
+import java.math.BigInteger;
+import java.util.Scanner;</p>
+
+<p>//http://acdream.info/problem?pid=1670</p>
+
+<p>public class Test1670 {
+    public static void main(String arg[]) {
+        int p[] = new int[10000];//存储素数 2 3 5 7 11 13 17 19 23 29 …
+        boolean isnp[] = new boolean[10001];//标记是否为素数
+        int pn = 0;//标记是第pn个素数，结合p[]可以得到对应的素数，2是第0个
+        isnp[0] = isnp[1] = true;//isnp[i]=true表示i不是素数
+        for (int i = 2; i &lt;= 10000; ++i) {
+            if (!isnp[i]) {//默认都是false的
+                p[pn++] = i;//添加一个素数
+            }
+            //for (int j = 0; j &lt; pn &amp;&amp; i * p[j] &lt;= 10000; ++j) {
+            //    isnp[i * p[j]] = true;
+            //    if (i % p[j] == 0)
+            //        break;
+            //}
+            for (int j = 0; i * j &lt;= 10000; ++j) {
+                isnp[i * j] = true;//给定范围的数字中素数的整数倍一定不是素数
+            }
+        }</p>
+
+<pre><code>    Scanner cin = new Scanner(System.in);
+    while (cin.hasNext()) {
+        int i = 0;
+        BigInteger n = cin.nextBigInteger(), now = BigInteger.ONE;
+        while (now.multiply(BigInteger.valueOf(p[i])).compareTo(n) &lt;= 0) {
+            now = now.multiply(BigInteger.valueOf(p[i]));
+            i++;
+        }
+        System.out.println(now.toString());
+    }
+} } ```
+</code></pre>
+
+<p><a href="http://acdream.info/problem?pid=1668">C题:数一与ACM的虐恋</a></p>
+
+<p>我表示做这道题目很虐好么，要不要这么虐我们，就当是学习了下BigDecimal怎么用的吧，精度精度。。。</p>
+
+<p>这题其实很简单，DP，但是状态转移是带着概率的，标程的坐标系是自底向上从左往右来的，初始时dp[n][1]=0，dp[n][i]=i-1，对于整个上三角的斜边上的位置有</p>
+
+<p>dp[i][1]=(a+c<em>0.5)</em>(dp[i+1][1]+1))+(b+c<em>0.5)</em>(dp[i+1][2]+1)</p>
+
+<p>其他位置上有三种走法</p>
+
+<p>dp[i][j]=a<em>(dp[i+1][j]+1)+b</em>(dp[i+1][j+1]+1)+c*(dp[i][j-1]+1)</p>
+
+<p>以下是标程</p>
+
+<p>```
+import java.math.BigDecimal;
+import java.util.Scanner;</p>
+
+<p>//http://acdream.info/problem?pid=1668</p>
+
+<p>public class Test1668 {
+    public static void main(String arg[]) {
+        int n;
+        BigDecimal p[] = new BigDecimal[5];
+        Scanner cin = new Scanner(System.in);
+        while (cin.hasNext()) {
+            n = cin.nextInt();
+            for (int i = 0; i &lt; 3; ++i) {
+                int a = cin.nextInt();
+                int c = cin.nextInt();
+                p[i] = BigDecimal.valueOf(a).divide(BigDecimal.valueOf(c), 100, BigDecimal.ROUND_HALF_EVEN);
+            }
+            //a=p[0], b=p[1], c=p[2], a+c/2=p[3], b+c/2=p[4]
+            p[3] = p[0].add(p[2].divide(BigDecimal.valueOf(2), 100, BigDecimal.ROUND_HALF_EVEN));
+            p[4] = p[1].add(p[2].divide(BigDecimal.valueOf(2), 100, BigDecimal.ROUND_HALF_EVEN));
+            //
+            BigDecimal[][] dp = new BigDecimal[n + 2][n + 2];
+            for (int i = 0; i &lt;= n + 1; ++i)
+                for (int j = 0; j &lt;= n + 1; ++j)
+                    dp[i][j] = BigDecimal.valueOf(0.0).setScale(100);
+            //dp[n][1] = BigDecimal.valueOf(0.0).setScale(100);//多余
+            for (int i = 2; i &lt;= n; ++i)
+                dp[n][i] = dp[n][i].add(dp[n][i - 1].add(BigDecimal.ONE));//no += here!
+            //从上往下，从左往右依次递推
+            for (int i = n - 1; i &gt;= 1; –i) {
+                dp[i][1] = dp[i][1].add(p[3].multiply(dp[i + 1][1].add(BigDecimal.ONE))).add(p[4].multiply(dp[i + 1][2].add(BigDecimal.ONE)));
+                for (int j = 2; j &lt;= n; ++j)
+                    dp[i][j] = dp[i][j].add(p[0].multiply(dp[i + 1][j].add(BigDecimal.ONE)).add(p[1].multiply(dp[i + 1][j + 1].add(BigDecimal.ONE))).add(p[2].multiply(dp[i][j - 1].add(BigDecimal.ONE))));
+            }
+            System.out.println(dp[1][1].setScale(50, BigDecimal.ROUND_HALF_EVEN).toString());
+        }
+    }
+}
+```</p>
+
+<p><a href="http://acdream.info/problem?pid=1667">D题:调皮的数一</a></p>
+
+<p>这题其实很简单，DP，不过我找到的又不是最好的递推式，不过易于理解，好在卡得不紧张可以打表通过。[标程600ms多一点，我的1000ms多一点]</p>
+
+<p>设f[k][t]表示第k步在t跑道，f[0][1]=1，f[1][1]=1，且有</p>
+
+<p>f[k][t]=f[k-1][t-1]+f[k-1][t]+f[k-1][t+1]</p>
+
+<p>根据递推式能够求得最终解f[n][1]。</p>
+
+<p>```
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;</p>
+
+<p>//http://acdream.info/problem?pid=1667</p>
+
+<p>public class Test1667 {</p>
+
+<pre><code>private static BigInteger[][] f;
+
+public static void main(String[] args) {
+    cal();
+    Scanner scanner = new Scanner(System.in);
+    int n;
+    while (scanner.hasNext()) {
+        n = scanner.nextInt();
+        System.out.println(f[n][1]);
+    }
+}
+
+private static void cal() {
+    int len = 1001;
+    f = new BigInteger[len][len + 1];
+    for (int i = 0; i &lt; len; i++) {
+        for (int j = 0; j &lt; len + 1; j++) {
+            f[i][j] = BigInteger.ZERO;
+        }
+    }
+    f[0][1] = BigInteger.ONE;
+    for (int i = 1; i &lt; len; i++) {
+        for (int j = 1; j &lt;= i + 1; j++) {
+            f[i][j] = f[i - 1][j - 1].add(f[i - 1][j]).add(j + 1 &gt; len ? BigInteger.ZERO : f[i - 1][j + 1]);
+        }
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>但是此题还有更优的递推式，我打表算法是 <script type="math/tex">O(n^2)</script>的，但是其实可以根据上面的递推式得到一个新的 <script type="math/tex">O(n)</script> 的递推式，具体式子见<a href="http://mathlover.info/archives/acdream_java#comment-4460">出题者的解题报告</a>，我目前还未理解，等我理解了再更新。</p>
+
+<p>标程如下：</p>
+
+<p>```
+import java.math.BigInteger;
+import java.util.<em>;
+import java.io.</em>;</p>
+
+<p>public class Main
+{</p>
+
+<pre><code>public static void main(String arg[]) throws IOException
+{
+    Scanner in = new Scanner(System.in);
+    BigInteger ans[]=new BigInteger[1005];
+    ans[0]=BigInteger.ONE;
+    ans[1]=BigInteger.ONE;
+    for(int i=2;i&lt;=1000;++i)
+        ans[i]=ans[i-1].multiply(BigInteger.valueOf(2*i+1)).add(ans[i-2].multiply(BigInteger.valueOf(3*i-3))).divide(BigInteger.valueOf(i+2));
+    while(in.hasNext())
+    {
+        int n=in.nextInt();
+        byte[] buff = (String.valueOf(ans[n])+"\n").getBytes();
+        System.out.write(buff);
+    }
+} } ```
+</code></pre>
+
+<p>E题算了，我觉得此题很无聊，=o=</p>
+
+]]></content>
+  </entry>
+  
+</feed>
