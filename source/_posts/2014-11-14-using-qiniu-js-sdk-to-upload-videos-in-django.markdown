@@ -14,13 +14,13 @@ categories: python
 
 七牛提供了一个演示通过该SDK进行文件上传的网站：[http://jssdk.demo.qiniu.io](http://jssdk.demo.qiniu.io)
 
-![image](http://hujiaweibujidao.github.io/qiniu1.png)
+![image](http://hujiaweibujidao.github.io/images/qiniu1.png)
 
 这个网站做得非常好，演示了文件上传并显示了上传的进度，正是我想要的效果，所以我后面把这个JS SDK嵌入到Django项目中，测试其功能
 
 下面这段代码演示的是在纯Python项目中如何将文件上传到七牛服务器，若还没有安装七牛的话请先运行 `pip install qiniu`
 
-```
+```python
 # coding=utf-8
 import os
 
@@ -99,7 +99,7 @@ domain: 'YOUR_DOMAIN_NAME',
 
 其他的内容就不用修改了，直接运行项目，进入到`http://127.0.0.1:8000/video/`下就能看到
 
-![image](http://hujiaweibujidao.github.io/qiniu2.png)
+![image](http://hujiaweibujidao.github.io/images/qiniu2.png)
 
 
 
