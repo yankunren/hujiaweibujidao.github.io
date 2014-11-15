@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>LAS 2-Matrix - Hujiawei Bujidao</title>
+  <title>using Qiniu JS SDK to upload Videos in Django - Hujiawei Bujidao</title>
   <meta name="author" content="hujiawei">
 
   
-  <meta name="description" content="线性代数那些事 Things of Linear Algebra
-逸夫图书馆, 2014/4/28 矩阵 1.什么是矩阵？ 这个问题很多人进行过探讨，在网上也比较火，比如孟岩的三篇《理解矩阵》，知乎上如何直观理解矩阵和线代，还有其他人对矩阵的理解，例如新理解矩阵1和新理解矩阵2等等。 那， &hellip;">
+  <meta name="description" content="最近做的项目中需要使用七牛云存储服务来存储网站(Django开发)中用户上传的视频，于是就有了下面一番折腾。 我想要的目标是可以上传视频，最好还能显示上传的进度 传送门: 七牛的Javascript SDK on Github 七牛提供了一个演示通过该SDK进行文件上传的网站：http:// &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2">
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/11/14/using-qiniu-js-sdk-to-upload-videos-in-django">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
@@ -106,7 +105,7 @@
 		
   <header>
     
-      <h1 class="entry-title">LAS 2-Matrix</h1>
+      <h1 class="entry-title">Using Qiniu JS SDK to Upload Videos in Django</h1>
     
     
       <p class="meta">
@@ -122,142 +121,162 @@
   
 
 
-<time datetime="2014-04-29T14:03:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2014</time>
+<time datetime="2014-11-14T22:48:00+08:00" pubdate data-updated="true">Nov 14<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><strong><center>线性代数那些事 Things of Linear Algebra</center></strong>
-<strong><center>逸夫图书馆, 2014/4/28</center></strong></p>
+<div class="entry-content"><p>最近做的项目中需要使用七牛云存储服务来存储网站(Django开发)中用户上传的视频，于是就有了下面一番折腾。</p>
 
-<h3 id="centercenter"><center>矩阵</center></h3>
+<p>我想要的目标是可以上传视频，最好还能显示上传的进度</p>
 
-<p>1.什么是矩阵？</p>
+<p>传送门: <a href="https://github.com/qiniupd/qiniu-js-sdk">七牛的Javascript SDK on Github</a></p>
 
-<p>这个问题很多人进行过探讨，在网上也比较火，比如<a href="http://blog.csdn.net/myan/article/details/647511">孟岩的三篇《理解矩阵》</a>，知乎上<a href="http://www.zhihu.com/question/21082351">如何直观理解矩阵和线代</a>，还有其他人对矩阵的理解，例如<a href="http://spaces.ac.cn/index.php/archives/1765/">新理解矩阵1</a>和<a href="http://spaces.ac.cn/index.php/archives/1768/">新理解矩阵2</a>等等。</p>
+<p>七牛提供了一个演示通过该SDK进行文件上传的网站：<a href="http://jssdk.demo.qiniu.io">http://jssdk.demo.qiniu.io</a></p>
 
-<p>那，到底什么是矩阵呢？</p>
+<p><img src="http://hujiaweibujidao.github.io/qiniu1.png" alt="image" /></p>
 
-<p><strong>总结起来，我觉得，矩阵就是线性变换，作用在一个点上就是将这个点移动到该空间的另一个点，作用在向量上就是对这个向量进行放缩或者旋转或者反射等一系列的线性变换，作用在矩阵上那就是对矩阵中的每一个列向量进行线性变换之后然后进行叠加结果(这就是为什么矩阵的乘法有些奇妙的原因)。因为运动是相对的，你可以理解为坐标系没有变，被作用对象发生了变化，也可以理解为被作用对象没有变，变的是坐标系(也就是空间的基)。</strong></p>
+<p>这个网站做得非常好，演示了文件上传并显示了上传的进度，正是我想要的效果，所以我后面把这个JS SDK嵌入到Django项目中，测试其功能</p>
 
-<blockquote>
-  <p>这里借用下小苏的图和解释。
-矩阵<script type="math/tex">% <![CDATA[
-A=\left[ \begin{array}{cc} a11 & a12 \\ a21 & a22 \end{array} \right] %]]></script>
-事实上是由两个向量$[a11,a21]^T$和$[a12,a22]^T$（这里的向量都是列向量）组成，它描述了一个平面（仿射）坐标系。换句话说，这两个向量其实是这个坐标系的两个基，而运算$y=Ax$则是告诉我们，在$A$这个坐标系下的$x$向量，在$I$坐标系下是怎样的。这里的$I$坐标系就是我们最常用的直角坐标系，也就是说，任何向量（包括矩阵里边的向量），只要它前面没有矩阵作用于它，那么它都是在直角坐标系下度量出来的。下图所用的矩阵<script type="math/tex">% <![CDATA[
-A=\left[ \begin{array}{cc} 3 & 2 \\ 1 & 3 \end{array} \right] %]]></script>
-构成了一个仿射坐标系，在这个坐标系下，有一个向量$x=[2,2]^T$，它在直角坐标系下测得的坐标为$[10,8]^T$，现在我们不难发现，直接用矩阵乘法来计算，有
-$Ax=[3∗2+2∗2,1∗2+3∗2]^T=[10,8]^T$
-小苏对此展开讨论了<a href="http://spaces.ac.cn/index.php/archives/1768/">它和矩阵乘法之间的联系</a></p>
-</blockquote>
+<p>下面这段代码演示的是在纯Python项目中如何将文件上传到七牛服务器，若还没有安装七牛的话请先运行 <code>pip install qiniu</code></p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/xianxinbianhua.png" alt="image" /></p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+</pre></td><td class="code"><pre><code class=""><span class="line"># coding=utf-8
+</span><span class="line">import os
+</span><span class="line">
+</span><span class="line">__author__ = 'hujiawei'
+</span><span class="line">__doc__ = 'qiniu sdk video demo'
+</span><span class="line">
+</span><span class="line">import StringIO
+</span><span class="line">import sys
+</span><span class="line">import qiniu.conf
+</span><span class="line">import qiniu.rs
+</span><span class="line">import qiniu.io
+</span><span class="line">
+</span><span class="line">BUCKET_NAME = "YOUR_BUCKET_NAME"
+</span><span class="line">qiniu.conf.ACCESS_KEY = "YOUR_ACCESS_KEY"
+</span><span class="line">qiniu.conf.SECRET_KEY = "YOUR_SECRET_KEY"
+</span><span class="line">
+</span><span class="line">policy = qiniu.rs.PutPolicy(BUCKET_NAME)
+</span><span class="line">uptoken = policy.token()
+</span><span class="line">print(uptoken)
+</span><span class="line">
+</span><span class="line"># ############ 示例：上传视频 ###############
+</span><span class="line"># extra = qiniu.io.PutExtra()
+</span><span class="line"># item = os.path.join(os.getcwd(), 'hellokitty.m4v')
+</span><span class="line"># ret, err = qiniu.io.put_file(uptoken, None, item, extra)
+</span><span class="line"># if err is not None:
+</span><span class="line">#     sys.stderr.write('error: %s ' % err)
+</span><span class="line">
+</span><span class="line">#ok: hamster.swf
+</span><span class="line">
+</span><span class="line">
+</span><span class="line"># ############ 示例：上传图片 ###############
+</span><span class="line">extra = qiniu.io.PutExtra()
+</span><span class="line">extra.mime_type = "image/jpeg"
+</span><span class="line"># print os.getcwd() #/Users/hujiawei/PycharmProjects/qiniusimple
+</span><span class="line">item = os.path.join(os.getcwd(), 'coder.jpg')
+</span><span class="line">ret, err = qiniu.io.put_file(uptoken, None, item, extra)
+</span><span class="line">if err is not None:
+</span><span class="line">    sys.stderr.write('error: %s ' % err)
+</span><span class="line">
+</span><span class="line"># extra = qiniu.io.PutExtra()
+</span><span class="line"># # extra.mime_type = "image/jpeg" #image/png 七牛能够自动识别mime-type
+</span><span class="line"># # print os.getcwd() #/Users/hujiawei/PycharmProjects/qiniusimple
+</span><span class="line"># item = os.path.join(os.getcwd(), 'apple.png')
+</span><span class="line"># ret, err = qiniu.io.put_file(uptoken, None, item, extra)
+</span><span class="line">
+</span><span class="line">############# 示例：上传字符串内容 ###############
+</span><span class="line"># extra = qiniu.io.PutExtra()
+</span><span class="line"># extra.mime_type = "text/plain"
+</span><span class="line"># key = "hellotxt"
+</span><span class="line"># data = StringIO.StringIO("hello!") # data 可以是str或readable对象
+</span><span class="line"># ret, err = qiniu.io.put(uptoken, key, data, extra)
+</span><span class="line"># if err is not None:
+</span><span class="line">#     sys.stderr.write('error: %s ' % err)</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p><a href="http://zh.wikipedia.org/wiki/%E7%9F%A9%E9%98%B5">wiki</a>上关于矩阵和线性变换关系的解释，其中提到了从n维空间到m维空间的任何线性变换都对应于一个矩阵，其中也提到了相似矩阵其实是相同的线性变换在不同的坐标基下的不同表示而已。</p>
+<p>本来我以为要在Django中使用这个SDK会很难，因为看到该项目的Github介绍还要安装<code>Node.js</code>等工具，可是实践了发现其实不难，如果只是想简单地使用它那么可以就把它们当做一个js库就行了。</p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/xianxingbianhuan.png" alt="image" /></p>
+<p>需要的可以下载 <a href="http://hujiaweibujidao.github.io/files/qiniudemo.zip">A Django site using Qiniu JS SDK</a></p>
 
-<p>2.线性变换</p>
+<p>如果要正常运行，请先仔细阅读下面的内容：</p>
 
-<p>好吧，矩阵是线性变换，那什么是线性变换呢？</p>
+<p>1.修改<code>video/views.py</code>中的如下内容，具体填什么你懂得</p>
 
-<p>wiki中对线性变换的解释，这些变换其实主要包括缩放、旋转、反射等，注意不包括平移，线性变换需要满足下面两个条件：</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">BUCKET_NAME = "YOUR_BUCKET_NAME"
+</span><span class="line">qiniu.conf.ACCESS_KEY = "YOUR_ACCESS_KEY"
+</span><span class="line">qiniu.conf.SECRET_KEY = "YOUR_SECRET_KEY"</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<script type="math/tex; mode=display">f(\alpha v)=\alpha v \quad f(u+v)=f(u)+f(v)</script>
+<p>2.修改<code>static/js/main.js</code>中的内容，我设置了获取uptoken的请求URL为<code>/video/uptoken</code>，这样每次要上传一个文件的时候，这个URL就会被调用，它会返回一个JSON字符串，包含了<code>uptoken</code>的值，具体可见<code>video/views.py</code>中的<code>uptoken</code>方法；其次还设置了域名，你需要将它设置为你的七牛域名，例如<code>http://whyeduvideo.qiniudn.com/</code></p>
 
-<p><img src="http://hujiaweibujidao.github.io/images/math/xianxinbianhua2.png" alt="image" /></p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">uptoken_url: '/video/uptoken',
+</span><span class="line">domain: 'YOUR_DOMAIN_NAME',</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>(1)放缩变换</p>
+<p>其他的内容就不用修改了，直接运行项目，进入到<code>http://127.0.0.1:8000/video/</code>下就能看到</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-
-A=\left[ \begin{array}{cc} \frac{3}{2} & 0 \\ 0 & \frac{3}{2} \end{array} \right] \quad
-\rightarrow \left\{ \begin{array}{c} x'=\frac{3}{2}x \\ y'=\frac{3}{2}y \end{array} \right.
- %]]></script>
-
-<p>放缩反射，x和y都变成原来的$\frac{3}{2}$倍。</p>
-
-<p>(2)反射变换</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-
-A=\left[ \begin{array}{cc} -1 & 0 \\ 0 & 1 \end{array} \right] \quad
-\rightarrow \left\{ \begin{array}{cc} x'=-x \\ y'=y \end{array} \right.
- %]]></script>
-
-<p>水平反射，x变成对应的相反数，y不变。</p>
-
-<p>什么是反射？</p>
-
-<p><a href="http://zh.wikipedia.org/wiki/%E5%8F%8D%E5%B0%84_(%E6%95%B0%E5%AD%A6)">反射 on wiki</a>上的解释是：<strong>反射是把一个物体变换成它的镜像的映射。对于二维空间中的反射，需要使用一条直线（反射轴）作为“镜子”，对于三维空间中的反射就要使用平面作为镜子。</strong></p>
-
-<p><strong>最常用的反射变换就是<a href="http://zh.wikipedia.org/wiki/%E8%B1%AA%E6%96%AF%E9%9C%8D%E5%B0%94%E5%BE%B7%E5%8F%98%E6%8D%A2">Householder变换 on wiki</a>了，这一变换将一个向量变换为由一个超平面反射的镜像，是一种线性变换。Householder变换可以将向量的某些元素置零，同时保持该向量的范数不变。</strong>关于Householder的内部原理以及代码实现请请参考后面的<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/">矩阵分解总结</a>部分，或者参考我写的另一份总结<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">《Numerical Methods Using Matlab》第三章 矩阵特征值和奇异值分解</a></p>
-
-<p>(3)旋转变换</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-
-A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\frac{\pi}{6}) & \cos(\frac{\pi}{6}) \end{array} \right] \quad
-\rightarrow \left\{ \begin{array}{c} x'=\frac{\sqrt{3}}{2}x-\frac{1}{2}y \\ y'=\frac{1}{2}x+\frac{\sqrt{3}}{2}y \end{array} \right.
- %]]></script>
-
-<p>旋转变换，<a href="http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan.png">一般性的证明请看这张图</a>，<a href="http://zh.wikipedia.org/wiki/%E6%97%8B%E8%BD%AC">wiki</a>中对二维空间旋转的解释。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/xuanzhuanbianhuan2.png" alt="image" /></p>
-
-<p>最常用的旋转矩阵就是<a href="http://zh.wikipedia.org/wiki/%E5%90%89%E6%96%87%E6%96%AF%E6%97%8B%E8%BD%AC">Givens旋转</a>。Givens 旋转在数值线性代数中主要的用途是在向量或矩阵中介入零。<strong>关于Givens旋转的内部原理以及代码实现请请参考后面的<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/">矩阵分解总结</a>部分。</strong></p>
-
-<p>3.逆矩阵和伴随矩阵</p>
-
-<p>理解了矩阵就是线性变换之后，那么就很容易明白逆矩阵就是将被作用对象从变换后的位置变换回来！</p>
-
-<p>那伴随矩阵又是什么呢？</p>
-
-<p><a href="http://zh.wikipedia.org/wiki/%E4%BC%B4%E9%9A%8F%E7%9F%A9%E9%98%B5">wiki</a>在线性代数中，一个方形矩阵的伴随矩阵A*是一个类似于逆矩阵$A^{-1}$的概念。如果矩阵可逆，那么它的逆矩阵和它的伴随矩阵之间只差一个系数(<script type="math/tex">A^{-1}=\frac{A^{*}}{det(A)}</script>)。也就是说，<strong>伴随矩阵其实是变换回来之后还进行了一次放缩，放缩的大小与矩阵的行列式值有关</strong>。</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/bansuijuzhen.png" alt="image" /></p>
-
-<p>举例说明伴随矩阵的计算，伴随矩阵其实就是原矩阵的代数余子式矩阵的转置！</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/bansuijuzhen2.png" alt="image" /></p>
-
-<p>伴随矩阵的一些性质</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/math/bansuijuzhen3.png" alt="image" /></p>
-
-<p>还需要注意的是，<strong>逆矩阵是对于方阵来说的，只有方阵才有逆矩阵的概念，那要不是方阵呢？那么就是广义的逆矩阵</strong>！广义逆矩阵在最小二乘法中有重要的应用。关于逆矩阵的求解以及代码实现请参考我写的另一份总结<a href="http://hujiaweibujidao.github.io/blog/2014/04/23/numerical-methods-using-matlab/">《Numerical Methods Using Matlab》第一章 线性方程组求解，最小二乘问题请参考第四章 曲线拟合和多项式插值</a>。关于矩阵逆矩阵的求解可以看后面的<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-6/">矩阵分解</a>部分。</p>
-
-<p>4.秩</p>
-
-<p>什么是矩阵的秩？</p>
-
-<p><a href="http://zh.wikipedia.org/wiki/%E7%A7%A9_(%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0)">wiki中的解释</a>在线性代数中，一个矩阵A的列秩是A的线性独立的纵列的极大数目。类似地，行秩是A的线性独立的横行的极大数目。矩阵的列秩和行秩总是相等的，因此它们可以简单地称作矩阵A的秩。通常表示为r(A)，rk(A)或rank A。m × n矩阵的秩最大为m和n中的较小者，表示为 min(m,n)。有尽可能大的秩的矩阵被称为有满秩；类似的，否则矩阵是秩不足（或称为“欠秩”）的。</p>
-
-<p><strong>矩阵的行秩与列秩相等，是线性代数基本定理的重要组成部分. 其基本证明思路是，矩阵可以看作线性映射的变换矩阵，列秩为像空间的维度，行秩为非零原像空间的维度，因此列秩与行秩相等，即像空间的维度与非零原像空间的维度相等（这里的非零原像空间是指约去了零空间后的商空间：原像空间）。这从矩阵的奇异值分解就可以看出来。</strong><a href="http://zh.wikipedia.org/wiki/%E7%A7%A9_(%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0)">证明可以参见wiki</a></p>
-
-<p>黄老师的总结中还给出了<strong>初等变换不改变矩阵的行秩和列秩</strong>的证明，此外还有，以下四个表述是等价的：</p>
-
-<p>• A 为满秩矩阵. 
-• A 为可逆矩阵. 
-• A 为非奇异矩阵.
-• |A| $\ne$ 0.</p>
-
-<p>说了这么多，那到底矩阵的秩对于矩阵表示的这个线性变换来说意味着什么？</p>
-
-<p><strong>我的理解是，矩阵的秩其实就是至少需要几个基向量就能完全表示该矩阵(线性变换)。</strong></p>
-
-<!--
-矩阵的一个重要用途是解线性方程组。线性方程组中未知量的系数可以排成一个矩阵，加上常数项，则称为增广矩阵。另一个重要用途是表示线性变换，即是诸如f(x)  = 4x之类的线性函数的推广。设定基底后，某个向量v可以表示为m×1的矩阵,而线性变换f可以表示为行数为m的矩阵A，使得经过变换后得到的向量f(v)可以表示成Av的形式。矩阵的特征值和特征向量可以揭示线性变换的深层特性。
--->
-
-<p>好吧，其实还有转置矩阵对不对？<a href="http://zh.wikipedia.org/wiki/%E8%BD%89%E7%BD%AE">转置on wiki</a>是从m×n矩阵的向量空间到所有n×m矩阵的向量空间的线性映射。这个我还不太理解，读者若明白了请留言告知，谢谢！</p>
-
-<p>OK，矩阵的理解就到这里吧，下节介绍矩阵的特征值和特征向量，也可以直接看看后面关于其他矩阵的理解，例如相似矩阵和正交矩阵等等。</p>
+<p><img src="http://hujiaweibujidao.github.io/qiniu2.png" alt="image" /></p>
 
 <p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/">http://hujiaweibujidao.github.io/blog/2014/04/29/linearalgebra-summary-2/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/11/14/using-qiniu-js-sdk-to-upload-videos-in-django/">http://hujiaweibujidao.github.io/blog/2014/11/14/using-qiniu-js-sdk-to-upload-videos-in-django/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 </div>
 
 
@@ -280,12 +299,12 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
   
 
 
-<time datetime="2014-04-29T14:03:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2014</time>
+<time datetime="2014-11-14T22:48:00+08:00" pubdate data-updated="true">Nov 14<span>th</span>, 2014</time>
 				
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/math/'>math</a>
+    <a class='category' href='/blog/categories/python/'>python</a>
   
 </span>
 
@@ -301,10 +320,8 @@ A=\left[ \begin{array}{cc} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\f
 			
 			<p class="meta">
 				
-				<a class="basic-alignment left" href="/blog/2014/04/29/linearalgebra-summary-1/" title="Previous Post: LAS 1-Determinant">&laquo; LAS 1-Determinant</a>
+				<a class="basic-alignment left" href="/blog/2014/11/14/acdream-java-contest/" title="Previous Post: ACdream Java Contest">&laquo; ACdream Java Contest</a>
 				
-				
-				<a class="basic-alignment right" href="/blog/2014/04/29/linearalgebra-summary-3/" title="Next Post: LAS 3-EigenVectors and Eigenvalues">LAS 3-EigenVectors and Eigenvalues &raquo;</a>
 				
 			</p>
 		</footer>
