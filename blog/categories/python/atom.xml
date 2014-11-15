@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-11-15T09:40:48+08:00</updated>
+  <updated>2014-11-15T10:00:12+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -26,13 +26,13 @@
 
 <p>七牛提供了一个演示通过该SDK进行文件上传的网站：<a href="http://jssdk.demo.qiniu.io">http://jssdk.demo.qiniu.io</a></p>
 
-<p><img src="http://hujiaweibujidao.github.io/qiniu1.png" alt="image" /></p>
+<p><img src="http://hujiaweibujidao.github.io/images/qiniu1.png" alt="image" /></p>
 
 <p>这个网站做得非常好，演示了文件上传并显示了上传的进度，正是我想要的效果，所以我后面把这个JS SDK嵌入到Django项目中，测试其功能</p>
 
 <p>下面这段代码演示的是在纯Python项目中如何将文件上传到七牛服务器，若还没有安装七牛的话请先运行 <code>pip install qiniu</code></p>
 
-<p>```
+<p>```python
 # coding=utf-8
 import os</p>
 
@@ -110,7 +110,7 @@ domain: 'YOUR_DOMAIN_NAME',
 
 <p>其他的内容就不用修改了，直接运行项目，进入到<code>http://127.0.0.1:8000/video/</code>下就能看到</p>
 
-<p><img src="http://hujiaweibujidao.github.io/qiniu2.png" alt="image" /></p>
+<p><img src="http://hujiaweibujidao.github.io/images/qiniu2.png" alt="image" /></p>
 
 ]]></content>
   </entry>

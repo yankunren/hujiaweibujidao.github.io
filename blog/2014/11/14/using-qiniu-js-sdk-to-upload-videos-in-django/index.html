@@ -136,13 +136,13 @@
 
 <p>七牛提供了一个演示通过该SDK进行文件上传的网站：<a href="http://jssdk.demo.qiniu.io">http://jssdk.demo.qiniu.io</a></p>
 
-<p><img src="http://hujiaweibujidao.github.io/qiniu1.png" alt="image" /></p>
+<p><img src="http://hujiaweibujidao.github.io/images/qiniu1.png" alt="image" /></p>
 
 <p>这个网站做得非常好，演示了文件上传并显示了上传的进度，正是我想要的效果，所以我后面把这个JS SDK嵌入到Django项目中，测试其功能</p>
 
 <p>下面这段代码演示的是在纯Python项目中如何将文件上传到七牛服务器，若还没有安装七牛的话请先运行 <code>pip install qiniu</code></p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -195,59 +195,60 @@
 <span class="line-number">51</span>
 <span class="line-number">52</span>
 <span class="line-number">53</span>
-</pre></td><td class="code"><pre><code class=""><span class="line"># coding=utf-8
-</span><span class="line">import os
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># coding=utf-8</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">os</span>
 </span><span class="line">
-</span><span class="line">__author__ = 'hujiawei'
-</span><span class="line">__doc__ = 'qiniu sdk video demo'
+</span><span class="line"><span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;hujiawei&#39;</span>
+</span><span class="line"><span class="n">__doc__</span> <span class="o">=</span> <span class="s">&#39;qiniu sdk video demo&#39;</span>
 </span><span class="line">
-</span><span class="line">import StringIO
-</span><span class="line">import sys
-</span><span class="line">import qiniu.conf
-</span><span class="line">import qiniu.rs
-</span><span class="line">import qiniu.io
+</span><span class="line"><span class="kn">import</span> <span class="nn">StringIO</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">sys</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">qiniu.conf</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">qiniu.rs</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">qiniu.io</span>
 </span><span class="line">
-</span><span class="line">BUCKET_NAME = "YOUR_BUCKET_NAME"
-</span><span class="line">qiniu.conf.ACCESS_KEY = "YOUR_ACCESS_KEY"
-</span><span class="line">qiniu.conf.SECRET_KEY = "YOUR_SECRET_KEY"
+</span><span class="line"><span class="n">BUCKET_NAME</span> <span class="o">=</span> <span class="s">&quot;YOUR_BUCKET_NAME&quot;</span>
+</span><span class="line"><span class="n">qiniu</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">ACCESS_KEY</span> <span class="o">=</span> <span class="s">&quot;YOUR_ACCESS_KEY&quot;</span>
+</span><span class="line"><span class="n">qiniu</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="s">&quot;YOUR_SECRET_KEY&quot;</span>
 </span><span class="line">
-</span><span class="line">policy = qiniu.rs.PutPolicy(BUCKET_NAME)
-</span><span class="line">uptoken = policy.token()
-</span><span class="line">print(uptoken)
+</span><span class="line"><span class="n">policy</span> <span class="o">=</span> <span class="n">qiniu</span><span class="o">.</span><span class="n">rs</span><span class="o">.</span><span class="n">PutPolicy</span><span class="p">(</span><span class="n">BUCKET_NAME</span><span class="p">)</span>
+</span><span class="line"><span class="n">uptoken</span> <span class="o">=</span> <span class="n">policy</span><span class="o">.</span><span class="n">token</span><span class="p">()</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="n">uptoken</span><span class="p">)</span>
 </span><span class="line">
-</span><span class="line"># ############ 示例：上传视频 ###############
-</span><span class="line"># extra = qiniu.io.PutExtra()
-</span><span class="line"># item = os.path.join(os.getcwd(), 'hellokitty.m4v')
-</span><span class="line"># ret, err = qiniu.io.put_file(uptoken, None, item, extra)
-</span><span class="line"># if err is not None:
-</span><span class="line">#     sys.stderr.write('error: %s ' % err)
+</span><span class="line"><span class="c"># ############ 示例：上传视频 ###############</span>
+</span><span class="line"><span class="c"># extra = qiniu.io.PutExtra()</span>
+</span><span class="line"><span class="c"># item = os.path.join(os.getcwd(), &#39;hellokitty.m4v&#39;)</span>
+</span><span class="line"><span class="c"># ret, err = qiniu.io.put_file(uptoken, None, item, extra)</span>
+</span><span class="line"><span class="c"># if err is not None:</span>
+</span><span class="line"><span class="c">#     sys.stderr.write(&#39;error: %s &#39; % err)</span>
 </span><span class="line">
-</span><span class="line">#ok: hamster.swf
+</span><span class="line"><span class="c">#ok: hamster.swf</span>
 </span><span class="line">
 </span><span class="line">
-</span><span class="line"># ############ 示例：上传图片 ###############
-</span><span class="line">extra = qiniu.io.PutExtra()
-</span><span class="line">extra.mime_type = "image/jpeg"
-</span><span class="line"># print os.getcwd() #/Users/hujiawei/PycharmProjects/qiniusimple
-</span><span class="line">item = os.path.join(os.getcwd(), 'coder.jpg')
-</span><span class="line">ret, err = qiniu.io.put_file(uptoken, None, item, extra)
-</span><span class="line">if err is not None:
-</span><span class="line">    sys.stderr.write('error: %s ' % err)
+</span><span class="line"><span class="c"># ############ 示例：上传图片 ###############</span>
+</span><span class="line"><span class="n">extra</span> <span class="o">=</span> <span class="n">qiniu</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">PutExtra</span><span class="p">()</span>
+</span><span class="line"><span class="n">extra</span><span class="o">.</span><span class="n">mime_type</span> <span class="o">=</span> <span class="s">&quot;image/jpeg&quot;</span>
+</span><span class="line"><span class="c"># print os.getcwd() #/Users/hujiawei/PycharmProjects/qiniusimple</span>
+</span><span class="line"><span class="n">item</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s">&#39;coder.jpg&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="n">ret</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">qiniu</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">put_file</span><span class="p">(</span><span class="n">uptoken</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">extra</span><span class="p">)</span>
+</span><span class="line"><span class="k">if</span> <span class="n">err</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+</span><span class="line">    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;error: </span><span class="si">%s</span><span class="s"> &#39;</span> <span class="o">%</span> <span class="n">err</span><span class="p">)</span>
 </span><span class="line">
-</span><span class="line"># extra = qiniu.io.PutExtra()
-</span><span class="line"># # extra.mime_type = "image/jpeg" #image/png 七牛能够自动识别mime-type
-</span><span class="line"># # print os.getcwd() #/Users/hujiawei/PycharmProjects/qiniusimple
-</span><span class="line"># item = os.path.join(os.getcwd(), 'apple.png')
-</span><span class="line"># ret, err = qiniu.io.put_file(uptoken, None, item, extra)
+</span><span class="line"><span class="c"># extra = qiniu.io.PutExtra()</span>
+</span><span class="line"><span class="c"># # extra.mime_type = &quot;image/jpeg&quot; #image/png 七牛能够自动识别mime-type</span>
+</span><span class="line"><span class="c"># # print os.getcwd() #/Users/hujiawei/PycharmProjects/qiniusimple</span>
+</span><span class="line"><span class="c"># item = os.path.join(os.getcwd(), &#39;apple.png&#39;)</span>
+</span><span class="line"><span class="c"># ret, err = qiniu.io.put_file(uptoken, None, item, extra)</span>
 </span><span class="line">
-</span><span class="line">############# 示例：上传字符串内容 ###############
-</span><span class="line"># extra = qiniu.io.PutExtra()
-</span><span class="line"># extra.mime_type = "text/plain"
-</span><span class="line"># key = "hellotxt"
-</span><span class="line"># data = StringIO.StringIO("hello!") # data 可以是str或readable对象
-</span><span class="line"># ret, err = qiniu.io.put(uptoken, key, data, extra)
-</span><span class="line"># if err is not None:
-</span><span class="line">#     sys.stderr.write('error: %s ' % err)</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line"><span class="c">############# 示例：上传字符串内容 ###############</span>
+</span><span class="line"><span class="c"># extra = qiniu.io.PutExtra()</span>
+</span><span class="line"><span class="c"># extra.mime_type = &quot;text/plain&quot;</span>
+</span><span class="line"><span class="c"># key = &quot;hellotxt&quot;</span>
+</span><span class="line"><span class="c"># data = StringIO.StringIO(&quot;hello!&quot;) # data 可以是str或readable对象</span>
+</span><span class="line"><span class="c"># ret, err = qiniu.io.put(uptoken, key, data, extra)</span>
+</span><span class="line"><span class="c"># if err is not None:</span>
+</span><span class="line"><span class="c">#     sys.stderr.write(&#39;error: %s &#39; % err)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>本来我以为要在Django中使用这个SDK会很难，因为看到该项目的Github介绍还要安装<code>Node.js</code>等工具，可是实践了发现其实不难，如果只是想简单地使用它那么可以就把它们当做一个js库就行了。</p>
 
@@ -257,23 +258,25 @@
 
 <p>1.修改<code>video/views.py</code>中的如下内容，具体填什么你懂得</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">BUCKET_NAME = "YOUR_BUCKET_NAME"
-</span><span class="line">qiniu.conf.ACCESS_KEY = "YOUR_ACCESS_KEY"
-</span><span class="line">qiniu.conf.SECRET_KEY = "YOUR_SECRET_KEY"</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">BUCKET_NAME</span> <span class="o">=</span> <span class="s">&quot;YOUR_BUCKET_NAME&quot;</span>
+</span><span class="line"><span class="n">qiniu</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">ACCESS_KEY</span> <span class="o">=</span> <span class="s">&quot;YOUR_ACCESS_KEY&quot;</span>
+</span><span class="line"><span class="n">qiniu</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="s">&quot;YOUR_SECRET_KEY&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>2.修改<code>static/js/main.js</code>中的内容，我设置了获取uptoken的请求URL为<code>/video/uptoken</code>，这样每次要上传一个文件的时候，这个URL就会被调用，它会返回一个JSON字符串，包含了<code>uptoken</code>的值，具体可见<code>video/views.py</code>中的<code>uptoken</code>方法；其次还设置了域名，你需要将它设置为你的七牛域名，例如<code>http://whyeduvideo.qiniudn.com/</code></p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">uptoken_url: '/video/uptoken',
-</span><span class="line">domain: 'YOUR_DOMAIN_NAME',</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">uptoken_url</span><span class="p">:</span> <span class="s">&#39;/video/uptoken&#39;</span><span class="p">,</span>
+</span><span class="line"><span class="n">domain</span><span class="p">:</span> <span class="s">&#39;YOUR_DOMAIN_NAME&#39;</span><span class="p">,</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>其他的内容就不用修改了，直接运行项目，进入到<code>http://127.0.0.1:8000/video/</code>下就能看到</p>
 
-<p><img src="http://hujiaweibujidao.github.io/qiniu2.png" alt="image" /></p>
+<p><img src="http://hujiaweibujidao.github.io/images/qiniu2.png" alt="image" /></p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/11/14/using-qiniu-js-sdk-to-upload-videos-in-django/">http://hujiaweibujidao.github.io/blog/2014/11/14/using-qiniu-js-sdk-to-upload-videos-in-django/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
