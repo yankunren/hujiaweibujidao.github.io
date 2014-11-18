@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-11-18T10:49:01+08:00</updated>
+  <updated>2014-11-18T13:51:49+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -22,7 +22,7 @@
 
 <p>这次写解题报告的人很靠谱啊，直接附上关键代码，哈哈哈</p>
 
-<p><a href="http://codeforces.com/contest/489/problem/A">489A - SwapSort</a></p>
+<h4 id="a---swapsorthttpcodeforcescomcontest489problema"><a href="http://codeforces.com/contest/489/problem/A">489A - SwapSort</a></h4>
 
 <p>这题很简单，大致就是让你通过不超过n次的数据交换排序一个长度为n的数组，其实用选择排序就行了嘛，我比赛的时候不知怎么搞的，首先想到快排，结果撸了两种快排，终于有一种快排过了pretests，但是后面的system tests就挂了。。。</p>
 
@@ -128,7 +128,7 @@
 </span><span class="line"><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p><a href="http://codeforces.com/contest/489/problem/B">489B - BerSU Ball</a></p>
+<h4 id="b---bersu-ballhttpcodeforcescomcontest489problemb"><a href="http://codeforces.com/contest/489/problem/B">489B - BerSU Ball</a></h4>
 
 <p>这题大意是n个男孩m个女孩的舞蹈技能不同，匹配时要满足他们的技能差值不超过1，求最大匹配。我一看完了慌了，这么快就要二分图匹配了？可是当我快速复习二分图匹配(大神请尽情鄙视新手吧…)时发现，尼玛这题贪心就行了啊，结果一分钟一撸就过了！核心代码就像是在做合并排序的合并操作，用两个指针分别指向两个数组的当前元素下标，如果它们能满足配对就配对，然后两个指针都向后移动，不能的话数据较小的对应的指针向后移动就行了。</p>
 
@@ -220,7 +220,7 @@
 </span><span class="line"><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p><a href="http://codeforces.com/contest/489/problem/C">489C - Given Length and Sum of Digits…</a></p>
+<h4 id="c---given-length-and-sum-of-digitshttpcodeforcescomcontest489problemc"><a href="http://codeforces.com/contest/489/problem/C">489C - Given Length and Sum of Digits…</a></h4>
 
 <p>这题大意是求由<code>m</code>位数字组成的且各位数字之和为<code>s</code>的最大数和最小数，最大数我们可以通过贪心的方式来得到，也就是从高位往低位开始设置每位的值，当前位总是取它能取的最大的那个数字，如果最终得到的最大数的最后一个数字不是<code>1</code>的话，那么翻转最大数就是最小数了，否则将最小数视为第一位数字是<code>1</code>，后面是满足由<code>m-1</code>位数字组成的且各位数字之和为<code>s-1</code>的最大数的翻转数，注意<code>m=1</code>的情况(被这个坑坑了好几次…)</p>
 
@@ -341,6 +341,110 @@
 </span><span class="line">            <span class="n">k</span><span class="o">++;</span>
 </span><span class="line">        <span class="o">}</span>
 </span><span class="line">        <span class="k">return</span> <span class="n">max</span><span class="o">;</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line">
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="d---unbearable-controversy-of-beinghttpcodeforcescomcontest489problemd"><a href="http://codeforces.com/contest/489/problem/D">489D - Unbearable Controversy of Being</a></h4>
+
+<p>这题内容比较长，大致就是说给你一些节点和某些节点之间的边的信息，求出该图中有多少个如题目中图示给出的那样的菱形，即节点a可以通过节点b也可以通过节点d到达节点c。这道题目解题报告给出的解法就是枚举，遍历任何两个节点a和c，求出它们中间的候选节点b和d，简单的方法是考虑与a相邻的节点是否也与节点c相邻，如果是的话那么该节点算是一个候选节点。最后由于节点a和节点c之间的任何两个候选节点的组合都能得到所需的菱形，那么就是C(r,2)，所有的这些组合相加就是最终的解。</p>
+
+<p>比较郁闷的是本题如果用Java来完成的话貌似一定需要精简代码，最好不要使用ArrayList等，而是使用原始的数组，以一定的空间来换时间，否则很容易超时。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kn">import</span> <span class="nn">java.lang.reflect.Array</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">//http://codeforces.com/contest/489/problem/D</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">//组合题，空间换时间</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UnbearableControversyofBeing2775D</span> <span class="o">{</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">Scanner</span> <span class="n">cin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+</span><span class="line">
+</span><span class="line">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">cin</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">        <span class="kt">int</span><span class="o">[]</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">];</span><span class="c1">//s[i]=j表示节点i有j个邻居</span>
+</span><span class="line">        <span class="kt">int</span><span class="o">[][]</span> <span class="n">v</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">n</span><span class="o">];</span><span class="c1">//v[i][j]=1 表示节点i和节点j相连</span>
+</span><span class="line">        <span class="kt">int</span><span class="o">[][]</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">n</span><span class="o">];</span><span class="c1">//t[i][j]=k表示节点i第j个邻居是k</span>
+</span><span class="line">
+</span><span class="line">        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">cin</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">;</span>
+</span><span class="line">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">a</span> <span class="o">=</span> <span class="n">cin</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">            <span class="n">b</span> <span class="o">=</span> <span class="n">cin</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">            <span class="n">v</span><span class="o">[</span><span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class="line">            <span class="n">t</span><span class="o">[</span><span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="n">s</span><span class="o">[</span><span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]]</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class="line">            <span class="n">s</span><span class="o">[</span><span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]++;</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">
+</span><span class="line">        <span class="c1">//</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class="line">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="o">)</span> <span class="o">{</span><span class="c1">//not the same node</span>
+</span><span class="line">                    <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n1</span><span class="o">;</span>
+</span><span class="line">                    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">s</span><span class="o">[</span><span class="n">i</span><span class="o">];</span> <span class="n">k</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">                        <span class="n">n1</span> <span class="o">=</span> <span class="n">t</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">k</span><span class="o">];</span>
+</span><span class="line">                        <span class="k">if</span> <span class="o">(</span><span class="n">n1</span> <span class="o">!=</span> <span class="n">i</span> <span class="o">&amp;&amp;</span> <span class="n">n1</span> <span class="o">!=</span> <span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">v</span><span class="o">[</span><span class="n">n1</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span><span class="c1">//nodes.get(n1).contains(j)</span>
+</span><span class="line">                            <span class="n">r</span><span class="o">++;</span>
+</span><span class="line">                        <span class="o">}</span>
+</span><span class="line">                    <span class="o">}</span>
+</span><span class="line">                    <span class="n">count</span> <span class="o">+=</span> <span class="n">r</span> <span class="o">*</span> <span class="o">(</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span><span class="c1">//combination</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">count</span><span class="o">);</span>
 </span><span class="line">    <span class="o">}</span>
 </span><span class="line">
 </span><span class="line"><span class="o">}</span>
