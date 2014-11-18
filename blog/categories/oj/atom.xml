@@ -4,7 +4,7 @@
   <title><![CDATA[Category: oj | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/oj/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-11-15T10:00:12+08:00</updated>
+  <updated>2014-11-18T10:37:13+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,195 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CodeForces Round 277.5 Div2]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/11/18/codeforces-round-277-dot-5-div2/"/>
+    <updated>2014-11-18T10:22:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/11/18/codeforces-round-277-dot-5-div2</id>
+    <content type="html"><![CDATA[<p>昨晚熬夜刷了CodeForces Round 277.5 Div2，哎，果然很难适应这么晚做题，不在状态，一个小时后才进入状态了，结果比赛完了整个人就睡不着了。。。</p>
+
+<p>这次写解题报告的人很靠谱啊，直接附上关键代码，哈哈哈</p>
+
+<p><a href="http://codeforces.com/contest/489/problem/A">489A - SwapSort</a></p>
+
+<p>这题很简单，大致就是让你通过不超过n次的数据交换排序一个长度为n的数组，其实用选择排序就行了嘛，我比赛的时候不知怎么搞的，首先想到快排，结果撸了两种快排，终于有一种快排过了pretests，但是后面的system tests就挂了。。。</p>
+
+<p>```java
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Scanner;</p>
+
+<p>//http://codeforces.com/contest/489/problem/A</p>
+
+<p>//选择排序，最多只需要n次交换</p>
+
+<p>public class SwapSort2775A {</p>
+
+<pre><code>private static ArrayList&lt;ASwap2&gt; swaps;
+
+public static void main(String[] args) {
+    Scanner cin = new Scanner(System.in);
+    int n = cin.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i &lt; n; i++) {
+        a[i] = cin.nextInt();
+    }
+    swaps = new ArrayList&lt;ASwap2&gt;();
+    int t;
+    for (int i = 0; i &lt; n; i++) {
+        t = i;
+        for (int k = i; k &lt; n; k++) {
+            if (a[k] &lt; a[t]) t = k;//
+        }
+        if (t != i) {
+            swaps.add(new ASwap2(t, i));
+            int s = a[i];
+            a[i] = a[t];
+            a[t] = s;
+        }
+    }
+    System.out.println(swaps.size());
+    for (ASwap2 swap : swaps) {
+        System.out.println(swap.x + " " + swap.y);
+    }
+}
+
+static class ASwap2 {//
+
+    int x, y;
+
+    ASwap2(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p><a href="http://codeforces.com/contest/489/problem/B">489B - BerSU Ball</a></p>
+
+<p>这题一看感觉完了，要二分图匹配了，可是当我复习了下二分图匹配(很忽视新手…)发现，尼玛这题贪心就行了啊，结果一分钟一撸就过了！核心代码就像是在做合并排序的合并操作，用两个指针分别指向两个数组的当前元素下标，如果它们能满足配对就配对，然后两个指针都向后移动，不能的话数据较小的数组的指针向后移动就行了。</p>
+
+<p>```
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Scanner;</p>
+
+<p>//http://codeforces.com/contest/489/problem/B</p>
+
+<p>//贪心，n个男孩m个女孩的舞蹈技能不同，匹配时要满足他们的技能差值不超过1，求最大匹配</p>
+
+<p>public class BerSUBall2775B {</p>
+
+<pre><code>public static void main(String[] args) {
+    Scanner cin = new Scanner(System.in);
+    int n = cin.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i &lt; n; i++) {
+        a[i] = cin.nextInt();
+    }
+    int m = cin.nextInt();
+    int[] b = new int[m];
+    for (int i = 0; i &lt; m; i++) {
+        b[i] = cin.nextInt();
+    }
+    Arrays.sort(a);
+    Arrays.sort(b);
+    int count = 0;
+    int i = 0, j = 0;
+    while (i &lt; n &amp;&amp; j &lt; m) {
+        if (Math.abs(a[i] - b[j]) &lt;= 1) {
+            i++;
+            j++;
+            count++;
+        } else {
+            if (a[i] &lt; b[j]) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+    }
+    System.out.println(count);
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p><a href="http://codeforces.com/contest/489/problem/C">489C - Given Length and Sum of Digits…</a></p>
+
+<p>这题大意是求由<code>m</code>位数字组成的且各位数字之和为<code>s</code>的最大数和最小数，最大数我们可以通过贪心的方式来得到，也就是从高位往低位开始设置每位的值，当前位总是取它能取的最大的那个数字，如果最大数的最后一个数字不是<code>1</code>的话，那么翻转最大数就是最小数了，否则将最小数视为第一位数字是<code>1</code>，后面是满足由<code>m-1</code>位数字组成的且各位数字之和为<code>s-1</code>的最大数的翻转数，注意<code>m=1</code>的情况(被这个坑坑了好几次…)</p>
+
+<p>```
+import java.util.Scanner;</p>
+
+<p>//http://codeforces.com/contest/489/problem/C</p>
+
+<p>//贪心</p>
+
+<p>public class GivenLengthandSumofDigits2775C {</p>
+
+<pre><code>public static void main(String[] args) {
+    Scanner cin = new Scanner(System.in);
+
+    int m = cin.nextInt();
+    int s = cin.nextInt();
+
+    if ((9 * m &lt; s) || (s &lt; 1 &amp;&amp; m &gt; 1)) {
+        System.out.println("-1 -1");
+        return;
+    }
+
+    String max = findMax(m, s);
+    String min = "";
+
+    //求最小值
+    if (max.charAt(max.length() - 1) != '0') {
+        min = new StringBuilder(max).reverse().toString();
+        System.out.println(min + " " + max);
+        return;
+    }
+
+    //特殊情况
+    if (m == 1) {
+        min = "" + s;
+    } else {
+        min = findMax(m - 1, s - 1);
+        min = "1" + new StringBuilder(min).reverse().toString();
+    }
+
+    System.out.println(min + " " + max);
+}
+
+//求最大值
+static String findMax(int m, int s) {
+    int k = 1;//当前第几位
+    int r = s;//剩余的总和
+
+    String max = "";
+    while (k &lt;= m) {
+        if (r &gt;= 9) {
+            max = max + "9";
+            r = r - 9;
+        } else {
+            max = max + r;
+            r = 0;
+        }
+        k++;
+    }
+    return max;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ACdream Java Contest]]></title>
