@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-11-18T13:51:49+08:00</updated>
+  <updated>2014-11-19T22:05:25+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -22,13 +22,13 @@
 
 <p>我想要的目标是可以上传视频，最好还能显示上传的进度</p>
 
-<p>传送门: <a href="https://github.com/qiniupd/qiniu-js-sdk">七牛的Javascript SDK on Github</a></p>
-
-<p>七牛提供了一个演示通过该SDK进行文件上传的网站：<a href="http://jssdk.demo.qiniu.io">http://jssdk.demo.qiniu.io</a></p>
+<p>七牛提供了一个演示通过文件上传的网站：<a href="http://jssdk.demo.qiniu.io">http://jssdk.demo.qiniu.io</a></p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/qiniu1.png" alt="image" /></p>
 
-<p>这个网站做得非常好，演示了文件上传并显示了上传的进度，正是我想要的效果，所以我后面把这个JS SDK嵌入到Django项目中，测试其功能</p>
+<p>该SDK是七牛提供的Javascript SDK，传送门: <a href="https://github.com/qiniupd/qiniu-js-sdk">七牛的Javascript SDK on Github</a></p>
+
+<p>这个演示网站做得非常不错，演示了文件上传并显示了上传的进度，正是我想要的效果，所以我后面把这个JS SDK嵌入到Django项目中，测试其功能</p>
 
 <p>下面这段代码演示的是在纯Python项目中如何将文件上传到七牛服务器，若还没有安装七牛的话请先运行 <code>pip install qiniu</code></p>
 
@@ -89,7 +89,7 @@ if err is not None:
 
 <p>本来我以为要在Django中使用这个SDK会很难，因为看到该项目的Github介绍还要安装<code>Node.js</code>等工具，可是实践了发现其实不难，如果只是想简单地使用它那么可以就把它们当做一个js库就行了。</p>
 
-<p>需要的可以下载 <a href="http://hujiaweibujidao.github.io/files/qiniudemo.zip">A Django site using Qiniu JS SDK</a></p>
+<p>需要的可以下载我制作的可运行的Django项目 <a href="http://hujiaweibujidao.github.io/files/qiniudemo.zip">A Django site using Qiniu JS SDK</a></p>
 
 <p>如果要正常运行，请先仔细阅读下面的内容：</p>
 
@@ -111,6 +111,42 @@ domain: 'YOUR_DOMAIN_NAME',
 <p>其他的内容就不用修改了，直接运行项目，进入到<code>http://127.0.0.1:8000/video/</code>下就能看到</p>
 
 <p><img src="http://hujiaweibujidao.github.io/images/qiniu2.png" alt="image" /></p>
+
+<p>如果你想要得到上传之后的文件在七牛服务器上的链接地址的话，请看下面的内容</p>
+
+<p>在SDK的<code>js/ui.js</code>文件的189行的函数中，其中的变量<code>url</code>就是我们需要的，我们只需要通过js将这个变量赋值给界面中的其他元素中就行了，可以直接在下面的函数中进行赋值，也可以在<code>js/main.js</code>文件的<code>FileUploaded</code>函数中进行赋值，推荐后面一种方式。</p>
+
+<p>下面代码中的<code>id='videourl'</code>是我自己添加的，用于后面的赋值操作</p>
+
+<p><code>
+FileProgress.prototype.setComplete = function(up, info) {
+    var td = this.fileProgressWrapper.find('td:eq(2) .progress');
+    var res = $.parseJSON(info);
+    var url;
+    if (res.url) {
+        url = res.url;
+        str = "&lt;div&gt;&lt;strong&gt;Link:&lt;/strong&gt;&lt;a href=" + res.url + " target='_blank' id='videourl' &gt; " + res.url + "&lt;/a&gt;&lt;/div&gt;" +
+            "&lt;div class=hash&gt;&lt;strong&gt;Hash:&lt;/strong&gt;" + res.hash + "&lt;/div&gt;";
+    } else {
+        var domain = up.getOption('domain');
+        url = domain + encodeURI(res.key);
+        var link = domain + res.key;
+        str = "&lt;div&gt;&lt;strong&gt;Link:&lt;/strong&gt;&lt;a href=" + url + " target='_blank'  id='videourl' &gt; " + link + "&lt;/a&gt;&lt;/div&gt;" +
+            "&lt;div class=hash&gt;&lt;strong&gt;Hash:&lt;/strong&gt;" + res.hash + "&lt;/div&gt;";
+    }
+</code></p>
+
+<p>在<code>js/main.js</code>文件的<code>FileUploaded</code>函数中进行赋值，下面的例子是将url赋值给表单中的一个隐藏的input组件。</p>
+
+<p>```
+ ‘FileUploaded’: function(up, file, info) {
+                var progress = new FileProgress(file, ‘fsUploadProgress’);
+                progress.setComplete(up, info);</p>
+
+<pre><code>            $('#inputurl').val($('#videourl').attr("href"));//url
+
+        }, ```
+</code></pre>
 
 ]]></content>
   </entry>
