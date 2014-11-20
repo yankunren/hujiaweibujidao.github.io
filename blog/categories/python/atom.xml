@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-11-20T10:18:54+08:00</updated>
+  <updated>2014-11-20T11:11:12+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -18,7 +18,9 @@
     <link href="http://hujiaweibujidao.github.io/blog/2014/11/14/using-qiniu-js-sdk-to-upload-videos-in-django/"/>
     <updated>2014-11-14T22:48:00+08:00</updated>
     <id>http://hujiaweibujidao.github.io/blog/2014/11/14/using-qiniu-js-sdk-to-upload-videos-in-django</id>
-    <content type="html"><![CDATA[<p>最近做的项目中需要使用七牛云存储服务来存储网站(Django开发)中用户上传的视频，于是就有了下面一番折腾。</p>
+    <content type="html"><![CDATA[<p>最近做的项目中需要使用七牛云存储服务来存储网站(Django开发)中用户上传的视频，于是就有了下面一番折腾，特此记录下来，以防以后需要。</p>
+
+<p>PS: 如何想要在SAE上使用Qiniu的话就需要将Qiniu Python SDK相关的源文件都拷贝到Django项目中，否则SAE会报找不到<code>qiniu</code>这个模块，因为SAE内置的预定义的模块列表中没有<code>qiniu</code>！</p>
 
 <p>我想要的目标是可以上传视频，最好还能显示上传的进度</p>
 
@@ -30,7 +32,7 @@
 
 <p>这个演示网站做得非常不错，演示了文件上传并显示了上传的进度，正是我想要的效果，所以我后面把这个JS SDK嵌入到Django项目中，测试其功能</p>
 
-<p>下面这段代码演示的是在纯Python项目中如何将文件上传到七牛服务器，若还没有安装七牛的话请先运行 <code>pip install qiniu</code></p>
+<p>下面这段代码演示的是在纯Python项目中如何将文件上传到七牛服务器，若还没有安装七牛的话请先运行 <code>pip install qiniu</code> [注意，我的版本是<code>6.1.8</code>，最近七牛的SDK发生了大变化，所以如果想要和我得到一样的效果请安装<code>6.1.8</code>版本，我的好友已经测试过其他的更新的版本都不行]</p>
 
 <p>```python
 # coding=utf-8
@@ -87,7 +89,7 @@ if err is not None:
 #     sys.stderr.write(‘error: %s ‘ % err)
 ```</p>
 
-<p>本来我以为要在Django中使用这个SDK会很难，因为看到该项目的Github介绍还要安装<code>Node.js</code>等工具，可是实践了发现其实不难，如果只是想简单地使用它那么可以就把它们当做一个js库就行了。</p>
+<p>本来我以为要在Django中使用这个SDK会很难，因为看到该项目的Github介绍还要安装<code>Node.js</code>等工具，可是实践了发现其实不难，如果只是想简单地使用它那么可以就把它们当做一个js库就行了，但是因为qiniu js sdk源码中的重要文件里面使用了不少相对路径，所以建议还是将sdk中的所有内容一起拷贝到Django项目中，保持其原有的相对位置。</p>
 
 <p>需要的可以下载我制作的可运行的Django项目 <a href="http://hujiaweibujidao.github.io/files/qiniudemo.zip">A Django site using Qiniu JS SDK</a></p>
 
