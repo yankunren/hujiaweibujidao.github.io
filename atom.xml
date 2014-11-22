@@ -4,7 +4,7 @@
   <title><![CDATA[Hujiawei Bujidao]]></title>
   <link href="http://hujiaweibujidao.github.io/atom.xml" rel="self"/>
   <link href="http://hujiaweibujidao.github.io/"/>
-  <updated>2014-11-22T14:40:20+08:00</updated>
+  <updated>2014-11-22T15:48:33+08:00</updated>
   <id>http://hujiaweibujidao.github.io/</id>
   <author>
     <name><![CDATA[hujiawei]]></name>
@@ -12,6 +12,394 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CodeForces Round 278 Div2]]></title>
+    <link href="http://hujiaweibujidao.github.io/blog/2014/11/22/codeforces-round-278-div2/"/>
+    <updated>2014-11-22T11:57:00+08:00</updated>
+    <id>http://hujiaweibujidao.github.io/blog/2014/11/22/codeforces-round-278-div2</id>
+    <content type="html"><![CDATA[<p>昨晚又熬夜参加CodeForces了，比赛拖延到1点半才开始，状态果然又是很糟糕，目前解决前面2道题</p>
+
+<h4 id="giga-towerhttpcodeforcescomcontest488problema"><a href="http://codeforces.com/contest/488/problem/A">Giga Tower</a></h4>
+
+<p>这题的大意是给你一个数字，让你求最近的大于这个数字并且含有数字8的数字与这个数字的差值，比如数字9，找到的数字应该是18，差值就是18-9=9。这题我又想多了，心想直接求肯定不行，然后设计了一个看起来不错的得到大于或者小于(用于负数)一个数字的最近的含有数字8的数字，结果写了蛮久了还是有不少bug，没敢提交，后来看到那么多人做出来了，就觉得这题没准直接累加就行，因为毕竟遇到8很容易，一般情况下都能很快得到那个目标数字，结果一试还真是行！</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test278A2</span> <span class="o">{</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">Scanner</span> <span class="n">cin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">cin</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(++</span><span class="n">a</span><span class="o">);</span>
+</span><span class="line">        <span class="k">while</span> <span class="o">(!</span><span class="n">s</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">&quot;8&quot;</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">b</span><span class="o">++;</span>
+</span><span class="line">            <span class="n">s</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(++</span><span class="n">a</span><span class="o">);</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line">
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="candy-boxeshttpcodeforcescomcontest488problemb"><a href="http://codeforces.com/contest/488/problem/B">Candy Boxes</a></h4>
+
+<p>这题首先告诉我们4个盒子里面的糖果数目满足如下条件</p>
+
+<script type="math/tex; mode=display">x4-x1=\frac{x2+x3}{2}=\frac{x1+x2+x3+x4}{4}, x1 \le x2 \le x3 \le x4</script>
+
+<p>也就是说这四个数字的range，median和average都相同，现在只告诉你其中
+n(<script type="math/tex">0 \le n \le 4</script>)个数字，让你求其他的数字，如果有很多的解只需要输出其中的一个即可，如果任何数字都不能满足的话输出NO。</p>
+
+<p>这题其实很简单，首先从上面的连等式中很快能够得到下面的结果</p>
+
+<script type="math/tex; mode=display">x1=\frac{x2+x3}{4}, x4=3*x1</script>
+
+<p>其中x4是x1的3倍是很关键的信息，然后分n分别为0，1，2，3，4这5种情况讨论就行了，难点在于n=2和n=3。</p>
+
+<p>当n=2时，先对这两个已知数排序，然后分别假设它们是(x1, x2)或者(x1, x3)等等所有可能的组合，根据条件求出剩下的两个数字，然后判断这四个数字是否满足条件，如果满足的话那就输出，否则输出NO。</p>
+
+<p>同理，当n=3时，分别假设剩下的那个数字是x1或者x2或者x3或者x4，求出来之后验证即可。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span>
+<span class="line-number">81</span>
+<span class="line-number">82</span>
+<span class="line-number">83</span>
+<span class="line-number">84</span>
+<span class="line-number">85</span>
+<span class="line-number">86</span>
+<span class="line-number">87</span>
+<span class="line-number">88</span>
+<span class="line-number">89</span>
+<span class="line-number">90</span>
+<span class="line-number">91</span>
+<span class="line-number">92</span>
+<span class="line-number">93</span>
+<span class="line-number">94</span>
+<span class="line-number">95</span>
+<span class="line-number">96</span>
+<span class="line-number">97</span>
+<span class="line-number">98</span>
+<span class="line-number">99</span>
+<span class="line-number">100</span>
+<span class="line-number">101</span>
+<span class="line-number">102</span>
+<span class="line-number">103</span>
+<span class="line-number">104</span>
+<span class="line-number">105</span>
+<span class="line-number">106</span>
+<span class="line-number">107</span>
+<span class="line-number">108</span>
+<span class="line-number">109</span>
+<span class="line-number">110</span>
+<span class="line-number">111</span>
+<span class="line-number">112</span>
+<span class="line-number">113</span>
+<span class="line-number">114</span>
+<span class="line-number">115</span>
+<span class="line-number">116</span>
+<span class="line-number">117</span>
+<span class="line-number">118</span>
+<span class="line-number">119</span>
+<span class="line-number">120</span>
+<span class="line-number">121</span>
+<span class="line-number">122</span>
+<span class="line-number">123</span>
+<span class="line-number">124</span>
+<span class="line-number">125</span>
+<span class="line-number">126</span>
+<span class="line-number">127</span>
+<span class="line-number">128</span>
+<span class="line-number">129</span>
+<span class="line-number">130</span>
+<span class="line-number">131</span>
+<span class="line-number">132</span>
+<span class="line-number">133</span>
+<span class="line-number">134</span>
+<span class="line-number">135</span>
+<span class="line-number">136</span>
+<span class="line-number">137</span>
+<span class="line-number">138</span>
+<span class="line-number">139</span>
+<span class="line-number">140</span>
+<span class="line-number">141</span>
+<span class="line-number">142</span>
+<span class="line-number">143</span>
+<span class="line-number">144</span>
+<span class="line-number">145</span>
+<span class="line-number">146</span>
+<span class="line-number">147</span>
+<span class="line-number">148</span>
+<span class="line-number">149</span>
+<span class="line-number">150</span>
+<span class="line-number">151</span>
+<span class="line-number">152</span>
+<span class="line-number">153</span>
+<span class="line-number">154</span>
+<span class="line-number">155</span>
+<span class="line-number">156</span>
+<span class="line-number">157</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+</span><span class="line">
+</span><span class="line"><span class="cm">/**</span>
+</span><span class="line"><span class="cm"> * hujiawei - 14/11/22.</span>
+</span><span class="line"><span class="cm"> */</span>
+</span><span class="line"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test278B</span> <span class="o">{</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">Scanner</span> <span class="n">cin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+</span><span class="line">
+</span><span class="line">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">cin</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">        <span class="kt">int</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">];</span>
+</span><span class="line">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">cin</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">
+</span><span class="line">        <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;1&quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;2&quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;2&quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;3&quot;</span><span class="o">);</span>
+</span><span class="line">        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+</span><span class="line">        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">4</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">2</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">3</span><span class="o">]))</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;NO&quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">3</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+</span><span class="line">            <span class="kt">int</span> <span class="n">a1</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">/</span> <span class="mi">3</span><span class="o">;</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a1</span><span class="o">,</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">2</span><span class="o">]))</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a1</span><span class="o">);</span>
+</span><span class="line">                <span class="k">return</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="kt">int</span> <span class="n">a4</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">*</span> <span class="mi">3</span><span class="o">;</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">2</span><span class="o">],</span> <span class="n">a4</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a4</span><span class="o">);</span>
+</span><span class="line">                <span class="k">return</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="kt">int</span> <span class="n">a2</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">-</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">a2</span><span class="o">,</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">2</span><span class="o">]))</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a2</span><span class="o">);</span>
+</span><span class="line">                <span class="k">return</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="kt">int</span> <span class="n">a3</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">-</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">a3</span><span class="o">,</span> <span class="n">a</span><span class="o">[</span><span class="mi">2</span><span class="o">]))</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a3</span><span class="o">);</span>
+</span><span class="line">                <span class="k">return</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;NO&quot;</span><span class="o">);</span>
+</span><span class="line">        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+</span><span class="line">            <span class="kt">int</span> <span class="n">a1</span><span class="o">,</span> <span class="n">a2</span><span class="o">,</span> <span class="n">a3</span><span class="o">,</span> <span class="n">a4</span><span class="o">;</span>
+</span><span class="line">            <span class="c1">//a1,a4</span>
+</span><span class="line">            <span class="n">a1</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class="line">            <span class="n">a4</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">a4</span> <span class="o">==</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">a1</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">a2</span> <span class="o">=</span> <span class="o">(</span><span class="n">a1</span> <span class="o">+</span> <span class="n">a4</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+</span><span class="line">                <span class="n">a3</span> <span class="o">=</span> <span class="o">(</span><span class="n">a1</span> <span class="o">+</span> <span class="n">a4</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a1</span><span class="o">,</span> <span class="n">a2</span><span class="o">,</span> <span class="n">a3</span><span class="o">,</span> <span class="n">a4</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a2</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a3</span><span class="o">);</span>
+</span><span class="line">                    <span class="k">return</span><span class="o">;</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="c1">//a1,a2</span>
+</span><span class="line">            <span class="n">a1</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class="line">            <span class="n">a2</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">a1</span> <span class="o">&gt;</span> <span class="n">a2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">a3</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a1</span> <span class="o">-</span> <span class="n">a2</span><span class="o">;</span>
+</span><span class="line">                <span class="n">a4</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">a1</span><span class="o">;</span>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a1</span><span class="o">,</span> <span class="n">a2</span><span class="o">,</span> <span class="n">a3</span><span class="o">,</span> <span class="n">a4</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a3</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a4</span><span class="o">);</span>
+</span><span class="line">                    <span class="k">return</span><span class="o">;</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="c1">//a1,a3</span>
+</span><span class="line">            <span class="n">a1</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class="line">            <span class="n">a3</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">a1</span> <span class="o">&gt;</span> <span class="n">a3</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">a2</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a1</span> <span class="o">-</span> <span class="n">a3</span><span class="o">;</span>
+</span><span class="line">                <span class="n">a4</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">a1</span><span class="o">;</span>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a1</span><span class="o">,</span> <span class="n">a2</span><span class="o">,</span> <span class="n">a3</span><span class="o">,</span> <span class="n">a4</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a2</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a4</span><span class="o">);</span>
+</span><span class="line">                    <span class="k">return</span><span class="o">;</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="c1">//a2,a3</span>
+</span><span class="line">            <span class="n">a2</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class="line">            <span class="n">a3</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">((</span><span class="n">a2</span> <span class="o">+</span> <span class="n">a3</span><span class="o">)</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">a1</span> <span class="o">=</span> <span class="o">(</span><span class="n">a2</span> <span class="o">+</span> <span class="n">a3</span><span class="o">)</span> <span class="o">/</span> <span class="mi">4</span><span class="o">;</span>
+</span><span class="line">                <span class="n">a4</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">a1</span><span class="o">;</span>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a1</span><span class="o">,</span> <span class="n">a2</span><span class="o">,</span> <span class="n">a3</span><span class="o">,</span> <span class="n">a4</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a1</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a4</span><span class="o">);</span>
+</span><span class="line">                    <span class="k">return</span><span class="o">;</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="c1">//a2,a4 and a3,a4</span>
+</span><span class="line">            <span class="n">a2</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class="line">            <span class="n">a4</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">a4</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">a1</span> <span class="o">=</span> <span class="n">a4</span> <span class="o">/</span> <span class="mi">3</span><span class="o">;</span>
+</span><span class="line">                <span class="n">a3</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a1</span> <span class="o">-</span> <span class="n">a2</span><span class="o">;</span>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a1</span><span class="o">,</span> <span class="n">a2</span><span class="o">,</span><span class="n">a3</span><span class="o">,</span> <span class="n">a4</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a1</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a3</span><span class="o">);</span>
+</span><span class="line">                    <span class="k">return</span><span class="o">;</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="c1">//a3,a4</span>
+</span><span class="line">            <span class="n">a3</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class="line">            <span class="n">a4</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">a4</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">a1</span> <span class="o">=</span> <span class="n">a4</span> <span class="o">/</span> <span class="mi">3</span><span class="o">;</span>
+</span><span class="line">                <span class="n">a2</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a1</span> <span class="o">-</span> <span class="n">a3</span><span class="o">;</span>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a1</span><span class="o">,</span> <span class="n">a2</span><span class="o">,</span><span class="n">a3</span><span class="o">,</span> <span class="n">a4</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a1</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a2</span><span class="o">);</span>
+</span><span class="line">                    <span class="k">return</span><span class="o">;</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="c1">//</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;NO&quot;</span><span class="o">);</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">check</span><span class="o">(</span><span class="kt">int</span> <span class="n">a1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">a2</span><span class="o">,</span> <span class="kt">int</span> <span class="n">a3</span><span class="o">,</span> <span class="kt">int</span> <span class="n">a4</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="k">if</span> <span class="o">(</span><span class="n">a1</span> <span class="o">&lt;=</span> <span class="n">a2</span> <span class="o">&amp;&amp;</span> <span class="n">a2</span> <span class="o">&lt;=</span> <span class="n">a3</span> <span class="o">&amp;&amp;</span> <span class="n">a3</span> <span class="o">&lt;=</span> <span class="n">a4</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">a4</span> <span class="o">-</span> <span class="n">a1</span><span class="o">)</span> <span class="o">==</span> <span class="o">(</span><span class="n">a2</span> <span class="o">+</span> <span class="n">a3</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">a4</span> <span class="o">-</span> <span class="n">a1</span><span class="o">)</span> <span class="o">==</span> <span class="o">(</span><span class="n">a1</span> <span class="o">+</span> <span class="n">a2</span> <span class="o">+</span> <span class="n">a3</span> <span class="o">+</span> <span class="n">a4</span><span class="o">)</span> <span class="o">/</span> <span class="mi">4</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line">
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/11/22/codeforces-round-278-div2/">http://hujiaweibujidao.github.io/blog/2014/11/22/codeforces-round-278-div2/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CodeForces Round 277.5 Div2]]></title>
@@ -8073,567 +8461,6 @@ B(n) &lt; lg n + 1 &lt; T(n).</p>
 
 <p class="post-footer">
                         Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-counting-101/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-counting-101/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Python Algorithms - C2 The basics]]></title>
-    <link href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/"/>
-    <updated>2014-07-01T10:20:00+08:00</updated>
-    <id>http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics</id>
-    <content type="html"><![CDATA[<p>最后更新时间：2014-7-7</p>
-
-<p><strong><center>Python算法设计篇(2)</center></strong>
-<strong><center>逸夫图书馆, 2014/7/1</center></strong></p>
-
-<h3 id="centerchapter-2-the-basicscenter"><center>Chapter 2: The basics</center></h3>
-
-<blockquote>
-  <p>Tracey: I didn’t know you were out there.  <br />
-Zoe: Sort of the point. Stealth—you may have heard of it.    <br />
-Tracey: I don’t think they covered that in basic.    <br />
-  —— From “The Message,” episode 14 of Firefly</p>
-</blockquote>
-
-<p>本节主要介绍了三个内容：算法渐近运行时间的表示方法、六条算法性能评估的经验以及Python中树和图的实现方式。</p>
-
-<h4 id="section">1.计算模型</h4>
-
-<p>图灵机模型(Turing machine)： <strong>A Turing machine is a simple (abstract) device that can read from, write to, and move along an infinitely long strip of paper.</strong>  The actual behavior of the machines varies. Each is a so-called finite state machine: it has a finite set of states (some of which indicate that it has finished), and every symbol it reads potentially triggers reading and/or writing and switching to a different state. You can think of this machinery as a set of rules. (“If I am in state 4 and see an X, I move one step to the left, write a Y, and switch to state 9.”) </p>
-
-<p>RAM模型(random-access machine)：标准的单核计算机，它大致有下面三个性质</p>
-
-<p>• We don’t have access to any form of concurrent execution; the machine simply executes one instruction after the other.</p>
-
-<p>计算机不能并发执行而只是按照指令顺序依次执行指令。</p>
-
-<p>• Standard, basic operations (such as arithmetic, comparisons, and memory access) all take constant (although possibly different) amounts of time. There are no more complicated basic operations (such as sorting).</p>
-
-<p>基本的操作都是常数时间完成的，没有其他的复杂操作。</p>
-
-<p>• One computer word (the size of a value that we can work with in constant time) is not unlimited but is big enough to address all the memory locations used to represent our problem, plus an extra percentage for our variables.</p>
-
-<p>计算机的字长足够大以使得它能够访问所有的内存地址。</p>
-
-<p>算法的本质： <strong>An algorithm is a procedure, consisting of a finite set of steps (possibly including loops and conditionals) that solves a given problem in finite time.</strong></p>
-
-<p>the notion of running time complexity (as described in the next section) is based on knowing how big a problem instance is, and that size is simply the amount of memory needed to encode it.  </p>
-
-<p>[算法的运行时间是基于问题的大小，这个大小是指问题的输入占用的内存空间大小]</p>
-
-<h4 id="section-1">2.算法渐近运行时间</h4>
-
-<p>主要介绍了大O符号、大$\Omega$符号以及大$\Theta$符号，这部分内容网上很多资料，大家也都知道了，此处略过，可以参考<a href="http://en.wikipedia.org/wiki/Big_O_notation">wikipedia_大O符号</a></p>
-
-<p>算法导论介绍到，对于三个符号可以做如下理解：$O$ = $\le$，$\Omega$ = $\ge$， $\Theta$ = $=$</p>
-
-<p>运行时间的三种特殊的情况：最优情况，最差情况，平均情况</p>
-
-<p>几种常见的运行时间以及算法实例 <a href="http://zh.wikipedia.org/zh-cn/时间复杂度">点击这里可以参考下wiki中的时间复杂度</a></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/complexity.png" alt="image" /></p>
-
-<h4 id="section-2">3.算法性能评估的经验</h4>
-
-<p>(1)Tip 1: If possible, don’t worry about it.</p>
-
-<p>如果暴力求解也还行就算了吧，别去担心了</p>
-
-<p>(2)Tip 2: For timing things, use timeit.</p>
-
-<p>使用<code>timeit</code>模块对运行时间进行分析，在前面的<a href="http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/">数据结构篇中第三部分数据结构</a>的list中已经介绍过了timeit模块，在使用的时候需要注意前面的运行不会影响后面的重复的运行(例如，分析排序算法运行时间，如果将前面已经排好序的序列传递给后面的重复运行是不行的)</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c">#timeit模块简单使用实例</span>
-</span><span class="line"><span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s">&quot;x = sum(range(10))&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>(3)Tip 3: To find bottlenecks, use a profiler.</p>
-
-<p>使用<code>cProfile</code>模块来获取更多的关于运行情况的内容，从而可以发现问题的瓶颈，如果系统没有<code>cProfile</code>模块，可以使用<code>profile</code>模块代替，关于这两者的更多内容可以查看<a href="https://docs.python.org/2/library/profile.html">Python standard library-Python Profilers</a></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c">#cProfile模块简单使用实例</span>
-</span><span class="line"><span class="kn">import</span> <span class="nn">cProfile</span>
-</span><span class="line"><span class="kn">import</span> <span class="nn">re</span>
-</span><span class="line"><span class="n">cProfile</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s">&#39;re.compile(&quot;foo|bar&quot;)&#39;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c">#运行结果：</span>
-</span><span class="line">
-</span><span class="line">         <span class="mi">194</span> <span class="n">function</span> <span class="n">calls</span> <span class="p">(</span><span class="mi">189</span> <span class="n">primitive</span> <span class="n">calls</span><span class="p">)</span> <span class="ow">in</span> <span class="mf">0.000</span> <span class="n">seconds</span>
-</span><span class="line">
-</span><span class="line">   <span class="n">Ordered</span> <span class="n">by</span><span class="p">:</span> <span class="n">standard</span> <span class="n">name</span>
-</span><span class="line">
-</span><span class="line">   <span class="n">ncalls</span>  <span class="n">tottime</span>  <span class="n">percall</span>  <span class="n">cumtime</span>  <span class="n">percall</span> <span class="n">filename</span><span class="p">:</span><span class="n">lineno</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">1</span><span class="p">(</span><span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">re</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">188</span><span class="p">(</span><span class="nb">compile</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">re</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">226</span><span class="p">(</span><span class="n">_compile</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">178</span><span class="p">(</span><span class="n">_compile_charset</span><span class="p">)</span>
-</span><span class="line">        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">sre_compile</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">207</span><span class="p">(</span><span class="n">_optimize_charset</span><span class="p">)</span>
-</span><span class="line"><span class="o">...</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>(4)Tip 4: Plot your results.</p>
-
-<p>画出算法性能结果图，如下图所示，可以使用的模块有<code>matplotlib</code></p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/plotresult.png" alt="image" /></p>
-
-<p>(5)Tip 5: Be careful when drawing conclusions based on timing comparisons.</p>
-
-<p>在对基于运行时间的比较而要下结论时需要小心</p>
-
-<p>First, any differences you observe may be because of random variations.</p>
-
-<p>首先，你观察到的差异可能是由于输入中的随机变化而引起的</p>
-
-<p>Second, there are issues when comparing averages. </p>
-
-<p>其次，比较算法的平均情况下的运行时间是存在问题的[这个我未理解，以下是作者的解释]</p>
-
-<p>At the very least, you should stick to comparing averages of actual timings. A common practice to get more meaningful numbers when performing timing experiments is to normalize the running time of each program, dividing it by the running time of some standard, simple algorithm. This can indeed be useful but can in some cases make your results less than meaningful. See the paper “How not to lie with statistics: The correct way to summarize benchmark results” by Fleming and Wallace for a few pointers. For some other perspectives, you could read Bast and Weber’s “Don’t compare averages,” or the more recent paper by Citron et al., “The harmonic or geometric mean: does it really matter?”</p>
-
-<p>Third, your conclusions may not generalize. </p>
-
-<p>最后，你下的结论不要太过于宽泛</p>
-
-<p>(6)Tip 6: Be careful when drawing conclusions about asymptotics from experiments.</p>
-
-<p>在对从实验中得到关于渐近时间的信息下结论时需要小心，实验只是对于理论的一个支撑，可以通过实验来推翻一个渐近时间结果的假设，但是反过来一般不行 [以下是作者的解释]</p>
-
-<p>If you want to say something conclusively about the asymptotic behavior of an algorithm, you need to analyze it, as described earlier in this chapter. Experiments can give you hints, but they are by their nature finite, and asymptotics deal with what happens for arbitrarily large data sizes. On the other hand, unless you’re working in theoretical computer science, the purpose of asymptotic analysis is to say something about the behavior of the algorithm when implemented and run on actual problem instances, meaning that experiments should be relevant.</p>
-
-<p>4.在Python中实现树和图</p>
-
-<p><strong>[Python中的dict和set]</strong> <br />
-Python中很多地方都使用了hash策略，在前面的<a href="http://hujiaweibujidao.github.io/blog/2014/05/07/python-algorithms-search/">Python数据结构篇中的搜索部分</a>已经介绍了hash的内容。Python提供了<code>hash</code>函数，例如<code>hash("Hello, world!")</code>得到<code>-943387004357456228</code> (结果不一定相同)。Python中的dict和set都使用了hash机制，所以平均情况下它们获取元素都是常数时间的。</p>
-
-<p>(1)图的表示：最常用的两种表示方式是邻接表和邻接矩阵 [假设要表示的图如下]</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/graphrep.png" alt="image" /></p>
-
-<p>邻接表 Adjacency Lists：因为历史原因，邻接表往往都是指链表list，但实际上也可以是其他的，例如在python中也可以是set或者dict，不同的表示方式有各自的优缺点，它们判断节点的连接关系和节点的度的方式甚至两个操作的性能都不太一样。</p>
-
-<p>① adjacency lists 表示形式</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># A Straightforward Adjacency List Representation</span>
-</span><span class="line"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-</span><span class="line"><span class="n">N</span> <span class="o">=</span> <span class="p">[</span>
-</span><span class="line">    <span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">],</span>    <span class="c"># a</span>
-</span><span class="line">    <span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="n">e</span><span class="p">],</span>             <span class="c"># b</span>
-</span><span class="line">    <span class="p">[</span><span class="n">d</span><span class="p">],</span>                <span class="c"># c</span>
-</span><span class="line">    <span class="p">[</span><span class="n">e</span><span class="p">],</span>                <span class="c"># d</span>
-</span><span class="line">    <span class="p">[</span><span class="n">f</span><span class="p">],</span>                <span class="c"># e</span>
-</span><span class="line">    <span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">],</span>          <span class="c"># f</span>
-</span><span class="line">    <span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">h</span><span class="p">],</span>             <span class="c"># g</span>
-</span><span class="line">    <span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">]</span>              <span class="c"># h</span>
-</span><span class="line"><span class="p">]</span>
-</span><span class="line">
-</span><span class="line"><span class="n">b</span> <span class="ow">in</span> <span class="n">N</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="c"># Neighborhood membership -&gt; True</span>
-</span><span class="line"><span class="nb">len</span><span class="p">(</span><span class="n">N</span><span class="p">[</span><span class="n">f</span><span class="p">])</span> <span class="c"># Degree -&gt; 3</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>② adjacency sets 表示形式</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># A Straightforward Adjacency Set Representation</span>
-</span><span class="line"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-</span><span class="line"><span class="n">N</span> <span class="o">=</span> <span class="p">[</span>
-</span><span class="line">    <span class="p">{</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">},</span>    <span class="c"># a</span>
-</span><span class="line">    <span class="p">{</span><span class="n">c</span><span class="p">,</span> <span class="n">e</span><span class="p">},</span>             <span class="c"># b</span>
-</span><span class="line">    <span class="p">{</span><span class="n">d</span><span class="p">},</span>                <span class="c"># c</span>
-</span><span class="line">    <span class="p">{</span><span class="n">e</span><span class="p">},</span>                <span class="c"># d</span>
-</span><span class="line">    <span class="p">{</span><span class="n">f</span><span class="p">},</span>                <span class="c"># e</span>
-</span><span class="line">    <span class="p">{</span><span class="n">c</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">},</span>          <span class="c"># f</span>
-</span><span class="line">    <span class="p">{</span><span class="n">f</span><span class="p">,</span> <span class="n">h</span><span class="p">},</span>             <span class="c"># g</span>
-</span><span class="line">    <span class="p">{</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">}</span>              <span class="c"># h</span>
-</span><span class="line"><span class="p">]</span>
-</span><span class="line">
-</span><span class="line"><span class="n">b</span> <span class="ow">in</span> <span class="n">N</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="c"># Neighborhood membership -&gt; True</span>
-</span><span class="line"><span class="nb">len</span><span class="p">(</span><span class="n">N</span><span class="p">[</span><span class="n">f</span><span class="p">])</span> <span class="c"># Degree -&gt; 3</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>基本上和adjacency lists表示形式一样对吧？但是，对于list，判断一个元素是否存在是线性时间$O(N(v))$，而在set中是常数时间$O(1)$，所以对于稠密图使用adjacency sets要更加高效。</p>
-
-<p>③ adjacency dicts 表示形式</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># A Straightforward Adjacency Dict Representation</span>
-</span><span class="line"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-</span><span class="line"><span class="n">N</span> <span class="o">=</span> <span class="p">[</span>
-</span><span class="line">    <span class="p">{</span><span class="n">b</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span><span class="mi">4</span><span class="p">},</span>    <span class="c"># a</span>
-</span><span class="line">    <span class="p">{</span><span class="n">c</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span><span class="mi">3</span><span class="p">},</span>                   <span class="c"># b</span>
-</span><span class="line">    <span class="p">{</span><span class="n">d</span><span class="p">:</span><span class="mi">8</span><span class="p">},</span>                        <span class="c"># c</span>
-</span><span class="line">    <span class="p">{</span><span class="n">e</span><span class="p">:</span><span class="mi">7</span><span class="p">},</span>                        <span class="c"># d</span>
-</span><span class="line">    <span class="p">{</span><span class="n">f</span><span class="p">:</span><span class="mi">5</span><span class="p">},</span>                        <span class="c"># e</span>
-</span><span class="line">    <span class="p">{</span><span class="n">c</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span><span class="mi">2</span><span class="p">},</span>              <span class="c"># f</span>
-</span><span class="line">    <span class="p">{</span><span class="n">f</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span><span class="mi">6</span><span class="p">},</span>                   <span class="c"># g</span>
-</span><span class="line">    <span class="p">{</span><span class="n">f</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span><span class="mi">8</span><span class="p">}</span>                    <span class="c"># h</span>
-</span><span class="line"><span class="p">]</span>
-</span><span class="line">
-</span><span class="line"><span class="n">b</span> <span class="ow">in</span> <span class="n">N</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="c"># Neighborhood membership -&gt; True</span>
-</span><span class="line"><span class="nb">len</span><span class="p">(</span><span class="n">N</span><span class="p">[</span><span class="n">f</span><span class="p">])</span> <span class="c"># Degree -&gt; 3</span>
-</span><span class="line"><span class="n">N</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="c"># Edge weight for (a, b) -&gt; 2</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>这种情况下如果边是带权值的都没有问题！</p>
-
-<p>除了上面三种方式外，还可以改变外层数据结构，上面三个都是list，其实也可以使用dict，例如下面的代码，此时节点是用字母表示的。在实际应用中，要根据问题选择最合适的表示形式。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">N</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class="line">    <span class="s">&#39;a&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;bcdef&#39;</span><span class="p">),</span>
-</span><span class="line">    <span class="s">&#39;b&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;ce&#39;</span><span class="p">),</span>
-</span><span class="line">    <span class="s">&#39;c&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;d&#39;</span><span class="p">),</span>
-</span><span class="line">    <span class="s">&#39;d&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;e&#39;</span><span class="p">),</span>
-</span><span class="line">    <span class="s">&#39;e&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;f&#39;</span><span class="p">),</span>
-</span><span class="line">    <span class="s">&#39;f&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;cgh&#39;</span><span class="p">),</span>
-</span><span class="line">    <span class="s">&#39;g&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;fh&#39;</span><span class="p">),</span>
-</span><span class="line">    <span class="s">&#39;h&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;fg&#39;</span><span class="p">)</span>
-</span><span class="line"><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>邻接矩阵 Adjacency Matrix</p>
-
-<p>使用嵌套的list，用1和0表示点和点之间的连接关系，此时对于它们的连接性判断时间是常数，但是对于度的计算时间是线性的</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># An Adjacency Matrix, Implemented with Nested Lists</span>
-</span><span class="line"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-</span><span class="line"><span class="n">N</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># a</span>
-</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># b</span>
-</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># c</span>
-</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># d</span>
-</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="c"># e</span>
-</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="c"># f</span>
-</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="c"># g</span>
-</span><span class="line">     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span> <span class="c"># h</span>
-</span><span class="line">
-</span><span class="line"><span class="n">N</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="c"># Neighborhood membership -&gt; 1</span>
-</span><span class="line"><span class="nb">sum</span><span class="p">(</span><span class="n">N</span><span class="p">[</span><span class="n">f</span><span class="p">])</span> <span class="c"># Degree -&gt; 3</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>如果边带有权值，也可以使用权值代替1，用inf代替0</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-</span><span class="line"><span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s">&#39;inf&#39;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="n">W</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">],</span> <span class="c"># a</span>
-</span><span class="line">     <span class="p">[</span><span class="n">_</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">],</span> <span class="c"># b</span>
-</span><span class="line">     <span class="p">[</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">],</span> <span class="c"># c</span>
-</span><span class="line">     <span class="p">[</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">],</span> <span class="c"># d</span>
-</span><span class="line">     <span class="p">[</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">],</span> <span class="c"># e</span>
-</span><span class="line">     <span class="p">[</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="c"># f</span>
-</span><span class="line">     <span class="p">[</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="c"># g</span>
-</span><span class="line">     <span class="p">[</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span> <span class="c"># h</span>
-</span><span class="line">
-</span><span class="line"><span class="n">W</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">inf</span> <span class="c"># Neighborhood membership</span>
-</span><span class="line"><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">W</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="k">if</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">inf</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c"># Degree</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><strong>NumPy</strong>：这里作者提到了一个最常用的数值计算模块NumPy，它包含了很多与多维数组计算有关的函数。我可能会在以后的机器学习中详细学习它的使用，到时候可能会写篇文章介绍它的使用</p>
-
-<p>(2)树的表示 [假设要表示下面的树]</p>
-
-<p><img src="http://hujiaweibujidao.github.io/images/algos/treerep.png" alt="image" /></p>
-
-<p>树是一种特殊的图，所以可以使用图的表示方法，但是因为树的特殊性，其实有其他更好的表示方法，最简单的就是直接用一个list即可，缺点也很明显，可读性太差了，相当不直观</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">T</span> <span class="o">=</span> <span class="p">[[</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s">&quot;c&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s">&quot;d&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;e&quot;</span><span class="p">,</span> <span class="s">&quot;f&quot;</span><span class="p">]]]</span>
-</span><span class="line"><span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c"># &#39;e&#39;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>很多时候我们都能够肯定树中节点的孩子节点个数最多有多少个(比如二叉树，三叉树等等)，所以比较方便的实现方式就是使用类class</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># A Binary Tree Class 二叉树实例</span>
-</span><span class="line"><span class="k">class</span> <span class="nc">Tree</span><span class="p">:</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right</span>
-</span><span class="line">
-</span><span class="line"><span class="n">t</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">Tree</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">),</span> <span class="n">Tree</span><span class="p">(</span><span class="s">&quot;c&quot;</span><span class="p">,</span> <span class="s">&quot;d&quot;</span><span class="p">))</span>
-</span><span class="line"><span class="n">t</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">left</span>  <span class="c"># &#39;c&#39;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>上面的实现方式的子节点都是孩子节点，但是还有一种很常用的树的表示方式，那就是“左孩子，右兄弟”表示形式，它就适用于孩子节点数目不确定的情况</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># 左孩子，右兄弟 表示方式</span>
-</span><span class="line"><span class="k">class</span> <span class="nc">Tree</span><span class="p">:</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kids</span><span class="p">,</span> <span class="nb">next</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">kids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">kids</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="nb">next</span>
-</span><span class="line"><span class="k">return</span> <span class="n">Tree</span>
-</span><span class="line">
-</span><span class="line"><span class="n">t</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">Tree</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="n">Tree</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="n">Tree</span><span class="p">(</span><span class="s">&quot;c&quot;</span><span class="p">,</span> <span class="n">Tree</span><span class="p">(</span><span class="s">&quot;d&quot;</span><span class="p">)))))</span>
-</span><span class="line"><span class="n">t</span><span class="o">.</span><span class="n">kids</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">val</span>  <span class="c"># &#39;c&#39;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<hr />
-
-<p><strong>[Bunch Pattern]</strong>：有意思的是，上面的实现方式使用了Python中一种常用的设计模式，叫做Bunch Pattern，貌似来自经典书籍Python Cookbook，原书介绍如下： </p>
-
-<p>[因为这个不太好理解和翻译，还是原文比较有味，后期等我深刻理解了我可能会详细介绍它]</p>
-
-<p>When prototyping (or even finalizing) data structures such as trees, it can be useful to have a flexible class that will allow you to specify arbitrary attributes in the constructor. In these cases, the “Bunch” pattern (named by Alex Martelli in the Python Cookbook) can come in handy. There are many ways of implementing it, but the gist of it is the following:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">class</span> <span class="nc">Bunch</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
-</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
-</span><span class="line">        <span class="nb">super</span><span class="p">(</span><span class="n">Bunch</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span> <span class="o">=</span> <span class="bp">self</span>
-</span><span class="line"><span class="k">return</span> <span class="n">Bunch</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>There are several useful aspects to this pattern. First, it lets you create and set arbitrary attributes by supplying them as command-line arguments:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">Bunch</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Jayne Cobb&quot;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="s">&quot;Public Relations&quot;</span><span class="p">)</span>
-</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span>
-</span><span class="line"><span class="s">&#39;Jayne Cobb&#39;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>Second, by subclassing dict, you get lots of functionality for free, such as iterating over the keys/attributes or easily checking whether an attribute is present. Here’s an example:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">T</span> <span class="o">=</span> <span class="n">Bunch</span>
-</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="n">T</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="n">T</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="s">&quot;b&quot;</span><span class="p">),</span> <span class="n">right</span><span class="o">=</span><span class="n">T</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="s">&quot;c&quot;</span><span class="p">))</span>
-</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">left</span>
-</span><span class="line"><span class="p">{</span><span class="s">&#39;right&#39;</span><span class="p">:</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;left&#39;</span><span class="p">:</span> <span class="s">&#39;a&#39;</span><span class="p">}</span>
-</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">right</span>
-</span><span class="line"><span class="s">&#39;b&#39;</span>
-</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="p">[</span><span class="s">&#39;left&#39;</span><span class="p">][</span><span class="s">&#39;right&#39;</span><span class="p">]</span>
-</span><span class="line"><span class="s">&#39;b&#39;</span>
-</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="s">&quot;left&quot;</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">right</span>
-</span><span class="line"><span class="bp">True</span>
-</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="s">&quot;right&quot;</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">right</span>
-</span><span class="line"><span class="bp">False</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>This pattern isn’t useful only when building trees, of course. You could use it for any situation where you’d want a flexible object whose attributes you could set in the constructor.</p>
-
-<hr />
-
-<p><strong>[与图有关的python模块]</strong>：</p>
-
-<p>• NetworkX: <a href="http://networkx.lanl.gov">http://networkx.lanl.gov</a></p>
-
-<p>• python-graph: <a href="http://code.google.com/p/python-graph">http://code.google.com/p/python-graph</a></p>
-
-<p>• Graphine: <a href="http://gitorious.org/projects/graphine/pages/Home">http://gitorious.org/projects/graphine/pages/Home</a></p>
-
-<p>• Pygr: a graph database  <a href="http://bioinfo.mbi.ucla.edu/pygr">http://bioinfo.mbi.ucla.edu/pygr</a>  </p>
-
-<p>• Gato: a graph animation toolbox <a href="http://gato.sourceforge.net">http://gato.sourceforge.net</a>   </p>
-
-<p>• PADS: a collection of graph algorithms  <a href="http://www.ics.uci.edu/~eppstein/PADS">http://www.ics.uci.edu/~eppstein/PADS</a></p>
-
-<hr />
-
-<p>5.Python编程中的一些细节</p>
-
-<p>In general, the more important your program, the more you should mistrust such black boxes and seek to find out what’s going on under the cover.</p>
-
-<p>作者在这里提到，如果你的程序越是重要的话，你就越是需要明白你所使用的数据结构的内部实现，甚至有些时候你要自己重新实现它。</p>
-
-<p>(1)Hidden Squares 隐藏的平方运行时间</p>
-
-<p>有些情况下我们可能没有注意到我们的操作是非常不高效的，例如下面的代码，如果是判断某个元素是否在list中运行时间是线性的，如果是使用set，判断某个元素是否存在只需要常数时间，所以如果我们需要判断很多元素是否存在的话，使用set的性能会更加高效。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randrange</span>
-</span><span class="line"><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="n">randrange</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
-</span><span class="line"><span class="mi">42</span> <span class="ow">in</span> <span class="n">L</span> <span class="c"># False</span>
-</span><span class="line"><span class="n">S</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
-</span><span class="line"><span class="mi">42</span> <span class="ow">in</span> <span class="n">S</span> <span class="c">#False</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>(2)The Trouble with Floats 精度带来的烦恼</p>
-
-<p>现有的计算机系统都是不能精确表达小数的！[该部分内容可以阅读与计算机组成原理相关的书籍了解计算机的浮点数系统]在python中，浮点数可能带来很多的烦恼，例如，运行下面的实例，本应该是相等，但是却返回False。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="nb">sum</span><span class="p">(</span><span class="mf">0.1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="mf">1.0</span> <span class="c"># False</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><strong>永远不要使用小数比较结果来作为两者相等的判断依据！</strong>你最多只能判断两个浮点数在有限位数上是相等的，也就是近似相等了。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">almost_equal</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">places</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
-</span><span class="line">    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">),</span> <span class="n">places</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
-</span><span class="line">
-</span><span class="line"><span class="n">almost_equal</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="mf">0.1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="mf">1.0</span><span class="p">)</span> <span class="c"># True</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>除此之外，可以使用一些有用的第三方模块，例如<code>decimal</code>，在需要处理金融数据的时候很有帮助</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="o">*</span>
-</span><span class="line"><span class="nb">sum</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s">&quot;0.1&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="n">Decimal</span><span class="p">(</span><span class="s">&quot;1.0&quot;</span><span class="p">)</span>  <span class="c"># Ture</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>还有一个有用的<code>Sage</code>模块，如下所示，它可以进行数学的符号运算得到准确值，如果需要也可以得到近似的浮点数解。<a href="http://sagemath.org">Sage的官方网址</a></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">sage</span><span class="p">:</span> <span class="mi">3</span><span class="o">/</span><span class="mi">5</span> <span class="o">*</span> <span class="mi">11</span><span class="o">/</span><span class="mi">7</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5239</span><span class="p">)</span>
-</span><span class="line"><span class="mi">13</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">31</span><span class="p">)</span> <span class="o">+</span> <span class="mi">33</span><span class="o">/</span><span class="mi">35</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>更多和Python中的浮点数有关的内容可以查看<a href="https://docs.python.org/2/tutorial/floatingpoint.html">Floating Point Arithmetic: Issues and Limitations</a></p>
-
-<hr />
-
-<p>问题2-12. (图的表示)</p>
-
-<p>Consider the following graph representation: you use a dictionary and let each key be a pair (tuple) of two nodes, with the corresponding value set to the edge weight. For example W[u, v] = 42. What would be the advantages and disadvantages of this representation? Could you supplement it to mitigate the downsides?</p>
-
-<p>The advantages and disadvantages depend on what you’re using it for. It works well for looking up edge weights efficiently but less well for iterating over the graph’s nodes or a node’s neighbors, for example. You could improve that part by using some extra structures (for example, a global list of nodes, if that’s what you need or a simple adjacency list structure, if that’s required).</p>
-
-<p>返回<a href="http://hujiaweibujidao.github.io/python/">Python数据结构与算法设计篇目录</a></p>
-
-<p class="post-footer">
-                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/">http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-the-basics/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
 ]]></content>
   </entry>
   

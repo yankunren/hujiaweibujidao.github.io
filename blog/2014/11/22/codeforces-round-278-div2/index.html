@@ -1,0 +1,922 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>CodeForces Round 278 Div2 - Hujiawei Bujidao</title>
+  <meta name="author" content="hujiawei">
+
+  
+  <meta name="description" content="昨晚又熬夜参加CodeForces了，比赛拖延到1点半才开始，状态果然又是很糟糕，目前解决前面2道题 Giga Tower 这题的大意是给你一个数字，让你求最近的大于这个数字并且含有数字8的数字与这个数字的差值，比如数字9，找到的数字应该是18，差值就是18-9=9。这题我又想多了， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hujiaweibujidao.github.io/blog/2014/11/22/codeforces-round-278-div2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Hujiawei Bujidao" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  -->
+  <script type='text/javascript' src='http://ajax.useso.com/ajax/libs/jquery/1.7.2/jquery.min.js?ver=3.4.2'></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+<link href="http://fonts.useso.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.useso.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <!--
+  
+
+  -->
+</head>
+
+<body   >
+
+	<header role="banner">
+		
+<hgroup style="text-align: center">
+	<h1><a href="/"><img src="/images/conan-paper-small.png"  />Hujiawei Bujidao<img src="/images/conan-hat-small.png"  /></a></h1>
+	
+	<h2>I will always be your savior! A secret makes a man man!</h2>
+	
+</hgroup>
+
+
+	</header>
+	<nav role="navigation">
+		<ul class="subscription" data-subscription="rss">
+  <!--<li><a href="https://github.com/hujiaweibujidao" rel="subscribe-rss" title="subscribe via RSS">View me on GitHub</a></li>-->
+  
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+  <!--
+  
+  --> 
+</ul>
+<!--
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hujiaweibujidao.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form> 
+  
+-->
+<ul class="main-navigation">
+  <li><a href="/blog/archives/">Blog</a></li>
+  <li><a href="/aboutme/">AboutMe</a></li>
+  <li><a href="/math/">Math</a></li>
+  <li><a href="/python/">Python</a></li>
+  <li><a href="/mobile/">Mobile</a></li>
+  
+  <li><a href="/blog/categories/algorithm/">Algorithms</a></li>
+  <li><a href="/blog/categories/oj/">OJSolutions</a></li>
+  <!--
+  <li><a href="/blog/categories/mobiledev/">MobileDev</a></li>
+  <li><a href="/datamining/">ML-DM-PR</a></li>
+  -->
+  <li><a href="/blog/categories/music/">Music</a></li>
+  <li><a href="/blog/categories/picture/">Picture</a></li>
+  <!--
+  <li><a href="/xjava/">XJava</a></li>
+  -->
+  <!-- <li><a href="/datamining/">Projects</a></li> -->
+</ul>
+
+
+	</nav>
+	<div id="main">
+		<div id="content">
+			<div>
+
+<article class="hentry" role="article">
+		
+  <header>
+    
+      <h1 class="entry-title">CodeForces Round 278 Div2</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-22T11:57:00+08:00" pubdate data-updated="true">Nov 22<span>nd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>昨晚又熬夜参加CodeForces了，比赛拖延到1点半才开始，状态果然又是很糟糕，目前解决前面2道题</p>
+
+<h4 id="giga-towerhttpcodeforcescomcontest488problema"><a href="http://codeforces.com/contest/488/problem/A">Giga Tower</a></h4>
+
+<p>这题的大意是给你一个数字，让你求最近的大于这个数字并且含有数字8的数字与这个数字的差值，比如数字9，找到的数字应该是18，差值就是18-9=9。这题我又想多了，心想直接求肯定不行，然后设计了一个看起来不错的得到大于或者小于(用于负数)一个数字的最近的含有数字8的数字，结果写了蛮久了还是有不少bug，没敢提交，后来看到那么多人做出来了，就觉得这题没准直接累加就行，因为毕竟遇到8很容易，一般情况下都能很快得到那个目标数字，结果一试还真是行！</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test278A2</span> <span class="o">{</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">Scanner</span> <span class="n">cin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">cin</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(++</span><span class="n">a</span><span class="o">);</span>
+</span><span class="line">        <span class="k">while</span> <span class="o">(!</span><span class="n">s</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">&quot;8&quot;</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">b</span><span class="o">++;</span>
+</span><span class="line">            <span class="n">s</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(++</span><span class="n">a</span><span class="o">);</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line">
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="candy-boxeshttpcodeforcescomcontest488problemb"><a href="http://codeforces.com/contest/488/problem/B">Candy Boxes</a></h4>
+
+<p>这题首先告诉我们4个盒子里面的糖果数目满足如下条件</p>
+
+<script type="math/tex; mode=display">x4-x1=\frac{x2+x3}{2}=\frac{x1+x2+x3+x4}{4}, x1 \le x2 \le x3 \le x4</script>
+
+<p>也就是说这四个数字的range，median和average都相同，现在只告诉你其中
+n(<script type="math/tex">0 \le n \le 4</script>)个数字，让你求其他的数字，如果有很多的解只需要输出其中的一个即可，如果任何数字都不能满足的话输出NO。</p>
+
+<p>这题其实很简单，首先从上面的连等式中很快能够得到下面的结果</p>
+
+<script type="math/tex; mode=display">x1=\frac{x2+x3}{4}, x4=3*x1</script>
+
+<p>其中x4是x1的3倍是很关键的信息，然后分n分别为0，1，2，3，4这5种情况讨论就行了，难点在于n=2和n=3。</p>
+
+<p>当n=2时，先对这两个已知数排序，然后分别假设它们是(x1, x2)或者(x1, x3)等等所有可能的组合，根据条件求出剩下的两个数字，然后判断这四个数字是否满足条件，如果满足的话那就输出，否则输出NO。</p>
+
+<p>同理，当n=3时，分别假设剩下的那个数字是x1或者x2或者x3或者x4，求出来之后验证即可。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span>
+<span class="line-number">81</span>
+<span class="line-number">82</span>
+<span class="line-number">83</span>
+<span class="line-number">84</span>
+<span class="line-number">85</span>
+<span class="line-number">86</span>
+<span class="line-number">87</span>
+<span class="line-number">88</span>
+<span class="line-number">89</span>
+<span class="line-number">90</span>
+<span class="line-number">91</span>
+<span class="line-number">92</span>
+<span class="line-number">93</span>
+<span class="line-number">94</span>
+<span class="line-number">95</span>
+<span class="line-number">96</span>
+<span class="line-number">97</span>
+<span class="line-number">98</span>
+<span class="line-number">99</span>
+<span class="line-number">100</span>
+<span class="line-number">101</span>
+<span class="line-number">102</span>
+<span class="line-number">103</span>
+<span class="line-number">104</span>
+<span class="line-number">105</span>
+<span class="line-number">106</span>
+<span class="line-number">107</span>
+<span class="line-number">108</span>
+<span class="line-number">109</span>
+<span class="line-number">110</span>
+<span class="line-number">111</span>
+<span class="line-number">112</span>
+<span class="line-number">113</span>
+<span class="line-number">114</span>
+<span class="line-number">115</span>
+<span class="line-number">116</span>
+<span class="line-number">117</span>
+<span class="line-number">118</span>
+<span class="line-number">119</span>
+<span class="line-number">120</span>
+<span class="line-number">121</span>
+<span class="line-number">122</span>
+<span class="line-number">123</span>
+<span class="line-number">124</span>
+<span class="line-number">125</span>
+<span class="line-number">126</span>
+<span class="line-number">127</span>
+<span class="line-number">128</span>
+<span class="line-number">129</span>
+<span class="line-number">130</span>
+<span class="line-number">131</span>
+<span class="line-number">132</span>
+<span class="line-number">133</span>
+<span class="line-number">134</span>
+<span class="line-number">135</span>
+<span class="line-number">136</span>
+<span class="line-number">137</span>
+<span class="line-number">138</span>
+<span class="line-number">139</span>
+<span class="line-number">140</span>
+<span class="line-number">141</span>
+<span class="line-number">142</span>
+<span class="line-number">143</span>
+<span class="line-number">144</span>
+<span class="line-number">145</span>
+<span class="line-number">146</span>
+<span class="line-number">147</span>
+<span class="line-number">148</span>
+<span class="line-number">149</span>
+<span class="line-number">150</span>
+<span class="line-number">151</span>
+<span class="line-number">152</span>
+<span class="line-number">153</span>
+<span class="line-number">154</span>
+<span class="line-number">155</span>
+<span class="line-number">156</span>
+<span class="line-number">157</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+</span><span class="line">
+</span><span class="line"><span class="cm">/**</span>
+</span><span class="line"><span class="cm"> * hujiawei - 14/11/22.</span>
+</span><span class="line"><span class="cm"> */</span>
+</span><span class="line"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test278B</span> <span class="o">{</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="n">Scanner</span> <span class="n">cin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+</span><span class="line">
+</span><span class="line">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">cin</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">        <span class="kt">int</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">];</span>
+</span><span class="line">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">cin</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">
+</span><span class="line">        <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;1&quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;2&quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;2&quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;3&quot;</span><span class="o">);</span>
+</span><span class="line">        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+</span><span class="line">        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">4</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">2</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">3</span><span class="o">]))</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;NO&quot;</span><span class="o">);</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">3</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+</span><span class="line">            <span class="kt">int</span> <span class="n">a1</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">/</span> <span class="mi">3</span><span class="o">;</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a1</span><span class="o">,</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">2</span><span class="o">]))</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a1</span><span class="o">);</span>
+</span><span class="line">                <span class="k">return</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="kt">int</span> <span class="n">a4</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">*</span> <span class="mi">3</span><span class="o">;</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">2</span><span class="o">],</span> <span class="n">a4</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a4</span><span class="o">);</span>
+</span><span class="line">                <span class="k">return</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="kt">int</span> <span class="n">a2</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">-</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">a2</span><span class="o">,</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">2</span><span class="o">]))</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a2</span><span class="o">);</span>
+</span><span class="line">                <span class="k">return</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="kt">int</span> <span class="n">a3</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">-</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">a3</span><span class="o">,</span> <span class="n">a</span><span class="o">[</span><span class="mi">2</span><span class="o">]))</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a3</span><span class="o">);</span>
+</span><span class="line">                <span class="k">return</span><span class="o">;</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;NO&quot;</span><span class="o">);</span>
+</span><span class="line">        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class="line">            <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+</span><span class="line">            <span class="kt">int</span> <span class="n">a1</span><span class="o">,</span> <span class="n">a2</span><span class="o">,</span> <span class="n">a3</span><span class="o">,</span> <span class="n">a4</span><span class="o">;</span>
+</span><span class="line">            <span class="c1">//a1,a4</span>
+</span><span class="line">            <span class="n">a1</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class="line">            <span class="n">a4</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">a4</span> <span class="o">==</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">a1</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">a2</span> <span class="o">=</span> <span class="o">(</span><span class="n">a1</span> <span class="o">+</span> <span class="n">a4</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+</span><span class="line">                <span class="n">a3</span> <span class="o">=</span> <span class="o">(</span><span class="n">a1</span> <span class="o">+</span> <span class="n">a4</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a1</span><span class="o">,</span> <span class="n">a2</span><span class="o">,</span> <span class="n">a3</span><span class="o">,</span> <span class="n">a4</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a2</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a3</span><span class="o">);</span>
+</span><span class="line">                    <span class="k">return</span><span class="o">;</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="c1">//a1,a2</span>
+</span><span class="line">            <span class="n">a1</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class="line">            <span class="n">a2</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">a1</span> <span class="o">&gt;</span> <span class="n">a2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">a3</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a1</span> <span class="o">-</span> <span class="n">a2</span><span class="o">;</span>
+</span><span class="line">                <span class="n">a4</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">a1</span><span class="o">;</span>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a1</span><span class="o">,</span> <span class="n">a2</span><span class="o">,</span> <span class="n">a3</span><span class="o">,</span> <span class="n">a4</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a3</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a4</span><span class="o">);</span>
+</span><span class="line">                    <span class="k">return</span><span class="o">;</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="c1">//a1,a3</span>
+</span><span class="line">            <span class="n">a1</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class="line">            <span class="n">a3</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">a1</span> <span class="o">&gt;</span> <span class="n">a3</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">a2</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a1</span> <span class="o">-</span> <span class="n">a3</span><span class="o">;</span>
+</span><span class="line">                <span class="n">a4</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">a1</span><span class="o">;</span>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a1</span><span class="o">,</span> <span class="n">a2</span><span class="o">,</span> <span class="n">a3</span><span class="o">,</span> <span class="n">a4</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a2</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a4</span><span class="o">);</span>
+</span><span class="line">                    <span class="k">return</span><span class="o">;</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="c1">//a2,a3</span>
+</span><span class="line">            <span class="n">a2</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class="line">            <span class="n">a3</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">((</span><span class="n">a2</span> <span class="o">+</span> <span class="n">a3</span><span class="o">)</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">a1</span> <span class="o">=</span> <span class="o">(</span><span class="n">a2</span> <span class="o">+</span> <span class="n">a3</span><span class="o">)</span> <span class="o">/</span> <span class="mi">4</span><span class="o">;</span>
+</span><span class="line">                <span class="n">a4</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">a1</span><span class="o">;</span>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a1</span><span class="o">,</span> <span class="n">a2</span><span class="o">,</span> <span class="n">a3</span><span class="o">,</span> <span class="n">a4</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a1</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a4</span><span class="o">);</span>
+</span><span class="line">                    <span class="k">return</span><span class="o">;</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="c1">//a2,a4 and a3,a4</span>
+</span><span class="line">            <span class="n">a2</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class="line">            <span class="n">a4</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">a4</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">a1</span> <span class="o">=</span> <span class="n">a4</span> <span class="o">/</span> <span class="mi">3</span><span class="o">;</span>
+</span><span class="line">                <span class="n">a3</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a1</span> <span class="o">-</span> <span class="n">a2</span><span class="o">;</span>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a1</span><span class="o">,</span> <span class="n">a2</span><span class="o">,</span><span class="n">a3</span><span class="o">,</span> <span class="n">a4</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a1</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a3</span><span class="o">);</span>
+</span><span class="line">                    <span class="k">return</span><span class="o">;</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="c1">//a3,a4</span>
+</span><span class="line">            <span class="n">a3</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class="line">            <span class="n">a4</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+</span><span class="line">            <span class="k">if</span> <span class="o">(</span><span class="n">a4</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">                <span class="n">a1</span> <span class="o">=</span> <span class="n">a4</span> <span class="o">/</span> <span class="mi">3</span><span class="o">;</span>
+</span><span class="line">                <span class="n">a2</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a1</span> <span class="o">-</span> <span class="n">a3</span><span class="o">;</span>
+</span><span class="line">                <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">a1</span><span class="o">,</span> <span class="n">a2</span><span class="o">,</span><span class="n">a3</span><span class="o">,</span> <span class="n">a4</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;YES&quot;</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a1</span><span class="o">);</span>
+</span><span class="line">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a2</span><span class="o">);</span>
+</span><span class="line">                    <span class="k">return</span><span class="o">;</span>
+</span><span class="line">                <span class="o">}</span>
+</span><span class="line">            <span class="o">}</span>
+</span><span class="line">            <span class="c1">//</span>
+</span><span class="line">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;NO&quot;</span><span class="o">);</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">check</span><span class="o">(</span><span class="kt">int</span> <span class="n">a1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">a2</span><span class="o">,</span> <span class="kt">int</span> <span class="n">a3</span><span class="o">,</span> <span class="kt">int</span> <span class="n">a4</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">        <span class="k">if</span> <span class="o">(</span><span class="n">a1</span> <span class="o">&lt;=</span> <span class="n">a2</span> <span class="o">&amp;&amp;</span> <span class="n">a2</span> <span class="o">&lt;=</span> <span class="n">a3</span> <span class="o">&amp;&amp;</span> <span class="n">a3</span> <span class="o">&lt;=</span> <span class="n">a4</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">a4</span> <span class="o">-</span> <span class="n">a1</span><span class="o">)</span> <span class="o">==</span> <span class="o">(</span><span class="n">a2</span> <span class="o">+</span> <span class="n">a3</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">a4</span> <span class="o">-</span> <span class="n">a1</span><span class="o">)</span> <span class="o">==</span> <span class="o">(</span><span class="n">a1</span> <span class="o">+</span> <span class="n">a2</span> <span class="o">+</span> <span class="n">a3</span> <span class="o">+</span> <span class="n">a4</span><span class="o">)</span> <span class="o">/</span> <span class="mi">4</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class="line">        <span class="o">}</span>
+</span><span class="line">        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line">
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p class="post-footer">
+                        Original link:<a href="http://hujiaweibujidao.github.io/blog/2014/11/22/codeforces-round-278-div2/">http://hujiaweibujidao.github.io/blog/2014/11/22/codeforces-round-278-div2/</a><br />Written by <a href="http://hujiaweibujidao.github.io">hujiawei</a>&nbsp;Posted at <a href="http://hujiaweibujidao.github.io">http://hujiaweibujidao.github.io</a><br />Feel free to read or comment it, and if you want to copy it into your own site, please copy it with its Original Link showed above or you can see the license below for more details.If you have any problem or suggestion, please comment below. :-)<br />Thanks a lot. Hope you enjoy here! :-)</p>
+</div>
+
+
+		<footer>
+			<p class="meta">
+				
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hujiawei</span></span>
+
+				
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-22T11:57:00+08:00" pubdate data-updated="true">Nov 22<span>nd</span>, 2014</time>
+				
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/codeforces/'>codeforces</a>, <a class='category' href='/blog/categories/oj/'>oj</a>
+  
+</span>
+
+
+			</p>
+			
+			<div class="sharing">
+  
+  
+  
+</div>
+
+			
+			<p class="meta">
+				
+				<a class="basic-alignment left" href="/blog/2014/11/18/codeforces-round-277-dot-5-div2/" title="Previous Post: CodeForces Round 277.5 Div2">&laquo; CodeForces Round 277.5 Div2</a>
+				
+				
+			</p>
+		</footer>
+	</article>
+	
+
+	
+	<section>
+		<h1>Comments</h1>
+		<div id="comments" aria-live="polite">
+			<!-- Duoshuo Comment BEGIN   data-title=""-->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hujiaweibujidao"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+
+		</div>
+	</section>
+	
+</div>
+
+<aside class="sidebar">
+  
+	<section>
+	<h1>关于博主</h1><br/>
+  <a href="/aboutme/"><img src="/images/me-small.png" width="250px" height="210px" alt="protrait"/></a><br/>
+  <p>Hi, I'm Hujiawei, from P.R.China. Now I'm a postgraduate student studying in <a href="http://www.tsinghua.edu.cn/publish/th/index.html">Tsinghua University</a>.
+  Wanna know me? <a href="/aboutme/">See here.</a> 
+  </p>
+  
+  <p>
+	  博主最近参加了一个线上黑客马拉松比赛，暂时的作品在[这里](http://shanshanlaichi.sinaapp.com)，欢迎大家访问并点赞支持！谢谢亲们！
+  </p>
+  
+  <img src="/images/conan-mainperson.png" width="250px" height="210px" alt="conan"/>
+  
+  <br/>
+  
+  <a href="http://weibo.com/hujiaweiyinger"><img src="/images/sinaweibo.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://github.com/hujiaweibujidao"><img src="/images/github.png" width="40px" height="40px"/></a>&nbsp;
+  <a href="http://hujiawei.tumblr.com"><img src="/images/tumblr.png" width="40px" height="40px"/></a> &nbsp;
+  <a href="https://twitter.com/hujiaweiyinger"><img src="/images/twitter.png" width="40px" height="40px"/></a>&nbsp;
+  <a href="http://www.douban.com/people/60272837/"><img src="/images/douban.png" width="40px" height="40px"/></a>
+ 
+ <br/>
+ <br/>
+ <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=50&skin=1&isTitle=0&noborder=1&isWeibo=1&isFans=0&uid=1740244950&verifier=68702156&dpc=1"></iframe>
+    <br/>
+    <!--autoplay="autoplay" -->
+    <!--
+<audio width="200" height="32" 
+style="margin: auto; top: 0; right: 0; bottom: 0; left: 0;" 
+controls="controls" 
+name="media" 
+src="http://hujiaweibujidao.github.io/music/Wouldnt-It-Be-Nice.mp3">
+</audio>
+-->
+  
+  
+  <!--baidu-->
+  <!--
+  <div class="bdsharebuttonbox"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>  
+-->
+
+</section>
+<section>
+ <h1>分类目录</h1>
+ <ul id="categories">
+	 <li class='category'><a href='/blog/categories/acdream/'>acdream (1)</a></li>
+<li class='category'><a href='/blog/categories/algorithm/'>algorithm (18)</a></li>
+<li class='category'><a href='/blog/categories/android/'>android (8)</a></li>
+<li class='category'><a href='/blog/categories/bestcoder/'>bestcoder (1)</a></li>
+<li class='category'><a href='/blog/categories/codeforces/'>codeforces (2)</a></li>
+<li class='category'><a href='/blog/categories/codejam/'>codejam (1)</a></li>
+<li class='category'><a href='/blog/categories/hadoop/'>hadoop (1)</a></li>
+<li class='category'><a href='/blog/categories/ios/'>ios (1)</a></li>
+<li class='category'><a href='/blog/categories/mac/'>mac (2)</a></li>
+<li class='category'><a href='/blog/categories/machinelearning/'>machinelearning (2)</a></li>
+<li class='category'><a href='/blog/categories/math/'>math (26)</a></li>
+<li class='category'><a href='/blog/categories/matlab/'>matlab (1)</a></li>
+<li class='category'><a href='/blog/categories/mobile/'>mobile (9)</a></li>
+<li class='category'><a href='/blog/categories/music/'>music (3)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (6)</a></li>
+<li class='category'><a href='/blog/categories/oj/'>oj (5)</a></li>
+<li class='category'><a href='/blog/categories/opencv/'>opencv (5)</a></li>
+<li class='category'><a href='/blog/categories/picture/'>picture (3)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (5)</a></li>
+
+ </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/11/22/codeforces-round-278-div2/">CodeForces Round 278 Div2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/18/codeforces-round-277-dot-5-div2/">CodeForces Round 277.5 Div2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/14/using-qiniu-js-sdk-to-upload-videos-in-django/">Using Qiniu JS SDK to Upload Videos in Django</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/14/acdream-java-contest/">ACdream Java Contest</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/09/bestcoder-round-17/">BestCoder Round 17</a>
+      </li>
+    
+  </ul>
+  
+  <h1>热评文章</h1>
+<!-- 多说热评文章 start -->
+	<div class="ds-top-threads" data-range="daily" data-num-items="5"></div>
+<!-- 多说热评文章 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"hujiaweibujidao"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+</section>
+<section>
+	<h1>好友博客</h1>
+	<ul>
+		<li>
+			<a href="http://doufunao.github.io/">豆腐脑的幻想乡</a>
+		</li>
+		<li>
+			<a href="http://c4fun.cn/">Code 4 Fun</a>
+		</li>
+		<li>
+			<a href="http://www.tanglei.name/">TangLei blog</a>
+		</li>
+		<li>
+			<a href="http://ontheroad.sinaapp.com/">Tian Jun-Find My Way</a>
+		</li>
+		
+		<li>
+			<a href="http://www.liaoxuefeng.com/">廖雪峰的官方网站</a>
+		</li>
+		<li>
+			<a href="http://beader.me/">Beader</a>
+		</li>
+		<li>
+			<a href="http://blog.csdn.net/v_JULY_v">结构之法，算法之道</a>
+		</li>
+				<li>
+			<a href="http://www.renfei.org/blog/">Renfei Song</a>
+		</li>
+		<li>
+			<a href="http://bluedavy.me">BlueDavy之技术blog</a>
+		</li>
+		<li>
+			<a href="http://blog.jobbole.com/category/python/">伯乐在线-Python</a>
+		</li>
+		<li>
+			<a href="http://www.douban.com/group/python/">豆瓣小组-Python</a>
+		</li>
+		<li>
+			<a href="#">这里会是你吗?</a>
+		</li>
+	</ul>
+</section>
+	
+</aside>
+
+
+		</div>
+	</div>
+	
+	<footer role="contentinfo">
+		<p>
+  	Copyright &copy; 2014 - hujiawei - <a href="http://hujiaweibujidao.github.io/happybirthday/">Happy birthday to MY QUEEN</a> - <span class="credit">Proudly Powered by <a href="http://octopress.org">Octopress</a></span>
+  	
+
+<!--baidu-->
+<!--
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"1","bdPos":"left","bdTop":"250"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+-->
+
+	<!-- CNZZ -->
+	&nbsp;&nbsp;
+	<script type="text/javascript">
+		var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+		document.write(unescape("%3Cspan id='cnzz_stat_icon_1000165127'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000165127%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	
+	<!--baidu share-->
+	<!--
+	<div class="bdsharebuttonbox" style="display: inline;"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+	-->
+	<!-- license -->
+	<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="http://i.creativecommons.org/l/by-nd/3.0/88x31.png" /></a>
+	本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/deed.zh">知识共享署名-禁止演绎 3.0 未本地化版本许可协议</a>进行许可。
+
+</p>
+
+<!--hujiawei custom blockquote-->
+<!--for block quote
+<style>
+blockquote{
+	font:inherit;
+	font-size:60%;
+	font-style:normal;
+	line-height:1.0em;
+	color:rgba(0,0,0,0.5);
+}
+</style>-->
+
+<!-- gutter for code line-numbers!! -->
+<!--for block quote-->
+<!--
+<style>
+blockquote{
+	font:inherit;
+	font-size:60%;
+	font-style:normal;
+	line-height:1.0em;
+	color:rgba(0,0,0,0.5);
+}
+
+.gutter{
+	display: none;
+}
+
+.highlight, .gist-highlight {
+margin-bottom: 1.8em;
+background: #002b36;
+overflow-y: hidden;
+overflow-x: auto;
+}
+</style>
+-->
+
+<!-- mathjax config similar to math.stackexchange  -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+<!-- the following line is incorrect! -->
+<!--
+<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+-->
+
+
+
+<!--return to top-->
+<style>
+	.returnTop {
+		position: fixed;
+		_position: absolute;
+		right: 10px;
+		bottom: 200px;
+		_bottom: auto;
+		display: none;
+		width: 40px;
+		height: 40px;
+		border: 1px solid #61b72e;
+		border-radius: 4px;
+		background: #fff;
+		box-shadow: 0 0 5px #F5F5F5;
+		text-indent: -9999px;
+		cursor: pointer;
+	}
+	.returnTop .s {
+		position: absolute;
+		top: -2px;
+		_top: -20px;
+		left: 10px;
+		width: 0;
+		height: 0;
+		border-width: 10px;
+		border-color: transparent transparent #61b72e;
+		border-style: dashed dashed solid;
+	}
+	.returnTop .b {
+		position: absolute;
+		top: 18px;
+		left: 16px;
+		height: 12px;
+		width: 8px;
+		background: #61b72e;
+	}
+</style>
+<div class="returnTop" title="嗖的就上去了！">
+	<span class="s"></span>
+	<span class="b"></span>
+	返回顶部
+</div>
+<script type="text/javascript">
+$(function(){
+$(window).bind("scroll", function(){
+
+var scrollTopNum = $(document).scrollTop(),
+winHeight = $(window).height(),
+returnTop = $("div.returnTop");
+
+(scrollTopNum > 0) ? returnTop.fadeIn("fast") : returnTop.fadeOut("fast");
+
+if (!-[1,]&&!window.XMLHttpRequest) {
+returnTop.css("top", scrollTopNum + winHeight - 200);
+}
+
+});
+
+$("div.returnTop").click(function() {
+$("html, body").animate({ scrollTop: 0 }, 100);
+});
+
+});
+</script>
+
+	</footer>
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
