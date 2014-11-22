@@ -4,7 +4,6 @@ title: "CodeForces Round 278 Div2"
 date: 2014-11-22 11:57
 comments: true
 categories: oj codeforces
-published: false
 ---
 
 昨晚又熬夜参加CodeForces了，比赛拖延到1点半才开始，状态果然又是很糟糕，目前解决前面2道题
