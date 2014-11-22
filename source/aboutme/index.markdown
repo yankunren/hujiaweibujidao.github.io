@@ -25,17 +25,17 @@ echo "My email address is $emailaddress. Email me if you are interested in $name
 echo "Hope you enjoy my bolg site here! Have fun! :-) "
 ```
 
-大家好，我叫Hujiawei，[五道口男子职业技术与艺术学院](http://www.tsinghua.edu.cn/publish/th/index.html)计算机系2013级研究生，本科就读于伟大的[左家垅男子职业技术学院](http://www.csu.edu.cn/)，热爱编程，喜欢Java/Python/Linux/Android/RaspberryPi等等，在三星中国研究院/湖南永景股份有限公司/湖南中途电子有限公司实习过，开发过大型(商业)网站([ASP.NET](http://www.cnblogs.com/yinger/category/305399.html)和J2EE SSH架构)，也开发过(商用)桌面软件（[RCP](http://www.cnblogs.com/yinger/category/339483.html)和[JavaFx](http://www.cnblogs.com/yinger/category/372015.html)），同样也做过Android应用（[微微博TinyWeibo](http://hujiaweiyinger.diandian.com/post/2013-05-18/project_weiweibo)，爱学习iStudy应用，眼球追踪Gaze的移植以及人脸识别应用XFace等）和小游戏（8Puzzle等），iOS无实际开发经验。我对移动互联网和数据挖掘/机器学习/模式识别比较感兴趣，如果你有相同兴趣欢迎联系我，交个朋友。
+大家好，我叫Hujiawei，[五道口男子职业技术与艺术学院](http://www.tsinghua.edu.cn/publish/th/index.html)计算机系2013级研究生，本科就读于伟大的[左家垅男子职业技术学院](http://www.csu.edu.cn/)，热爱编程，喜欢Java/Python/Linux/Android/RaspberryPi等等，在三星中国研究院/湖南永景股份有限公司/湖南中途电子有限公司实习过，开发过大型(商业)网站([ASP.NET](http://www.cnblogs.com/yinger/category/305399.html)和J2EE SSH架构)，也开发过(商用)桌面软件（[RCP](http://www.cnblogs.com/yinger/category/339483.html)和[JavaFx](http://www.cnblogs.com/yinger/category/372015.html)），同样也做过Android应用（[微微博TinyWeibo](http://hujiaweiyinger.diandian.com/post/2013-05-18/project_weiweibo)，爱学习iStudy应用，眼球追踪Gaze的移植以及[人脸识别应用XFace](https://github.com/hujiaweibujidao/XFace)等）和小游戏（[8Puzzle](https://github.com/hujiaweibujidao/8PuzzleGame)等），iOS无实际开发经验。我对移动互联网和数据挖掘/机器学习/模式识别比较感兴趣，如果你有相同兴趣欢迎联系我，交个朋友。
 
 <!-- [个人简历](http://hujiaweibujidao.github.io/resume.html) -->
 
 我的GitHub主页： <https://github.com/hujiaweibujidao>
 
-中南大学计科0902班毕业纪念网址：<http://hujiaweibujidao.github.io/csucs0902/>
+中南大学计科0902班毕业纪念网站：<http://hujiaweibujidao.github.io/csucs0902/>
 
 PS：读研阶段都会呆在北京，如果有不错的实习机会请和我联系，最好是和数据挖掘/机器学习/模式识别或者移动开发有关，谢谢！[英文简历下载](http://hujiaweibujidao.github.io/resume2014.pdf)
 
-PPS：感谢很多人的来信邀请，小弟真的很感谢你们对我的关注，谢谢！但是目前研二了，要进行科研了，毕竟毕业要紧，嘿嘿。。。所以我不能有太多的时间做其他的事情了，不过还是谢谢你们的邀请！O(∩_∩)O~
+PPS：感谢很多人的来信邀请，小弟真的很感谢你们对我的关注，谢谢！但是目前研二了，要进行科研了，毕竟毕业要紧。。。所以我不能有太多的时间做其他的事情了，不过还是谢谢你们的邀请！O(∩_∩)O~
 
 ####原博客地址：
 
